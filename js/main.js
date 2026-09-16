@@ -1,47 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Nav scroll state
+  // Nav
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
-  // Mobile nav toggle
   const toggle = document.getElementById('navToggle');
   const links = document.querySelector('.nav-links');
   toggle?.addEventListener('click', () => links.classList.toggle('open'));
+  links?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-  // Close mobile nav on link click
-  links?.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => links.classList.remove('open'));
-  });
+  // ===== DISK GALLERY BUILDER (Z-axis 90° circular disk) =====
+  document.querySelectorAll('.disk-gallery').forEach(gallery => {
+    const images = JSON.parse(gallery.dataset.images || '[]');
+    if (!images.length) return;
 
-  // Orbit galleries – populate images from data-images
-  document.querySelectorAll('.orbit-gallery').forEach(gallery => {
-    const track = gallery.querySelector('.orbit-track');
-    const imgs = JSON.parse(gallery.dataset.images || '[]');
-    imgs.forEach((src, i) => {
+    const disk = document.createElement('div');
+    disk.className = 'disk';
+
+    const count = images.length;
+    const radius = gallery.classList.contains('small') ? 48 : 62;
+
+    images.forEach((src, i) => {
       const img = document.createElement('img');
       img.src = src;
-      img.alt = 'Institution';
-      img.style.animationDelay = `${i * -6}s`;
-      track.appendChild(img);
+      img.alt = '';
+      const angle = (360 / count) * i;
+      img.style.transform = `rotateZ(${angle}deg) translateX(${radius}px) rotateZ(-${angle}deg)`;
+      disk.appendChild(img);
     });
+
+    gallery.appendChild(disk);
   });
 
-  // Skill nodes subtle 3D on mouse move
+  // Skill 3D tilt
   document.querySelectorAll('.skill-node').forEach(node => {
     node.addEventListener('mousemove', e => {
-      const rect = node.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      node.style.transform = `translateZ(20px) rotateX(${y * -8}deg) rotateY(${x * 8}deg)`;
+      const r = node.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      node.style.transform = `translateZ(18px) rotateX(${y * -7}deg) rotateY(${x * 7}deg)`;
     });
-    node.addEventListener('mouseleave', () => {
-      node.style.transform = '';
-    });
+    node.addEventListener('mouseleave', () => node.style.transform = '');
   });
 
-  // Lightbox system (art, graphics, certs, projects)
+  // Lightbox
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightboxImg');
   let scale = 1;
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function closeLightbox() {
     lightbox.classList.remove('active');
-    setTimeout(() => { lightbox.hidden = true; lbImg.src = ''; }, 350);
+    setTimeout(() => { lightbox.hidden = true; lbImg.src = ''; }, 340);
   }
 
   document.querySelectorAll('.art-card, .graphics-card, .cert-card, .project-card').forEach(card => {
@@ -77,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lbImg.style.transform = `scale(${scale})`;
   });
 
-  // Wheel zoom inside lightbox
   lightbox.addEventListener('wheel', e => {
     if (!lightbox.classList.contains('active')) return;
     e.preventDefault();
@@ -85,23 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
     lbImg.style.transform = `scale(${scale})`;
   }, { passive: false });
 
-  // CV modal (simple open)
+  // CV
   document.querySelectorAll('[data-modal]').forEach(btn => {
     btn.addEventListener('click', () => {
       const src = btn.dataset.modal;
       if (src.endsWith('.pdf')) window.open(src, '_blank');
       else openLightbox(src);
     });
-  });
-
-  // Smooth reveal on scroll (lightweight)
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('revealed');
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.section, .edu-card, .art-card, .project-card').forEach(el => {
-    el.classList.add('reveal');
-    observer.observe(el);
   });
 });
