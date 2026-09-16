@@ -23,7 +23,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Gold Cursor */
 .cursor-dot {
   position: fixed; width: 6px; height: 6px; background: var(--gold);
   border-radius: 50%; pointer-events: none; z-index: 9999;
@@ -35,7 +34,6 @@ body {
   transform: translate(-50%, -50%); opacity: 0.7;
 }
 
-/* AI Assistant */
 .ai-trigger {
   position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px;
   border-radius: 50%; background: var(--charcoal); border: 1px solid var(--border);
@@ -69,7 +67,6 @@ body {
 .voice-indicator.active { opacity: 1; animation: voicePulse 1.2s infinite; }
 @keyframes voicePulse { 0%,100%{width:30%} 50%{width:90%} }
 
-/* Navigation */
 .nav { position: fixed; top: 0; width: 100%; z-index: 100; transition: all 0.4s; }
 .nav.scrolled {
   background: rgba(10,10,10,0.88); backdrop-filter: blur(14px);
@@ -91,7 +88,6 @@ body {
 .nav-links a:hover { color: var(--gold); }
 .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.4rem; cursor: none; }
 
-/* Hero + Galaxy */
 .hero {
   height: 100vh; min-height: 640px; position: relative;
   display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;
@@ -120,7 +116,6 @@ body {
 }
 @keyframes pulse { 0%,100%{opacity:0.15} 50%{opacity:1} }
 
-/* Sections */
 .section { padding: var(--space-lg) 0; }
 .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
 .container.golden { max-width: 980px; }
@@ -131,7 +126,6 @@ body {
   border-bottom: 1px solid var(--border); padding-bottom: 0.55rem;
 }
 
-/* Profile */
 .profile-grid {
   display: grid; grid-template-columns: 0.9fr 1.618fr; gap: var(--space); align-items: center;
 }
@@ -151,7 +145,6 @@ body {
 }
 .profile-bio { color: var(--silver); font-size: 1rem; line-height: 1.7; }
 
-/* Education + Wheel */
 .timeline { display: flex; flex-direction: column; gap: 1.8rem; }
 .edu-card {
   background: var(--charcoal); border: 1px solid var(--border); padding: 1.7rem;
@@ -162,7 +155,6 @@ body {
 .edu-card h3 { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.25rem; }
 .edu-card p { color: var(--silver); font-size: 0.92rem; }
 
-/* Vertical Disk Wheel (Fixed) */
 .wheel-box {
   position: relative; width: 100%; height: 240px; margin-top: 1.5rem;
   perspective: 1000px; overflow: hidden;
@@ -205,7 +197,6 @@ body {
   to   { transform: rotateX(12deg) rotateY(360deg); }
 }
 
-/* Skills */
 .skill-constellation {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.9rem;
 }
@@ -216,7 +207,6 @@ body {
 }
 .skill-node:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-4px); }
 
-/* Galleries */
 .gallery-grid, .project-grid, .graphics-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;
 }
@@ -231,7 +221,6 @@ body {
 .project-info h3 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 0.25rem; }
 .project-info p { font-size: 0.88rem; color: var(--silver); }
 
-/* Digital + Videos */
 .digital-grid, .video-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.4rem;
 }
@@ -247,14 +236,12 @@ body {
 .btn:hover { border-color: var(--gold); color: var(--gold); }
 .cv-actions { display: flex; gap: 0.8rem; margin-top: 1rem; }
 
-/* Location */
 .location-card {
   background: var(--charcoal); border: 1px solid var(--border); padding: 2.2rem; text-align: center;
 }
 .location-text { font-family: var(--font-serif); font-size: 1.6rem; color: var(--gold); margin-bottom: 0.4rem; }
 .location-sub { color: var(--silver); font-size: 0.95rem; }
 
-/* Contact */
 .contact-diagram {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 0.9rem;
 }
@@ -268,7 +255,6 @@ body {
   border-color: var(--gold); color: var(--gold); transform: translateY(-4px);
 }
 
-/* Footer */
 .footer { padding: 3.5rem 0; border-top: 1px solid var(--border); text-align: center; }
 .footer-name { font-family: var(--font-serif); font-size: 1.3rem; color: var(--gold); margin-bottom: 0.3rem; }
 .footer-tag, .footer-meta { font-size: 0.85rem; color: var(--silver); }
@@ -277,7 +263,6 @@ body {
 }
 .footer-note { font-size: 0.8rem; color: var(--silver); opacity: 0.7; letter-spacing: 0.05em; }
 
-/* Lightbox */
 .lightbox {
   position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.93);
   display: flex; align-items: center; justify-content: center;
@@ -301,7 +286,6 @@ body {
   background: rgba(0,0,0,0.65); color: var(--gold); font-size: 1.15rem; cursor: none;
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-toggle { display: block; }
