@@ -1,0 +1,1940 @@
+/* =========================================================
+   SHADID AHAMED — PORTFOLIO DATA ENGINE
+   File: js/data.js
+
+   IMPORTANT:
+   - This file contains portfolio CONTENT only.
+   - Replace placeholder values with your actual links/files.
+   - Other JS modules can read window.ShadidData.
+   ========================================================= */
+
+(() => {
+  "use strict";
+
+
+  /* =======================================================
+     01 — PERSONAL IDENTITY
+     ======================================================= */
+
+  const identity = {
+    name: "Shadid Ahamed",
+
+    displayName: "SHADID AHAMED",
+
+    banglaName: "শাদিদ আহমেদ",
+
+    title:
+      "Architecture Student · Visual Artist · Creative Technologist",
+
+    institution:
+      "BRAC University",
+
+    department:
+      "Department of Architecture",
+
+    batch:
+      "Summer 2026",
+
+    currentSemester:
+      "Semester 1",
+
+    currentCourse:
+      "ARCH 101",
+
+    studentRoll:
+      "14061008",
+
+    expectedGraduation:
+      "2033",
+
+    portfolioType:
+      "Digital Portfolio",
+
+    shortBio:
+      "An architecture student exploring the intersection of spatial thinking, drawing, visual storytelling, digital technology and creative experimentation.",
+
+    longBio:
+      "Shadid Ahamed is an architecture student and visual artist whose interests move between architectural thinking, drawing, digital experimentation, technology and visual storytelling. His portfolio brings together academic exploration, artistic work, architectural projects, digital projects, teaching experiences and creative experiments into one evolving digital space.",
+
+    philosophy:
+      "I believe a portfolio should not simply show what has already been done. It should reveal how a person observes, thinks, experiments, learns and continues to evolve."
+  };
+
+
+  /* =======================================================
+     02 — EDUCATION
+     ======================================================= */
+
+  const education = [
+    {
+      id: "education-motijheel-ideal",
+
+      institution:
+        "Motijheel Ideal School & College",
+
+      period:
+        "2013 — 2023",
+
+      level:
+        "Class 1 — Class 10",
+
+      qualification:
+        "Secondary School Certificate (SSC)",
+
+      group:
+        "General / School Education",
+
+      result:
+        "GPA 5.00",
+
+      location:
+        "Dhaka, Bangladesh",
+
+      description:
+        "The beginning of Shadid's formal academic journey, spanning from Class 1 through Class 10 and leading to the Secondary School Certificate examination.",
+
+      narrative:
+        "This period formed the foundation of his academic discipline while also allowing his interest in drawing, observation and creative expression to develop alongside school education.",
+
+      image:
+        "assets/education/motijheel-ideal.jpg",
+
+      website:
+        "",
+
+      status:
+        "completed"
+    },
+
+    {
+      id: "education-notre-dame",
+
+      institution:
+        "Notre Dame College",
+
+      period:
+        "2023 — 2025",
+
+      level:
+        "Higher Secondary",
+
+      qualification:
+        "Higher Secondary Certificate (HSC)",
+
+      group:
+        "Science",
+
+      result:
+        "GPA 5.00",
+
+      location:
+        "Dhaka, Bangladesh",
+
+      description:
+        "Completed higher secondary education in the Science group at Notre Dame College.",
+
+      narrative:
+        "The Science background strengthened analytical thinking in physics, chemistry, mathematics and biology while his long-standing interest in drawing continued to develop in parallel.",
+
+      image:
+        "assets/education/notre-dame-college.jpg",
+
+      website:
+        "",
+
+      status:
+        "completed"
+    },
+
+    {
+      id: "education-brac",
+
+      institution:
+        "BRAC University",
+
+      period:
+        "Summer 2026 — 2033",
+
+      level:
+        "Undergraduate",
+
+      qualification:
+        "Bachelor of Architecture",
+
+      group:
+        "Architecture",
+
+      result:
+        "Currently Studying",
+
+      location:
+        "Dhaka, Bangladesh",
+
+      description:
+        "Currently studying Architecture at BRAC University as part of the Summer 2026 batch.",
+
+      narrative:
+        "Architecture brings together Shadid's interests in drawing, science, geometry, observation, design and technology. The undergraduate journey is intended to become a long-term laboratory for exploring space, form, material, human experience and digital creativity.",
+
+      currentSemester:
+        "Semester 1",
+
+      currentCourse:
+        "ARCH 101",
+
+      studentRoll:
+        "14061008",
+
+      expectedGraduation:
+        "2033",
+
+      image:
+        "assets/education/brac-university.jpg",
+
+      website:
+        "",
+
+      status:
+        "current"
+    }
+  ];
+
+
+  /* =======================================================
+     03 — ACADEMIC INTERESTS
+     ======================================================= */
+
+  const academicInterests = [
+    {
+      name: "Architecture",
+      description:
+        "Spatial design, form, proportion, composition and the relationship between people and space."
+    },
+
+    {
+      name: "Visual Arts",
+      description:
+        "Drawing, visual storytelling, composition, experimentation and artistic expression."
+    },
+
+    {
+      name: "Geometry",
+      description:
+        "Exploring grids, shapes, proportions, patterns and geometric relationships."
+    },
+
+    {
+      name: "Physics",
+      description:
+        "Understanding physical principles and their relationship with the built environment."
+    },
+
+    {
+      name: "Digital Technology",
+      description:
+        "Web development, interactive experiences, digital interfaces and creative technology."
+    },
+
+    {
+      name: "Visual Communication",
+      description:
+        "Using images, diagrams, layouts and visual systems to communicate ideas clearly."
+    }
+  ];
+
+
+  /* =======================================================
+     04 — SKILLS
+     ======================================================= */
+
+  const skills = [
+    {
+      id: "drawing",
+      name: "Drawing",
+      category: "Art",
+      description:
+        "Long-term drawing practice with experience in competitive and exhibition-oriented artwork.",
+      level:
+        "Advanced",
+      icon:
+        "✦"
+    },
+
+    {
+      id: "watercolor",
+      name: "Watercolor",
+      category: "Art",
+      description:
+        "Experimental watercolor practice focused on atmosphere, color and visual storytelling.",
+      level:
+        "Developing",
+      icon:
+        "◌"
+    },
+
+    {
+      id: "architecture",
+      name: "Architectural Thinking",
+      category: "Architecture",
+      description:
+        "Exploring space, geometry, composition, scale, structure and design through architectural education.",
+      level:
+        "Developing",
+      icon:
+        "⌂"
+    },
+
+    {
+      id: "visualization",
+      name: "Visual Communication",
+      category: "Design",
+      description:
+        "Communicating concepts through drawings, diagrams, layouts and visual compositions.",
+      level:
+        "Advanced",
+      icon:
+        "◇"
+    },
+
+    {
+      id: "web",
+      name: "Web Development",
+      category: "Technology",
+      description:
+        "Building experimental websites and interactive digital experiences using HTML, CSS and JavaScript.",
+      level:
+        "Developing",
+      icon:
+        "</>"
+    },
+
+    {
+      id: "creative-tech",
+      name: "Creative Technology",
+      category: "Technology",
+      description:
+        "Combining visual design, interaction and technology to create experimental digital experiences.",
+      level:
+        "Developing",
+      icon:
+        "⌁"
+    }
+  ];
+
+
+  /* =======================================================
+     05 — READING / LITERATURE
+     ======================================================= */
+
+  const books = [
+    {
+      id: "book-samaresh",
+
+      author:
+        "Samaresh Majumdar",
+
+      title:
+        "Selected Works",
+
+      works: [
+        "Meyera Jemon Hoy",
+        "Moushalkal",
+        "Uttaradhikarini"
+      ],
+
+      description:
+        "Samaresh Majumdar's writing is part of Shadid's literary interests, particularly for its characters, atmosphere, relationships and observation of life.",
+
+      category:
+        "Bangla Literature",
+
+      cover:
+        "assets/books/samaresh-majumdar.jpg"
+    },
+
+    {
+      id: "book-himu",
+
+      author:
+        "Humayun Ahmed",
+
+      title:
+        "Himu Series",
+
+      works: [
+        "Selected Himu books"
+      ],
+
+      description:
+        "The Himu books are appreciated for their distinctive character, unconventional perspective and mixture of everyday life with philosophical observation.",
+
+      category:
+        "Bangla Fiction",
+
+      cover:
+        "assets/books/himu.jpg"
+    },
+
+    {
+      id: "book-rabindranath",
+
+      author:
+        "Rabindranath Tagore",
+
+      title:
+        "Selected Works",
+
+      works: [
+        "Selected literary works"
+      ],
+
+      description:
+        "Tagore's poetry, prose and philosophical writing contribute to an interest in language, emotion, nature and human observation.",
+
+      category:
+        "Bangla Literature",
+
+      cover:
+        "assets/books/rabindranath-tagore.jpg"
+    },
+
+    {
+      id: "book-ekattorer-dinguli",
+
+      author:
+        "Jahanara Imam",
+
+      title:
+        "একাত্তরের দিনগুলি",
+
+      works: [
+        "একাত্তরের দিনগুলি"
+      ],
+
+      description:
+        "A historically significant personal account connected with the Liberation War of Bangladesh, included among the history-oriented books that have influenced Shadid's reading interests.",
+
+      category:
+        "History / Liberation War",
+
+      cover:
+        "assets/books/ekattorer-dinguli.jpg"
+    }
+  ];
+
+
+  /* =======================================================
+     06 — ARTWORKS
+     ======================================================= */
+
+  const artworks = [
+    {
+      id: "art-flower-grows-in-silence",
+
+      title:
+        "Flower Grows in Silence",
+
+      year:
+        "",
+
+      medium:
+        "Mixed / Drawing & Watercolor",
+
+      dimensions:
+        "",
+
+      status:
+        "Exhibited",
+
+      image:
+        "assets/art/flower-grows-in-silence.jpg",
+
+      description:
+        "A figure appears partly submerged beneath water, surrounded by lotus leaves, fish and a distant landscape. The composition explores the contrast between an internal world and the world beyond it.",
+
+      concept:
+        "The underwater environment represents confinement and the pressure of an enclosed inner world. The flower growing from within represents quiet thought, beauty and the possibility of freedom. Fish suggest the continuous movement of time, while the distant land represents the world that remains separated from the figure.",
+
+      visualNotes:
+        [
+          "Green clothing represents the underwater environment.",
+          "Yellow represents the world above the water.",
+          "Water texture creates a sense of confinement.",
+          "The flower represents silent growth.",
+          "Fish represent the flow of time.",
+          "The distant land represents separation from ordinary worldly life."
+        ],
+
+      featured:
+        true
+    },
+
+    {
+      id: "art-02",
+
+      title:
+        "Artwork — Title To Be Added",
+
+      year:
+        "",
+
+      medium:
+        "To be added",
+
+      dimensions:
+        "",
+
+      status:
+        "Portfolio",
+
+      image:
+        "assets/art/art-02.jpg",
+
+      description:
+        "Artwork description will be added here.",
+
+      concept:
+        "Concept and symbolism will be added here.",
+
+      visualNotes:
+        [],
+
+      featured:
+        false
+    },
+
+    {
+      id: "art-03",
+
+      title:
+        "Artwork — Title To Be Added",
+
+      year:
+        "",
+
+      medium:
+        "To be added",
+
+      dimensions:
+        "",
+
+      status:
+        "Portfolio",
+
+      image:
+        "assets/art/art-03.jpg",
+
+      description:
+        "Artwork description will be added here.",
+
+      concept:
+        "Concept and symbolism will be added here.",
+
+      visualNotes:
+        [],
+
+      featured:
+        false
+    }
+  ];
+
+
+  /* =======================================================
+     07 — ART COMPETITIONS
+     ======================================================= */
+
+  const artCompetitions = [
+    {
+      id: "competition-01",
+
+      name:
+        "Drawing Competition — Title To Be Added",
+
+      organizer:
+        "Bangladesh Shishu Academy / Organizer To Be Confirmed",
+
+      year:
+        "",
+
+      result:
+        "To be added",
+
+      certificate:
+        "assets/certificates/art-competition-01.jpg",
+
+      description:
+        "A competitive drawing experience from Shadid's long-term involvement in visual arts."
+    },
+
+    {
+      id: "competition-02",
+
+      name:
+        "Shilpakala Academy Competition — Title To Be Added",
+
+      organizer:
+        "Bangladesh Shilpakala Academy",
+
+      year:
+        "",
+
+      result:
+        "To be added",
+
+      certificate:
+        "assets/certificates/art-competition-02.jpg",
+
+      description:
+        "Participation in a drawing-related competition associated with Bangladesh Shilpakala Academy."
+    },
+
+    {
+      id: "competition-03",
+
+      name:
+        "Noboborsho Drawing Competition",
+
+      organizer:
+        "To be confirmed",
+
+      year:
+        "",
+
+      result:
+        "To be added",
+
+      certificate:
+        "assets/certificates/art-competition-03.jpg",
+
+      description:
+        "A Bengali New Year themed drawing competition."
+    }
+  ];
+
+
+  /* =======================================================
+     08 — ARCHITECTURE PROJECTS
+     ======================================================= */
+
+  const architectureProjects = [
+    {
+      id: "arch-squares-grid",
+
+      title:
+        "Squares & Grid",
+
+      category:
+        "Architecture Studio",
+
+      year:
+        "2026",
+
+      image:
+        "assets/architecture/squares-grid.jpg",
+
+      gallery:
+        [
+          "assets/architecture/squares-grid.jpg"
+        ],
+
+      description:
+        "An exploration of geometric order, repetition, proportion and spatial relationships through a square-based grid system.",
+
+      process:
+        "The project studies how a simple geometric rule can generate visual hierarchy and spatial organization.",
+
+      tags:
+        [
+          "Grid",
+          "Geometry",
+          "Composition",
+          "Studio"
+        ]
+    },
+
+    {
+      id: "arch-low-relief",
+
+      title:
+        "Low Relief",
+
+      category:
+        "Architecture Studio",
+
+      year:
+        "2026",
+
+      image:
+        "assets/architecture/low-relief.jpg",
+
+      gallery:
+        [
+          "assets/architecture/low-relief.jpg"
+        ],
+
+      description:
+        "A study of shallow depth, surface, shadow and spatial perception through relief-based architectural composition.",
+
+      process:
+        "The work investigates how small changes in depth can produce changing patterns of light and shadow.",
+
+      tags:
+        [
+          "Relief",
+          "Light",
+          "Shadow",
+          "Material"
+        ]
+    },
+
+    {
+      id: "arch-pavilion",
+
+      title:
+        "Pavilion",
+
+      category:
+        "Architecture Studio",
+
+      year:
+        "2026",
+
+      image:
+        "assets/architecture/pavilion.jpg",
+
+      gallery:
+        [
+          "assets/architecture/pavilion.jpg"
+        ],
+
+      description:
+        "A pavilion study exploring enclosure, openness, movement and the relationship between structure and surrounding space.",
+
+      process:
+        "The project investigates how a small architectural intervention can frame movement and experience.",
+
+      tags:
+        [
+          "Pavilion",
+          "Space",
+          "Structure",
+          "Movement"
+        ]
+    },
+
+    {
+      id: "arch-future",
+
+      title:
+        "Architecture Project — To Be Added",
+
+      category:
+        "Architecture Studio",
+
+      year:
+        "",
+
+      image:
+        "assets/architecture/project-04.jpg",
+
+      gallery:
+        [
+        ],
+
+      description:
+        "Additional architecture project information will be added here.",
+
+      process:
+        "Project process documentation will be added here.",
+
+      tags:
+        [
+          "Architecture"
+        ]
+    }
+  ];
+
+
+  /* =======================================================
+     09 — DIGITAL PROJECTS
+     ======================================================= */
+
+  const digitalProjects = [
+    {
+      id: "digital-ecommerce",
+
+      title:
+        "E-Commerce Website",
+
+      category:
+        "Web / Digital",
+
+      description:
+        "An experimental e-commerce project designed to explore digital storefront structure, product presentation, interaction and responsive web design.",
+
+      technologies:
+        [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ],
+
+      liveUrl:
+        "",
+
+      githubUrl:
+        "",
+
+      image:
+        "assets/digital/ecommerce.jpg",
+
+      status:
+        "Live / Link To Be Added"
+    },
+
+    {
+      id: "digital-affiliate",
+
+      title:
+        "Affiliate Marketing Project",
+
+      category:
+        "Digital Marketing",
+
+      description:
+        "An experimental affiliate marketing website concept built around product discovery, digital storefront presentation and external marketplace links.",
+
+      technologies:
+        [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Affiliate Marketing"
+        ],
+
+      liveUrl:
+        "",
+
+      githubUrl:
+        "",
+
+      image:
+        "assets/digital/affiliate.jpg",
+
+      status:
+        "Project"
+    },
+
+    {
+      id: "digital-portfolio",
+
+      title:
+        "Shadid Digital Portfolio",
+
+      category:
+        "Creative Technology",
+
+      description:
+        "The evolving personal portfolio system combining architecture, art, education, digital projects, interactive experiences and an adaptive portfolio assistant.",
+
+      technologies:
+        [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ],
+
+      liveUrl:
+        "https://shadidahamed.github.io/",
+
+      githubUrl:
+        "https://github.com/",
+
+      image:
+        "assets/digital/portfolio.jpg",
+
+      status:
+        "Current"
+    }
+  ];
+
+
+  /* =======================================================
+     10 — GAME
+     ======================================================= */
+
+  const game = {
+    id:
+      "shadid-game",
+
+    title:
+      "Shadid's Game",
+
+    category:
+      "Interactive Digital Experience",
+
+    description:
+      "An experimental browser game created as part of Shadid's exploration of interactive technology, gameplay systems and visual experimentation.",
+
+    liveUrl:
+      "https://shadidahamed.github.io/Shadid-s-game/",
+
+    sourceUrl:
+      "",
+
+    localMode:
+      true,
+
+    image:
+      "assets/game/game-cover.jpg",
+
+    technologies:
+      [
+        "HTML5 Canvas",
+        "JavaScript",
+        "Browser Game Systems"
+      ],
+
+    futureDirection:
+      "The game is intended to evolve from an early prototype into a significantly deeper interactive experience with stronger atmosphere, world design, gameplay systems, progression and visual feedback."
+  };
+
+
+  /* =======================================================
+     11 — TEACHING / ENGLISH EXPERIENCE
+     ======================================================= */
+
+  const teaching = [
+    {
+      id: "teaching-english",
+
+      title:
+        "English Teaching / Classes",
+
+      subject:
+        "English",
+
+      numberOfClasses:
+        3,
+
+      description:
+        "Taught three English classes as part of a teaching and communication experience.",
+
+      result:
+        "Certificate / Result To Be Added",
+
+      certificate:
+        "assets/certificates/english-teaching.jpg",
+
+      video:
+        "assets/videos/english-class.mp4"
+    }
+  ];
+
+
+  /* =======================================================
+     12 — ENGLISH COURSES
+     ======================================================= */
+
+  const englishCourses = [
+    {
+      id: "english-mentors",
+
+      institution:
+        "Mentors",
+
+      course:
+        "English Course",
+
+      score:
+        "87% / 89% — To Be Confirmed",
+
+      certificate:
+        "assets/certificates/mentors-english.jpg",
+
+      description:
+        "An English language course completed as part of ongoing communication and academic preparation."
+    },
+
+    {
+      id: "english-ndc",
+
+      institution:
+        "Notre Dame College",
+
+      course:
+        "After-Exercise English Course",
+
+      score:
+        "87% / 89% — To Be Confirmed",
+
+      certificate:
+        "assets/certificates/ndc-english.jpg",
+
+      description:
+        "An English course undertaken during the Notre Dame College period."
+    }
+  ];
+
+
+  /* =======================================================
+     13 — FITNESS / EXTRACURRICULAR
+     ======================================================= */
+
+  const extracurricular = [
+    {
+      id: "marathon-5k",
+
+      title:
+        "5 KM Marathon",
+
+      category:
+        "Fitness / Extracurricular",
+
+      result:
+        "Runner-up — Event details to be added",
+
+      description:
+        "Participated in a 5 kilometre marathon and completed the event within the required time.",
+
+      certificate:
+        "assets/certificates/5k-marathon.jpg"
+    },
+
+    {
+      id: "drawing-competitions",
+
+      title:
+        "Competitive Drawing",
+
+      category:
+        "Visual Arts",
+
+      result:
+        "Multiple competition experiences",
+
+      description:
+        "Long-term participation in drawing competitions, including events connected with children's art, cultural programs and art institutions."
+    }
+  ];
+
+
+  /* =======================================================
+     14 — VIDEOS
+     ======================================================= */
+
+  const videos = [
+    {
+      id: "video-english-class",
+
+      title:
+        "English Teaching Class",
+
+      category:
+        "Teaching",
+
+      description:
+        "A video from an English teaching/class experience in which three classes were taught.",
+
+      source:
+        "assets/videos/english-class.mp4",
+
+      thumbnail:
+        "assets/videos/english-class.jpg",
+
+      type:
+        "video"
+    },
+
+    {
+      id: "video-physics",
+
+      title:
+        "Physics / Science Video",
+
+      category:
+        "Education",
+
+      description:
+        "Future physics or science teaching content will be added here.",
+
+      source:
+        "",
+
+      thumbnail:
+        "assets/videos/physics.jpg",
+
+      type:
+        "video"
+    }
+  ];
+
+
+  /* =======================================================
+     15 — CERTIFICATES
+     ======================================================= */
+
+  const certificates = [
+    {
+      id: "certificate-art-01",
+
+      title:
+        "Drawing Competition Certificate",
+
+      category:
+        "Art",
+
+      issuer:
+        "To Be Added",
+
+      date:
+        "",
+
+      image:
+        "assets/certificates/art-01.jpg",
+
+      viewerUrl:
+        "",
+
+      description:
+        "Certificate related to a drawing competition."
+    },
+
+    {
+      id: "certificate-art-02",
+
+      title:
+        "Shilpakala Academy Certificate",
+
+      category:
+        "Art",
+
+      issuer:
+        "Bangladesh Shilpakala Academy",
+
+      date:
+        "",
+
+      image:
+        "assets/certificates/shilpakala.jpg",
+
+      viewerUrl:
+        "",
+
+      description:
+        "Certificate related to an art competition or event."
+    },
+
+    {
+      id: "certificate-english",
+
+      title:
+        "English Course Certificate",
+
+      category:
+        "English",
+
+      issuer:
+        "To Be Added",
+
+      date:
+        "",
+
+      image:
+        "assets/certificates/english.jpg",
+
+      viewerUrl:
+        "",
+
+      description:
+        "Certificate from an English language course."
+    },
+
+    {
+      id: "certificate-marathon",
+
+      title:
+        "5 KM Marathon Certificate",
+
+      category:
+        "Extracurricular",
+
+      issuer:
+        "To Be Added",
+
+      date:
+        "",
+
+      image:
+        "assets/certificates/marathon.jpg",
+
+      viewerUrl:
+        "",
+
+      description:
+        "Certificate associated with a 5 kilometre marathon."
+    }
+  ];
+
+
+  /* =======================================================
+     16 — DOCUMENTS
+     ======================================================= */
+
+  const documents = [
+    {
+      id: "document-cv",
+
+      title:
+        "Curriculum Vitae",
+
+      category:
+        "Professional Document",
+
+      description:
+        "A professional overview of education, skills, experiences, projects and achievements.",
+
+      file:
+        "",
+
+      viewerUrl:
+        "",
+
+      type:
+        "pdf",
+
+      protectedViewer:
+        true
+    },
+
+    {
+      id: "document-id",
+
+      title:
+        "Student ID",
+
+      category:
+        "Identity Document",
+
+      description:
+        "Student identification document for portfolio reference.",
+
+      file:
+        "",
+
+      viewerUrl:
+        "",
+
+      type:
+        "image",
+
+      protectedViewer:
+        true
+    }
+  ];
+
+
+  /* =======================================================
+     17 — SOCIAL / CONTACT
+     ======================================================= */
+
+  const socialLinks = [
+    {
+      id: "github",
+
+      name:
+        "GitHub",
+
+      icon:
+        "github",
+
+      handle:
+        "@shadidahamed",
+
+      url:
+        "https://github.com/",
+
+      enabled:
+        true
+    },
+
+    {
+      id: "linkedin",
+
+      name:
+        "LinkedIn",
+
+      icon:
+        "linkedin",
+
+      handle:
+        "Shadid Ahamed",
+
+      url:
+        "",
+
+      enabled:
+        true
+    },
+
+    {
+      id: "instagram",
+
+      name:
+        "Instagram",
+
+      icon:
+        "instagram",
+
+      handle:
+        "@shadidahamed",
+
+      url:
+        "",
+
+      enabled:
+        true
+    },
+
+    {
+      id: "facebook",
+
+      name:
+        "Facebook",
+
+      icon:
+        "facebook",
+
+      handle:
+        "Shadid Ahamed",
+
+      url:
+        "",
+
+      enabled:
+        true
+    },
+
+    {
+      id: "whatsapp",
+
+      name:
+        "WhatsApp",
+
+      icon:
+        "whatsapp",
+
+      handle:
+        "Contact",
+
+      url:
+        "",
+
+      enabled:
+        true
+    },
+
+    {
+      id: "x",
+
+      name:
+        "X",
+
+      icon:
+        "x",
+
+      handle:
+        "@ShadidAhamed",
+
+      url:
+        "",
+
+      enabled:
+        true
+    },
+
+    {
+      id: "email",
+
+      name:
+        "Email",
+
+      icon:
+        "mail",
+
+      handle:
+        "Email address to be added",
+
+      url:
+        "",
+
+      enabled:
+        true
+    }
+  ];
+
+
+  /* =======================================================
+     18 — LOCATION
+     ======================================================= */
+
+  const locations = {
+    current:
+      {
+        label:
+          "Current Base",
+
+        city:
+          "Dhaka",
+
+        country:
+          "Bangladesh",
+
+        description:
+          "Currently living and studying in Dhaka while continuing an academic journey in architecture and creative practice."
+      },
+
+    education:
+      [
+        {
+          institution:
+            "Motijheel Ideal School & College",
+
+          city:
+            "Dhaka",
+
+          country:
+            "Bangladesh"
+        },
+
+        {
+          institution:
+            "Notre Dame College",
+
+          city:
+            "Dhaka",
+
+          country:
+            "Bangladesh"
+        },
+
+        {
+          institution:
+            "BRAC University",
+
+          city:
+            "Dhaka",
+
+          country:
+            "Bangladesh"
+        }
+      ]
+  };
+
+
+  /* =======================================================
+     19 — FAMILY / LIFE NOTE
+     ======================================================= */
+
+  /*
+   * Keep this section intentionally lightweight.
+   * It is for the optional personal/life section of the
+   * portfolio, not for exposing private information.
+   */
+
+  const life = {
+    headline:
+      "Happily living life with his family.",
+
+    description:
+      "Beyond academics and creative work, family remains an important part of Shadid's personal life and everyday journey.",
+
+    familySectionEnabled:
+      true,
+
+    members:
+      [
+        {
+          relation:
+            "Father",
+
+          name:
+            "Tofayel Ahmed",
+
+          occupation:
+            "Police Inspector",
+
+          publicProfile:
+            false
+        },
+
+        {
+          relation:
+            "Mother",
+
+          name:
+            "To Be Added",
+
+          occupation:
+            "Household",
+
+          publicProfile:
+            false
+        },
+
+        {
+          relation:
+            "Wife",
+
+          name:
+            "To Be Added",
+
+          occupation:
+            "",
+
+          publicProfile:
+            false
+        }
+      ]
+  };
+
+
+  /* =======================================================
+     20 — ARCHITECTURE PORTFOLIO BOOK
+     ======================================================= */
+
+  const physicalPortfolio = {
+    title:
+      "Architecture Portfolio — Book Edition",
+
+    description:
+      "Alongside this digital portfolio, a separate architecture portfolio is being developed in physical book form.",
+
+    video:
+      "",
+
+    videoThumbnail:
+      "assets/portfolio/architecture-book.jpg",
+
+    status:
+      "In Development"
+  };
+
+
+  /* =======================================================
+     21 — PORTFOLIO STATISTICS
+     ======================================================= */
+
+  const statistics = {
+    educationInstitutions:
+      education.length,
+
+    artWorks:
+      artworks.filter(
+        (item) =>
+          !item.title.includes("To Be Added")
+      ).length,
+
+    architectureProjects:
+      architectureProjects.filter(
+        (item) =>
+          !item.title.includes("To Be Added")
+      ).length,
+
+    digitalProjects:
+      digitalProjects.length,
+
+    books:
+      books.length,
+
+    videos:
+      videos.length,
+
+    certificates:
+      certificates.length,
+
+    currentBatch:
+      "Summer 2026",
+
+    expectedGraduation:
+      "2033"
+  };
+
+
+  /* =======================================================
+     22 — AI KNOWLEDGE PROFILE
+     ======================================================= */
+
+  /*
+   * This is NOT a secret unrestricted AI.
+   *
+   * It gives the portfolio assistant structured knowledge
+   * about the site so it can answer questions intelligently
+   * and make contextual suggestions.
+   */
+
+  const aiKnowledge = {
+    identity,
+
+    education,
+
+    academicInterests,
+
+    skills,
+
+    books,
+
+    artworks,
+
+    architectureProjects,
+
+    digitalProjects,
+
+    game,
+
+    teaching,
+
+    englishCourses,
+
+    extracurricular,
+
+    certificates,
+
+    documents,
+
+    locations,
+
+    physicalPortfolio,
+
+    statistics,
+
+    capabilities:
+      [
+        "Explain portfolio sections",
+        "Describe education",
+        "Discuss architecture projects",
+        "Discuss artworks",
+        "Explain digital projects",
+        "Suggest portfolio improvements",
+        "Suggest missing content",
+        "Help organize project information",
+        "Answer questions about the portfolio",
+        "Generate content ideas",
+        "Identify incomplete data fields"
+      ]
+  };
+
+
+  /* =======================================================
+     23 — GLOBAL DATA API
+     ======================================================= */
+
+  const ShadidData = {
+
+    version:
+      "1.0.0",
+
+    lastUpdated:
+      "2026",
+
+    identity,
+
+    education,
+
+    academicInterests,
+
+    skills,
+
+    books,
+
+    artworks,
+
+    artCompetitions,
+
+    architectureProjects,
+
+    digitalProjects,
+
+    game,
+
+    teaching,
+
+    englishCourses,
+
+    extracurricular,
+
+    videos,
+
+    certificates,
+
+    documents,
+
+    socialLinks,
+
+    locations,
+
+    life,
+
+    physicalPortfolio,
+
+    statistics,
+
+    aiKnowledge,
+
+
+    /* -------------------------------------------------------
+       Utility Methods
+       ------------------------------------------------------- */
+
+    getEducation() {
+      return education;
+    },
+
+    getSkills() {
+      return skills;
+    },
+
+    getBooks() {
+      return books;
+    },
+
+    getArtworks() {
+      return artworks;
+    },
+
+    getArchitectureProjects() {
+      return architectureProjects;
+    },
+
+    getDigitalProjects() {
+      return digitalProjects;
+    },
+
+    getCertificates() {
+      return certificates;
+    },
+
+    getDocuments() {
+      return documents;
+    },
+
+    getVideos() {
+      return videos;
+    },
+
+    getSocialLinks() {
+      return socialLinks.filter(
+        (item) => item.enabled
+      );
+    },
+
+
+    /* -------------------------------------------------------
+       Find Any Portfolio Item
+       ------------------------------------------------------- */
+
+    findById(id) {
+      const collections = [
+        education,
+        skills,
+        books,
+        artworks,
+        artCompetitions,
+        architectureProjects,
+        digitalProjects,
+        teaching,
+        englishCourses,
+        extracurricular,
+        videos,
+        certificates,
+        documents,
+        socialLinks
+      ];
+
+      for (const collection of collections) {
+        const found = collection.find(
+          (item) => item.id === id
+        );
+
+        if (found) {
+          return found;
+        }
+      }
+
+      return null;
+    },
+
+
+    /* -------------------------------------------------------
+       Search Portfolio Knowledge
+       ------------------------------------------------------- */
+
+    search(query) {
+      if (!query) return [];
+
+      const normalized =
+        String(query)
+          .toLowerCase()
+          .trim();
+
+      const collections = [
+        education,
+        skills,
+        books,
+        artworks,
+        architectureProjects,
+        digitalProjects,
+        videos,
+        certificates,
+        documents
+      ];
+
+      const results = [];
+
+      collections.forEach((collection) => {
+        collection.forEach((item) => {
+
+          const searchableText =
+            JSON.stringify(item)
+              .toLowerCase();
+
+          if (
+            searchableText.includes(
+              normalized
+            )
+          ) {
+            results.push(item);
+          }
+        });
+      });
+
+      return results;
+    },
+
+
+    /* -------------------------------------------------------
+       Find Incomplete Data
+       ------------------------------------------------------- */
+
+    getIncompleteItems() {
+      const incomplete = [];
+
+      const collections = [
+        education,
+        artworks,
+        architectureProjects,
+        digitalProjects,
+        videos,
+        certificates,
+        documents,
+        socialLinks
+      ];
+
+      collections.forEach((collection) => {
+
+        collection.forEach((item) => {
+
+          const emptyFields = [];
+
+          Object.entries(item).forEach(
+            ([key, value]) => {
+
+              if (
+                value === "" ||
+                value === null ||
+                value === undefined
+              ) {
+                emptyFields.push(key);
+              }
+
+              if (
+                Array.isArray(value) &&
+                value.length === 0
+              ) {
+                emptyFields.push(key);
+              }
+            }
+          );
+
+          if (emptyFields.length) {
+            incomplete.push({
+              id: item.id,
+              title:
+                item.title ||
+                item.name ||
+                item.institution ||
+                item.author ||
+                item.id,
+
+              emptyFields
+            });
+          }
+        });
+      });
+
+      return incomplete;
+    },
+
+
+    /* -------------------------------------------------------
+       Generate AI Context
+       ------------------------------------------------------- */
+
+    getAIContext() {
+      return {
+        identity: this.identity,
+
+        education: this.education,
+
+        skills: this.skills,
+
+        interests:
+          this.academicInterests,
+
+        artworks: this.artworks,
+
+        architecture:
+          this.architectureProjects,
+
+        digital:
+          this.digitalProjects,
+
+        books:
+          this.books,
+
+        game:
+          this.game,
+
+        statistics:
+          this.statistics,
+
+        incomplete:
+          this.getIncompleteItems()
+      };
+    }
+  };
+
+
+  /* =======================================================
+     24 — EXPOSE GLOBAL API
+     ======================================================= */
+
+  window.ShadidData = ShadidData;
+
+
+  /* =======================================================
+     25 — ANNOUNCE DATA READY
+     ======================================================= */
+
+  window.dispatchEvent(
+    new CustomEvent(
+      "portfolio:data-ready",
+      {
+        detail: {
+          data: ShadidData
+        }
+      }
+    )
+  );
+
+})();
