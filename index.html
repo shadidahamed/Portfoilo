@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="description" content="SHADID AHAMED — Architecture Student · Visual Artist · Creative Technologist">
-  <title>SHADID AHAMED | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHADID AHAMED | Architecture Portfolio</title>
+  <meta name="description" content="SHADID AHAMED — Architecture Student · Visual Artist · Creative Technologist | BRAC University">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Custom Cursor -->
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-  <!-- AI -->
-  <button class="ai-trigger" id="aiTrigger">✦</button>
+  <!-- AI Assistant -->
+  <button class="ai-trigger" id="aiTrigger" title="AI Assistant">✦</button>
   <div class="ai-panel" id="aiPanel" hidden>
     <div class="ai-header">
       <span>Portfolio Assistant</span>
@@ -23,39 +25,39 @@
     <div class="ai-messages" id="aiMessages"></div>
     <div class="ai-input-row">
       <input type="text" id="aiInput" placeholder="Talk to me..." autocomplete="off">
-      <button id="aiVoice">🎤</button>
+      <button id="aiVoice" title="Voice">🎤</button>
     </div>
     <div class="voice-indicator" id="voiceIndicator"></div>
   </div>
 
   <button class="back-to-top" id="backToTop">↑</button>
 
-  <!-- Navigation with Icons -->
+  <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-logo" data-section="home">SA</a>
-      <ul class="nav-links">
-        <li><a href="#" data-section="profile" title="Profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></a></li>
-        <li><a href="#" data-section="education" title="Education"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></a></li>
-        <li><a href="#" data-section="skills" title="Skills"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></a></li>
-        <li><a href="#" data-section="art" title="Art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></a></li>
-        <li><a href="#" data-section="architecture" title="Architecture"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></a></li>
-        <li><a href="#" data-section="graphics" title="Graphics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></a></li>
-        <li><a href="#" data-section="digital" title="Projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></a></li>
-        <li><a href="#" data-section="videos" title="Videos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="5 3 19 12 5 21 5 3"/></svg></a></li>
-        <li><a href="#" data-section="note" title="Note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></a></li>
-        <li><a href="#" data-section="documents" title="CV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></a></li>
-        <li><a href="#" data-section="location" title="Location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
-        <li><a href="#" data-section="contact" title="Contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg></a></li>
-        <li><a href="#" data-section="game" title="Game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M14 12h4M8 9v6M16 9v6"/></svg></a></li>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" data-section="profile" title="Profile">Profile</a></li>
+        <li><a href="#" data-section="education" title="Education">Education</a></li>
+        <li><a href="#" data-section="skills" title="Skills">Skills</a></li>
+        <li><a href="#" data-section="art" title="Art">Art</a></li>
+        <li><a href="#" data-section="architecture" title="Architecture">Architecture</a></li>
+        <li><a href="#" data-section="graphics" title="Graphics">Graphics</a></li>
+        <li><a href="#" data-section="digital" title="Projects">Projects</a></li>
+        <li><a href="#" data-section="videos" title="Videos">Videos</a></li>
+        <li><a href="#" data-section="note" title="Note">Note</a></li>
+        <li><a href="#" data-section="documents" title="Documents">Documents</a></li>
+        <li><a href="#" data-section="location" title="Location">Location</a></li>
+        <li><a href="#" data-section="contact" title="Contact">Contact</a></li>
+        <li><a href="#" data-section="game" title="Game">Game</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle">☰</button>
     </div>
   </nav>
 
-  <!-- HOME / HERO -->
+  <!-- ========== HOME ========== -->
   <section class="page active" id="home">
-    <header class="hero">
+    <div class="hero">
       <canvas id="galaxy"></canvas>
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -65,12 +67,11 @@
         <p class="hero-meta">BRAC University · Architecture · Summer 2026</p>
         <p class="hero-portfolio">Portfolio</p>
       </div>
-    </header>
+    </div>
   </section>
 
-  <!-- All other sections (hidden by default) -->
+  <!-- ========== PROFILE ========== -->
   <section class="page" id="profile">
-    <!-- Profile content (same as before) -->
     <div class="container">
       <h2 class="section-title">Profile</h2>
       <div class="profile-grid">
@@ -82,43 +83,284 @@
           <ul class="profile-list">
             <li>BRAC University</li>
             <li>Department of Architecture</li>
-            <li>Summer 2026 · Batch</li>
+            <li>Summer 2026 Batch</li>
             <li>Current Semester: 1</li>
             <li>Current Course: ARCH 101</li>
             <li>Student Roll: 14061008</li>
           </ul>
-          <p class="profile-bio">Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming.</p>
+          <p class="profile-bio">
+            Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming. Combines traditional artistic practice with emerging digital tools.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Education, Skills, Art, Architecture, Graphics, Digital, Videos, Note, Documents, Location, Contact sections remain the same structure as previous polished version -->
+  <!-- ========== EDUCATION ========== -->
+  <section class="page" id="education">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
 
-  <!-- GAME SECTION -->
+      <div class="edu-block">
+        <div class="edu-year">2013 – 2023</div>
+        <h3>Motijheel Ideal School & College</h3>
+        <p class="edu-detail">Class 1 to Class 10 · SSC 2023 · GPA 5.00</p>
+        <p class="edu-desc">
+          Spent 10 years here from Class 1 to Class 10. Completed Secondary School Certificate (SSC) examination in 2023 with a perfect GPA of 5.00. This institution shaped the foundation of my academic journey.
+        </p>
+        <p class="edu-location">Location: Motijheel, Dhaka</p>
+      </div>
+
+      <div class="edu-block">
+        <div class="edu-year">2023 – 2025</div>
+        <h3>Notre Dame College</h3>
+        <p class="edu-detail">HSC 2025 · GPA 5.00 · Science Group</p>
+        <p class="edu-desc">
+          Studied from 2023 to 2025. Completed Higher Secondary Certificate (HSC) with GPA 5.00. Was in the Science group. My classroom was near the Math Lab (around seat number 206 area). This college played a major role in preparing me for university life.
+        </p>
+        <p class="edu-location">Location: Arambagh, Dhaka</p>
+      </div>
+
+      <div class="edu-block">
+        <div class="edu-year">2026 – Present</div>
+        <h3>BRAC University</h3>
+        <p class="edu-detail">Bachelor of Architecture · Summer 2026 Batch · Expected Graduation: 2033</p>
+        <p class="edu-desc">
+          Currently studying in the Department of Architecture. Started in Summer 2026. Expected to graduate around 2033. The architecture department focuses on design, theory, history, and practical studio work.
+        </p>
+        <p class="edu-location">Location: Merul Badda, Dhaka</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section class="page" id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills & Interests</h2>
+
+      <div class="skill-category">
+        <h3>Literature & Reading</h3>
+        <p>I deeply enjoy reading. Some of the writers and books that influenced me:</p>
+        <ul>
+          <li><strong>Samaresh Majumdar</strong> — One of my favourite authors. I have read several of his books including <em>Uttaradhikar</em>, <em>Kaalbela</em>, and others. His storytelling has a special place in my heart.</li>
+          <li><strong>Humayun Ahmed</strong> — Especially the Himu series.</li>
+          <li><strong>Rabindranath Tagore</strong> — Many of his writings.</li>
+          <li>Board textbooks such as <em>Ekattorer Dinguli</em> also left a strong impression on me.</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Drawing & Art Competitions</h3>
+        <p>I have participated in many art competitions since childhood:</p>
+        <ul>
+          <li>Bangladesh Shishu Academy competitions</li>
+          <li>Shilpakala Academy competitions</li>
+          <li>Noboborsho (Bengali New Year) art competitions</li>
+          <li>Various national and local art contests</li>
+        </ul>
+        <p>Achieved 1st and 2nd positions in several competitions, and also participated in many others.</p>
+      </div>
+
+      <div class="skill-category">
+        <h3>Other Skills</h3>
+        <ul>
+          <li>Freehand Drawing & Sketching</li>
+          <li>English Speaking & Communication</li>
+          <li>C++, HTML, JavaScript, Programming</li>
+          <li>Fitness — Completed 5 km Marathon (Runner-up category)</li>
+          <li>English Courses after SSC & HSC (scored 87–89%)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ART ========== -->
+  <section class="page" id="art">
+    <div class="container">
+      <h2 class="section-title">Art & Drawing</h2>
+      <p class="section-intro">Selected artworks from exhibitions and personal practice. Each piece carries its own story.</p>
+      <div class="gallery-grid" id="artGallery">
+        <!-- Images will be loaded dynamically or you can add manually -->
+        <div class="art-item">
+          <div class="art-image-box">
+            <img src="assets/art/01.jpg" alt="Artwork">
+          </div>
+          <div class="art-info">
+            <h4>Artwork Title</h4>
+            <p>Short description of the artwork and the exhibition it was part of.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ARCHITECTURE ========== -->
+  <section class="page" id="architecture">
+    <div class="container">
+      <h2 class="section-title">Architecture Projects</h2>
+      <p class="section-intro">Studio projects including Squares & Grid, Low Relief, Pavilion and more.</p>
+      <div class="project-list">
+        <div class="project-item">
+          <h3>Squares and Grid</h3>
+          <p>Early studio exploration focusing on proportion, grid systems and spatial relationships.</p>
+        </div>
+        <div class="project-item">
+          <h3>Low Relief</h3>
+          <p>Study of depth, light and shadow through low relief composition.</p>
+        </div>
+        <div class="project-item">
+          <h3>Pavilion</h3>
+          <p>Design of a small pavilion exploring structure, material and human scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GRAPHICS ========== -->
+  <section class="page" id="graphics">
+    <div class="container">
+      <h2 class="section-title">Graphics</h2>
+      <p class="section-intro">Selected graphic works from coursework.</p>
+      <div class="graphics-grid">
+        <!-- Add graphics items here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DIGITAL PROJECTS ========== -->
+  <section class="page" id="digital">
+    <div class="container">
+      <h2 class="section-title">Digital Projects</h2>
+
+      <div class="digital-card">
+        <h3>Shadid's Game</h3>
+        <p>A game I developed. You can play it directly.</p>
+        <a href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" class="btn">Play Game</a>
+      </div>
+
+      <div class="digital-card">
+        <h3>E-commerce Website (TrendCart)</h3>
+        <p>Modern UI shopping system developed as a portfolio project.</p>
+        <a href="https://shadidahamed.github.io/trendcart/" target="_blank" class="btn">Live Demo</a>
+      </div>
+
+      <div class="digital-card">
+        <h3>Affiliate Marketing Website</h3>
+        <p>Previously developed affiliate marketing website created as a work/project demo. The project is no longer active.</p>
+      </div>
+
+      <div class="digital-card">
+        <h3>Orpheus Engine</h3>
+        <p>Game development project by Shadid.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VIDEOS ========== -->
+  <section class="page" id="videos">
+    <div class="container">
+      <h2 class="section-title">Videos</h2>
+      <p class="section-intro">English learning classes I conducted. More videos (Physics, Science etc.) will be added later.</p>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <h3>Video 1 – Modifiers</h3>
+          <p>English class on Modifiers</p>
+          <a href="https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS" target="_blank" class="btn">Watch</a>
+        </div>
+        <div class="video-card">
+          <h3>Video 2 – Connectors</h3>
+          <p>English class on Connectors</p>
+          <a href="https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I" target="_blank" class="btn">Watch</a>
+        </div>
+        <div class="video-card">
+          <h3>Video 3 – Subject-Verb Agreement</h3>
+          <p>English class on Subject-Verb Agreement</p>
+          <a href="https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg" target="_blank" class="btn">Watch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NOTE ========== -->
+  <section class="page" id="note">
+    <div class="container">
+      <h2 class="section-title">A Note About Shadid</h2>
+      <div class="note-content">
+        <p>If I had to tell someone who Shadid was, I would not begin with his results or the things he failed to get. I would begin with how hard he kept trying.</p>
+        <p>He wanted a future badly enough to keep reaching for it even when life kept putting obstacles in front of him. He fought through academic pressure, disappointment, loneliness, financial stress, and heartbreak — and still kept studying, drawing, designing, and creating.</p>
+        <p>Behind every drawing was patience. Behind every plan was hope. Behind every “I’ll try again” was someone who had already been through a lot.</p>
+        <p>He is still becoming the person he wants to be. And that matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOCUMENTS ========== -->
+  <section class="page" id="documents">
+    <div class="container">
+      <h2 class="section-title">Documents & Certificates</h2>
+      <div class="doc-card">
+        <h3>Professional CV</h3>
+        <p>Download or view my complete CV containing education, skills and experience.</p>
+        <div class="cv-actions">
+          <a href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" class="btn">View CV</a>
+          <a href="https://drive.google.com/uc?export=download&id=1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV" class="btn" download>Download CV</a>
+        </div>
+      </div>
+      <p class="small-note">Certificates from art competitions and English courses will be added here. View only (screenshot protection applied where possible).</p>
+    </div>
+  </section>
+
+  <!-- ========== LOCATION ========== -->
+  <section class="page" id="location">
+    <div class="container">
+      <h2 class="section-title">Location</h2>
+      <div class="location-card">
+        <p class="location-text">Dhaka, Bangladesh</p>
+        <p class="location-sub">Happily living life with family · Open to collaboration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="page" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-intro">You can contact me through any of these platforms:</p>
+      <div class="contact-grid">
+        <a href="mailto:shadidahamed.matashome05m@gmail.com" class="contact-btn">Email</a>
+        <a href="https://github.com/shadidahamed" target="_blank" class="contact-btn">GitHub</a>
+        <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" class="contact-btn">LinkedIn</a>
+        <a href="https://www.instagram.com/shade_ed25" target="_blank" class="contact-btn">Instagram</a>
+        <a href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" class="contact-btn">Facebook</a>
+        <a href="https://wa.me/8801326162684" target="_blank" class="contact-btn">WhatsApp</a>
+        <a href="https://x.com/ShadidAhamed" target="_blank" class="contact-btn">X (Twitter)</a>
+        <a href="https://www.reddit.com/user/Shade_ed25" target="_blank" class="contact-btn">Reddit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GAME ========== -->
   <section class="page" id="game">
     <div class="container">
       <h2 class="section-title">A Little Game</h2>
       <div id="gameIntro" class="game-intro">
-        <div class="game-character">👋</div>
-        <p class="game-hi">Hi!</p>
-        <p class="game-message">Let's enjoy a fun game</p>
-        <button id="startGameBtn" class="btn">Will you play the game?</button>
+        <div class="game-character">🧒</div>
+        <h3>Hi!</h3>
+        <p>Let's enjoy a fun game</p>
+        <button id="startGameBtn" class="btn play-btn">Will you play the game?</button>
       </div>
-      <div id="gameCanvasWrap" class="game-canvas-wrap" hidden>
+      <div id="gameArea" hidden>
         <canvas id="gameCanvas"></canvas>
-        <div class="game-controls-info">
-          <p>Desktop: Arrow / WASD = Move · Space = Brake · R = Restart · ESC = Exit</p>
-          <p>Mobile: Use on-screen controls</p>
-        </div>
-        <div class="mobile-controls" id="mobileControls">
-          <button id="btnLeft">←</button>
-          <button id="btnBrake">Brake</button>
-          <button id="btnRight">→</button>
-        </div>
+        <p class="game-controls">Arrow Keys / WASD to move · Space to brake · R to restart · ESC to exit</p>
       </div>
     </div>
   </section>
+
+  <!-- Physical Portfolio Note -->
+  <div class="physical-note">
+    This is my digital portfolio. I am also preparing a physical Architecture Portfolio book. A video of it will be added soon.
+  </div>
 
   <script src="js/main.js"></script>
   <script src="js/ai.js"></script>
