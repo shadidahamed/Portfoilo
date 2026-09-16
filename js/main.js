@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Custom gold cursor
   const dot = document.querySelector('.cursor-dot');
   const ring = document.querySelector('.cursor-ring');
   document.addEventListener('mousemove', e => {
@@ -9,32 +8,42 @@ document.addEventListener('DOMContentLoaded', () => {
     ring.style.top = e.clientY + 'px';
   });
 
-  // Nav
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
   const toggle = document.getElementById('navToggle');
   const links = document.querySelector('.nav-links');
   toggle?.addEventListener('click', () => links.classList.toggle('open'));
-  links?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+  links?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
 
-  // Galaxy background
   const canvas = document.getElementById('galaxy');
   const ctx = canvas.getContext('2d');
   let w, h, stars = [], mouse = { x: 0, y: 0 };
+  const center = { x: 0, y: 0 };
 
   function resize() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
+    center.x = w / 2;
+    center.y = h / 2;
   }
   window.addEventListener('resize', resize);
   resize();
 
-  for (let i = 0; i < 180; i++) {
+  for (let i = 0; i < 220; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const radius = Math.random() * Math.min(w, h) * 0.45;
     stars.push({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      z: Math.random() * 2 + 0.5,
-      o: Math.random()
+      angle,
+      radius,
+      speed: 0.0008 + Math.random() * 0.0015,
+      size: Math.random() * 1.8 + 0.4,
+      opacity: Math.random() * 0.7 + 0.3,
+      z: Math.random()
     });
   }
 
@@ -44,25 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function drawGalaxy() {
-    ctx.fillStyle = 'rgba(8,8,12,0.35)';
+    ctx.fillStyle = 'rgba(6,6,10,0.28)';
     ctx.fillRect(0, 0, w, h);
     stars.forEach(s => {
-      s.x += mouse.x * s.z * 0.6;
-      s.y += mouse.y * s.z * 0.6;
-      if (s.x < 0) s.x = w;
-      if (s.x > w) s.x = 0;
-      if (s.y < 0) s.y = h;
-      if (s.y > h) s.y = 0;
+      s.angle += s.speed;
+      const x = center.x + Math.cos(s.angle) * s.radius + mouse.x * 40 * s.z;
+      const y = center.y + Math.sin(s.angle) * s.radius * 0.55 + mouse.y * 30 * s.z;
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.z * 0.9, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(201,168,124,${0.3 + s.o * 0.5})`;
+      ctx.arc(x, y, s.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,124,${s.opacity})`;
       ctx.fill();
     });
     requestAnimationFrame(drawGalaxy);
   }
   drawGalaxy();
 
-  // Wheel system
   document.querySelectorAll('.wheel').forEach(wheelEl => {
     const data = JSON.parse(wheelEl.dataset.images || '[]');
     if (!data.length) return;
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.alt = item.title || '';
       div.appendChild(img);
       const angle = (360 / data.length) * i;
-      div.style.transform = `rotateZ(${angle}deg) translateX(${radius}px) rotateZ(-${angle}deg)`;
+      div.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
       wheelEl.appendChild(div);
     });
 
@@ -98,10 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1800);
   });
 
-  // Lightbox
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightboxImg');
   let scale = 1;
+
   function openLightbox(src) {
     lbImg.src = src;
     scale = 1;
@@ -113,14 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.classList.remove('active');
     setTimeout(() => { lightbox.hidden = true; }, 340);
   }
+
   document.querySelectorAll('.art-card, .graphics-card, .project-card').forEach(card => {
     card.addEventListener('click', () => {
       const img = card.querySelector('.wheel-item.active img');
       if (img) openLightbox(img.src);
     });
   });
+
   lightbox.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
   document.getElementById('zoomIn')?.addEventListener('click', () => {
     scale = Math.min(scale + 0.25, 3);
     lbImg.style.transform = `scale(${scale})`;
