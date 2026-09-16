@@ -12,13 +12,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Custom gold cursor -->
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-  <!-- Elegant AI button (not sticky annoying style) -->
   <button class="ai-trigger" id="aiTrigger" aria-label="AI Assistant">✦</button>
-
   <div class="ai-panel" id="aiPanel" hidden>
     <div class="ai-header">
       <span>Portfolio Assistant</span>
@@ -26,9 +23,10 @@
     </div>
     <div class="ai-messages" id="aiMessages"></div>
     <div class="ai-input-row">
-      <input type="text" id="aiInput" placeholder="Ask anything...">
+      <input type="text" id="aiInput" placeholder="Ask me anything...">
       <button id="aiVoice" title="Voice">🎤</button>
     </div>
+    <div class="voice-indicator" id="voiceIndicator"></div>
   </div>
 
   <nav class="nav" id="nav">
@@ -44,13 +42,13 @@
         <li><a href="#digital">07 Projects</a></li>
         <li><a href="#videos">08 Videos</a></li>
         <li><a href="#documents">09 Documents</a></li>
-        <li><a href="#contact">10 Contact</a></li>
+        <li><a href="#location">10 Location</a></li>
+        <li><a href="#contact">11 Contact</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle">☰</button>
     </div>
   </nav>
 
-  <!-- HERO with interactive galaxy -->
   <header class="hero" id="hero">
     <canvas id="galaxy"></canvas>
     <div class="hero-overlay"></div>
@@ -63,7 +61,6 @@
     <div class="scroll-indicator"><span></span><span></span><span></span></div>
   </header>
 
-  <!-- PROFILE -->
   <section class="section profile" id="profile">
     <div class="container golden">
       <h2 class="section-title">01 · Profile</h2>
@@ -81,13 +78,12 @@
             <li>Current Course: ARCH 101</li>
             <li>Student Roll: 14061008</li>
           </ul>
-          <p class="profile-bio">Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming.</p>
+          <p class="profile-bio">Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming. Combines traditional artistic practice with emerging digital tools.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
   <section class="section education" id="education">
     <div class="container golden">
       <h2 class="section-title">02 · Education</h2>
@@ -126,7 +122,7 @@
             <div class="wheel" data-images='[
               {"src":"assets/education/brac-1.jpg","title":"Campus"},
               {"src":"assets/education/brac-2.jpg","title":"Architecture Department"},
-              {"src":"assets/education/brac-3.jpg","title":"Studio"}
+              {"src":"assets/education/brac-3.jpg","title":"Studio Space"}
             ]'></div>
             <p class="wheel-caption"></p>
           </div>
@@ -135,7 +131,6 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section class="section skills" id="skills">
     <div class="container golden">
       <h2 class="section-title">03 · Skills</h2>
@@ -153,7 +148,6 @@
     </div>
   </section>
 
-  <!-- ART -->
   <section class="section art" id="art">
     <div class="container golden">
       <h2 class="section-title">04 · Art & Drawing</h2>
@@ -162,17 +156,15 @@
           <div class="wheel-box small">
             <div class="wheel" data-images='[
               {"src":"assets/art/01a.jpg","title":"Artwork 01"},
-              {"src":"assets/art/01b.jpg","title":"Detail"}
+              {"src":"assets/art/01b.jpg","title":"Detail View"}
             ]'></div>
             <p class="wheel-caption"></p>
           </div>
         </figure>
-        <!-- more cards -->
       </div>
     </div>
   </section>
 
-  <!-- ARCHITECTURE PROJECTS -->
   <section class="section architecture" id="architecture">
     <div class="container golden">
       <h2 class="section-title">05 · Architecture Projects</h2>
@@ -191,12 +183,10 @@
             <p>Short description</p>
           </div>
         </article>
-        <!-- more projects -->
       </div>
     </div>
   </section>
 
-  <!-- GRAPHICS -->
   <section class="section graphics" id="graphics">
     <div class="container golden">
       <h2 class="section-title">06 · Graphics</h2>
@@ -209,12 +199,10 @@
             <p class="wheel-caption"></p>
           </div>
         </figure>
-        <!-- more -->
       </div>
     </div>
   </section>
 
-  <!-- DIGITAL PROJECTS (your real links kept) -->
   <section class="section digital" id="digital">
     <div class="container golden">
       <h2 class="section-title">07 · Selected Digital Projects</h2>
@@ -238,7 +226,6 @@
     </div>
   </section>
 
-  <!-- VIDEOS (your exact YouTube links) -->
   <section class="section videos" id="videos">
     <div class="container golden">
       <h2 class="section-title">08 · Videos</h2>
@@ -262,53 +249,64 @@
     </div>
   </section>
 
-  <!-- DOCUMENTS -->
   <section class="section documents" id="documents">
     <div class="container golden">
       <h2 class="section-title">09 · CV & Documents</h2>
       <div class="docs-layout">
         <div class="cv-preview">
           <h3>Professional CV</h3>
-          <a href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" class="btn" target="_blank">Download CV</a>
+          <div class="cv-actions">
+            <a href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" class="btn" target="_blank">View CV</a>
+            <a href="https://drive.google.com/uc?export=download&id=1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV" class="btn" download>Download CV</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT (your exact real links) -->
+  <section class="section location" id="location">
+    <div class="container golden">
+      <h2 class="section-title">10 · Location</h2>
+      <div class="location-card">
+        <p class="location-text">Dhaka, Bangladesh</p>
+        <p class="location-sub">Based in Dhaka · Open to collaboration</p>
+      </div>
+    </div>
+  </section>
+
   <section class="section contact" id="contact">
     <div class="container golden">
-      <h2 class="section-title">10 · Contact</h2>
+      <h2 class="section-title">11 · Contact</h2>
       <div class="contact-diagram">
         <a href="mailto:shadidahamed.matashome05m@gmail.com" class="contact-item" title="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
         </a>
         <a href="https://github.com/shadidahamed" class="contact-item" title="GitHub" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
         </a>
         <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" class="contact-item" title="LinkedIn" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
         <a href="https://www.instagram.com/shade_ed25" class="contact-item" title="Instagram" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
         <a href="https://www.facebook.com/share/1C2KcQfwvn/" class="contact-item" title="Facebook" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
         <a href="https://wa.me/8801326162684" class="contact-item" title="WhatsApp" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         </a>
         <a href="https://x.com/ShadidAhamed" class="contact-item" title="X" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l11.5 16h4.5L8.5 4H4zm11.5 0L4 20h4.5L20 4h-4.5z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4l11.5 16h4.5L8.5 4H4zm11.5 0L4 20h4.5L20 4h-4.5z"/></svg>
         </a>
         <a href="https://pin.it/4Z5y34R2T" class="contact-item" title="Pinterest" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 12c0 2 1.5 4 4 4s4-2 4-4-1.5-4-4-4-4 2-4 4z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.3-.1-.8-.2-2 0-2.9.2-.8 1.3-5.5 1.3-5.5s-.3-.7-.3-1.7c0-1.6.9-2.8 2.1-2.8 1 0 1.5.7 1.5 1.6 0 1-.6 2.4-.9 3.8-.3 1.1.5 2 1.6 2 1.9 0 3.4-2 3.4-4.9 0-2.6-1.9-4.4-4.5-4.4-3.1 0-4.9 2.3-4.9 4.7 0 .9.3 1.9.8 2.4.1.1.1.2.1.3l-.3 1.2c0 .2-.1.2-.3.1-1.3-.6-2.1-2.5-2.1-4 0-3.3 2.4-6.3 6.9-6.3 3.6 0 6.4 2.6 6.4 6 0 3.6-2.3 6.5-5.4 6.5-1.1 0-2.1-.6-2.4-1.2l-.7 2.5c-.2.9-.9 2-1.3 2.7 1 .3 2 .5 3.1.5 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
         </a>
         <a href="https://www.reddit.com/user/Shade_ed25" class="contact-item" title="Reddit" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="11.5" r="1.5"/><circle cx="15.5" cy="11.5" r="1.5"/><path d="M8.5 15.5c1.5 1 5.5 1 7 0"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="11.5" r="1.5"/><circle cx="15.5" cy="11.5" r="1.5"/><path d="M8.5 15.5c1.5 1 5.5 1 7 0"/></svg>
         </a>
         <a href="https://www.tumblr.com/" class="contact-item" title="Tumblr" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2v6h4v4h-4v5a3 3 0 0 0 3 3h3v4h-4a7 7 0 0 1-7-7V2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2v6h4v4h-4v5a3 3 0 0 0 3 3h3v4h-4a7 7 0 0 1-7-7V2z"/></svg>
         </a>
       </div>
     </div>
@@ -318,7 +316,9 @@
     <div class="container">
       <p class="footer-name">SHADID AHAMED</p>
       <p class="footer-tag">Architecture · Art · Technology</p>
-      <p class="footer-meta">BRAC University · Summer 2026</p>
+      <p class="footer-meta">BRAC University · Summer 2026 · Dhaka, Bangladesh</p>
+      <div class="footer-line"></div>
+      <p class="footer-note">A living portfolio of continuous creation</p>
     </div>
   </footer>
 
