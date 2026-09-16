@@ -1,300 +1,148 @@
-:root {
-  --phi: 1.618;
-  --black: #0a0a0a;
-  --charcoal: #121212;
-  --silver: #c8c8c8;
-  --gold: #c9a87c;
-  --gold-light: #e8d5b5;
-  --border: rgba(201,168,124,0.22);
-  --space: calc(1rem * var(--phi));
-  --space-lg: calc(2.2rem * var(--phi));
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-}
+const trigger = document.getElementById('aiTrigger');
+const panel = document.getElementById('aiPanel');
+const closeBtn = document.getElementById('aiClose');
+const messages = document.getElementById('aiMessages');
+const input = document.getElementById('aiInput');
+const voiceBtn = document.getElementById('aiVoice');
+const voiceIndicator = document.getElementById('voiceIndicator');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; cursor: none; }
-body {
-  background: var(--black);
-  color: #f0f0f0;
-  font-family: var(--font-sans);
-  line-height: 1.65;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-.cursor-dot {
-  position: fixed; width: 6px; height: 6px; background: var(--gold);
-  border-radius: 50%; pointer-events: none; z-index: 9999;
-  transform: translate(-50%, -50%);
-}
-.cursor-ring {
-  position: fixed; width: 28px; height: 28px; border: 1.5px solid var(--gold);
-  border-radius: 50%; pointer-events: none; z-index: 9998;
-  transform: translate(-50%, -50%); opacity: 0.7;
-}
-
-.ai-trigger {
-  position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px;
-  border-radius: 50%; background: var(--charcoal); border: 1px solid var(--border);
-  color: var(--gold); font-size: 1.2rem; z-index: 90;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s; cursor: none;
-}
-.ai-trigger:hover { border-color: var(--gold); transform: scale(1.08); }
-.ai-panel {
-  position: fixed; bottom: 90px; right: 28px; width: 340px; max-height: 420px;
-  background: rgba(12,12,12,0.95); border: 1px solid var(--border);
-  border-radius: 8px; z-index: 91; display: flex; flex-direction: column;
-  backdrop-filter: blur(12px);
-}
-.ai-header {
-  padding: 12px 16px; border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-  color: var(--gold); font-size: 0.9rem;
-}
-.ai-close { background: none; border: none; color: var(--silver); font-size: 1.3rem; cursor: none; }
-.ai-messages { flex: 1; overflow-y: auto; padding: 14px; font-size: 0.88rem; }
-.ai-input-row { display: flex; border-top: 1px solid var(--border); }
-.ai-input-row input {
-  flex: 1; background: transparent; border: none; padding: 12px; color: #fff; outline: none;
-}
-.ai-input-row button { background: none; border: none; color: var(--gold); padding: 0 14px; cursor: none; }
-.voice-indicator {
-  height: 3px; background: var(--gold); width: 0%; margin: 0 16px 10px;
-  border-radius: 2px; opacity: 0; transition: width 0.3s;
-}
-.voice-indicator.active { opacity: 1; animation: voicePulse 1.2s infinite; }
-@keyframes voicePulse { 0%,100%{width:30%} 50%{width:90%} }
-
-.nav { position: fixed; top: 0; width: 100%; z-index: 100; transition: all 0.4s; }
-.nav.scrolled {
-  background: rgba(10,10,10,0.88); backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-inner {
-  max-width: 1180px; margin: 0 auto; padding: 1rem 1.5rem;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo {
-  font-family: var(--font-serif); font-size: 1.35rem; color: var(--gold);
-  text-decoration: none; letter-spacing: 0.12em;
-}
-.nav-links { display: flex; gap: 1.15rem; list-style: none; }
-.nav-links a {
-  color: var(--silver); text-decoration: none; font-size: 0.72rem;
-  letter-spacing: 0.06em; transition: color 0.3s;
-}
-.nav-links a:hover { color: var(--gold); }
-.nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.4rem; cursor: none; }
-
-.hero {
-  height: 100vh; min-height: 640px; position: relative;
-  display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;
-}
-#galaxy { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.78) 100%);
-  pointer-events: none;
-}
-.hero-content { position: relative; z-index: 2; }
-.hero-name {
-  font-family: var(--font-serif); font-weight: 500;
-  font-size: clamp(2.6rem, 7.5vw, 5.2rem); letter-spacing: 0.09em; margin-bottom: 0.25rem;
-}
-.hero-bangla { font-size: 1.05rem; color: var(--gold-light); margin-bottom: 0.9rem; opacity: 0.9; }
-.hero-sub { font-size: 0.95rem; letter-spacing: 0.16em; color: var(--silver); margin-bottom: 0.4rem; }
-.hero-meta { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.12em; }
-.scroll-indicator {
-  position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; gap: 5px; opacity: 0.55;
-}
-.scroll-indicator span {
-  width: 1px; height: 11px; background: var(--gold);
-  animation: pulse 1.7s infinite ease-in-out;
-}
-@keyframes pulse { 0%,100%{opacity:0.15} 50%{opacity:1} }
-
-.section { padding: var(--space-lg) 0; }
-.container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
-.container.golden { max-width: 980px; }
-.section-title {
-  font-family: var(--font-serif); font-weight: 400;
-  font-size: clamp(1.5rem, 2.8vw, 2.1rem); color: var(--gold);
-  margin-bottom: var(--space); letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--border); padding-bottom: 0.55rem;
-}
-
-.profile-grid {
-  display: grid; grid-template-columns: 0.9fr 1.618fr; gap: var(--space); align-items: center;
-}
-.portrait-frame {
-  width: 100%; aspect-ratio: 1; border-radius: 50%;
-  border: 1px solid var(--border); padding: 6px;
-  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-  box-shadow: 0 0 0 1px rgba(201,168,124,0.15), 0 25px 50px rgba(0,0,0,0.6);
-  overflow: hidden;
-}
-.portrait-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.profile-info h3 { font-family: var(--font-serif); font-size: 1.7rem; margin-bottom: 1rem; }
-.profile-list { list-style: none; margin-bottom: 1.4rem; }
-.profile-list li {
-  padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-  color: var(--silver); font-size: 0.92rem;
-}
-.profile-bio { color: var(--silver); font-size: 1rem; line-height: 1.7; }
-
-.timeline { display: flex; flex-direction: column; gap: 1.8rem; }
-.edu-card {
-  background: var(--charcoal); border: 1px solid var(--border); padding: 1.7rem;
-  transition: transform 0.35s, box-shadow 0.35s;
-}
-.edu-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,0.55); }
-.edu-year { font-size: 0.78rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.35rem; }
-.edu-card h3 { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.25rem; }
-.edu-card p { color: var(--silver); font-size: 0.92rem; }
-
-.wheel-box {
-  position: relative; width: 100%; height: 240px; margin-top: 1.5rem;
-  perspective: 1000px; overflow: hidden;
-}
-.wheel-box.small { height: 180px; }
-.wheel {
-  position: absolute; left: 50%; top: 50%;
-  width: 260px; height: 260px; margin: -130px 0 0 -130px;
-  transform-style: preserve-3d; transform: rotateX(12deg);
-  animation: wheelRotate 20s linear infinite;
-}
-.wheel-box.small .wheel { width: 200px; height: 200px; margin: -100px 0 0 -100px; }
-.wheel-item {
-  position: absolute; width: 120px; height: 120px;
-  left: 50%; top: 50%; margin: -60px 0 0 -60px;
-  transform-style: preserve-3d;
-  transition: transform 0.85s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.wheel-box.small .wheel-item { width: 90px; height: 90px; margin: -45px 0 0 -45px; }
-.wheel-item img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 6px;
-  border: 1px solid rgba(201,168,124,0.4); box-shadow: 0 12px 30px rgba(0,0,0,0.55);
-}
-.wheel-item.active {
-  transform: scale(1.35) translateZ(50px) !important; z-index: 20;
-}
-.wheel-item.active img {
-  border-color: var(--gold);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.7), 0 0 25px rgba(201,168,124,0.2);
-}
-.wheel-caption {
-  position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;
-  font-size: 0.88rem; color: var(--gold-light); letter-spacing: 0.04em;
-  pointer-events: none; opacity: 0; transition: opacity 0.5s;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.95);
-}
-.wheel-caption.visible { opacity: 1; }
-@keyframes wheelRotate {
-  from { transform: rotateX(12deg) rotateY(0deg); }
-  to   { transform: rotateX(12deg) rotateY(360deg); }
-}
-
-.skill-constellation {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.9rem;
-}
-.skill-node {
-  background: var(--charcoal); border: 1px solid var(--border);
-  padding: 1.1rem 0.7rem; text-align: center; font-size: 0.88rem;
-  color: var(--silver); transition: all 0.35s;
-}
-.skill-node:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-4px); }
-
-.gallery-grid, .project-grid, .graphics-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;
-}
-.art-card, .project-card, .graphics-card {
-  background: var(--charcoal); border: 1px solid var(--border);
-  transition: transform 0.4s, box-shadow 0.4s;
-}
-.art-card:hover, .project-card:hover, .graphics-card:hover {
-  transform: translateY(-7px); box-shadow: 0 22px 45px rgba(0,0,0,0.55);
-}
-.project-info { padding: 1.1rem; }
-.project-info h3 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 0.25rem; }
-.project-info p { font-size: 0.88rem; color: var(--silver); }
-
-.digital-grid, .video-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.4rem;
-}
-.digital-card, .video-card {
-  background: var(--charcoal); border: 1px solid var(--border); padding: 1.6rem;
-}
-.digital-card h3, .video-card h3 { font-family: var(--font-serif); margin-bottom: 0.4rem; }
-.digital-card p, .video-card p { color: var(--silver); font-size: 0.92rem; margin-bottom: 1rem; }
-.btn {
-  display: inline-block; padding: 0.45rem 1.1rem; border: 1px solid var(--border);
-  color: var(--silver); text-decoration: none; font-size: 0.82rem; transition: all 0.3s;
-}
-.btn:hover { border-color: var(--gold); color: var(--gold); }
-.cv-actions { display: flex; gap: 0.8rem; margin-top: 1rem; }
-
-.location-card {
-  background: var(--charcoal); border: 1px solid var(--border); padding: 2.2rem; text-align: center;
-}
-.location-text { font-family: var(--font-serif); font-size: 1.6rem; color: var(--gold); margin-bottom: 0.4rem; }
-.location-sub { color: var(--silver); font-size: 0.95rem; }
-
-.contact-diagram {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 0.9rem;
-}
-.contact-item {
-  display: flex; align-items: center; justify-content: center; height: 72px;
-  background: var(--charcoal); border: 1px solid var(--border); color: var(--silver);
-  transition: all 0.3s; border-radius: 3px;
-}
-.contact-item svg { width: 24px; height: 24px; }
-.contact-item:hover {
-  border-color: var(--gold); color: var(--gold); transform: translateY(-4px);
-}
-
-.footer { padding: 3.5rem 0; border-top: 1px solid var(--border); text-align: center; }
-.footer-name { font-family: var(--font-serif); font-size: 1.3rem; color: var(--gold); margin-bottom: 0.3rem; }
-.footer-tag, .footer-meta { font-size: 0.85rem; color: var(--silver); }
-.footer-line {
-  width: 60px; height: 1px; background: var(--border); margin: 1.4rem auto;
-}
-.footer-note { font-size: 0.8rem; color: var(--silver); opacity: 0.7; letter-spacing: 0.05em; }
-
-.lightbox {
-  position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.93);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; visibility: hidden; transition: all 0.35s;
-}
-.lightbox.active { opacity: 1; visibility: visible; }
-.lightbox-content { max-width: 92vw; max-height: 88vh; position: relative; }
-.lightbox-content img {
-  max-width: 100%; max-height: 88vh; object-fit: contain; transition: transform 0.3s;
-}
-.lightbox-close {
-  position: absolute; top: 1.4rem; right: 1.4rem; background: none; border: none;
-  color: var(--gold); font-size: 1.9rem; cursor: none;
-}
-.lightbox-controls {
-  position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 0.9rem;
-}
-.lightbox-controls button {
-  width: 38px; height: 38px; border: 1px solid var(--border);
-  background: rgba(0,0,0,0.65); color: var(--gold); font-size: 1.15rem; cursor: none;
-}
-
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: block; }
-  .nav-links.open {
-    display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
-    background: rgba(10,10,10,0.96); padding: 1.4rem; gap: 0.9rem;
+trigger?.addEventListener('click', () => {
+  panel.hidden = !panel.hidden;
+  if (!panel.hidden) {
+    input.focus();
+    if (messages.children.length === 0) {
+      addMsg("Hey. I'm the assistant living inside Shadid's portfolio. Ask me anything — about him, his work, his story, or just whatever's on your mind.", 'bot');
+    }
   }
-  .profile-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
-  .gallery-grid, .project-grid, .graphics-grid { grid-template-columns: 1fr; }
-  html { cursor: auto; }
-  .cursor-dot, .cursor-ring { display: none; }
+});
+closeBtn?.addEventListener('click', () => panel.hidden = true);
+
+function typeWriter(text, element, speed = 18) {
+  let i = 0;
+  element.textContent = '';
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      messages.scrollTop = messages.scrollHeight;
+      setTimeout(type, speed);
+    }
+  }
+  type();
 }
+
+function addMsg(text, who = 'bot') {
+  const div = document.createElement('div');
+  div.style.margin = '10px 0';
+  div.style.lineHeight = '1.55';
+  div.style.color = who === 'user' ? 'var(--gold-light)' : 'var(--silver)';
+  messages.appendChild(div);
+
+  if (who === 'bot') {
+    typeWriter('✦ ' + text, div);
+  } else {
+    div.textContent = 'You: ' + text;
+  }
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function getReply(q) {
+  const lower = q.toLowerCase().trim();
+
+  if (/(hi|hello|hey|salam|assalam|good morning|good evening)/.test(lower)) {
+    return "Hey. Good to meet you. I'm the assistant inside Shadid's portfolio. What would you like to know?";
+  }
+
+  if (/(who is shadid|tell me about shadid|who are you talking about|describe him|his story|about shadid)/.test(lower)) {
+    return "If I had to tell someone who Shadid is, I wouldn't start with marks or results. I'd start with how hard he kept trying. He wanted a future badly enough to keep reaching for it even when life kept putting obstacles in front of him. He fought through academic pressure, disappointment, loneliness, financial stress, and heartbreak — and still kept studying, drawing, designing, and creating. Behind every drawing was patience. Behind every plan was hope. Behind every 'I'll try again' was someone who had already been through a lot. He's still becoming the person he wants to be. That matters.";
+  }
+
+  if (/(struggle|hard time|difficult|pain|fight|fighter|obstacle|pressure|disappointment|failed|failure)/.test(lower)) {
+    return "He fought. Through academic pressure, through closed doors, through financial stress, through heartbreak, through loneliness. There were many moments that hurt more than he usually let people see. But he kept going. That refusal to quit is one of the most important things about him.";
+  }
+
+  if (/(draw|drawing|art|create|design|imagine|portfolio|website|game|orpheus)/.test(lower)) {
+    return "He creates. He draws, designs spaces, imagines furniture, builds websites, works on games, and constantly tries new ideas. Making something beautiful and meaningful actually matters to him. Details are not optional for him — they're the point.";
+  }
+
+  if (/(education|university|college|school|brac|notre dame|motijheel|ssc|hsc|arch)/.test(lower)) {
+    return "He studied at Motijheel Ideal School & College (SSC 2023, GPA 5.00), then Notre Dame College (HSC 2025, GPA 5.00), and is now at BRAC University in the Department of Architecture, Summer 2026 batch. Current course: ARCH 101. Roll: 14061008.";
+  }
+
+  if (/(skill|what can he do|abilities|good at)/.test(lower)) {
+    return "Literature, freehand writing, English speaking, drawing, sketching, C++, HTML, JavaScript, and programming. He moves between artistic and technical work quite naturally.";
+  }
+
+  if (/(project|work|portfolio|ecommerce|task tracker|orpheus)/.test(lower)) {
+    return "You can look at his Architecture projects, Art & Drawing section, Graphics works, Task Tracker App, the E-commerce website (TrendCart), and Orpheus Engine. Everything is in the portfolio sections above.";
+  }
+
+  if (/(contact|email|reach|message|whatsapp|instagram|github|linkedin)/.test(lower)) {
+    return "All real links are in the Contact section: Email, GitHub, LinkedIn, Instagram, Facebook, WhatsApp, X, Pinterest, Reddit, and Tumblr. Feel free to reach out.";
+  }
+
+  if (/(cv|resume|curriculum)/.test(lower)) {
+    return "You can both View and Download his CV from the Documents section. The Drive links are already connected.";
+  }
+
+  if (/(location|where|dhaka|bangladesh|live)/.test(lower)) {
+    return "He is based in Dhaka, Bangladesh.";
+  }
+
+  if (/(personality|character|kind of person|what is he like)/.test(lower)) {
+    return "Someone who still cares even after being hurt. Someone who still tries after failing. Someone who still dreams when tired. He is defined less by the things he has already achieved and more by the fact that he keeps reaching forward.";
+  }
+
+  if (/(future|dream|goal|ambition|want to become)/.test(lower)) {
+    return "He is still becoming the person he wants to be. Architecture, design, creation, and building a future that actually feels like his own — those are the directions he keeps moving toward.";
+  }
+
+  if (/(advice|motivate|inspire|how does he keep going)/.test(lower)) {
+    return "He just keeps trying. When one door closes he looks for another. When he is exhausted he still studies or draws. The real achievement was everything he had to overcome to keep going.";
+  }
+
+  if (/(favorite|like|love|hobby|interest)/.test(lower)) {
+    return "Drawing, sketching, literature, writing, English, programming, designing spaces and digital things. Creating is not a side activity for him — it's central.";
+  }
+
+  if (/(thank|thanks|appreciate)/.test(lower)) {
+    return "You're welcome. Anything else you want to know?";
+  }
+
+  if (/(bye|goodbye|see you|take care)/.test(lower)) {
+    return "Take care. Come back anytime.";
+  }
+
+  return "I can tell you about Shadid's story, his education, skills, projects, struggles, creativity, contact details, CV, or location. Ask me whatever you want — I'll answer honestly.";
+}
+
+input?.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && input.value.trim()) {
+    const q = input.value.trim();
+    addMsg(q, 'user');
+    input.value = '';
+    setTimeout(() => addMsg(getReply(q)), 450);
+  }
+});
+
+voiceBtn?.addEventListener('click', () => {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    addMsg("Voice recognition is not supported in this browser.");
+    return;
+  }
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new Rec();
+  rec.lang = 'en-US';
+  rec.continuous = false;
+
+  voiceIndicator.classList.add('active');
+  rec.onresult = e => {
+    const transcript = e.results[0][0].transcript;
+    input.value = transcript;
+    voiceIndicator.classList.remove('active');
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+  };
+  rec.onerror = () => voiceIndicator.classList.remove('active');
+  rec.onend = () => voiceIndicator.classList.remove('active');
+  rec.start();
+});
