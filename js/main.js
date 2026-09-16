@@ -8,30 +8,51 @@ document.addEventListener('DOMContentLoaded', () => {
   toggle?.addEventListener('click', () => links.classList.toggle('open'));
   links?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-  // ===== DISK GALLERY BUILDER (Z-axis 90° circular disk) =====
-  document.querySelectorAll('.disk-gallery').forEach(gallery => {
-    const images = JSON.parse(gallery.dataset.images || '[]');
-    if (!images.length) return;
+  // ===== WHEEL SYSTEM =====
+  function initWheels() {
+    document.querySelectorAll('.wheel').forEach(wheelEl => {
+      const data = JSON.parse(wheelEl.dataset.images || '[]');
+      if (!data.length) return;
 
-    const disk = document.createElement('div');
-    disk.className = 'disk';
+      const caption = wheelEl.parentElement.querySelector('.wheel-caption');
+      const isSmall = wheelEl.closest('.wheel-box')?.classList.contains('small');
+      const radius = isSmall ? 85 : 115;
+      let current = 0;
 
-    const count = images.length;
-    const radius = gallery.classList.contains('small') ? 48 : 62;
+      data.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.className = 'wheel-item';
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.title || '';
+        div.appendChild(img);
 
-    images.forEach((src, i) => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = '';
-      const angle = (360 / count) * i;
-      img.style.transform = `rotateZ(${angle}deg) translateX(${radius}px) rotateZ(-${angle}deg)`;
-      disk.appendChild(img);
+        const angle = (360 / data.length) * i;
+        div.style.transform = `rotateZ(${angle}deg) translateX(${radius}px) rotateZ(-${angle}deg)`;
+        wheelEl.appendChild(div);
+      });
+
+      const items = wheelEl.querySelectorAll('.wheel-item');
+
+      function updateFront() {
+        items.forEach((item, i) => item.classList.toggle('active', i === current));
+        if (caption && data[current]) {
+          caption.textContent = data[current].title || '';
+          caption.classList.add('visible');
+        }
+      }
+
+      updateFront();
+
+      setInterval(() => {
+        current = (current + 1) % data.length;
+        updateFront();
+      }, 1800);
     });
+  }
+  initWheels();
 
-    gallery.appendChild(disk);
-  });
-
-  // Skill 3D tilt
+  // Skill tilt
   document.querySelectorAll('.skill-node').forEach(node => {
     node.addEventListener('mousemove', e => {
       const r = node.getBoundingClientRect();
@@ -61,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.art-card, .graphics-card, .cert-card, .project-card').forEach(card => {
     card.addEventListener('click', () => {
-      const src = card.dataset.src || card.querySelector('img')?.src;
+      const activeImg = card.querySelector('.wheel-item.active img');
+      const src = activeImg?.src || card.dataset.src;
       if (src) openLightbox(src);
     });
   });
