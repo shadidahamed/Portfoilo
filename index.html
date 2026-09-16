@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SHADID AHAMED — Architecture Student · Visual Artist · Creative Technologist | BRAC University">
+  <title>SHADID AHAMED | Architecture Portfolio</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Floating minimal nav -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">SA</a>
+      <ul class="nav-links">
+        <li><a href="#profile">01 Profile</a></li>
+        <li><a href="#education">02 Education</a></li>
+        <li><a href="#skills">03 Skills</a></li>
+        <li><a href="#art">04 Art</a></li>
+        <li><a href="#architecture">05 Architecture</a></li>
+        <li><a href="#graphics">06 Graphics</a></li>
+        <li><a href="#digital">07 Projects</a></li>
+        <li><a href="#videos">08 Videos</a></li>
+        <li><a href="#documents">09 Documents</a></li>
+        <li><a href="#contact">10 Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="hero-bg">
+      <!-- Optional 3D rotating models video (slow motion 360°) -->
+      <video class="hero-video" autoplay muted loop playsinline poster="">
+        <source src="assets/hero-3d.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-name">SHADID AHAMED</h1>
+      <p class="hero-bangla">শাদিদ আহমেদ</p>
+      <p class="hero-sub">Architecture Student · Visual Artist · Creative Technologist</p>
+      <p class="hero-meta">BRAC University · Architecture · Summer 2026</p>
+    </div>
+    <div class="scroll-indicator">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- PROFILE -->
+  <section class="section profile" id="profile">
+    <div class="container golden">
+      <h2 class="section-title">01 · Profile</h2>
+      <div class="profile-grid">
+        <div class="profile-info">
+          <h3>SHADID AHAMED</h3>
+          <ul class="profile-list">
+            <li>BRAC University</li>
+            <li>Department of Architecture</li>
+            <li>Summer 2026 · Batch</li>
+            <li>Current Semester: 1</li>
+            <li>Current Course: ARCH 101</li>
+            <li>Student Roll: 14061008</li>
+          </ul>
+        </div>
+        <div class="profile-bio">
+          <p>Architecture student at BRAC University with a deep interest in freehand drawing, sketching, literature, writing, English communication and programming. Combines traditional artistic practice with emerging digital and computational tools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section education" id="education">
+    <div class="container golden">
+      <h2 class="section-title">02 · Education</h2>
+      <div class="timeline">
+        <article class="edu-card" data-expand>
+          <div class="edu-year">2013–2023</div>
+          <h3>Motijheel Ideal School & College</h3>
+          <p>SSC — 2023 · GPA 5.00</p>
+          <div class="orbit-gallery" data-images='["assets/education/misc.jpg"]'>
+            <div class="orbit-track"></div>
+          </div>
+        </article>
+        <article class="edu-card" data-expand>
+          <div class="edu-year">2023–2025</div>
+          <h3>Notre Dame College</h3>
+          <p>HSC — 2025 · GPA 5.00</p>
+          <div class="orbit-gallery" data-images='["assets/education/ndc.jpg"]'>
+            <div class="orbit-track"></div>
+          </div>
+        </article>
+        <article class="edu-card active" data-expand>
+          <div class="edu-year">2026–Present</div>
+          <h3>BRAC University</h3>
+          <p>Department of Architecture<br>Bachelor of Architecture · Summer 2026</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section skills" id="skills">
+    <div class="container golden">
+      <h2 class="section-title">03 · Skills</h2>
+      <div class="skill-constellation" id="skillGrid">
+        <div class="skill-node" data-skill="Literature">Literature</div>
+        <div class="skill-node" data-skill="Freehand Writing">Freehand Writing</div>
+        <div class="skill-node" data-skill="English Speaking">English Speaking</div>
+        <div class="skill-node" data-skill="Drawing">Drawing</div>
+        <div class="skill-node" data-skill="Sketching">Sketching</div>
+        <div class="skill-node" data-skill="C++">C++</div>
+        <div class="skill-node" data-skill="HTML">HTML</div>
+        <div class="skill-node" data-skill="JavaScript">JavaScript</div>
+        <div class="skill-node" data-skill="Programming">Programming</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ART PORTFOLIO -->
+  <section class="section art" id="art">
+    <div class="container golden">
+      <h2 class="section-title">04 · Art & Drawing</h2>
+      <div class="gallery-grid" id="artGallery">
+        <!-- Replace with your actual artworks. Keep object-fit:contain -->
+        <figure class="art-card" data-src="assets/art/01.jpg" data-title="Artwork Title" data-desc="Short description">
+          <img src="assets/art/01.jpg" alt="Artwork" loading="lazy">
+          <figcaption class="floating-desc">Artwork Title</figcaption>
+        </figure>
+        <!-- Duplicate structure for more works. User replaces images & text -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE PROJECTS (8 slots) -->
+  <section class="section architecture" id="architecture">
+    <div class="container golden">
+      <h2 class="section-title">05 · Architecture Projects</h2>
+      <div class="project-grid" id="archProjects">
+        <!-- 8 placeholder cards. Replace images, titles, descriptions -->
+        <article class="project-card" data-src="assets/architecture/01.jpg">
+          <img src="assets/architecture/01.jpg" alt="Project" loading="lazy">
+          <div class="project-info">
+            <h3>Project Title 01</h3>
+            <p>Short description. Course / studio / year if available.</p>
+          </div>
+        </article>
+        <!-- Repeat 7 more times with unique data -->
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAPHICS (~18 slots) -->
+  <section class="section graphics" id="graphics">
+    <div class="container golden">
+      <h2 class="section-title">06 · Graphics</h2>
+      <div class="graphics-grid" id="graphicsGrid">
+        <!-- Placeholder. User fills title, grade, description, image -->
+        <figure class="graphics-card" data-src="assets/graphics/01.jpg" data-title="Sheet 01" data-grade="—" data-desc="Description">
+          <img src="assets/graphics/01.jpg" alt="Graphics work" loading="lazy">
+          <figcaption class="floating-desc">Sheet 01 · Grade —</figcaption>
+        </figure>
+        <!-- Repeat structure -->
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL / TECH PROJECTS -->
+  <section class="section digital" id="digital">
+    <div class="container golden">
+      <h2 class="section-title">07 · Selected Digital Projects</h2>
+      <div class="digital-grid">
+        <article class="digital-card">
+          <h3>Affiliate Marketing Website</h3>
+          <p>Previously developed affiliate marketing website created as a work/project demo. No longer active.</p>
+          <div class="digital-actions">
+            <a href="#" class="btn disabled">Live Demo</a>
+            <a href="#" class="btn disabled">GitHub</a>
+          </div>
+        </article>
+        <article class="digital-card">
+          <h3>E-commerce Platform</h3>
+          <p>Technical portfolio / demo project.</p>
+          <div class="digital-actions">
+            <a href="#" class="btn disabled">Live Demo</a>
+            <a href="#" class="btn disabled">GitHub</a>
+          </div>
+        </article>
+        <article class="digital-card">
+          <h3>Orpheus Engine</h3>
+          <p>Game development project by Shadid.</p>
+          <div class="digital-actions">
+            <a href="#" class="btn disabled">Live Demo</a>
+            <a href="#" class="btn disabled">GitHub</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUTUBE / VIDEO -->
+  <section class="section videos" id="videos">
+    <div class="container golden">
+      <h2 class="section-title">08 · Video / YouTube</h2>
+      <div class="video-grid" id="videoGrid">
+        <!-- Placeholder cards. Replace with real YouTube IDs when available -->
+        <article class="video-card">
+          <div class="video-thumb">
+            <img src="assets/videos/thumb01.jpg" alt="Video">
+            <button class="play-btn" data-yt="">▶</button>
+          </div>
+          <h3>Video Title</h3>
+          <p>Short description</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV & DOCUMENTS -->
+  <section class="section documents" id="documents">
+    <div class="container golden">
+      <h2 class="section-title">09 · CV & Documents</h2>
+      <div class="docs-layout">
+        <div class="cv-preview">
+          <h3>Professional CV</h3>
+          <button class="btn" data-modal="assets/cv/Shadid_Ahmed_CV.pdf">View CV</button>
+          <a href="assets/cv/Shadid_Ahmed_CV.pdf" class="btn" download>Download CV</a>
+        </div>
+        <div class="cert-archive">
+          <h3>Certificates & Archive</h3>
+          <div class="cert-grid" id="certGrid">
+            <!-- User adds certificate images here -->
+            <figure class="cert-card" data-src="assets/certificates/01.jpg">
+              <img src="assets/certificates/01.jpg" alt="Certificate">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="container golden">
+      <h2 class="section-title">10 · Contact</h2>
+      <div class="contact-diagram">
+        <!-- All placeholders – replace with real links -->
+        <a href="#" class="contact-item" data-platform="Facebook" aria-label="Facebook"><span>Facebook</span></a>
+        <a href="#" class="contact-item" data-platform="Instagram" aria-label="Instagram"><span>Instagram</span></a>
+        <a href="#" class="contact-item" data-platform="X" aria-label="X / Twitter"><span>X</span></a>
+        <a href="mailto:" class="contact-item" data-platform="Gmail" aria-label="Gmail"><span>Gmail</span></a>
+        <a href="#" class="contact-item" data-platform="Tumblr" aria-label="Tumblr"><span>Tumblr</span></a>
+        <a href="#" class="contact-item" data-platform="Reddit" aria-label="Reddit"><span>Reddit</span></a>
+        <a href="#" class="contact-item" data-platform="TikTok" aria-label="TikTok"><span>TikTok</span></a>
+        <a href="#" class="contact-item" data-platform="Messenger" aria-label="Messenger"><span>Messenger</span></a>
+        <a href="#" class="contact-item" data-platform="WhatsApp" aria-label="WhatsApp"><span>WhatsApp</span></a>
+        <a href="tel:" class="contact-item" data-platform="Phone" aria-label="Phone"><span>Phone</span></a>
+        <a href="#" class="contact-item" data-platform="Discord" aria-label="Discord"><span>Discord</span></a>
+        <a href="#" class="contact-item" data-platform="Steam" aria-label="Steam"><span>Steam</span></a>
+        <a href="#" class="contact-item" data-platform="GitHub" aria-label="GitHub"><span>GitHub</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-name">SHADID AHAMED</p>
+      <p class="footer-tag">Architecture · Art · Technology</p>
+      <p class="footer-meta">BRAC University · Summer 2026</p>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX / MODAL -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" aria-label="Close">×</button>
+    <div class="lightbox-content">
+      <img src="" alt="" id="lightboxImg">
+      <div class="lightbox-controls">
+        <button id="zoomIn">+</button>
+        <button id="zoomOut">−</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
