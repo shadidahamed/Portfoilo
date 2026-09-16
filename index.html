@@ -12,6 +12,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Custom gold cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Elegant AI button (not sticky annoying style) -->
+  <button class="ai-trigger" id="aiTrigger" aria-label="AI Assistant">✦</button>
+
+  <div class="ai-panel" id="aiPanel" hidden>
+    <div class="ai-header">
+      <span>Portfolio Assistant</span>
+      <button class="ai-close" id="aiClose">×</button>
+    </div>
+    <div class="ai-messages" id="aiMessages"></div>
+    <div class="ai-input-row">
+      <input type="text" id="aiInput" placeholder="Ask anything...">
+      <button id="aiVoice" title="Voice">🎤</button>
+    </div>
+  </div>
+
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">SA</a>
@@ -27,19 +46,14 @@
         <li><a href="#documents">09 Documents</a></li>
         <li><a href="#contact">10 Contact</a></li>
       </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+      <button class="nav-toggle" id="navToggle">☰</button>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO with interactive galaxy -->
   <header class="hero" id="hero">
-    <div class="hero-bg">
-      <img class="hero-still" src="assets/hero.jpg" alt="SHADID AHAMED">
-      <video class="hero-video" autoplay muted loop playsinline>
-        <source src="assets/hero-3d.mp4" type="video/mp4">
-      </video>
-      <div class="hero-overlay"></div>
-    </div>
+    <canvas id="galaxy"></canvas>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-name">SHADID AHAMED</h1>
       <p class="hero-bangla">শাদিদ আহমেদ</p>
@@ -54,10 +68,8 @@
     <div class="container golden">
       <h2 class="section-title">01 · Profile</h2>
       <div class="profile-grid">
-        <div class="profile-portrait">
-          <div class="portrait-frame">
-            <img src="assets/profile.jpg" alt="SHADID AHAMED">
-          </div>
+        <div class="portrait-frame">
+          <img src="assets/profile.jpg" alt="SHADID AHAMED">
         </div>
         <div class="profile-info">
           <h3>SHADID AHAMED</h3>
@@ -69,18 +81,17 @@
             <li>Current Course: ARCH 101</li>
             <li>Student Roll: 14061008</li>
           </ul>
-          <p class="profile-bio">Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming. Combines traditional artistic practice with emerging digital and computational tools.</p>
+          <p class="profile-bio">Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION – all three institutions use the wheel -->
+  <!-- EDUCATION -->
   <section class="section education" id="education">
     <div class="container golden">
       <h2 class="section-title">02 · Education</h2>
       <div class="timeline">
-
         <article class="edu-card">
           <div class="edu-year">2013–2023</div>
           <h3>Motijheel Ideal School & College</h3>
@@ -94,7 +105,6 @@
             <p class="wheel-caption"></p>
           </div>
         </article>
-
         <article class="edu-card">
           <div class="edu-year">2023–2025</div>
           <h3>Notre Dame College</h3>
@@ -108,7 +118,6 @@
             <p class="wheel-caption"></p>
           </div>
         </article>
-
         <article class="edu-card">
           <div class="edu-year">2026–Present</div>
           <h3>BRAC University</h3>
@@ -117,12 +126,11 @@
             <div class="wheel" data-images='[
               {"src":"assets/education/brac-1.jpg","title":"Campus"},
               {"src":"assets/education/brac-2.jpg","title":"Architecture Department"},
-              {"src":"assets/education/brac-3.jpg","title":"Studio Space"}
+              {"src":"assets/education/brac-3.jpg","title":"Studio"}
             ]'></div>
             <p class="wheel-caption"></p>
           </div>
         </article>
-
       </div>
     </div>
   </section>
@@ -153,13 +161,13 @@
         <figure class="art-card">
           <div class="wheel-box small">
             <div class="wheel" data-images='[
-              {"src":"assets/art/01a.jpg","title":"Artwork Title 01"},
-              {"src":"assets/art/01b.jpg","title":"Detail View"}
+              {"src":"assets/art/01a.jpg","title":"Artwork 01"},
+              {"src":"assets/art/01b.jpg","title":"Detail"}
             ]'></div>
             <p class="wheel-caption"></p>
           </div>
         </figure>
-        <!-- Add more art-card with the same structure -->
+        <!-- more cards -->
       </div>
     </div>
   </section>
@@ -169,11 +177,10 @@
     <div class="container golden">
       <h2 class="section-title">05 · Architecture Projects</h2>
       <div class="project-grid">
-
         <article class="project-card">
           <div class="wheel-box">
             <div class="wheel" data-images='[
-              {"src":"assets/architecture/01a.jpg","title":"Project 01 – Main View"},
+              {"src":"assets/architecture/01a.jpg","title":"Main View"},
               {"src":"assets/architecture/01b.jpg","title":"Plan"},
               {"src":"assets/architecture/01c.jpg","title":"Section"}
             ]'></div>
@@ -181,12 +188,10 @@
           </div>
           <div class="project-info">
             <h3>Project Title 01</h3>
-            <p>Short description. Course / studio / year.</p>
+            <p>Short description</p>
           </div>
         </article>
-
-        <!-- Repeat the same structure for Project 02 to 08 -->
-
+        <!-- more projects -->
       </div>
     </div>
   </section>
@@ -199,61 +204,59 @@
         <figure class="graphics-card">
           <div class="wheel-box small">
             <div class="wheel" data-images='[
-              {"src":"assets/graphics/01.jpg","title":"Sheet 01 · Grade —"}
+              {"src":"assets/graphics/01.jpg","title":"Sheet 01"}
             ]'></div>
             <p class="wheel-caption"></p>
           </div>
         </figure>
-        <!-- Add more graphics-card -->
+        <!-- more -->
       </div>
     </div>
   </section>
 
-  <!-- DIGITAL PROJECTS -->
+  <!-- DIGITAL PROJECTS (your real links kept) -->
   <section class="section digital" id="digital">
     <div class="container golden">
       <h2 class="section-title">07 · Selected Digital Projects</h2>
       <div class="digital-grid">
         <article class="digital-card">
-          <h3>Affiliate Marketing Website</h3>
-          <p>Previously developed affiliate marketing website created as a work/project demo. No longer active.</p>
-          <div class="digital-actions">
-            <a href="#" class="btn disabled">Live Demo</a>
-            <a href="#" class="btn disabled">GitHub</a>
-          </div>
+          <h3>Task Tracker App</h3>
+          <p>Simple productivity tool</p>
         </article>
         <article class="digital-card">
-          <h3>E-commerce Platform</h3>
-          <p>Technical portfolio / demo project.</p>
+          <h3>E-commerce Website</h3>
+          <p>Modern UI shopping system</p>
           <div class="digital-actions">
-            <a href="#" class="btn disabled">Live Demo</a>
-            <a href="#" class="btn disabled">GitHub</a>
+            <a href="https://shadidahamed.github.io/trendcart/" class="btn" target="_blank">Live</a>
           </div>
         </article>
         <article class="digital-card">
           <h3>Orpheus Engine</h3>
-          <p>Game development project by Shadid.</p>
-          <div class="digital-actions">
-            <a href="#" class="btn disabled">Live Demo</a>
-            <a href="#" class="btn disabled">GitHub</a>
-          </div>
+          <p>Game development project by Shadid</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- VIDEOS -->
+  <!-- VIDEOS (your exact YouTube links) -->
   <section class="section videos" id="videos">
     <div class="container golden">
-      <h2 class="section-title">08 · Video / YouTube</h2>
+      <h2 class="section-title">08 · Videos</h2>
       <div class="video-grid">
         <article class="video-card">
-          <div class="video-thumb">
-            <img src="assets/videos/thumb01.jpg" alt="">
-            <button class="play-btn">▶</button>
-          </div>
-          <h3>Video Title</h3>
-          <p>Short description</p>
+          <h3>Video 1</h3>
+          <p>Modifiers English</p>
+          <a href="https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS" target="_blank" class="btn">Watch</a>
+        </article>
+        <article class="video-card">
+          <h3>Video 2</h3>
+          <p>Connectors English</p>
+          <a href="https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I" target="_blank" class="btn">Watch</a>
+        </article>
+        <article class="video-card">
+          <h3>Video 3</h3>
+          <p>Subject-Verb-Agreement</p>
+          <a href="https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg" target="_blank" class="btn">Watch</a>
         </article>
       </div>
     </div>
@@ -266,64 +269,46 @@
       <div class="docs-layout">
         <div class="cv-preview">
           <h3>Professional CV</h3>
-          <button class="btn" data-modal="assets/cv/Shadid_Ahmed_CV.pdf">View CV</button>
-          <a href="assets/cv/Shadid_Ahmed_CV.pdf" class="btn" download>Download CV</a>
-        </div>
-        <div class="cert-archive">
-          <h3>Certificates & Archive</h3>
-          <div class="cert-grid">
-            <figure class="cert-card" data-src="assets/certificates/01.jpg">
-              <img src="assets/certificates/01.jpg" alt="Certificate">
-            </figure>
-          </div>
+          <a href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" class="btn" target="_blank">Download CV</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT – clear detailed icons -->
+  <!-- CONTACT (your exact real links) -->
   <section class="section contact" id="contact">
     <div class="container golden">
       <h2 class="section-title">10 · Contact</h2>
       <div class="contact-diagram">
-        <a href="#" class="contact-item" aria-label="Facebook" title="Facebook">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <a href="mailto:shadidahamed.matashome05m@gmail.com" class="contact-item" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
         </a>
-        <a href="#" class="contact-item" aria-label="Instagram" title="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <a href="https://github.com/shadidahamed" class="contact-item" title="GitHub" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
         </a>
-        <a href="#" class="contact-item" aria-label="X" title="X">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.5 16h4.5L8.5 4H4zm11.5 0L4 20h4.5L20 4h-4.5z"/></svg>
+        <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" class="contact-item" title="LinkedIn" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="mailto:" class="contact-item" aria-label="Gmail" title="Gmail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+        <a href="https://www.instagram.com/shade_ed25" class="contact-item" title="Instagram" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
-        <a href="#" class="contact-item" aria-label="Tumblr" title="Tumblr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6h4v4h-4v5a3 3 0 0 0 3 3h3v4h-4a7 7 0 0 1-7-7V2z"/></svg>
+        <a href="https://www.facebook.com/share/1C2KcQfwvn/" class="contact-item" title="Facebook" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="#" class="contact-item" aria-label="Reddit" title="Reddit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="11.5" r="1.5"/><circle cx="15.5" cy="11.5" r="1.5"/><path d="M8.5 15.5c1.5 1 5.5 1 7 0"/></svg>
+        <a href="https://wa.me/8801326162684" class="contact-item" title="WhatsApp" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         </a>
-        <a href="#" class="contact-item" aria-label="TikTok" title="TikTok">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        <a href="https://x.com/ShadidAhamed" class="contact-item" title="X" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l11.5 16h4.5L8.5 4H4zm11.5 0L4 20h4.5L20 4h-4.5z"/></svg>
         </a>
-        <a href="#" class="contact-item" aria-label="Messenger" title="Messenger">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <a href="https://pin.it/4Z5y34R2T" class="contact-item" title="Pinterest" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 12c0 2 1.5 4 4 4s4-2 4-4-1.5-4-4-4-4 2-4 4z"/></svg>
         </a>
-        <a href="#" class="contact-item" aria-label="WhatsApp" title="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M8 10.5c.5 2 2.5 4 4.5 4.5"/></svg>
+        <a href="https://www.reddit.com/user/Shade_ed25" class="contact-item" title="Reddit" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="11.5" r="1.5"/><circle cx="15.5" cy="11.5" r="1.5"/><path d="M8.5 15.5c1.5 1 5.5 1 7 0"/></svg>
         </a>
-        <a href="tel:" class="contact-item" aria-label="Phone" title="Phone">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </a>
-        <a href="#" class="contact-item" aria-label="Discord" title="Discord">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5v6a5 5 0 0 0 5 5h1l2 3 2-3h1a5 5 0 0 0 5-5V9z"/><circle cx="9.5" cy="12" r="1"/><circle cx="14.5" cy="12" r="1"/></svg>
-        </a>
-        <a href="#" class="contact-item" aria-label="Steam" title="Steam">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14l2-4 4 2-2 4z"/><circle cx="15.5" cy="9.5" r="1.5"/></svg>
-        </a>
-        <a href="#" class="contact-item" aria-label="GitHub" title="GitHub">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        <a href="https://www.tumblr.com/" class="contact-item" title="Tumblr" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2v6h4v4h-4v5a3 3 0 0 0 3 3h3v4h-4a7 7 0 0 1-7-7V2z"/></svg>
         </a>
       </div>
     </div>
@@ -338,9 +323,9 @@
   </footer>
 
   <div class="lightbox" id="lightbox" hidden>
-    <button class="lightbox-close" aria-label="Close">×</button>
+    <button class="lightbox-close">×</button>
     <div class="lightbox-content">
-      <img src="" alt="" id="lightboxImg">
+      <img src="" id="lightboxImg" alt="">
       <div class="lightbox-controls">
         <button id="zoomIn">+</button>
         <button id="zoomOut">−</button>
@@ -349,5 +334,6 @@
   </div>
 
   <script src="js/main.js"></script>
+  <script src="js/ai.js"></script>
 </body>
 </html>
