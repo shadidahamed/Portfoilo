@@ -1,2571 +1,2425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
 
+  <!-- =========================================================
+       BASIC DOCUMENT SETTINGS
+       ========================================================= -->
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
 
   <meta
     name="description"
-    content="Shadid Ahamed — Architecture Student, Visual Artist and Creative Technologist."
-  >
+    content="Shadid Ahamed — Architecture Student, Visual Artist, Creative Technologist."
+  />
 
   <meta
     name="author"
     content="Shadid Ahamed"
-  >
+  />
 
   <meta
     name="theme-color"
-    content="#050505"
-  >
+    content="#08090b"
+  />
 
-  <title>SHADID AHAMED — Digital Portfolio</title>
+  <meta
+    name="color-scheme"
+    content="dark"
+  />
 
-  <!-- =====================================================
-       GOOGLE FONTS
-       ===================================================== -->
+  <title>Shadid Ahamed — Digital Portfolio</title>
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <!-- =====================================================
-       MAIN STYLESHEET
-       ===================================================== -->
-
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
-
-  <!-- =====================================================
+  <!-- =========================================================
        FAVICON
-       ===================================================== -->
-
+       ========================================================= -->
   <link
     rel="icon"
     type="image/png"
     href="assets/favicon.png"
-  >
+  />
+
+  <!-- =========================================================
+       PRECONNECT / TYPOGRAPHY
+       No external font dependency is required for functionality.
+       CSS may provide the final typography system.
+       ========================================================= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- =========================================================
+       MAIN STYLESHEET
+       ========================================================= -->
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  />
 </head>
 
-
 <body>
-
-  <!-- =====================================================
-       CUSTOM CURSOR
-       ===================================================== -->
-
+  <!-- =========================================================
+       APPLICATION ROOT
+       ========================================================= -->
   <div
-    id="cursor"
-    aria-hidden="true"
-  ></div>
-
-  <div
-    id="cursor-ring"
-    aria-hidden="true"
-  ></div>
-
-
-  <!-- =====================================================
-       PAGE LOADER
-       ===================================================== -->
-
-  <div
-    id="page-loader"
-    class="page-loader"
-    aria-hidden="true"
+    id="app"
+    class="app"
+    data-app-ready="false"
   >
 
-    <div class="loader-orbit">
+    <!-- =======================================================
+         GLOBAL AMBIENT / COSMIC BACKGROUND
+         effects.js owns the dynamic visual layer.
+         ======================================================= -->
+    <div
+      id="cosmic-atmosphere"
+      class="cosmic-atmosphere"
+      aria-hidden="true"
+    >
+      <div
+        id="cosmic-stars"
+        class="cosmic-layer cosmic-stars"
+      ></div>
 
-      <div class="loader-core"></div>
+      <div
+        id="cosmic-particles"
+        class="cosmic-layer cosmic-particles"
+      ></div>
 
-      <div class="loader-ring"></div>
+      <div
+        id="cosmic-nebula"
+        class="cosmic-layer cosmic-nebula"
+      ></div>
 
+      <div
+        id="cosmic-orbits"
+        class="cosmic-layer cosmic-orbits"
+      ></div>
+
+      <div
+        id="cosmic-grid"
+        class="cosmic-layer cosmic-grid"
+      ></div>
+
+      <div
+        id="cosmic-grain"
+        class="cosmic-layer cosmic-grain"
+      ></div>
     </div>
 
-    <div class="loader-text">
-      SHADID AHAMED
-    </div>
 
-    <div class="loader-status">
-      INITIALIZING PORTFOLIO
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       AMBIENT BACKGROUND
-       ===================================================== -->
-
-  <div
-    id="ambient-background"
-    class="ambient-background"
-    aria-hidden="true"
-  >
-
-    <div class="ambient-orb orb-one"></div>
-    <div class="ambient-orb orb-two"></div>
-    <div class="ambient-orb orb-three"></div>
-
-  </div>
+    <!-- =======================================================
+         GLOBAL SCREEN VIGNETTE
+         ======================================================= -->
+    <div
+      id="screen-vignette"
+      class="screen-vignette"
+      aria-hidden="true"
+    ></div>
 
 
-  <!-- =====================================================
-       GALAXY CANVAS
-       ===================================================== -->
+    <!-- =======================================================
+         GLOBAL HEADER
+         ======================================================= -->
+    <header
+      id="site-header"
+      class="site-header"
+    >
 
-  <canvas
-    id="galaxy"
-    aria-hidden="true"
-  ></canvas>
+      <div class="header-brand">
+        <button
+          id="brand-home-button"
+          class="brand-button"
+          type="button"
+          data-route-target="home"
+          aria-label="Go to Home"
+        >
+          <span class="brand-mark">SA</span>
 
-
-  <!-- =====================================================
-       NAVIGATION
-       ===================================================== -->
-
-  <header
-    id="site-header"
-    class="site-header"
-  >
-
-    <div class="nav-shell">
-
-      <a
-        href="#home"
-        class="brand magnetic"
-        aria-label="Go to home"
-        data-section-link="home"
-      >
-
-        <span class="brand-mark">SA</span>
-
-        <span class="brand-name">
-          SHADID
-        </span>
-
-      </a>
+          <span class="brand-copy">
+            <span class="brand-name">SHADID AHAMED</span>
+            <span class="brand-role">
+              ARCHITECTURE · ART · TECHNOLOGY
+            </span>
+          </span>
+        </button>
+      </div>
 
 
-      <button
-        id="menu-toggle"
-        class="menu-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-        aria-controls="main-navigation"
-      >
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-      </button>
-
-
+      <!-- =====================================================
+           DESKTOP NAVIGATION
+           ===================================================== -->
       <nav
-        id="main-navigation"
-        class="main-navigation"
-        aria-label="Main navigation"
+        id="desktop-navigation"
+        class="desktop-navigation"
+        aria-label="Primary navigation"
       >
 
-        <a
-          href="#home"
-          data-section-link="home"
+        <button
+          class="nav-link is-active"
+          type="button"
+          data-route-target="home"
+          aria-current="page"
         >
-          Home
-        </a>
+          HOME
+        </button>
 
-        <a
-          href="#profile"
-          data-section-link="profile"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="profile"
         >
-          Profile
-        </a>
+          PROFILE
+        </button>
 
-        <a
-          href="#education"
-          data-section-link="education"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="education"
         >
-          Education
-        </a>
+          EDUCATION
+        </button>
 
-        <a
-          href="#skills"
-          data-section-link="skills"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="skills"
         >
-          Skills
-        </a>
+          SKILLS
+        </button>
 
-        <a
-          href="#art"
-          data-section-link="art"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="art"
         >
-          Art
-        </a>
+          ART
+        </button>
 
-        <a
-          href="#architecture"
-          data-section-link="architecture"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="architecture"
         >
-          Architecture
-        </a>
+          ARCHITECTURE
+        </button>
 
-        <a
-          href="#digital"
-          data-section-link="digital"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="graphics"
         >
-          Digital
-        </a>
+          GRAPHICS
+        </button>
 
-        <a
-          href="#videos"
-          data-section-link="videos"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="digital"
         >
-          Videos
-        </a>
+          DIGITAL
+        </button>
 
-        <a
-          href="#documents"
-          data-section-link="documents"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="videos"
         >
-          Documents
-        </a>
+          VIDEOS
+        </button>
 
-        <a
-          href="#contact"
-          data-section-link="contact"
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="documents"
         >
-          Contact
-        </a>
+          DOCUMENTS
+        </button>
+
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="location"
+        >
+          LOCATION
+        </button>
+
+        <button
+          class="nav-link"
+          type="button"
+          data-route-target="contact"
+        >
+          CONTACT
+        </button>
+
+        <button
+          class="nav-link nav-link-game"
+          type="button"
+          data-route-target="game"
+        >
+          GAME
+        </button>
 
       </nav>
 
 
-      <button
-        id="ai-nav-button"
-        class="nav-ai-button magnetic"
-        type="button"
-        aria-label="Open Shadid AI"
-        data-open-ai
-      >
+      <!-- =====================================================
+           HEADER ACTIONS
+           ===================================================== -->
+      <div class="header-actions">
 
-        <span class="ai-pulse"></span>
+        <button
+          id="ai-global-button"
+          class="header-action-button ai-trigger"
+          type="button"
+          aria-label="Open Shadid AI"
+          aria-controls="ai-overlay"
+          aria-expanded="false"
+        >
+          <span class="header-action-indicator"></span>
+          <span>AI</span>
+        </button>
 
-        <span>AI</span>
+        <button
+          id="mobile-menu-button"
+          class="mobile-menu-button"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-controls="mobile-navigation-panel"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-      </button>
+      </div>
 
-    </div>
-
-  </header>
+    </header>
 
 
-  <!-- =====================================================
-       MAIN CONTENT
-       ===================================================== -->
-
-  <main id="main-content">
-
-
-    <!-- ===================================================
-         HOME / HERO
-         =================================================== -->
-
-    <section
-      id="home"
-      class="page-section hero-section"
-      data-section="home"
+    <!-- =======================================================
+         MOBILE NAVIGATION
+         ======================================================= -->
+    <aside
+      id="mobile-navigation-panel"
+      class="mobile-navigation-panel"
+      aria-hidden="true"
     >
 
-      <div class="hero-grid-overlay"></div>
+      <div class="mobile-navigation-inner">
 
-      <div class="hero-content">
-
-        <div
-          class="hero-eyebrow"
-          data-reveal="blur"
-        >
-          DIGITAL PORTFOLIO · 2026
-        </div>
-
-
-        <div
-          class="hero-name-wrap"
-          data-reveal="scale"
-        >
-
-          <h1 class="hero-name">
-            SHADID
-            <span>AHAMED</span>
-          </h1>
-
-        </div>
-
-
-        <div
-          class="hero-bangla"
-          data-reveal
-        >
-          শাদিদ আহমেদ
-        </div>
-
-
-        <p
-          class="hero-role"
-          data-reveal
-        >
-          Architecture Student
-          <span>·</span>
-          Visual Artist
-          <span>·</span>
-          Creative Technologist
-        </p>
-
-
-        <p
-          class="hero-institution"
-          data-reveal
-        >
-          BRAC University
-          <span>·</span>
-          Architecture
-          <span>·</span>
-          Summer 2026
-        </p>
-
-
-        <div
-          class="hero-actions"
-          data-reveal
-        >
-
-          <a
-            href="#profile"
-            class="primary-button magnetic"
-            data-section-link="profile"
-          >
-            <span>Enter Portfolio</span>
-            <span class="button-arrow">↗</span>
-          </a>
-
+        <div class="mobile-navigation-top">
+          <span class="technical-label">NAVIGATION</span>
 
           <button
-            class="secondary-button magnetic"
+            id="mobile-menu-close"
+            class="icon-button"
             type="button"
-            data-open-ai
+            aria-label="Close navigation"
           >
-            Ask the AI
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+
+        <nav
+          id="mobile-navigation"
+          class="mobile-navigation"
+          aria-label="Mobile navigation"
+        >
+
+          <button
+            class="mobile-nav-link is-active"
+            type="button"
+            data-route-target="home"
+            aria-current="page"
+          >
+            <span class="mobile-nav-index">01</span>
+            <span>HOME</span>
           </button>
 
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="profile"
+          >
+            <span class="mobile-nav-index">02</span>
+            <span>PROFILE</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="education"
+          >
+            <span class="mobile-nav-index">03</span>
+            <span>EDUCATION</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="skills"
+          >
+            <span class="mobile-nav-index">04</span>
+            <span>SKILLS</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="art"
+          >
+            <span class="mobile-nav-index">05</span>
+            <span>ART</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="architecture"
+          >
+            <span class="mobile-nav-index">06</span>
+            <span>ARCHITECTURE</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="graphics"
+          >
+            <span class="mobile-nav-index">07</span>
+            <span>GRAPHICS</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="digital"
+          >
+            <span class="mobile-nav-index">08</span>
+            <span>DIGITAL</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="videos"
+          >
+            <span class="mobile-nav-index">09</span>
+            <span>VIDEOS</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="documents"
+          >
+            <span class="mobile-nav-index">10</span>
+            <span>DOCUMENTS</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="location"
+          >
+            <span class="mobile-nav-index">11</span>
+            <span>LOCATION</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="contact"
+          >
+            <span class="mobile-nav-index">12</span>
+            <span>CONTACT</span>
+          </button>
+
+          <button
+            class="mobile-nav-link"
+            type="button"
+            data-route-target="game"
+          >
+            <span class="mobile-nav-index">13</span>
+            <span>GAME</span>
+          </button>
+
+        </nav>
+
+
+        <div class="mobile-navigation-footer">
+          <button
+            class="mobile-ai-link ai-trigger"
+            type="button"
+            aria-controls="ai-overlay"
+            aria-expanded="false"
+          >
+            <span class="mobile-ai-dot"></span>
+            <span>ASK SHADID AI</span>
+          </button>
         </div>
 
-
-        <div
-          class="hero-scroll-indicator"
-          data-reveal
-        >
-
-          <span>SCROLL TO EXPLORE</span>
-
-          <div class="scroll-line">
-            <span></span>
-          </div>
-
-        </div>
-
       </div>
 
-
-      <div
-        class="hero-corner hero-corner-top"
-        aria-hidden="true"
-      >
-        05°04'2005
-      </div>
+    </aside>
 
 
-      <div
-        class="hero-corner hero-corner-bottom"
-        aria-hidden="true"
-      >
-        DHAKA · BANGLADESH
-      </div>
+    <!-- =======================================================
+         MOBILE NAVIGATION BACKDROP
+         ======================================================= -->
+    <button
+      id="mobile-navigation-backdrop"
+      class="mobile-navigation-backdrop"
+      type="button"
+      aria-label="Close navigation"
+      tabindex="-1"
+    ></button>
 
-    </section>
 
-
-    <!-- ===================================================
-         PROFILE
-         =================================================== -->
-
-    <section
-      id="profile"
-      class="page-section profile-section"
-      data-section="profile"
+    <!-- =======================================================
+         MAIN APPLICATION VIEWPORT
+         IMPORTANT:
+         Sections remain mounted for stateful rendering, but only
+         one major section is active/interactive at a time.
+         main.js owns the state transition.
+         ======================================================= -->
+    <main
+      id="main-viewport"
+      class="main-viewport"
+      tabindex="-1"
     >
 
-      <div class="section-shell">
 
-        <div
-          class="section-heading"
-          data-reveal
-        >
+      <!-- =====================================================
+           HOME
+           ===================================================== -->
+      <section
+        id="section-home"
+        class="portfolio-section section-home is-active"
+        data-section="home"
+        data-atmosphere="home"
+        aria-labelledby="home-title"
+      >
 
-          <span class="section-number">
-            01
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              IDENTITY
-            </span>
-
-            <h2>
-              Profile
-            </h2>
-
-          </div>
-
+        <div class="section-background home-background">
+          <div class="home-orbit orbit-one"></div>
+          <div class="home-orbit orbit-two"></div>
+          <div class="home-orbit orbit-three"></div>
         </div>
 
 
-        <div class="profile-layout">
+        <div class="home-layout">
+
+          <div class="home-left">
+
+            <div class="home-system-status">
+              <span class="status-light"></span>
+              <span id="home-system-status-text">
+                PORTFOLIO SYSTEM ONLINE
+              </span>
+            </div>
 
 
-          <!-- PORTRAIT -->
+            <div class="home-kicker">
+              DIGITAL ARCHIVE / 2026
+            </div>
 
-          <div
-            class="profile-portrait glass-panel image-depth"
-            data-reveal="left"
-          >
 
-            <div class="portrait-orbit"></div>
+            <h1
+              id="home-title"
+              class="home-title"
+            >
+              <span class="home-title-line">SHADID</span>
+              <span class="home-title-line">AHAMED</span>
+            </h1>
 
-            <div class="portrait-frame">
 
-              <img
-                src="assets/profile.jpg"
-                alt="Portrait of Shadid Ahamed"
-                loading="eager"
+            <div class="home-bengali-name">
+              শাদিদ আহমেদ
+            </div>
+
+
+            <div class="home-role-line">
+              Architecture Student
+              <span>·</span>
+              Visual Artist
+              <span>·</span>
+              Creative Technologist
+            </div>
+
+
+            <div class="home-academic-line">
+              BRAC University
+              <span>·</span>
+              Department of Architecture
+              <span>·</span>
+              Summer 2026
+            </div>
+
+
+            <div class="home-actions">
+
+              <button
+                id="enter-portfolio-button"
+                class="primary-action-button"
+                type="button"
+                data-route-target="profile"
               >
+                <span>ENTER PORTFOLIO</span>
+                <span class="button-arrow">↗</span>
+              </button>
 
-            </div>
 
+              <button
+                id="home-ai-button"
+                class="secondary-action-button ai-trigger"
+                type="button"
+                aria-controls="ai-overlay"
+                aria-expanded="false"
+              >
+                <span class="button-ai-symbol">✦</span>
+                <span>ASK THE AI</span>
+              </button>
 
-            <div class="portrait-label">
-              <span>SHADID AHAMED</span>
-              <small>ARCHITECTURE · ART · TECHNOLOGY</small>
             </div>
 
           </div>
 
 
-          <!-- PROFILE INFORMATION -->
+          <div class="home-right">
 
-          <div
-            class="profile-information"
-            data-reveal="right"
-          >
+            <div
+              class="home-identity-object"
+              aria-hidden="true"
+            >
 
-            <div class="glass-panel profile-main-card">
+              <div class="identity-ring identity-ring-one"></div>
+              <div class="identity-ring identity-ring-two"></div>
+              <div class="identity-ring identity-ring-three"></div>
 
-              <span class="profile-status">
-                CURRENTLY BUILDING
-              </span>
-
-              <h3>
-                Architecture as a language
-                between imagination and reality.
-              </h3>
-
-              <p>
-                An architecture student at BRAC University
-                exploring space, visual art, technology,
-                digital experiences and the relationship
-                between people and the environments they inhabit.
-              </p>
-
-              <p>
-                This portfolio documents that journey —
-                from academic exploration and hand drawing
-                to architecture projects, digital experiments,
-                teaching, creative technology and interactive work.
-              </p>
-
-
-              <div class="profile-meta-grid">
-
-                <div>
-                  <span>UNIVERSITY</span>
-                  <strong>BRAC University</strong>
-                </div>
-
-                <div>
-                  <span>DEPARTMENT</span>
-                  <strong>Architecture</strong>
-                </div>
-
-                <div>
-                  <span>SESSION</span>
-                  <strong>Summer 2026</strong>
-                </div>
-
-                <div>
-                  <span>COURSE</span>
-                  <strong>Bachelor of Architecture</strong>
-                </div>
-
-                <div>
-                  <span>SEMESTER</span>
-                  <strong>1</strong>
-                </div>
-
-                <div>
-                  <span>STUDIO</span>
-                  <strong>ARCH 101</strong>
-                </div>
-
+              <div class="identity-core">
+                <span class="identity-core-mark">SA</span>
               </div>
 
             </div>
 
 
-            <!-- PROFILE QUOTE -->
-
-            <blockquote
-              class="profile-quote glass-panel"
-            >
-
-              <span class="quote-mark">“</span>
-
-              <p>
-                Designing is not only about making
-                something beautiful. It is about giving
-                an idea a place to exist.
-              </p>
-
-              <span class="quote-line"></span>
-
-            </blockquote>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROFILE STATS -->
-
-        <div
-          class="stats-grid"
-          data-stagger
-        >
-
-          <div class="stat-card glass-panel tilt-card">
-
-            <span
-              class="counter-number"
-              data-counter="3"
-            >
-              0
-            </span>
-
-            <small>
-              EDUCATIONAL STAGES
-            </small>
-
-          </div>
-
-
-          <div class="stat-card glass-panel tilt-card">
-
-            <span
-              class="counter-number"
-              data-counter="1"
-            >
-              0
-            </span>
-
-            <small>
-              ARCHITECTURE DEGREE
-            </small>
-
-          </div>
-
-
-          <div class="stat-card glass-panel tilt-card">
-
-            <span
-              class="counter-number"
-              data-counter="2026"
-            >
-              0
-            </span>
-
-            <small>
-              NEW CHAPTER
-            </small>
-
-          </div>
-
-
-          <div class="stat-card glass-panel tilt-card">
-
-            <span class="stat-symbol">
-              ∞
-            </span>
-
-            <small>
-              IDEAS TO EXPLORE
-            </small>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         EDUCATION
-         =================================================== -->
-
-    <section
-      id="education"
-      class="page-section education-section"
-      data-section="education"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            02
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              JOURNEY
-            </span>
-
-            <h2>
-              Education
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div class="education-intro glass-panel" data-reveal>
-
-          <div class="education-intro-mark">
-            01—03
-          </div>
-
-          <div>
-
-            <h3>
-              Three stages.
-              One continuous journey.
-            </h3>
-
-            <p>
-              From foundational schooling and science
-              education to architecture, each stage has
-              contributed a different layer to the way
-              Shadid observes, draws, calculates and designs.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="education-timeline">
-
-
-          <!-- SCHOOL -->
-
-          <article
-            class="education-card glass-panel tilt-card expandable-card"
-            data-reveal="left"
-          >
-
-            <div class="education-card-number">
-              01
-            </div>
-
-            <div class="education-card-content">
-
-              <span class="education-period">
-                2013 — 2023
-              </span>
-
-              <h3>
-                Motijheel Ideal School & College
-              </h3>
-
-              <span class="education-location">
-                Dhaka, Bangladesh
-              </span>
-
-              <p>
-                Class 1 through Class 10, building the
-                academic foundation that led toward the
-                secondary school certificate.
-              </p>
-
-              <div class="expand-content">
-
-                <div class="education-detail-grid">
-
-                  <div>
-                    <span>LEVEL</span>
-                    <strong>Class 1 — 10</strong>
-                  </div>
-
-                  <div>
-                    <span>QUALIFICATION</span>
-                    <strong>SSC</strong>
-                  </div>
-
-                  <div>
-                    <span>RESULT</span>
-                    <strong>GPA 5.00</strong>
-                  </div>
-
-                  <div>
-                    <span>FOCUS</span>
-                    <strong>Science & Foundation</strong>
-                  </div>
-
-                </div>
-
+            <div class="home-side-telemetry">
+
+              <div class="telemetry-row">
+                <span>MODE</span>
+                <strong>ARCHIVE</strong>
+              </div>
+
+              <div class="telemetry-row">
+                <span>FIELD</span>
+                <strong>ARCHITECTURE</strong>
+              </div>
+
+              <div class="telemetry-row">
+                <span>STATE</span>
+                <strong>ACTIVE</strong>
+              </div>
+
+              <div class="telemetry-row">
+                <span>YEAR</span>
+                <strong>2026</strong>
               </div>
 
             </div>
 
-            <div class="expand-icon">
-              ↓
+          </div>
+
+        </div>
+
+
+        <div class="home-bottom-meta">
+
+          <div class="home-scroll-indicator">
+            <span class="scroll-indicator-line"></span>
+            <span>SELECT A FIELD</span>
+          </div>
+
+          <div class="home-digital-label">
+            DIGITAL PORTFOLIO · SHADID AHAMED
+          </div>
+
+          <div class="home-coordinate-label">
+            DHAKA / BD
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           PROFILE
+           ===================================================== -->
+      <section
+        id="section-profile"
+        class="portfolio-section section-profile"
+        data-section="profile"
+        data-atmosphere="profile"
+        aria-labelledby="profile-title"
+        hidden
+      >
+
+        <div class="section-shell profile-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">01 / 14</span>
+
+              <h2
+                id="profile-title"
+                class="section-title"
+              >
+                PROFILE
+              </h2>
             </div>
 
-          </article>
+            <span class="section-category">
+              IDENTITY ARCHIVE
+            </span>
+
+          </div>
 
 
-          <!-- NDC -->
+          <div class="profile-editorial-grid">
 
-          <article
-            class="education-card glass-panel tilt-card expandable-card"
-            data-reveal
-          >
+            <div class="profile-portrait-column">
 
-            <div class="education-card-number">
-              02
-            </div>
+              <div class="profile-image-frame">
 
-            <div class="education-card-content">
+                <img
+                  src="assets/profile.jpg"
+                  alt="Portrait of Shadid Ahamed"
+                  class="profile-image"
+                  loading="eager"
+                />
 
-              <span class="education-period">
-                2023 — 2025
-              </span>
-
-              <h3>
-                Notre Dame College
-              </h3>
-
-              <span class="education-location">
-                Dhaka, Bangladesh
-              </span>
-
-              <p>
-                Higher secondary education in the Science
-                group, strengthening mathematics, physics,
-                chemistry, biology and analytical thinking.
-              </p>
-
-              <div class="expand-content">
-
-                <div class="education-detail-grid">
-
-                  <div>
-                    <span>LEVEL</span>
-                    <strong>HSC</strong>
-                  </div>
-
-                  <div>
-                    <span>GROUP</span>
-                    <strong>Science</strong>
-                  </div>
-
-                  <div>
-                    <span>RESULT</span>
-                    <strong>GPA 5.00</strong>
-                  </div>
-
-                  <div>
-                    <span>INTEREST</span>
-                    <strong>Science + Design</strong>
-                  </div>
-
+                <div class="profile-image-overlay">
+                  <span>IDENTITY / 001</span>
                 </div>
 
               </div>
 
+
+              <div class="profile-image-meta">
+                <span>SHADID AHAMED</span>
+                <span>ARCHITECTURE / ART / TECHNOLOGY</span>
+              </div>
+
             </div>
 
-            <div class="expand-icon">
-              ↓
-            </div>
 
-          </article>
+            <div class="profile-content-column">
+
+              <div class="profile-intro">
+
+                <span class="technical-label">
+                  ARCHITECTURE STUDENT · VISUAL ARTIST · CREATIVE TECHNOLOGIST
+                </span>
+
+                <p class="profile-lead">
+                  An evolving personal archive connecting architecture,
+                  drawing, visual art, writing, literature, and digital
+                  experimentation.
+                </p>
+
+              </div>
 
 
-          <!-- BRAC -->
+              <div class="profile-disciplines">
 
-          <article
-            class="education-card glass-panel tilt-card expandable-card education-current"
-            data-reveal="right"
-          >
+                <article class="discipline-node">
+                  <span class="discipline-number">01</span>
+                  <h3>ARCHITECTURE</h3>
+                  <p>
+                    Space, form, drawings, studio work and architectural
+                    exploration.
+                  </p>
+                </article>
 
-            <div class="education-card-number">
-              03
-            </div>
+                <article class="discipline-node">
+                  <span class="discipline-number">02</span>
+                  <h3>VISUAL ART</h3>
+                  <p>
+                    Drawing, painting, observation, interpretation and
+                    personal visual language.
+                  </p>
+                </article>
 
-            <div class="education-card-content">
+                <article class="discipline-node">
+                  <span class="discipline-number">03</span>
+                  <h3>WRITING</h3>
+                  <p>
+                    Literature, reading, expression and written
+                    communication.
+                  </p>
+                </article>
 
-              <span class="education-period">
-                SUMMER 2026 — PRESENT
-              </span>
+                <article class="discipline-node">
+                  <span class="discipline-number">04</span>
+                  <h3>TECHNOLOGY</h3>
+                  <p>
+                    Websites, interactive systems, experiments and
+                    creative digital work.
+                  </p>
+                </article>
 
-              <h3>
-                BRAC University
-              </h3>
+              </div>
 
-              <span class="education-location">
-                Dhaka, Bangladesh
-              </span>
 
-              <p>
-                Bachelor of Architecture — beginning a
-                long-term exploration of architecture,
-                spatial thinking, representation,
-                materiality and creative technology.
-              </p>
+              <div class="profile-academic-record">
 
-              <div class="expand-content">
+                <div class="record-heading">
+                  CURRENT ACADEMIC IDENTITY
+                </div>
 
-                <div class="education-detail-grid">
+                <div class="record-grid">
 
-                  <div>
-                    <span>PROGRAM</span>
-                    <strong>Bachelor of Architecture</strong>
+                  <div class="record-cell">
+                    <span>INSTITUTION</span>
+                    <strong>BRAC University</strong>
                   </div>
 
-                  <div>
-                    <span>SEMESTER</span>
-                    <strong>1</strong>
+                  <div class="record-cell">
+                    <span>DEPARTMENT</span>
+                    <strong>Architecture</strong>
                   </div>
 
-                  <div>
-                    <span>COURSE</span>
-                    <strong>ARCH 101</strong>
-                  </div>
-
-                  <div>
+                  <div class="record-cell">
                     <span>SESSION</span>
                     <strong>Summer 2026</strong>
                   </div>
 
+                  <div class="record-cell">
+                    <span>PROGRAM</span>
+                    <strong>Bachelor of Architecture</strong>
+                  </div>
+
+                  <div class="record-cell">
+                    <span>SEMESTER</span>
+                    <strong>Semester 1</strong>
+                  </div>
+
+                  <div class="record-cell">
+                    <span>COURSE</span>
+                    <strong>ARCH 101</strong>
+                  </div>
+
                 </div>
 
               </div>
 
             </div>
 
-            <div class="expand-icon">
-              ↓
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         SKILLS
-         =================================================== -->
-
-    <section
-      id="skills"
-      class="page-section skills-section"
-      data-section="skills"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            03
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              CAPABILITIES
-            </span>
-
-            <h2>
-              Skills
-            </h2>
-
           </div>
 
         </div>
 
-
-        <div
-          class="skills-introduction glass-panel"
-          data-reveal
-        >
-
-          <h3>
-            A multidisciplinary toolkit.
-          </h3>
-
-          <p>
-            Architecture sits at the center, but the
-            creative process moves across drawing,
-            visual communication, technology, teaching
-            and digital experimentation.
-          </p>
-
-        </div>
-
-
-        <div
-          id="skills-grid"
-          class="skills-grid"
-          data-stagger
-        >
-
-          <article class="skill-card glass-panel tilt-card">
-
-            <div class="skill-icon">
-              ✦
-            </div>
-
-            <h3>
-              Drawing
-            </h3>
-
-            <p>
-              Hand drawing, observation, visual studies
-              and artistic experimentation.
-            </p>
-
-          </article>
-
-
-          <article class="skill-card glass-panel tilt-card">
-
-            <div class="skill-icon">
-              ◇
-            </div>
-
-            <h3>
-              Architecture
-            </h3>
-
-            <p>
-              Spatial thinking, architectural representation,
-              model-making and design exploration.
-            </p>
-
-          </article>
-
-
-          <article class="skill-card glass-panel tilt-card">
-
-            <div class="skill-icon">
-              ◎
-            </div>
-
-            <h3>
-              Visual Art
-            </h3>
-
-            <p>
-              Pencil, watercolor and mixed visual
-              experimentation.
-            </p>
-
-          </article>
-
-
-          <article class="skill-card glass-panel tilt-card">
-
-            <div class="skill-icon">
-              &lt;/&gt;
-            </div>
-
-            <h3>
-              Web Technology
-            </h3>
-
-            <p>
-              HTML, CSS, JavaScript and interactive
-              web experiences.
-            </p>
-
-          </article>
-
-
-          <article class="skill-card glass-panel tilt-card">
-
-            <div class="skill-icon">
-              ∿
-            </div>
-
-            <h3>
-              Creative Technology
-            </h3>
-
-            <p>
-              Combining design thinking with interactive
-              digital systems.
-            </p>
-
-          </article>
-
-
-          <article class="skill-card glass-panel tilt-card">
-
-            <div class="skill-icon">
-              A
-            </div>
-
-            <h3>
-              Teaching
-            </h3>
-
-            <p>
-              English teaching and educational
-              communication.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         ART
-         =================================================== -->
-
-    <section
-      id="art"
-      class="page-section art-section"
-      data-section="art"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            04
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              VISUAL WORK
-            </span>
-
-            <h2>
-              Art
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="art-intro"
-          data-reveal
-        >
-
-          <p>
-            Selected visual works exploring silence,
-            movement, nature, emotion and observation.
-          </p>
-
-          <span>
-            CLICK A WORK TO EXPAND
-          </span>
-
-        </div>
-
-
-        <!-- ART CAROUSEL -->
-
-        <div
-          class="art-gallery shadid-carousel"
-          data-carousel
-          data-carousel-interval="4200"
-          tabindex="0"
-        >
-
-          <div class="shadid-carousel-track">
-
-
-            <!-- ARTWORK 01 -->
-
-            <article
-              class="artwork-card shadid-carousel-item glass-panel"
-            >
-
-              <div class="artwork-image image-zoom">
-
-                <img
-                  src="assets/art/flower-grows-in-silence.jpg"
-                  alt="Flower Grows in Silence"
-                  loading="lazy"
-                  data-lazy
-                >
-
-              </div>
-
-
-              <div class="artwork-information">
-
-                <span class="artwork-number">
-                  ART / 001
-                </span>
-
-                <h3>
-                  Flower Grows in Silence
-                </h3>
-
-                <p>
-                  A figure floating partly underwater,
-                  surrounded by lotus, leaves and fish.
-                  The contrast between the underwater
-                  world and the distant land represents
-                  separation, confinement and the quiet
-                  growth of beauty.
-                </p>
-
-                <div class="artwork-meta">
-
-                  <span>
-                    MIXED MEDIA
-                  </span>
-
-                  <span>
-                    ORIGINAL WORK
-                  </span>
-
-                </div>
-
-              </div>
-
-            </article>
-
-
-            <!-- ARTWORK 02 -->
-
-            <article
-              class="artwork-card shadid-carousel-item glass-panel"
-            >
-
-              <div class="artwork-image image-zoom">
-
-                <img
-                  src="assets/art/art-02.jpg"
-                  alt="Artwork 02"
-                  loading="lazy"
-                  data-lazy
-                >
-
-              </div>
-
-
-              <div class="artwork-information">
-
-                <span class="artwork-number">
-                  ART / 002
-                </span>
-
-                <h3>
-                  Visual Study
-                </h3>
-
-                <p>
-                  A visual exploration documenting
-                  observation, composition and the
-                  development of artistic technique.
-                </p>
-
-                <div class="artwork-meta">
-
-                  <span>
-                    DRAWING
-                  </span>
-
-                  <span>
-                    STUDY
-                  </span>
-
-                </div>
-
-              </div>
-
-            </article>
-
-
-            <!-- ARTWORK 03 -->
-
-            <article
-              class="artwork-card shadid-carousel-item glass-panel"
-            >
-
-              <div class="artwork-image image-zoom">
-
-                <img
-                  src="assets/art/art-03.jpg"
-                  alt="Artwork 03"
-                  loading="lazy"
-                  data-lazy
-                >
-
-              </div>
-
-
-              <div class="artwork-information">
-
-                <span class="artwork-number">
-                  ART / 003
-                </span>
-
-                <h3>
-                  Study in Form
-                </h3>
-
-                <p>
-                  An experimental study of form, line,
-                  texture and visual balance.
-                </p>
-
-                <div class="artwork-meta">
-
-                  <span>
-                    EXPERIMENT
-                  </span>
-
-                  <span>
-                    VISUAL STUDY
-                  </span>
-
-                </div>
-
-              </div>
-
-            </article>
-
-          </div>
-
-
-          <div class="carousel-controls">
-
-            <button
-              type="button"
-              class="carousel-button magnetic"
-              data-carousel-prev
-              aria-label="Previous artwork"
-            >
-              ←
-            </button>
-
-            <button
-              type="button"
-              class="carousel-button magnetic"
-              data-carousel-next
-              aria-label="Next artwork"
-            >
-              →
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         ARCHITECTURE
-         =================================================== -->
-
-    <section
-      id="architecture"
-      class="page-section architecture-section"
-      data-section="architecture"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            05
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              SPATIAL EXPLORATION
-            </span>
-
-            <h2>
-              Architecture
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="architecture-intro glass-panel"
-          data-reveal
-        >
-
-          <div>
-
-            <span>
-              STUDIO WORK
-            </span>
-
-            <h3>
-              Learning to think in space.
-            </h3>
-
-          </div>
-
-          <p>
-            Architecture projects documenting the
-            transition from abstract exercises and
-            composition to spatial thinking, physical
-            form and architectural representation.
-          </p>
-
-        </div>
-
-
-        <!-- PROJECT 01 -->
-
-        <article
-          class="architecture-project glass-panel"
-          data-reveal="left"
-        >
-
-          <div class="project-index">
-            01
-          </div>
-
-
-          <div class="project-image image-depth image-zoom">
-
-            <img
-              src="assets/architecture/squares-grid.jpg"
-              alt="Squares and Grid architecture project"
-              loading="lazy"
-              data-lazy
-            >
-
-          </div>
-
-
-          <div class="project-content">
-
-            <span>
-              STUDIO EXERCISE
-            </span>
-
-            <h3>
-              Squares & Grid
-            </h3>
-
-            <p>
-              An exploration of repetition, rhythm,
-              proportion, alignment and the relationship
-              between individual units and a larger system.
-            </p>
-
-            <div class="project-tags">
-
-              <span>FORM</span>
-              <span>GRID</span>
-              <span>COMPOSITION</span>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- PROJECT 02 -->
-
-        <article
-          class="architecture-project glass-panel reverse"
-          data-reveal="right"
-        >
-
-          <div class="project-index">
-            02
-          </div>
-
-
-          <div class="project-image image-depth image-zoom">
-
-            <img
-              src="assets/architecture/low-relief.jpg"
-              alt="Low Relief architecture project"
-              loading="lazy"
-              data-lazy
-            >
-
-          </div>
-
-
-          <div class="project-content">
-
-            <span>
-              STUDIO EXERCISE
-            </span>
-
-            <h3>
-              Low Relief
-            </h3>
-
-            <p>
-              A study of depth, layering, shadow and
-              surface through relief-based composition.
-            </p>
-
-            <div class="project-tags">
-
-              <span>RELIEF</span>
-              <span>DEPTH</span>
-              <span>LIGHT</span>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- PROJECT 03 -->
-
-        <article
-          class="architecture-project glass-panel"
-          data-reveal="left"
-        >
-
-          <div class="project-index">
-            03
-          </div>
-
-
-          <div class="project-image image-depth image-zoom">
-
-            <img
-              src="assets/architecture/pavilion.jpg"
-              alt="Pavilion architecture project"
-              loading="lazy"
-              data-lazy
-            >
-
-          </div>
-
-
-          <div class="project-content">
-
-            <span>
-              DESIGN EXPLORATION
-            </span>
-
-            <h3>
-              Pavilion
-            </h3>
-
-            <p>
-              A spatial experiment focused on movement,
-              enclosure, openness, circulation and the
-              relationship between structure and user.
-            </p>
-
-            <div class="project-tags">
-
-              <span>SPACE</span>
-              <span>MOVEMENT</span>
-              <span>STRUCTURE</span>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- ARCHITECTURE VIEWER -->
-
-        <div
-          class="architecture-viewer glass-panel"
-          data-reveal
-        >
-
-          <div class="viewer-header">
+      </section>
+
+
+      <!-- =====================================================
+           EDUCATION
+           ===================================================== -->
+      <section
+        id="section-education"
+        class="portfolio-section section-education"
+        data-section="education"
+        data-atmosphere="education"
+        aria-labelledby="education-title"
+        hidden
+      >
+
+        <div class="section-shell education-shell">
+
+          <div class="section-header">
 
             <div>
+              <span class="section-index">02 / 14</span>
 
-              <span>
-                SPATIAL VIEWER
-              </span>
-
-              <h3>
-                Explore the work
-              </h3>
-
-            </div>
-
-            <div class="viewer-controls">
-
-              <button
-                type="button"
-                data-carousel-prev
-                aria-label="Rotate architecture view left"
+              <h2
+                id="education-title"
+                class="section-title"
               >
-                ↶
-              </button>
-
-              <button
-                type="button"
-                data-carousel-next
-                aria-label="Rotate architecture view right"
-              >
-                ↷
-              </button>
-
+                EDUCATION
+              </h2>
             </div>
 
-          </div>
-
-
-          <div class="architecture-view-stage">
-
-            <div class="architecture-orbit">
-
-              <div class="orbit-node node-one"></div>
-              <div class="orbit-node node-two"></div>
-              <div class="orbit-node node-three"></div>
-
-            </div>
-
-            <div class="viewer-center">
-              SPATIAL
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         GRAPHICS
-         =================================================== -->
-
-    <section
-      id="graphics"
-      class="page-section graphics-section"
-      data-section="graphics"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            06
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              VISUAL COMMUNICATION
+            <span class="section-category">
+              ACADEMIC JOURNEY
             </span>
 
-            <h2>
-              Graphics
-            </h2>
+          </div>
+
+
+          <div
+            id="education-timeline"
+            class="education-timeline"
+          >
+
+            <!--
+              data.js / main.js can populate or augment these entries.
+              Initial structural nodes are present so CSS and JS have
+              stable anchors.
+            -->
+
+
+            <!-- SCHOOL -->
+            <article
+              id="education-school"
+              class="education-entry"
+              data-education-id="school"
+            >
+
+              <div class="education-marker">
+                <span class="education-marker-number">01</span>
+              </div>
+
+              <div class="education-object-column">
+
+                <button
+                  class="education-rotator"
+                  type="button"
+                  data-education-rotate="school"
+                  aria-label="Rotate Motijheel Ideal School and College image"
+                >
+
+                  <span class="education-object-scene">
+
+                    <span class="education-face education-face-front">
+                      <img
+                        src=""
+                        alt="Motijheel Ideal School & College"
+                        class="education-image"
+                        data-education-image="school"
+                        loading="lazy"
+                      />
+                    </span>
+
+                    <span class="education-face education-face-back">
+                      <span class="education-face-label">
+                        ARCHIVE
+                      </span>
+                      <span class="education-face-code">
+                        MI / 2013—2023
+                      </span>
+                    </span>
+
+                    <span class="education-face education-face-side">
+                      <span class="education-face-label">
+                        DHAKA
+                      </span>
+                    </span>
+
+                  </span>
+
+                </button>
+
+                <span class="education-rotate-hint">
+                  CLICK / TAP TO ROTATE
+                </span>
+
+              </div>
+
+
+              <div class="education-info">
+
+                <div class="education-period">
+                  2013 — 2023
+                </div>
+
+                <h3 class="education-institution">
+                  Motijheel Ideal School &amp; College
+                </h3>
+
+                <div class="education-meta">
+                  Dhaka, Bangladesh
+                  <span>·</span>
+                  Class 1 — Class 10
+                  <span>·</span>
+                  SSC
+                </div>
+
+                <div class="education-result">
+                  <span>RESULT</span>
+                  <strong>GPA 5.00</strong>
+                </div>
+
+                <div
+                  class="education-description"
+                  data-education-description="school"
+                >
+                  <p>
+                    School-level academic foundation and the beginning of
+                    the documented educational journey.
+                  </p>
+                </div>
+
+                <button
+                  class="text-action education-expand-button"
+                  type="button"
+                  data-education-expand="school"
+                  aria-expanded="false"
+                >
+                  VIEW DETAILS
+                  <span>↗</span>
+                </button>
+
+                <button
+                  class="text-action education-location-button"
+                  type="button"
+                  data-location-target="school"
+                >
+                  LOCATION
+                  <span>⌖</span>
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <!-- COLLEGE -->
+            <article
+              id="education-college"
+              class="education-entry"
+              data-education-id="college"
+            >
+
+              <div class="education-marker">
+                <span class="education-marker-number">02</span>
+              </div>
+
+              <div class="education-object-column">
+
+                <button
+                  class="education-rotator"
+                  type="button"
+                  data-education-rotate="college"
+                  aria-label="Rotate Notre Dame College image"
+                >
+
+                  <span class="education-object-scene">
+
+                    <span class="education-face education-face-front">
+                      <img
+                        src=""
+                        alt="Notre Dame College"
+                        class="education-image"
+                        data-education-image="college"
+                        loading="lazy"
+                      />
+                    </span>
+
+                    <span class="education-face education-face-back">
+                      <span class="education-face-label">
+                        SCIENCE
+                      </span>
+                      <span class="education-face-code">
+                        NDC / 2023—2025
+                      </span>
+                    </span>
+
+                    <span class="education-face education-face-side">
+                      <span class="education-face-label">
+                        DHAKA
+                      </span>
+                    </span>
+
+                  </span>
+
+                </button>
+
+                <span class="education-rotate-hint">
+                  CLICK / TAP TO ROTATE
+                </span>
+
+              </div>
+
+
+              <div class="education-info">
+
+                <div class="education-period">
+                  2023 — 2025
+                </div>
+
+                <h3 class="education-institution">
+                  Notre Dame College
+                </h3>
+
+                <div class="education-meta">
+                  Dhaka, Bangladesh
+                  <span>·</span>
+                  HSC
+                  <span>·</span>
+                  Science
+                </div>
+
+                <div class="education-result">
+                  <span>RESULT</span>
+                  <strong>GPA 5.00</strong>
+                </div>
+
+                <div class="education-disciplines-inline">
+                  Mathematics
+                  <span>·</span>
+                  Physics
+                  <span>·</span>
+                  Chemistry
+                  <span>·</span>
+                  Biology
+                </div>
+
+                <div
+                  class="education-description"
+                  data-education-description="college"
+                >
+                  <p>
+                    Science education connecting analytical thinking with
+                    the foundations that now intersect with design and
+                    architecture.
+                  </p>
+                </div>
+
+                <button
+                  class="text-action education-expand-button"
+                  type="button"
+                  data-education-expand="college"
+                  aria-expanded="false"
+                >
+                  VIEW DETAILS
+                  <span>↗</span>
+                </button>
+
+                <button
+                  class="text-action education-location-button"
+                  type="button"
+                  data-location-target="college"
+                >
+                  LOCATION
+                  <span>⌖</span>
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <!-- UNIVERSITY -->
+            <article
+              id="education-university"
+              class="education-entry"
+              data-education-id="university"
+            >
+
+              <div class="education-marker">
+                <span class="education-marker-number">03</span>
+              </div>
+
+              <div class="education-object-column">
+
+                <button
+                  class="education-rotator"
+                  type="button"
+                  data-education-rotate="university"
+                  aria-label="Rotate BRAC University image"
+                >
+
+                  <span class="education-object-scene">
+
+                    <span class="education-face education-face-front">
+                      <img
+                        src=""
+                        alt="BRAC University"
+                        class="education-image"
+                        data-education-image="university"
+                        loading="lazy"
+                      />
+                    </span>
+
+                    <span class="education-face education-face-back">
+                      <span class="education-face-label">
+                        ARCHITECTURE
+                      </span>
+                      <span class="education-face-code">
+                        BRAC / SUMMER 2026
+                      </span>
+                    </span>
+
+                    <span class="education-face education-face-side">
+                      <span class="education-face-label">
+                        CURRENT
+                      </span>
+                    </span>
+
+                  </span>
+
+                </button>
+
+                <span class="education-rotate-hint">
+                  CLICK / TAP TO ROTATE
+                </span>
+
+              </div>
+
+
+              <div class="education-info">
+
+                <div class="education-period">
+                  Summer 2026 — Present
+                </div>
+
+                <h3 class="education-institution">
+                  BRAC University
+                </h3>
+
+                <div class="education-meta">
+                  Dhaka, Bangladesh
+                  <span>·</span>
+                  Bachelor of Architecture
+                </div>
+
+                <div class="education-result">
+                  <span>PHASE</span>
+                  <strong>Semester 1</strong>
+                </div>
+
+                <div class="education-disciplines-inline">
+                  Department of Architecture
+                  <span>·</span>
+                  ARCH 101
+                </div>
+
+                <div
+                  class="education-description"
+                  data-education-description="university"
+                >
+                  <p>
+                    Current academic phase in architecture at BRAC
+                    University.
+                  </p>
+                </div>
+
+                <button
+                  class="text-action education-expand-button"
+                  type="button"
+                  data-education-expand="university"
+                  aria-expanded="false"
+                >
+                  VIEW DETAILS
+                  <span>↗</span>
+                </button>
+
+                <button
+                  class="text-action education-location-button"
+                  type="button"
+                  data-location-target="university"
+                >
+                  LOCATION
+                  <span>⌖</span>
+                </button>
+
+              </div>
+
+            </article>
+
+          </div>
+
+
+          <div
+            id="education-detail-drawer"
+            class="education-detail-drawer"
+            aria-hidden="true"
+          >
+
+            <div class="drawer-header">
+              <span class="technical-label">ACADEMIC DETAIL</span>
+
+              <button
+                class="icon-button drawer-close"
+                type="button"
+                data-close-drawer="education"
+                aria-label="Close education details"
+              >
+                ×
+              </button>
+            </div>
+
+            <div
+              id="education-detail-content"
+              class="drawer-content"
+            ></div>
 
           </div>
 
         </div>
 
+      </section>
 
-        <div
-          class="graphics-grid"
-          data-stagger
-        >
 
-          <article
-            class="graphic-card glass-panel image-zoom tilt-card"
+      <!-- =====================================================
+           SKILLS
+           ===================================================== -->
+      <section
+        id="section-skills"
+        class="portfolio-section section-skills"
+        data-section="skills"
+        data-atmosphere="skills"
+        aria-labelledby="skills-title"
+        hidden
+      >
+
+        <div class="section-shell skills-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">03 / 14</span>
+
+              <h2
+                id="skills-title"
+                class="section-title"
+              >
+                SKILLS
+              </h2>
+            </div>
+
+            <span class="section-category">
+              INTERACTIVE CAPABILITIES
+            </span>
+
+          </div>
+
+
+          <div
+            id="skills-grid"
+            class="skills-grid"
+            aria-live="polite"
+          >
+            <!-- data.js-driven skill cards -->
+          </div>
+
+
+          <div
+            id="skill-detail-panel"
+            class="skill-detail-panel"
+            role="dialog"
+            aria-modal="false"
+            aria-hidden="true"
+            aria-labelledby="skill-detail-title"
           >
 
-            <div class="graphic-image">
+            <div class="skill-detail-inner">
 
-              <img
-                src="assets/graphics/graphic-01.jpg"
-                alt="Graphic design project"
-                loading="lazy"
-                data-lazy
-              >
+              <div class="skill-detail-header">
 
-            </div>
+                <span
+                  id="skill-detail-index"
+                  class="technical-label"
+                >
+                  SKILL MODULE
+                </span>
 
-            <div class="graphic-content">
+                <button
+                  id="skill-detail-close"
+                  class="icon-button"
+                  type="button"
+                  aria-label="Close skill details"
+                >
+                  ×
+                </button>
 
-              <span>
-                01
-              </span>
+              </div>
 
-              <h3>
-                Visual Composition
-              </h3>
+              <div class="skill-detail-content">
 
-              <p>
-                Graphic experimentation combining
-                typography, composition and visual hierarchy.
-              </p>
+                <div class="skill-detail-image-column">
+                  <div
+                    id="skill-detail-image-frame"
+                    class="skill-detail-image-frame"
+                  >
+                    <img
+                      id="skill-detail-image"
+                      src=""
+                      alt=""
+                      hidden
+                    />
+                  </div>
+                </div>
 
-            </div>
+                <div class="skill-detail-text-column">
 
-          </article>
+                  <h3
+                    id="skill-detail-title"
+                    class="skill-detail-title"
+                  >
+                    SKILL
+                  </h3>
 
+                  <p
+                    id="skill-detail-description"
+                    class="skill-detail-description"
+                  ></p>
 
-          <article
-            class="graphic-card glass-panel image-zoom tilt-card"
-          >
+                  <div
+                    id="skill-detail-related"
+                    class="skill-detail-related"
+                  ></div>
 
-            <div class="graphic-image">
+                </div>
 
-              <img
-                src="assets/graphics/graphic-02.jpg"
-                alt="Graphic design project"
-                loading="lazy"
-                data-lazy
-              >
-
-            </div>
-
-            <div class="graphic-content">
-
-              <span>
-                02
-              </span>
-
-              <h3>
-                Digital Identity
-              </h3>
-
-              <p>
-                Exploration of identity systems and
-                digital presentation.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <article
-            class="graphic-card glass-panel image-zoom tilt-card"
-          >
-
-            <div class="graphic-image">
-
-              <img
-                src="assets/graphics/graphic-03.jpg"
-                alt="Graphic design project"
-                loading="lazy"
-                data-lazy
-              >
+              </div>
 
             </div>
 
-            <div class="graphic-content">
-
-              <span>
-                03
-              </span>
-
-              <h3>
-                Experimental Graphics
-              </h3>
-
-              <p>
-                Visual experiments developed outside
-                traditional academic work.
-              </p>
-
-            </div>
-
-          </article>
+          </div>
 
         </div>
 
-      </div>
-
-    </section>
+      </section>
 
 
-    <!-- ===================================================
-         DIGITAL PROJECTS
-         =================================================== -->
+      <!-- =====================================================
+           ART
+           ===================================================== -->
+      <section
+        id="section-art"
+        class="portfolio-section section-art"
+        data-section="art"
+        data-atmosphere="art"
+        aria-labelledby="art-title"
+        hidden
+      >
 
-    <section
-      id="digital"
-      class="page-section digital-section"
-      data-section="digital"
-    >
+        <div class="section-shell art-shell">
 
-      <div class="section-shell">
+          <div class="section-header">
 
-        <div
-          class="section-heading"
-          data-reveal
-        >
+            <div>
+              <span class="section-index">04 / 14</span>
 
-          <span class="section-number">
-            07
-          </span>
+              <h2
+                id="art-title"
+                class="section-title"
+              >
+                ART
+              </h2>
+            </div>
 
-          <div>
+            <span class="section-category">
+              VISUAL GALLERY
+            </span>
 
-            <span class="section-kicker">
+          </div>
+
+
+          <div class="art-gallery-layout">
+
+            <div class="art-orbit-stage">
+
+              <div
+                id="art-orbit"
+                class="art-orbit"
+                aria-label="Artwork gallery"
+              >
+
+                <button
+                  class="art-orbit-node is-active"
+                  type="button"
+                  data-art-id="flower-grows-in-silence"
+                  aria-label="Open Flower Grows in Silence"
+                >
+                  <span class="art-node-index">01</span>
+                </button>
+
+                <div class="art-orbit-ring ring-a"></div>
+                <div class="art-orbit-ring ring-b"></div>
+
+              </div>
+
+
+              <div class="art-stage-center">
+
+                <div class="art-image-frame">
+
+                  <img
+                    id="art-feature-image"
+                    src=""
+                    alt="Selected artwork"
+                    class="art-feature-image"
+                    loading="lazy"
+                  />
+
+                  <div class="art-image-overlay">
+                    <span>ARCHIVE IMAGE</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="art-information">
+
+              <span
+                id="art-number"
+                class="technical-label"
+              >
+                ARTWORK 01
+              </span>
+
+              <h3
+                id="art-title-current"
+                class="art-title-current"
+              >
+                Flower Grows in Silence
+              </h3>
+
+              <div
+                id="art-medium"
+                class="art-medium"
+              >
+                —
+              </div>
+
+              <p
+                id="art-description"
+                class="art-description"
+              >
+                A figure partly underwater surrounded by lotus, green
+                leaves, fish and distant land, exploring confinement,
+                separation, passage of time and silent growth of beauty.
+              </p>
+
+
+              <div
+                id="art-interpretation"
+                class="art-interpretation"
+              >
+                <span class="technical-label">
+                  INTERPRETATION
+                </span>
+
+                <p>
+                  Water texture represents confinement. A flower growing
+                  from within represents silent thought, beauty and the
+                  possibility of freedom. Fish represent the flow of time,
+                  while distant land separates the figure from worldly life.
+                </p>
+              </div>
+
+
+              <button
+                id="art-open-detail"
+                class="primary-action-button"
+                type="button"
+              >
+                VIEW ARTWORK
+                <span>↗</span>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="art-detail-modal"
+            class="modal-shell art-detail-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-hidden="true"
+            aria-labelledby="art-modal-title"
+          >
+
+            <div class="modal-backdrop"></div>
+
+            <div class="modal-panel">
+
+              <div class="modal-header">
+
+                <span class="technical-label">
+                  ARTWORK DETAIL
+                </span>
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  data-modal-close="art"
+                  aria-label="Close artwork detail"
+                >
+                  ×
+                </button>
+
+              </div>
+
+              <div class="art-modal-grid">
+
+                <div class="art-modal-image">
+                  <img
+                    id="art-modal-image"
+                    src=""
+                    alt=""
+                  />
+                </div>
+
+                <div class="art-modal-copy">
+
+                  <span
+                    id="art-modal-number"
+                    class="technical-label"
+                  >
+                    ARTWORK
+                  </span>
+
+                  <h3
+                    id="art-modal-title"
+                    class="modal-title"
+                  >
+                    Flower Grows in Silence
+                  </h3>
+
+                  <div
+                    id="art-modal-meta"
+                    class="modal-meta"
+                  ></div>
+
+                  <p
+                    id="art-modal-description"
+                    class="modal-body"
+                  ></p>
+
+                  <div
+                    id="art-modal-interpretation"
+                    class="modal-body"
+                  ></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           ARCHITECTURE
+           ===================================================== -->
+      <section
+        id="section-architecture"
+        class="portfolio-section section-architecture"
+        data-section="architecture"
+        data-atmosphere="architecture"
+        aria-labelledby="architecture-title"
+        hidden
+      >
+
+        <div class="section-shell architecture-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">05 / 14</span>
+
+              <h2
+                id="architecture-title"
+                class="section-title"
+              >
+                ARCHITECTURE
+              </h2>
+            </div>
+
+            <span class="section-category">
+              STUDIO ARCHIVE
+            </span>
+
+          </div>
+
+
+          <div
+            id="architecture-archive"
+            class="architecture-archive"
+          >
+            <!-- data.js-driven project archive -->
+          </div>
+
+
+          <div
+            id="architecture-project-modal"
+            class="modal-shell"
+            role="dialog"
+            aria-modal="true"
+            aria-hidden="true"
+            aria-labelledby="architecture-modal-title"
+          >
+
+            <div class="modal-backdrop"></div>
+
+            <div class="modal-panel modal-panel-large">
+
+              <div class="modal-header">
+
+                <span class="technical-label">
+                  ARCHITECTURAL PROJECT
+                </span>
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  data-modal-close="architecture"
+                  aria-label="Close architecture project"
+                >
+                  ×
+                </button>
+
+              </div>
+
+              <div
+                id="architecture-modal-content"
+                class="architecture-modal-content"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           GRAPHICS
+           ===================================================== -->
+      <section
+        id="section-graphics"
+        class="portfolio-section section-graphics"
+        data-section="graphics"
+        data-atmosphere="graphics"
+        aria-labelledby="graphics-title"
+        hidden
+      >
+
+        <div class="section-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">06 / 14</span>
+
+              <h2
+                id="graphics-title"
+                class="section-title"
+              >
+                GRAPHICS
+              </h2>
+            </div>
+
+            <span class="section-category">
+              VISUAL SYSTEMS
+            </span>
+
+          </div>
+
+
+          <div
+            id="graphics-grid"
+            class="graphics-grid"
+          >
+            <!-- data.js-driven graphics -->
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           DIGITAL
+           ===================================================== -->
+      <section
+        id="section-digital"
+        class="portfolio-section section-digital"
+        data-section="digital"
+        data-atmosphere="digital"
+        aria-labelledby="digital-title"
+        hidden
+      >
+
+        <div class="section-shell digital-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">07 / 14</span>
+
+              <h2
+                id="digital-title"
+                class="section-title"
+              >
+                DIGITAL
+              </h2>
+            </div>
+
+            <span class="section-category">
               CREATIVE TECHNOLOGY
             </span>
 
-            <h2>
-              Digital Projects
-            </h2>
-
           </div>
 
-        </div>
 
-
-        <div
-          class="digital-grid"
-          data-stagger
-        >
-
-
-          <!-- E-COMMERCE -->
-
-          <article
-            class="digital-card digital-feature glass-panel tilt-card"
-            data-reveal="left"
+          <div
+            id="digital-project-grid"
+            class="digital-project-grid"
           >
+            <!-- data.js-driven projects -->
+          </div>
 
-            <div class="digital-card-visual">
 
-              <div class="digital-code-decoration">
-                &lt;/&gt;
-              </div>
+          <div class="digital-feature">
 
-              <div class="digital-orbit"></div>
+            <div class="digital-feature-copy">
 
-            </div>
-
-            <div class="digital-card-content">
-
-              <span>
-                WEB PLATFORM
+              <span class="technical-label">
+                EXISTING GAME PROJECT
               </span>
 
               <h3>
-                E-Commerce Website
+                ORPHEUS / SHADID'S GAME
               </h3>
 
               <p>
-                A digital commerce project exploring
-                product presentation, interface design,
-                responsive layouts and online shopping
-                experiences.
+                An atmospheric interactive experiment preserved as an
+                important reference for the portfolio's game direction.
               </p>
 
               <a
-                href="#"
-                class="primary-button magnetic project-live-link"
+                class="primary-action-button"
+                href="https://shadidahamed.github.io/Shadid-s-game/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>Live Website</span>
+                OPEN LIVE GAME
                 <span>↗</span>
               </a>
 
             </div>
 
-          </article>
+            <div class="digital-feature-telemetry">
 
+              <div>
+                <span>TYPE</span>
+                <strong>INTERACTIVE</strong>
+              </div>
 
-          <!-- AFFILIATE -->
+              <div>
+                <span>STYLE</span>
+                <strong>ATMOSPHERIC</strong>
+              </div>
 
-          <article
-            class="digital-card glass-panel tilt-card"
-            data-reveal
-          >
+              <div>
+                <span>STATUS</span>
+                <strong>LIVE</strong>
+              </div>
 
-            <div class="digital-mini-icon">
-              ◈
             </div>
-
-            <span>
-              DIGITAL MARKETING
-            </span>
-
-            <h3>
-              Affiliate Marketing Project
-            </h3>
-
-            <p>
-              An affiliate-focused web concept developed
-              around product discovery, online commerce,
-              product categorization and digital promotion.
-            </p>
-
-            <div class="digital-tech">
-              WEB · MARKETING · E-COMMERCE
-            </div>
-
-          </article>
-
-
-          <!-- GAME -->
-
-          <article
-            class="digital-card game-project-card glass-panel tilt-card"
-            data-reveal="right"
-          >
-
-            <div class="game-card-glow"></div>
-
-            <div class="digital-mini-icon">
-              ◉
-            </div>
-
-            <span>
-              INTERACTIVE EXPERIENCE
-            </span>
-
-            <h3>
-              Shadid's Game
-            </h3>
-
-            <p>
-              An evolving browser-based game experiment,
-              created as a foundation for a much larger
-              interactive world.
-            </p>
-
-            <a
-              href="https://shadidahamed.github.io/Shadid-s-game/"
-              class="secondary-button magnetic"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Live Game ↗
-            </a>
-
-          </article>
-
-        </div>
-
-
-        <!-- DIGITAL PHILOSOPHY -->
-
-        <div
-          class="digital-statement glass-panel"
-          data-reveal
-        >
-
-          <span>
-            DESIGN × CODE
-          </span>
-
-          <h3>
-            When a website becomes an experience.
-          </h3>
-
-          <p>
-            Digital work is not treated only as coding.
-            The objective is to combine interaction,
-            storytelling, visual identity and technology
-            into something people can experience.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         AI AGENT
-         =================================================== -->
-
-    <section
-      id="ai"
-      class="page-section ai-section"
-      data-section="ai"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            AI
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              DIGITAL COMPANION
-            </span>
-
-            <h2>
-              Shadid AI
-            </h2>
 
           </div>
 
         </div>
 
+      </section>
 
-        <div
-          class="ai-main-interface glass-panel"
-          data-reveal
-        >
 
-          <div class="ai-interface-header">
+      <!-- =====================================================
+           VIDEOS
+           ===================================================== -->
+      <section
+        id="section-videos"
+        class="portfolio-section section-videos"
+        data-section="videos"
+        data-atmosphere="videos"
+        aria-labelledby="videos-title"
+        hidden
+      >
 
-            <div class="ai-identity">
+        <div class="section-shell videos-shell">
 
-              <div class="ai-core">
+          <div class="section-header">
 
-                <span></span>
-                <span></span>
-                <span></span>
+            <div>
+              <span class="section-index">08 / 14</span>
 
-              </div>
-
-              <div>
-
-                <strong>
-                  SHADID AI
-                </strong>
-
-                <small>
-                  PORTFOLIO INTELLIGENCE
-                </small>
-
-              </div>
-
+              <h2
+                id="videos-title"
+                class="section-title"
+              >
+                VIDEOS
+              </h2>
             </div>
 
-
-            <div class="ai-status">
-
-              <span class="status-dot"></span>
-
-              ONLINE
-
-            </div>
+            <span class="section-category">
+              TEACHING / MEDIA
+            </span>
 
           </div>
 
 
           <div
-            id="ai-messages"
-            class="ai-messages"
-            aria-live="polite"
+            id="video-grid"
+            class="video-grid"
           >
+            <!-- data.js-driven video archive -->
+          </div>
 
-            <div class="ai-message ai-message-system">
 
-              <span class="ai-message-label">
-                SHADID AI
-              </span>
+          <div class="video-coming-soon">
+
+            <span class="technical-label">
+              FUTURE MEDIA
+            </span>
+
+            <p>
+              Additional Physics, Science and teaching videos can be
+              added through the central portfolio data system.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           DIGITALIZED PORTFOLIO NOTE
+           This lives inside the Documents/Archive area structurally
+           but remains independently targetable by JavaScript.
+           ===================================================== -->
+      <section
+        id="section-note"
+        class="portfolio-section section-note"
+        data-section="note"
+        data-atmosphere="documents"
+        aria-labelledby="note-title"
+        hidden
+      >
+
+        <div class="section-shell note-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">09 / 14</span>
+
+              <h2
+                id="note-title"
+                class="section-title"
+              >
+                NOTE
+              </h2>
+            </div>
+
+            <span class="section-category">
+              PORTFOLIO FORMAT
+            </span>
+
+          </div>
+
+
+          <div class="note-panel">
+
+            <div class="note-panel-index">
+              DIGITALIZED
+            </div>
+
+            <div class="note-panel-content">
+
+              <h3>
+                THIS IS A DIGITALIZED PORTFOLIO
+              </h3>
 
               <p>
-                Hello. I can explore this portfolio with
-                you, explain sections, discuss projects,
-                analyze the available information and
-                help develop future ideas.
+                This website is the digitalized portfolio.
               </p>
+
+              <p>
+                A separate physical architecture portfolio will exist
+                as a page-by-page architectural document.
+              </p>
+
+              <div class="presentation-video-placeholder">
+
+                <span class="technical-label">
+                  PRESENTATION VIDEO
+                </span>
+
+                <span>
+                  VIDEO COMING SOON
+                </span>
+
+              </div>
 
             </div>
 
           </div>
 
-
-          <div class="ai-suggestions">
-
-            <button
-              type="button"
-              data-ai-prompt="Tell me about Shadid."
-            >
-              About Shadid
-            </button>
-
-            <button
-              type="button"
-              data-ai-prompt="Explain the architecture projects."
-            >
-              Architecture
-            </button>
-
-            <button
-              type="button"
-              data-ai-prompt="Tell me about the artwork Flower Grows in Silence."
-            >
-              Art
-            </button>
-
-            <button
-              type="button"
-              data-ai-prompt="What can you improve in this portfolio?"
-            >
-              Improve Portfolio
-            </button>
-
-          </div>
-
-
-          <form
-            id="ai-form"
-            class="ai-input-area"
-          >
-
-            <input
-              id="ai-input"
-              name="message"
-              type="text"
-              autocomplete="off"
-              placeholder="Talk to the portfolio intelligence..."
-              aria-label="Message Shadid AI"
-            >
-
-            <button
-              type="submit"
-              class="ai-send-button magnetic"
-              aria-label="Send message"
-            >
-              ↗
-            </button>
-
-          </form>
-
         </div>
 
-      </div>
-
-    </section>
+      </section>
 
 
-    <!-- ===================================================
-         VIDEOS
-         =================================================== -->
+      <!-- =====================================================
+           DOCUMENTS
+           ===================================================== -->
+      <section
+        id="section-documents"
+        class="portfolio-section section-documents"
+        data-section="documents"
+        data-atmosphere="documents"
+        aria-labelledby="documents-title"
+        hidden
+      >
 
-    <section
-      id="videos"
-      class="page-section videos-section"
-      data-section="videos"
-    >
+        <div class="section-shell documents-shell">
 
-      <div class="section-shell">
+          <div class="section-header">
 
-        <div
-          class="section-heading"
-          data-reveal
-        >
+            <div>
+              <span class="section-index">10 / 14</span>
 
-          <span class="section-number">
-            08
-          </span>
+              <h2
+                id="documents-title"
+                class="section-title"
+              >
+                DOCUMENTS
+              </h2>
+            </div>
 
-          <div>
-
-            <span class="section-kicker">
-              MOVING IMAGE
+            <span class="section-category">
+              PERSONAL ARCHIVE
             </span>
 
-            <h2>
-              Videos
-            </h2>
+          </div>
+
+
+          <div
+            id="document-grid"
+            class="document-grid"
+          >
+            <!-- data.js-driven documents -->
+          </div>
+
+
+          <div class="document-viewer-note">
+
+            <span class="technical-label">
+              VIEWER
+            </span>
+
+            <p>
+              Protected viewer — download controls are restricted.
+            </p>
+
+            <small>
+              This interface does not claim to prevent screenshots or
+              external copying.
+            </small>
+
+          </div>
+
+
+          <div
+            id="document-viewer-modal"
+            class="modal-shell document-viewer-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-hidden="true"
+            aria-labelledby="document-viewer-title"
+          >
+
+            <div class="modal-backdrop"></div>
+
+            <div class="modal-panel modal-panel-document">
+
+              <div class="modal-header">
+
+                <div>
+                  <span class="technical-label">
+                    PROTECTED VIEWER
+                  </span>
+
+                  <h3
+                    id="document-viewer-title"
+                    class="modal-title"
+                  >
+                    DOCUMENT
+                  </h3>
+                </div>
+
+                <button
+                  class="icon-button"
+                  type="button"
+                  data-modal-close="documents"
+                  aria-label="Close document viewer"
+                >
+                  ×
+                </button>
+
+              </div>
+
+              <div
+                id="document-viewer-content"
+                class="document-viewer-content"
+              ></div>
+
+            </div>
 
           </div>
 
         </div>
 
+      </section>
 
-        <div class="videos-grid">
+
+      <!-- =====================================================
+           LOCATION
+           ===================================================== -->
+      <section
+        id="section-location"
+        class="portfolio-section section-location"
+        data-section="location"
+        data-atmosphere="location"
+        aria-labelledby="location-title"
+        hidden
+      >
+
+        <div class="section-shell location-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">11 / 14</span>
+
+              <h2
+                id="location-title"
+                class="section-title"
+              >
+                LOCATION
+              </h2>
+            </div>
+
+            <span class="section-category">
+              GEOGRAPHIC ARCHIVE
+            </span>
+
+          </div>
 
 
-          <!-- ENGLISH TEACHING -->
+          <div class="location-layout">
 
-          <article
-            class="video-card glass-panel"
-            data-reveal="left"
-          >
+            <div class="location-copy">
 
-            <div class="video-wrapper">
+              <span class="technical-label">
+                CURRENT LOCATION
+              </span>
 
-              <video
-                controls
-                preload="metadata"
-                poster="assets/videos/english-class-poster.jpg"
+              <h3>
+                Dhaka
+              </h3>
+
+              <div class="location-country">
+                Bangladesh
+              </div>
+
+              <p>
+                The portfolio uses an abstract location representation.
+                Precise private residential coordinates are not exposed.
+              </p>
+
+              <div class="location-data">
+
+                <div class="location-data-row">
+                  <span>COUNTRY</span>
+                  <strong>BD</strong>
+                </div>
+
+                <div class="location-data-row">
+                  <span>CITY</span>
+                  <strong>DHAKA</strong>
+                </div>
+
+                <div class="location-data-row">
+                  <span>REGION</span>
+                  <strong>BANGLADESH</strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="location-visual">
+
+              <div
+                id="abstract-map"
+                class="abstract-map"
+                role="img"
+                aria-label="Abstract geographic grid representing Dhaka, Bangladesh"
               >
 
-                <source
-                  src="assets/videos/english-class.mp4"
-                  type="video/mp4"
+                <div class="map-grid"></div>
+                <div class="map-orbit map-orbit-a"></div>
+                <div class="map-orbit map-orbit-b"></div>
+
+                <div class="map-node map-node-primary">
+                  <span>DH</span>
+                </div>
+
+                <div class="map-crosshair"></div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           CONTACT
+           ===================================================== -->
+      <section
+        id="section-contact"
+        class="portfolio-section section-contact"
+        data-section="contact"
+        data-atmosphere="contact"
+        aria-labelledby="contact-title"
+        hidden
+      >
+
+        <div class="section-shell contact-shell">
+
+          <div class="section-header">
+
+            <div>
+              <span class="section-index">12 / 14</span>
+
+              <h2
+                id="contact-title"
+                class="section-title"
+              >
+                CONTACT
+              </h2>
+            </div>
+
+            <span class="section-category">
+              NETWORK NODE
+            </span>
+
+          </div>
+
+
+          <div class="contact-layout">
+
+            <div class="contact-intro">
+
+              <span class="technical-label">
+                CONNECT
+              </span>
+
+              <h3>
+                OPEN CHANNEL
+              </h3>
+
+              <p>
+                Contact links are configurable through the central
+                portfolio data system.
+              </p>
+
+            </div>
+
+
+            <div
+              id="contact-links"
+              class="contact-links"
+            >
+              <!-- data.js-driven contact links -->
+            </div>
+
+          </div>
+
+
+          <div class="contact-footer-note">
+            <span>SHADID AHAMED</span>
+            <span>ARCHITECTURE · ART · TECHNOLOGY</span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           GAME
+           ===================================================== -->
+      <section
+        id="section-game"
+        class="portfolio-section section-game"
+        data-section="game"
+        data-atmosphere="game"
+        aria-labelledby="game-title"
+        hidden
+      >
+
+        <div class="game-shell">
+
+          <!-- GAME TOP BAR -->
+          <div class="game-topbar">
+
+            <div class="game-title-group">
+
+              <span class="technical-label">
+                PORTFOLIO EXPERIENCE
+              </span>
+
+              <h2
+                id="game-title"
+                class="game-title"
+              >
+                ORPHEUS
+              </h2>
+
+            </div>
+
+
+            <div class="game-topbar-actions">
+
+              <a
+                class="secondary-action-button"
+                href="https://shadidahamed.github.io/Shadid-s-game/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                OPEN LIVE GAME
+                <span>↗</span>
+              </a>
+
+              <button
+                id="game-exit-button"
+                class="icon-button"
+                type="button"
+                data-route-target="home"
+                aria-label="Exit game"
+              >
+                ×
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- GAME BOOT / START OVERLAY -->
+          <div
+            id="game-boot-overlay"
+            class="game-overlay game-boot-overlay"
+          >
+
+            <div class="game-terminal">
+
+              <div class="game-terminal-header">
+
+                <span>
+                  ORPHEUS SYSTEM
+                </span>
+
+                <span>
+                  PORTFOLIO BUILD
+                </span>
+
+              </div>
+
+
+              <div class="game-terminal-content">
+
+                <div class="game-boot-mark">
+                  ORPHEUS
+                </div>
+
+                <div
+                  id="game-boot-status"
+                  class="game-boot-status"
                 >
-
-                Your browser does not support video playback.
-
-              </video>
-
-            </div>
-
-
-            <div class="video-information">
-
-              <span>
-                TEACHING
-              </span>
-
-              <h3>
-                English Teaching / Class
-              </h3>
-
-              <p>
-                A recorded English teaching session
-                documenting classroom communication and
-                teaching experience.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <!-- FUTURE VIDEO -->
-
-          <article
-            class="video-card glass-panel video-placeholder"
-            data-reveal="right"
-          >
-
-            <div class="video-placeholder-icon">
-              +
-            </div>
-
-            <span>
-              UPCOMING
-            </span>
-
-            <h3>
-              Physics & Science
-            </h3>
-
-            <p>
-              Future educational videos will document
-              physics, science and other teaching work.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         DOCUMENTS
-         =================================================== -->
-
-    <section
-      id="documents"
-      class="page-section documents-section"
-      data-section="documents"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            09
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              ARCHIVE
-            </span>
-
-            <h2>
-              Documents
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="documents-notice glass-panel"
-          data-reveal
-        >
-
-          <span>
-            PRIVATE VIEWER
-          </span>
-
-          <h3>
-            Selected personal documents.
-          </h3>
-
-          <p>
-            Documents can be displayed through protected
-            in-browser viewers. Standard download controls
-            can be restricted, while recognizing that a
-            website cannot technically prevent screenshots
-            or external camera capture.
-          </p>
-
-        </div>
-
-
-        <div
-          class="documents-grid"
-          data-stagger
-        >
-
-
-          <!-- CV -->
-
-          <article
-            class="document-card glass-panel tilt-card"
-          >
-
-            <div class="document-icon">
-              CV
-            </div>
-
-            <div>
-
-              <span>
-                DOCUMENT / 01
-              </span>
-
-              <h3>
-                Curriculum Vitae
-              </h3>
-
-              <p>
-                Academic background, skills, experience,
-                projects and creative work.
-              </p>
-
-            </div>
-
-            <a
-              href="assets/documents/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="document-open"
-            >
-              View ↗
-            </a>
-
-          </article>
-
-
-          <!-- ID -->
-
-          <article
-            class="document-card glass-panel tilt-card"
-          >
-
-            <div class="document-icon">
-              ID
-            </div>
-
-            <div>
-
-              <span>
-                DOCUMENT / 02
-              </span>
-
-              <h3>
-                Identification Document
-              </h3>
-
-              <p>
-                Personal identification document presented
-                through the protected document viewer.
-              </p>
-
-            </div>
-
-            <a
-              href="assets/documents/id.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="document-open"
-            >
-              View ↗
-            </a>
-
-          </article>
-
-
-          <!-- FUTURE -->
-
-          <article
-            class="document-card glass-panel tilt-card document-empty"
-          >
-
-            <div class="document-icon">
-              +
-            </div>
-
-            <div>
-
-              <span>
-                DOCUMENT / 03
-              </span>
-
-              <h3>
-                More Documents
-              </h3>
-
-              <p>
-                Additional certificates, academic records
-                and portfolio materials can be added later.
-              </p>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         LOCATION / LIFE
-         =================================================== -->
-
-    <section
-      id="location"
-      class="page-section location-section"
-      data-section="location"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            10
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              PLACE
-            </span>
-
-            <h2>
-              Location
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="location-layout"
-          data-reveal
-        >
-
-          <div class="location-map glass-panel">
-
-            <div class="map-grid"></div>
-
-            <div class="map-center">
-
-              <div class="map-pulse"></div>
-
-              <div class="map-pin">
-                +
-              </div>
-
-            </div>
-
-            <div class="map-label">
-              DHAKA · BANGLADESH
-            </div>
-
-          </div>
-
-
-          <div class="location-information glass-panel">
-
-            <span>
-              CURRENT BASE
-            </span>
-
-            <h3>
-              Dhaka, Bangladesh
-            </h3>
-
-            <p>
-              Happily building a life around family,
-              education, architecture, art and the
-              experiences that shape the person behind
-              this portfolio.
-            </p>
-
-
-            <div class="location-facts">
-
-              <div>
-
-                <span>
-                  COUNTRY
-                </span>
-
-                <strong>
-                  Bangladesh
-                </strong>
-
-              </div>
-
-
-              <div>
-
-                <span>
-                  CITY
-                </span>
-
-                <strong>
-                  Dhaka
-                </strong>
-
-              </div>
-
-
-              <div>
-
-                <span>
-                  UNIVERSITY
-                </span>
-
-                <strong>
-                  BRAC University
-                </strong>
+                  SYSTEM READY
+                </div>
+
+                <p>
+                  A compact portfolio-native interactive environment
+                  inspired by the architectural and atmospheric DNA of
+                  the previous ORPHEUS project.
+                </p>
+
+
+                <div class="game-control-list">
+
+                  <div>
+                    <span>MOVE</span>
+                    <strong>W A S D / ARROW KEYS</strong>
+                  </div>
+
+                  <div>
+                    <span>JUMP</span>
+                    <strong>SPACE</strong>
+                  </div>
+
+                  <div>
+                    <span>PAUSE</span>
+                    <strong>ESC / P</strong>
+                  </div>
+
+                  <div>
+                    <span>MOBILE</span>
+                    <strong>TOUCH CONTROL</strong>
+                  </div>
+
+                </div>
+
+
+                <button
+                  id="game-start-button"
+                  class="primary-action-button"
+                  type="button"
+                >
+                  START EXPERIENCE
+                  <span>↗</span>
+                </button>
 
               </div>
 
@@ -2573,757 +2427,61 @@
 
           </div>
 
-        </div>
 
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         PORTFOLIO NOTE / BOOK
-         =================================================== -->
-
-    <section
-      id="note"
-      class="page-section note-section"
-      data-section="note"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="portfolio-note glass-panel"
-          data-reveal="scale"
-        >
-
-          <div class="note-decoration">
-            SA
-          </div>
-
-          <div class="note-content">
-
-            <span>
-              A DIGITALIZED PORTFOLIO
-            </span>
-
-            <h2>
-              This is only one version
-              of the story.
-            </h2>
-
-            <p>
-              Alongside this digital portfolio, a separate
-              architecture portfolio exists in book form —
-              designed to be experienced physically, page
-              by page, as an architectural document.
-            </p>
-
-            <button
-              type="button"
-              class="secondary-button magnetic"
-              id="portfolio-video-button"
-            >
-              Portfolio Video ↗
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         CONTACT
-         =================================================== -->
-
-    <section
-      id="contact"
-      class="page-section contact-section"
-      data-section="contact"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            11
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              CONNECT
-            </span>
-
-            <h2>
-              Contact
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div class="contact-layout">
-
-
+          <!-- GAME CANVAS AREA -->
           <div
-            class="contact-message"
-            data-reveal="left"
+            id="game-stage"
+            class="game-stage"
+            tabindex="0"
+            aria-label="ORPHEUS game area"
           >
-
-            <span>
-              HAVE AN IDEA?
-            </span>
-
-            <h3>
-              Let's build something
-              worth remembering.
-            </h3>
-
-            <p>
-              For architecture, art, digital projects,
-              collaboration, teaching or creative
-              technology — get in touch.
-            </p>
-
-          </div>
-
-
-          <div
-            class="contact-links glass-panel"
-            data-reveal="right"
-          >
-
-
-            <!-- EMAIL -->
-
-            <a
-              href="mailto:"
-              class="contact-link magnetic"
-              data-social="email"
-            >
-
-              <span class="contact-icon">
-                @
-              </span>
-
-              <span>
-                <small>EMAIL</small>
-                <strong>Get in touch</strong>
-              </span>
-
-              <span>
-                ↗
-              </span>
-
-            </a>
-
-
-            <!-- GITHUB -->
-
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-link magnetic"
-              data-social="github"
-            >
-
-              <span class="contact-icon">
-                GH
-              </span>
-
-              <span>
-                <small>GITHUB</small>
-                <strong>Code & Projects</strong>
-              </span>
-
-              <span>
-                ↗
-              </span>
-
-            </a>
-
-
-            <!-- LINKEDIN -->
-
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-link magnetic"
-              data-social="linkedin"
-            >
-
-              <span class="contact-icon">
-                in
-              </span>
-
-              <span>
-                <small>LINKEDIN</small>
-                <strong>Professional profile</strong>
-              </span>
-
-              <span>
-                ↗
-              </span>
-
-            </a>
-
-
-            <!-- INSTAGRAM -->
-
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-link magnetic"
-              data-social="instagram"
-            >
-
-              <span class="contact-icon">
-                IG
-              </span>
-
-              <span>
-                <small>INSTAGRAM</small>
-                <strong>Visual work</strong>
-              </span>
-
-              <span>
-                ↗
-              </span>
-
-            </a>
-
-
-            <!-- FACEBOOK -->
-
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-link magnetic"
-              data-social="facebook"
-            >
-
-              <span class="contact-icon">
-                f
-              </span>
-
-              <span>
-                <small>FACEBOOK</small>
-                <strong>Social profile</strong>
-              </span>
-
-              <span>
-                ↗
-              </span>
-
-            </a>
-
-
-            <!-- WHATSAPP -->
-
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-link magnetic"
-              data-social="whatsapp"
-            >
-
-              <span class="contact-icon">
-                WA
-              </span>
-
-              <span>
-                <small>WHATSAPP</small>
-                <strong>Direct contact</strong>
-              </span>
-
-              <span>
-                ↗
-              </span>
-
-            </a>
-
-
-            <!-- X -->
-
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-link magnetic"
-              data-social="x"
-            >
-
-              <span class="contact-icon">
-                X
-              </span>
-
-              <span>
-                <small>X</small>
-                <strong>Social profile</strong>
-              </span>
-
-              <span>
-                ↗
-              </span>
-
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         GAME
-         =================================================== -->
-
-    <section
-      id="game"
-      class="page-section game-section"
-      data-section="game"
-    >
-
-      <div class="section-shell">
-
-        <div
-          class="section-heading"
-          data-reveal
-        >
-
-          <span class="section-number">
-            12
-          </span>
-
-          <div>
-
-            <span class="section-kicker">
-              INTERACTIVE WORLD
-            </span>
-
-            <h2>
-              The Game
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="game-shell glass-panel"
-          data-reveal="scale"
-        >
-
-          <div class="game-header">
-
-            <div>
-
-              <span>
-                SHADID GAME ENGINE
-              </span>
-
-              <h3>
-                An evolving interactive experiment
-              </h3>
-
-            </div>
-
-            <div class="game-status">
-              <span></span>
-              ENGINE READY
-            </div>
-
-          </div>
-
-
-          <div class="game-viewport">
 
             <canvas
-              id="gameCanvas"
-              width="1280"
-              height="720"
-              aria-label="Interactive browser game"
+              id="game-canvas"
+              class="game-canvas"
+              aria-label="ORPHEUS game canvas"
             ></canvas>
 
 
+            <!-- GAME BACKGROUND / WORLD DECORATION -->
             <div
-              id="game-overlay"
-              class="game-overlay"
+              class="game-world-overlay"
+              aria-hidden="true"
             >
-
-              <div class="game-title">
-
-                <span>
-                  PROJECT / 001
-                </span>
-
-                <h3>
-                  SHADID
-                  <br>
-                  GAME
-                </h3>
-
-                <p>
-                  Press START to enter.
-                </p>
-
-              </div>
-
-
-              <button
-                id="game-start"
-                class="primary-button magnetic"
-                type="button"
-              >
-                START GAME ↗
-              </button>
-
+              <div class="game-scanline"></div>
+              <div class="game-grain"></div>
+              <div class="game-corner-marker top-left"></div>
+              <div class="game-corner-marker top-right"></div>
+              <div class="game-corner-marker bottom-left"></div>
+              <div class="game-corner-marker bottom-right"></div>
             </div>
 
 
+            <!-- GAME HUD -->
             <div
               id="game-hud"
               class="game-hud"
+              aria-live="polite"
             >
 
-              <div>
-                SCORE
-                <strong id="game-score">
-                  000000
-                </strong>
+              <div class="game-hud-top">
+
+                <div class="hud-zone">
+                  <span class="hud-label">ZONE</span>
+                  <strong id="hud-zone-value">01</strong>
+                </div>
+
+                <div class="hud-score">
+                  <span class="hud-label">SCORE</span>
+                  <strong id="hud-score-value">000000</strong>
+                </div>
+
+                <div class="hud-difficulty">
+                  <span class="hud-label">DIFFICULTY</span>
+                  <strong id="hud-difficulty-value">NORMAL</strong>
+                </div>
+
               </div>
 
-              <div>
-                SPEED
-                <strong id="game-speed">
-                  000
-                </strong>
-              </div>
 
-              <div>
-                STATUS
-                <strong id="game-status-text">
-                  READY
-                </strong>
-              </div>
-
-            </div>
-
-
-            <div
-              id="game-controls"
-              class="game-controls"
-            >
-
-              <button
-                type="button"
-                data-game-control="left"
-                aria-label="Move left"
-              >
-                ←
-              </button>
-
-              <button
-                type="button"
-                data-game-control="brake"
-                aria-label="Brake"
-              >
-                ↓
-              </button>
-
-              <button
-                type="button"
-                data-game-control="right"
-                aria-label="Move right"
-              >
-                →
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="game-footer">
-
-            <span>
-              DESKTOP: ARROW KEYS / WASD
-            </span>
-
-            <span>
-              MOBILE: TOUCH CONTROLS
-            </span>
-
-            <a
-              href="https://shadidahamed.github.io/Shadid-s-game/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LIVE VERSION ↗
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-
-  <!-- =====================================================
-       AI FLOATING PANEL
-       ===================================================== -->
-
-  <aside
-    id="ai-panel"
-    class="ai-floating-panel"
-    aria-label="Shadid AI assistant"
-    aria-hidden="true"
-  >
-
-    <div class="ai-floating-header">
-
-      <div class="ai-identity">
-
-        <div class="ai-core small">
-
-          <span></span>
-          <span></span>
-          <span></span>
-
-        </div>
-
-        <div>
-
-          <strong>
-            SHADID AI
-          </strong>
-
-          <small>
-            PORTFOLIO INTELLIGENCE
-          </small>
-
-        </div>
-
-      </div>
-
-
-      <button
-        id="ai-close"
-        type="button"
-        aria-label="Close AI"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div
-      id="ai-panel-messages"
-      class="ai-panel-messages"
-      aria-live="polite"
-    ></div>
-
-
-    <form
-      id="ai-panel-form"
-      class="ai-panel-form"
-    >
-
-      <input
-        id="ai-panel-input"
-        type="text"
-        autocomplete="off"
-        placeholder="Ask something..."
-        aria-label="Ask Shadid AI"
-      >
-
-      <button
-        type="submit"
-        aria-label="Send"
-      >
-        ↗
-      </button>
-
-    </form>
-
-  </aside>
-
-
-  <!-- =====================================================
-       VIDEO MODAL
-       ===================================================== -->
-
-  <div
-    id="video-modal"
-    class="modal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-backdrop"></div>
-
-    <div
-      class="modal-content glass-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Portfolio video"
-    >
-
-      <button
-        class="modal-close"
-        type="button"
-        aria-label="Close video"
-      >
-        ×
-      </button>
-
-      <video
-        id="portfolio-video"
-        controls
-        preload="metadata"
-      >
-
-        <source
-          src="assets/videos/portfolio-video.mp4"
-          type="video/mp4"
-        >
-
-        Your browser does not support video playback.
-
-      </video>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       BACK TO TOP
-       ===================================================== -->
-
-  <button
-    id="back-to-top"
-    class="back-to-top magnetic"
-    type="button"
-    aria-label="Back to top"
-  >
-    ↑
-  </button>
-
-
-  <!-- =====================================================
-       FOOTER
-       ===================================================== -->
-
-  <footer class="site-footer">
-
-    <div class="footer-shell">
-
-      <div class="footer-brand">
-
-        <span>
-          SHADID AHAMED
-        </span>
-
-        <small>
-          ARCHITECTURE · ART · TECHNOLOGY
-        </small>
-
-      </div>
-
-
-      <div class="footer-center">
-
-        <span>
-          DIGITAL PORTFOLIO
-        </span>
-
-        <span>
-          © 2026
-        </span>
-
-      </div>
-
-
-      <div class="footer-right">
-
-        <span>
-          DHAKA, BANGLADESH
-        </span>
-
-        <span>
-          ↗
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =====================================================
-       JAVASCRIPT
-       ===================================================== -->
-
-  <!-- DATA FIRST -->
-  <script
-    src="js/data.js"
-    defer
-  ></script>
-
-
-  <!-- VISUAL EFFECTS -->
-  <script
-    src="js/effects.js"
-    defer
-  ></script>
-
-
-  <!-- AI -->
-  <script
-    src="js/ai.js"
-    defer
-  ></script>
-
-
-  <!-- GAME -->
-  <script
-    src="js/game.js"
-    defer
-  ></script>
-
-
-  <!-- MAIN CONTROLLER LAST -->
-  <script
-    src="js/main.js"
-    defer
-  ></script>
-
-
-</body>
-</html>
+              <div class="
