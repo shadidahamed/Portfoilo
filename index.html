@@ -3,1321 +3,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080807">
 <meta name="description" content="Shadid Ahamed — Creative Developer, Architecture Student & Artist. A cinematic personal archive of architecture, art, digital projects, web experiments and creative work.">
+<meta name="theme-color" content="#080807">
 <meta property="og:title" content="Shadid Ahamed — Creative Developer, Architecture Student & Artist">
 <meta property="og:description" content="A cinematic personal archive of architecture, art, digital projects, web experiments and creative work.">
 <meta property="og:type" content="website">
 <title>Shadid Ahamed Portfolio</title>
-
 <style>
-/* =========================
-   GLOBAL DESIGN SYSTEM
-========================= */
 :root{
-  --bg:#070706;--bg2:#0d0c0a;--panel:rgba(15,14,12,.78);
-  --gold:#c9a45b;--gold2:#f0cf83;--white:#f4f0e8;
-  --text:#e8e2d8;--muted:#9b9489;--ash:#6c665c;
-  --line:rgba(240,207,131,.16);--line2:rgba(240,207,131,.34);
-  --shadow:0 28px 90px rgba(0,0,0,.45);
-  --ease:cubic-bezier(.2,.72,.22,1)
+ --bg:#070706;--bg2:#0d0c0a;--panel:rgba(14,13,11,.76);--gold:#c9a45b;--gold2:#f0cf83;
+ --warm:#ffe1a0;--white:#f5f0e7;--text:#e9e2d6;--muted:#9a9287;--ash:#686158;
+ --line:rgba(240,207,131,.16);--line2:rgba(240,207,131,.34);--line3:rgba(255,255,255,.07);
+ --shadow:0 26px 90px rgba(0,0,0,.46);--ease:cubic-bezier(.2,.72,.22,1)
 }
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--text);
-font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-overflow:hidden}
+html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow:hidden}
 body{line-height:1.55}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
-::selection{background:rgba(240,207,131,.2)}
-canvas{display:block}
-
-#galaxy{
- position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none
-}
-.noise,.vignette{
- position:fixed;inset:0;pointer-events:none;z-index:1
-}
-.noise{opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.vignette{background:radial-gradient(circle at center,transparent 25%,rgba(0,0,0,.2) 62%,rgba(0,0,0,.7))}
-
-.container{width:min(1240px,100%);margin:auto}
-.glass{
- background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
- border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);
- backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
-}
-.eyebrow{
- display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--line);
- border-radius:99px;color:var(--muted);font-size:10px;letter-spacing:.17em;text-transform:uppercase
-}
-.eyebrow:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold2);box-shadow:0 0 12px var(--gold)}
-h1,h2,h3,h4{margin:0;color:var(--white);line-height:1.05;letter-spacing:-.035em}
-h1{font-size:clamp(3.3rem,8vw,8rem)}
-h2{font-size:clamp(2.1rem,5vw,4.8rem)}
-h3{font-size:clamp(1.3rem,2.5vw,2.1rem)}
-p{margin:0;color:var(--muted)}
-.gold{color:var(--gold2)}
-.btn{
- display:inline-flex;align-items:center;justify-content:center;gap:8px;
- padding:11px 15px;border:1px solid var(--line2);border-radius:13px;
- background:rgba(240,207,131,.08);color:var(--gold2);
- font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;
- transition:.25s var(--ease)
-}
-.btn:hover{transform:translateY(-2px);background:rgba(240,207,131,.14)}
-.btn.secondary{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.1);color:var(--text)}
-.icon-btn{
- width:40px;height:40px;display:grid;place-items:center;border-radius:12px;
- border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--muted)
-}
-.icon-btn:hover{color:var(--gold2);border-color:var(--line2)}
-
-/* =========================
-   NAVIGATION
-========================= */
-.side-nav{
- position:fixed;z-index:1000;left:18px;top:50%;transform:translateY(-50%);
- width:64px;padding:9px 8px;border:1px solid var(--line);
- background:rgba(8,7,6,.65);backdrop-filter:blur(20px);
- border-radius:28px;box-shadow:var(--shadow)
-}
-.brand{
- width:46px;height:46px;margin:0 auto 8px;display:grid;place-items:center;
- border:1px solid var(--line2);border-radius:15px;color:var(--gold2);font-weight:800
-}
-.nav-btn{
- position:relative;width:46px;height:46px;margin:3px auto;border:0;border-radius:15px;
- display:grid;place-items:center;background:none;color:var(--muted);transition:.2s
-}
-.nav-btn svg{width:19px;height:19px}
-.nav-btn:hover,.nav-btn.active{color:var(--gold2);background:rgba(240,207,131,.08)}
-.nav-tip{
- position:absolute;left:57px;top:50%;transform:translateY(-50%) translateX(-5px);
- opacity:0;pointer-events:none;background:#090807;border:1px solid var(--line);
- padding:6px 9px;border-radius:9px;font-size:10px;white-space:nowrap;transition:.2s
-}
-.nav-btn:hover .nav-tip{opacity:1;transform:translateY(-50%)}
-.mobile-toggle{
- display:none;position:fixed;right:14px;top:14px;z-index:1100;width:52px;height:52px;
- border:1px solid var(--line);border-radius:17px;background:rgba(8,7,6,.8);color:var(--gold2)
-}
-.mobile-menu{
- display:none;position:fixed;right:14px;top:76px;z-index:1090;width:min(310px,calc(100vw - 28px));
- padding:9px;border:1px solid var(--line);border-radius:20px;background:rgba(8,7,6,.95);
- backdrop-filter:blur(20px);grid-template-columns:1fr 1fr;gap:6px
-}
-.mobile-menu.open{display:grid}
-.mobile-item{
- padding:11px;border:1px solid rgba(255,255,255,.05);border-radius:12px;
- background:none;color:var(--muted);text-align:left
-}
-.mobile-item.active{color:var(--gold2);background:rgba(240,207,131,.06)}
-
-/* =========================
-   SECTION ENGINE
-========================= */
-main{position:relative;z-index:5;height:100dvh;padding:0 28px 0 108px}
-.stage{position:relative;width:min(1240px,100%);height:100%;margin:auto}
-.section{
- position:absolute;inset:0;display:flex;align-items:center;padding:64px 12px 35px;
- opacity:0;visibility:hidden;pointer-events:none;
- transform:translateX(35px) scale(.985);filter:blur(6px);
- transition:opacity .4s var(--ease),transform .5s var(--ease),filter .5s var(--ease)
-}
-.section.active{opacity:1;visibility:visible;pointer-events:auto;transform:none;filter:none}
-.section-scroll{
- width:100%;max-height:calc(100dvh - 99px);overflow:auto;padding:5px 6px 20px;
- scrollbar-width:thin;scrollbar-color:rgba(240,207,131,.2) transparent
-}
-.section-scroll::-webkit-scrollbar{width:6px}
-.section-scroll::-webkit-scrollbar-thumb{background:rgba(240,207,131,.2);border-radius:99px}
-.head{
- display:grid;grid-template-columns:1.3fr .7fr;gap:25px;align-items:end;margin-bottom:25px
-}
-.lead{text-align:right;max-width:520px;justify-self:end;font-size:14px}
-.grid{display:grid;gap:12px}
-
-/* =========================
-   HOME
-========================= */
-.home{
- min-height:72dvh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:25px
-}
-.hero-line{font-size:clamp(1rem,2vw,1.45rem);color:#cbc3b6;margin:15px 0 17px}
-.hero-text{max-width:650px;font-size:16px;line-height:1.85}
-.hero-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}
-.hero-sign{margin-top:28px;font-size:10px;color:#736c62;letter-spacing:.15em;text-transform:uppercase}
-.orb{
- width:min(410px,70vw);aspect-ratio:1;border:1px solid rgba(240,207,131,.18);border-radius:50%;
- background:radial-gradient(circle at center,rgba(240,207,131,.16),transparent 42%),
- repeating-radial-gradient(circle,rgba(240,207,131,.07) 0 1px,transparent 1px 18px);
- box-shadow:inset 0 0 90px rgba(240,207,131,.04);position:relative;
- animation:orbFloat 7s ease-in-out infinite
-}
-.orb:before,.orb:after{
- content:"";position:absolute;inset:15%;border:1px solid rgba(240,207,131,.14);
- border-radius:50%;transform:rotate(22deg) scaleX(.35);animation:spin 11s linear infinite
-}
-.orb:after{inset:25%;transform:rotate(-48deg) scaleX(.25);animation-duration:15s}
-.orb i{position:absolute;inset:45%;border-radius:50%;background:var(--gold2);box-shadow:0 0 80px rgba(240,207,131,.35)}
-@keyframes orbFloat{50%{transform:translateY(-8px)}}
-@keyframes spin{to{transform:rotate(382deg) scaleX(.35)}}
-
-/* =========================
-   PROFILE / EDUCATION
-========================= */
-.profile-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:12px}
-.profile-card{padding:17px;display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:center}
-.avatar{
- width:140px;aspect-ratio:1;overflow:hidden;border-radius:22px;border:1px solid var(--line2);
- background:radial-gradient(circle,rgba(240,207,131,.13),transparent 60%)
-}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.role{font-size:10px;color:var(--gold2);letter-spacing:.13em;text-transform:uppercase}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:13px}
-.meta div{padding:9px;border:1px solid rgba(255,255,255,.06);border-radius:11px}
-.meta small{display:block;color:#6e675e;font-size:8px;text-transform:uppercase}
-.meta span{font-size:11px;color:#d5cec3}
-.story{padding:20px}
-.story p{font-size:14px;line-height:1.85;margin-top:10px}
-.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px}
-.pill{padding:6px 9px;border:1px solid rgba(240,207,131,.12);border-radius:99px;color:#9e968a;font-size:10px}
-.family{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:17px}
-.family div{padding:11px;border:1px solid rgba(255,255,255,.06);border-radius:12px}
-.family strong{display:block;font-size:10px;color:#d9d1c5}.family span{font-size:9px;color:#837b70}
-
-.timeline{display:grid;gap:11px}
-.edu{padding:18px 18px 18px 55px;position:relative}
-.edu-dot{
- position:absolute;left:17px;top:21px;width:16px;height:16px;border:1px solid var(--gold2);
- border-radius:50%;box-shadow:0 0 20px rgba(240,207,131,.25)
-}
-.edu-top{display:flex;justify-content:space-between;gap:15px}.edu-year{font-size:9px;color:var(--gold2);letter-spacing:.15em}
-.edu p{margin-top:6px;font-size:12px}.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
-.edu-line{font-size:11px;color:#aaa297}.edu-line b{color:#d9d1c5}
-.edu-gallery{margin-top:13px;height:220px;position:relative;perspective:900px;display:grid;place-items:center;overflow:hidden}
-.carousel{position:relative;width:min(500px,100%);height:180px;transform-style:preserve-3d}
-.face{
- position:absolute;inset:0;border:1px solid var(--line);border-radius:17px;overflow:hidden;
- background:#0b0a09;display:grid;place-items:center;backface-visibility:hidden
-}
-.face img{width:100%;height:100%;object-fit:cover}
-.placeholder{text-align:center;padding:30px}
-.placeholder b{display:block;color:var(--gold2);font-size:11px;text-transform:uppercase;letter-spacing:.14em}
-.placeholder span{font-size:9px;color:#71695f}
-
-/* =========================
-   SKILLS
-========================= */
-.skill-grid{grid-template-columns:repeat(5,1fr)}
-.skill{padding:15px;min-height:135px}
-.skill-icon{
- width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);
- border-radius:11px;color:var(--gold2);margin-bottom:12px
-}
-.skill-icon svg{width:17px}.skill h4{font-size:12px}.skill p{font-size:10px;margin-top:5px;line-height:1.65}
-.two{grid-template-columns:1fr 1fr;margin-top:12px}
-.book-card,.music-card,.achievements{padding:17px}
-.book-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
-.book{padding:7px 9px;border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#bdb4a6;font-size:10px}
-.achievements{margin-top:12px}.achievement-grid{grid-template-columns:repeat(4,1fr);margin-top:12px}
-.achievement{min-height:140px;padding:14px}.achievement .aimg{height:70px;border-radius:12px;background:radial-gradient(circle,rgba(240,207,131,.1),transparent 65%),#0b0a09;border:1px solid rgba(240,207,131,.08);display:grid;place-items:center}
-.achievement strong{display:block;margin-top:8px;font-size:10px}.achievement span{font-size:9px;color:#827a6f}
-.drawing-grid{grid-template-columns:repeat(4,1fr);margin-top:12px}
-.work{position:relative;border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#0a0908;cursor:pointer}
-.work-media{height:160px;display:grid;place-items:center;background:linear-gradient(135deg,#14120f,#080706)}
-.work-media img{width:100%;height:100%;object-fit:cover}
-.work-caption{position:absolute;left:0;right:0;bottom:0;padding:24px 10px 9px;background:linear-gradient(transparent,rgba(0,0,0,.94))}
-.work-caption strong{font-size:9px}.work-caption span{display:block;color:#777066;font-size:8px}
-
-/* =========================
-   PROJECTS
-========================= */
-.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.filter{
- padding:8px 10px;border:1px solid var(--line);border-radius:99px;background:none;
- color:#8e877d;font-size:9px;text-transform:uppercase;letter-spacing:.08em
-}
-.filter.active,.filter:hover{background:rgba(240,207,131,.07);color:var(--gold2);border-color:var(--line2)}
-.projects{grid-template-columns:1fr 1fr}
-.project{overflow:hidden}
-.project-img{
- height:215px;position:relative;background:radial-gradient(circle at center,rgba(240,207,131,.12),transparent 55%),#0a0908
-}
-.project-img img{width:100%;height:100%;object-fit:cover}
-.project-type{
- position:absolute;left:10px;top:10px;padding:6px 8px;border-radius:99px;
- background:rgba(0,0,0,.65);border:1px solid var(--line);font-size:8px;color:#b8ae9d;text-transform:uppercase
-}
-.project-body{padding:15px}.project-body h3{font-size:18px}.project-body p{font-size:11px;line-height:1.7;margin-top:6px}
-.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.tag{font-size:8px;color:#8f877c;border:1px solid rgba(255,255,255,.07);padding:5px 7px;border-radius:8px}
-.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
-
-/* =========================
-   GRAPHICS / VIDEOS / CONTACT
-========================= */
-.graphics{grid-template-columns:repeat(3,1fr)}
-.graphic{
- min-height:175px;border:1px solid var(--line);border-radius:16px;overflow:hidden;
- background:#0a0908;position:relative;cursor:pointer
-}
-.graphic img{width:100%;height:100%;object-fit:contain}
-.graphic-view{height:175px;display:grid;place-items:center;background:linear-gradient(135deg,#11100e,#080706)}
-.graphic-label{position:absolute;left:9px;bottom:8px;padding:6px 8px;border-radius:8px;background:rgba(0,0,0,.65);font-size:8px;color:#b8ae9d}
-.videos{grid-template-columns:repeat(3,1fr)}
-.video{overflow:hidden}.video-frame{aspect-ratio:16/9;background:#050505}.video-frame iframe{width:100%;height:100%;border:0}.video-body{padding:12px}.video-body h3{font-size:14px}.video-body p{font-size:9px;margin-top:3px}
-.contacts{grid-template-columns:repeat(3,1fr)}.contact{padding:15px;display:flex;gap:10px;align-items:center;min-height:76px}
-.contact-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;color:var(--gold2);flex:0 0 38px}
-.contact-icon svg{width:17px}.contact strong{display:block;font-size:11px}.contact span{display:block;color:#777066;font-size:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lower{grid-template-columns:1.1fr .9fr;margin-top:12px}
-.location,.status,.cv{padding:20px}.location p,.status p,.cv p{font-size:12px;line-height:1.8;margin-top:8px}
-.cv-grid{grid-template-columns:1.2fr .8fr}
-
-/* =========================
-   AI
-========================= */
-.ai-fab{
- position:fixed;right:22px;bottom:22px;z-index:1200;width:62px;height:62px;border-radius:21px;
- border:1px solid var(--line2);background:rgba(9,8,7,.88);color:var(--gold2);display:grid;place-items:center;
- box-shadow:0 18px 48px rgba(0,0,0,.4)
-}
-.ai-fab:before{
- content:"";position:absolute;inset:8px;border:1px solid rgba(240,207,131,.12);border-radius:17px;animation:pulse 2.5s infinite
-}
-@keyframes pulse{50%{transform:scale(1.07);opacity:.5}}
-.ai-fab svg{width:24px}.ai-status-dot{position:absolute;right:8px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold2);box-shadow:0 0 12px var(--gold)}
-.ai-panel{
- position:fixed;right:22px;bottom:96px;z-index:1199;width:min(400px,calc(100vw - 28px));
- height:min(620px,calc(100dvh - 110px));display:grid;grid-template-rows:auto 1fr auto;
- background:rgba(9,8,7,.94);border:1px solid var(--line2);border-radius:24px;
- box-shadow:var(--shadow);backdrop-filter:blur(22px);overflow:hidden;
- opacity:0;transform:translateY(15px) scale(.97);pointer-events:none;transition:.3s var(--ease)
-}
-.ai-panel.open{opacity:1;transform:none;pointer-events:auto}
-.ai-head{display:flex;align-items:center;justify-content:space-between;padding:13px;border-bottom:1px solid var(--line)}
-.ai-title{display:flex;gap:9px;align-items:center}.ai-orb{width:31px;height:31px;border:1px solid var(--line);border-radius:11px;display:grid;place-items:center;color:var(--gold2)}
-.status-text{font-size:8px;color:#7c7469;letter-spacing:.14em}
-.chat{padding:13px;overflow:auto;display:flex;flex-direction:column;gap:9px}
-.msg{max-width:88%;padding:9px 11px;border-radius:14px;border:1px solid rgba(255,255,255,.06);font-size:11px;line-height:1.6;white-space:pre-wrap}
-.msg.ai{align-self:flex-start;background:rgba(255,255,255,.025);border-top-left-radius:5px}.msg.user{align-self:flex-end;background:rgba(240,207,131,.08);border-top-right-radius:5px}
-.ai-foot{padding:9px;border-top:1px solid var(--line)}
-.mode-row{display:flex;gap:5px;margin-bottom:6px}.mode{
- padding:6px 8px;border-radius:9px;background:none;border:1px solid rgba(255,255,255,.06);color:#756d63;font-size:8px;text-transform:uppercase
-}
-.mode.active{color:var(--gold2);background:rgba(240,207,131,.06);border-color:var(--line)}
-.ai-row{display:flex;gap:6px}.ai-input{
- flex:1;min-width:0;min-height:42px;max-height:105px;resize:none;padding:10px 11px;
- border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);color:var(--text);outline:0
-}
-.ai-send,.ai-mic{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(240,207,131,.06);color:var(--gold2)}
-.ai-mic.listening{background:rgba(240,207,131,.15)}
-.ai-note{font-size:8px;color:#59534b;margin-top:5px}
-
-/* =========================
-   LIGHTBOX / MODAL
-========================= */
-.overlay{
- position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:15px;
- background:rgba(0,0,0,.78);backdrop-filter:blur(12px);
- opacity:0;pointer-events:none;transition:.25s
-}
-.overlay.open{opacity:1;pointer-events:auto}
-.viewer{
- width:min(1180px,96vw);height:min(86vh,820px);background:#070706;border:1px solid var(--line2);
- border-radius:22px;overflow:hidden;display:grid;grid-template-rows:1fr auto;position:relative
-}
-.viewer-stage{position:relative;overflow:hidden;touch-action:none;display:grid;place-items:center;background:#050505}
-.viewer-img{position:absolute;left:50%;top:50%;max-width:none;transform:translate(-50%,-50%);user-select:none;-webkit-user-drag:none}
-.watermark{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;color:rgba(240,207,131,.16);font-weight:800;font-size:clamp(30px,7vw,80px);letter-spacing:.18em;transform:rotate(-18deg)}
-.viewer-note{position:absolute;left:12px;bottom:10px;color:#777066;font-size:8px}
-.viewer-bar{display:flex;justify-content:center;gap:6px;align-items:center;padding:8px;border-top:1px solid var(--line)}
-.viewer-info{font-size:8px;color:#71695f;margin:0 5px}
-.modal{
- width:min(1100px,95vw);max-height:88vh;overflow:auto;padding:20px;
- display:grid;grid-template-columns:1.6fr 1fr;gap:20px;position:relative
-}
-.modal-img{min-height:430px;border:1px solid var(--line);border-radius:18px;display:grid;place-items:center;background:#0b0a09;overflow:hidden}
-.modal-img img{width:100%;height:100%;object-fit:contain}
-.modal-copy p{font-size:13px;line-height:1.8;margin-top:9px}
-
-/* =========================
-   CURSOR
-========================= */
-@media(pointer:fine){
-  body.has-cursor,
-  body.has-cursor *{
-    cursor:none;
-  }
-
-  .cursor-dot,
-  .cursor-ring{
-    position:fixed;
-    z-index:99999;
-    pointer-events:none;
-    transform:translate(-50%,-50%);
-    opacity:1;
-    display:block;
-  }
-
-  .cursor-dot{
-    width:7px;
-    height:7px;
-    background:var(--gold2);
-    border-radius:50%;
-    box-shadow:
-      0 0 8px var(--gold2),
-      0 0 18px rgba(240,207,131,.8);
-  }
-
-  .cursor-ring{
-    width:30px;
-    height:30px;
-    border:1px solid rgba(240,207,131,.8);
-    border-radius:50%;
-    box-shadow:0 0 12px rgba(240,207,131,.18);
-    transition:
-      width .2s ease,
-      height .2s ease,
-      border-color .2s ease,
-      box-shadow .2s ease;
-  }
-
-  .cursor-hover .cursor-ring{
-    width:44px;
-    height:44px;
-    border-color:var(--gold2);
-    box-shadow:0 0 20px rgba(240,207,131,.35);
-  }
-
-  .cursor-hover .cursor-dot{
-    transform:translate(-50%,-50%) scale(1.35);
-  }
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media(max-width:1050px){
- main{padding:0 18px}.side-nav{display:none}.mobile-toggle{display:grid;place-items:center}
- .home{grid-template-columns:1fr 1fr}.skill-grid{grid-template-columns:repeat(3,1fr)}
- .drawing-grid{grid-template-columns:repeat(3,1fr)}.contacts{grid-template-columns:1fr 1fr}
-}
-@media(max-width:760px){
- html,body{overflow:hidden}main{padding:0 8px}.section{padding:63px 4px 16px}.section-scroll{max-height:calc(100dvh - 82px)}
- .head{grid-template-columns:1fr}.lead{text-align:left;justify-self:start}
- .home{grid-template-columns:1fr;min-height:78dvh}.home .orb{order:-1;width:min(280px,68vw);justify-self:center}
- .profile-grid,.two,.lower,.cv-grid{grid-template-columns:1fr}.profile-card{grid-template-columns:85px 1fr;padding:13px}.avatar{width:85px;border-radius:17px}.family{grid-template-columns:1fr 1fr}
- .edu-grid{grid-template-columns:1fr}.skill-grid{grid-template-columns:1fr 1fr}.drawing-grid,.graphics{grid-template-columns:1fr 1fr}
- .projects,.videos{grid-template-columns:1fr}.contacts{grid-template-columns:1fr}.achievement-grid{grid-template-columns:1fr 1fr}
- .modal{grid-template-columns:1fr;padding:13px}.modal-img{min-height:280px}.viewer{height:83vh}
- .ai-panel{right:8px;bottom:80px;width:calc(100vw - 16px)}.ai-fab{right:10px;bottom:10px}
-}
-@media(max-width:480px){
- .skill-grid,.drawing-grid,.graphics{grid-template-columns:1fr}.achievement-grid{grid-template-columns:1fr}
- .hero-text{font-size:14px}.hero-actions .btn{flex:1}.family{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){
- *,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}
-}
+button,input,textarea{font:inherit}button{border:0;background:none;color:inherit;cursor:pointer}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}::selection{background:rgba(240,207,131,.2)}
+#galaxy{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.vignette{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at 50% 40%,transparent 18%,rgba(0,0,0,.12) 55%,rgba(0,0,0,.72) 100%)}
+.site{position:relative;z-index:4;height:100dvh}
+.glass{background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid var(--line);border-radius:23px;box-shadow:var(--shadow);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:9px;letter-spacing:.17em;text-transform:uppercase}
+.eyebrow:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold2);box-shadow:0 0 14px rgba(240,207,131,.7)}
+.gold{color:var(--gold2)}h1,h2,h3,h4{margin:0;color:var(--white);line-height:1.04;letter-spacing:-.04em}h1{font-size:clamp(3.4rem,8vw,8rem)}h2{font-size:clamp(2.2rem,5vw,4.8rem)}h3{font-size:clamp(1.3rem,2.3vw,2rem)}p{margin:0;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border:1px solid var(--line2);border-radius:12px;background:rgba(240,207,131,.07);color:var(--gold2);font-weight:700;font-size:10px;letter-spacing:.09em;text-transform:uppercase;transition:.24s var(--ease)}.btn:hover{transform:translateY(-2px);background:rgba(240,207,131,.13)}.btn.secondary{border-color:var(--line3);color:var(--text);background:rgba(255,255,255,.025)}
+.icon-btn{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--muted)}.icon-btn:hover{color:var(--gold2);border-color:var(--line2)}
+/* CURSOR */
+@media(pointer:fine){body.cursor-enabled,body.cursor-enabled a,body.cursor-enabled button,body.cursor-enabled input,body.cursor-enabled textarea{cursor:none}.cursor-dot,.cursor-ring{position:fixed;left:0;top:0;z-index:99999;pointer-events:none;opacity:0;transform:translate(-50%,-50%);mix-blend-mode:screen}.cursor-dot{width:7px;height:7px;border-radius:50%;background:var(--gold2);box-shadow:0 0 8px var(--gold2),0 0 18px rgba(240,207,131,.8)}.cursor-ring{width:30px;height:30px;border:1px solid rgba(240,207,131,.8);border-radius:50%;box-shadow:0 0 14px rgba(201,164,91,.16);transition:.22s var(--ease)}body.cursor-ready .cursor-dot,body.cursor-ready .cursor-ring{opacity:1}body.cursor-hover .cursor-ring{width:46px;height:46px;border-color:var(--gold2);box-shadow:0 0 23px rgba(240,207,131,.32)}body.cursor-hover .cursor-dot{transform:translate(-50%,-50%) scale(1.35)}}
+/* NAV */
+.side-nav{position:fixed;z-index:1000;left:18px;top:50%;transform:translateY(-50%);width:64px;padding:9px 8px;border:1px solid var(--line);border-radius:28px;background:rgba(9,8,7,.66);backdrop-filter:blur(19px);box-shadow:var(--shadow)}
+.brand{width:46px;height:46px;margin:0 auto 8px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:15px;color:var(--gold2);font-weight:800}.nav-btn{position:relative;width:46px;height:46px;margin:3px auto;border-radius:15px;display:grid;place-items:center;color:var(--muted);transition:.2s}.nav-btn:hover,.nav-btn.active{color:var(--gold2);background:rgba(240,207,131,.08)}.nav-btn svg{width:19px;height:19px;stroke:currentColor}.nav-tip{position:absolute;left:58px;top:50%;transform:translateY(-50%) translateX(-5px);padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:#090807;opacity:0;pointer-events:none;transition:.2s;white-space:nowrap;font-size:10px}.nav-btn:hover .nav-tip{opacity:1;transform:translateY(-50%)}
+.mobile-toggle{display:none;position:fixed;right:14px;top:14px;z-index:1100;width:52px;height:52px;border:1px solid var(--line);border-radius:17px;background:rgba(9,8,7,.86);color:var(--gold2)}.mobile-menu{display:none;position:fixed;right:14px;top:75px;z-index:1090;width:min(320px,calc(100vw - 28px));padding:10px;border:1px solid var(--line);border-radius:20px;background:rgba(9,8,7,.95);backdrop-filter:blur(20px);grid-template-columns:1fr 1fr;gap:6px}.mobile-menu.open{display:grid}.mobile-item{padding:11px;border:1px solid var(--line3);border-radius:12px;color:var(--muted);text-align:left}.mobile-item.active{color:var(--gold2);background:rgba(240,207,131,.06)}
+/* STAGE */
+main{position:relative;z-index:5;height:100dvh;padding:0 25px 0 100px}.stage{width:min(1250px,100%);height:100%;margin:auto;position:relative}.section{position:absolute;inset:0;display:flex;align-items:center;padding:60px 8px 30px;opacity:0;visibility:hidden;pointer-events:none;transform:translateX(30px) scale(.986);filter:blur(6px);transition:opacity .42s var(--ease),transform .5s var(--ease),filter .45s var(--ease)}.section.active{opacity:1;visibility:visible;pointer-events:auto;transform:none;filter:none}.section-scroll{width:100%;max-height:calc(100dvh - 90px);overflow:auto;padding:4px 5px 18px;scrollbar-width:thin;scrollbar-color:rgba(240,207,131,.2) transparent}.section-scroll::-webkit-scrollbar{width:6px}.section-scroll::-webkit-scrollbar-thumb{background:rgba(240,207,131,.18);border-radius:99px}.section-head{display:grid;grid-template-columns:1.2fr .8fr;gap:25px;align-items:end;margin-bottom:22px}.lead{text-align:right;justify-self:end;max-width:520px;font-size:12px;line-height:1.8}.grid{display:grid;gap:11px}
+/* HOME */
+.home{min-height:82dvh;display:grid;grid-template-columns:1fr;align-content:center;text-align:center}.home-copy{max-width:850px;margin:auto}.home .hero-line{margin:16px 0 15px;font-size:clamp(1rem,2vw,1.45rem);color:#cbc2b4}.home .hero-text{max-width:720px;margin:auto;font-size:14px;line-height:1.85}.home-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:24px}.home-sign{margin-top:22px;color:#736c62;font-size:9px;letter-spacing:.15em;text-transform:uppercase}.home-orb{width:min(340px,58vw);aspect-ratio:1;margin:30px auto 0;border:1px solid rgba(240,207,131,.15);border-radius:50%;background:radial-gradient(circle at center,rgba(240,207,131,.16),transparent 44%),repeating-radial-gradient(circle,rgba(240,207,131,.06) 0 1px,transparent 1px 16px);box-shadow:inset 0 0 80px rgba(240,207,131,.04);position:relative;opacity:.85}.home-orb:before,.home-orb:after{content:"";position:absolute;inset:13%;border:1px solid rgba(240,207,131,.12);border-radius:50%;transform:rotate(22deg) scaleX(.33);animation:orbit 12s linear infinite}.home-orb:after{inset:24%;transform:rotate(-40deg) scaleX(.26);animation-duration:16s}.home-orb i{position:absolute;inset:46%;border-radius:50%;background:var(--gold2);box-shadow:0 0 65px rgba(240,207,131,.36)}@keyframes orbit{to{transform:rotate(382deg) scaleX(.33)}}
+/* PROFILE */
+.profile-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:12px}.profile-card{padding:19px}.profile-top{display:grid;grid-template-columns:155px 1fr;gap:19px;align-items:center}.avatar{width:155px;aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid var(--line2);background:radial-gradient(circle,rgba(240,207,131,.12),transparent 62%);box-shadow:0 0 35px rgba(240,207,131,.06)}.avatar img{width:100%;height:100%;object-fit:cover}.profile-card h3{margin-top:7px}.role{font-size:9px;color:var(--gold2);text-transform:uppercase;letter-spacing:.13em}.profile-p{font-size:11px;line-height:1.75;margin-top:7px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:13px}.meta-item{padding:9px;border:1px solid var(--line3);border-radius:11px}.meta-item small{display:block;color:#6e675e;font-size:8px;text-transform:uppercase}.meta-item span{font-size:10px;color:#d5cec2}.story{padding:20px}.story p{margin-top:9px;font-size:13px;line-height:1.85}.family{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:17px}.family div{padding:10px;border:1px solid var(--line3);border-radius:11px}.family strong{display:block;font-size:9px}.family span{font-size:8px;color:#81796f}
+/* 3D CYLINDER */
+.cyl-wrap{position:relative;height:280px;margin-top:13px;perspective:1050px;display:grid;place-items:center;overflow:hidden}.cylinder{position:relative;width:220px;height:150px;transform-style:preserve-3d;transition:transform 1.15s var(--ease)}.cyl-face{position:absolute;left:0;top:0;width:220px;height:150px;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:#0a0908;backface-visibility:hidden;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.35);cursor:pointer}.cyl-face img{width:100%;height:100%;object-fit:cover}.cyl-empty{text-align:center;padding:22px}.cyl-empty b{display:block;color:var(--gold2);font-size:9px;letter-spacing:.13em;text-transform:uppercase}.cyl-empty span{display:block;color:#71695e;font-size:8px;margin-top:4px}.cyl-center{position:absolute;left:50%;top:50%;width:12px;height:12px;transform:translate(-50%,-50%);border-radius:50%;background:var(--gold2);box-shadow:0 0 30px rgba(240,207,131,.35);pointer-events:none}.cyl-caption{display:flex;justify-content:center;gap:7px;align-items:center;margin-top:-4px;color:#6f685e;font-size:8px;letter-spacing:.11em;text-transform:uppercase}.cyl-caption b{color:var(--gold2)}
+.edu{padding:18px;margin-bottom:11px;position:relative}.edu-top{display:flex;justify-content:space-between;gap:15px}.edu-top h3{font-size:18px}.edu-year{font-size:8px;color:var(--gold2);letter-spacing:.16em}.edu p{margin-top:5px;font-size:10px}.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:11px}.edu-line{font-size:10px;color:#aaa297}.edu-line b{color:#d8d0c2}.map-mini{height:170px;border-radius:15px;overflow:hidden;border:1px solid var(--line);margin-top:12px}.map-mini iframe{width:100%;height:100%;border:0}
+/* SKILLS */
+.skill-launcher{grid-template-columns:repeat(3,1fr);gap:9px}.skill-btn{min-height:102px;padding:13px;text-align:left;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,rgba(255,255,255,.03),rgba(240,207,131,.018));transition:.24s var(--ease)}.skill-btn:hover{transform:translateY(-3px);border-color:var(--line2);background:rgba(240,207,131,.055)}.skill-icon{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;color:var(--gold2);margin-bottom:10px}.skill-btn h4{font-size:11px}.skill-btn p{font-size:8px;line-height:1.5;margin-top:4px}.skill-note{margin-top:12px;padding:13px}.skill-note p{font-size:10px}
+/* SKILL DRAWER */
+.skill-drawer{width:min(1180px,95vw);height:min(87vh,860px);display:grid;grid-template-rows:auto 1fr;overflow:hidden;background:#090807;border:1px solid var(--line2);border-radius:24px;box-shadow:var(--shadow)}.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}.drawer-title h3{font-size:20px}.drawer-title p{font-size:9px;margin-top:2px}.drawer-scroll{overflow:auto;padding:16px}.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.detail-item{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#0a0908;cursor:pointer}.detail-media{height:155px;display:grid;place-items:center;background:linear-gradient(135deg,#11100e,#080706)}.detail-media img{width:100%;height:100%;object-fit:cover}.detail-copy{padding:10px}.detail-copy strong{display:block;font-size:10px}.detail-copy span{display:block;color:#726a60;font-size:8px;line-height:1.5;margin-top:4px}.detail-block{margin-bottom:20px}.detail-block h4{font-size:13px;margin-bottom:9px}.author-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(240,207,131,.035),transparent)}.author-card+.author-card{margin-top:8px}.author-card h4{font-size:15px}.author-books{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.author-book{padding:5px 7px;border-radius:8px;border:1px solid var(--line3);font-size:8px;color:#bbb2a4}.author-note{font-size:9px;line-height:1.6;margin-top:8px}.editable-note{padding:8px 9px;border-radius:9px;border:1px dashed rgba(240,207,131,.18);font-size:8px;color:#70685e;margin-top:8px}.local-video{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#080706}.local-video video{width:100%;aspect-ratio:16/9;display:block;background:#050505}.local-video .video-meta{padding:9px}.local-video .video-meta strong{font-size:9px;display:block}.local-video .video-meta span{font-size:8px;color:#70685e}
+/* PROJECTS */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.filter{padding:8px 10px;border:1px solid var(--line);border-radius:99px;background:none;color:#877f74;font-size:9px;text-transform:uppercase}.filter.active,.filter:hover{color:var(--gold2);background:rgba(240,207,131,.07);border-color:var(--line2)}.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.project-card{overflow:hidden}.project-image{height:215px;display:grid;place-items:center;background:radial-gradient(circle at center,rgba(240,207,131,.11),transparent 55%),#0a0908;cursor:pointer}.project-image img{width:100%;height:100%;object-fit:cover}.project-body{padding:14px}.project-body h3{font-size:19px}.project-body p{font-size:10px;line-height:1.7;margin-top:5px}.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.tag{font-size:8px;color:#928a7f;border:1px solid var(--line3);padding:5px 7px;border-radius:8px}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.project-modal{width:min(1120px,95vw);max-height:88vh;overflow:auto;padding:20px;display:grid;grid-template-columns:1.618fr 1fr;gap:20px;background:#090807;border:1px solid var(--line2);border-radius:22px}.project-modal-image{min-height:430px;display:grid;place-items:center;border:1px solid var(--line);border-radius:18px;background:#0a0908;overflow:hidden}.project-modal-image img{width:100%;height:100%;object-fit:contain}.project-modal-copy h2{margin-top:12px;font-size:clamp(2rem,4vw,3.8rem)}.project-modal-copy p{font-size:12px;line-height:1.8;margin-top:9px}.video-frame{aspect-ratio:16/9;background:#050505;border-bottom:1px solid var(--line)}.video-frame iframe{width:100%;height:100%;border:0}
+/* GRAPHICS */
+.graphics-grid{grid-template-columns:repeat(3,1fr)}.graphic-card{height:190px;border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative;background:#0a0908;cursor:pointer}.graphic-media{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#11100e,#080706)}.graphic-media img{width:100%;height:100%;object-fit:contain}.graphic-label{position:absolute;left:9px;bottom:8px;padding:6px 8px;border-radius:8px;background:rgba(0,0,0,.66);border:1px solid var(--line);font-size:8px;color:#b8ae9d;letter-spacing:.12em}
+/* ACHIEVEMENTS */
+.achievement-grid{grid-template-columns:repeat(4,1fr)}.certificate{padding:14px}.certificate-number{font-size:8px;color:var(--gold2);letter-spacing:.16em}.certificate h4{font-size:11px;margin-top:8px;line-height:1.4}.certificate p{font-size:8px;margin-top:5px;line-height:1.55}.cert-actions{margin-top:10px}.cert-protection{margin-top:12px;padding:12px;border:1px dashed rgba(240,207,131,.16);border-radius:12px;color:#776f65;font-size:8px;line-height:1.6}
+/* CONTACT */
+.contact-icons{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}.contact-icon-card{height:85px;display:grid;place-items:center;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.03),rgba(240,207,131,.02));position:relative;transition:.23s}.contact-icon-card:hover{transform:translateY(-3px);border-color:var(--line2);background:rgba(240,207,131,.06)}.contact-icon-card svg{width:28px;height:28px;stroke:var(--gold2);fill:none;stroke-width:1.55}.contact-icon-card .hint{display:none}.contact-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin-top:12px}.location-panel,.status-panel{padding:18px}.address{font-size:12px;line-height:1.8;margin-top:9px;color:#b8afa1}.map-frame{height:255px;margin-top:13px;border:1px solid var(--line);border-radius:15px;overflow:hidden}.map-frame iframe{width:100%;height:100%;border:0}.status-panel p{font-size:11px;line-height:1.8;margin-top:8px}
+/* CV */
+.cv-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.cv-card{padding:21px}.cv-card p{font-size:12px;line-height:1.8;margin-top:8px}.cv-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}.cv-side{padding:21px}.cv-side div{color:#7f786d;font-size:10px;line-height:1.8}
+/* AI */
+.ai-fab{position:fixed;right:22px;bottom:22px;z-index:1200;width:62px;height:62px;border-radius:21px;border:1px solid var(--line2);background:rgba(9,8,7,.88);color:var(--gold2);display:grid;place-items:center;box-shadow:0 18px 48px rgba(0,0,0,.42)}.ai-fab:before{content:"";position:absolute;inset:8px;border:1px solid rgba(240,207,131,.12);border-radius:17px;animation:pulse 2.5s infinite}.ai-fab svg{width:25px;position:relative}.ai-dot{position:absolute;right:8px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold2);box-shadow:0 0 12px var(--gold)}@keyframes pulse{50%{transform:scale(1.06);opacity:.55}}
+.ai-panel{position:fixed;right:22px;bottom:96px;z-index:1199;width:min(410px,calc(100vw - 28px));height:min(620px,calc(100dvh - 110px));display:grid;grid-template-rows:auto 1fr auto;background:rgba(9,8,7,.95);border:1px solid var(--line2);border-radius:24px;backdrop-filter:blur(22px);box-shadow:var(--shadow);overflow:hidden;opacity:0;transform:translateY(15px) scale(.97);pointer-events:none;transition:.3s var(--ease)}.ai-panel.open{opacity:1;transform:none;pointer-events:auto}.ai-head{display:flex;justify-content:space-between;align-items:center;padding:13px;border-bottom:1px solid var(--line)}.ai-title{display:flex;gap:9px;align-items:center}.ai-orb{width:31px;height:31px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;color:var(--gold2)}.ai-status{font-size:8px;color:#7d756a;letter-spacing:.14em}.chat{padding:13px;overflow:auto;display:flex;flex-direction:column;gap:9px}.msg{max-width:89%;padding:9px 11px;border-radius:14px;border:1px solid var(--line3);font-size:11px;line-height:1.6;white-space:pre-wrap}.msg.ai{align-self:flex-start;background:rgba(255,255,255,.025);border-top-left-radius:5px}.msg.user{align-self:flex-end;background:rgba(240,207,131,.08);border-top-right-radius:5px}.ai-foot{padding:9px;border-top:1px solid var(--line)}.mode-row{display:flex;gap:5px;margin-bottom:6px}.mode{padding:6px 8px;border-radius:9px;background:none;border:1px solid var(--line3);color:#756d63;font-size:8px;text-transform:uppercase}.mode.active{color:var(--gold2);background:rgba(240,207,131,.06);border-color:var(--line)}.ai-row{display:flex;gap:6px}.ai-input{flex:1;min-width:0;min-height:42px;max-height:105px;resize:none;padding:10px;border-radius:12px;border:1px solid var(--line3);background:rgba(255,255,255,.025);color:var(--text);outline:0}.ai-send,.ai-mic{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(240,207,131,.06);color:var(--gold2)}.ai-mic.listening{background:rgba(240,207,131,.15)}.ai-note{font-size:8px;color:#59534b;margin-top:5px}
+/* OVERLAYS */
+.overlay{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:15px;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:.25s}.overlay.open{opacity:1;pointer-events:auto}.viewer{width:min(1180px,96vw);height:min(88vh,850px);display:grid;grid-template-rows:1fr auto;position:relative;background:#070706;border:1px solid var(--line2);border-radius:22px;overflow:hidden}.viewer-main{display:grid;grid-template-rows:1fr auto;min-height:0}.viewer-stage{position:relative;overflow:hidden;background:radial-gradient(circle at center,rgba(240,207,131,.08),transparent 57%),#050505;touch-action:none;display:grid;place-items:center}.viewer-img{position:absolute;left:50%;top:50%;max-width:none;transform:translate(-50%,-50%) scale(1);user-select:none;-webkit-user-drag:none}.viewer-info-panel{padding:16px 18px;background:#050505;border-top:1px solid var(--line);display:grid;grid-template-columns:1.618fr 1fr;gap:20px}.viewer-info-panel h3{font-size:20px}.viewer-info-panel p{margin-top:5px;font-size:10px;line-height:1.7}.viewer-toolbar{display:flex;justify-content:center;align-items:center;gap:6px;padding:8px;border-top:1px solid var(--line);background:#090807}.viewer-count{font-size:8px;color:#746d63;margin:0 8px}.viewer-close{position:absolute;right:10px;top:10px;z-index:5}.watermark{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;color:rgba(240,207,131,.15);font-weight:800;font-size:clamp(26px,6vw,80px);letter-spacing:.18em;transform:rotate(-17deg)}.protected-note{position:absolute;left:11px;bottom:10px;z-index:3;font-size:8px;color:rgba(255,255,255,.42)}
+/* RESPONSIVE */
+@media(max-width:1080px){main{padding:0 17px}.side-nav{display:none}.mobile-toggle{display:grid;place-items:center}.skill-launcher{grid-template-columns:repeat(2,1fr)}.achievement-grid{grid-template-columns:repeat(3,1fr)}.contact-icons{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:760px){main{padding:0 7px}.section{padding:60px 4px 13px}.section-scroll{max-height:calc(100dvh - 78px)}.section-head{grid-template-columns:1fr}.lead{text-align:left;justify-self:start}.home{min-height:80dvh}.home-orb{width:min(250px,64vw);margin-top:24px}.profile-grid,.cv-grid,.contact-layout,.project-modal{grid-template-columns:1fr}.profile-top{grid-template-columns:90px 1fr}.avatar{width:90px}.family{grid-template-columns:1fr 1fr}.meta{grid-template-columns:1fr 1fr}.edu-grid{grid-template-columns:1fr}.cyl-wrap{height:245px}.cyl-face{width:190px;height:132px}.cylinder{width:190px;height:132px}.detail-grid{grid-template-columns:1fr 1fr}.detail-media{height:135px}.project-grid{grid-template-columns:1fr}.graphics-grid{grid-template-columns:1fr 1fr}.achievement-grid{grid-template-columns:1fr 1fr}.contact-icons{grid-template-columns:repeat(4,1fr)}.map-frame{height:230px}.viewer{height:88vh}.viewer-main{grid-template-rows:1fr auto}.viewer-info-panel{grid-template-columns:1fr;gap:7px;padding:13px 14px}.viewer-info-panel h3{font-size:18px}.viewer-toolbar{padding:7px}.ai-panel{right:8px;bottom:80px;width:calc(100vw - 16px)}.ai-fab{right:10px;bottom:10px}}
+@media(max-width:470px){h1{font-size:3.25rem}.skill-launcher{grid-template-columns:1fr 1fr}.graphics-grid{grid-template-columns:1fr}.contact-icons{grid-template-columns:repeat(3,1fr)}.achievement-grid{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}.home .hero-text{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
 </style>
 </head>
-
 <body>
-<canvas id="galaxy" aria-hidden="true"></canvas>
-<div class="noise" aria-hidden="true"></div>
-<div class="vignette" aria-hidden="true"></div>
-
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation"></button>
-<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation"></nav>
-<nav class="side-nav" id="sideNav" aria-label="Primary navigation"></nav>
-
-<main>
-<div class="stage">
-
-<!-- HOME -->
-<section class="section active" id="home">
-<div class="section-scroll">
-<div class="home">
-<div>
-<span class="eyebrow">Personal Universe · 2026</span>
-<h1 style="margin-top:14px">Shadid<br><span class="gold">Ahamed</span></h1>
-<div class="hero-line">Creative Developer • Architecture Student • Artist • Designer • Builder</div>
-<p class="hero-text">Frontend Developer focused on building clean, fast and responsive web experiences — alongside architecture, drawing, visual thinking, interactive experiments and digital projects.</p>
-<div class="hero-actions">
-<button class="btn" data-go="profile">Proceed ↗</button>
-<a class="btn secondary" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener">View CV</a>
-</div>
-<div class="hero-sign">Aspiring Developer • Problem Solver • UI Builder</div>
-</div>
-<div style="display:grid;place-items:center">
-<div class="orb"><i></i></div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- PROFILE -->
-<section class="section" id="profile">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Profile</span><h2 style="margin-top:13px">A person who keeps <span class="gold">creating.</span></h2></div>
-<p class="lead">A creative identity sitting between architecture, art, code, visual thinking and experimentation.</p>
-</div>
-<div class="profile-grid">
-<article class="glass profile-card">
-<div class="avatar"><img src="image/Heroimage.png" alt="Shadid Ahamed profile image" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder><b>Heroimage.png</b><span>Add the original image file</span></div>'"></div>
-<div>
-<div class="role">Currently studying at BRAC University</div>
-<h3 style="margin-top:6px">Shadid Ahamed</h3>
-<p style="margin-top:7px;font-size:12px">Architecture Department · first-stage / first-semester context · currently trying to shift toward CSE / Computer Science and Engineering.</p>
-<div class="meta">
-<div><small>Role</small><span>1000061008</span></div>
-<div><small>Batch</small><span>Summer 2026</span></div>
-<div><small>Course</small><span>ARC 101</span></div>
-<div><small>Institution</small><span>BRAC University</span></div>
-</div>
-</div>
-</article>
-<article class="glass story">
-<h3>About Shadid</h3>
-<p>Shadid’s story is less about a single label and more about continuing to make things. He worked toward architecture, practiced drawing, built portfolios, explored web development, designed websites, experimented with games, explored spaces and furniture, and kept building through academic, financial and family pressures. The central theme is persistence: keep learning, keep experimenting, keep reaching forward.</p>
-<div class="pills">
-<span class="pill">Architecture</span><span class="pill">Drawing</span><span class="pill">Web Development</span><span class="pill">Games</span><span class="pill">Digital Design</span><span class="pill">Visual Thinking</span><span class="pill">Model Making</span>
-</div>
-<div class="family">
-<div><strong>Father</strong><span>Tofail Ahmed · Police Inspector</span></div>
-<div><strong>Mother</strong><span>Household / homemaker</span></div>
-<div><strong>Wife</strong><span>Major part of life and future planning</span></div>
-<div><strong>Family</strong><span>Younger sister and Nasir are part of the supplied context</span></div>
-</div>
-</article>
-</div>
-</div>
-</section>
-
-<!-- EDUCATION -->
-<section class="section" id="education">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Education</span><h2 style="margin-top:13px">Built across <span class="gold">three stages.</span></h2></div>
-<p class="lead">School → Notre Dame College → BRAC University, with a current direction toward CSE.</p>
-</div>
-<div class="timeline" id="educationTimeline"></div>
-</div>
-</section>
-
-<!-- SKILLS -->
-<section class="section" id="skills">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Skills & Interests</span><h2 style="margin-top:13px">Many tools, <span class="gold">one visual mind.</span></h2></div>
-<p class="lead">Skills are treated as connected creative practices rather than a flat checklist.</p>
-</div>
-<div class="grid skill-grid" id="skillGrid"></div>
-
-<div class="grid two">
-<article class="glass book-card">
-<span class="eyebrow">Literature / Reading</span>
-<h3 style="margin-top:13px">Books are part of the archive.</h3>
-<p style="margin-top:8px;font-size:12px;line-height:1.8">Favorite writer: Samaresh Majumdar. Other interests include Humayun Ahmed, Bibhutibhushan Bandyopadhyay, Kazi Nazrul Islam and Michael Madhusudan Dutt, plus shorter poems, Pratybastha / Protibastob and Dhaka Comics.</p>
-<div class="book-list" id="bookList"></div>
-</article>
-<article class="glass music-card">
-<span class="eyebrow">Music</span>
-<h3 style="margin-top:13px">Listening & performing.</h3>
-<p style="margin-top:8px;font-size:12px;line-height:1.8">Shadid enjoys listening to music and can perform some songs. No specific singers or song titles are asserted without supplied information.</p>
-<div style="margin-top:17px;padding:15px;border:1px solid rgba(255,255,255,.06);border-radius:15px">
-<span style="font-size:9px;color:#777067;letter-spacing:.14em">VISUAL THINKING</span>
-<div style="margin-top:7px;color:#d8d0c3;font-size:17px">See structure.<br>Draw structure.<br>Build structure.</div>
-</div>
-</article>
-</div>
-
-<div style="margin-top:15px"><span class="eyebrow">Achievements</span><div class="grid achievement-grid" id="achievementGrid"></div></div>
-<div style="margin-top:15px"><span class="eyebrow">Drawing Archive</span><div class="grid drawing-grid" id="drawingGrid"></div></div>
-</div>
-</section>
-
-<!-- PROJECTS -->
-<section class="section" id="projects">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Projects</span><h2 style="margin-top:13px">Digital systems meet <span class="gold">physical form.</span></h2></div>
-<p class="lead">Digital projects, architectural projects and graphic studies — presented image-first.</p>
-</div>
-<div class="filters" id="filters"></div>
-<div class="grid projects" id="projectGrid"></div>
-</div>
-</section>
-
-<!-- GRAPHICS -->
-<section class="section" id="graphics">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Architectural Graphics</span><h2 style="margin-top:13px">A visual archive for <span class="gold">landscape work.</span></h2></div>
-<p class="lead">Open any item to fullscreen, zoom, pan and swipe without rotating the whole mobile interface.</p>
-</div>
-<div class="grid graphics" id="graphicsGrid"></div>
-</div>
-</section>
-
-<!-- VIDEOS -->
-<section class="section" id="videos">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Videos</span><h2 style="margin-top:13px">A quiet cinematic <span class="gold">screen.</span></h2></div>
-<p class="lead">Original YouTube URLs remain unchanged.</p>
-</div>
-<div class="grid videos" id="videoGrid"></div>
-<div class="glass" style="padding:18px;margin-top:12px">
-<span class="eyebrow">Extra English Project</span>
-<h3 style="margin-top:12px">Collaborative English project / video</h3>
-<p style="margin-top:7px;font-size:11px">Placeholder ready for future title, team information, project image and video.</p>
-</div>
-</div>
-</section>
-
-<!-- CONTENT -->
-<section class="section" id="content">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Content</span><h2 style="margin-top:13px">Find the <span class="gold">digital trail.</span></h2></div>
-<p class="lead">Minimal icon-first cards with the original account links intact.</p>
-</div>
-<div class="grid contacts" id="contentLinks"></div>
-<div class="grid lower">
-<article class="glass location">
-<span class="eyebrow">Location</span>
-<h3 style="margin-top:12px">Dhaka, Bangladesh</h3>
-<p>17 No. [15×17] Bazar<br>Flat 24<br>Paltan area<br>Dhaka<br>Bangladesh</p>
-<a class="btn" style="margin-top:13px" href="https://www.google.com/maps/search/?api=1&query=17+No+15x17+Bazar+Flat+24+Paltan+Dhaka+Bangladesh" target="_blank" rel="noopener">View on Google Maps</a>
-</article>
-<article class="glass status">
-<span class="eyebrow">Archive Status</span>
-<h3 style="margin-top:12px">Currently preparing / building a personal portfolio book.</h3>
-<p>This portfolio is designed as a living personal archive.</p>
-</article>
-</div>
-</div>
-</section>
-
-<!-- CONTACT -->
-<section class="section" id="contact">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Contact</span><h2 style="margin-top:13px">Open a <span class="gold">conversation.</span></h2></div>
-<p class="lead">Choose any platform you already prefer.</p>
-</div>
-<div class="grid contacts" id="contactLinks"></div>
-<div class="glass" style="padding:19px;margin-top:12px"><h3>Privacy</h3><p style="font-size:11px;margin-top:7px">The local AI stores its conversation only in this browser’s localStorage. It does not send chat history to a remote service.</p></div>
-</div>
-</section>
-
-<!-- CV -->
-<section class="section" id="cv">
-<div class="section-scroll">
-<div class="head">
-<div><span class="eyebrow">Resume / CV</span><h2 style="margin-top:13px">One document. <span class="gold">The wider archive.</span></h2></div>
-<p class="lead">Original Google Drive CV link preserved exactly.</p>
-</div>
-<div class="grid cv-grid">
-<article class="glass cv">
-<h3>Shadid Ahamed</h3>
-<p>Creative Developer • Architecture Student • Artist • Designer • Builder</p>
-<a class="btn" style="margin-top:16px" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener">View CV</a>
-</article>
-<article class="glass cv"><span class="eyebrow">Portfolio Record</span><p>Frontend development<br>Architecture & visual studies<br>Drawing archive<br>Digital projects<br>Interactive experiments</p></article>
-</div>
-</div>
-</section>
-
-</div>
-</main>
-
-<!-- AI -->
-<button class="ai-fab" id="aiFab" aria-label="Open Portfolio AI" aria-expanded="false">
-<span class="ai-status-dot"></span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="7"/><path d="M9 12h.01M15 12h.01M9.5 15c1.3 1 3.7 1 5 0M12 5V2M12 22v-3"/></svg>
-</button>
-
-<aside class="ai-panel" id="aiPanel" aria-label="Portfolio AI">
-<div class="ai-head">
-<div class="ai-title"><div class="ai-orb">AI</div><div><strong style="font-size:11px">Portfolio AI</strong><div id="aiStatus" class="status-text">READY</div></div></div>
-<div style="display:flex;gap:5px"><button class="icon-btn" id="clearAI" aria-label="Clear chat">⌫</button><button class="icon-btn" id="closeAI" aria-label="Close AI">×</button></div>
-</div>
-<div class="chat" id="chat" aria-live="polite"></div>
-<div class="ai-foot">
-<div class="mode-row"><button class="mode active" id="textMode">Text</button><button class="mode" id="voiceMode">Voice</button></div>
-<div class="ai-row">
-<textarea id="aiInput" class="ai-input" rows="1" placeholder="Ask about Shadid, projects, education, books, links…"></textarea>
-<button id="micBtn" class="ai-mic" aria-label="Voice input">🎙</button>
-<button id="sendBtn" class="ai-send" aria-label="Send">↗</button>
-</div>
-<div class="ai-note">Local memory only · no API key · browser voice support varies.</div>
-</div>
-</aside>
-
+<canvas id="galaxy" aria-hidden="true"></canvas><div class="noise" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div><div class="cursor-dot" id="cursorDot"></div><div class="cursor-ring" id="cursorRing"></div>
+<div class="site">
+<button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation"></button><nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation"></nav><nav class="side-nav" id="sideNav" aria-label="Primary navigation"></nav>
+<main><div class="stage">
+<section class="section active" id="home"><div class="section-scroll"><div class="home"><div class="home-copy"><span class="eyebrow">Personal Universe · 2026</span><h1 style="margin-top:14px">Shadid<br><span class="gold">Ahamed</span></h1><div class="hero-line">Creative Developer • Architecture Student • Artist • Designer • Builder</div><p class="hero-text">Frontend Developer focused on building clean, fast and responsive web experiences — alongside architecture, drawing, visual thinking, interactive experiments and digital projects.</p><div class="home-actions"><button class="btn" data-go="profile">Enter Portfolio ↗</button><a class="btn secondary" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener noreferrer">View CV</a></div><div class="home-sign">Aspiring Developer • Problem Solver • UI Builder</div><div class="home-orb"><i></i></div></div></div></div></section>
+<section class="section" id="profile"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Profile</span><h2 style="margin-top:13px">A person who keeps <span class="gold">creating.</span></h2></div><p class="lead">Architecture, art, code, visual thinking and experiments — kept together as one archive.</p></div><div class="profile-grid"><article class="glass profile-card"><div class="profile-top"><div class="avatar"><img src="image/Heroimage.png" alt="Shadid Ahamed profile image" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\'cyl-empty\'><b>Heroimage.png</b><span>Add the original image file</span></div>'"></div><div><div class="role">Currently studying at BRAC University</div><h3>Shadid Ahamed</h3><p class="profile-p">Architecture Department · first-stage / first-semester context · currently trying to shift toward CSE / Computer Science and Engineering.</p><div class="meta"><div class="meta-item"><small>Role</small><span>1000061008</span></div><div class="meta-item"><small>Batch</small><span>Summer 2026</span></div><div class="meta-item"><small>Course</small><span>ARC 101</span></div><div class="meta-item"><small>Institution</small><span>BRAC University</span></div></div></div></div></article><article class="glass story"><span class="eyebrow">About Shadid</span><h3 style="margin-top:12px">Keep learning. Keep building. Keep reaching forward.</h3><p>Shadid’s story here is not reduced to marks or setbacks. It is a record of drawing, architecture, portfolio building, web development, game experiments, furniture and spatial thinking, and the habit of continuing to create through pressure.</p><div class="family"><div><strong>Father</strong><span>Tofail Ahmed · Police Inspector</span></div><div><strong>Mother</strong><span>Household / homemaker</span></div><div><strong>Wife</strong><span>Major part of life and future planning</span></div><div><strong>Family</strong><span>Younger sister + Nasir in supplied context</span></div></div></article></div></div></section>
+<section class="section" id="education"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Education</span><h2 style="margin-top:13px">Three stages. <span class="gold">One timeline.</span></h2></div><p class="lead">The galleries below are upright 3D cylinders: the faces stay vertical, rotate around a central axis and advance one face at a time.</p></div><div id="educationRoot"></div></div></section>
+<section class="section" id="skills"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Skills & Interests</span><h2 style="margin-top:13px">Compact tools for <span class="gold">deeper rooms.</span></h2></div><p class="lead">Tap a skill. Each opens its own focused space instead of showing everything at once.</p></div><div class="grid skill-launcher" id="skillLauncher"></div><div class="glass skill-note"><p>Architectural Design contains Digital Design, Visual Thinking, Model Making and Graphics Composition together, as requested.</p></div></div></section>
+<section class="section" id="projects"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Projects</span><h2 style="margin-top:13px">Work that moves between <span class="gold">screens and space.</span></h2></div><p class="lead">Image-first project cards. The project title and description appear outside the image, and the richer view opens only after interaction.</p></div><div class="filters" id="projectFilters"></div><div class="project-grid" id="projectGrid"></div></div></section>
+<section class="section" id="graphics"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Graphics</span><h2 style="margin-top:13px">Landscape studies in <span class="gold">motion.</span></h2></div><p class="lead">Eighteen editable graphic slots are ready. Each opens in the protected image viewer with zoom, pan and detail text.</p></div><div class="grid graphics-grid" id="graphicsGrid"></div></div></section>
+<section class="section" id="achievements"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Achievements</span><h2 style="margin-top:13px">A separate <span class="gold">certificate archive.</span></h2></div><p class="lead">Certificate names stay visible while your Drive links remain editable. The interface does not provide download controls.</p></div><div class="grid achievement-grid" id="certificateGrid"></div><div class="cert-protection">Viewer protection is UI-level only. A browser cannot technically guarantee that screenshots, screen recording, developer tools or other capture methods are impossible.</div></div></section>
+<section class="section" id="contact"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Contact</span><h2 style="margin-top:13px">Everything is <span class="gold">in one place.</span></h2></div><p class="lead">Icon-only contact actions. The original destination URLs remain exactly preserved in the data layer.</p></div><div class="contact-icons" id="contactIcons"></div><div class="contact-layout"><article class="glass location-panel"><span class="eyebrow">Location</span><h3 style="margin-top:12px">Dhaka, Bangladesh</h3><div class="address">17 No. [15×17] Bazar<br>Flat 24<br>Paltan area<br>Dhaka<br>Bangladesh</div><div class="map-frame"><iframe loading="lazy" title="Google Maps — supplied Dhaka location" src="https://www.google.com/maps?q=17+No+15x17+Bazar+Flat+24+Paltan+Dhaka+Bangladesh&output=embed"></iframe></div><a class="btn" style="margin-top:11px" href="https://www.google.com/maps/search/?api=1&query=17+No+15x17+Bazar+Flat+24+Paltan+Dhaka+Bangladesh" target="_blank" rel="noopener noreferrer">Open Google Maps</a></article><article class="glass status-panel"><span class="eyebrow">Archive Status</span><h3 style="margin-top:12px">Currently preparing / building a personal portfolio book.</h3><p>The portfolio remains editable through the configuration arrays inside this one HTML file.</p></article></div></div></section>
+<section class="section" id="cv"><div class="section-scroll"><div class="section-head"><div><span class="eyebrow">Resume / CV</span><h2 style="margin-top:13px">View it or <span class="gold">save it.</span></h2></div><p class="lead">The original Google Drive CV link remains preserved; a direct download action uses the same file ID.</p></div><div class="cv-grid"><article class="glass cv-card"><h3>Shadid Ahamed</h3><p>Creative Developer • Architecture Student • Artist • Designer • Builder</p><p>Original CV link preserved exactly as supplied.</p><div class="cv-actions"><a class="btn" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener noreferrer">View CV</a><a class="btn secondary" href="https://drive.google.com/uc?export=download&id=1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV" target="_blank" rel="noopener noreferrer">Download CV</a></div></article><aside class="glass cv-side"><div>PORTFOLIO RECORD<br><span class="gold">ARCHIVE / CREATIVE SYSTEM</span><br><br>Frontend development<br>Architecture & visual studies<br>Drawing archive<br>Digital projects<br>Interactive experiments</div></aside></div></div></section>
+</div></main>
+<!-- SKILL DETAIL -->
+<div class="overlay" id="skillOverlay" aria-hidden="true"><div class="skill-drawer"><div class="drawer-head"><div class="drawer-title"><h3 id="drawerTitle">Skill</h3><p id="drawerSubtitle">Focused archive</p></div><button class="icon-btn" id="drawerClose" aria-label="Close skill detail">×</button></div><div class="drawer-scroll" id="drawerScroll"></div></div></div>
 <!-- IMAGE VIEWER -->
-<div class="overlay" id="viewerOverlay" aria-hidden="true">
-<div class="viewer">
-<button class="viewer-close icon-btn" id="viewerClose" style="position:absolute;right:10px;top:10px;z-index:3">×</button>
-<div class="viewer-stage" id="viewerStage">
-<div class="watermark">VIEW ONLY</div>
-<img id="viewerImg" class="viewer-img" alt="" draggable="false">
-<div class="viewer-note">Viewing only — download disabled in the interface.</div>
-</div>
-<div class="viewer-bar">
-<button class="icon-btn" id="zoomMinus">−</button>
-<button class="icon-btn" id="zoomReset">1×</button>
-<button class="icon-btn" id="zoomPlus">＋</button>
-<button class="icon-btn" id="viewerPrev">‹</button>
-<span class="viewer-info" id="viewerInfo">01 / 01</span>
-<button class="icon-btn" id="viewerNext">›</button>
-</div>
-</div>
-</div>
-
+<div class="overlay" id="viewerOverlay" aria-hidden="true"><div class="viewer"><button class="icon-btn viewer-close" id="viewerClose" aria-label="Close image viewer">×</button><div class="viewer-main"><div class="viewer-stage" id="viewerStage"><div class="watermark">VIEW ONLY</div><img id="viewerImg" class="viewer-img" alt="" draggable="false"><div class="protected-note">Viewing only · casual saving is discouraged in the interface.</div></div><div class="viewer-info-panel"><div><h3 id="viewerTitle">Image</h3><p id="viewerDesc">Description</p></div><div><p id="viewerNote">1.618-inspired image/detail proportion.</p></div></div></div><div class="viewer-toolbar"><button class="icon-btn" id="zoomMinus">−</button><button class="icon-btn" id="zoomReset">1×</button><button class="icon-btn" id="zoomPlus">＋</button><button class="icon-btn" id="viewerPrev">‹</button><span class="viewer-count" id="viewerCount">01 / 01</span><button class="icon-btn" id="viewerNext">›</button></div></div></div>
 <!-- PROJECT MODAL -->
-<div class="overlay" id="projectOverlay" aria-hidden="true">
-<div class="glass modal">
-<button class="icon-btn" id="projectClose" style="position:absolute;right:10px;top:10px">×</button>
-<div class="modal-img" id="modalImage"></div>
-<div class="modal-copy" id="modalCopy"></div>
+<div class="overlay" id="projectOverlay" aria-hidden="true"><div class="project-modal"><button class="icon-btn viewer-close" id="projectClose" aria-label="Close project">×</button><div class="project-modal-image" id="projectModalImage"></div><div class="project-modal-copy" id="projectModalCopy"></div></div></div>
+<!-- AI -->
+<button class="ai-fab" id="aiFab" aria-label="Open Portfolio AI" aria-expanded="false"><span class="ai-dot"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="7"/><path d="M9 12h.01M15 12h.01M9.5 15c1.3 1 3.7 1 5 0M12 5V2M12 22v-3"/></svg></button>
+<aside class="ai-panel" id="aiPanel" aria-label="Portfolio AI"><div class="ai-head"><div class="ai-title"><div class="ai-orb">AI</div><div><strong style="font-size:11px">Portfolio AI</strong><div class="ai-status" id="aiStatus">READY</div></div></div><div style="display:flex;gap:5px"><button class="icon-btn" id="clearAI" aria-label="Clear chat">⌫</button><button class="icon-btn" id="closeAI" aria-label="Close AI">×</button></div></div><div class="chat" id="chat" aria-live="polite"></div><div class="ai-foot"><div class="mode-row"><button class="mode active" id="textMode">Text</button><button class="mode" id="voiceMode">Voice</button></div><div class="ai-row"><textarea id="aiInput" class="ai-input" rows="1" placeholder="Ask about Shadid, projects, education, books, links…"></textarea><button id="micBtn" class="ai-mic" aria-label="Voice input">🎙</button><button id="sendBtn" class="ai-send" aria-label="Send">↗</button></div><div class="ai-note">Local memory only · no API key · voice support varies by browser.</div></div></aside>
 </div>
-</div>
-
 <script>
 /* =========================
    PORTFOLIO DATA
 ========================= */
+const NAV=[['home','Home'],['profile','Profile'],['education','Education'],['skills','Skills'],['projects','Projects'],['graphics','Graphics'],['achievements','Achievements'],['contact','Contact'],['cv','CV']];
 const LINKS={
- email:"mailto:shadidahamed.matashome05m@gmail.com",
- github:"https://github.com/shadidahamed",
- linkedin:"https://www.linkedin.com/in/shadid-ahamed-41a0703b2/",
- instagram:"https://www.instagram.com/shade_ed25",
- facebook:"https://www.facebook.com/share/1C2KcQfwvn/",
- whatsapp:"https://wa.me/8801326162684",
- x:"https://x.com/ShadidAhamed",
- pinterest:"https://pin.it/4Z5y34R2T",
- reddit:"https://www.reddit.com/user/Shade_ed25",
- tumblr:"https://www.tumblr.com/",
- trendcart:"https://shadidahamed.github.io/trendcart/",
- game:"https://shadidahamed.github.io/Shadid-s-game/",
- cv:"https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link"
-};
-
+ email:'mailto:shadidahamed.matashome05m@gmail.com',github:'https://github.com/shadidahamed',linkedin:'https://www.linkedin.com/in/shadid-ahamed-41a0703b2/',instagram:'https://www.instagram.com/shade_ed25',facebook:'https://www.facebook.com/share/1C2KcQfwvn/',whatsapp:'https://wa.me/8801326162684',x:'https://x.com/ShadidAhamed',pinterest:'https://pin.it/4Z5y34R2T',reddit:'https://www.reddit.com/user/Shade_ed25',tumblr:'https://www.tumblr.com/',trendcart:'https://shadidahamed.github.io/trendcart/',game:'https://shadidahamed.github.io/Shadid-s-game/',cv:'https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link'};
 const CONTACTS=[
- ["email","Email","✉",LINKS.email,"shadidahamed.matashome05m@gmail.com",false],
- ["github","GitHub","GH",LINKS.github,"github.com/shadidahamed"],
- ["linkedin","LinkedIn","in",LINKS.linkedin,"linkedin.com/in/shadid-ahamed-41a0703b2"],
- ["instagram","Instagram","◎",LINKS.instagram,"instagram.com/shade_ed25"],
- ["facebook","Facebook","f",LINKS.facebook,"facebook.com/share/1C2KcQfwvn"],
- ["whatsapp","WhatsApp","◌",LINKS.whatsapp,"wa.me/8801326162684"],
- ["x","X","𝕏",LINKS.x,"x.com/ShadidAhamed"],
- ["pinterest","Pinterest","P",LINKS.pinterest,"pin.it/4Z5y34R2T"],
- ["reddit","Reddit","r",LINKS.reddit,"reddit.com/user/Shade_ed25"],
- ["tumblr","Tumblr","t",LINKS.tumblr,"tumblr.com"]
+ ['email','✉',LINKS.email,false],['github','GH',LINKS.github,true],['linkedin','in',LINKS.linkedin,true],['instagram','◎',LINKS.instagram,true],['facebook','f',LINKS.facebook,true],['whatsapp','◌',LINKS.whatsapp,true],['x','𝕏',LINKS.x,true],['pinterest','P',LINKS.pinterest,true],['reddit','r',LINKS.reddit,true],['tumblr','t',LINKS.tumblr,true]
 ];
-
-const NAV=[
- ["home","Home","⌂"],["profile","Profile","◉"],["education","Education","◇"],
- ["skills","Skills","✦"],["projects","Projects","▣"],["graphics","Graphics","▧"],
- ["videos","Videos","▶"],["content","Content","⊞"],["contact","Contact","◌"],["cv","CV","▤"]
-];
-
-const VIDEOS=[
- {title:"Modifiers English",url:"https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS",id:"MCj4pNiJR_Q"},
- {title:"Connectors English",url:"https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I",id:"K29JNurQr9c"},
- {title:"Subject-Verb-Agreement",url:"https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg",id:"0ba53jWZy5o"}
-];
-
-const OLD_IMAGES=[
- "image/IMG scetch 1.jpg",
- "image/image sketch 1.jpg",
- "image/image sketch 2.jpg",
- "image/image ipad 1.png",
- "image/image colour 1.jpg",
- "image/image pc 1.png",
- "image/image sketch 3.jpg"
-];
-
-const SKILLS=[
- ["ART & DRAWING","Sketching, composition and observational practice","✎"],
- ["ARCHITECTURAL DESIGN","Spatial thinking, studio work and visual studies","◇"],
- ["DIGITAL DESIGN","Interfaces, layout systems and visual hierarchy","▦"],
- ["WEB DEVELOPMENT","Clean, fast and responsive frontend experiences","‹/›"],
- ["CREATIVE TECHNOLOGY","Canvas, interactions and playful experiments","✦"],
- ["LITERATURE / READING","Novels, short poems and visual storytelling","▤"],
- ["MUSIC","Listening and performing some songs","♫"],
- ["VISUAL THINKING","Turning ideas into images and forms","◉"],
- ["MODEL MAKING","Physical studies and form exploration","△"],
- ["GRAPHIC COMPOSITION","Lines, grids, geometry and presentation","▧"]
-];
-
-const BOOKS=[
- "Dour","Uttaradhikar","Kalbela","Kalpurush","Mousholkal",
- "Himu","Amar Bondhu Rashed","Pather Panchali",
- "Pratybastha / Protibastob","Dhaka Comics"
-];
-
-const ACHIEVEMENTS=[
- ["Bangladesh Shishu Academy / Children’s Drawing Competition","Thana 1st · District 1st · Division 2nd"],
- ["SSC GPA 5 Crest / Award","GPA 5.00 · Golden A+"],
- ["HSC GPA 5 Crest / Award","GPA 5.00 · Golden A+"],
- ["Badminton Referee Medal","Police badminton club context"],
- ["5 km Run","Runner-up"],
- ["Drawing Certificates","Viewing-only certificate archive"],
- ["Notre Dame College Crest","Archive item"]
-];
-
+const OLD_IMAGES=['image/IMG scetch 1.jpg','image/image sketch 1.jpg','image/image sketch 2.jpg','image/image ipad 1.png','image/image colour 1.jpg','image/image pc 1.png','image/image sketch 3.jpg'];
 const GALLERIES={
- school:["School Image 01","School Image 02","School Image 03"],
- college:["College Image 01","College Image 02","College Image 03","College Image 04"],
- university:["University Image 01","University Image 02","University Image 03"]
+ school:[{src:'',title:'School Image 01',desc:'Add the first school photograph and your short location note here.'},{src:'',title:'School Image 02',desc:'Add the second school photograph and your short location note here.'},{src:'',title:'School Image 03',desc:'Add the third school photograph and your short location note here.'}],
+ college:[{src:'',title:'College Image 01',desc:'Notre Dame College archive image.'},{src:'',title:'College Image 02',desc:'Notre Dame College archive image.'},{src:'',title:'College Image 03',desc:'Notre Dame College archive image.'},{src:'',title:'College Image 04',desc:'Notre Dame College archive image.'}],
+ university:[{src:'',title:'University Image 01',desc:'BRAC University archive image.'},{src:'',title:'University Image 02',desc:'BRAC University archive image.'},{src:'',title:'University Image 03',desc:'BRAC University archive image.'}]
 };
-
-const GRAPHICS=Array.from({length:18},(_,i)=>({
- title:`GRAPHICS ${String(i+1).padStart(2,"0")}`,
- src:""
-}));
-
-const DRAWINGS=[
- ...OLD_IMAGES.map((src,i)=>({title:`Drawing / Skill Work ${String(i+1).padStart(2,"0")}`,src})),
- ...Array.from({length:13},(_,i)=>({title:`Drawing Work ${String(i+8).padStart(2,"0")}`,src:""}))
+const DRAWINGS=OLD_IMAGES.map((src,i)=>({src,title:`Drawing Work ${String(i+1).padStart(2,'0')}`,desc:'Add a one- or two-line description of this drawing here.'})).concat(Array.from({length:7},(_,i)=>({src:'',title:`Drawing Work ${String(i+8).padStart(2,'0')}`,desc:'Editable drawing slot — add your image and short description.'})));
+const ARCH_VISUAL=[{src:'',title:'Digital Design 01',desc:'Digital design image slot.'},{src:'',title:'Digital Design 02',desc:'Digital design image slot.'},{src:'',title:'Visual Thinking 01',desc:'Visual thinking image slot.'},{src:'',title:'Visual Thinking 02',desc:'Visual thinking image slot.'},{src:'',title:'Model Making 01',desc:'Architectural model / model-making image slot.'},{src:'',title:'Model Making 02',desc:'Architectural model / model-making image slot.'}];
+const GRAPHIC_COMPOSITION=[{src:'',title:'Graphics Composition 01',desc:'Graphics composition image slot.'},{src:'',title:'Graphics Composition 02',desc:'Graphics composition image slot.'},{src:'',title:'Graphics Composition 03',desc:'Graphics composition image slot.'},{src:'',title:'Graphics Composition 04',desc:'Graphics composition image slot.'}];
+const GRAPHICS=Array.from({length:18},(_,i)=>({src:'',title:`GRAPHICS ${String(i+1).padStart(2,'0')}`,desc:'Landscape architectural graphic. Add your real filename and a short note.'}));
+const VIDEOS=[{title:'Modifiers English',url:'https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS',id:'MCj4pNiJR_Q'},{title:'Connectors English',url:'https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I',id:'K29JNurQr9c'},{title:'Subject-Verb-Agreement',url:'https://youtu.be/0ba53jWZy5o?si=Co3T1wrEhQz7OPg',id:'0ba53jWZy5o'}];
+const MUSIC_ARTISTS=[{name:'Britney Spears',note:'Artist preference slot.'},{name:'Add Artist 02',note:'Editable artist slot.'},{name:'Add Artist 03',note:'Editable artist slot.'}];
+const MUSIC_VIDEOS=[{src:'',title:'Song Video 01',desc:'Add your local video filename here, e.g. media/song01.mp4'},{src:'',title:'Song Video 02',desc:'Add your local video filename here.'}];
+const WRITERS=[
+ {name:'Samaresh Majumdar',books:['Uttaradhikar','Kalbela','Kalpurush','Moushalkal'],note:'Add your personal short note about why you like this writer here.'},
+ {name:'Humayun Ahmed',books:['Himu','Amar Bondhu Rashed'],note:'Add your personal short note here.'},
+ {name:'Bibhutibhushan Bandyopadhyay',books:['Pather Panchali'],note:'Pather Panchali is attributed to Bibhutibhushan Bandyopadhyay. Add your personal note here.'},
+ {name:'Kazi Nazrul Islam',books:['Short poems / poetry'],note:'Add your preferred poem or personal note here.'},
+ {name:'Michael Madhusudan Dutt',books:['Add title'],note:'Add the specific work title you want displayed.'}
 ];
-
+const CERTIFICATES=Array.from({length:22},(_,i)=>({name:`Certificate ${String(i+1).padStart(2,'0')} — Add official title`,drive:''}));
+CERTIFICATES[0].name='Bangladesh Shishu Academy / Children’s Drawing Competition — Thana 1st';
+CERTIFICATES[1].name='Bangladesh Shishu Academy / Children’s Drawing Competition — District 1st';
+CERTIFICATES[2].name='Bangladesh Shishu Academy / Children’s Drawing Competition — Division 2nd';
+CERTIFICATES[3].name='5 km Run — Runner-up';
+CERTIFICATES[4].name='Badminton Referee Medal / Certificate';
 const PROJECTS=[
- {
-  id:"trendcart",type:"Digital",title:"TrendCart",
-  description:"E-commerce / digital web project focused on a modern shopping-style interface.",
-  tags:["HTML","CSS","JavaScript","Web"],image:"",url:LINKS.trendcart
- },
- {
-  id:"game",type:"Digital",title:"Office Engine / Shadid’s Game",
-  description:"Custom interactive web game / game-engine-style project built with HTML, CSS and JavaScript. It demonstrates interactive systems, 3D-style effects and frontend experimentation.",
-  tags:["HTML","CSS","JavaScript","Interactive"],image:"",url:LINKS.game,featured:true
- },
- {id:"lory",type:"Architecture",title:"Lory Lift",description:"Architectural project with original images and plaster-of-Paris model work.",tags:["Model","Plaster of Paris"],image:""},
- {id:"squares",type:"Architecture",title:"Squares and Grid",description:"Architectural study built around squares, grids and composition.",tags:["Grid","Composition"],image:""},
- {id:"line",type:"Graphics",title:"Line Signature / Black and White Lines",description:"Black-and-white line work and 3D-form-related images.",tags:["Line Work","3D Form"],image:""},
- {id:"interlock",type:"Architecture",title:"Interlock",description:"Top view, axonometric view and side view studies.",tags:["Top View","Axonometric","Side View"],image:""},
- {id:"pavilion",type:"Architecture",title:"Pavilion",description:"Pavilion image and project-media placeholder.",tags:["Pavilion","Media"],image:""},
- {id:"cutouts",type:"Architecture",title:"Cutouts / Section Cutouts",description:"Prism / grid cutting project and section-cut studies.",tags:["Cutouts","Section"],image:""},
- {id:"mosque",type:"Architecture",title:"Mosque-related Work",description:"Mosque project images and collaborative / work-in-progress studies.",tags:["Mosque","Collaboration"],image:""},
- {id:"task",type:"Digital",title:"Task Tracker App",description:"Simple productivity tool preserved from the original portfolio project.",tags:["Original Project","Productivity"],image:""},
- {id:"ecommerce",type:"Digital",title:"E-commerce Website",description:"Modern UI shopping system preserved from the original portfolio project.",tags:["Original Project","Shopping UI"],image:""}
+ {id:'orpheus',type:'Web Development',title:'Orpheus Engine',subtitle:'Original portfolio context: Office Engine / Shadid’s Game',description:'A custom interactive web game / game-engine-style project built with HTML, CSS and JavaScript, demonstrating frontend experimentation, interactive systems and 3D-style effects.',tags:['HTML','CSS','JavaScript','Interactive'],image:'',url:LINKS.game,featured:true},
+ {id:'trendcart',type:'Web Development',title:'TrendCart',subtitle:'E-commerce / digital web project',description:'A modern shopping-style web project preserved from the original portfolio.',tags:['Web','E-commerce','UI'],image:'',url:LINKS.trendcart},
+ {id:'current',type:'Web Development',title:'This Portfolio',subtitle:'Current personal portfolio',description:'The current single-file cinematic personal archive — HTML, CSS and JavaScript in one GitHub Pages-ready document.',tags:['Single HTML','Canvas','UI'],image:'',url:''},
+ {id:'lory',type:'Architecture',title:'Lory Lift',subtitle:'Architectural studio work',description:'Original project images and plaster-of-Paris model studies.',tags:['Model','Plaster of Paris'],image:''},
+ {id:'squares',type:'Architecture',title:'Squares and Grid',subtitle:'Architectural composition',description:'Grid and square-based visual study.',tags:['Grid','Composition'],image:''},
+ {id:'line',type:'Architecture',title:'Line Signature / Black and White Lines',subtitle:'Line work and 3D form studies',description:'Black-and-white line work with 3D-form-related images.',tags:['Line Work','3D Form'],image:''},
+ {id:'interlock',type:'Architecture',title:'Interlock',subtitle:'Top / axonometric / side views',description:'Top view, axonometric view and side-view studies.',tags:['Top View','Axonometric','Side View'],image:''},
+ {id:'pavilion',type:'Architecture',title:'Pavilion',subtitle:'Pavilion project media',description:'Pavilion image and future video/project media slot.',tags:['Pavilion','Media'],image:''},
+ {id:'cutouts',type:'Architecture',title:'Cutouts / Section Cutouts',subtitle:'Prism / grid cutting project',description:'Prism / grid cutting and section-cut studies.',tags:['Cutouts','Section'],image:''},
+ {id:'mosque',type:'Architecture',title:'Mosque-related Work',subtitle:'Collaborative / work-in-progress',description:'Mosque project images and collaborative work-in-progress studies.',tags:['Mosque','Collaboration'],image:''},
+ {id:'task',type:'Original',title:'Task Tracker App',subtitle:'Original portfolio project',description:'Simple productivity tool preserved from the original portfolio source.',tags:['Productivity','Original'],image:''},
+ {id:'ecommerce',type:'Original',title:'E-commerce Website',subtitle:'Original portfolio project',description:'Modern UI shopping system preserved from the original portfolio source.',tags:['Shopping UI','Original'],image:''}
 ];
-
+function h(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function hasImage(src){return !!src}
+function placeholder(title,note){return `<div class="cyl-empty"><b>${h(title)}</b><span>${h(note)}</span></div>`}
 /* =========================
-   ICONS
+   ICON SYSTEM
 ========================= */
-const ICON={
-home:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z'/></svg>",
-profile:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><circle cx='12' cy='8' r='3.5'/><path d='M5 20c.7-4 3-6 7-6s6.3 2 7 6'/></svg>",
-education:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='m3 9 9-5 9 5-9 5-9-5Z'/><path d='M7 11v5c2.2 2 7.8 2 10 0v-5M21 9v6'/></svg>",
-skills:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='m12 3 1.6 5.1L19 10l-5.4 1.9L12 17l-1.6-5.1L5 10l5.4-1.9L12 3Z'/></svg>",
-projects:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 7h16v13H4zM7 4h10v3H7z'/></svg>",
-graphics:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><rect x='3' y='4' width='18' height='16' rx='2'/><path d='m5 17 5-5 3 3 2-2 4 4'/></svg>",
-videos:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><rect x='3' y='5' width='18' height='14' rx='2'/><path d='m10 9 5 3-5 3V9Z'/></svg>",
-content:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><rect x='4' y='4' width='6' height='6'/><rect x='14' y='4' width='6' height='6'/><rect x='4' y='14' width='6' height='6'/><rect x='14' y='14' width='6' height='6'/></svg>",
-contact:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 5h16v11H8l-4 4V5Z'/></svg>",
-cv:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M6 3h9l4 4v14H6z'/><path d='M15 3v5h5M9 13h6M9 17h6'/></svg>"
+const ICONS={
+ home:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z'/></svg>",
+ profile:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><circle cx='12' cy='8' r='3.5'/><path d='M5 20c.7-4 3-6 7-6s6.3 2 7 6'/></svg>",
+ education:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='m3 9 9-5 9 5-9 5-9-5Z'/><path d='M7 11v5c2.2 2 7.8 2 10 0v-5M21 9v6'/></svg>",
+ skills:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='m12 3 1.6 5.1L19 10l-5.4 1.9L12 17l-1.6-5.1L5 10l5.4-1.9L12 3Z'/></svg>",
+ projects:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 7h16v13H4zM7 4h10v3H7z'/></svg>",
+ graphics:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><rect x='3' y='4' width='18' height='16' rx='2'/><path d='m5 17 5-5 3 3 2-2 4 4'/></svg>",
+ achievements:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='m12 3 2.2 4.5L19 8.2l-3.5 3.4.8 4.9-4.3-2.3-4.3 2.3.8-4.9L5 8.2l4.8-.7L12 3Z'/></svg>",
+ contact:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 5h16v11H8l-4 4V5Z'/></svg>",
+ cv:"<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M6 3h9l4 4v14H6z'/><path d='M15 3v5h5M9 13h6M9 17h6'/></svg>"
 };
-
-const $=(s,r=document)=>r.querySelector(s);
-const $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 /* =========================
    NAVIGATION
 ========================= */
-const sideNav=$("#sideNav"),mobileMenu=$("#mobileMenu"),mobileToggle=$("#mobileToggle");
-sideNav.innerHTML='<div class="brand">S</div>'+NAV.map(([id,label,ico])=>
- `<button class="nav-btn" data-go="${id}" aria-label="${label}">${ICON[id]||ico}<span class="nav-tip">${label}</span></button>`).join("");
-mobileMenu.innerHTML=NAV.map(([id,label])=>`<button class="mobile-item" data-go="${id}">${label}</button>`).join("");
+const sideNav=$('#sideNav'),mobileMenu=$('#mobileMenu'),mobileToggle=$('#mobileToggle');
+sideNav.innerHTML='<div class="brand">S</div>'+NAV.map(([id,label])=>`<button class="nav-btn" data-go="${id}" aria-label="${label}">${ICONS[id]}<span class="nav-tip">${label}</span></button>`).join('');
+mobileMenu.innerHTML=NAV.map(([id,label])=>`<button class="mobile-item" data-go="${id}">${label}</button>`).join('');
 mobileToggle.innerHTML="<svg width='22' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 7h16M4 12h16M4 17h16'/></svg>";
-
-let current=localStorage.getItem("shadid:lastSection")||location.hash.slice(1)||"home";
-if(!NAV.some(n=>n[0]===current))current="home";
-
-function go(id){
- if(!NAV.some(n=>n[0]===id))id="home";
- current=id;localStorage.setItem("shadid:lastSection",id);
- $$(".section").forEach(s=>s.classList.toggle("active",s.id===id));
- $$(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.go===id));
- $$(".mobile-item").forEach(b=>b.classList.toggle("active",b.dataset.go===id));
- history.replaceState(null,"","#"+id);
- galaxyMode=id;
- mobileMenu.classList.remove("open");
-}
-document.addEventListener("click",e=>{
- const el=e.target.closest("[data-go]");
- if(el){e.preventDefault();go(el.dataset.go)}
-});
-mobileToggle.onclick=()=>mobileMenu.classList.toggle("open");
-onhashchange=()=>go(location.hash.slice(1)||"home");
-
+let current=localStorage.getItem('shadid:lastSection')||location.hash.slice(1)||'home';if(!NAV.some(n=>n[0]===current))current='home';
+let galaxyMode=current;
+function go(id){if(!NAV.some(n=>n[0]===id))id='home';current=id;galaxyMode=id;localStorage.setItem('shadid:lastSection',id);$$('.section').forEach(s=>s.classList.toggle('active',s.id===id));$$('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.go===id));$$('.mobile-item').forEach(b=>b.classList.toggle('active',b.dataset.go===id));mobileMenu.classList.remove('open');history.replaceState(null,'','#'+id)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){e.preventDefault();go(b.dataset.go)}});mobileToggle.onclick=()=>mobileMenu.classList.toggle('open');onhashchange=()=>go(location.hash.slice(1)||'home');
 /* =========================
-   EDUCATION GALLERIES
+   3D EDUCATION GALLERIES
 ========================= */
-function galleryHTML(name,items){
- return `
- <div class="edu-gallery glass" data-gallery="${name}">
-   <div class="carousel">${items.map((t,i)=>`<button class="face" data-face="${i}" aria-label="${esc(t)}">${placeholderHTML(t,"Replace src in GALLERIES")}</button>`).join("")}</div>
-   <div style="position:absolute;left:12px;bottom:9px;font-size:8px;color:#6d655b;letter-spacing:.1em">${name.toUpperCase()} GALLERY · <span class="gcount">01</span></div>
-   <div style="position:absolute;right:10px;bottom:8px;display:flex;gap:5px">
-    <button class="icon-btn gprev" aria-label="Previous">‹</button><button class="icon-btn gnext" aria-label="Next">›</button>
-   </div>
- </div>`;
-}
-function placeholderHTML(title,note="Add the real image path in the data configuration."){
- return `<div class="placeholder"><b>${esc(title)}</b><span>${esc(note)}</span></div>`;
-}
-$("#educationTimeline").innerHTML=`
-<article class="glass edu">
-<div class="edu-dot"></div><div class="edu-top"><h3>Motijheel Ideal School and College</h3><span class="edu-year">2013–2023</span></div>
-<p>School · Classes 1–10 · Science</p>
-<div class="edu-grid"><div class="edu-line"><b>SSC:</b> GPA 5.00 · Golden A+</div><div class="edu-line"><b>Location:</b> Motijheel campus</div></div>
-<a class="btn" style="margin-top:11px" href="https://www.google.com/maps/search/?api=1&query=Motijheel+Ideal+School+and+College+Dhaka+Bangladesh" target="_blank" rel="noopener">View on Google Maps</a>
-${galleryHTML("school",GALLERIES.school)}
-</article>
-
-<article class="glass edu">
-<div class="edu-dot"></div><div class="edu-top"><h3>Notre Dame College</h3><span class="edu-year">2023–2025</span></div>
-<p>HSC 2025 · Science · Batch 2025 · Group 1</p>
-<div class="edu-grid">
-<div class="edu-line"><b>Result:</b> GPA 5.00 · Golden A+</div>
-<div class="edu-line"><b>Group Roll:</b> 20</div>
-<div class="edu-line"><b>College Roll:</b> 125019</div>
-<div class="edu-line"><b>Group:</b> Group 1</div>
-</div>${galleryHTML("college",GALLERIES.college)}
-</article>
-
-<article class="glass edu">
-<div class="edu-dot"></div><div class="edu-top"><h3>BRAC University</h3><span class="edu-year">2026–</span></div>
-<p>Architecture Department · first-stage / first-semester context · trying to shift toward CSE</p>
-<div class="edu-grid">
-<div class="edu-line"><b>Role:</b> 1000061008</div>
-<div class="edu-line"><b>Course:</b> ARC 101</div>
-<div class="edu-line"><b>ARC 101:</b> Design-related studio/work</div>
-<div class="edu-line"><b>Expected / potential graduation:</b> 2032</div>
-</div>${galleryHTML("university",GALLERIES.university)}
-</article>
-
-<div class="glass" style="padding:15px">
-<strong style="font-size:10px">MODEL-MAKING ARCHIVE CONTEXT</strong>
-<p style="font-size:10px;margin-top:4px">The original portfolio context referenced approximately 600 models / model-making work. This is preserved as portfolio context, not as a newly verified statistic.</p>
-</div>
-`;
-const galleryState={};
-$$("[data-gallery]").forEach(g=>{
- const key=g.dataset.gallery,faces=$$(".face",g),items=GALLERIES[key];
- galleryState[key]=0;
- const draw=()=>{
-  const n=faces.length,i=galleryState[key];
-  faces.forEach((f,k)=>{
-   const d=(k-i+n)%n,ang=d*360/n;
-   f.style.transform=`rotateY(${ang}deg) translateZ(190px) scale(${d===0?1:.78})`;
-   f.style.opacity=d===0?"1":d===1||d===n-1?".17":"0";
-   f.style.pointerEvents=d===0?"auto":"none";
-  });
-  $(".gcount",g).textContent=String(i+1).padStart(2,"0");
- };
- const step=d=>{galleryState[key]=(galleryState[key]+d+items.length)%items.length;draw()};
- $(".gprev",g).onclick=()=>step(-1);$(".gnext",g).onclick=()=>step(1);
- faces.forEach(f=>f.onclick=()=>openViewer(items.map(x=>({title:x,src:""})),Number(f.dataset.face),`${key} gallery`));
- draw();setInterval(()=>step(1),2000);
-});
-
+function cylinderMarkup(key,items){return `<div class="cyl-wrap" data-cyl="${key}"><div class="cylinder">${items.map((it,i)=>`<button class="cyl-face" data-index="${i}">${hasImage(it.src)?`<img src="${h(it.src)}" alt="${h(it.title)}" onerror="this.style.display='none';this.parentElement.innerHTML='${placeholder(it.title,'Image unavailable').replace(/'/g,"\\'")}'">`:placeholder(it.title,'Add the real image path in GALLERIES')}</button>`).join('')}</div><div class="cyl-center"></div></div><div class="cyl-caption"><button class="icon-btn cyl-prev" aria-label="Previous image">‹</button><b class="cyl-count">01</b><span>/ ${String(items.length).padStart(2,'0')}</span><button class="icon-btn cyl-next" aria-label="Next image">›</button></div>`}
+function educationCard(title,year,desc,meta,key,items,location=false){return `<article class="glass edu"><div class="edu-top"><h3>${h(title)}</h3><span class="edu-year">${h(year)}</span></div><p>${h(desc)}</p><div class="edu-grid">${meta.map(x=>`<div class="edu-line"><b>${h(x[0])}:</b> ${h(x[1])}</div>`).join('')}</div>${location?`<div class="map-mini"><iframe loading="lazy" title="Google Maps — Motijheel Ideal School and College" src="https://www.google.com/maps?q=Motijheel+Ideal+School+and+College+Dhaka+Bangladesh&output=embed"></iframe></div><a class="btn" style="margin-top:10px" href="https://www.google.com/maps/search/?api=1&query=Motijheel+Ideal+School+and+College+Dhaka+Bangladesh" target="_blank" rel="noopener noreferrer">View on Google Maps</a>`:''}${cylinderMarkup(key,items)}</article>`}
+$('#educationRoot').innerHTML=educationCard('Motijheel Ideal School and College','2013–2023','School · Classes 1–10 · Science',[['SSC','GPA 5.00 · Golden A+'],['Location','Motijheel, Dhaka']], 'school',GALLERIES.school,true)+educationCard('Notre Dame College','2023–2025','HSC 2025 · Science · Batch 2025 · Group 1',[['Result','GPA 5.00 · Golden A+'],['Group Roll','20'],['College Roll','125019'],['Group','Group 1']],'college',GALLERIES.college)+educationCard('BRAC University','2026–','Architecture Department · first-stage / first-semester context · trying to shift toward CSE',[['Role','1000061008'],['Course','ARC 101'],['ARC 101','Design-related studio/work'],['Expected / potential graduation','2032']], 'university',GALLERIES.university)+'<div class="glass" style="padding:14px"><strong style="font-size:9px">MODEL-MAKING ARCHIVE CONTEXT</strong><p style="font-size:9px;margin-top:4px">The supplied portfolio context referenced approximately 600 models / model-making work. This is preserved as supplied context rather than newly verified data.</p></div>';
+const cylState={};
+$$('[data-cyl]').forEach(root=>{const key=root.dataset.cyl,faces=$$('.cyl-face',root),cyl=$('.cylinder',root),count=$('.cyl-count',root);cylState[key]=0;function draw(){const n=faces.length,i=cylState[key],step=360/n;cyl.style.transform=`rotateY(${-i*step}deg)`;faces.forEach((f,k)=>{const angle=k*step;f.style.transform=`rotateY(${angle}deg) translateZ(${Math.max(125,Math.min(185,faces.length*42))}px)`});count.textContent=String(i+1).padStart(2,'0')}function step(d){cylState[key]=(cylState[key]+d+faces.length)%faces.length;draw()}root.querySelector('.cyl-prev').onclick=()=>step(-1);root.querySelector('.cyl-next').onclick=()=>step(1);faces.forEach(f=>f.onclick=()=>openViewer(GALLERIES[key],+f.dataset.index,`${key} gallery`));draw();setInterval(()=>step(1),1800)});
 /* =========================
-   SKILLS / ACHIEVEMENTS
+   SKILLS
 ========================= */
-$("#skillGrid").innerHTML=SKILLS.map(s=>`<article class="glass skill"><div class="skill-icon">${s[2]}</div><h4>${s[0]}</h4><p>${s[1]}</p></article>`).join("");
-$("#bookList").innerHTML=BOOKS.map(b=>`<span class="book">${b}</span>`).join("");
-$("#achievementGrid").innerHTML=ACHIEVEMENTS.map((a,i)=>`
-<article class="glass achievement" data-ach="${i}">
-<div class="aimg">${placeholderHTML(a[0],"Certificate / award image placeholder")}</div>
-<strong>${esc(a[0])}</strong><span>${esc(a[1])}</span>
-</article>`).join("");
-$("#drawingGrid").innerHTML=DRAWINGS.map((d,i)=>`
-<button class="work" data-draw="${i}" aria-label="Open ${esc(d.title)}">
-<div class="work-media">${d.src?`<img src="${esc(d.src)}" alt="${esc(d.title)}" onerror="this.style.display='none';this.parentElement.innerHTML='${placeholderHTML(d.title,"Image unavailable").replace(/'/g,"\\'")}'">`:placeholderHTML(d.title,"Placeholder ready for your real file")}</div>
-<div class="work-caption"><strong>${esc(d.title)}</strong><span>${d.src?"Legacy gallery path preserved":"Editable archive item"}</span></div>
-</button>`).join("");
-
-/* =========================
-   GRAPHICS
-========================= */
-$("#graphicsGrid").innerHTML=GRAPHICS.map((g,i)=>`
-<button class="graphic" data-graphic="${i}" aria-label="${esc(g.title)}">
-<div class="graphic-view">${g.src?`<img src="${esc(g.src)}" alt="${esc(g.title)}">`:placeholderHTML(g.title,"Landscape placeholder")}</div>
-<span class="graphic-label">${esc(g.title)}</span>
-</button>`).join("");
-
+const SKILLS=[['art','Art & Drawing','Six–seven focused drawings','✎'],['architecture','Architectural Design','Digital design · visual thinking · model making · graphics','◇'],['web','Web Development','Orpheus Engine · TrendCart · current portfolio','‹/›'],['video','Video Making & Editing','Three original YouTube videos','▶'],['music','Music','Artists + editable personal video slots','♫'],['books','Books / Literature','Writers, favourite books and personal notes','▤']];
+$('#skillLauncher').innerHTML=SKILLS.map(s=>`<button class="skill-btn" data-skill="${s[0]}"><div class="skill-icon">${s[3]}</div><h4>${s[1]}</h4><p>${s[2]}</p></button>`).join('');
+function detailCard(item,i,group='default'){return `<button class="detail-item" data-detail-index="${i}" data-detail-group="${group}"><div class="detail-media">${hasImage(item.src)?`<img src="${h(item.src)}" alt="${h(item.title)}">`:placeholder(item.title,'Add image path in this data array')}</div><div class="detail-copy"><strong>${h(item.title)}</strong><span>${h(item.desc)}</span></div></button>`}
+function openSkill(type){const title=$('#drawerTitle'),sub=$('#drawerSubtitle'),body=$('#drawerScroll');let html='';if(type==='art'){title.textContent='Art & Drawing';sub.textContent='Focused drawing archive';html=`<div class="detail-block"><h4>Selected Drawing Works</h4><div class="detail-grid">${DRAWINGS.slice(0,7).map((x,i)=>detailCard(x,i,'art')).join('')}</div></div>`}if(type==='architecture'){title.textContent='Architectural Design';sub.textContent='Digital design · visual thinking · model making · graphics composition';html=`<div class="detail-block"><h4>Digital Design · Visual Thinking · Model Making</h4><div class="detail-grid">${ARCH_VISUAL.map((x,i)=>detailCard(x,i,'archVisual')).join('')}</div></div><div class="detail-block"><h4>Graphics Composition</h4><div class="detail-grid">${GRAPHIC_COMPOSITION.map((x,i)=>detailCard(x,i,'graphics')).join('')}</div></div>`}if(type==='web'){title.textContent='Web Development';sub.textContent='Three focused projects';html=`<div class="detail-grid">${PROJECTS.filter(p=>p.type==='Web Development').map(p=>`<article class="project-card glass"><div class="project-image">${p.image?`<img src="${h(p.image)}" alt="${h(p.title)}">`:placeholder(p.title,'Add project image')}</div><div class="project-body"><h3>${h(p.title)}</h3><p>${h(p.subtitle)}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${h(t)}</span>`).join('')}</div><div class="actions">${p.url?`<a class="btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.featured?'Play the Game':'Live Project'}</a>`:''}<button class="btn secondary" data-project="${p.id}">Details</button></div></div></article>`).join('')}</div>`}if(type==='video'){title.textContent='Video Making & Editing';sub.textContent='Original YouTube archive';html=`<div class="detail-grid">${VIDEOS.map(v=>`<article class="glass project-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0" title="${h(v.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="project-body"><h3>${h(v.title)}</h3><p>Original YouTube URL preserved.</p><div class="actions"><a class="btn" href="${v.url}" target="_blank" rel="noopener noreferrer">Watch Video</a></div></div></article>`).join('')}</div>`}if(type==='music'){title.textContent='Music';sub.textContent='Artists + local video slots';html=`<div class="detail-block"><h4>Artists I Like</h4>${MUSIC_ARTISTS.map(a=>`<div class="author-card"><h4>${h(a.name)}</h4><div class="author-note">${h(a.note)}</div></div>`).join('')}</div><div class="detail-block"><h4>My Song Video Slots</h4><div class="detail-grid">${MUSIC_VIDEOS.map(v=>`<div class="local-video">${hasImage(v.src)?`<video controls preload="metadata" src="${h(v.src)}"></video>`:`<div class="detail-media" style="height:auto;aspect-ratio:16/9">${placeholder(v.title,v.desc)}</div>`}<div class="video-meta"><strong>${h(v.title)}</strong><span>${h(v.desc)}</span></div></div>`).join('')}</div></div>`}if(type==='books'){title.textContent='Books / Literature';sub.textContent='Writers, books and personal notes';html=WRITERS.map(w=>`<article class="author-card"><h4>${h(w.name)}</h4><div class="author-books">${w.books.map(b=>`<span class="author-book">${h(b)}</span>`).join('')}</div><div class="editable-note">${h(w.note)}</div></article>`).join('')}
+body.innerHTML=html;body.dataset.skill=type;$('#skillOverlay').classList.add('open');$('#skillOverlay').setAttribute('aria-hidden','false');
+}
+$$('[data-skill]').forEach(b=>b.onclick=()=>openSkill(b.dataset.skill));$('#drawerClose').onclick=()=>$('#skillOverlay').classList.remove('open');$('#skillOverlay').onclick=e=>{if(e.target===e.currentTarget)$('#drawerClose').click()};
 /* =========================
    PROJECTS
 ========================= */
-const filters=["all","Digital","Architecture","Graphics"];
-$("#filters").innerHTML=filters.map((f,i)=>`<button class="filter ${i===0?"active":""}" data-filter="${f}">${f==="all"?"All Projects":f}</button>`).join("");
-
-function projectCard(p){
- return `<article class="glass project">
- <button class="project-img" data-project="${p.id}" aria-label="Open ${esc(p.title)}">
- ${p.type?`<span class="project-type">${esc(p.type)}</span>`:""}
- ${p.image?`<img src="${esc(p.image)}" alt="${esc(p.title)}">`:placeholderHTML(p.title,"Add the project image path in PROJECTS")}
- </button>
- <div class="project-body">
- <h3>${esc(p.title)}</h3><p>${esc(p.description)}</p>
- <div class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
- <div class="actions">
- ${p.url?`<a class="btn" href="${p.url}" target="_blank" rel="noopener">${p.featured?"Play the Game":"View Project"}</a>`:""}
- <button class="btn secondary" data-project="${p.id}">Details</button>
- </div></div></article>`;
-}
-function renderProjects(type="all"){
- $("#projectGrid").innerHTML=PROJECTS.filter(p=>type==="all"||p.type===type).map(projectCard).join("");
-}
-renderProjects();
-$("#filters").onclick=e=>{
- const b=e.target.closest("[data-filter]");if(!b)return;
- $$(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderProjects(b.dataset.filter)
-};
-
-function openProject(id){
- const p=PROJECTS.find(x=>x.id===id);if(!p)return;
- $("#modalImage").innerHTML=p.image?`<img src="${esc(p.image)}" alt="${esc(p.title)}">`:placeholderHTML(p.title,"Add image path in PROJECTS");
- $("#modalCopy").innerHTML=`
- <span class="eyebrow">${esc(p.type)} project</span>
- <h2 style="margin-top:12px">${esc(p.title)}</h2>
- <p>${esc(p.description)}</p>
- <div class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
- <div class="actions">${p.url?`<a class="btn" href="${p.url}" target="_blank" rel="noopener">${p.featured?"Play the Game":"Live Project"}</a>`:""}</div>`;
- $("#projectOverlay").classList.add("open");$("#projectOverlay").setAttribute("aria-hidden","false");
-}
-
+const filterTypes=['all','Web Development','Architecture','Original'];$('#projectFilters').innerHTML=filterTypes.map((x,i)=>`<button class="filter ${i===0?'active':''}" data-filter="${x}">${x==='all'?'All Projects':h(x)}</button>`).join('');
+function renderProjects(filter='all'){$('#projectGrid').innerHTML=PROJECTS.filter(p=>filter==='all'||p.type===filter).map(p=>`<article class="glass project-card"><button class="project-image" data-project-image="${p.id}">${hasImage(p.image)?`<img src="${h(p.image)}" alt="${h(p.title)}">`:placeholder(p.title,'Add the project image path')}</button><div class="project-body"><h3>${h(p.title)}</h3><p>${h(p.description)}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${h(t)}</span>`).join('')}</div><div class="actions">${p.url?`<a class="btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.featured?'Play the Game':'Live Project'}</a>`:''}<button class="btn secondary" data-project="${p.id}">Details</button></div></div></article>`).join('')}
+renderProjects();$('#projectFilters').onclick=e=>{const b=e.target.closest('[data-filter]');if(!b)return;$$('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderProjects(b.dataset.filter)};
+function openProject(id){const p=PROJECTS.find(x=>x.id===id);if(!p)return;$('#projectModalImage').innerHTML=hasImage(p.image)?`<img src="${h(p.image)}" alt="${h(p.title)}">`:placeholder(p.title,'Add the project image path');$('#projectModalCopy').innerHTML=`<span class="eyebrow">${h(p.type)}</span><h2>${h(p.title)}</h2><p>${h(p.description)}</p><p style="margin-top:8px;color:#746d63;font-size:10px">${h(p.subtitle)}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${h(t)}</span>`).join('')}</div><div class="actions">${p.url?`<a class="btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.featured?'Play the Game':'View Project'}</a>`:''}</div>`;$('#projectOverlay').classList.add('open');$('#projectOverlay').setAttribute('aria-hidden','false')}
+$('#projectClose').onclick=()=>{$('#projectOverlay').classList.remove('open');$('#projectOverlay').setAttribute('aria-hidden','true')};$('#projectOverlay').onclick=e=>{if(e.target===e.currentTarget)$('#projectClose').click()};document.addEventListener('click',e=>{const p=e.target.closest('[data-project]');if(p)openProject(p.dataset.project)});
 /* =========================
-   VIDEOS / CONTACTS
+   GRAPHICS
 ========================= */
-$("#videoGrid").innerHTML=VIDEOS.map(v=>`
-<article class="glass video">
-<div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0" title="${esc(v.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-<div class="video-body"><h3>${esc(v.title)}</h3><p>Original YouTube URL preserved.</p><a class="btn" style="margin-top:9px" href="${v.url}" target="_blank" rel="noopener">Watch Video</a></div>
-</article>`).join("");
-
-function contactCards(){
- return CONTACTS.map(c=>`<a class="glass contact" href="${c[3]}" ${c[5]===false?"":"target='_blank' rel='noopener'"}>
- <span class="contact-icon">${c[2]}</span><span><strong>${esc(c[1])}</strong><span>${esc(c[4])}</span></span>
- </a>`).join("");
-}
-$("#contentLinks").innerHTML=contactCards();
-$("#contactLinks").innerHTML=contactCards();
-
+$('#graphicsGrid').innerHTML=GRAPHICS.map((g,i)=>`<button class="graphic-card" data-graphic="${i}"><div class="graphic-media">${hasImage(g.src)?`<img src="${h(g.src)}" alt="${h(g.title)}">`:placeholder(g.title,'Landscape placeholder — add filename in GRAPHICS')}</div><span class="graphic-label">${h(g.title)}</span></button>`).join('');
 /* =========================
-   LIGHTBOX
+   ACHIEVEMENTS
 ========================= */
-const viewerOverlay=$("#viewerOverlay"),viewerImg=$("#viewerImg"),viewerInfo=$("#viewerInfo");
-let vItems=[],vIndex=0,vScale=1,vx=0,vy=0,drag=false,lastX=0,lastY=0;
-
-function openViewer(items,index=0,group="Image Viewer"){
- vItems=items;vIndex=index;vScale=1;vx=0;vy=0;
- viewerOverlay.classList.add("open");viewerOverlay.setAttribute("aria-hidden","false");renderViewer(group);
-}
-function renderViewer(group="Image Viewer"){
- const item=vItems[vIndex]||{};
- viewerInfo.textContent=`${group} · ${String(vIndex+1).padStart(2,"0")} / ${String(vItems.length).padStart(2,"0")}`;
- viewerImg.alt=item.title||"Portfolio image";
- if(item.src){
-  viewerImg.src=item.src;viewerImg.style.display="block";
-  viewerImg.onerror=()=>{viewerImg.style.display="none"}
- }else viewerImg.style.display="none";
- applyViewer();
-}
+$('#certificateGrid').innerHTML=CERTIFICATES.map((c,i)=>`<article class="glass certificate"><div class="certificate-number">CERTIFICATE ${String(i+1).padStart(2,'0')}</div><h4>${h(c.name)}</h4><p>Drive link slot. Open/view only in the interface.</p><div class="cert-actions">${c.drive?`<a class="btn" href="${h(c.drive)}" target="_blank" rel="noopener noreferrer">View Certificate</a>`:`<button class="btn secondary" disabled>Add Drive Link</button>`}</div></article>`).join('');
+/* =========================
+   CONTACT
+========================= */
+const contactLetterMap={email:'✉',github:'GH',linkedin:'in',instagram:'◎',facebook:'f',whatsapp:'◌',x:'𝕏',pinterest:'P',reddit:'r',tumblr:'t'};
+$('#contactIcons').innerHTML=CONTACTS.map(c=>`<a class="contact-icon-card" href="${c[2]}" ${c[3]?'target="_blank" rel="noopener noreferrer"':''} aria-label="${c[0]}"><span>${c[1]}</span><span class="hint">${c[0]}</span></a>`).join('');
+/* =========================
+   LIGHTBOX / VIEWER
+========================= */
+const viewerOverlay=$('#viewerOverlay'),viewerImg=$('#viewerImg'),viewerTitle=$('#viewerTitle'),viewerDesc=$('#viewerDesc'),viewerCount=$('#viewerCount');let vItems=[],vIndex=0,vScale=1,vx=0,vy=0,drag=false,lastX=0,lastY=0;
+function openViewer(items,index=0,label='Image'){vItems=items||[];vIndex=index;vScale=1;vx=0;vy=0;viewerOverlay.classList.add('open');viewerOverlay.setAttribute('aria-hidden','false');renderViewer(label)}
+function renderViewer(label='Image'){const x=vItems[vIndex]||{};viewerTitle.textContent=x.title||'Image';viewerDesc.textContent=x.desc||'Add a short one- or two-line description here.';viewerCount.textContent=`${String(vIndex+1).padStart(2,'0')} / ${String(vItems.length).padStart(2,'0')} · ${label}`;if(hasImage(x.src)){viewerImg.src=x.src;viewerImg.style.display='block';viewerImg.onerror=()=>viewerImg.style.display='none'}else viewerImg.style.display='none';applyViewer();}
 function applyViewer(){viewerImg.style.transform=`translate(calc(-50% + ${vx}px),calc(-50% + ${vy}px)) scale(${vScale})`}
-function nextViewer(d){if(!vItems.length)return;vIndex=(vIndex+d+vItems.length)%vItems.length;renderViewer()}
-function closeViewer(){viewerOverlay.classList.remove("open");viewerOverlay.setAttribute("aria-hidden","true")}
-$("#viewerClose").onclick=closeViewer;$("#viewerPrev").onclick=()=>nextViewer(-1);$("#viewerNext").onclick=()=>nextViewer(1);
-$("#zoomPlus").onclick=()=>{vScale=Math.min(5,vScale+.25);applyViewer()};
-$("#zoomMinus").onclick=()=>{vScale=Math.max(.65,vScale-.25);applyViewer()};
-$("#zoomReset").onclick=()=>{vScale=1;vx=0;vy=0;applyViewer()};
-
-$("#viewerStage").addEventListener("pointerdown",e=>{
- if(e.target!==viewerImg)return;drag=true;lastX=e.clientX;lastY=e.clientY;viewerImg.setPointerCapture?.(e.pointerId)
-});
-$("#viewerStage").addEventListener("pointermove",e=>{
- if(!drag)return;vx+=e.clientX-lastX;vy+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;applyViewer()
-});
-$("#viewerStage").addEventListener("pointerup",()=>drag=false);
-$("#viewerStage").addEventListener("wheel",e=>{e.preventDefault();vScale=Math.max(.65,Math.min(5,vScale+(e.deltaY<0?.18:-.18)));applyViewer()},{passive:false});
-viewerImg.oncontextmenu=e=>e.preventDefault();
-
-document.addEventListener("keydown",e=>{
- if(viewerOverlay.classList.contains("open")){
-  if(e.key==="Escape")closeViewer();
-  if(e.key==="ArrowLeft")nextViewer(-1);
-  if(e.key==="ArrowRight")nextViewer(1);
-  if(e.key==="+")$("#zoomPlus").click();
-  if(e.key==="-")$("#zoomMinus").click();
- }
-});
-$("#drawingGrid").onclick=e=>{const b=e.target.closest("[data-draw]");if(!b)return;openViewer([DRAWINGS[+b.dataset.draw]],0,"Drawing")};
-$("#graphicsGrid").onclick=e=>{const b=e.target.closest("[data-graphic]");if(!b)return;openViewer([GRAPHICS[+b.dataset.graphic]],0,"Graphic")};
-document.addEventListener("click",e=>{
- const p=e.target.closest("[data-project]");if(p)openProject(p.dataset.project);
-});
-
+function nextViewer(d){if(!vItems.length)return;vIndex=(vIndex+d+vItems.length)%vItems.length;vScale=1;vx=0;vy=0;renderViewer()}
+function closeViewer(){viewerOverlay.classList.remove('open');viewerOverlay.setAttribute('aria-hidden','true')}
+$('#viewerClose').onclick=closeViewer;$('#viewerPrev').onclick=()=>nextViewer(-1);$('#viewerNext').onclick=()=>nextViewer(1);$('#zoomPlus').onclick=()=>{vScale=Math.min(5,vScale+.25);applyViewer()};$('#zoomMinus').onclick=()=>{vScale=Math.max(.65,vScale-.25);applyViewer()};$('#zoomReset').onclick=()=>{vScale=1;vx=0;vy=0;applyViewer()};
+$('#viewerStage').addEventListener('pointerdown',e=>{if(e.target!==viewerImg)return;drag=true;lastX=e.clientX;lastY=e.clientY;viewerImg.setPointerCapture?.(e.pointerId)});$('#viewerStage').addEventListener('pointermove',e=>{if(!drag)return;vx+=e.clientX-lastX;vy+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;applyViewer()});$('#viewerStage').addEventListener('pointerup',()=>drag=false);$('#viewerStage').addEventListener('pointercancel',()=>drag=false);$('#viewerStage').addEventListener('wheel',e=>{e.preventDefault();vScale=Math.max(.65,Math.min(5,vScale+(e.deltaY<0?.18:-.18)));applyViewer()},{passive:false});viewerImg.oncontextmenu=e=>e.preventDefault();viewerOverlay.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('click',e=>{const g=e.target.closest('[data-graphic]');if(g){const i=+g.dataset.graphic;openViewer(GRAPHICS,i,'Graphic')}});
+document.addEventListener('click',e=>{const detail=e.target.closest('.detail-item');if(detail){const group=detail.dataset.detailGroup;const arr=group==='art'?DRAWINGS.slice(0,7):group==='archVisual'?ARCH_VISUAL:group==='graphics'?GRAPHIC_COMPOSITION:[];const i=+detail.dataset.detailIndex;openViewer(arr,i,group)}});
 /* =========================
-   PROJECT MODAL
+   GALAXY
 ========================= */
-$("#projectClose").onclick=()=>{$("#projectOverlay").classList.remove("open");$("#projectOverlay").setAttribute("aria-hidden","true")};
-$("#projectOverlay").onclick=e=>{if(e.target===e.currentTarget)$("#projectClose").click()};
-
+const canvas=$('#galaxy'),ctx=canvas.getContext('2d');let W=innerWidth,H=innerHeight,dpr=1,stars=[];const cfg={home:[720,3,1.15],profile:[430,2,.5],education:[560,3,.78],skills:[450,4,.58],projects:[650,4,1],graphics:[380,2,.3],achievements:[330,2,.34],contact:[260,2,.2],cv:[310,2,.26]};const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;function seed(){const c=cfg[galaxyMode]||cfg.home;const n=innerWidth<760?Math.floor(c[0]*.38):c[0];stars=Array.from({length:n},()=>({r:Math.pow(Math.random(),.67),a:Math.random()*Math.PI*2,arm:Math.floor(Math.random()*c[1]),s:.3+Math.random()*1.25,o:.18+Math.random()*.72,p:Math.random()*10}))}function resize(){dpr=Math.min(devicePixelRatio||1,1.6);W=innerWidth;H=innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);seed()}function frame(t){ctx.clearRect(0,0,W,H);const [,,flow]=cfg[galaxyMode]||cfg.home,cx=W*.56,cy=H*.51,scale=Math.min(W,H)*.45;const g=ctx.createRadialGradient(cx,cy,0,cx,cy,scale*.58);g.addColorStop(0,'rgba(240,207,131,.09)');g.addColorStop(.24,'rgba(240,207,131,.025)');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);stars.forEach(s=>{const a=s.a+s.r*6.1+(reduce?0:t*.000025*flow),rad=s.r*scale,off=(s.arm/(cfg[galaxyMode]||cfg.home)[1])*Math.PI*2,x=cx+Math.cos(a+off)*rad,y=cy+Math.sin(a+off)*rad*.56;ctx.beginPath();ctx.arc(x,y,s.s,0,Math.PI*2);ctx.fillStyle=`rgba(224,211,184,${s.o*(.55+.45*Math.sin(t*.001+s.p))*.72})`;ctx.fill()});requestAnimationFrame(frame)}addEventListener('resize',resize);resize();requestAnimationFrame(frame);
 /* =========================
-   GALAXY ENGINE
+   CURSOR
 ========================= */
-const galaxy=$("#galaxy"),ctx=galaxy.getContext("2d");
-let W=0,H=0,dpr=1,stars=[],galaxyMode="home";
-const modeCfg={
- home:[720,3,1.1],profile:[420,2,.45],education:[520,3,.7],skills:[470,4,.58],
- projects:[650,4,1],graphics:[360,2,.32],videos:[430,3,.48],content:[290,2,.24],contact:[240,2,.18],cv:[300,2,.28]
-};
-const reduced=matchMedia("(prefers-reduced-motion:reduce)").matches;
-
-function seed(){
- const [count,arms,flow]=modeCfg[galaxyMode]||modeCfg.home;
- const n=innerWidth<760?Math.floor(count*.38):count;
- stars=Array.from({length:n},()=>({
-  r:Math.pow(Math.random(),.65),a:Math.random()*Math.PI*2,
-  arm:Math.floor(Math.random()*arms),s:.3+Math.random()*1.2,
-  o:.2+Math.random()*.7,p:Math.random()*10
- }));
-}
-function resizeGalaxy(){
- dpr=Math.min(devicePixelRatio||1,1.6);W=innerWidth;H=innerHeight;
- galaxy.width=Math.floor(W*dpr);galaxy.height=Math.floor(H*dpr);
- galaxy.style.width=W+"px";galaxy.style.height=H+"px";ctx.setTransform(dpr,0,0,dpr,0,0);seed()
-}
-function galaxyFrame(t){
- ctx.clearRect(0,0,W,H);
- const [,,flow]=modeCfg[galaxyMode]||modeCfg.home,cx=W*.55,cy=H*.5,scale=Math.min(W,H)*.44;
- const glow=ctx.createRadialGradient(cx,cy,0,cx,cy,scale*.55);
- glow.addColorStop(0,"rgba(240,207,131,.1)");glow.addColorStop(.2,"rgba(240,207,131,.03)");glow.addColorStop(1,"transparent");
- ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
- stars.forEach(s=>{
-  const ang=s.a+s.r*6.2+(reduced?0:t*.000025*flow);
-  const rad=s.r*scale;
-  const armOffset=(s.arm/safeArms())*Math.PI*2;
-  const x=cx+Math.cos(ang+armOffset)*rad;
-  const y=cy+Math.sin(ang+armOffset)*rad*.56;
-  const tw=.55+.45*Math.sin(t*.001+s.p);
-  ctx.beginPath();ctx.arc(x,y,s.s,0,Math.PI*2);
-  ctx.fillStyle=`rgba(220,206,178,${s.o*tw*.75})`;ctx.fill()
- });
- requestAnimationFrame(galaxyFrame)
-}
-function safeArms(){return (modeCfg[galaxyMode]||modeCfg.home)[1]}
-addEventListener("resize",resizeGalaxy);resizeGalaxy();requestAnimationFrame(galaxyFrame);
-
+if(matchMedia('(pointer:fine)').matches&&!('ontouchstart' in window)){document.body.classList.add('cursor-enabled');const dot=$('#cursorDot'),ring=$('#cursorRing');let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y;addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;dot.style.left=x+'px';dot.style.top=y+'px';document.body.classList.add('cursor-ready');document.body.classList.toggle('cursor-hover',!!e.target.closest('a,button,.graphic-card,.detail-item,.project-image,.cyl-face'))});(function loop(){rx+=(x-rx)*.18;ry+=(y-ry)*.18;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})()}
 /* =========================
-   CUSTOM CURSOR
+   AI ENGINE
 ========================= */
-if(matchMedia("(pointer:fine)").matches&&!("ontouchstart" in window)){
- document.body.classList.add("has-cursor");
- const dot=$("#cursorDot"),ring=$("#cursorRing");let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y;
- addEventListener("mousemove",e=>{
-  x=e.clientX;y=e.clientY;dot.style.left=x+"px";dot.style.top=y+"px";
-  document.body.classList.toggle("cursor-hover",!!e.target.closest("a,button,.work,.graphic"))
- });
- (function cursorLoop(){rx+=(x-rx)*.18;ry+=(y-ry)*.18;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(cursorLoop)})();
-}
-
-/* =========================
-   AI LOCAL MEMORY
-========================= */
-const AI_KEY="shadid:portfolioAI:v1";
-let mem=JSON.parse(localStorage.getItem(AI_KEY)||"null")||{history:[],lang:"en",topic:"general",mode:"text"};
-mem.history=Array.isArray(mem.history)?mem.history.slice(-100):[];
-const ai={
- active:true,listening:false,speaking:false,mode:mem.mode||"text"
-};
-function save(){localStorage.setItem(AI_KEY,JSON.stringify({...mem,history:mem.history.slice(-100)}))}
-function addMsg(role,text){mem.history.push({role,text});mem.history=mem.history.slice(-100);save()}
-function renderChat(){
- const c=$("#chat");c.innerHTML=mem.history.map(m=>`<div class="msg ${m.role}">${esc(m.text)}</div>`).join("");
- c.scrollTop=c.scrollHeight
-}
-function detectLang(t){
- const bn=(String(t).match(/[\u0980-\u09FF]/g)||[]).length;
- const en=(String(t).match(/[A-Za-z]/g)||[]).length;
- return bn&&en?"bn-en":bn?"bn":"en"
-}
-function norm(t){return String(t).toLowerCase().replace(/[!?.,;:"'“”‘’()]/g," ").replace(/\s+/g," ").trim()}
-
-/* =========================
-   AI KNOWLEDGE / INTENTS
-========================= */
-function answer(text){
- const lang=detectLang(text),n=norm(text);mem.lang=lang;
- if(/^(stop|shutdown|close conversation|end conversation|stop talking|that's enough|থামো|বন্ধ হও|কথা বন্ধ করো|আর কথা না|বন্ধ করো)$/.test(n)||/(conversation).*(stop|close|end)/.test(n)||/(conversation).*(বন্ধ|থাম)/.test(n)){
-  stopVoice();ai.active=false;$("#aiStatus").textContent="PAUSED";
-  return lang==="bn"?"ঠিক আছে। Active conversation থামালাম। History থাকবে; আবার ডাকলে continue হবে।":lang==="bn-en"?"Okay. Conversationটা stop করলাম; history থাকবে, আবার ডাকলে continue হবে.":"Alright. I’m stopping the active conversation. The history stays and can continue later."
- }
- const commands=[
-  ["home",/(go home|open home|হোম খোলো|হোমে যাও)/],
-  ["profile",/(open profile|profile খোলো|প্রোফাইল খোলো)/],
-  ["education",/(open education|education খোলো|এডুকেশন খোলো)/],
-  ["skills",/(show skills|open skills|skills খোলো|স্কিলস খোলো)/],
-  ["projects",/(open projects|show projects|projects খোলো|প্রজেক্টস খোলো)/],
-  ["graphics",/(open graphics|graphics খোলো|গ্রাফিক্স খোলো)/],
-  ["videos",/(open videos|videos খোলো|ভিডিওস খোলো)/],
-  ["content",/(open content|content খোলো|কন্টেন্ট খোলো)/],
-  ["contact",/(open contact|contact খোলো|কন্টাক্ট খোলো)/],
-  ["cv",/(open cv|show cv|cv খোলো|cv দেখাও)/]
- ];
- const cmd=commands.find(x=>x[1].test(n));
- if(cmd){go(cmd[0]);return lang==="bn"?`${cmd[0].toUpperCase()} section খুলে দিলাম।`:`Opening ${cmd[0]}.`}
- if(/^(hi|hello|hey|yo|হাই|হ্যালো|সালাম|আসসালামু আলাইকুম)$/.test(n))
-  return lang==="bn"?"হ্যালো 👋 আমি Portfolio AI। Shadid, projects, education, art, books বা links নিয়ে জিজ্ঞেস করো।":"Hello 👋 I’m Portfolio AI. Ask me about Shadid, projects, education, art, books, or links.";
- if(/who are you|are you human|are you ai|তুমি কে|তুমি ai|মানুষ নাকি/.test(n))
-  return lang==="bn"?"আমি AI—এই portfolio-র ভেতরে চলা local conversational interface। মানুষ না, তাই biological experiences আমার নেই।":"I’m an AI running inside this portfolio. I’m not human and don’t have biological experiences.";
- if(/can you eat|do you sleep|তুমি খাও|ঘুমাও/.test(n))
-  return lang==="bn"?"আমি খাই না বা ঘুমাই না—আমার খাবার বলতে electricity, code আর browser runtime 😄":"I don’t eat or sleep. My food is basically electricity, code, and browser runtime 😄";
- if(/who is shadid|what kind of person|how was shadid|shadid কে|কেমন ছিল শাদিদ|কি ধরনের মানুষ/.test(n))
-  return lang==="bn"?"Shadid-কে শুধু marks দিয়ে বোঝানো ঠিক নয়। এই archive-এ persistence, drawing, architecture, web development, experiments, projects এবং বারবার তৈরি করে যাওয়ার গল্পটাই বেশি গুরুত্বপূর্ণ।":"Shadid is represented here through persistence: drawing, architecture, web development, experiments, projects, setbacks, and continuing to create rather than being reduced to marks.";
- if(/what does shadid study|what is he studying|কি পড়ে|কি অধ্যয়ন|study/.test(n))
-  return lang==="bn"?"Portfolio record অনুযায়ী Shadid BRAC University-এর Architecture Department-এর first-stage / first-semester context-এ ছিল এবং CSE-র দিকে shift করার চেষ্টা করছে।":"The portfolio records Shadid in BRAC University’s Architecture Department, first-stage/first-semester context, while trying to shift toward CSE.";
- if(/why.*cse|কেন.*cse|shift.*cse/.test(n))
-  return lang==="bn"?"Portfolio নির্দিষ্ট কোনো কারণ দেয় না; শুধু বলা আছে যে তিনি CSE-র দিকে shift করার চেষ্টা করছেন।":"The portfolio does not provide a specific reason; it only says he is trying to shift toward CSE.";
- if(/notre dame|125019|group roll|college roll/.test(n)||mem.topic==="college"&&/roll|group/.test(n))
-  {mem.topic="college";return "Notre Dame College: 2023–2025, HSC 2025, Science, Group 1, Group Roll 20, College Roll 125019, GPA 5.00 / Golden A+."}
- if(/school|ssc|motijheel/.test(n)){mem.topic="school";return "Motijheel Ideal School and College: 2013–2023, Classes 1–10, Science, SSC GPA 5.00 / Golden A+."}
- if(/brac|arc 101|university|graduat/.test(n)){mem.topic="university";return "BRAC University: Architecture Department, first-stage / first-semester context, ARC 101 design-related studio/work, currently trying to shift toward CSE. Expected / potential graduation year listed in the portfolio: 2032, not guaranteed."}
- if(/trendcart/.test(n))return `TrendCart is Shadid’s e-commerce / digital web project: ${LINKS.trendcart}`;
- if(/game|office engine|play/.test(n))return `Office Engine / Shadid’s Game is a custom interactive web game / game-engine-style project built with HTML, CSS and JavaScript. Play it: ${LINKS.game}`;
- if(/technology|tech stack|what technologies|কি দিয়ে বানানো/.test(n))return "The explicitly stored technologies for the game are HTML, CSS and JavaScript.";
- if(/project|projects|প্রজেক্ট/.test(n))return "Digital: TrendCart and Office Engine / Shadid’s Game. Architecture: Lory Lift, Squares and Grid, Line Signature, Interlock, Pavilion, Cutouts and Mosque-related work.";
- if(/drawing|achievement|medal|certificate|আঁকা|ড্রয়িং|অর্জন/.test(n))return "Achievement context includes Bangladesh Shishu Academy / Children’s Drawing Competition: Thana 1st, District 1st, Division 2nd; 5 km run Runner-up; and badminton referee medal context.";
- if(/book|literature|writer|samaresh|humayun|pather|nazrul|madhusudan/.test(n))return "Favorite writer: Samaresh Majumdar. Stored titles include Dour, Uttaradhikar, Kalbela, Kalpurush and Mousholkal. The portfolio also references Humayun Ahmed’s Himu and Amar Bondhu Rashed; Pather Panchali is by Bibhutibhushan Bandyopadhyay.";
- if(/family|father|mother|wife|sister|nasir|পরিবার|বাবা|মা|বউ|বোন/.test(n))return "Supplied family context: father Tofail Ahmed — Police Inspector; mother — household/homemaker; wife — major part of Shadid’s life and future planning; younger sister; and Nasir as a family-related person mentioned in the story.";
- if(/email|github|linkedin|whatsapp|instagram|facebook|pinterest|reddit|tumblr|contact|কন্টাক্ট/.test(n)){
-  const c=CONTACTS.find(x=>n.includes(x[0]));return c?`${c[1]}: ${c[3].replace("mailto:","")}`:`Email: shadidahamed.matashome05m@gmail.com`;
- }
- if(/\bcv\b|resume|রেজুমে/.test(n))return `CV: ${LINKS.cv}`;
- if(/video|youtube|ভিডিও/.test(n))return "The portfolio includes three original YouTube videos: Modifiers English, Connectors English and Subject-Verb-Agreement.";
- if(/location|address|ঠিকানা|কোথায়/.test(n))return "Supplied location: 17 No. [15×17] Bazar, Flat 24, Paltan area, Dhaka, Bangladesh.";
- if(/how do you work|how does this ai work|কীভাবে কাজ/.test(n))return "I use a compact local knowledge base, intent matching and local browser memory. This version does not need a remote AI API.";
- if(/what can you do|কি করতে পারো|help/.test(n))return "I can explain Shadid’s portfolio, education, projects, books, achievements and links, and I can control section navigation and supported voice features.";
- if(/thanks|thank you|ধন্যবাদ/.test(n))return lang==="bn"?"স্বাগতম 😄":"You’re welcome 😄";
- if(/silly|joke|funny|গাধা|ভূত|খাবার/.test(n))return lang==="bn"?"আমি offence নিই না 😄 Browser runtime-এ drama কম, curiosity বেশি।":"No offence taken 😄 Less drama, more browser runtime.";
- return lang==="bn"?"এই local portfolio knowledge base-এ ওই প্রশ্নের নির্দিষ্ট তথ্য নেই। আমি অনুমান করে তথ্য বানাতে চাই না।":"That specific detail isn’t in my local portfolio knowledge, so I won’t invent it.";
-}
-
-/* =========================
-   AI UI
-========================= */
-const aiFab=$("#aiFab"),aiPanel=$("#aiPanel"),chat=$("#chat"),aiInput=$("#aiInput"),aiStatus=$("#aiStatus");
-function openAI(){
- aiPanel.classList.add("open");aiFab.setAttribute("aria-expanded","true");
- if(!mem.history.length){addMsg("ai","হ্যালো 👋 আমি Portfolio AI। Ask me about Shadid, projects, education, art, books or links.");}
- renderChat()
-}
-function closeAI(){aiPanel.classList.remove("open");aiFab.setAttribute("aria-expanded","false")}
-aiFab.onclick=()=>aiPanel.classList.contains("open")?closeAI():openAI();
-$("#closeAI").onclick=closeAI;
-$("#clearAI").onclick=()=>{mem.history=[];mem.topic="general";ai.active=true;save();renderChat();aiStatus.textContent="READY"};
-
-function send(){
- const text=aiInput.value.trim();if(!text)return;
- aiInput.value="";addMsg("user",text);renderChat();aiStatus.textContent="THINKING";
- setTimeout(()=>{
-  const reply=answer(text);addMsg("ai",reply);renderChat();
-  if(ai.mode==="voice"&&ai.active)speak(reply,detectLang(text));else aiStatus.textContent=ai.active?"READY":"PAUSED";
- },140);
-}
-$("#sendBtn").onclick=send;
-aiInput.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}};
-aiInput.oninput=()=>{aiInput.style.height="auto";aiInput.style.height=Math.min(aiInput.scrollHeight,110)+"px"};
-
-/* =========================
-   VOICE ENGINE
-========================= */
-let recognition=null;
-const SpeechRec=window.SpeechRecognition||window.webkitSpeechRecognition;
-let voices=[];
-if(window.speechSynthesis){
- voices=window.speechSynthesis.getVoices();
- window.speechSynthesis.onvoiceschanged=()=>voices=window.speechSynthesis.getVoices()
-}
-if(SpeechRec){
- recognition=new SpeechRec();
- recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;
- let finalText="";
- recognition.onstart=()=>{ai.listening=true;aiStatus.textContent="LISTENING";$("#micBtn").classList.add("listening")};
- recognition.onend=()=>{ai.listening=false;$("#micBtn").classList.remove("listening");if(ai.active)aiStatus.textContent="READY"};
- recognition.onerror=()=>{ai.listening=false;$("#micBtn").classList.remove("listening");aiStatus.textContent="READY"};
- recognition.onresult=e=>{
-  let interim="";
-  for(let i=e.resultIndex;i<e.results.length;i++){
-   const t=e.results[i][0].transcript;
-   if(e.results[i].isFinal)finalText+=(finalText?" ":"")+t;else interim+=t
-  }
-  if(interim){aiInput.value=interim}
-  if(finalText.trim()){const t=finalText.trim();finalText="";aiInput.value=t;send()}
- }
-}
-function startListening(){
- if(!recognition){alert("Voice input is not supported in this browser. Please use text input.");return}
- recognition.lang=mem.lang==="bn"||mem.lang==="bn-en"?"bn-BD":"en-US";
- try{recognition.start()}catch(_){}
-}
-function stopListening(){try{recognition?.stop()}catch(_){}}
-function speak(text,lang){
- if(!window.speechSynthesis)return;
- stopListening();window.speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);
- u.lang=lang==="bn"||lang==="bn-en"?"bn-BD":"en-US";
- const v=voices.find(x=>(lang==="bn"||lang==="bn-en")?/bn/i.test(x.lang):/en/i.test(x.lang)&&/google|microsoft/i.test(x.name))
-   ||voices.find(x=>(lang==="bn"||lang==="bn-en")?/bn/i.test(x.lang):/en/i.test(x.lang))
-   ||voices[0];
- if(v)u.voice=v;
- u.rate=.98;
- u.onstart=()=>{ai.speaking=true;aiStatus.textContent="SPEAKING"};
- u.onend=()=>{ai.speaking=false;if(ai.mode==="voice"&&ai.active){aiStatus.textContent="LISTENING";startListening()}else aiStatus.textContent="READY"};
- window.speechSynthesis.speak(u)
-}
-function stopVoice(){
- try{window.speechSynthesis?.cancel()}catch(_){}
- stopListening();ai.speaking=false
-}
-$("#textMode").onclick=()=>{
- ai.mode="text";mem.mode="text";save();$("#textMode").classList.add("active");$("#voiceMode").classList.remove("active");stopVoice()
-};
-$("#voiceMode").onclick=()=>{
- if(!recognition){alert("Voice input is not supported in this browser. Please use text input.");return}
- ai.mode="voice";mem.mode="voice";save();$("#voiceMode").classList.add("active");$("#textMode").classList.remove("active");startListening()
-};
-$("#micBtn").onclick=()=>ai.listening?stopListening():startListening();
-if(mem.mode==="voice"){ai.mode="voice";$("#voiceMode").classList.add("active");$("#textMode").classList.remove("active")}
-if(mem.history.length)renderChat();
-
-/* =========================
-   PROJECT MODAL / EVENTS
-========================= */
-document.addEventListener("click",e=>{
- const p=e.target.closest("[data-project]");if(p)openProject(p.dataset.project)
-});
-$("#projectClose").onclick=()=>{$("#projectOverlay").classList.remove("open");$("#projectOverlay").setAttribute("aria-hidden","true")};
-$("#projectOverlay").onclick=e=>{if(e.target===e.currentTarget)$("#projectClose").click()};
-
-/* =========================
-   LOAD STATE
-========================= */
+const AIKEY='shadid:portfolioAI:v2';let memory=JSON.parse(localStorage.getItem(AIKEY)||'null')||{history:[],lang:'en',mode:'text',topic:'general'};memory.history=Array.isArray(memory.history)?memory.history.slice(-100):[];const ai={active:true,listening:false,mode:memory.mode||'text'};function saveAI(){localStorage.setItem(AIKEY,JSON.stringify({...memory,history:memory.history.slice(-100)}))}function addMessage(role,text){memory.history.push({role,text});memory.history=memory.history.slice(-100);saveAI()}function renderChat(){$('#chat').innerHTML=memory.history.map(m=>`<div class="msg ${m.role}">${h(m.text)}</div>`).join('');$('#chat').scrollTop=$('#chat').scrollHeight}function langOf(t){const bn=(String(t).match(/[\u0980-\u09FF]/g)||[]).length,en=(String(t).match(/[A-Za-z]/g)||[]).length;return bn&&en?'bn-en':bn?'bn':'en'}function norm(t){return String(t).toLowerCase().replace(/[!?.,;:"'“”‘’()]/g,' ').replace(/\s+/g,' ').trim()}
+function aiAnswer(text){const lang=langOf(text),n=norm(text);memory.lang=lang;const stop=/^(stop|shutdown|close conversation|end conversation|stop talking|that's enough|থামো|বন্ধ হও|কথা বন্ধ করো|আর কথা না|বন্ধ করো)$/.test(n)||/(conversation).*(stop|close|end)/.test(n)||/(conversation).*(বন্ধ|থাম)/.test(n);if(stop){stopVoice();ai.active=false;$('#aiStatus').textContent='PAUSED';return lang==='bn'?'ঠিক আছে। Active conversation থামালাম। History থাকবে; আবার ডাকলে continue হবে।':'Alright. I’m stopping the active conversation. The history stays and can continue later.'}const commands=[['home',/(go home|open home|হোম খোলো|হোমে যাও)/],['profile',/(open profile|profile খোলো|প্রোফাইল খোলো)/],['education',/(open education|education খোলো|এডুকেশন খোলো)/],['skills',/(show skills|open skills|skills খোলো|স্কিলস খোলো)/],['projects',/(open projects|show projects|projects খোলো|প্রজেক্টস খোলো)/],['graphics',/(open graphics|graphics খোলো|গ্রাফিক্স খোলো)/],['achievements',/(open achievements|achievements খোলো|অ্যাচিভমেন্ট খোলো)/],['contact',/(open contact|contact খোলো|কন্টাক্ট খোলো)/],['cv',/(open cv|show cv|cv খোলো|cv দেখাও)/]];const cmd=commands.find(x=>x[1].test(n));if(cmd){go(cmd[0]);return lang==='bn'?`${cmd[0].toUpperCase()} section খুলে দিলাম।`:`Opening ${cmd[0]}.`}if(/^(hi|hello|hey|হাই|হ্যালো|সালাম|আসসালামু আলাইকুম)$/.test(n))return lang==='bn'?'হ্যালো 👋 Portfolio, project, education, art, books বা links নিয়ে জিজ্ঞেস করো।':'Hello 👋 Ask me about the portfolio, projects, education, art, books or links.';if(/who are you|are you human|are you ai|তুমি কে|তুমি ai|মানুষ নাকি/.test(n))return lang==='bn'?'আমি এই portfolio-র local AI interface—মানুষ নই।':'I’m the local AI interface inside this portfolio, not a human.';if(/who is shadid|how was shadid|shadid কে|কেমন ছিল/.test(n))return lang==='bn'?'Shadid-কে শুধু marks দিয়ে বোঝানো ঠিক নয়। এই archive-এ persistence, drawing, architecture, code, experiments এবং বারবার তৈরি করে যাওয়াটা গুরুত্বপূর্ণ।':'Shadid is represented here through persistence: drawing, architecture, code, experiments and continuing to create rather than being reduced to marks.';if(/what does shadid study|what is he studying|কি পড়ে|study/.test(n))return 'Portfolio context: BRAC University Architecture Department, first-stage / first-semester context, while trying to shift toward CSE.';if(/why.*cse|কেন.*cse/.test(n))return 'The portfolio does not state a specific reason for the shift; it only records that Shadid is trying to shift toward CSE.';if(/notre dame|125019|group roll/.test(n))return 'Notre Dame College: 2023–2025, HSC 2025, Science, Group 1, Group Roll 20, College Roll 125019, GPA 5.00 / Golden A+.';if(/school|ssc|motijheel/.test(n))return 'Motijheel Ideal School and College: 2013–2023, Classes 1–10, Science, SSC GPA 5.00 / Golden A+.';if(/brac|arc 101|university/.test(n))return 'BRAC University: Architecture Department, ARC 101 design-related studio/work, first-stage / first-semester context, trying to shift toward CSE; expected / potential graduation year listed as 2032, not guaranteed.';if(/trendcart/.test(n))return `TrendCart: ${LINKS.trendcart}`;if(/orpheus|game|office engine|play/.test(n))return `Orpheus Engine / original Office Engine / Shadid’s Game link: ${LINKS.game}`;if(/project|projects|প্রজেক্ট/.test(n))return 'Web Development: Orpheus Engine, TrendCart and this Portfolio. Architecture: Lory Lift, Squares and Grid, Line Signature, Interlock, Pavilion, Cutouts and Mosque-related work.';if(/drawing|achievement|medal|certificate|আঁকা|অর্জন/.test(n))return 'Drawing competition context: Thana 1st, District 1st, Division 2nd. Also: 5 km run Runner-up and badminton referee medal context.';if(/books|book|literature|writer|samaresh|humayun|pather|nazrul|madhusudan/.test(n))return 'Writers in the archive include Samaresh Majumdar, Humayun Ahmed, Bibhutibhushan Bandyopadhyay, Kazi Nazrul Islam and Michael Madhusudan Dutt. Pather Panchali is by Bibhutibhushan Bandyopadhyay.';if(/email|github|linkedin|whatsapp|instagram|facebook|pinterest|reddit|tumblr/.test(n)){const c=CONTACTS.find(x=>n.includes(x[0]));return c?`${c[0]}: ${c[2].replace('mailto:','')}`:LINKS.email.replace('mailto:','')};if(/cv|resume|রেজুমে/.test(n))return `CV: ${LINKS.cv}`;if(/youtube|video|ভিডিও/.test(n))return 'Video Making & Editing contains the three original YouTube links: Modifiers English, Connectors English and Subject-Verb-Agreement.';if(/location|address|ঠিকানা/.test(n))return '17 No. [15×17] Bazar, Flat 24, Paltan area, Dhaka, Bangladesh.';if(/eat|sleep|খাও|ঘুম/.test(n))return lang==='bn'?'আমি খাই না বা ঘুমাই না—আমার খাবার বলতে electricity, code আর browser runtime 😄':'I don’t eat or sleep—my food is basically electricity, code and browser runtime 😄';return lang==='bn'?'এই local portfolio knowledge base-এ ওই প্রশ্নের নির্দিষ্ট তথ্য নেই। আমি অনুমান করে তথ্য বানাতে চাই না।':'That detail is outside my local portfolio knowledge, so I won’t invent it.'}
+function openAI(){const panel=$('#aiPanel');panel.classList.add('open');$('#aiFab').setAttribute('aria-expanded','true');if(!memory.history.length){addMessage('ai','হ্যালো 👋 আমি Portfolio AI। Shadid, projects, education, art, books বা links নিয়ে জিজ্ঞেস করো।')}renderChat()}function closeAI(){$('#aiPanel').classList.remove('open');$('#aiFab').setAttribute('aria-expanded','false')}$('#aiFab').onclick=()=>$('#aiPanel').classList.contains('open')?closeAI():openAI();$('#closeAI').onclick=closeAI;$('#clearAI').onclick=()=>{memory.history=[];memory.topic='general';memory.lang='en';ai.active=true;saveAI();renderChat();$('#aiStatus').textContent='READY'};function sendAI(){const t=$('#aiInput').value.trim();if(!t)return;$('#aiInput').value='';addMessage('user',t);renderChat();$('#aiStatus').textContent='THINKING';setTimeout(()=>{const reply=aiAnswer(t);addMessage('ai',reply);renderChat();if(ai.mode==='voice'&&ai.active)speak(reply,langOf(t));else $('#aiStatus').textContent=ai.active?'READY':'PAUSED'},120)}$('#sendBtn').onclick=sendAI;$('#aiInput').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAI()}};$('#aiInput').oninput=()=>{$('#aiInput').style.height='auto';$('#aiInput').style.height=Math.min($('#aiInput').scrollHeight,110)+'px'};
+/* VOICE */
+let recognition=null;const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let voices=[];if(window.speechSynthesis){voices=window.speechSynthesis.getVoices();window.speechSynthesis.onvoiceschanged=()=>voices=window.speechSynthesis.getVoices()}if(SR){recognition=new SR();recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;let finalText='';recognition.onstart=()=>{ai.listening=true;$('#aiStatus').textContent='LISTENING';$('#micBtn').classList.add('listening')};recognition.onend=()=>{ai.listening=false;$('#micBtn').classList.remove('listening');if(ai.active)$('#aiStatus').textContent='READY'};recognition.onerror=()=>{ai.listening=false;$('#micBtn').classList.remove('listening');$('#aiStatus').textContent='READY'};recognition.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)finalText+=(finalText?' ':'')+t;else interim+=t}if(interim)$('#aiInput').value=interim;if(finalText.trim()){const t=finalText.trim();finalText='';$('#aiInput').value=t;sendAI()}}}function startListening(){if(!recognition){alert('Voice input is not supported in this browser. Please use text input.');return}recognition.lang=memory.lang==='bn'||memory.lang==='bn-en'?'bn-BD':'en-US';try{recognition.start()}catch(_){}}function stopListening(){try{recognition?.stop()}catch(_){}}function stopVoice(){try{window.speechSynthesis?.cancel()}catch(_){}stopListening();ai.speaking=false}function speak(text,lang){if(!window.speechSynthesis)return;stopListening();window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang==='bn'||lang==='bn-en'?'bn-BD':'en-US';const v=voices.find(x=>/google|microsoft/i.test(x.name)&&((lang==='bn'||lang==='bn-en')?/bn/i.test(x.lang):/en/i.test(x.lang)))||voices.find(x=>(lang==='bn'||lang==='bn-en')?/bn/i.test(x.lang):/en/i.test(x.lang))||voices[0];if(v)u.voice=v;u.rate=.98;u.onstart=()=>{$('#aiStatus').textContent='SPEAKING';ai.speaking=true};u.onend=()=>{ai.speaking=false;if(ai.mode==='voice'&&ai.active){$('#aiStatus').textContent='LISTENING';startListening()}else $('#aiStatus').textContent='READY'};window.speechSynthesis.speak(u)}$('#textMode').onclick=()=>{ai.mode='text';memory.mode='text';saveAI();$('#textMode').classList.add('active');$('#voiceMode').classList.remove('active');stopVoice()};$('#voiceMode').onclick=()=>{if(!recognition){alert('Voice input is not supported in this browser. Please use text input.');return}ai.mode='voice';memory.mode='voice';saveAI();$('#voiceMode').classList.add('active');$('#textMode').classList.remove('active');startListening()};$('#micBtn').onclick=()=>ai.listening?stopListening():startListening();if(memory.mode==='voice'&&recognition){ai.mode='voice';$('#voiceMode').classList.add('active');$('#textMode').classList.remove('active')};if(memory.history.length)renderChat();
+/* KEYBOARD / PROTECTION */
+document.addEventListener('keydown',e=>{if($('#viewerOverlay').classList.contains('open')){if(e.key==='Escape')closeViewer();if(e.key==='ArrowLeft')nextViewer(-1);if(e.key==='ArrowRight')nextViewer(1);if(e.key==='+')$('#zoomPlus').click();if(e.key==='-')$('#zoomMinus').click()}});document.addEventListener('dragstart',e=>{if(e.target.closest('.viewer,.graphic-card,.cyl-face'))e.preventDefault()});document.addEventListener('contextmenu',e=>{if(e.target.closest('.viewer,.graphic-card,.cyl-face'))e.preventDefault()});
+/* LOAD */
 go(current);
 </script>
 </body>
