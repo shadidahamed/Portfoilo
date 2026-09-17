@@ -1,187 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PORTFOLIO | Creative Technologist & Developer</title>
-
-    <!-- FontAwesome 6.4.0 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHADID AHAMED | Architecture Portfolio</title>
+  <meta name="description" content="SHADID AHAMED — Architecture Student · Visual Artist · Creative Technologist | BRAC University">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Background WebGL Ambient Canvas -->
-    <canvas id="bg-canvas"></canvas>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
 
-    <!-- Navigation Header -->
-    <header class="glass-nav">
-        <a href="#hero" class="brand-logo">
-            <span class="symbol">◈</span> ORPHEUS <span class="accent-gold">.STUDIO</span>
-        </a>
-        <nav class="nav-links">
-            <a href="#about" class="nav-item">About</a>
-            <a href="#projects" class="nav-item">Works</a>
-            <a href="#skills" class="nav-item">Capabilities</a>
-            <a href="#game-section" class="nav-item btn-crimson-glitch">
-                <i class="fa-solid fa-gamepad"></i> Launch Engine
-            </a>
-        </nav>
-        <button class="mobile-toggle" id="mobile-toggle">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-    </header>
+  <!-- AI Assistant -->
+  <button class="ai-trigger" id="aiTrigger" title="AI Assistant">✦</button>
+  <div class="ai-panel" id="aiPanel" hidden>
+    <div class="ai-header">
+      <span>Portfolio Assistant</span>
+      <button class="ai-close" id="aiClose">×</button>
+    </div>
+    <div class="ai-messages" id="aiMessages"></div>
+    <div class="ai-input-row">
+      <input type="text" id="aiInput" placeholder="Talk to me..." autocomplete="off">
+      <button id="aiVoice" title="Voice">🎤</button>
+    </div>
+    <div class="voice-indicator" id="voiceIndicator"></div>
+  </div>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-        <div class="hero-content">
-            <div class="badge-tag">CREATIVE TECHNOLOGIST & FULL-STACK ARCHITECT</div>
-            <h1 class="hero-title">ENGINEERING <br><span class="text-glow-crimson">DIGITAL VOIDS</span></h1>
-            <p class="hero-subtitle">
-                Designing dark, high-performance web environments, immersive 3D simulations, and scalable modern web architecture.
-            </p>
-            <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary">Explore Works</a>
-                <a href="#game-section" class="btn btn-secondary"><i class="fa-solid fa-terminal"></i> Enter Simulation</a>
-            </div>
+  <button class="back-to-top" id="backToTop">↑</button>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" data-section="home">SA</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" data-section="profile" title="Profile">Profile</a></li>
+        <li><a href="#" data-section="education" title="Education">Education</a></li>
+        <li><a href="#" data-section="skills" title="Skills">Skills</a></li>
+        <li><a href="#" data-section="art" title="Art">Art</a></li>
+        <li><a href="#" data-section="architecture" title="Architecture">Architecture</a></li>
+        <li><a href="#" data-section="graphics" title="Graphics">Graphics</a></li>
+        <li><a href="#" data-section="digital" title="Projects">Projects</a></li>
+        <li><a href="#" data-section="videos" title="Videos">Videos</a></li>
+        <li><a href="#" data-section="note" title="Note">Note</a></li>
+        <li><a href="#" data-section="documents" title="Documents">Documents</a></li>
+        <li><a href="#" data-section="location" title="Location">Location</a></li>
+        <li><a href="#" data-section="contact" title="Contact">Contact</a></li>
+        <li><a href="#" data-section="game" title="Game">Game</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle">☰</button>
+    </div>
+  </nav>
+
+  <!-- ========== HOME ========== -->
+  <section class="page active" id="home">
+    <div class="hero">
+      <canvas id="galaxy"></canvas>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-name">SHADID AHAMED</h1>
+        <p class="hero-bangla">শাদিদ আহমেদ</p>
+        <p class="hero-sub">Architecture Student · Visual Artist · Creative Technologist</p>
+        <p class="hero-meta">BRAC University · Architecture · Summer 2026</p>
+        <p class="hero-portfolio">Portfolio</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROFILE ========== -->
+  <section class="page" id="profile">
+    <div class="container">
+      <h2 class="section-title">Profile</h2>
+      <div class="profile-grid">
+        <div class="portrait-frame">
+          <img src="assets/profile.jpg" alt="SHADID AHAMED">
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section-container">
-        <div class="section-header">
-            <h2>01 / BIOGRAPHY</h2>
-            <div class="divider"></div>
+        <div class="profile-info">
+          <h3>SHADID AHAMED</h3>
+          <ul class="profile-list">
+            <li>BRAC University</li>
+            <li>Department of Architecture</li>
+            <li>Summer 2026 Batch</li>
+            <li>Current Semester: 1</li>
+            <li>Current Course: ARCH 101</li>
+            <li>Student Roll: 14061008</li>
+          </ul>
+          <p class="profile-bio">
+            Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming. Combines traditional artistic practice with emerging digital tools.
+          </p>
         </div>
-        <div class="about-grid">
-            <div class="glass-card about-card">
-                <h3>Architectural Philosophy</h3>
-                <p>
-                    I specialize in bridging high-end visual experiences with lean, production-grade engineering. Focused on zero-memory-leak execution, cinematic dark aesthetics, and robust full-stack software development.
-                </p>
-            </div>
-            <div class="glass-card stats-card">
-                <div class="stat-item">
-                    <span class="stat-number">05+</span>
-                    <span class="stat-label">Years Engineering</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">60fps</span>
-                    <span class="stat-label">3D Realtime Target</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Precision & Stability</span>
-                </div>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section-container">
-        <div class="section-header">
-            <h2>02 / FEATURED PROJECTS</h2>
-            <div class="divider"></div>
-        </div>
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="glass-card project-card">
-                <div class="project-tag">THREE.JS / SHADERS</div>
-                <h3>Aether Canvas Engine</h3>
-                <p>Real-time procedural lighting and geometry web engine optimized for browser rendering at high frame rates.</p>
-                <div class="project-footer">
-                    <span>WebGL · JS · WebAudio</span>
-                    <a href="#" class="icon-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </div>
-            <!-- Project 2 -->
-            <div class="glass-card project-card">
-                <div class="project-tag">FULL-STACK / API</div>
-                <h3>Hyperion Cloud Core</h3>
-                <p>Microservice architecture dashboard offering real-time telemetry streaming and state synchronization.</p>
-                <div class="project-footer">
-                    <span>Node.js · Redis · WebSockets</span>
-                    <a href="#" class="icon-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- ========== EDUCATION ========== -->
+  <section class="page" id="education">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section-container">
-        <div class="section-header">
-            <h2>03 / CAPABILITIES</h2>
-            <div class="divider"></div>
+      <div class="edu-block">
+        <div class="edu-year">2013 – 2023</div>
+        <h3>Motijheel Ideal School & College</h3>
+        <p class="edu-detail">Class 1 to Class 10 · SSC 2023 · GPA 5.00</p>
+        <p class="edu-desc">
+          Spent 10 years here from Class 1 to Class 10. Completed Secondary School Certificate (SSC) examination in 2023 with a perfect GPA of 5.00. This institution shaped the foundation of my academic journey.
+        </p>
+        <p class="edu-location">Location: Motijheel, Dhaka</p>
+      </div>
+
+      <div class="edu-block">
+        <div class="edu-year">2023 – 2025</div>
+        <h3>Notre Dame College</h3>
+        <p class="edu-detail">HSC 2025 · GPA 5.00 · Science Group</p>
+        <p class="edu-desc">
+          Studied from 2023 to 2025. Completed Higher Secondary Certificate (HSC) with GPA 5.00. Was in the Science group. My classroom was near the Math Lab (around seat number 206 area). This college played a major role in preparing me for university life.
+        </p>
+        <p class="edu-location">Location: Arambagh, Dhaka</p>
+      </div>
+
+      <div class="edu-block">
+        <div class="edu-year">2026 – Present</div>
+        <h3>BRAC University</h3>
+        <p class="edu-detail">Bachelor of Architecture · Summer 2026 Batch · Expected Graduation: 2033</p>
+        <p class="edu-desc">
+          Currently studying in the Department of Architecture. Started in Summer 2026. Expected to graduate around 2033. The architecture department focuses on design, theory, history, and practical studio work.
+        </p>
+        <p class="edu-location">Location: Merul Badda, Dhaka</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section class="page" id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills & Interests</h2>
+
+      <div class="skill-category">
+        <h3>Literature & Reading</h3>
+        <p>I deeply enjoy reading. Some of the writers and books that influenced me:</p>
+        <ul>
+          <li><strong>Samaresh Majumdar</strong> — One of my favourite authors. I have read several of his books including <em>Uttaradhikar</em>, <em>Kaalbela</em>, and others. His storytelling has a special place in my heart.</li>
+          <li><strong>Humayun Ahmed</strong> — Especially the Himu series.</li>
+          <li><strong>Rabindranath Tagore</strong> — Many of his writings.</li>
+          <li>Board textbooks such as <em>Ekattorer Dinguli</em> also left a strong impression on me.</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Drawing & Art Competitions</h3>
+        <p>I have participated in many art competitions since childhood:</p>
+        <ul>
+          <li>Bangladesh Shishu Academy competitions</li>
+          <li>Shilpakala Academy competitions</li>
+          <li>Noboborsho (Bengali New Year) art competitions</li>
+          <li>Various national and local art contests</li>
+        </ul>
+        <p>Achieved 1st and 2nd positions in several competitions, and also participated in many others.</p>
+      </div>
+
+      <div class="skill-category">
+        <h3>Other Skills</h3>
+        <ul>
+          <li>Freehand Drawing & Sketching</li>
+          <li>English Speaking & Communication</li>
+          <li>C++, HTML, JavaScript, Programming</li>
+          <li>Fitness — Completed 5 km Marathon (Runner-up category)</li>
+          <li>English Courses after SSC & HSC (scored 87–89%)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ART ========== -->
+  <section class="page" id="art">
+    <div class="container">
+      <h2 class="section-title">Art & Drawing</h2>
+      <p class="section-intro">Selected artworks from exhibitions and personal practice. Each piece carries its own story.</p>
+      <div class="gallery-grid" id="artGallery">
+        <!-- Images will be loaded dynamically or you can add manually -->
+        <div class="art-item">
+          <div class="art-image-box">
+            <img src="assets/art/01.jpg" alt="Artwork">
+          </div>
+          <div class="art-info">
+            <h4>Artwork Title</h4>
+            <p>Short description of the artwork and the exhibition it was part of.</p>
+          </div>
         </div>
-        <div class="skills-grid">
-            <div class="glass-card skill-box">
-                <i class="fa-brands fa-js-square"></i>
-                <h4>JavaScript (ES6+)</h4>
-                <p>Modular architectures, asynchronous processing, spatial Math.</p>
-            </div>
-            <div class="glass-card skill-box">
-                <i class="fa-solid fa-cube"></i>
-                <h4>Three.js / WebGL</h4>
-                <p>Custom shaders, memory lifecycle management, physics integration.</p>
-            </div>
-            <div class="glass-card skill-box">
-                <i class="fa-solid fa-layer-group"></i>
-                <h4>Full-Stack System</h4>
-                <p>Node.js, modern CSS layouting, REST & WebSocket integration.</p>
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ARCHITECTURE ========== -->
+  <section class="page" id="architecture">
+    <div class="container">
+      <h2 class="section-title">Architecture Projects</h2>
+      <p class="section-intro">Studio projects including Squares & Grid, Low Relief, Pavilion and more.</p>
+      <div class="project-list">
+        <div class="project-item">
+          <h3>Squares and Grid</h3>
+          <p>Early studio exploration focusing on proportion, grid systems and spatial relationships.</p>
         </div>
-    </section>
-
-    <!-- Game Integration Section (Orpheus Engine) -->
-    <section id="game-section" class="game-wrapper-section">
-        <div class="section-header">
-            <h2>04 / ORPHEUS HYBRID SIMULATION</h2>
-            <p>Interactive 3D Driving Engine — Driven with real-time physics & low-void lighting.</p>
+        <div class="project-item">
+          <h3>Low Relief</h3>
+          <p>Study of depth, light and shadow through low relief composition.</p>
         </div>
-
-        <div class="game-viewport-card glass-card">
-            <!-- Game HUD Canvas Overlay -->
-            <div id="game-hud" class="game-hud">
-                <div class="hud-stat">
-                    <span class="hud-label">SPEED</span>
-                    <span id="speed-display" class="hud-value">000</span> <span class="hud-unit">KM/H</span>
-                </div>
-                <div class="hud-stat">
-                    <span class="hud-label">ZONE</span>
-                    <span class="hud-value accent-gold">VOID_01</span>
-                </div>
-            </div>
-
-            <!-- Controls Info Bar -->
-            <div id="game-controls-overlay" class="game-overlay-controls">
-                <div class="controls-hint">
-                    <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> or <span class="key">ARROWS</span> to Drive & Steer | <span class="key">SPACE</span> Brake
-                </div>
-                <button id="btn-start-game" class="btn btn-primary btn-crimson-glitch">INITIALIZE ENGINE</button>
-            </div>
-
-            <!-- Three.js Game Container -->
-            <div id="game-container"></div>
+        <div class="project-item">
+          <h3>Pavilion</h3>
+          <p>Design of a small pavilion exploring structure, material and human scale.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer-container">
-        <p>&copy; 2026 ORPHEUS ENGINE / ALL RIGHTS RESERVED.</p>
-        <div class="social-links">
-            <a href="#"><i class="fa-brands fa-github"></i></a>
-            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+  <!-- ========== GRAPHICS ========== -->
+  <section class="page" id="graphics">
+    <div class="container">
+      <h2 class="section-title">Graphics</h2>
+      <p class="section-intro">Selected graphic works from coursework.</p>
+      <div class="graphics-grid">
+        <!-- Add graphics items here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DIGITAL PROJECTS ========== -->
+  <section class="page" id="digital">
+    <div class="container">
+      <h2 class="section-title">Digital Projects</h2>
+
+      <div class="digital-card">
+        <h3>Shadid's Game</h3>
+        <p>A game I developed. You can play it directly.</p>
+        <a href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" class="btn">Play Game</a>
+      </div>
+
+      <div class="digital-card">
+        <h3>E-commerce Website (TrendCart)</h3>
+        <p>Modern UI shopping system developed as a portfolio project.</p>
+        <a href="https://shadidahamed.github.io/trendcart/" target="_blank" class="btn">Live Demo</a>
+      </div>
+
+      <div class="digital-card">
+        <h3>Affiliate Marketing Website</h3>
+        <p>Previously developed affiliate marketing website created as a work/project demo. The project is no longer active.</p>
+      </div>
+
+      <div class="digital-card">
+        <h3>Orpheus Engine</h3>
+        <p>Game development project by Shadid.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VIDEOS ========== -->
+  <section class="page" id="videos">
+    <div class="container">
+      <h2 class="section-title">Videos</h2>
+      <p class="section-intro">English learning classes I conducted. More videos (Physics, Science etc.) will be added later.</p>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <h3>Video 1 – Modifiers</h3>
+          <p>English class on Modifiers</p>
+          <a href="https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS" target="_blank" class="btn">Watch</a>
         </div>
-    </footer>
+        <div class="video-card">
+          <h3>Video 2 – Connectors</h3>
+          <p>English class on Connectors</p>
+          <a href="https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I" target="_blank" class="btn">Watch</a>
+        </div>
+        <div class="video-card">
+          <h3>Video 3 – Subject-Verb Agreement</h3>
+          <p>English class on Subject-Verb Agreement</p>
+          <a href="https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg" target="_blank" class="btn">Watch</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Three.js r128 Library + GLTFLoader -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="script.js"></script>
+  <!-- ========== NOTE ========== -->
+  <section class="page" id="note">
+    <div class="container">
+      <h2 class="section-title">A Note About Shadid</h2>
+      <div class="note-content">
+        <p>If I had to tell someone who Shadid was, I would not begin with his results or the things he failed to get. I would begin with how hard he kept trying.</p>
+        <p>He wanted a future badly enough to keep reaching for it even when life kept putting obstacles in front of him. He fought through academic pressure, disappointment, loneliness, financial stress, and heartbreak — and still kept studying, drawing, designing, and creating.</p>
+        <p>Behind every drawing was patience. Behind every plan was hope. Behind every “I’ll try again” was someone who had already been through a lot.</p>
+        <p>He is still becoming the person he wants to be. And that matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOCUMENTS ========== -->
+  <section class="page" id="documents">
+    <div class="container">
+      <h2 class="section-title">Documents & Certificates</h2>
+      <div class="doc-card">
+        <h3>Professional CV</h3>
+        <p>Download or view my complete CV containing education, skills and experience.</p>
+        <div class="cv-actions">
+          <a href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" class="btn">View CV</a>
+          <a href="https://drive.google.com/uc?export=download&id=1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV" class="btn" download>Download CV</a>
+        </div>
+      </div>
+      <p class="small-note">Certificates from art competitions and English courses will be added here. View only (screenshot protection applied where possible).</p>
+    </div>
+  </section>
+
+  <!-- ========== LOCATION ========== -->
+  <section class="page" id="location">
+    <div class="container">
+      <h2 class="section-title">Location</h2>
+      <div class="location-card">
+        <p class="location-text">Dhaka, Bangladesh</p>
+        <p class="location-sub">Happily living life with family · Open to collaboration</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="page" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-intro">You can contact me through any of these platforms:</p>
+      <div class="contact-grid">
+        <a href="mailto:shadidahamed.matashome05m@gmail.com" class="contact-btn">Email</a>
+        <a href="https://github.com/shadidahamed" target="_blank" class="contact-btn">GitHub</a>
+        <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" class="contact-btn">LinkedIn</a>
+        <a href="https://www.instagram.com/shade_ed25" target="_blank" class="contact-btn">Instagram</a>
+        <a href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" class="contact-btn">Facebook</a>
+        <a href="https://wa.me/8801326162684" target="_blank" class="contact-btn">WhatsApp</a>
+        <a href="https://x.com/ShadidAhamed" target="_blank" class="contact-btn">X (Twitter)</a>
+        <a href="https://www.reddit.com/user/Shade_ed25" target="_blank" class="contact-btn">Reddit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GAME ========== -->
+  <section class="page" id="game">
+    <div class="container">
+      <h2 class="section-title">A Little Game</h2>
+      <div id="gameIntro" class="game-intro">
+        <div class="game-character">🧒</div>
+        <h3>Hi!</h3>
+        <p>Let's enjoy a fun game</p>
+        <button id="startGameBtn" class="btn play-btn">Will you play the game?</button>
+      </div>
+      <div id="gameArea" hidden>
+        <canvas id="gameCanvas"></canvas>
+        <p class="game-controls">Arrow Keys / WASD to move · Space to brake · R to restart · ESC to exit</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Physical Portfolio Note -->
+  <div class="physical-note">
+    This is my digital portfolio. I am also preparing a physical Architecture Portfolio book. A video of it will be added soon.
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/game.js"></script>
 </body>
 </html>
