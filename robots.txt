@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://shadidahamed.github.io/Portfolio/sitemap.xml
