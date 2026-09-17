@@ -348,12 +348,54 @@ main{position:relative;z-index:5;height:100dvh;padding:0 28px 0 108px}
    CURSOR
 ========================= */
 @media(pointer:fine){
- body.has-cursor,body.has-cursor *{cursor:none}
- .cursor-dot,.cursor-ring{position:fixed;z-index:99999;pointer-events:none;transform:translate(-50%,-50%);opacity:0}
- .cursor-dot{width:7px;height:7px;background:var(--gold2);border-radius:50%;box-shadow:0 0 16px var(--gold)}
- .cursor-ring{width:30px;height:30px;border:1px solid rgba(240,207,131,.7);border-radius:50%;transition:.2s}
- .cursor-hover .cursor-ring{width:46px;height:46px;border-color:var(--gold2)}
- .cursor-hover .cursor-dot{transform:translate(-50%,-50%) scale(1.3)}
+  body.has-cursor,
+  body.has-cursor *{
+    cursor:none;
+  }
+
+  .cursor-dot,
+  .cursor-ring{
+    position:fixed;
+    z-index:99999;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    opacity:1;
+    display:block;
+  }
+
+  .cursor-dot{
+    width:7px;
+    height:7px;
+    background:var(--gold2);
+    border-radius:50%;
+    box-shadow:
+      0 0 8px var(--gold2),
+      0 0 18px rgba(240,207,131,.8);
+  }
+
+  .cursor-ring{
+    width:30px;
+    height:30px;
+    border:1px solid rgba(240,207,131,.8);
+    border-radius:50%;
+    box-shadow:0 0 12px rgba(240,207,131,.18);
+    transition:
+      width .2s ease,
+      height .2s ease,
+      border-color .2s ease,
+      box-shadow .2s ease;
+  }
+
+  .cursor-hover .cursor-ring{
+    width:44px;
+    height:44px;
+    border-color:var(--gold2);
+    box-shadow:0 0 20px rgba(240,207,131,.35);
+  }
+
+  .cursor-hover .cursor-dot{
+    transform:translate(-50%,-50%) scale(1.35);
+  }
 }
 
 /* =========================
