@@ -1,369 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHADID AHAMED | Architecture Portfolio</title>
-  <meta name="description" content="SHADID AHAMED — Architecture Student · Visual Artist · Creative Technologist | BRAC University">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shadid Ahamed — Architecture Student, Visual Artist & Creative Technologist | BRAC University">
+    <meta name="keywords" content="Shadid Ahamed, portfolio, architecture, visual artist, creative technologist, BRAC University">
+    <meta property="og:title" content="Shadid Ahamed | Portfolio">
+    <meta property="og:description" content="Architecture Student • Visual Artist • Creative Technologist">
+    <title>Shadid Ahamed | Portfolio</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
 
-  <!-- Custom Cursor -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
 
-  <!-- AI Assistant -->
-  <button class="ai-trigger" id="aiTrigger" title="AI Assistant">✦</button>
-  <div class="ai-panel" id="aiPanel" hidden>
-    <div class="ai-header">
-      <span>Portfolio Assistant</span>
-      <button class="ai-close" id="aiClose">×</button>
-    </div>
-    <div class="ai-messages" id="aiMessages"></div>
-    <div class="ai-input-row">
-      <input type="text" id="aiInput" placeholder="Talk to me..." autocomplete="off">
-      <button id="aiVoice" title="Voice">🎤</button>
-    </div>
-    <div class="voice-indicator" id="voiceIndicator"></div>
-  </div>
+    <!-- Galaxy Background -->
+    <canvas id="galaxy-canvas"></canvas>
 
-  <button class="back-to-top" id="backToTop">↑</button>
-
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo" data-section="home">SA</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#" data-section="profile" title="Profile">Profile</a></li>
-        <li><a href="#" data-section="education" title="Education">Education</a></li>
-        <li><a href="#" data-section="skills" title="Skills">Skills</a></li>
-        <li><a href="#" data-section="art" title="Art">Art</a></li>
-        <li><a href="#" data-section="architecture" title="Architecture">Architecture</a></li>
-        <li><a href="#" data-section="graphics" title="Graphics">Graphics</a></li>
-        <li><a href="#" data-section="digital" title="Projects">Projects</a></li>
-        <li><a href="#" data-section="videos" title="Videos">Videos</a></li>
-        <li><a href="#" data-section="note" title="Note">Note</a></li>
-        <li><a href="#" data-section="documents" title="Documents">Documents</a></li>
-        <li><a href="#" data-section="location" title="Location">Location</a></li>
-        <li><a href="#" data-section="contact" title="Contact">Contact</a></li>
-        <li><a href="#" data-section="game" title="Game">Game</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle">☰</button>
-    </div>
-  </nav>
-
-  <!-- ========== HOME ========== -->
-  <section class="page active" id="home">
-    <div class="hero">
-      <canvas id="galaxy"></canvas>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-name">SHADID AHAMED</h1>
-        <p class="hero-bangla">শাদিদ আহমেদ</p>
-        <p class="hero-sub">Architecture Student · Visual Artist · Creative Technologist</p>
-        <p class="hero-meta">BRAC University · Architecture · Summer 2026</p>
-        <p class="hero-portfolio">Portfolio</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PROFILE ========== -->
-  <section class="page" id="profile">
-    <div class="container">
-      <h2 class="section-title">Profile</h2>
-      <div class="profile-grid">
-        <div class="portrait-frame">
-          <img src="assets/profile.jpg" alt="SHADID AHAMED">
-        </div>
-        <div class="profile-info">
-          <h3>SHADID AHAMED</h3>
-          <ul class="profile-list">
-            <li>BRAC University</li>
-            <li>Department of Architecture</li>
-            <li>Summer 2026 Batch</li>
-            <li>Current Semester: 1</li>
-            <li>Current Course: ARCH 101</li>
-            <li>Student Roll: 14061008</li>
-          </ul>
-          <p class="profile-bio">
-            Architecture student at BRAC University with deep interest in freehand drawing, sketching, literature, writing, English communication and programming. Combines traditional artistic practice with emerging digital tools.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== EDUCATION ========== -->
-  <section class="page" id="education">
-    <div class="container">
-      <h2 class="section-title">Education</h2>
-
-      <div class="edu-block">
-        <div class="edu-year">2013 – 2023</div>
-        <h3>Motijheel Ideal School & College</h3>
-        <p class="edu-detail">Class 1 to Class 10 · SSC 2023 · GPA 5.00</p>
-        <p class="edu-desc">
-          Spent 10 years here from Class 1 to Class 10. Completed Secondary School Certificate (SSC) examination in 2023 with a perfect GPA of 5.00. This institution shaped the foundation of my academic journey.
-        </p>
-        <p class="edu-location">Location: Motijheel, Dhaka</p>
-      </div>
-
-      <div class="edu-block">
-        <div class="edu-year">2023 – 2025</div>
-        <h3>Notre Dame College</h3>
-        <p class="edu-detail">HSC 2025 · GPA 5.00 · Science Group</p>
-        <p class="edu-desc">
-          Studied from 2023 to 2025. Completed Higher Secondary Certificate (HSC) with GPA 5.00. Was in the Science group. My classroom was near the Math Lab (around seat number 206 area). This college played a major role in preparing me for university life.
-        </p>
-        <p class="edu-location">Location: Arambagh, Dhaka</p>
-      </div>
-
-      <div class="edu-block">
-        <div class="edu-year">2026 – Present</div>
-        <h3>BRAC University</h3>
-        <p class="edu-detail">Bachelor of Architecture · Summer 2026 Batch · Expected Graduation: 2033</p>
-        <p class="edu-desc">
-          Currently studying in the Department of Architecture. Started in Summer 2026. Expected to graduate around 2033. The architecture department focuses on design, theory, history, and practical studio work.
-        </p>
-        <p class="edu-location">Location: Merul Badda, Dhaka</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SKILLS ========== -->
-  <section class="page" id="skills">
-    <div class="container">
-      <h2 class="section-title">Skills & Interests</h2>
-
-      <div class="skill-category">
-        <h3>Literature & Reading</h3>
-        <p>I deeply enjoy reading. Some of the writers and books that influenced me:</p>
-        <ul>
-          <li><strong>Samaresh Majumdar</strong> — One of my favourite authors. I have read several of his books including <em>Uttaradhikar</em>, <em>Kaalbela</em>, and others. His storytelling has a special place in my heart.</li>
-          <li><strong>Humayun Ahmed</strong> — Especially the Himu series.</li>
-          <li><strong>Rabindranath Tagore</strong> — Many of his writings.</li>
-          <li>Board textbooks such as <em>Ekattorer Dinguli</em> also left a strong impression on me.</li>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-logo">SA</div>
+        <ul class="nav-links">
+            <li><button class="nav-btn active" data-section="home">Home</button></li>
+            <li><button class="nav-btn" data-section="profile">Profile</button></li>
+            <li><button class="nav-btn" data-section="education">Education</button></li>
+            <li><button class="nav-btn" data-section="skills">Skills</button></li>
+            <li><button class="nav-btn" data-section="projects">Projects</button></li>
+            <li><button class="nav-btn" data-section="videos">Videos</button></li>
+            <li><button class="nav-btn" data-section="contact">Contact</button></li>
         </ul>
-      </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
 
-      <div class="skill-category">
-        <h3>Drawing & Art Competitions</h3>
-        <p>I have participated in many art competitions since childhood:</p>
-        <ul>
-          <li>Bangladesh Shishu Academy competitions</li>
-          <li>Shilpakala Academy competitions</li>
-          <li>Noboborsho (Bengali New Year) art competitions</li>
-          <li>Various national and local art contests</li>
-        </ul>
-        <p>Achieved 1st and 2nd positions in several competitions, and also participated in many others.</p>
-      </div>
+    <!-- AI Floating Button -->
+    <button class="ai-fab" id="aiFab" title="Portfolio Assistant">
+        <i class="fas fa-robot"></i>
+    </button>
 
-      <div class="skill-category">
-        <h3>Other Skills</h3>
-        <ul>
-          <li>Freehand Drawing & Sketching</li>
-          <li>English Speaking & Communication</li>
-          <li>C++, HTML, JavaScript, Programming</li>
-          <li>Fitness — Completed 5 km Marathon (Runner-up category)</li>
-          <li>English Courses after SSC & HSC (scored 87–89%)</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== ART ========== -->
-  <section class="page" id="art">
-    <div class="container">
-      <h2 class="section-title">Art & Drawing</h2>
-      <p class="section-intro">Selected artworks from exhibitions and personal practice. Each piece carries its own story.</p>
-      <div class="gallery-grid" id="artGallery">
-        <!-- Images will be loaded dynamically or you can add manually -->
-        <div class="art-item">
-          <div class="art-image-box">
-            <img src="assets/art/01.jpg" alt="Artwork">
-          </div>
-          <div class="art-info">
-            <h4>Artwork Title</h4>
-            <p>Short description of the artwork and the exhibition it was part of.</p>
-          </div>
+    <!-- AI Panel -->
+    <div class="ai-panel" id="aiPanel">
+        <div class="ai-header">
+            <div class="ai-title">
+                <span class="ai-dot"></span>
+                Portfolio Assistant
+            </div>
+            <div class="ai-controls">
+                <button class="ai-voice-btn" id="aiVoiceBtn" title="Voice Mode">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="ai-close" id="aiClose">✕</button>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== ARCHITECTURE ========== -->
-  <section class="page" id="architecture">
-    <div class="container">
-      <h2 class="section-title">Architecture Projects</h2>
-      <p class="section-intro">Studio projects including Squares & Grid, Low Relief, Pavilion and more.</p>
-      <div class="project-list">
-        <div class="project-item">
-          <h3>Squares and Grid</h3>
-          <p>Early studio exploration focusing on proportion, grid systems and spatial relationships.</p>
+        <div class="ai-messages" id="aiMessages">
+            <div class="ai-msg bot">
+                <p>হ্যালো। আমি শাদিদের পোর্টফোলিও অ্যাসিস্ট্যান্ট। বাংলা বা ইংরেজিতে যেকোনো প্রশ্ন করুন — পোর্টফোলিও, ব্যক্তিগত গল্প, পরিবার, বা সাধারণ জ্ঞান।</p>
+            </div>
         </div>
-        <div class="project-item">
-          <h3>Low Relief</h3>
-          <p>Study of depth, light and shadow through low relief composition.</p>
+        <div class="ai-input-area">
+            <input type="text" id="aiInput" placeholder="Type or speak... / লিখুন বা বলুন..." autocomplete="off">
+            <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
         </div>
-        <div class="project-item">
-          <h3>Pavilion</h3>
-          <p>Design of a small pavilion exploring structure, material and human scale.</p>
+        <div class="ai-status" id="aiStatus"></div>
+    </div>
+
+    <!-- ==================== HOME ==================== -->
+    <section id="home" class="section active">
+        <div class="home-content">
+            <h1 class="home-name">SHADID AHAMED</h1>
+            <p class="home-name-bn">শাদিদ আহমেদ</p>
+            <p class="home-tagline">Architecture Student • Visual Artist • Creative Technologist</p>
+            <p class="home-uni">BRAC University • Architecture • Summer 2026</p>
+            <div class="home-cta">
+                <button class="btn-gold" data-section="profile">View Profile</button>
+                <button class="btn-outline" data-section="projects">Projects</button>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="scroll-hint">Explore</div>
+    </section>
 
-  <!-- ========== GRAPHICS ========== -->
-  <section class="page" id="graphics">
-    <div class="container">
-      <h2 class="section-title">Graphics</h2>
-      <p class="section-intro">Selected graphic works from coursework.</p>
-      <div class="graphics-grid">
-        <!-- Add graphics items here -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== DIGITAL PROJECTS ========== -->
-  <section class="page" id="digital">
-    <div class="container">
-      <h2 class="section-title">Digital Projects</h2>
-
-      <div class="digital-card">
-        <h3>Shadid's Game</h3>
-        <p>A game I developed. You can play it directly.</p>
-        <a href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" class="btn">Play Game</a>
-      </div>
-
-      <div class="digital-card">
-        <h3>E-commerce Website (TrendCart)</h3>
-        <p>Modern UI shopping system developed as a portfolio project.</p>
-        <a href="https://shadidahamed.github.io/trendcart/" target="_blank" class="btn">Live Demo</a>
-      </div>
-
-      <div class="digital-card">
-        <h3>Affiliate Marketing Website</h3>
-        <p>Previously developed affiliate marketing website created as a work/project demo. The project is no longer active.</p>
-      </div>
-
-      <div class="digital-card">
-        <h3>Orpheus Engine</h3>
-        <p>Game development project by Shadid.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== VIDEOS ========== -->
-  <section class="page" id="videos">
-    <div class="container">
-      <h2 class="section-title">Videos</h2>
-      <p class="section-intro">English learning classes I conducted. More videos (Physics, Science etc.) will be added later.</p>
-
-      <div class="video-grid">
-        <div class="video-card">
-          <h3>Video 1 – Modifiers</h3>
-          <p>English class on Modifiers</p>
-          <a href="https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS" target="_blank" class="btn">Watch</a>
+    <!-- ==================== PROFILE ==================== -->
+    <section id="profile" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Profile</h2>
+            <div class="profile-grid">
+                <div class="profile-photo">
+                    <div class="photo-frame">
+                        <div class="profile-placeholder">Your Photo</div>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h3>শাদিদ আহমেদ <span class="en">/ Shadid Ahamed</span></h3>
+                    <p class="role">Architecture Student • Visual Artist • Creative Technologist</p>
+                    <div class="info-block">
+                        <p><strong>University:</strong> BRAC University — Architecture Department</p>
+                        <p><strong>Batch:</strong> Summer 2026</p>
+                        <p><strong>Roll Number:</strong> 1000061008</p>
+                        <p><strong>Current Course:</strong> ARC 101 (Design Section)</p>
+                        <p><strong>Status:</strong> Currently studying Architecture and shifting to CSE (Computer Science & Engineering)</p>
+                        <p><strong>Expected Graduation:</strong> 2032 (tentative)</p>
+                    </div>
+                    <div class="bio-text">
+                        <p>He is someone who wanted a future badly enough to keep reaching for it even when life kept putting obstacles in front of him. He worked toward architecture, pushed himself through admissions, studied when exhausted, practiced drawing, built portfolios, learned new things, and kept looking for another door whenever one closed.</p>
+                        <p>He fought through academic pressure, disappointment, loneliness, financial stress and heartbreak — and still kept creating. He draws, designs, imagines spaces, furniture, websites, portfolios and games.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="video-card">
-          <h3>Video 2 – Connectors</h3>
-          <p>English class on Connectors</p>
-          <a href="https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I" target="_blank" class="btn">Watch</a>
+    </section>
+
+    <!-- ==================== EDUCATION ==================== -->
+    <section id="education" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Education</h2>
+
+            <!-- School -->
+            <div class="edu-card">
+                <div class="edu-header">
+                    <h3>School</h3>
+                    <span class="edu-years">2013 – 2023</span>
+                </div>
+                <h4>Motijheel Ideal School and College</h4>
+                <p class="edu-location">
+                    <a href="https://maps.google.com/?q=Motijheel+Ideal+School+and+College+Dhaka" target="_blank" rel="noopener">
+                        <i class="fas fa-map-marker-alt"></i> Motijheel, Dhaka
+                    </a>
+                </p>
+                <ul class="edu-details">
+                    <li>Class 1 to Class 10 — Full 10 years</li>
+                    <li>SSC — Science Group</li>
+                    <li>GPA: <strong>5.00</strong> (Golden A+)</li>
+                </ul>
+                <div class="dice-carousel" data-speed="2200">
+                    <div class="dice-track">
+                        <div class="dice-item"><div class="dice-placeholder">School Photo 1</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">School Photo 2</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">School Photo 3</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- College -->
+            <div class="edu-card">
+                <div class="edu-header">
+                    <h3>College</h3>
+                    <span class="edu-years">2023 – 2025</span>
+                </div>
+                <h4>Notre Dame College, Dhaka</h4>
+                <ul class="edu-details">
+                    <li>HSC — Science Group (Group 1)</li>
+                    <li>Batch 2025 • Roll: 125019</li>
+                    <li>Group Rank: 20</li>
+                    <li>HSC GPA: <strong>5.00</strong> (Golden A+)</li>
+                </ul>
+                <div class="dice-carousel" data-speed="2400">
+                    <div class="dice-track">
+                        <div class="dice-item"><div class="dice-placeholder">College Photo 1</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">College Photo 2</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">College Photo 3</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">College Photo 4</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- University -->
+            <div class="edu-card">
+                <div class="edu-header">
+                    <h3>University</h3>
+                    <span class="edu-years">2026 – Present</span>
+                </div>
+                <h4>BRAC University</h4>
+                <ul class="edu-details">
+                    <li>Department: Architecture (ARC)</li>
+                    <li>Batch: Summer 2026</li>
+                    <li>Roll: 1000061008</li>
+                    <li>Current: ARC 101 — Design Section</li>
+                    <li>Transitioning to: CSE (Computer Science & Engineering)</li>
+                    <li>Expected Passing Year: 2032</li>
+                </ul>
+                <div class="dice-carousel" data-speed="2600">
+                    <div class="dice-track">
+                        <div class="dice-item"><div class="dice-placeholder">University Photo 1</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">University Photo 2</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">University Photo 3</div></div>
+                        <div class="dice-item"><div class="dice-placeholder">University Photo 4</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="video-card">
-          <h3>Video 3 – Subject-Verb Agreement</h3>
-          <p>English class on Subject-Verb Agreement</p>
-          <a href="https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg" target="_blank" class="btn">Watch</a>
+    </section>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section id="skills" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Skills & Achievements</h2>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Literature & Reading</h3>
+                    <p>Deeply passionate about Bengali literature.</p>
+                    <ul>
+                        <li><strong>Favorite Writer:</strong> Samaresh Majumdar</li>
+                        <li>Notable: <em>Uttaradhikar</em>, <em>Kaalbel</em>, <em>Mousolkal</em>, <em>Nil</em></li>
+                        <li>Humayun Ahmed — Himu series, <em>Amar Bondhu Rashed</em></li>
+                        <li>Rabindranath Tagore, Kazi Nazrul Islam, Michael Madhusudan Dutt</li>
+                        <li><strong>Most Favorite:</strong> <em>Protibastab</em> (Dhaka Comics) — gifted by a friend</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3>Drawing & Art</h3>
+                    <p>Strong architectural hand skills and fine art.</p>
+                    <ul>
+                        <li>Bangladesh Art Exhibition — Name featured</li>
+                        <li>Bangladesh Shishu Academy — Passed (1st position)</li>
+                        <li>Bangladesh Shishu Competition (Chitrankan) 2023:</li>
+                        <li>Thana Level — 1st</li>
+                        <li>District Level — 1st</li>
+                        <li>Division Level — 2nd</li>
+                    </ul>
+                    <p class="cert-note">Certificates available via Drive (view only)</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-music"></i></div>
+                    <h3>Music</h3>
+                    <p>Loves listening to music and can sing several songs.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h3>Architectural Skills</h3>
+                    <p>Strong hand drafting, model making, spatial thinking and design process.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-running"></i></div>
+                    <h3>Physical Fitness</h3>
+                    <ul>
+                        <li>5 km Run — Runner-up</li>
+                        <li>Medal & Crest from Notre Dame College</li>
+                        <li>SSC & HSC Golden A+ Crests</li>
+                        <li>Badminton Club Referee (Police) — Medal received</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== NOTE ========== -->
-  <section class="page" id="note">
-    <div class="container">
-      <h2 class="section-title">A Note About Shadid</h2>
-      <div class="note-content">
-        <p>If I had to tell someone who Shadid was, I would not begin with his results or the things he failed to get. I would begin with how hard he kept trying.</p>
-        <p>He wanted a future badly enough to keep reaching for it even when life kept putting obstacles in front of him. He fought through academic pressure, disappointment, loneliness, financial stress, and heartbreak — and still kept studying, drawing, designing, and creating.</p>
-        <p>Behind every drawing was patience. Behind every plan was hope. Behind every “I’ll try again” was someone who had already been through a lot.</p>
-        <p>He is still becoming the person he wants to be. And that matters.</p>
-      </div>
-    </div>
-  </section>
+    <!-- ==================== PROJECTS ==================== -->
+    <section id="projects" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Projects</h2>
 
-  <!-- ========== DOCUMENTS ========== -->
-  <section class="page" id="documents">
-    <div class="container">
-      <h2 class="section-title">Documents & Certificates</h2>
-      <div class="doc-card">
-        <h3>Professional CV</h3>
-        <p>Download or view my complete CV containing education, skills and experience.</p>
-        <div class="cv-actions">
-          <a href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" class="btn">View CV</a>
-          <a href="https://drive.google.com/uc?export=download&id=1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV" class="btn" download>Download CV</a>
+            <h3 class="sub-title">Digital Projects</h3>
+            <div class="projects-grid">
+                <div class="project-card digital">
+                    <div class="project-visual"><i class="fas fa-shopping-cart"></i></div>
+                    <h4>TrendCart — E-commerce Website</h4>
+                    <p>Modern UI shopping system built with clean frontend practices.</p>
+                    <a href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener" class="btn-gold small">Live Demo</a>
+                </div>
+                <div class="project-card digital">
+                    <div class="project-visual"><i class="fas fa-gamepad"></i></div>
+                    <h4>Office Engine (Shadid’s Game)</h4>
+                    <p>3D maze-style game engine created purely with HTML, CSS & JavaScript. Smooth vectors, matrix inversion, skeletal mesh & hydration systems.</p>
+                    <a href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener" class="btn-gold small">Play the Game</a>
+                </div>
+            </div>
+
+            <h3 class="sub-title">Architecture Departmental Projects</h3>
+            <div class="arch-projects">
+                <div class="arch-item">
+                    <div class="arch-img-wrap"><div class="arch-placeholder">Lorry Lift + Plaster Paris</div></div>
+                    <div class="arch-desc">
+                        <h4>Lorry Lift</h4>
+                        <p>Physical model exploring structural form. Plaster of Paris version developed from the initial concept. Two key views documented.</p>
+                    </div>
+                </div>
+                <div class="arch-item">
+                    <div class="arch-img-wrap"><div class="arch-placeholder">Squares & Grid</div></div>
+                    <div class="arch-desc">
+                        <h4>Squares & Grid</h4>
+                        <p>Study of modular geometry and spatial organization through grid systems.</p>
+                    </div>
+                </div>
+                <div class="arch-item">
+                    <div class="arch-img-wrap"><div class="arch-placeholder">Line Signature (B&W + 3D)</div></div>
+                    <div class="arch-desc">
+                        <h4>Line Signature</h4>
+                        <p>Black & white line exploration later translated into 3D form. Three studies combined into one presentation.</p>
+                    </div>
+                </div>
+                <div class="arch-item">
+                    <div class="arch-img-wrap"><div class="arch-placeholder">Interlock — Top / Axonometric / Side</div></div>
+                    <div class="arch-desc">
+                        <h4>Interlock</h4>
+                        <p>Top view, axonometric and side view studies of interlocking spatial elements.</p>
+                    </div>
+                </div>
+                <div class="arch-item">
+                    <div class="arch-img-wrap"><div class="arch-placeholder">Pavilion (Final Project)</div></div>
+                    <div class="arch-desc">
+                        <h4>Pavilion</h4>
+                        <p>Final project of the semester. Includes process documentation and a short video presentation.</p>
+                    </div>
+                </div>
+                <div class="arch-item">
+                    <div class="arch-img-wrap"><div class="arch-placeholder">Prism Cutouts & Grids</div></div>
+                    <div class="arch-desc">
+                        <h4>Section Cutouts</h4>
+                        <p>Prism volume with systematic cutouts derived from grid logic.</p>
+                    </div>
+                </div>
+                <div class="arch-item">
+                    <div class="arch-img-wrap"><div class="arch-placeholder">Mosque Collaboration</div></div>
+                    <div class="arch-desc">
+                        <h4>Mosque Project</h4>
+                        <p>Collaborative work on a mosque design. Contributed to specific design touchpoints.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-title">Architectural Graphics</h3>
+            <p class="graphics-note">Approximately 18 graphic sheets — landscape orientation. Circular rotating display.</p>
+            <div class="dice-carousel landscape" data-speed="2800">
+                <div class="dice-track">
+                    <div class="dice-item landscape"><div class="dice-placeholder">Graphics 01</div></div>
+                    <div class="dice-item landscape"><div class="dice-placeholder">Graphics 02</div></div>
+                    <div class="dice-item landscape"><div class="dice-placeholder">Graphics 03</div></div>
+                    <div class="dice-item landscape"><div class="dice-placeholder">Graphics 04</div></div>
+                    <div class="dice-item landscape"><div class="dice-placeholder">Graphics 05</div></div>
+                    <div class="dice-item landscape"><div class="dice-placeholder">Graphics 06</div></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <p class="small-note">Certificates from art competitions and English courses will be added here. View only (screenshot protection applied where possible).</p>
+    </section>
+
+    <!-- ==================== VIDEOS ==================== -->
+    <section id="videos" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Videos</h2>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <h4>Modifiers (English)</h4>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/MCj4pNiJR_Q" title="Modifiers English" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <a href="https://youtu.be/MCj4pNiJR_Q" target="_blank" rel="noopener">Watch on YouTube</a>
+                </div>
+                <div class="video-card">
+                    <h4>Connectors (English)</h4>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/K29JNurQr9c" title="Connectors English" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <a href="https://youtu.be/K29JNurQr9c" target="_blank" rel="noopener">Watch on YouTube</a>
+                </div>
+                <div class="video-card">
+                    <h4>Subject-Verb Agreement</h4>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/0ba53jWZy5o" title="Subject-Verb Agreement" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <a href="https://youtu.be/0ba53jWZy5o" target="_blank" rel="noopener">Watch on YouTube</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Contact & Links</h2>
+
+            <div class="contact-grid">
+                <a href="mailto:shadidahamed.matashome05m@gmail.com" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fas fa-envelope"></i><span>Email</span>
+                </a>
+                <a href="https://github.com/shadidahamed" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i><span>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin"></i><span>LinkedIn</span>
+                </a>
+                <a href="https://www.instagram.com/shade_ed25" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-instagram"></i><span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/share/1C2KcQfwvn/" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-facebook"></i><span>Facebook</span>
+                </a>
+                <a href="https://wa.me/8801326162684" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+                </a>
+                <a href="https://x.com/ShadidAhamed" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-x-twitter"></i><span>X (Twitter)</span>
+                </a>
+                <a href="https://pin.it/4Z5y34R2T" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-pinterest"></i><span>Pinterest</span>
+                </a>
+                <a href="https://www.reddit.com/user/Shade_ed25" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-reddit"></i><span>Reddit</span>
+                </a>
+                <a href="https://www.tumblr.com/" class="contact-item" target="_blank" rel="noopener">
+                    <i class="fab fa-tumblr"></i><span>Tumblr</span>
+                </a>
+                <a href="https://shadidahamed.github.io/Shadid-s-game/" class="contact-item highlight" target="_blank" rel="noopener">
+                    <i class="fas fa-gamepad"></i><span>Play Office Engine</span>
+                </a>
+            </div>
+
+            <div class="location-block">
+                <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                <p>Flat No. 24, 15/17 Bazar, under Thana Paltan, Dhaka</p>
+                <a href="https://maps.google.com/?q=Paltan+Dhaka" target="_blank" rel="noopener" class="btn-outline small">Open in Google Maps</a>
+            </div>
+
+            <div class="cv-block">
+                <h3>Resume / CV</h3>
+                <p>Download my CV for detailed education, skills and project experience.</p>
+                <a href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener" class="btn-gold">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" alt="Enlarged view">
+        <button class="lightbox-close">✕</button>
     </div>
-  </section>
 
-  <!-- ========== LOCATION ========== -->
-  <section class="page" id="location">
-    <div class="container">
-      <h2 class="section-title">Location</h2>
-      <div class="location-card">
-        <p class="location-text">Dhaka, Bangladesh</p>
-        <p class="location-sub">Happily living life with family · Open to collaboration</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CONTACT ========== -->
-  <section class="page" id="contact">
-    <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-intro">You can contact me through any of these platforms:</p>
-      <div class="contact-grid">
-        <a href="mailto:shadidahamed.matashome05m@gmail.com" class="contact-btn">Email</a>
-        <a href="https://github.com/shadidahamed" target="_blank" class="contact-btn">GitHub</a>
-        <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" class="contact-btn">LinkedIn</a>
-        <a href="https://www.instagram.com/shade_ed25" target="_blank" class="contact-btn">Instagram</a>
-        <a href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" class="contact-btn">Facebook</a>
-        <a href="https://wa.me/8801326162684" target="_blank" class="contact-btn">WhatsApp</a>
-        <a href="https://x.com/ShadidAhamed" target="_blank" class="contact-btn">X (Twitter)</a>
-        <a href="https://www.reddit.com/user/Shade_ed25" target="_blank" class="contact-btn">Reddit</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== GAME ========== -->
-  <section class="page" id="game">
-    <div class="container">
-      <h2 class="section-title">A Little Game</h2>
-      <div id="gameIntro" class="game-intro">
-        <div class="game-character">🧒</div>
-        <h3>Hi!</h3>
-        <p>Let's enjoy a fun game</p>
-        <button id="startGameBtn" class="btn play-btn">Will you play the game?</button>
-      </div>
-      <div id="gameArea" hidden>
-        <canvas id="gameCanvas"></canvas>
-        <p class="game-controls">Arrow Keys / WASD to move · Space to brake · R to restart · ESC to exit</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Physical Portfolio Note -->
-  <div class="physical-note">
-    This is my digital portfolio. I am also preparing a physical Architecture Portfolio book. A video of it will be added soon.
-  </div>
-
-  <script src="js/main.js"></script>
-  <script src="js/ai.js"></script>
-  <script src="js/game.js"></script>
+    <script src="js/galaxy.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
 </body>
 </html>
