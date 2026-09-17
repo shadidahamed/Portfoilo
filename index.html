@@ -1,398 +1,1206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#070707">
-  <meta name="description" content="Shadid Ahamed — Architecture student, visual artist and creative technologist. Interactive portfolio.">
-  <meta name="keywords" content="Shadid Ahamed, portfolio, architecture, visual artist, creative technologist, BRAC University, frontend developer">
-  <meta property="og:title" content="Shadid Ahamed — Portfolio">
-  <meta property="og:description" content="An interactive portfolio universe of architecture, art, projects and experiments by Shadid Ahamed.">
-  <meta property="og:image" content="image/Heroimage.png">
-  <meta property="og:type" content="website">
-  <title>Shadid Ahamed — Portfolio Universe</title>
+    <meta charset="UTF-8">
 
-  <link rel="icon" type="image/x-icon" href="./favicon.ico">
-  <link rel="icon" type="image/png" href="./favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="description"
+        content="Shadid Ahamed — Architecture, digital projects, drawing, design and frontend development portfolio."
+    >
+
+    <meta
+        name="keywords"
+        content="Shadid Ahamed, Architecture, Frontend Developer, Drawing, Portfolio, BRAC University, Web Projects"
+    >
+
+    <meta property="og:title" content="Shadid Ahamed — Portfolio">
+    <meta
+        property="og:description"
+        content="A multidisciplinary portfolio covering architecture, art, digital projects and web development."
+    >
+    <meta
+        property="og:image"
+        content="https://shadidahamed.github.io/image/Heroimage.png"
+    >
+
+    <meta name="theme-color" content="#080808">
+
+    <title>Shadid Ahamed — Portfolio</title>
+
+    <link rel="icon" type="image/png" href="./favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-  <div id="space-stage" aria-hidden="true"></div>
-  <div class="space-vignette" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
 
-  <div class="custom-cursor" id="cursorDot" aria-hidden="true"></div>
-  <div class="custom-cursor-ring" id="cursorRing" aria-hidden="true"></div>
+    <!-- =========================================================
+         GLOBAL GALAXY BACKGROUND
+    ========================================================== -->
+    <canvas id="galaxyCanvas" aria-hidden="true"></canvas>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <button class="brand" data-section="home" aria-label="Go to Home">
-        <span class="brand-mark">SA</span>
-        <span class="brand-word">SHADID<span>.</span></span>
-      </button>
+    <div class="background-vignette"></div>
+    <div class="background-noise"></div>
 
-      <nav class="desktop-nav" aria-label="Primary navigation">
-        <button class="nav-link active" data-section="home">Home</button>
-        <button class="nav-link" data-section="profile">Profile</button>
-        <button class="nav-link" data-section="education">Education</button>
-        <button class="nav-link" data-section="skills">Skills</button>
-        <button class="nav-link" data-section="projects">Projects</button>
-        <button class="nav-link" data-section="videos">Videos</button>
-        <button class="nav-link" data-section="content">Content</button>
-        <button class="nav-link" data-section="contact">Contact</button>
-      </nav>
+    <!-- =========================================================
+         CUSTOM CURSOR
+    ========================================================== -->
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-ring"></div>
 
-      <div class="header-actions">
-        <button class="icon-btn" id="aiMiniBtn" title="Open Portfolio AI" aria-label="Open Portfolio AI">
-          <i class="fa-solid fa-sparkles"></i>
+    <!-- =========================================================
+         TOP BRAND
+    ========================================================== -->
+    <header class="top-bar">
+
+        <a href="#home" class="brand" data-section="home">
+            <span class="brand-mark">S</span>
+
+            <span class="brand-text">
+                Shadid<span>.</span>
+            </span>
+        </a>
+
+        <div class="top-status">
+            <span class="status-dot"></span>
+            <span>PORTFOLIO // ONLINE</span>
+        </div>
+
+    </header>
+
+    <!-- =========================================================
+         DESKTOP NAVIGATION
+    ========================================================== -->
+    <nav class="desktop-nav" aria-label="Main navigation">
+
+        <button
+            class="nav-item active"
+            data-section="home"
+            title="Home"
+        >
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
         </button>
-        <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">
-          <i class="fa-solid fa-bars"></i>
+
+        <button
+            class="nav-item"
+            data-section="profile"
+            title="Profile"
+        >
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
         </button>
-      </div>
+
+        <button
+            class="nav-item"
+            data-section="education"
+            title="Education"
+        >
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Education</span>
+        </button>
+
+        <button
+            class="nav-item"
+            data-section="skills"
+            title="Skills"
+        >
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Skills</span>
+        </button>
+
+        <button
+            class="nav-item"
+            data-section="achievements"
+            title="Achievements"
+        >
+            <i class="fa-solid fa-medal"></i>
+            <span>Achievements</span>
+        </button>
+
+        <button
+            class="nav-item"
+            data-section="projects"
+            title="Projects"
+        >
+            <i class="fa-solid fa-cubes"></i>
+            <span>Projects</span>
+        </button>
+
+        <button
+            class="nav-item"
+            data-section="videos"
+            title="Videos"
+        >
+            <i class="fa-solid fa-play"></i>
+            <span>Videos</span>
+        </button>
+
+        <button
+            class="nav-item"
+            data-section="content"
+            title="Content"
+        >
+            <i class="fa-solid fa-sparkles"></i>
+            <span>Content</span>
+        </button>
+
+        <button
+            class="nav-item"
+            data-section="contact"
+            title="Contact"
+        >
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Contact</span>
+        </button>
+
+        <button
+            class="nav-item"
+            data-section="cv"
+            title="CV"
+        >
+            <i class="fa-solid fa-file-lines"></i>
+            <span>CV</span>
+        </button>
+
+    </nav>
+
+    <!-- =========================================================
+         MOBILE NAVIGATION
+    ========================================================== -->
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+
+        <button class="mobile-nav-item active" data-section="home">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+
+        <button class="mobile-nav-item" data-section="profile">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </button>
+
+        <button class="mobile-nav-item" data-section="education">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Education</span>
+        </button>
+
+        <button class="mobile-nav-item" data-section="skills">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Skills</span>
+        </button>
+
+        <button class="mobile-nav-item" data-section="projects">
+            <i class="fa-solid fa-cubes"></i>
+            <span>Projects</span>
+        </button>
+
+        <button class="mobile-nav-item" data-section="contact">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Contact</span>
+        </button>
+
+    </nav>
+
+    <!-- =========================================================
+         MAIN APPLICATION
+    ========================================================== -->
+    <main id="app">
+
+        <!-- =====================================================
+             HOME
+        ====================================================== -->
+        <section
+            id="home"
+            class="page-section active-section"
+            data-page="home"
+        >
+
+            <div class="section-shell home-shell">
+
+                <div class="home-content">
+
+                    <div class="eyebrow">
+                        <span></span>
+                        MULTIDISCIPLINARY CREATIVE
+                    </div>
+
+                    <h1>
+                        Shadid
+                        <span>Ahamed.</span>
+                    </h1>
+
+                    <div class="hero-title-line"></div>
+
+                    <p class="hero-description">
+                        Architecture student, artist, digital creator and
+                        frontend developer building visual experiences
+                        across physical and digital space.
+                    </p>
+
+                    <div class="home-meta">
+
+                        <div class="meta-pill">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Dhaka, Bangladesh
+                        </div>
+
+                        <div class="meta-pill">
+                            <i class="fa-solid fa-building-columns"></i>
+                            BRAC University
+                        </div>
+
+                        <div class="meta-pill">
+                            <i class="fa-solid fa-code"></i>
+                            Digital Creator
+                        </div>
+
+                    </div>
+
+                    <div class="home-actions">
+
+                        <button
+                            class="primary-button"
+                            data-section="profile"
+                        >
+                            <span>Proceed</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <button
+                            class="secondary-button"
+                            data-section="projects"
+                        >
+                            Explore Projects
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="home-visual">
+
+                    <div class="galaxy-orbit orbit-one"></div>
+                    <div class="galaxy-orbit orbit-two"></div>
+                    <div class="galaxy-orbit orbit-three"></div>
+
+                    <div class="central-profile-orb">
+                        <div class="orb-core">
+                            <span>S</span>
+                        </div>
+                    </div>
+
+                    <div class="floating-label label-one">
+                        <span>01</span>
+                        ART
+                    </div>
+
+                    <div class="floating-label label-two">
+                        <span>02</span>
+                        DESIGN
+                    </div>
+
+                    <div class="floating-label label-three">
+                        <span>03</span>
+                        CODE
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             PROFILE
+        ====================================================== -->
+        <section
+            id="profile"
+            class="page-section"
+            data-page="profile"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">01</span>
+                        <h2>Profile</h2>
+                    </div>
+
+                    <p>
+                        Identity, current academic path and personal overview.
+                    </p>
+
+                </div>
+
+                <div class="profile-layout">
+
+                    <div class="profile-photo-panel glass-card">
+
+                        <div class="photo-frame">
+                            <img
+                                src="./image/profile.jpg"
+                                alt="Portrait of Shadid Ahamed"
+                                data-fallback="SHADID AHAMED"
+                            >
+                        </div>
+
+                        <div class="profile-photo-caption">
+                            <span>PROFILE</span>
+                            <strong>SHADID AHAMED</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="profile-copy glass-card">
+
+                        <div class="small-label">
+                            WHO IS SHADID?
+                        </div>
+
+                        <h3>
+                            A person still building
+                            <span>the person he wants to become.</span>
+                        </h3>
+
+                        <p>
+                            Shadid Ahamed is a multidisciplinary learner
+                            interested in architecture, visual art, digital
+                            experiences, frontend development and creative
+                            problem-solving.
+                        </p>
+
+                        <p>
+                            His path has included academic pressure,
+                            admissions, drawing, architecture, design,
+                            financial responsibility, portfolio building,
+                            programming experiments and many attempts to
+                            construct a future of his own.
+                        </p>
+
+                        <div class="profile-facts">
+
+                            <div class="fact-item">
+                                <span>FULL NAME</span>
+                                <strong>Shadid Ahamed</strong>
+                            </div>
+
+                            <div class="fact-item">
+                                <span>BRAC ROLE</span>
+                                <strong>1000061008</strong>
+                            </div>
+
+                            <div class="fact-item">
+                                <span>CURRENT PATH</span>
+                                <strong>
+                                    Architecture → transition toward CSE
+                                </strong>
+                            </div>
+
+                            <div class="fact-item">
+                                <span>ACADEMIC SESSION</span>
+                                <strong>Summer 2026</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="quote-panel glass-card">
+
+                    <div class="quote-icon">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+
+                    <p>
+                        “Behind every drawing was patience, behind every plan
+                        was hope, behind every attempt was effort, and behind
+                        every ‘I'll try again’ was someone who had already been
+                        through a lot.”
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             EDUCATION
+        ====================================================== -->
+        <section
+            id="education"
+            class="page-section"
+            data-page="education"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">02</span>
+                        <h2>Education</h2>
+                    </div>
+
+                    <p>
+                        School, college and university journey.
+                    </p>
+
+                </div>
+
+                <div id="educationContainer"></div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             SKILLS
+        ====================================================== -->
+        <section
+            id="skills"
+            class="page-section"
+            data-page="skills"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">03</span>
+                        <h2>Skills</h2>
+                    </div>
+
+                    <p>
+                        Drawing, literature, music, design and creative work.
+                    </p>
+
+                </div>
+
+                <div class="skill-category-grid">
+
+                    <article class="skill-category glass-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-pencil"></i>
+                        </div>
+
+                        <h3>Drawing & Visual Art</h3>
+
+                        <p>
+                            Drawing is one of Shadid's strongest long-term
+                            creative practices, combining observation,
+                            composition, line quality and experimentation
+                            across physical and digital media.
+                        </p>
+
+                        <div
+                            id="drawingGallery"
+                            class="drawing-gallery-grid"
+                        ></div>
+
+                    </article>
+
+                    <article class="skill-category glass-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <h3>Literature</h3>
+
+                        <p>
+                            Interested in Bengali literature, novels,
+                            contemporary fiction and poetry.
+                        </p>
+
+                        <div class="literature-groups">
+
+                            <div>
+                                <span class="literature-label">
+                                    FAVORITE WRITER
+                                </span>
+
+                                <strong>Samaresh Majumdar</strong>
+
+                                <p>
+                                    Uttaradhikar, Kalbela, Kalpurush,
+                                    Satkahon and other works.
+                                </p>
+                            </div>
+
+                            <div>
+                                <span class="literature-label">
+                                    ALSO READ
+                                </span>
+
+                                <p>
+                                    Humayun Ahmed's Himu works,
+                                    “Amar Bondhu Rashed” by
+                                    Muhammed Zafar Iqbal,
+                                    “Pather Panchali” by
+                                    Bibhutibhushan Bandyopadhyay,
+                                    poems by Kazi Nazrul Islam and works
+                                    by Michael Madhusudan Dutt.
+                                </p>
+                            </div>
+
+                            <div class="favorite-book">
+
+                                <span>
+                                    MOST SPECIAL
+                                </span>
+
+                                <strong>
+                                    Dhaka Comics —
+                                    Protibastob, Sequel 01
+                                </strong>
+
+                                <p>
+                                    A memorable gift from a friend.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article class="skill-category glass-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+
+                        <h3>Music</h3>
+
+                        <p>
+                            Music is part of everyday life — both listening
+                            and experimenting with songs.
+                        </p>
+
+                        <div class="skill-tags">
+                            <span>Listening</span>
+                            <span>Music Exploration</span>
+                            <span>Singing</span>
+                            <span>Creative Sound</span>
+                        </div>
+
+                    </article>
+
+                    <article class="skill-category glass-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-compass-drafting"></i>
+                        </div>
+
+                        <h3>Architectural Hand</h3>
+
+                        <p>
+                            Strong interest in architectural graphics,
+                            spatial composition, model making, visual
+                            structure, line work and presentation.
+                        </p>
+
+                        <div class="skill-tags">
+                            <span>Architectural Graphics</span>
+                            <span>Model Making</span>
+                            <span>Composition</span>
+                            <span>Spatial Thinking</span>
+                        </div>
+
+                    </article>
+
+                    <article class="skill-category glass-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+
+                        <h3>Digital Creation</h3>
+
+                        <p>
+                            HTML, CSS and JavaScript experimentation,
+                            interactive web experiences, UI systems,
+                            game interfaces and personal digital projects.
+                        </p>
+
+                        <div class="skill-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>UI</span>
+                            <span>3D Web</span>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             ACHIEVEMENTS
+        ====================================================== -->
+        <section
+            id="achievements"
+            class="page-section"
+            data-page="achievements"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">04</span>
+                        <h2>Achievements</h2>
+                    </div>
+
+                    <p>
+                        Academic, creative and physical milestones.
+                    </p>
+
+                </div>
+
+                <div id="achievementGrid" class="achievement-grid"></div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             PROJECTS
+        ====================================================== -->
+        <section
+            id="projects"
+            class="page-section"
+            data-page="projects"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">05</span>
+                        <h2>Projects</h2>
+                    </div>
+
+                    <p>
+                        Digital work, architecture projects and graphics.
+                    </p>
+
+                </div>
+
+                <!-- DIGITAL -->
+                <div class="project-section">
+
+                    <div class="project-section-heading">
+                        <span>DIGITAL PROJECTS</span>
+                        <div></div>
+                    </div>
+
+                    <div id="digitalProjects"></div>
+
+                </div>
+
+                <!-- ARCHITECTURE -->
+                <div class="project-section">
+
+                    <div class="project-section-heading">
+                        <span>ARCHITECTURAL PROJECTS</span>
+                        <div></div>
+                    </div>
+
+                    <div id="architectureProjects"></div>
+
+                </div>
+
+                <!-- GRAPHICS -->
+                <div class="project-section">
+
+                    <div class="project-section-heading">
+                        <span>ARCHITECTURAL GRAPHICS</span>
+                        <div></div>
+                    </div>
+
+                    <div
+                        id="graphicsGallery"
+                        class="graphics-gallery"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             VIDEOS
+        ====================================================== -->
+        <section
+            id="videos"
+            class="page-section"
+            data-page="videos"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">06</span>
+                        <h2>Videos</h2>
+                    </div>
+
+                    <p>
+                        YouTube lessons, projects and recorded work.
+                    </p>
+
+                </div>
+
+                <div id="videoGrid" class="video-grid"></div>
+
+                <div class="video-project-card glass-card">
+
+                    <div>
+                        <span class="small-label">
+                            UNIVERSITY PROJECT
+                        </span>
+
+                        <h3>
+                            Collaborative English Video Project
+                        </h3>
+
+                        <p>
+                            A collaborative English-language video project
+                            created as part of an academic task.
+                        </p>
+                    </div>
+
+                    <a
+                        href="#"
+                        class="secondary-button disabled-link"
+                        onclick="return false;"
+                    >
+                        VIDEO LINK TO BE ADDED
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             CONTENT
+        ====================================================== -->
+        <section
+            id="content"
+            class="page-section"
+            data-page="content"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">07</span>
+                        <h2>Content</h2>
+                    </div>
+
+                    <p>
+                        Find, follow and explore Shadid online.
+                    </p>
+
+                </div>
+
+                <div
+                    id="contentIconGrid"
+                    class="content-icon-grid"
+                ></div>
+
+                <div class="portfolio-book-card glass-card">
+
+                    <div class="book-icon">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+
+                    <div>
+                        <span class="small-label">
+                            CURRENT WORK
+                        </span>
+
+                        <h3>
+                            Portfolio Book
+                        </h3>
+
+                        <p>
+                            A physical portfolio book is currently being
+                            developed around architecture, drawing, process,
+                            design thinking and personal creative work.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             CONTACT
+        ====================================================== -->
+        <section
+            id="contact"
+            class="page-section"
+            data-page="contact"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">08</span>
+                        <h2>Contact</h2>
+                    </div>
+
+                    <p>
+                        Direct links and public contact information.
+                    </p>
+
+                </div>
+
+                <div class="contact-layout">
+
+                    <div class="contact-links glass-card">
+
+                        <div class="small-label">
+                            BUSINESS & SOCIAL
+                        </div>
+
+                        <div id="contactLinkGrid"></div>
+
+                    </div>
+
+                    <div class="map-card glass-card">
+
+                        <div class="small-label">
+                            LOCATION
+                        </div>
+
+                        <h3>
+                            Dhaka, Bangladesh
+                        </h3>
+
+                        <p>
+                            Paltan area, Dhaka.
+                        </p>
+
+                        <div class="map-frame">
+
+                            <iframe
+                                title="Shadid's public location"
+                                src="https://www.google.com/maps?q=15%2F17%2C%20Flat%2024%2C%20Paltan%2C%20Dhaka%2C%20Bangladesh&output=embed"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+
+                        </div>
+
+                        <a
+                            class="secondary-button"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://www.google.com/maps/search/?api=1&query=15%2F17%2C%20Flat%2024%2C%20Paltan%2C%20Dhaka%2C%20Bangladesh"
+                        >
+                            Open in Google Maps
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             CV
+        ====================================================== -->
+        <section
+            id="cv"
+            class="page-section"
+            data-page="cv"
+        >
+
+            <div class="section-shell">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-index">09</span>
+                        <h2>Resume</h2>
+                    </div>
+
+                    <p>
+                        Education, experience, projects and professional profile.
+                    </p>
+
+                </div>
+
+                <div class="cv-card glass-card">
+
+                    <div class="cv-symbol">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="small-label">
+                            PROFESSIONAL PROFILE
+                        </span>
+
+                        <h3>
+                            Shadid Ahamed — CV
+                        </h3>
+
+                        <p>
+                            View the current CV hosted on Google Drive.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link"
+                        class="primary-button"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span>Open CV</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================================
+         IMAGE VIEWER
+    ========================================================== -->
+    <div
+        id="mediaViewer"
+        class="media-viewer"
+        aria-hidden="true"
+    >
+
+        <div class="media-viewer-toolbar">
+
+            <button id="viewerClose" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <button id="viewerZoomOut" title="Zoom out">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+
+            <span id="viewerZoomLabel">100%</span>
+
+            <button id="viewerZoomIn" title="Zoom in">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+        </div>
+
+        <div class="media-stage" id="mediaStage">
+
+            <img
+                id="viewerImage"
+                src=""
+                alt=""
+                draggable="false"
+            >
+
+        </div>
+
+        <div class="viewer-hint">
+            Click image to enlarge/shrink · Wheel to zoom · Drag to move
+        </div>
+
     </div>
 
-    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-      <button data-section="home">Home</button>
-      <button data-section="profile">Profile</button>
-      <button data-section="education">Education</button>
-      <button data-section="skills">Skills</button>
-      <button data-section="projects">Projects</button>
-      <button data-section="videos">Videos</button>
-      <button data-section="content">Content</button>
-      <button data-section="contact">Contact</button>
-    </div>
-  </header>
+    <!-- =========================================================
+         AI ASSISTANT BUTTON
+    ========================================================== -->
+    <button
+        id="aiLauncher"
+        class="ai-launcher"
+        aria-label="Open Portfolio AI Assistant"
+        title="Portfolio AI Assistant"
+    >
+        <span class="ai-pulse"></span>
+        <i class="fa-solid fa-brain"></i>
+    </button>
 
-  <main id="portfolioApp">
-    <section class="page-section active" id="section-home" data-section-id="home">
-      <div class="home-layout shell">
-        <div class="eyebrow reveal-item">DIGITAL PORTFOLIO · SUMMER 2026</div>
-        <div class="home-title-wrap reveal-item delay-1">
-          <h1 class="hero-name">SHADID <span>AHAMED</span></h1>
-          <div class="hero-bengali">শাদিদ আহমেদ</div>
-        </div>
-        <p class="hero-role reveal-item delay-2">Architecture Student · Visual Artist · Creative Technologist</p>
-        <p class="hero-location reveal-item delay-2">BRAC University · Architecture · Summer 2026</p>
+    <!-- =========================================================
+         AI ASSISTANT PANEL
+    ========================================================== -->
+    <aside
+        id="aiPanel"
+        class="ai-panel"
+        aria-hidden="true"
+    >
 
-        <div class="hero-actions reveal-item delay-3">
-          <button class="primary-btn magnetic" data-section="profile">
-            <span>PROCEED</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-          <button class="ghost-btn magnetic" data-section="projects">Explore Work</button>
-        </div>
+        <div class="ai-panel-header">
 
-        <div class="hero-caption reveal-item delay-3">
-          <span class="micro-dot"></span>
-          <span>ENTER THE UNIVERSE</span>
-          <span class="caption-line"></span>
-          <span>1000061008</span>
-        </div>
-      </div>
-    </section>
+            <div class="ai-title">
 
-    <section class="page-section" id="section-profile" data-section-id="profile">
-      <div class="shell section-shell">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">01 · PROFILE</div>
-            <h2>Who is <span>Shadid?</span></h2>
-          </div>
-          <p class="section-note">A person still becoming — through architecture, art, technology and persistence.</p>
-        </div>
+                <div class="ai-avatar">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
 
-        <div class="profile-grid">
-          <article class="portrait-card glass-card">
-            <div class="portrait-frame">
-              <img src="image/Heroimage.png" alt="Portrait / profile image of Shadid Ahamed" loading="lazy">
-              <div class="portrait-scan"></div>
+                <div>
+                    <strong>Portfolio AI</strong>
+                    <span id="aiStatus">Standby</span>
+                </div>
+
             </div>
-            <div class="portrait-meta">
-              <span>SHADID AHAMED</span>
-              <span>BRAC · 2026</span>
+
+            <div class="ai-header-actions">
+
+                <button
+                    id="aiVoiceToggle"
+                    title="Voice mode"
+                >
+                    <i class="fa-solid fa-microphone"></i>
+                </button>
+
+                <button
+                    id="aiClose"
+                    title="Close panel"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
             </div>
-          </article>
 
-          <article class="profile-copy glass-card">
-            <div class="profile-status">
-              <span class="status-pulse"></span>
-              <span>PROFILE ONLINE</span>
+        </div>
+
+        <div
+            id="aiMessages"
+            class="ai-messages"
+        ></div>
+
+        <div
+            id="aiTypingIndicator"
+            class="ai-typing-indicator"
+            aria-hidden="true"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="ai-controls">
+
+            <div
+                id="aiVoiceStatus"
+                class="ai-voice-status"
+            >
+                <span></span>
+                <small>Typing mode</small>
             </div>
-            <p>Shadid Ahamed is an architecture student, visual artist and creative technologist who likes turning ideas into things people can actually experience.</p>
-            <p>His work moves between drawing, architectural making, interactive web design, 3D experiments and game-like digital environments.</p>
-            <div class="fact-grid">
-              <div><span>Current</span><strong>BRAC University</strong></div>
-              <div><span>Department</span><strong>Architecture → CSE transition</strong></div>
-              <div><span>Role</span><strong>1000061008</strong></div>
-              <div><span>Expected graduation</span><strong>2032</strong></div>
+
+            <div class="ai-input-row">
+
+                <input
+                    type="text"
+                    id="aiInput"
+                    autocomplete="off"
+                    placeholder="Ask about Shadid, history, general knowledge..."
+                >
+
+                <button
+                    id="aiSend"
+                    title="Send"
+                >
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
+
             </div>
-            <button class="text-btn" id="storyBtn">Read the longer story <i class="fa-solid fa-arrow-right"></i></button>
-          </article>
-        </div>
 
-        <div class="story-panel glass-card" id="storyPanel" hidden>
-          <div class="panel-kicker">A NOTE ABOUT SHADID</div>
-          <p>If I had to tell someone who Shadid was, I would not begin with his results, his marks, or the things he failed to get. I would begin with how hard he kept trying.</p>
-          <p>He kept reaching for a future he could believe in — through admissions, study, drawing, architecture, personal projects, money pressure, disappointments and the many moments when another door seemed to close.</p>
-          <p>He was never defined only by success. The deeper story is that after being hurt or exhausted, he kept creating, kept learning and kept looking for another way forward.</p>
-          <button class="text-btn" id="storyCloseBtn">Close <i class="fa-solid fa-xmark"></i></button>
-        </div>
-      </div>
-    </section>
+            <div class="ai-hints">
 
-    <section class="page-section" id="section-education" data-section-id="education">
-      <div class="shell section-shell">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">02 · EDUCATION</div>
-            <h2>The path <span>so far</span></h2>
-          </div>
-          <p class="section-note">School → college → university, presented as a living archive.</p>
-        </div>
+                <button data-ai-hint="Who is Shadid?">
+                    Who is Shadid?
+                </button>
 
-        <div class="education-stack">
-          <article class="education-card glass-card">
-            <div class="edu-copy">
-              <span class="edu-index">01</span>
-              <div class="edu-kicker">SCHOOL · 2013—2023</div>
-              <h3>Motijheel Ideal School and College</h3>
-              <p>Class 1–10 · Science · SSC · GPA 5.00 / Golden A+</p>
-              <div class="edu-tags"><span>SSC</span><span>SCIENCE</span><span>GPA 5.00</span></div>
-              <a class="inline-link" href="https://www.google.com/maps/search/?api=1&query=Motijheel%20Ideal%20School%20and%20College%2C%20Dhaka" target="_blank" rel="noopener">Open campus on Maps <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <button data-ai-hint="What are your projects?">
+                    Projects
+                </button>
+
+                <button data-ai-hint="Are you human or AI?">
+                    Human or AI?
+                </button>
+
             </div>
-            <div class="dice-stage" data-gallery='["image/education/school-01.jpg","image/education/school-02.jpg","image/education/school-03.jpg"]' data-label="School gallery"></div>
-          </article>
 
-          <article class="education-card glass-card reverse-mobile">
-            <div class="edu-copy">
-              <span class="edu-index">02</span>
-              <div class="edu-kicker">COLLEGE · 2023—2025</div>
-              <h3>Notre Dame College</h3>
-              <p>Science · Batch 2025 · Group 1 · Group Roll 20 · College Roll 125019 · HSC GPA 5.00 / Golden A+</p>
-              <div class="edu-tags"><span>HSC</span><span>SCIENCE</span><span>GOLDEN A+</span></div>
-            </div>
-            <div class="dice-stage" data-gallery='["image/education/college-01.jpg","image/education/college-02.jpg","image/education/college-03.jpg","image/education/college-04.jpg"]' data-label="College gallery"></div>
-          </article>
-
-          <article class="education-card glass-card">
-            <div class="edu-copy">
-              <span class="edu-index">03</span>
-              <div class="edu-kicker">UNIVERSITY · STARTED 2026</div>
-              <h3>BRAC University</h3>
-              <p>Architecture · Summer 2026 · ARC 101 Design · currently preparing for a transition toward Computer Science and Engineering.</p>
-              <div class="edu-tags"><span>BRAC</span><span>ARC 101</span><span>ROLE 1000061008</span><span>EST. 2032</span></div>
-              <p class="bilingual">বাংলা: বর্তমানে BRAC University-এর Architecture Department-এ অধ্যয়নরত; পরবর্তীতে CSE-তে যাওয়ার চেষ্টা করছি।</p>
-            </div>
-            <div class="dice-stage" data-gallery='["image/education/brac-01.jpg","image/education/brac-02.jpg","image/education/brac-03.jpg","image/education/brac-04.jpg"]' data-label="University gallery"></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section" id="section-skills" data-section-id="skills">
-      <div class="shell section-shell">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">03 · SKILLS & ACHIEVEMENTS</div>
-            <h2>Things I <span>keep practicing</span></h2>
-          </div>
-          <p class="section-note">Creative skills, reading, music, drawing, architectural observation and physical activity.</p>
         </div>
 
-        <div class="skill-matrix">
-          <article class="skill-card tall glass-card">
-            <i class="fa-solid fa-pencil icon-gold"></i>
-            <h3>Drawing & Visual Art</h3>
-            <p>Drawing is one of Shadid’s strongest long-running practices — from competition work to observational studies and experimental visual pieces.</p>
-            <div class="skill-stat"><strong>20+</strong><span>selected works planned for the archive</span></div>
-          </article>
+    </aside>
 
-          <article class="skill-card glass-card">
-            <i class="fa-solid fa-compass-drafting icon-gold"></i>
-            <h3>Architectural Hand</h3>
-            <p>Strong interest in hand-drawn spatial studies, form, composition, model-making and architectural graphics.</p>
-          </article>
+    <!-- =========================================================
+         THREE.JS
+    ========================================================== -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"
+    ></script>
 
-          <article class="skill-card glass-card">
-            <i class="fa-solid fa-book-open icon-gold"></i>
-            <h3>Literature & Reading</h3>
-            <p>Favourite authors include Samaresh Majumdar, Humayun Ahmed, Rabindranath Tagore, Kazi Nazrul Islam, Bibhutibhushan Bandyopadhyay and Michael Madhusudan Dutt.</p>
-            <button class="text-btn mini" id="booksBtn">See reading notes <i class="fa-solid fa-arrow-right"></i></button>
-          </article>
+    <!-- =========================================================
+         APPLICATION SCRIPT
+    ========================================================== -->
+    <script src="./script.js"></script>
 
-          <article class="skill-card glass-card">
-            <i class="fa-solid fa-music icon-gold"></i>
-            <h3>Music</h3>
-            <p>Enjoys listening to music and can perform some songs; music is part of the everyday creative routine.</p>
-          </article>
+    <!-- =========================================================
+         AI SCRIPT
+    ========================================================== -->
+    <script src="./ai.js"></script>
 
-          <article class="skill-card glass-card">
-            <i class="fa-solid fa-person-running icon-gold"></i>
-            <h3>Physical Fitness</h3>
-            <p>5 KM run · Runner-up.</p>
-            <img class="achievement-mini" src="image/achievements/run-medal.jpg" alt="5 KM running medal" loading="lazy">
-          </article>
-
-          <article class="skill-card glass-card">
-            <i class="fa-solid fa-award icon-gold"></i>
-            <h3>Drawing Achievement</h3>
-            <p>2023 Chitrankan competition: 1st at thana level, 1st at district level and 2nd at division level.</p>
-            <a class="inline-link" href="#certificates">View certificate archive <i class="fa-solid fa-arrow-right"></i></a>
-          </article>
-        </div>
-
-        <div class="drawing-archive">
-          <div class="sub-heading"><span>DRAWING ARCHIVE</span><span>Selected works</span></div>
-          <div class="drawing-grid" id="drawingGrid"></div>
-        </div>
-
-        <div class="achievement-rail" id="certificates">
-          <div class="sub-heading"><span>OBJECTS & MILESTONES</span><span>Physical archive</span></div>
-          <div class="object-row">
-            <div class="object-card"><img src="image/achievements/ssc-crest.jpg" alt="SSC crest" loading="lazy"><span>SSC · GPA 5.00</span></div>
-            <div class="object-card"><img src="image/achievements/hsc-crest.jpg" alt="HSC crest" loading="lazy"><span>HSC · GPA 5.00</span></div>
-            <div class="object-card"><img src="image/achievements/notre-dame-crest.jpg" alt="Notre Dame crest" loading="lazy"><span>Notre Dame College</span></div>
-            <div class="object-card"><img src="image/achievements/badminton-medal.jpg" alt="Badminton referee medal" loading="lazy"><span>Badminton referee</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section" id="section-projects" data-section-id="projects">
-      <div class="shell section-shell">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">04 · PROJECTS</div>
-            <h2>Things I <span>built</span></h2>
-          </div>
-          <p class="section-note">Digital experiments, architecture coursework and the graphic studies behind them.</p>
-        </div>
-
-        <div class="project-switcher" role="tablist" aria-label="Project categories">
-          <button class="project-tab active" data-project-category="digital">Digital Projects</button>
-          <button class="project-tab" data-project-category="architecture">Architecture</button>
-          <button class="project-tab" data-project-category="graphics">Graphics</button>
-        </div>
-
-        <div class="project-panel active" id="project-digital"></div>
-        <div class="project-panel" id="project-architecture"></div>
-        <div class="project-panel" id="project-graphics"></div>
-      </div>
-    </section>
-
-    <section class="page-section" id="section-videos" data-section-id="videos">
-      <div class="shell section-shell">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">05 · VIDEOS</div>
-            <h2>Watch what I <span>made</span></h2>
-          </div>
-          <p class="section-note">Existing YouTube links are kept intact. Add future videos inside portfolio-data.js.</p>
-        </div>
-        <div class="video-grid" id="videoGrid"></div>
-      </div>
-    </section>
-
-    <section class="page-section" id="section-content" data-section-id="content">
-      <div class="shell section-shell">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">06 · CONTENT</div>
-            <h2>Find me <span>elsewhere</span></h2>
-          </div>
-          <p class="section-note">A minimal digital index of my public work and social spaces.</p>
-        </div>
-        <div class="social-grid" id="socialGrid"></div>
-      </div>
-    </section>
-
-    <section class="page-section" id="section-contact" data-section-id="contact">
-      <div class="shell section-shell">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">07 · CONTACT</div>
-            <h2>Let's <span>connect</span></h2>
-          </div>
-          <p class="section-note">For work, collaboration, conversation or just to say hello.</p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="contact-links glass-card" id="contactGrid"></div>
-          <div class="map-card glass-card">
-            <div class="map-copy">
-              <span class="panel-kicker">LOCATION</span>
-              <h3>Dhaka, Bangladesh</h3>
-              <p id="locationText">Use your preferred public-facing address here. For privacy, the exact home address is kept configurable in portfolio-data.js.</p>
-              <a id="mapLink" class="primary-btn small" href="https://www.google.com/maps/search/?api=1&query=Dhaka%2C%20Bangladesh" target="_blank" rel="noopener">Open in Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-            <div class="map-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
-          </div>
-        </div>
-
-        <div class="resume-panel glass-card">
-          <div>
-            <span class="panel-kicker">PROFESSIONAL PROFILE</span>
-            <h3>Resume / CV</h3>
-            <p>Download or view the current CV through the original Google Drive link.</p>
-          </div>
-          <a class="primary-btn" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener">Open CV <i class="fa-solid fa-file-arrow-down"></i></a>
-        </div>
-
-        <footer class="site-footer">
-          <span>© <span id="year"></span> Shadid Ahamed</span>
-          <span>Built from curiosity.</span>
-        </footer>
-      </div>
-    </section>
-  </main>
-
-  <button class="ai-fab magnetic" id="aiFab" aria-label="Open Portfolio AI" title="Open Portfolio AI">
-    <i class="fa-solid fa-sparkles"></i>
-  </button>
-
-  <aside class="ai-panel" id="aiPanel" aria-hidden="true">
-    <div class="ai-panel-header">
-      <div>
-        <span class="ai-status"><span></span> PORTFOLIO AI</span>
-        <strong>Ask Shadid's digital assistant</strong>
-      </div>
-      <button class="icon-btn close-ai" id="aiClose" aria-label="Close AI"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-
-    <div class="ai-mode-row">
-      <button class="ai-mode active" data-mode="type"><i class="fa-solid fa-keyboard"></i> Type</button>
-      <button class="ai-mode" data-mode="voice"><i class="fa-solid fa-microphone"></i> Voice</button>
-      <span class="ai-memory-label">Memory on</span>
-    </div>
-
-    <div class="ai-messages" id="aiMessages" aria-live="polite"></div>
-
-    <div class="ai-composer">
-      <input id="aiInput" type="text" autocomplete="off" placeholder="Ask about Shadid, history, science, anything…">
-      <button id="aiVoiceBtn" class="composer-icon" title="Voice mode" aria-label="Voice mode"><i class="fa-solid fa-microphone"></i></button>
-      <button id="aiSendBtn" class="send-btn" title="Send" aria-label="Send"><i class="fa-solid fa-arrow-up"></i></button>
-    </div>
-    <div class="ai-footnote">Press Enter to send · voice uses your browser's speech tools</div>
-  </aside>
-
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer"><i class="fa-solid fa-xmark"></i></button>
-    <div class="lightbox-stage" id="lightboxStage">
-      <img id="lightboxImage" alt="Expanded portfolio image">
-    </div>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="portfolio-data.js"></script>
-  <script src="app.js"></script>
-  <script src="ai.js"></script>
 </body>
 </html>
