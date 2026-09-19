@@ -12,9 +12,10 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/book-01-cover-clean.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Favicon: SA monogram — auto light/dark + green accent via CSS in SVG -->
+<link rel="icon" href="sa-favicon.svg" type="image/svg+xml">
+<link rel="icon" href="sa-favicon-green.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="sa-favicon.svg">
 <title>Shadid Ahamed — Architecture · Craft · Code</title>
 <style>
 :root {
@@ -428,6 +429,20 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   z-index: 30;
   pointer-events: none;
 }
+.orbital-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 260px; height: 160px;
+  margin: -80px 0 0 -130px;
+  border: 1px solid rgba(242,240,234,0.12);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: inset 0 0 24px rgba(0,0,0,0.35);
+}
+@media (max-width: 560px) {
+  .orbital-ring { width: 200px; height: 124px; margin: -62px 0 0 -100px; }
+}
 .orbital-item {
   position: absolute;
   top: 50%; left: 50%;
@@ -790,23 +805,14 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
         </div>
       </div>
 
-      <!-- Cinematic main stage -->
-      <div id="book-stage" class="book-stage card" style="padding:0;overflow:hidden;margin:28px 0 18px;position:relative;cursor:pointer;">
-        <img id="book-stage-img" src="images/book-01-cover-clean.jpg" alt="Portfolio book" style="width:100%;aspect-ratio:16/9;object-fit:cover;transition:opacity 0.7s ease;">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:18px 20px;background:linear-gradient(transparent,rgba(5,5,5,0.85));display:flex;justify-content:space-between;align-items:flex-end;">
-          <div>
-            <div id="book-stage-label" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);margin-bottom:4px;">01 / 05</div>
-            <div id="book-stage-title" style="font-size:15px;font-weight:600;">Cover — geometric PORTFOLIO</div>
-          </div>
-          <div style="font-size:12px;color:var(--dim);">Click to open full view</div>
+      <!-- Circular orbital gallery for book pages (rim path, no bottom description until click) -->
+      <div class="orbital-wrap" style="margin:28px 0 12px;">
+        <div class="orbital-stage" id="book-orbital-stage" style="height:340px;">
+          <div class="orbital-center"></div>
+          <div class="orbital-ring" aria-hidden="true"></div>
         </div>
       </div>
-
-      <!-- Thumbnail strip (no permanent description under) -->
-      <div class="book-slider-wrap" style="position:relative;margin-bottom:8px;">
-        <div id="book-track" class="slider-track" style="gap:10px;"></div>
-      </div>
-      <p style="font-size:12px;color:var(--dim);margin-top:6px;">Auto-advances slowly. Hover to pause. Click any frame or the stage for the immersive project view. Esc or × to close.</p>
+      <p style="font-size:12px;color:var(--dim);margin-top:4px;">Images rotate on a circular path. Click any frame to open full view with title and description. Esc or × to close.</p>
 
       <div class="card" style="margin-top:32px;">
         <h3 style="margin-bottom:10px;">Material &amp; method</h3>
@@ -904,9 +910,11 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
               <div class="when">2023 – 2025</div>
               <h3>Notre Dame College</h3>
               <p style="color:var(--muted);font-size:14px;">HSC 2025 · Science · Group 1 · Roll 20 · College Roll 125019</p>
+              <p style="color:var(--dim);font-size:13px;margin-top:4px;">Arambagh, Motijheel, Dhaka-1000</p>
               <span class="result">HSC GPA 5.00 · Golden A+</span>
+              <div style="margin-top:12px;"><a class="btn" href="https://www.google.com/maps/search/Notre+Dame+College+Motijheel+Dhaka" target="_blank" rel="noopener">Maps</a></div>
             </div>
-            <img class="tl-thumb" src="image/college1.jpg" alt="Notre Dame College" onclick="openLb(this.src,'Notre Dame College','College campus')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3ECollege%3C/text%3E%3C/svg%3E'">
+            <img class="tl-thumb" src="image/college1.jpg" alt="Notre Dame College" onclick="openLb(this.src,'Notre Dame College','Arambagh, Motijheel, Dhaka')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3ECollege%3C/text%3E%3C/svg%3E'">
           </div>
         </div>
         <div class="tl-item">
@@ -915,9 +923,11 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
               <div class="when">2026 – present</div>
               <h3>BRAC University</h3>
               <p style="color:var(--muted);font-size:14px;">Architecture · First semester · ARC 101 · Role 1000061008 · Batch Summer 2026</p>
-              <p style="color:var(--dim);font-size:13px;margin-top:8px;">Exploring shift toward CSE. Expected / potential graduation: 2032.</p>
+              <p style="color:var(--dim);font-size:13px;margin-top:4px;">Kha 224, Merul Badda, Dhaka-1212</p>
+              <p style="color:var(--dim);font-size:13px;margin-top:6px;">Exploring shift toward CSE. Expected / potential graduation: 2032.</p>
+              <div style="margin-top:12px;"><a class="btn" href="https://www.google.com/maps/search/BRAC+University+Merul+Badda+Dhaka" target="_blank" rel="noopener">Maps</a></div>
             </div>
-            <img class="tl-thumb" src="image/uni1.jpg" alt="BRAC University" onclick="openLb(this.src,'BRAC University','Campus')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3EUniversity%3C/text%3E%3C/svg%3E'">
+            <img class="tl-thumb" src="image/uni1.jpg" alt="BRAC University" onclick="openLb(this.src,'BRAC University','Merul Badda, Dhaka')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3EUniversity%3C/text%3E%3C/svg%3E'">
           </div>
         </div>
       </div>
@@ -1268,67 +1278,55 @@ function closeSidebar() {
 overlay.addEventListener("click", closeSidebar);
 
 function renderBook() {
-  const track = document.getElementById("book-track");
-  const stageImg = document.getElementById("book-stage-img");
-  const stageTitle = document.getElementById("book-stage-title");
-  const stageLabel = document.getElementById("book-stage-label");
-  const stage = document.getElementById("book-stage");
-  if (!track || !DATA.book.length) return;
+  const stage = document.getElementById("book-orbital-stage");
+  if (!stage || !DATA.book || !DATA.book.length) return;
 
-  let idx = 0;
-  let paused = false;
+  // clear previous items (keep center + ring)
+  stage.querySelectorAll(".orbital-item").forEach(el => el.remove());
 
-  function show(i) {
-    idx = i;
-    const d = DATA.book[i];
-    if (stageImg) {
-      stageImg.style.opacity = "0.35";
-      setTimeout(() => {
-        stageImg.src = d.i;
-        stageImg.style.opacity = "1";
-      }, 280);
-    }
-    if (stageTitle) stageTitle.textContent = d.t;
-    if (stageLabel) stageLabel.textContent = String(i + 1).padStart(2, "0") + " / " + String(DATA.book.length).padStart(2, "0");
-    Array.from(track.children).forEach((el, j) => el.classList.toggle("active", j === i));
-    const active = track.children[i];
-    if (active) active.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  }
+  const list = DATA.book;
+  const n = list.length;
+  const radiusX = Math.min(130, Math.max(90, (stage.offsetWidth || 320) * 0.32));
+  const radiusY = radiusX * 0.62;
+  const items = [];
 
-  track.innerHTML = "";
-  DATA.book.forEach((d, i) => {
-    const item = document.createElement("div");
-    item.className = "slider-item" + (i === 0 ? " active" : "");
-    item.style.flex = "0 0 min(160px, 42vw)";
-    item.style.aspectRatio = "4/3";
+  list.forEach((d, i) => {
+    const el = document.createElement("div");
+    el.className = "orbital-item";
     const img = document.createElement("img");
     img.src = d.i;
     img.alt = d.t;
     img.onerror = function() { this.style.opacity = "0.35"; };
-    item.appendChild(img);
-    item.onclick = () => {
-      show(i);
-      openProjectViewer(d);
-    };
-    track.appendChild(item);
+    el.appendChild(img);
+    el.onclick = () => openProjectViewer(d);
+    stage.appendChild(el);
+    items.push({ el, angle: (i / n) * Math.PI * 2 });
   });
 
-  if (stage) {
-    stage.onclick = () => openProjectViewer(DATA.book[idx]);
-    stage.onmouseenter = () => { paused = true; };
-    stage.onmouseleave = () => { paused = false; };
+  let base = 0;
+  let paused = false;
+  stage.onmouseenter = () => { paused = true; };
+  stage.onmouseleave = () => { paused = false; };
+
+  if (window._bookOrbitalRaf) cancelAnimationFrame(window._bookOrbitalRaf);
+  function tick() {
+    if (!paused && document.getElementById("view-book")?.classList.contains("active")) {
+      base += 0.0055;
+    }
+    items.forEach((it) => {
+      const a = it.angle + base;
+      const x = Math.cos(a) * radiusX;
+      const y = Math.sin(a) * radiusY;
+      const depth = (Math.cos(a) + 1) / 2;
+      const scale = 0.52 + 0.58 * depth;
+      it.el.style.transform = "translate(" + x + "px," + y + "px) scale(" + scale + ")";
+      it.el.style.zIndex = Math.round(depth * 20);
+      it.el.style.opacity = 0.4 + 0.6 * depth;
+      it.el.classList.toggle("orbital-front", depth > 0.85);
+    });
+    window._bookOrbitalRaf = requestAnimationFrame(tick);
   }
-  track.onmouseenter = () => { paused = true; };
-  track.onmouseleave = () => { paused = false; };
-
-  if (window._bookTimer) clearInterval(window._bookTimer);
-  window._bookTimer = setInterval(() => {
-    if (paused) return;
-    if (!document.getElementById("view-book")?.classList.contains("active")) return;
-    show((idx + 1) % DATA.book.length);
-  }, 4800);
-
-  show(0);
+  tick();
 }
 
 function openProjectViewer(d) {
@@ -1359,12 +1357,14 @@ function openSkill(s) {
 
   if (s.id === "art" || s.id === "arch") {
     const list = s.id === "art" ? DATA.drawings : DATA.arch;
-    // Circular orbital gallery (dice-style)
+    // Circular orbital gallery on a visible rim path (dice / board edge)
+    // Description appears ONLY after click
     const orbitalWrap = document.createElement("div");
     orbitalWrap.className = "orbital-wrap";
-    orbitalWrap.innerHTML = '<div class="orbital-stage" id="orbital-stage"><div class="orbital-center"></div></div>';
+    orbitalWrap.innerHTML = '<div class="orbital-stage" id="orbital-stage"><div class="orbital-center"></div><div class="orbital-ring" aria-hidden="true"></div></div>';
     const detail = document.createElement("div");
     detail.className = "detail-split";
+    detail.style.display = "none"; // hidden until click
     detail.innerHTML = '<div class="detail-img"><img id="det-img" src="" alt=""></div><div class="detail-box"><h3 id="det-title" style="font-weight:700;letter-spacing:-0.02em;"></h3><p id="det-desc"></p></div>';
 
     body.appendChild(orbitalWrap);
@@ -1373,7 +1373,8 @@ function openSkill(s) {
     const stage = document.getElementById("orbital-stage");
     const items = [];
     const n = list.length || 1;
-    const radius = Math.min(150, Math.max(100, stage.offsetWidth * 0.32 || 130));
+    const radiusX = Math.min(130, Math.max(90, (stage.offsetWidth || 300) * 0.32));
+    const radiusY = radiusX * 0.62;
 
     function select(idx) {
       items.forEach((it, i) => it.el.classList.toggle("orbital-front", i === idx));
@@ -1385,6 +1386,7 @@ function openSkill(s) {
       };
       document.getElementById("det-title").textContent = d.t;
       document.getElementById("det-desc").textContent = d.d;
+      detail.style.display = "grid"; // show only after click
     }
 
     list.forEach((d, i) => {
@@ -1403,24 +1405,21 @@ function openSkill(s) {
     let base = 0;
     let raf = null;
     function tick() {
-      base += 0.006;
+      base += 0.0055;
       items.forEach((it) => {
         const a = it.angle + base;
-        const x = Math.cos(a) * radius;
-        const y = Math.sin(a) * radius * 0.62;
-        // front (cos near 1) is larger
-        const depth = (Math.cos(a) + 1) / 2; // 0..1
-        const scale = 0.55 + 0.55 * depth;
-        const z = Math.round(depth * 20);
+        const x = Math.cos(a) * radiusX;
+        const y = Math.sin(a) * radiusY;
+        const depth = (Math.cos(a) + 1) / 2;
+        const scale = 0.52 + 0.58 * depth;
         it.el.style.transform = "translate(" + x + "px," + y + "px) scale(" + scale + ")";
-        it.el.style.zIndex = z;
-        it.el.style.opacity = 0.45 + 0.55 * depth;
+        it.el.style.zIndex = Math.round(depth * 20);
+        it.el.style.opacity = 0.4 + 0.6 * depth;
       });
       raf = requestAnimationFrame(tick);
     }
     tick();
 
-    // stop animation when modal closes
     const modal = document.getElementById("skill-modal");
     const stopOnClose = () => {
       if (!modal.classList.contains("open") && raf) {
@@ -1430,8 +1429,6 @@ function openSkill(s) {
     };
     const obs = new MutationObserver(stopOnClose);
     obs.observe(modal, { attributes: true, attributeFilter: ["class"] });
-
-    select(0);
   } else if (s.id === "web") {
     DATA.digital.forEach(p => {
       const c = document.createElement("div");
