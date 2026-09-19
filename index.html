@@ -411,16 +411,19 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 
 /* Circular orbital / dice gallery */
 .orbital-wrap { margin-bottom: 18px; }
+/* Eye-level circular carousel — upright cards on a ring (not top-down flat) */
 .orbital-stage {
   position: relative;
   width: 100%;
-  height: 320px;
-  perspective: 900px;
+  height: 380px;
+  perspective: 1100px;
+  perspective-origin: 50% 45%;
   margin: 0 auto 8px;
+  transform-style: preserve-3d;
 }
 .orbital-center {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 58%; left: 50%;
   width: 6px; height: 6px;
   margin: -3px 0 0 -3px;
   border-radius: 50%;
@@ -431,30 +434,35 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 }
 .orbital-ring {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 260px; height: 160px;
-  margin: -80px 0 0 -130px;
-  border: 1px solid rgba(242,240,234,0.12);
+  top: 58%; left: 50%;
+  width: 280px; height: 70px;
+  margin: -35px 0 0 -140px;
+  border: 1px solid rgba(242,240,234,0.14);
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  box-shadow: inset 0 0 24px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transform: rotateX(72deg);
 }
 @media (max-width: 560px) {
-  .orbital-ring { width: 200px; height: 124px; margin: -62px 0 0 -100px; }
+  .orbital-ring { width: 210px; height: 52px; margin: -26px 0 0 -105px; }
 }
 .orbital-item {
   position: absolute;
   top: 50%; left: 50%;
-  width: 110px; height: 110px;
-  margin: -55px 0 0 -55px;
-  border-radius: 10px;
+  /* upright portrait card */
+  width: 100px;
+  height: 140px;
+  margin: -70px 0 0 -50px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg-3);
   cursor: pointer;
   will-change: transform, opacity;
   transition: border-color 0.2s, box-shadow 0.2s;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 .orbital-item img {
   width: 100%; height: 100%;
@@ -463,12 +471,12 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 }
 .orbital-item:hover,
 .orbital-item.orbital-front {
-  border-color: rgba(255,255,255,0.45);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 12px 28px rgba(0,0,0,0.45);
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.25), 0 16px 32px rgba(0,0,0,0.5);
 }
 @media (max-width: 560px) {
-  .orbital-stage { height: 260px; }
-  .orbital-item { width: 88px; height: 88px; margin: -44px 0 0 -44px; }
+  .orbital-stage { height: 300px; }
+  .orbital-item { width: 78px; height: 110px; margin: -55px 0 0 -39px; }
 }
 
 /* Detail: image left, text right */
@@ -1281,13 +1289,12 @@ function renderBook() {
   const stage = document.getElementById("book-orbital-stage");
   if (!stage || !DATA.book || !DATA.book.length) return;
 
-  // clear previous items (keep center + ring)
   stage.querySelectorAll(".orbital-item").forEach(el => el.remove());
 
   const list = DATA.book;
   const n = list.length;
-  const radiusX = Math.min(130, Math.max(90, (stage.offsetWidth || 320) * 0.32));
-  const radiusY = radiusX * 0.62;
+  const radiusX = Math.min(140, Math.max(100, (stage.offsetWidth || 320) * 0.34));
+  const radiusY = radiusX * 0.38; // eye-level ellipse
   const items = [];
 
   list.forEach((d, i) => {
@@ -1298,31 +1305,30 @@ function renderBook() {
     img.alt = d.t;
     img.onerror = function() { this.style.opacity = "0.35"; };
     el.appendChild(img);
-    el.onclick = () => openProjectViewer(d);
+    el.onclick = () => {
+      window._orbitalPaused = true;
+      openProjectViewer(d);
+    };
     stage.appendChild(el);
     items.push({ el, angle: (i / n) * Math.PI * 2 });
   });
 
   let base = 0;
-  let paused = false;
-  stage.onmouseenter = () => { paused = true; };
-  stage.onmouseleave = () => { paused = false; };
-
   if (window._bookOrbitalRaf) cancelAnimationFrame(window._bookOrbitalRaf);
   function tick() {
-    if (!paused && document.getElementById("view-book")?.classList.contains("active")) {
-      base += 0.0055;
-    }
+    const active = document.getElementById("view-book")?.classList.contains("active");
+    if (active && !window._orbitalPaused) base += 0.005;
     items.forEach((it) => {
       const a = it.angle + base;
       const x = Math.cos(a) * radiusX;
       const y = Math.sin(a) * radiusY;
       const depth = (Math.cos(a) + 1) / 2;
-      const scale = 0.52 + 0.58 * depth;
-      it.el.style.transform = "translate(" + x + "px," + y + "px) scale(" + scale + ")";
-      it.el.style.zIndex = Math.round(depth * 20);
-      it.el.style.opacity = 0.4 + 0.6 * depth;
-      it.el.classList.toggle("orbital-front", depth > 0.85);
+      const scale = 0.55 + 0.55 * depth;
+      const lift = -18 * depth;
+      it.el.style.transform = "translate(" + x + "px," + (y + lift) + "px) scale(" + scale + ")";
+      it.el.style.zIndex = Math.round(depth * 30);
+      it.el.style.opacity = 0.35 + 0.65 * depth;
+      it.el.classList.toggle("orbital-front", depth > 0.82);
     });
     window._bookOrbitalRaf = requestAnimationFrame(tick);
   }
@@ -1357,37 +1363,18 @@ function openSkill(s) {
 
   if (s.id === "art" || s.id === "arch") {
     const list = s.id === "art" ? DATA.drawings : DATA.arch;
-    // Circular orbital gallery on a visible rim path (dice / board edge)
-    // Description appears ONLY after click
+    // Eye-level upright cards on circular path.
+    // Click → full-screen lightbox (image left, text right). No detail under carousel.
     const orbitalWrap = document.createElement("div");
     orbitalWrap.className = "orbital-wrap";
-    orbitalWrap.innerHTML = '<div class="orbital-stage" id="orbital-stage"><div class="orbital-center"></div><div class="orbital-ring" aria-hidden="true"></div></div>';
-    const detail = document.createElement("div");
-    detail.className = "detail-split";
-    detail.style.display = "none"; // hidden until click
-    detail.innerHTML = '<div class="detail-img"><img id="det-img" src="" alt=""></div><div class="detail-box"><h3 id="det-title" style="font-weight:700;letter-spacing:-0.02em;"></h3><p id="det-desc"></p></div>';
-
+    orbitalWrap.innerHTML = '<div class="orbital-stage" id="orbital-stage"><div class="orbital-center"></div><div class="orbital-ring" aria-hidden="true"></div></div><p style="font-size:12px;color:var(--dim);text-align:center;margin-top:4px;">Click a frame for full view · Esc or outside to close</p>';
     body.appendChild(orbitalWrap);
-    body.appendChild(detail);
 
     const stage = document.getElementById("orbital-stage");
     const items = [];
     const n = list.length || 1;
-    const radiusX = Math.min(130, Math.max(90, (stage.offsetWidth || 300) * 0.32));
-    const radiusY = radiusX * 0.62;
-
-    function select(idx) {
-      items.forEach((it, i) => it.el.classList.toggle("orbital-front", i === idx));
-      const d = list[idx];
-      const imgEl = document.getElementById("det-img");
-      imgEl.src = d.i;
-      imgEl.onerror = function() {
-        this.src = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23111%22 width=%22400%22 height=%22300%22/%3E%3C/svg%3E";
-      };
-      document.getElementById("det-title").textContent = d.t;
-      document.getElementById("det-desc").textContent = d.d;
-      detail.style.display = "grid"; // show only after click
-    }
+    const radiusX = Math.min(140, Math.max(100, (stage.offsetWidth || 320) * 0.34));
+    const radiusY = radiusX * 0.38; // flatter ellipse = more eye-level
 
     list.forEach((d, i) => {
       const el = document.createElement("div");
@@ -1397,24 +1384,34 @@ function openSkill(s) {
       img.alt = d.t;
       img.onerror = function() { this.style.opacity = "0.35"; };
       el.appendChild(img);
-      el.onclick = () => select(i);
+      el.onclick = (e) => {
+        e.stopPropagation();
+        window._orbitalPaused = true;
+        openLb(d.i, d.t, d.d || "");
+      };
       stage.appendChild(el);
       items.push({ el, angle: (i / n) * Math.PI * 2 });
     });
 
     let base = 0;
     let raf = null;
+    window._orbitalPaused = false;
+
     function tick() {
-      base += 0.0055;
+      if (!window._orbitalPaused) base += 0.005;
       items.forEach((it) => {
         const a = it.angle + base;
         const x = Math.cos(a) * radiusX;
         const y = Math.sin(a) * radiusY;
-        const depth = (Math.cos(a) + 1) / 2;
-        const scale = 0.52 + 0.58 * depth;
-        it.el.style.transform = "translate(" + x + "px," + y + "px) scale(" + scale + ")";
-        it.el.style.zIndex = Math.round(depth * 20);
-        it.el.style.opacity = 0.4 + 0.6 * depth;
+        const depth = (Math.cos(a) + 1) / 2; // 1 = front
+        const scale = 0.55 + 0.55 * depth;
+        // slight Y lift for front cards (standing upright feel)
+        const lift = -18 * depth;
+        it.el.style.transform =
+          "translate(" + x + "px," + (y + lift) + "px) scale(" + scale + ")";
+        it.el.style.zIndex = Math.round(depth * 30);
+        it.el.style.opacity = 0.35 + 0.65 * depth;
+        it.el.classList.toggle("orbital-front", depth > 0.82);
       });
       raf = requestAnimationFrame(tick);
     }
@@ -1425,6 +1422,7 @@ function openSkill(s) {
       if (!modal.classList.contains("open") && raf) {
         cancelAnimationFrame(raf);
         raf = null;
+        window._orbitalPaused = false;
       }
     };
     const obs = new MutationObserver(stopOnClose);
@@ -1529,16 +1527,22 @@ function openLb(src, title, desc) {
   if (numEl) numEl.textContent = "PROJECT VIEW";
   const extra = document.getElementById("lb-extra");
   if (extra) extra.innerHTML = "<strong>Close</strong> · × or Esc · click outside";
+  window._orbitalPaused = true;
   document.getElementById("lightbox").classList.add("open");
 }
-document.getElementById("lb-close").onclick = () => document.getElementById("lightbox").classList.remove("open");
+function closeLightbox() {
+  document.getElementById("lightbox").classList.remove("open");
+  window._orbitalPaused = false; // resume circular rotation
+}
+document.getElementById("lb-close").onclick = closeLightbox;
 document.getElementById("lightbox").addEventListener("click", e => {
-  if (e.target.id === "lightbox") document.getElementById("lightbox").classList.remove("open");
+  if (e.target.id === "lightbox") closeLightbox();
 });
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") {
-    document.getElementById("lightbox").classList.remove("open");
+    closeLightbox();
     document.getElementById("skill-modal").classList.remove("open");
+    window._orbitalPaused = false;
   }
 });
 
