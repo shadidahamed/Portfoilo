@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- 
+    SA Monogram Favicon for Sadid Ahmed - Architecture Portfolio
+    Style inspired by geometric hatched PF logo
+    Uses currentColor → easily change color via CSS
+  -->
+  <defs>
+    <pattern id="hatchFwd" patternUnits="userSpaceOnUse" width="4" height="4">
+      <path d="M0,4 L4,0" stroke="currentColor" stroke-width="1.15"/>
+    </pattern>
+    <pattern id="hatchBwd" patternUnits="userSpaceOnUse" width="4" height="4">
+      <path d="M0,0 L4,4" stroke="currentColor" stroke-width="1.15"/>
+    </pattern>
+    <pattern id="hatchX" patternUnits="userSpaceOnUse" width="4" height="4">
+      <path d="M0,4 L4,0 M0,0 L4,4" stroke="currentColor" stroke-width="0.9"/>
+    </pattern>
+  </defs>
+
+  <!-- Transparent background by default -->
+
+  <!-- ========== S ========== -->
+  <!-- Top bar -->
+  <rect x="6" y="8" width="24" height="8" fill="url(#hatchFwd)"/>
+  <!-- Upper left vertical -->
+  <rect x="6" y="8" width="8" height="18" fill="url(#hatchBwd)"/>
+  <!-- Middle bar -->
+  <rect x="6" y="24" width="20" height="7" fill="url(#hatchX)"/>
+  <!-- Lower right vertical -->
+  <rect x="18" y="24" width="8" height="22" fill="url(#hatchFwd)"/>
+  <!-- Bottom bar -->
+  <rect x="6" y="40" width="24" height="8" fill="url(#hatchBwd)"/>
+
+  <!-- S decorative details -->
+  <rect x="10" y="11" width="4.5" height="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+  <circle cx="14.5" cy="28" r="2.6" fill="none" stroke="currentColor" stroke-width="1.3"/>
+  <rect x="9" y="43" width="4.5" height="4.5" fill="currentColor" opacity="0.85"/>
+
+  <!-- ========== A ========== -->
+  <!-- Left leg -->
+  <polygon points="24,49 34,9 41,9 31,49" fill="url(#hatchFwd)"/>
+  <!-- Right leg -->
+  <polygon points="40,9 49,9 58,49 49,49" fill="url(#hatchBwd)"/>
+  <!-- Crossbar -->
+  <rect x="33" y="26" width="17" height="7" fill="url(#hatchX)"/>
+
+  <!-- A decorative details -->
+  <rect x="37" y="13" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.3"/>
+  <circle cx="48" cy="38" r="3" fill="none" stroke="currentColor" stroke-width="1.2"/>
+  <rect x="44" y="42" width="5" height="5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+
+  <!-- Mix / overlap zone (signature of the original style) -->
+  <rect x="22" y="18" width="12" height="16" fill="url(#hatchX)" opacity="0.9"/>
+  <path d="M24,20 L32,32 M26,18 L34,30" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.7"/>
+  <rect x="26" y="23" width="4" height="4" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.8"/>
+</svg>
