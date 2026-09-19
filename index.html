@@ -1293,13 +1293,14 @@ function renderBook() {
 
   const list = DATA.book;
   const n = list.length;
-  const radiusX = Math.min(140, Math.max(100, (stage.offsetWidth || 320) * 0.34));
-  const radiusY = radiusX * 0.38; // eye-level ellipse
+  const radiusX = Math.min(145, Math.max(105, (stage.offsetWidth || 320) * 0.36));
+  const radiusY = radiusX * 0.42;
   const items = [];
 
   list.forEach((d, i) => {
     const el = document.createElement("div");
     el.className = "orbital-item";
+    el.style.transition = "transform 0.6s cubic-bezier(0.33,1,0.32,1), opacity 0.5s ease, box-shadow 0.3s";
     const img = document.createElement("img");
     img.src = d.i;
     img.alt = d.t;
@@ -1310,29 +1311,48 @@ function renderBook() {
       openProjectViewer(d);
     };
     stage.appendChild(el);
-    items.push({ el, angle: (i / n) * Math.PI * 2 });
+    items.push({ el, baseAngle: (i / n) * Math.PI * 2, data: d });
   });
 
-  let base = 0;
-  if (window._bookOrbitalRaf) cancelAnimationFrame(window._bookOrbitalRaf);
-  function tick() {
-    const active = document.getElementById("view-book")?.classList.contains("active");
-    if (active && !window._orbitalPaused) base += 0.005;
+  let active = 0;
+  if (window._bookStepTimer) clearTimeout(window._bookStepTimer);
+
+  function layout(offsetAngle) {
     items.forEach((it) => {
-      const a = it.angle + base;
-      const x = Math.cos(a) * radiusX;
-      const y = Math.sin(a) * radiusY;
+      const a = it.baseAngle + offsetAngle;
+      const x = Math.sin(a) * radiusX;
+      const y = -Math.cos(a) * radiusY * 0.32;
       const depth = (Math.cos(a) + 1) / 2;
-      const scale = 0.55 + 0.55 * depth;
-      const lift = -18 * depth;
+      const scale = 0.45 + 0.7 * depth;
+      const lift = -24 * depth;
       it.el.style.transform = "translate(" + x + "px," + (y + lift) + "px) scale(" + scale + ")";
-      it.el.style.zIndex = Math.round(depth * 30);
-      it.el.style.opacity = 0.35 + 0.65 * depth;
-      it.el.classList.toggle("orbital-front", depth > 0.82);
+      it.el.style.zIndex = Math.round(depth * 40);
+      it.el.style.opacity = 0.25 + 0.75 * depth;
+      it.el.classList.toggle("orbital-front", depth > 0.9);
     });
-    window._bookOrbitalRaf = requestAnimationFrame(tick);
   }
-  tick();
+
+  function offsetFor(idx) { return -items[idx].baseAngle; }
+  layout(offsetFor(0));
+
+  function goTo(idx) {
+    active = ((idx % n) + n) % n;
+    layout(offsetFor(active));
+  }
+
+  function scheduleNext() {
+    if (window._bookStepTimer) clearTimeout(window._bookStepTimer);
+    window._bookStepTimer = setTimeout(function() {
+      if (window._orbitalPaused) { scheduleNext(); return; }
+      if (!document.getElementById("view-book")?.classList.contains("active")) {
+        scheduleNext();
+        return;
+      }
+      goTo(active + 1);
+      scheduleNext();
+    }, 1500);
+  }
+  scheduleNext();
 }
 
 function openProjectViewer(d) {
@@ -1363,22 +1383,24 @@ function openSkill(s) {
 
   if (s.id === "art" || s.id === "arch") {
     const list = s.id === "art" ? DATA.drawings : DATA.arch;
-    // Eye-level upright cards on circular path.
-    // Click → full-screen lightbox (image left, text right). No detail under carousel.
+    // Stepped circular carousel: CENTER image is always the large one.
+    // Pattern: settle on center (~1s pause) → rotate to next → settle → pause.
+    // Not continuous spin. Click → full lightbox.
     const orbitalWrap = document.createElement("div");
     orbitalWrap.className = "orbital-wrap";
-    orbitalWrap.innerHTML = '<div class="orbital-stage" id="orbital-stage"><div class="orbital-center"></div><div class="orbital-ring" aria-hidden="true"></div></div><p style="font-size:12px;color:var(--dim);text-align:center;margin-top:4px;">Click a frame for full view · Esc or outside to close</p>';
+    orbitalWrap.innerHTML = '<div class="orbital-stage" id="orbital-stage"><div class="orbital-center"></div><div class="orbital-ring" aria-hidden="true"></div></div><p style="font-size:12px;color:var(--dim);text-align:center;margin-top:4px;">Center image is active · Click for full view · Esc / outside to close</p>';
     body.appendChild(orbitalWrap);
 
     const stage = document.getElementById("orbital-stage");
     const items = [];
-    const n = list.length || 1;
-    const radiusX = Math.min(140, Math.max(100, (stage.offsetWidth || 320) * 0.34));
-    const radiusY = radiusX * 0.38; // flatter ellipse = more eye-level
+    const n = Math.max(list.length, 1);
+    const radiusX = Math.min(145, Math.max(105, (stage.offsetWidth || 320) * 0.36));
+    const radiusY = radiusX * 0.42;
 
     list.forEach((d, i) => {
       const el = document.createElement("div");
       el.className = "orbital-item";
+      el.style.transition = "transform 0.6s cubic-bezier(0.33,1,0.32,1), opacity 0.5s ease, box-shadow 0.3s";
       const img = document.createElement("img");
       img.src = d.i;
       img.alt = d.t;
@@ -1390,42 +1412,66 @@ function openSkill(s) {
         openLb(d.i, d.t, d.d || "");
       };
       stage.appendChild(el);
-      items.push({ el, angle: (i / n) * Math.PI * 2 });
+      items.push({ el, baseAngle: (i / n) * Math.PI * 2, data: d });
     });
 
-    let base = 0;
-    let raf = null;
+    let active = 0;
+    let stepTimer = null;
     window._orbitalPaused = false;
 
-    function tick() {
-      if (!window._orbitalPaused) base += 0.005;
+    function layout(offsetAngle) {
       items.forEach((it) => {
-        const a = it.angle + base;
-        const x = Math.cos(a) * radiusX;
-        const y = Math.sin(a) * radiusY;
-        const depth = (Math.cos(a) + 1) / 2; // 1 = front
-        const scale = 0.55 + 0.55 * depth;
-        // slight Y lift for front cards (standing upright feel)
-        const lift = -18 * depth;
+        const a = it.baseAngle + offsetAngle;
+        // front when a ≈ 0: center of screen, largest
+        const x = Math.sin(a) * radiusX;
+        const y = -Math.cos(a) * radiusY * 0.32;
+        const depth = (Math.cos(a) + 1) / 2; // 1 = front/center
+        const scale = 0.45 + 0.7 * depth; // clear size jump for center
+        const lift = -24 * depth;
         it.el.style.transform =
           "translate(" + x + "px," + (y + lift) + "px) scale(" + scale + ")";
-        it.el.style.zIndex = Math.round(depth * 30);
-        it.el.style.opacity = 0.35 + 0.65 * depth;
-        it.el.classList.toggle("orbital-front", depth > 0.82);
+        it.el.style.zIndex = Math.round(depth * 40);
+        it.el.style.opacity = 0.25 + 0.75 * depth;
+        it.el.classList.toggle("orbital-front", depth > 0.9);
       });
-      raf = requestAnimationFrame(tick);
     }
-    tick();
+
+    function offsetFor(idx) {
+      return -items[idx].baseAngle;
+    }
+
+    layout(offsetFor(0));
+
+    function goTo(idx) {
+      active = ((idx % n) + n) % n;
+      layout(offsetFor(active));
+    }
+
+    function scheduleNext() {
+      if (stepTimer) clearTimeout(stepTimer);
+      stepTimer = setTimeout(function() {
+        if (window._orbitalPaused) {
+          scheduleNext();
+          return;
+        }
+        if (!document.getElementById("skill-modal") || !document.getElementById("skill-modal").classList.contains("open")) {
+          return;
+        }
+        goTo(active + 1);
+        scheduleNext();
+      }, 1500);
+    }
+    scheduleNext();
 
     const modal = document.getElementById("skill-modal");
-    const stopOnClose = () => {
-      if (!modal.classList.contains("open") && raf) {
-        cancelAnimationFrame(raf);
-        raf = null;
+    const cleanup = function() {
+      if (!modal.classList.contains("open")) {
+        if (stepTimer) clearTimeout(stepTimer);
+        stepTimer = null;
         window._orbitalPaused = false;
       }
     };
-    const obs = new MutationObserver(stopOnClose);
+    const obs = new MutationObserver(cleanup);
     obs.observe(modal, { attributes: true, attributeFilter: ["class"] });
   } else if (s.id === "web") {
     DATA.digital.forEach(p => {
