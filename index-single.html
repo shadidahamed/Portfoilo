@@ -255,18 +255,19 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 .name-grid span.on { background: #fff; }
 .name-grid span.mid { background: rgba(255,255,255,0.45); }
 .name-stack h1 {
-  font-size: clamp(2.6rem, 7vw, 3.8rem);
+  font-size: clamp(3.2rem, 9vw, 5.8rem);
   font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 0.95;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
   margin: 0;
+  color: var(--text);
 }
 .name-stack .line-1 { display: block; }
 .name-stack .line-2 {
   display: block;
-  color: var(--muted);
-  font-weight: 700;
-  margin-top: 2px;
+  color: var(--text);
+  font-weight: 800;
+  margin-top: 0;
 }
 .home-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
 .chip {
@@ -581,6 +582,80 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   .book-hero-grid { grid-template-columns: 1fr; }
 }
 .slider-item.active { border-color: rgba(255,255,255,0.55); box-shadow: 0 0 0 1px rgba(255,255,255,0.25); }
+
+/* CSS 3D floating book */
+.book-3d-wrap {
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 280px;
+  margin: 20px 0 28px;
+}
+.book-3d {
+  width: 180px;
+  height: 240px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: bookFloat 8s ease-in-out infinite, bookSpin 18s linear infinite;
+}
+@keyframes bookFloat {
+  0%, 100% { transform: translateY(0) rotateX(8deg) rotateY(-18deg); }
+  50% { transform: translateY(-14px) rotateX(6deg) rotateY(-12deg); }
+}
+@keyframes bookSpin {
+  0% { transform: translateY(0) rotateX(8deg) rotateY(-25deg); }
+  50% { transform: translateY(-10px) rotateX(5deg) rotateY(15deg); }
+  100% { transform: translateY(0) rotateX(8deg) rotateY(-25deg); }
+}
+.book-3d .face {
+  position: absolute;
+  width: 180px;
+  height: 240px;
+  background: #0a0a0a;
+  border: 1px solid rgba(242,240,234,0.12);
+  background-size: cover;
+  background-position: center;
+}
+.book-3d .front { transform: translateZ(12px); }
+.book-3d .back { transform: rotateY(180deg) translateZ(12px); background: #111; }
+.book-3d .spine {
+  width: 24px;
+  height: 240px;
+  left: 78px;
+  transform: rotateY(90deg) translateZ(90px);
+  background: linear-gradient(90deg, #1a1a1a, #0d0d0d);
+}
+.book-3d .top {
+  width: 180px;
+  height: 24px;
+  top: -12px;
+  transform: rotateX(90deg) translateZ(12px);
+  background: repeating-linear-gradient(90deg, #f2f0ea 0 8px, #111 8px 16px);
+  opacity: 0.9;
+}
+
+/* Orbital skill images */
+.orbit-wrap {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  margin: 20px 0;
+  perspective: 900px;
+}
+.orbit-item {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.4s, box-shadow 0.3s;
+  background: var(--bg-3);
+}
+.orbit-item img { width: 100%; height: 100%; object-fit: cover; }
+.orbit-item:hover { border-color: var(--border-hover); box-shadow: 0 0 20px rgba(255,255,255,0.1); z-index: 5; }
 </style>
 </head>
 <body>
@@ -625,54 +700,46 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 
     <section class="view active" id="view-home">
       <div class="home-hero">
-        <p class="section-label">Portfolio</p>
-        <div class="name-block">
-          <div class="name-grid" aria-hidden="true" title="Squares and Grid">
-            <span class="on"></span><span></span><span class="on"></span><span></span>
-            <span></span><span class="on"></span><span></span><span class="on"></span>
-            <span class="on"></span><span></span><span class="on"></span><span></span>
-            <span></span><span class="on"></span><span></span><span class="on"></span>
-          </div>
+        <p class="section-label" style="letter-spacing:0.14em;">A handmade portfolio translated into a digital spatial archive</p>
+        <div class="name-block" style="margin-top:12px;margin-bottom:28px;">
           <div class="name-stack">
-            <h1><span class="line-1">Shadid</span><span class="line-2">Ahamed</span></h1>
+            <h1><span class="line-1">SHADID</span><span class="line-2">AHAMED</span></h1>
           </div>
         </div>
-        <p class="lead">Architecture student at BRAC University. First-semester portfolio book — fully handmade. Drawing, grid thinking, digital experiments. Persistence as method.</p>
+        <p class="lead" style="max-width:520px;font-size:1.05rem;">Architecture student. Creative developer. Artist. Maker. A first-semester portfolio built from hand, geometry, material, drawing, code — and an interest in where architecture meets computing.</p>
         <div class="home-meta">
-          <span class="chip">Architecture</span>
-          <span class="chip">Handmade Craft</span>
-          <span class="chip">Drawing</span>
-          <span class="chip">Web / Code</span>
-          <span class="chip">BRAC · ARC-101</span>
+          <span class="chip">ARCHITECTURE</span>
+          <span class="chip">DRAWING</span>
+          <span class="chip">CRAFT</span>
+          <span class="chip">WEB / JS</span>
+          <span class="chip">EXPLORING CSE</span>
         </div>
+        <p style="color:var(--dim);font-size:0.92rem;max-width:520px;line-height:1.7;margin:20px 0 24px;border-left:2px solid var(--maroon);padding-left:14px;">
+          The purpose of this portfolio is not simply to ask for work. It documents how ideas are constructed, how materials become form, how visual language becomes interface, and how a student keeps building through uncertainty.
+        </p>
         <div class="btn-row">
-          <button class="btn btn-primary" data-view="book" onclick="showView('book')">The Book</button>
-          <button class="btn" data-view="skills" onclick="showView('skills')">Skills &amp; Work</button>
-          <a class="btn" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener">CV</a>
+          <button class="btn btn-primary" data-view="book" onclick="showView('book')">ENTER THE BOOK →</button>
+          <button class="btn" data-view="skills" onclick="showView('skills')">EXPLORE ARCHITECTURE</button>
+          <button class="btn" onclick="document.getElementById('ai-fab').click()">ASK THE CURATOR</button>
         </div>
       </div>
-      <div class="income-banner">
-        <h3>What this site is</h3>
-        <p>Not a standard hire-me page. A research-oriented talent document: the handmade portfolio book, process, drawings, architectural studies, and digital experiments. For teachers, admissions, collaborators, and anyone who values craft over templates.</p>
-        <div class="services">
-          <div class="service-item"><strong>The Book</strong><span>Fully handmade cover, geometric lettering, grids</span></div>
-          <div class="service-item"><strong>Drawing &amp; Models</strong><span>Competition work, plaster, composition</span></div>
-          <div class="service-item"><strong>Architecture</strong><span>First-semester studies, diagrams, thinking</span></div>
-          <div class="service-item"><strong>Digital</strong><span>TrendCart, interactive game, UI experiments</span></div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" data-view="book" onclick="showView('book')">Open The Book</button>
-          <a class="btn" href="mailto:shadidahamed.matashome05m@gmail.com">Email</a>
-          <a class="btn" href="https://wa.me/8801326162684" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-      </div>
-      <div class="footer-note"><span>© Shadid Ahamed</span><span>Dhaka, Bangladesh</span></div>
+      <div class="footer-note" style="margin-top:56px;"><span>© Shadid Ahamed · Dhaka, Bangladesh</span><span>ARC-101 / Summer 2026</span></div>
     </section>
 
     <section class="view" id="view-book">
       <p class="section-label">02 · Flagship · ARC-101 · Summer 2026</p>
       <h1>The Book</h1>
       <p class="lead" style="max-width:580px;">A first-semester portfolio constructed entirely by hand. Black mount / Swiss board, pen hatching, geometric lettering, checkerboard binding. No computer. This object is the clearest statement of how I think: control, grid, contrast, material honesty.</p>
+
+      <!-- CSS 3D floating book -->
+      <div class="book-3d-wrap">
+        <div class="book-3d" id="book3d" title="Handmade portfolio — ARC-101">
+          <div class="face front" style="background-image:url('images/book-01-cover-clean.jpg')"></div>
+          <div class="face back"></div>
+          <div class="face spine"></div>
+          <div class="face top"></div>
+        </div>
+      </div>
 
       <!-- Cinematic main stage -->
       <div id="book-stage" class="book-stage card" style="padding:0;overflow:hidden;margin:28px 0 18px;position:relative;cursor:pointer;">
@@ -734,15 +801,35 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
     <section class="view" id="view-process">
       <p class="section-label">03 · Method</p>
       <h1>Process / Persistence</h1>
-      <p class="lead" style="max-width:560px;">Some things did not happen the way I expected. Some decisions were mine. Some outcomes were outside my control. I learned from the work, the mistakes and the setbacks, and kept building.</p>
-      <div class="card" style="margin-top:24px;max-width:640px;">
-        <p style="color:var(--muted);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-          The public record is not a list of wounds. It is the response: the handmade book, the drawings, the models, the sites, the games, the continuous practice. Architecture taught structure. Drawing taught attention. Code taught systems. The through-line is the same — stay in the work.
-        </p>
-        <p style="color:var(--dim);font-size:0.9rem;line-height:1.65;">
-          “Lage Raho.” Keep going. Rise high enough that the noise cannot reach. That is the method, not a slogan.
-        </p>
+      <p class="lead" style="max-width:580px;">Some things did not happen the way I expected. Some decisions were mine. Some outcomes were outside my control. I learned from the work, the mistakes and the setbacks, and kept building.</p>
+
+      <div class="card" style="margin-top:28px;max-width:720px;">
+        <h3 style="margin-bottom:14px;font-size:1.05rem;">If I had to tell someone who Shadid was</h3>
+        <div style="color:var(--muted);font-size:0.92rem;line-height:1.8;">
+          <p style="margin-bottom:12px;">I would not begin with his results, his marks, or the things he failed to get. I would begin with how hard he kept trying.</p>
+          <p style="margin-bottom:12px;">He was someone who wanted a future badly enough to keep reaching for it even when life kept putting obstacles in front of him. He worked toward architecture, pushed himself through admissions, studied when he was exhausted, practiced drawing, built portfolios, learned new things, and kept looking for another door whenever one closed.</p>
+          <p style="margin-bottom:12px;">There were many closed doors. Disappointments that hurt more than he usually let people see. Pressure from family, money, education, relationships and personal loss. Times when he felt completely worn down. But he kept going.</p>
+          <p style="margin-bottom:12px;">He fought through academic pressure, disappointment, loneliness, financial stress and heartbreak. He fought to keep studying, keep creating, and build a future that felt like his own. He drew, designed, imagined spaces, websites, games and countless small ideas. He cared about details because making something beautiful and meaningful mattered to him.</p>
+          <p style="margin-bottom:12px;">The real achievement was everything he had to overcome to reach the things he did make. Behind every drawing was patience, behind every plan was hope, behind every “I’ll try again” was someone who had already been through a lot.</p>
+          <p style="margin-bottom:0;">His story was never just about whether one university, one relationship or one exam went exactly as planned. It was about a person who kept reaching forward. When I think about Shadid, I would not reduce him to his pain. I would remember the fighter who carried that pain and still tried to build something beautiful with his life.</p>
+        </div>
       </div>
+
+      <div class="card" style="margin-top:20px;max-width:720px;">
+        <h3 style="margin-bottom:14px;font-size:1.05rem;">Family</h3>
+        <div style="color:var(--muted);font-size:0.92rem;line-height:1.8;">
+          <p style="margin-bottom:12px;">From the outside my family may look ordinary. To me they were never just “family members”. They were shelter, pressure, anger, safety, misunderstanding, and a love that was not always spoken but was always there.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Father — Tofail Ahmed</strong>, Police Inspector. Duty, discipline, hard reality. Our relationship was not always easy. Sometimes his rules felt too strict. Sometimes I felt controlled rather than understood. I also know he carries responsibility for the family’s safety and future in his own way. Not all love is soft. Some arrives as concern, rules and duty.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Mother</strong> — homemaker. Her presence is so constant that its value is easy to miss day to day. She may not know every technical detail of architecture or every admission score, but she often senses mood and change before words. There has been anger and misunderstanding. “Hard” with her never meant absence of love.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Wife</strong> — the person I chose as partner. With her came hope, responsibility, money stress, adjustment, misunderstanding and large shared dreams. Not only romantic moments — also questions of support and understanding. She changed how I think about the future.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Younger sister</strong> — the ordinary mix of quarrel, distance, teasing and standing together. I have not always given enough time. She is still part of home and childhood.</p>
+          <p style="margin-bottom:0;">We have loved each other and hurt each other. Supported and failed to understand. None of us is perfect. I want them one day to be able to say: he struggled a lot, but he did not give up. That the father sees not only the difficult son but the person who fought to find his path. That the mother sees the son who tried to make something with his life. That is the truth I want held.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:24px;font-size:0.9rem;color:var(--dim);max-width:640px;">
+        The public record is the response: the handmade book, the drawings, the models, the sites, the continuous practice. “Lage Raho.” Keep going. Rise high enough that the noise cannot reach.
+      </p>
     </section>
 
     <section class="view" id="view-education">
