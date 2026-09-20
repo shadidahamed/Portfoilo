@@ -274,19 +274,32 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 .name-grid span.on { background: #fff; }
 .name-grid span.mid { background: rgba(255,255,255,0.45); }
 .name-stack h1 {
-  font-size: clamp(3.2rem, 9vw, 5.8rem);
+  font-size: clamp(3.8rem, 11vw, 7rem);
   font-weight: 800;
   letter-spacing: -0.045em;
-  line-height: 0.9;
+  line-height: 0.88;
   margin: 0;
   color: var(--text);
 }
 .name-stack .line-1 { display: block; }
 .name-stack .line-2 {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18em;
   color: var(--text);
   font-weight: 800;
   margin-top: 0;
+}
+.name-dot {
+  display: inline-block;
+  width: 0.22em; height: 0.22em;
+  min-width: 10px; min-height: 10px;
+  background: linear-gradient(135deg, #e8b84a 0%, #c47a2a 45%, #f0c96a 100%);
+  box-shadow: 0 0 12px rgba(232,184,74,0.55), 0 0 2px #e8b84a;
+  image-rendering: pixelated;
+  border-radius: 1px;
+  flex-shrink: 0;
+  margin-bottom: 0.12em;
 }
 .home-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
 .chip {
@@ -317,9 +330,11 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 }
 @media (max-width: 700px) { .profile-layout { grid-template-columns: 1fr; } }
 .avatar {
-  width: 180px; aspect-ratio: 1; border-radius: 50%; object-fit: cover;
+  width: 240px; max-width: 100%; aspect-ratio: 1; border-radius: 50%; object-fit: cover;
   border: 2px solid var(--border); background: var(--bg-3);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
 }
+@media (max-width: 700px) { .avatar { width: 160px; margin: 0 auto; } }
 .profile-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
 .tag {
   font-size: 12px; padding: 4px 10px; border-radius: 6px;
@@ -812,7 +827,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
         <p class="section-label" style="letter-spacing:0.14em;">A handmade portfolio translated into a digital spatial archive</p>
         <div class="name-block" style="margin-top:12px;margin-bottom:28px;">
           <div class="name-stack">
-            <h1><span class="line-1">SHADID</span><span class="line-2">AHAMED</span></h1>
+            <h1><span class="line-1">SHADID</span><span class="line-2">AHAMED<span class="name-dot" aria-hidden="true"></span></span></h1>
           </div>
         </div>
         <p class="lead" style="max-width:520px;font-size:1.05rem;">Architecture student. Creative developer. Artist. Maker. A first-semester portfolio built from hand, geometry, material, drawing, code — and an interest in where architecture meets computing.</p>
@@ -843,8 +858,8 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
       <!-- CSS 3D floating book -->
       <div class="book-3d-wrap">
         <div class="book-3d" id="book3d" title="Handmade portfolio — ARC-101">
-          <div class="face front" style="background-image:url('815366796_1754064392528440_1990530380060926840_n.jpg')"></div>
-          <div class="face back"></div>
+          <div class="face front" style="background-image:url('book-3d.jpg')"></div>
+          <div class="face back" style="background-image:url('811615849_2097588261148773_877248636819443508_n.jpg')"></div>
           <div class="face spine"></div>
           <div class="face top"></div>
         </div>
@@ -879,7 +894,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
       <div class="profile-layout" style="margin-top:28px;">
         <img class="avatar" src="Screenshot%202026-09-20%20201810.png" alt="Shadid Ahamed" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2318181b%22 width=%22200%22 height=%22200%22/%3E%3Ctext fill=%22%23a1a1aa%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2224%22%3ESA%3C/text%3E%3C/svg%3E'">
         <div>
-          <h2>Shadid Ahamed</h2>
+          <h2>Shadid Ahamed · সাদিদ আহমেদ</h2>
           <p style="color:var(--muted);font-size:14px;margin-bottom:12px;">BRAC University · Architecture · Role 1000061008 · Batch Summer 2026 · First semester (ARC 101)</p>
           <div class="profile-tags">
             <span class="tag">Architecture</span>
@@ -887,13 +902,28 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
             <span class="tag">Drawing</span>
             <span class="tag">Web / Code</span>
             <span class="tag">Persistence</span>
+            <span class="tag">Comic</span>
           </div>
           <p style="color:var(--muted);font-size:0.95rem;line-height:1.75;margin-bottom:14px;">
-            First-semester architecture student at BRAC. The physical portfolio book is handmade end-to-end — geometric lettering, hatching, grids, checker structure. I also draw, build models, and write code (sites and interactive work). The through-line is persistence: keep making under pressure, treat the hard chapter as the current one, rise high enough that noise cannot reach.
+            First-semester architecture student at BRAC. The physical portfolio book is handmade end-to-end — geometric lettering, hatching, grids, checker structure. I also draw, build models, write comics, and write code (sites and interactive work). The through-line is persistence: keep making under pressure, treat the hard chapter as the current one, rise high enough that noise cannot reach.
           </p>
-          <p style="color:var(--dim);font-size:0.9rem;line-height:1.6;">
-            Projected path toward later years. Based in Paltan, Dhaka. Open for research, admission conversations, collaboration, and serious craft.
+          <p style="color:var(--dim);font-size:0.9rem;line-height:1.6;margin-bottom:16px;">
+            Based in Paltan, Dhaka. Open for research, admission conversations, collaboration, and serious craft. Exploring where architecture meets computing.
           </p>
+          <div class="card" style="padding:16px;margin-top:8px;">
+            <h3 style="font-size:13px;margin-bottom:10px;color:var(--dim);letter-spacing:0.06em;text-transform:uppercase;">Quick facts</h3>
+            <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin:0;">
+              <strong style="color:var(--offwhite);">Education</strong> — Motijheel Ideal (SSC 5.00) → Notre Dame College (HSC 5.00) → BRAC Architecture<br>
+              <strong style="color:var(--offwhite);">Focus</strong> — handmade portfolio, freehand + colour, models, web experiments<br>
+              <strong style="color:var(--offwhite);">Method</strong> — Lage Raho · keep building · material honesty<br>
+              <strong style="color:var(--offwhite);">Family</strong> — Tofayel Ahamed · Afruja Sultana · Tahliba Tuhfa
+            </p>
+          </div>
+          <div class="btn-row" style="margin-top:16px;">
+            <button class="btn btn-primary" data-view="book" onclick="showView('book')">The Book</button>
+            <button class="btn" data-view="skills" onclick="showView('skills')">Skills</button>
+            <button class="btn" data-view="contact" onclick="showView('contact')">Contact</button>
+          </div>
         </div>
       </div>
     </section>
@@ -919,10 +949,9 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
         <h3 style="margin-bottom:14px;font-size:1.05rem;">Family</h3>
         <div style="color:var(--muted);font-size:0.92rem;line-height:1.8;">
           <p style="margin-bottom:12px;">From the outside my family may look ordinary. To me they were never just “family members”. They were shelter, pressure, anger, safety, misunderstanding, and a love that was not always spoken but was always there.</p>
-          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Father — Tofail Ahmed</strong>, Police Inspector. Duty, discipline, hard reality. Our relationship was not always easy. Sometimes his rules felt too strict. Sometimes I felt controlled rather than understood. I also know he carries responsibility for the family’s safety and future in his own way. Not all love is soft. Some arrives as concern, rules and duty.</p>
-          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Mother</strong> — homemaker. Her presence is so constant that its value is easy to miss day to day. She may not know every technical detail of architecture or every admission score, but she often senses mood and change before words. There has been anger and misunderstanding. “Hard” with her never meant absence of love.</p>
-          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Wife</strong> — the person I chose as partner. With her came hope, responsibility, money stress, adjustment, misunderstanding and large shared dreams. Not only romantic moments — also questions of support and understanding. She changed how I think about the future.</p>
-          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Younger sister</strong> — the ordinary mix of quarrel, distance, teasing and standing together. I have not always given enough time. She is still part of home and childhood.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Father — Tofayel Ahamed (তোফায়েল আহমেদ)</strong>, Police Inspector. Duty, discipline, hard reality. Our relationship was not always easy. Sometimes his rules felt too strict. Sometimes I felt controlled rather than understood. I also know he carries responsibility for the family’s safety and future in his own way. Not all love is soft. Some arrives as concern, rules and duty.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Mother — Afruja Sultana (আফরুজা সুলতানা)</strong> — homemaker. Her presence is so constant that its value is easy to miss day to day. She may not know every technical detail of architecture or every admission score, but she often senses mood and change before words. There has been anger and misunderstanding. “Hard” with her never meant absence of love.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--offwhite);">Younger sister — Tahliba Tuhfa (তাহলিবা তোহফা)</strong> — the ordinary mix of quarrel, distance, teasing and standing together. I have not always given enough time. She is still part of home and childhood.</p>
           <p style="margin-bottom:0;">We have loved each other and hurt each other. Supported and failed to understand. None of us is perfect. I want them one day to be able to say: he struggled a lot, but he did not give up. That the father sees not only the difficult son but the person who fought to find his path. That the mother sees the son who tried to make something with his life. That is the truth I want held.</p>
         </div>
       </div>
@@ -1079,10 +1108,11 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 <script>
 const DATA = {
   book: [
-    { t: "Cover — geometric PORTFOLIO", i: "815366796_1754064392528440_1990530380060926840_n.jpg", d: "Black base, silver/white hatching, deep maroon accents. PORTFOLIO is constructed from geometric blocks, textures, overlapping planes and controlled voids. Name, roll and ARC-101 sit in clear hierarchy.", material: "Swiss board / black mount · pen hatching · hand lettering", concept: "Control, grid, contrast, material honesty. The cover is the thesis." },
-    { t: "Front cover — full object", i: "813965363_2318476582340902_2775377306658662126_n.jpg", d: "The complete handmade portfolio book seen from the front. Checker binding on the left edge, geometric PORTFOLIO lettering, floral corner marks. Fully hand-crafted for ARC-101, Summer 2026.", material: "Hand-bound · Swiss board · black mount", concept: "Physical proof of process over template." },
-    { t: "Back cover — checker structure", i: "811615849_2097588261148773_877248636819443508_n.jpg", d: "Back cover with white-black checker field and DESIGN mark. The checker is not decoration — it continues the grid language of the lettering into the binding and the object as a whole.", material: "Painted / applied checker on board", concept: "Grid as continuous language, not applied ornament." },
-    { t: "Full cover — side fold view", i: "ChatGPT%20Image%20Sep%2020%2C%202026%2C%2007_38_48%20PM.png", d: "Unfolded / side view of the full cover from front through spine to back. Shows the continuous checker edge and the constructed PORTFOLIO wordmark running the length of the object.", material: "Swiss board · hand construction · continuous edge treatment", concept: "One object, one language — front, spine and back as a single system." }
+    { t: "Cover — geometric PORTFOLIO / PAFI", i: "815366796_1754064392528440_1990530380060926840_n.jpg", d: "হাতে আঁকা জ্যামিতিক PORTFOLIO অক্ষর — hatch, grid, maroon accent. The cover is the thesis: control, structure, material honesty.", material: "Swiss board / black mount · pen hatching · hand lettering", concept: "Letters as architectural mass and void." },
+    { t: "Front — handmade object", i: "813965363_2318476582340902_2775377306658662126_n.jpg", d: "সম্পূর্ণ হাতে বাঁধাই বই — checker binding, floral corners, roll 1000061008, ARC-101 Summer 2026.", material: "Hand-bound · Swiss board", concept: "Physical proof over template." },
+    { t: "Back — checker field", i: "811615849_2097588261148773_877248636819443508_n.jpg", d: "পিছনের কভার — সাদা-কালো checker এবং DESIGN mark. Grid language continues to the edge.", material: "Painted checker on board", concept: "Grid as continuous language." },
+    { t: "Side fold — full cover system", i: "ChatGPT%20Image%20Sep%2020%2C%202026%2C%2007_38_48%20PM.png", d: "ফ্রন্ট থেকে স্পাইন থেকে ব্যাক — একটা continuous object. Checker edge runs the length.", material: "Continuous edge treatment", concept: "One object, one language." },
+    { t: "3D book view", i: "book-3d.jpg", d: "ত্রিমাত্রিক / angled view of the handmade portfolio — the object as it sits in space.", material: "Photograph of physical book", concept: "Presence and weight of craft." }
   ],
   contacts: [
     { label: "Email", url: "mailto:shadidahamed.matashome05m@gmail.com", icon: "mail" },
@@ -1102,13 +1132,21 @@ const DATA = {
     { title: "Task Tracker", desc: "Simple productivity tool. Link to be added.", links: [] }
   ],
   drawings: [
-    { t: "Sketch 1", i: "image/IMG scetch 1.jpg", d: "Hand drawing study." },
-    { t: "Sketch 2", i: "image/image sketch 1.jpg", d: "Composition study." },
-    { t: "Sketch 3", i: "image/image sketch 2.jpg", d: "Line work." },
-    { t: "iPad study", i: "image/image ipad 1.png", d: "Digital sketch." },
-    { t: "Colour study", i: "image/image colour 1.jpg", d: "Colour exploration." },
-    { t: "PC study", i: "image/image pc 1.png", d: "Digital composition." },
-    { t: "Sketch 4", i: "image/image sketch 3.jpg", d: "Freehand study." }
+    { t: "We Need the Water · পানির ডাক", i: "IMG%20scetch%201.jpg", d: "একটা মেয়ে সকল কষ্ট ভেদ করে এগিয়ে আসছে — ছেলেটাকে বাঁচাতে। ছেলেটা পৃথিবীর দুঃখ থেকে বাঁচতে নিজেকে জলে ছেড়ে দিয়েছে; existential sink. মাছগুলো তার চেতনার ছায়া; পদ্মপাতা আশার প্রতীক। / She crosses every pain to reach him. He has already given himself to the water — existence dissolving. Fish as awareness, leaves as hope." },
+    { t: "The Sea of Dreams · স্বপ্নের সমুদ্র", i: "image%20sketch%202.jpg", d: "Whale, boy, ray — ink dreamscape. Writer: Shadid Ahamed. সমুদ্রে ভরসা আর একা থাকার কবিতা।" },
+    { t: "Futuristic Loneliness · ভবিষ্যতের একাকীত্ব", i: "image%20sketch%201.jpg", d: "Future যত জটিল হচ্ছে, loneliness তত বাড়ছে। City of the dream / Science of loneliness — perspective, headset, empty hands reaching." },
+    { t: "Bamboo still life · বাঁশের স্টাডি", i: "image%20sketch%203.jpg", d: "Pencil study — pot, cut bamboo, shadow. Quiet observation of form and weight." },
+    { t: "Digital library · ডিজিটাল পাঠাগার", i: "image%20ipad%201.png", d: "iPad / digital composition — vaulted library, light, readers. Architecture of knowledge." },
+    { t: "Colour festival · রঙিন উৎসব", i: "image%20colour.jpg", d: "Multi-panel colour work — crowd under the banyan, stage, craft shop, portrait with owls. Public life in pigment." },
+    { t: "Flame-marked face · আগুনের চিহ্ন", i: "image%20colour%201.jpg", d: "Portrait study — red hair, flame marks, steady gaze. Character and intensity." },
+    { t: "Comic · কে সে কী করতেছে", i: "809518654_1855217995842076_8923680691947304600_n.jpg", d: "Black-and-white comic sequence — phone, pig, crow, fish. বাংলা প্যানেল; mystery and dark humour." },
+    { t: "Comic · ১৮ November · উঠে দাঁড়ানো", i: "809601262_4548993055379554_8793039364914601083_n.jpg", d: "Stairwell, body, resolve. “আমার প্রেম থেকে উঠেই হবে” — rising out of someone’s gravity." },
+    { t: "Comic · সমুদ্রের মেয়ে", i: "813466984_26807832862248578_2653115749408704795_n.jpg", d: "Woman with cup, radio on a branch, spear, wrecked shore. “এ কী মেক্সিকো হইতে সাগরের!!” — journey and distance." },
+    { t: "Note · তোমার আঁকা ছবিগুলো অনেক সুন্দর", i: "814113108_1617142683373760_3602804557652732585_n.jpg", d: "Notre Dame College — Father Susanto-র হাতে লেখা প্রশংসা। A rare written blessing on the craft of drawing." },
+    { t: "Comic · ০৫ November · দুইদিন", i: "818061932_846874715114836_2565138691570136914_n.jpg", d: "Rain, umbrella, boat, island. “দুইদিন যাও, তোমার” — time, weather, and the road between people." },
+    { t: "Comic · ১৯ November · যুদ্ধের হাত", i: "818478656_1667736108690904_8025924023257939696_n.jpg", d: "“The outcome of the war is in our hands…” — stairs, serpent, blue energy. Conflict and choice." },
+    { t: "Portrait · একবার যদি সুযোগ পেতাম", i: "813692048_1750841226169127_6723820080107089098_n.jpg", d: "Soft portrait and circular Bangla lines — chance, memory, and the cost of staying in someone’s mind." },
+    { t: "Loneliness · একাকীত্ব", i: "813853349_2273476383432547_5877535730504115386_n.jpg", d: "পাহাড়ের পাশে ঝুপড়ি, হ্রদ, একজন মানুষ। পৃথিবীতে কিছু মানুষ থাকে যাদের কেউ নেই — শুধু তারা, প্রকৃতি, আর সৃষ্টিকর্তা। / Some live with almost no one beside them — only self, landscape, and the One who made both. Quiet shelter under a heavy sky." }
   ],
   arch: [
     { t: "Project-1 · Squares in Grid", i: "Screenshot%202026-09-20%20202305.png", d: "First project. Black and white square grid composition — structure, rhythm and controlled void." },
@@ -1132,6 +1170,7 @@ const DATA = {
     { w: "Kazi Nazrul Islam & Michael Madhusudan Dutt", books: ["Shorter poems", "Selected works of Madhusudan"], note: "Also interest in Dhaka Comics / Pratybastha." }
   ],
   certs: [
+    { n: "Father Susanto (Notre Dame College) — “তোমার আঁকা ছবিগুলো অনেক সুন্দর”", d: "814113108_1617142683373760_3602804557652732585_n.jpg", img: "814113108_1617142683373760_3602804557652732585_n.jpg" },
     { n: "Bangladesh Shishu Academy / Children’s Drawing — Thana 1st (2023)", d: "https://drive.google.com/", img: "image/cert1.jpg" },
     { n: "Bangladesh Shishu Academy / Children’s Drawing — District 1st (2023)", d: "https://drive.google.com/", img: "image/cert2.jpg" },
     { n: "Bangladesh Shishu Academy / Children’s Drawing — Division 2nd (2023)", d: "https://drive.google.com/", img: "image/cert3.jpg" },
@@ -1161,7 +1200,7 @@ const SKILLS = [
   let w, h, t = 0;
   const stars = [];
   const arms = 3;
-  const armStars = 900;
+  const armStars = 1600;
 
   function resize() {
     w = c.width = window.innerWidth;
@@ -1181,7 +1220,7 @@ const SKILLS = [
       });
     }
     // distant field stars
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 160; i++) {
       stars.push({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -1593,7 +1632,16 @@ function renderAch() {
   DATA.certs.forEach(c => {
     const row = document.createElement("div");
     row.className = "ach-row";
-    row.innerHTML = "<img class=\"ach-thumb\" src=\"" + c.img + "\" alt=\"\" onerror=\"this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect fill=%22%2318181b%22 width=%2248%22 height=%2248%22/%3E%3C/svg%3E'\"><span class=\"name\">" + c.n + "</span><a href=\"" + c.d + "\" target=\"_blank\" rel=\"noopener\">View</a>";
+    const isLocal = c.img && !c.img.startsWith("http") && !c.img.includes("drive.google");
+    const viewHtml = isLocal
+      ? "<button type=\"button\" class=\"btn\" style=\"padding:6px 12px;font-size:12px;\">View</button>"
+      : "<a href=\"" + c.d + "\" target=\"_blank\" rel=\"noopener\">View</a>";
+    row.innerHTML = "<img class=\"ach-thumb\" src=\"" + c.img + "\" alt=\"\" style=\"cursor:none;\" onerror=\"this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect fill=%22%2318181b%22 width=%2248%22 height=%2248%22/%3E%3C/svg%3E'\"><span class=\"name\">" + c.n + "</span>" + viewHtml;
+    if (isLocal) {
+      const open = () => openLb(c.img, c.n, "Achievement — view only. Screenshot is possible on any public page.");
+      row.querySelector("img").onclick = open;
+      row.querySelector("button").onclick = open;
+    }
     list.appendChild(row);
   });
 }
@@ -1828,7 +1876,7 @@ function reply(text) {
   if (/who (are|r) you|তুমি কে/i.test(t)) return "I am the local curator for this portfolio. I navigate the site and explain Shadid’s work. You can speak or type.";
   if (/who is shadid|about shadid|biography|কে এই/i.test(t)) return "Shadid Ahamed — Architecture student at BRAC, ARC-101, roll 1000061008. Handmade portfolio books, drawing, models, and code. Core method: persistence.";
   if (/book|handmade|portfolio book|কভার|জ্যামিতিক/i.test(t)) { showView("book"); return "The Book is central. Black mount, pen hatching, geometric PORTFOLIO lettering, checker binding. Fully handmade. I opened it for you."; }
-  if (/family|বাবা|মা/i.test(t)) return "Father: Tofail Ahmed, Police Inspector. Mother: homemaker. The public work focuses on craft and growth.";
+  if (/family|বাবা|মা/i.test(t)) return "Father: Tofayel Ahamed, Police Inspector. Mother: Afruja Sultana. Sister: Tahliba Tuhfa. The public work focuses on craft and growth.";
   if (/struggle|hard|fail|buet|medical|persistence|লেগে রাখো|lage raho|eagle|process/i.test(t)) { showView("process"); return "Opening Process. Some outcomes were outside control; the response is continuous making — book, drawings, models, code."; }
   if (/education|school|college|university|ssc|hsc|brac|notre|motijheel/i.test(t)) {
     showView("education");
