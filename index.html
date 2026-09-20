@@ -22,14 +22,16 @@
   --bg: #050505;
   --bg-2: #0b0b0c;
   --bg-3: #141416;
-  --border: rgba(242,240,234,0.08);
-  --border-hover: rgba(242,240,234,0.18);
+  --border: rgba(242,240,234,0.09);
+  --border-hover: rgba(242,240,234,0.2);
   --text: #f2f0ea;
   --muted: #a8a49c;
   --dim: #74747a;
   --green: #5a8f6a;
   --maroon: #6b2c36;
   --maroon-soft: rgba(107,44,54,0.4);
+  --pumpkin: #e88c2a;
+  --pumpkin-soft: rgba(232,140,42,0.22);
   --silver: #c8c4bc;
   --offwhite: #d8d0c5;
   --radius: 10px;
@@ -58,7 +60,18 @@ body.touch-device * {
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
+img[loading="lazy"] { content-visibility: auto; }
+.orbital-item img, .tl-thumb, .ach-thumb, .avatar {
+  background: var(--bg-3);
+}
 button { font-family: inherit; border: none; background: none; color: inherit; }
+
+/* Mild view-protection (cannot fully block screenshots) */
+.lightbox, .modal, .orbital-item, .ach-row {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
 
 /* Custom cursor — only round circle; mix-blend so it inverts on light/dark */
 .cursor-dot {
@@ -274,32 +287,29 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 .name-grid span.on { background: #fff; }
 .name-grid span.mid { background: rgba(255,255,255,0.45); }
 .name-stack h1 {
-  font-size: clamp(3.8rem, 11vw, 7rem);
   font-weight: 800;
   letter-spacing: -0.045em;
-  line-height: 0.88;
+  line-height: 0.84;
   margin: 0;
-  color: var(--text);
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.05),
+    0 2px 14px rgba(0,0,0,0.5),
+    0 0 36px rgba(242,240,234,0.03);
 }
-.name-stack .line-1 { display: block; }
+.name-stack .line-1 {
+  display: block;
+  font-size: clamp(4.8rem, 14.5vw, 9rem);
+  color: #f2f0ea;
+  letter-spacing: -0.04em;
+}
 .name-stack .line-2 {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.18em;
-  color: var(--text);
+  display: block;
+  font-size: clamp(3.2rem, 9.5vw, 5.8rem);
+  color: #c9a27a;
   font-weight: 800;
-  margin-top: 0;
-}
-.name-dot {
-  display: inline-block;
-  width: 0.22em; height: 0.22em;
-  min-width: 10px; min-height: 10px;
-  background: linear-gradient(135deg, #e8b84a 0%, #c47a2a 45%, #f0c96a 100%);
-  box-shadow: 0 0 12px rgba(232,184,74,0.55), 0 0 2px #e8b84a;
-  image-rendering: pixelated;
-  border-radius: 1px;
-  flex-shrink: 0;
-  margin-bottom: 0.12em;
+  margin-top: 0.04em;
+  letter-spacing: -0.02em;
+  /* width of AHAMED kept shorter so last letter of SHADID sits above the end of AHAMED */
 }
 .home-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
 .chip {
@@ -723,6 +733,14 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   transform-style: preserve-3d;
   animation: bookFloat 8s ease-in-out infinite, bookSpin 18s linear infinite;
 }
+@media (max-width: 560px) {
+  .book-3d-wrap { min-height: 220px; }
+  .book-3d { width: 140px; height: 190px; }
+  .book-3d .face { width: 140px; height: 190px; }
+  .book-3d .spine { width: 20px; height: 190px; left: 60px; transform: rotateY(90deg) translateZ(70px); }
+  .book-3d .top { width: 140px; height: 20px; top: -10px; transform: rotateX(90deg) translateZ(10px); }
+  .book-3d { animation: bookFloat 10s ease-in-out infinite, bookSpin 22s linear infinite; }
+}
 @keyframes bookFloat {
   0%, 100% { transform: translateY(0) rotateX(8deg) rotateY(-18deg); }
   50% { transform: translateY(-14px) rotateX(6deg) rotateY(-12deg); }
@@ -827,7 +845,10 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
         <p class="section-label" style="letter-spacing:0.14em;">A handmade portfolio translated into a digital spatial archive</p>
         <div class="name-block" style="margin-top:12px;margin-bottom:28px;">
           <div class="name-stack">
-            <h1><span class="line-1">SHADID</span><span class="line-2">AHAMED<span class="name-dot" aria-hidden="true"></span></span></h1>
+            <h1>
+              <span class="line-1">SHADID</span>
+              <span class="line-2">AHAMED</span>
+            </h1>
           </div>
         </div>
         <p class="lead" style="max-width:520px;font-size:1.05rem;">Architecture student. Creative developer. Artist. Maker. A first-semester portfolio built from hand, geometry, material, drawing, code — and an interest in where architecture meets computing.</p>
@@ -858,7 +879,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
       <!-- CSS 3D floating book -->
       <div class="book-3d-wrap">
         <div class="book-3d" id="book3d" title="Handmade portfolio — ARC-101">
-          <div class="face front" style="background-image:url('book-3d.jpg')"></div>
+          <div class="face front" style="background-image:url('815366796_1754064392528440_1990530380060926840_n.jpg');background-position:center 18%;"></div>
           <div class="face back" style="background-image:url('811615849_2097588261148773_877248636819443508_n.jpg')"></div>
           <div class="face spine"></div>
           <div class="face top"></div>
@@ -892,7 +913,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
       <p class="section-label">About</p>
       <h1>Profile</h1>
       <div class="profile-layout" style="margin-top:28px;">
-        <img class="avatar" src="Screenshot%202026-09-20%20201810.png" alt="Shadid Ahamed" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2318181b%22 width=%22200%22 height=%22200%22/%3E%3Ctext fill=%22%23a1a1aa%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2224%22%3ESA%3C/text%3E%3C/svg%3E'">
+        <img class="avatar" src="Screenshot%202026-09-20%20201810.png" alt="Shadid Ahamed" loading="eager" decoding="async" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2318181b%22 width=%22200%22 height=%22200%22/%3E%3Ctext fill=%22%23a1a1aa%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2224%22%3ESA%3C/text%3E%3C/svg%3E'">
         <div>
           <h2>Shadid Ahamed · সাদিদ আহমেদ</h2>
           <p style="color:var(--muted);font-size:14px;margin-bottom:12px;">BRAC University · Architecture · Role 1000061008 · Batch Summer 2026 · First semester (ARC 101)</p>
@@ -975,7 +996,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
               <span class="result">SSC GPA 5.00 · Golden A+</span>
               <div style="margin-top:12px;"><a class="btn" href="https://www.google.com/maps/search/Motijheel+Ideal+School+and+College+Dhaka" target="_blank" rel="noopener">Maps</a></div>
             </div>
-            <img class="tl-thumb" src="school-2.jpg" alt="Motijheel Ideal" onclick="openLb(this.src,'Motijheel Ideal','School campus')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3ESchool%3C/text%3E%3C/svg%3E'">
+            <img class="tl-thumb" src="school-2.jpg" alt="Motijheel Ideal" loading="lazy" decoding="async" onclick="openLb(this.src,'Motijheel Ideal','School campus')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3ESchool%3C/text%3E%3C/svg%3E'">
           </div>
         </div>
         <div class="tl-item">
@@ -988,7 +1009,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
               <span class="result">HSC GPA 5.00 · Golden A+</span>
               <div style="margin-top:12px;"><a class="btn" href="https://www.google.com/maps/search/Notre+Dame+College+Motijheel+Dhaka" target="_blank" rel="noopener">Maps</a></div>
             </div>
-            <img class="tl-thumb" src="college-3.jpg" alt="Notre Dame College" onclick="openLb(this.src,'Notre Dame College','Arambagh, Motijheel, Dhaka')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3ECollege%3C/text%3E%3C/svg%3E'">
+            <img class="tl-thumb" src="college-3.jpg" alt="Notre Dame College" loading="lazy" decoding="async" onclick="openLb(this.src,'Notre Dame College','Arambagh, Motijheel, Dhaka')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3ECollege%3C/text%3E%3C/svg%3E'">
           </div>
         </div>
         <div class="tl-item">
@@ -1001,7 +1022,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
               <p style="color:var(--dim);font-size:13px;margin-top:6px;">Exploring shift toward CSE. Expected / potential graduation: 2032.</p>
               <div style="margin-top:12px;"><a class="btn" href="https://www.google.com/maps/search/BRAC+University+Merul+Badda+Dhaka" target="_blank" rel="noopener">Maps</a></div>
             </div>
-            <img class="tl-thumb" src="university-3.jpg" alt="BRAC University" onclick="openLb(this.src,'BRAC University','Merul Badda, Dhaka')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3EUniversity%3C/text%3E%3C/svg%3E'">
+            <img class="tl-thumb" src="university-3.jpg" alt="BRAC University" loading="lazy" decoding="async" onclick="openLb(this.src,'BRAC University','Merul Badda, Dhaka')" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22105%22%3E%3Crect fill=%22%2318181b%22 width=%22140%22 height=%22105%22/%3E%3Ctext fill=%22%2371717a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2211%22%3EUniversity%3C/text%3E%3C/svg%3E'">
           </div>
         </div>
       </div>
@@ -1026,7 +1047,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
       <h1>Achievements</h1>
       <p class="lead">Certificates and competition results. View-only Drive links.</p>
       <div class="ach-list" id="ach-list"></div>
-      <p style="margin-top:16px;font-size:12px;color:var(--dim);">Viewing only. Screenshots cannot be fully blocked by a website.</p>
+      <p style="margin-top:16px;font-size:12px;color:var(--dim);">View-only archive · selection disabled · full screenshot blocking is not possible in any browser, but casual capture is discouraged.</p>
     </section>
 
     <section class="view" id="view-contact">
@@ -1193,39 +1214,44 @@ const SKILLS = [
   { id: "lit", title: "Literature", blurb: "Favorite writers and books." }
 ];
 
-/* Rotating spiral galaxy + void field */
+/* Rotating spiral galaxy + void field — denser on desktop, lighter on mobile */
 (function() {
   const c = document.getElementById("space-canvas");
   const ctx = c.getContext("2d");
   let w, h, t = 0;
   const stars = [];
-  const arms = 3;
-  const armStars = 1600;
+  const arms = 4;
+  const isMobile = () => window.innerWidth < 900 || ("ontouchstart" in window) || navigator.maxTouchPoints > 0;
+  let armStars = 2400;
+  let fieldStars = 280;
 
   function resize() {
     w = c.width = window.innerWidth;
     h = c.height = window.innerHeight;
     stars.length = 0;
+    const mobile = isMobile();
+    armStars = mobile ? 900 : 2400;
+    fieldStars = mobile ? 120 : 280;
     const cx = w * 0.72, cy = h * 0.28;
     for (let i = 0; i < armStars; i++) {
       const arm = i % arms;
-      const dist = Math.pow(Math.random(), 0.65) * Math.min(w, h) * 0.42;
-      const angle = (arm / arms) * Math.PI * 2 + dist * 0.018 + Math.random() * 0.4;
+      const dist = Math.pow(Math.random(), 0.62) * Math.min(w, h) * 0.48;
+      const angle = (arm / arms) * Math.PI * 2 + dist * 0.016 + Math.random() * 0.45;
       stars.push({
         baseAngle: angle,
         dist: dist,
-        size: Math.random() * 1.3 + 0.2,
-        bright: Math.random() * 0.55 + 0.15,
-        speed: 0.0008 + Math.random() * 0.0006
+        size: Math.random() * 1.35 + 0.18,
+        bright: Math.random() * 0.58 + 0.14,
+        speed: 0.0007 + Math.random() * 0.0007
       });
     }
     // distant field stars
-    for (let i = 0; i < 160; i++) {
+    for (let i = 0; i < fieldStars; i++) {
       stars.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        size: Math.random() * 0.9 + 0.15,
-        bright: Math.random() * 0.25 + 0.05,
+        size: Math.random() * 0.95 + 0.12,
+        bright: Math.random() * 0.28 + 0.04,
         fixed: true
       });
     }
@@ -1403,6 +1429,8 @@ function renderBook() {
     const img = document.createElement("img");
     img.src = d.i;
     img.alt = d.t;
+    img.loading = "lazy";
+    img.decoding = "async";
     img.onerror = function() { this.style.opacity = "0.35"; };
     el.appendChild(img);
     el.onclick = () => {
@@ -1503,6 +1531,8 @@ function openSkill(s) {
       const img = document.createElement("img");
       img.src = d.i;
       img.alt = d.t;
+      img.loading = "lazy";
+      img.decoding = "async";
       img.onerror = function() { this.style.opacity = "0.35"; };
       el.appendChild(img);
       el.onclick = (e) => {
@@ -1636,7 +1666,7 @@ function renderAch() {
     const viewHtml = isLocal
       ? "<button type=\"button\" class=\"btn\" style=\"padding:6px 12px;font-size:12px;\">View</button>"
       : "<a href=\"" + c.d + "\" target=\"_blank\" rel=\"noopener\">View</a>";
-    row.innerHTML = "<img class=\"ach-thumb\" src=\"" + c.img + "\" alt=\"\" style=\"cursor:none;\" onerror=\"this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect fill=%22%2318181b%22 width=%2248%22 height=%2248%22/%3E%3C/svg%3E'\"><span class=\"name\">" + c.n + "</span>" + viewHtml;
+    row.innerHTML = "<img class=\"ach-thumb\" src=\"" + c.img + "\" alt=\"\" loading=\"lazy\" decoding=\"async\" style=\"cursor:none;\" onerror=\"this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect fill=%22%2318181b%22 width=%2248%22 height=%2248%22/%3E%3C/svg%3E'\"><span class=\"name\">" + c.n + "</span>" + viewHtml;
     if (isLocal) {
       const open = () => openLb(c.img, c.n, "Achievement — view only. Screenshot is possible on any public page.");
       row.querySelector("img").onclick = open;
@@ -1943,12 +1973,20 @@ if (micBtn) {
   micBtn.addEventListener("touchend", function(e) { e.preventDefault(); startListen(); }, { passive: false });
 }
 
-renderBook();
+/* Lightweight init first — heavy image work deferred until section is opened */
 renderSkills();
-renderVideos();
-renderAch();
 renderContacts();
 loadChat();
+
+let _bookRendered = false, _videosRendered = false, _achRendered = false;
+const _origShowView = window.showView;
+window.showView = function(id) {
+  _origShowView(id);
+  if (id === "book" && !_bookRendered) { _bookRendered = true; renderBook(); }
+  if (id === "videos" && !_videosRendered) { _videosRendered = true; renderVideos(); }
+  if (id === "achievements" && !_achRendered) { _achRendered = true; renderAch(); }
+};
+
 const start = (location.hash || "").slice(1) || localStorage.getItem("view") || "home";
 if (document.getElementById("view-" + start)) showView(start);
 else showView("home");
