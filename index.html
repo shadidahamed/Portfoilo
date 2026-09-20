@@ -45,35 +45,42 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: none;
+  cursor: none !important;
 }
-body.touch-device { cursor: auto; }
-body.touch-device * { cursor: auto !important; }
+/* Hide EVERY system cursor on desktop — only custom ring/dot */
+body:not(.touch-device),
+body:not(.touch-device) * {
+  cursor: none !important;
+}
+body.touch-device,
+body.touch-device * {
+  cursor: auto !important;
+}
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+button { font-family: inherit; border: none; background: none; color: inherit; }
 
-/* Custom cursor */
+/* Custom cursor — only round circle; mix-blend so it inverts on light/dark */
 .cursor-dot {
-  position: fixed; width: 7px; height: 7px;
+  position: fixed; width: 6px; height: 6px;
   background: #fff; border-radius: 50%;
   pointer-events: none; z-index: 99999;
   transform: translate(-50%, -50%);
   transition: width 0.2s, height 0.2s;
-  box-shadow: 0 0 8px rgba(255,255,255,0.5);
   mix-blend-mode: difference;
 }
 .cursor-ring {
-  position: fixed; width: 32px; height: 32px;
-  border: 1.5px solid rgba(255,255,255,0.65);
+  position: fixed; width: 28px; height: 28px;
+  border: 1.5px solid #fff;
   border-radius: 50%;
   pointer-events: none; z-index: 99998;
   transform: translate(-50%, -50%);
   transition: width 0.25s, height 0.25s, opacity 0.25s;
-  opacity: 0.7;
+  opacity: 0.85;
+  mix-blend-mode: difference;
 }
-body.hovering .cursor-dot { width: 12px; height: 12px; }
-body.hovering .cursor-ring { width: 48px; height: 48px; opacity: 1; }
+body.hovering .cursor-dot { width: 10px; height: 10px; }
+body.hovering .cursor-ring { width: 44px; height: 44px; opacity: 1; }
 body.touch-device .cursor-dot,
 body.touch-device .cursor-ring { display: none !important; }
 
@@ -130,7 +137,6 @@ body.touch-device .cursor-ring { display: none !important; }
   font-size: 13.5px; color: var(--muted);
   display: flex; align-items: center; gap: 10px;
   transition: background 0.2s, color 0.2s, box-shadow 0.25s;
-  cursor: pointer;
   width: 100%;
   pointer-events: auto;
   position: relative;
@@ -168,17 +174,28 @@ body.touch-device .cursor-ring { display: none !important; }
 .hire-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
 .menu-toggle {
-  display: none; position: fixed; top: 16px; left: 16px; z-index: 60;
-  width: 42px; height: 42px; border-radius: 10px;
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 250;
+  width: 44px; height: 44px; border-radius: 10px;
   background: var(--bg-2); border: 1px solid var(--border);
   align-items: center; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 @media (max-width: 900px) { .menu-toggle { display: flex; } }
 .overlay {
   display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5); z-index: 40;
+  background: rgba(0,0,0,0.5); z-index: 190;
 }
 .overlay.show { display: block; }
+/* Mobile nav: ensure buttons receive taps */
+@media (max-width: 900px) {
+  .nav button {
+    min-height: 44px;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.08);
+    touch-action: manipulation;
+  }
+  .sidebar { z-index: 220; }
+}
 
 .main {
   min-height: 100vh;
@@ -343,7 +360,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 }
 .tl-thumb {
   width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px;
-  border: 1px solid var(--border); cursor: pointer; background: var(--bg-3);
+  border: 1px solid var(--border);  background: var(--bg-3);
 }
 
 /* Skills — light 3D */
@@ -352,7 +369,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 }
 .skill-card {
   background: var(--bg-2); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 18px; cursor: pointer; text-align: left;
+  border-radius: var(--radius); padding: 18px;  text-align: left;
   transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), box-shadow 0.3s, border-color 0.2s;
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   transform-style: preserve-3d;
@@ -402,7 +419,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 .slider-item {
   flex: 0 0 min(200px, 70vw); scroll-snap-align: start;
   border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
-  cursor: pointer; background: var(--bg-3); aspect-ratio: 1;
+   background: var(--bg-3); aspect-ratio: 1;
   transition: border-color 0.2s, transform 0.2s;
 }
 .slider-item:hover { border-color: var(--border-hover); transform: scale(1.02); }
@@ -415,8 +432,8 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 .orbital-stage {
   position: relative;
   width: 100%;
-  height: 380px;
-  perspective: 1100px;
+  height: 440px;
+  perspective: 1200px;
   perspective-origin: 50% 45%;
   margin: 0 auto 8px;
   transform-style: preserve-3d;
@@ -435,8 +452,8 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 .orbital-ring {
   position: absolute;
   top: 58%; left: 50%;
-  width: 280px; height: 70px;
-  margin: -35px 0 0 -140px;
+  width: 320px; height: 80px;
+  margin: -40px 0 0 -160px;
   border: 1px solid rgba(242,240,234,0.14);
   border-radius: 50%;
   pointer-events: none;
@@ -445,20 +462,19 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   transform: rotateX(72deg);
 }
 @media (max-width: 560px) {
-  .orbital-ring { width: 210px; height: 52px; margin: -26px 0 0 -105px; }
+  .orbital-ring { width: 250px; height: 62px; margin: -31px 0 0 -125px; }
 }
 .orbital-item {
   position: absolute;
   top: 50%; left: 50%;
-  /* upright portrait card */
-  width: 100px;
-  height: 140px;
-  margin: -70px 0 0 -50px;
-  border-radius: 8px;
+  /* larger upright cards — readable while rotating */
+  width: 132px;
+  height: 176px;
+  margin: -88px 0 0 -66px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg-3);
-  cursor: pointer;
   will-change: transform, opacity;
   transition: border-color 0.2s, box-shadow 0.2s;
   transform-style: preserve-3d;
@@ -468,6 +484,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
 }
 .orbital-item:hover,
 .orbital-item.orbital-front {
@@ -475,8 +492,12 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   box-shadow: 0 0 0 1px rgba(255,255,255,0.25), 0 16px 32px rgba(0,0,0,0.5);
 }
 @media (max-width: 560px) {
-  .orbital-stage { height: 300px; }
-  .orbital-item { width: 78px; height: 110px; margin: -55px 0 0 -39px; }
+  .orbital-stage { height: 360px; }
+  .orbital-item {
+    width: 108px;
+    height: 144px;
+    margin: -72px 0 0 -54px;
+  }
 }
 
 /* Detail: image left, text right */
@@ -633,16 +654,32 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 .ai-msg { max-width: 88%; padding: 9px 12px; border-radius: 10px; font-size: 13px; line-height: 1.5; }
 .ai-msg.bot { background: var(--bg-3); border: 1px solid var(--border); align-self: flex-start; }
 .ai-msg.user { background: rgba(255,255,255,0.06); align-self: flex-end; color: var(--muted); }
-.ai-input-row { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+.ai-input-row { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; }
 .ai-input-row input {
-  flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
-  padding: 9px 12px; color: var(--text); font-size: 13px; outline: none;
+  flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-size: 14px; outline: none;
 }
 .ai-input-row input:focus { border-color: var(--border-hover); }
 .ai-input-row button {
-  width: 36px; height: 36px; border-radius: 8px; background: var(--bg-3);
-  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 8px; background: var(--text); color: var(--bg); font-weight: 600;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
+.ai-mic {
+  width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border) !important;
+  background: var(--bg-3) !important; color: var(--text) !important;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ai-mic.listening {
+  background: rgba(90,143,106,0.25) !important;
+  border-color: var(--green) !important;
+  color: var(--green) !important;
+  animation: pulseMic 1.2s ease infinite;
+}
+@keyframes pulseMic {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(90,143,106,0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(90,143,106,0); }
+}
+.ai-mic svg { width: 18px; height: 18px; }
 
 .footer-note {
   margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
@@ -722,7 +759,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--border);
-  cursor: pointer;
+  
   transition: transform 0.4s, box-shadow 0.3s;
   background: var(--bg-3);
 }
@@ -815,7 +852,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 
       <!-- Circular orbital gallery for book pages (rim path, no bottom description until click) -->
       <div class="orbital-wrap" style="margin:28px 0 12px;">
-        <div class="orbital-stage" id="book-orbital-stage" style="height:340px;">
+        <div class="orbital-stage" id="book-orbital-stage" style="height:420px;">
           <div class="orbital-center"></div>
           <div class="orbital-ring" aria-hidden="true"></div>
         </div>
@@ -1031,7 +1068,10 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   </div>
   <div class="ai-msgs" id="ai-msgs"></div>
   <div class="ai-input-row">
-    <input type="text" id="ai-input" placeholder="Ask about Shadid…" aria-label="Message">
+    <button type="button" class="ai-mic" id="ai-mic" title="Voice (speak)" aria-label="Voice input">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a3 3 0 00-3 3v6a3 3 0 006 0V5a3 3 0 00-3-3z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 19v3M8 22h8"/></svg>
+    </button>
+    <input type="text" id="ai-input" placeholder="Speak or type…" aria-label="Message">
     <button type="button" id="ai-send">→</button>
   </div>
 </div>
@@ -1246,6 +1286,7 @@ const SKILLS = [
 
 window.showView = function showView(id) {
   if (!id) return;
+  id = String(id).replace(/^#/, "").trim();
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   const el = document.getElementById("view-" + id);
   if (el) {
@@ -1254,6 +1295,7 @@ window.showView = function showView(id) {
     console.warn("Section not found:", id);
     const home = document.getElementById("view-home");
     if (home) home.classList.add("active");
+    id = "home";
   }
   document.querySelectorAll("#nav button").forEach(b => {
     b.classList.toggle("active", b.getAttribute("data-view") === id);
@@ -1261,29 +1303,47 @@ window.showView = function showView(id) {
   try { history.replaceState(null, "", "#" + id); } catch (err) {}
   try { localStorage.setItem("view", id); } catch (err) {}
   closeSidebar();
-  window.scrollTo(0, 0);
-}
-// Event delegation — works even if nodes change
-document.addEventListener("click", function(e) {
+  window.scrollTo({ top: 0, behavior: "instant" in document.documentElement.style ? "instant" : "auto" });
+};
+
+// Robust navigation: click + touchend (mobile)
+function navFromEvent(e) {
   const el = e.target.closest("[data-view]");
   if (!el) return;
   const v = el.getAttribute("data-view");
   if (!v) return;
   e.preventDefault();
+  e.stopPropagation();
   showView(v);
-});
+}
+document.addEventListener("click", navFromEvent);
+document.addEventListener("touchend", function(e) {
+  // Only for data-view targets so we don't block scrolling
+  if (e.target.closest("[data-view]")) navFromEvent(e);
+}, { passive: false });
 
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
-document.getElementById("menu-toggle").addEventListener("click", () => {
+const menuBtn = document.getElementById("menu-toggle");
+function toggleSidebar(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
   sidebar.classList.toggle("open");
   overlay.classList.toggle("show");
-});
+}
+menuBtn.addEventListener("click", toggleSidebar);
+menuBtn.addEventListener("touchend", function(e) {
+  e.preventDefault();
+  toggleSidebar(e);
+}, { passive: false });
 function closeSidebar() {
   sidebar.classList.remove("open");
   overlay.classList.remove("show");
 }
 overlay.addEventListener("click", closeSidebar);
+overlay.addEventListener("touchend", function(e) {
+  e.preventDefault();
+  closeSidebar();
+}, { passive: false });
 
 function renderBook() {
   const stage = document.getElementById("book-orbital-stage");
@@ -1293,7 +1353,7 @@ function renderBook() {
 
   const list = DATA.book;
   const n = list.length;
-  const radiusX = Math.min(145, Math.max(105, (stage.offsetWidth || 320) * 0.36));
+  const radiusX = Math.min(175, Math.max(125, (stage.offsetWidth || 320) * 0.38));
   const radiusY = radiusX * 0.42;
   const items = [];
 
@@ -1323,8 +1383,8 @@ function renderBook() {
       const x = Math.sin(a) * radiusX;
       const y = -Math.cos(a) * radiusY * 0.32;
       const depth = (Math.cos(a) + 1) / 2;
-      const scale = 0.45 + 0.7 * depth;
-      const lift = -24 * depth;
+      const scale = 0.62 + 0.55 * depth;
+      const lift = -28 * depth;
       it.el.style.transform = "translate(" + x + "px," + (y + lift) + "px) scale(" + scale + ")";
       it.el.style.zIndex = Math.round(depth * 40);
       it.el.style.opacity = 0.25 + 0.75 * depth;
@@ -1350,7 +1410,7 @@ function renderBook() {
       }
       goTo(active + 1);
       scheduleNext();
-    }, 1500);
+    }, 2000);
   }
   scheduleNext();
 }
@@ -1394,7 +1454,7 @@ function openSkill(s) {
     const stage = document.getElementById("orbital-stage");
     const items = [];
     const n = Math.max(list.length, 1);
-    const radiusX = Math.min(145, Math.max(105, (stage.offsetWidth || 320) * 0.36));
+    const radiusX = Math.min(175, Math.max(125, (stage.offsetWidth || 320) * 0.38));
     const radiusY = radiusX * 0.42;
 
     list.forEach((d, i) => {
@@ -1426,8 +1486,8 @@ function openSkill(s) {
         const x = Math.sin(a) * radiusX;
         const y = -Math.cos(a) * radiusY * 0.32;
         const depth = (Math.cos(a) + 1) / 2; // 1 = front/center
-        const scale = 0.45 + 0.7 * depth; // clear size jump for center
-        const lift = -24 * depth;
+        const scale = 0.62 + 0.55 * depth; // front larger, sides still readable
+        const lift = -28 * depth;
         it.el.style.transform =
           "translate(" + x + "px," + (y + lift) + "px) scale(" + scale + ")";
         it.el.style.zIndex = Math.round(depth * 40);
@@ -1459,7 +1519,7 @@ function openSkill(s) {
         }
         goTo(active + 1);
         scheduleNext();
-      }, 1500);
+      }, 2000);
     }
     scheduleNext();
 
@@ -1595,6 +1655,10 @@ document.addEventListener("keydown", e => {
 let conversation = [];
 const aiPanel = document.getElementById("ai-panel");
 const aiMsgs = document.getElementById("ai-msgs");
+let aiAwaitingOff = false;
+let helpFollowUpTimer = null;
+let voiceEnabled = true;
+
 function saveChat() { try { localStorage.setItem("sa_chat", JSON.stringify(conversation.slice(-60))); } catch (e) {} }
 function loadChat() {
   try { const s = localStorage.getItem("sa_chat"); if (s) conversation = JSON.parse(s); } catch (e) {}
@@ -1610,53 +1674,214 @@ function renderChat() {
   });
   aiMsgs.scrollTop = aiMsgs.scrollHeight;
 }
-function reply(text) {
-  const t = text.toLowerCase();
-  // Navigation helpers
-  if (/open (the )?book|show (the )?book|বই/.test(t)) { showView("book"); return "Opening The Book — the handmade first-semester portfolio. Fully hand-crafted geometric cover, checker structure, no digital production. This is the central object."; }
-  if (/open (profile|about)|show profile|প্রোফাইল/.test(t)) { showView("profile"); return "Opening Profile."; }
-  if (/open process|show process|persistence|struggle|লেগে রাখো/.test(t)) { showView("process"); return "Opening Process / Persistence. The method is to keep building — the book, the drawings, the code — rather than centre the setbacks."; }
-  if (/open education|show education|শিক্ষা|এডুকেশন/.test(t)) { showView("education"); return "Opening Education. Motijheel Ideal (SSC 5.00) → Notre Dame (HSC 5.00) → BRAC Architecture, roll 1000061008, Summer 2026. Clear computing direction alongside."; }
-  if (/open skills|show skills|architecture|drawing|স্কিল/.test(t)) { showView("skills"); return "Opening Skills — Art & Drawing, Architectural design, Web experiments, Video, Literature."; }
-  if (/open contact|show contact|যোগাযোগ/.test(t)) { showView("contact"); return "Opening Contact."; }
 
-  if (/stop|থামো|বন্ধ/.test(t)) return "Alright. Paused.";
-  if (/^(hi|hello|hey|হ্যালো|নমস্কার)/.test(t)) return "Hi. I can open sections for you (say “open the book” or “show education”), or answer about the handmade portfolio, education, craft, struggle, or how to reach Shadid.";
-  if (/who (are|r) you|তুমি কে/.test(t)) return "Local curator for this portfolio. I can navigate the site and explain the work.";
-  if (/who is shadid|about shadid|biography|কে এই/.test(t)) return "Shadid Ahamed — Architecture student at BRAC (ARC-101, roll 1000061008). Builds fully handmade portfolio books, draws, makes models, and also writes code (TrendCart, interactive game). Core method: persistence. The physical book is the strongest proof of how he thinks.";
-  if (/book|handmade|portfolio book|কভার|জ্যামিতিক/.test(t)) { showView("book"); return "The Book is central. Black mount / Swiss board, pen hatching, geometric PORTFOLIO lettering, maroon accents, checker binding. Made entirely by hand for first semester. Opened the section for you."; }
-  if (/family|বাবা|মা/.test(t)) return "Father: Tofail Ahmed (Police Inspector). Mother: homemaker. Family and personal pressure are part of the story he carries, but the public work focuses on craft and growth.";
-  if (/struggle|hard|fail|buet|medical|persistence|লেগে রাখো|lage raho|eagle|process/.test(t)) { showView("process"); return "Opening Process / Persistence. Some outcomes were outside control; some decisions were his. The public record is the response: the handmade book, drawings, models, sites and continuous practice. Method: keep going. Rise high enough that the noise cannot reach."; }
-  if (/education|school|college|university|ssc|hsc|brac|notre|motijheel/.test(t)) return "Motijheel Ideal School & College — SSC GPA 5.00. Notre Dame College — HSC GPA 5.00 (Roll 125019). BRAC University Architecture, Role 1000061008, Batch Summer 2026, currently ARC-101. Also exploring computing.";
-  if (/trendcart/.test(t)) return "TrendCart live: https://shadidahamed.github.io/trendcart/";
-  if (/game|office engine/.test(t)) return "Shadid’s Game: https://shadidahamed.github.io/Shadid-s-game/";
-  if (/project|work|skill|drawing|web|architecture/.test(t)) return "Core areas: Art & Drawing (competition + freehand), Architectural design (models, grids, diagrams), Web (TrendCart + game), and the handmade Book itself. Say “open skills” or “open the book” to jump there.";
-  if (/contact|email|whatsapp|hire|collaborate|যোগাযোগ/.test(t)) return "Email: shadidahamed.matashome05m@gmail.com · WhatsApp: https://wa.me/8801326162684 · Or say “open contact”.";
-  if (/cv|resume/.test(t)) return "CV: https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link";
-  if (/location|paltan|dhaka/.test(t)) return "Based in Paltan, Dhaka.";
-  if (/japan|japanese|ドイツ|german|germany|australia|canada|america|usa/.test(t)) return "He is exploring opportunities abroad (Japan, Germany, Australia, Canada, USA among others). Language and cultural framing can be adjusted — tell me which country or language you want the answers in and I will adapt.";
-  return "You can ask about the handmade Book, education path, skills, struggle/persistence, projects, or contact. Or just say “open the book” / “show education” and I will navigate.";
+/* ---- Voice: speak (TTS) ---- */
+function speak(text, onDone) {
+  if (!voiceEnabled || !window.speechSynthesis) {
+    if (onDone) onDone();
+    return;
+  }
+  try { window.speechSynthesis.cancel(); } catch (e) {}
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = 1.0;
+  u.pitch = 1.0;
+  // Prefer English; Bengali if available
+  const voices = window.speechSynthesis.getVoices() || [];
+  const en = voices.find(v => /en(-|_)?(US|GB|IN)?/i.test(v.lang) && /female|zira|samantha|google/i.test(v.name))
+    || voices.find(v => /^en/i.test(v.lang));
+  const bn = voices.find(v => /^bn/i.test(v.lang));
+  if (/[\u0980-\u09FF]/.test(text) && bn) u.voice = bn;
+  else if (en) u.voice = en;
+  u.onend = () => { if (onDone) onDone(); };
+  u.onerror = () => { if (onDone) onDone(); };
+  window.speechSynthesis.speak(u);
 }
+// Chrome loads voices async
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = function() {};
+}
+
+/* ---- Voice: listen (STT) ---- */
+let recognition = null;
+let isListening = false;
+(function initSTT() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return;
+  recognition = new SR();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = "en-US"; // also understands mixed; user can switch
+  recognition.onstart = () => {
+    isListening = true;
+    const mic = document.getElementById("ai-mic");
+    if (mic) mic.classList.add("listening");
+    document.getElementById("ai-status").textContent = "Listening…";
+  };
+  recognition.onend = () => {
+    isListening = false;
+    const mic = document.getElementById("ai-mic");
+    if (mic) mic.classList.remove("listening");
+    if (document.getElementById("ai-status").textContent === "Listening…") {
+      document.getElementById("ai-status").textContent = "Ready";
+    }
+  };
+  recognition.onerror = () => {
+    isListening = false;
+    const mic = document.getElementById("ai-mic");
+    if (mic) mic.classList.remove("listening");
+    document.getElementById("ai-status").textContent = "Ready";
+  };
+  recognition.onresult = (ev) => {
+    const said = (ev.results[0] && ev.results[0][0] && ev.results[0][0].transcript) || "";
+    if (said.trim()) handleMsg(said.trim());
+  };
+})();
+
+function startListen() {
+  if (!recognition) {
+    const msg = "Voice input is not supported in this browser. Please type, or use Chrome / Edge.";
+    conversation.push({ role: "bot", text: msg });
+    renderChat(); saveChat();
+    speak(msg);
+    return;
+  }
+  if (isListening) {
+    try { recognition.stop(); } catch (e) {}
+    return;
+  }
+  try {
+    // Prefer bn-BD if user often speaks Bangla — dual: try en first, user can say Bangla too on many devices
+    recognition.lang = /[\u0980-\u09FF]/.test((conversation.slice(-1)[0] || {}).text || "") ? "bn-BD" : "en-US";
+    recognition.start();
+  } catch (e) {
+    document.getElementById("ai-status").textContent = "Ready";
+  }
+}
+
+function scheduleHelpFollowUp() {
+  if (helpFollowUpTimer) clearTimeout(helpFollowUpTimer);
+  helpFollowUpTimer = setTimeout(() => {
+    if (!aiPanel.classList.contains("open")) return;
+    const q = "Do you still need any help? I can open the Book, Profile, Education, Skills, or Contact. Or say you are done.";
+    conversation.push({ role: "bot", text: q });
+    renderChat(); saveChat();
+    speak(q);
+  }, 28000);
+}
+
+function closeAssistantCompletely() {
+  if (helpFollowUpTimer) clearTimeout(helpFollowUpTimer);
+  try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
+  try { recognition && recognition.stop(); } catch (e) {}
+  aiPanel.classList.remove("open");
+  aiAwaitingOff = false;
+  document.getElementById("ai-status").textContent = "Ready";
+}
+
+function reply(text) {
+  const t = text.toLowerCase().trim();
+
+  // Off confirmation flow
+  if (aiAwaitingOff) {
+    if (/^(yes|yeah|yep|ok|okay|sure|please|হ্যাঁ|হ্যা|ঠিক|off|go off|get off)/i.test(t) || /yes.*off|off.*yes|get off|turn off/i.test(t)) {
+      aiAwaitingOff = false;
+      const bye = "Alright. Going off now. Call me anytime.";
+      setTimeout(closeAssistantCompletely, 1600);
+      return bye;
+    }
+    if (/^(no|nah|না|not yet|wait)/i.test(t)) {
+      aiAwaitingOff = false;
+      scheduleHelpFollowUp();
+      return "Okay, I will stay. What would you like — Book, Profile, Education, Skills, or Contact?";
+    }
+  }
+
+  // User says no more help
+  if (/no (more )?help|don't need|dont need|not needed|আর দরকার নেই|দরকার নেই|enough|i'?m done|thats all|that's all|finish|বন্ধ কর|stop helping/i.test(t)
+      || /^(no|না)$/i.test(t) && conversation.length > 2) {
+    aiAwaitingOff = true;
+    return "Should I go off then? Say yes to close, or no to keep chatting.";
+  }
+  if (/go off|turn off|close (yourself|assistant)|off হয়ে|বন্ধ হয়ে যাও/i.test(t)) {
+    aiAwaitingOff = true;
+    return "Confirm — should I turn off now? Say yes please, or no.";
+  }
+
+  // Navigation
+  if (/open (the )?book|show (the )?book|বই|book open|go to book/i.test(t)) { showView("book"); return "Opening The Book — handmade first-semester portfolio. Geometric cover, checker structure, fully hand-crafted."; }
+  if (/open (profile|about)|show profile|প্রোফাইল|go to profile/i.test(t)) { showView("profile"); return "Opening Profile."; }
+  if (/open process|show process|persistence|struggle|লেগে রাখো/i.test(t)) { showView("process"); return "Opening Process and Persistence."; }
+  if (/open education|show education|শিক্ষা|এডুকেশন|go to education/i.test(t)) { showView("education"); return "Opening Education. Motijheel Ideal, SSC 5.00. Notre Dame, HSC 5.00. BRAC Architecture, roll 1000061008, Summer 2026."; }
+  if (/open skills|show skills|স্কিল|go to skills/i.test(t)) { showView("skills"); return "Opening Skills — drawing, architecture models, web, video, literature."; }
+  if (/open contact|show contact|যোগাযোগ|go to contact/i.test(t)) { showView("contact"); return "Opening Contact."; }
+  if (/open home|show home|go home|হোম|go to home/i.test(t)) { showView("home"); return "Back at Home."; }
+  if (/open video|show video/i.test(t)) { showView("videos"); return "Opening Videos."; }
+  if (/open achievement|show achievement/i.test(t)) { showView("achievements"); return "Opening Achievements."; }
+
+  if (/stop|থামো|বন্ধ করো speech|be quiet|quiet/i.test(t)) {
+    try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
+    return "Alright. Paused speaking.";
+  }
+  if (/^(hi|hello|hey|হ্যালো|নমস্কার)/i.test(t)) {
+    return "Hi. I can open sections for you — Book, Profile, Education, Skills, Contact — by voice or text. What should I open?";
+  }
+  if (/who (are|r) you|তুমি কে/i.test(t)) return "I am the local curator for this portfolio. I navigate the site and explain Shadid’s work. You can speak or type.";
+  if (/who is shadid|about shadid|biography|কে এই/i.test(t)) return "Shadid Ahamed — Architecture student at BRAC, ARC-101, roll 1000061008. Handmade portfolio books, drawing, models, and code. Core method: persistence.";
+  if (/book|handmade|portfolio book|কভার|জ্যামিতিক/i.test(t)) { showView("book"); return "The Book is central. Black mount, pen hatching, geometric PORTFOLIO lettering, checker binding. Fully handmade. I opened it for you."; }
+  if (/family|বাবা|মা/i.test(t)) return "Father: Tofail Ahmed, Police Inspector. Mother: homemaker. The public work focuses on craft and growth.";
+  if (/struggle|hard|fail|buet|medical|persistence|লেগে রাখো|lage raho|eagle|process/i.test(t)) { showView("process"); return "Opening Process. Some outcomes were outside control; the response is continuous making — book, drawings, models, code."; }
+  if (/education|school|college|university|ssc|hsc|brac|notre|motijheel/i.test(t)) {
+    showView("education");
+    return "Motijheel Ideal — SSC GPA 5.00. Notre Dame College — HSC GPA 5.00. BRAC University Architecture, role 1000061008, batch Summer 2026. I opened Education.";
+  }
+  if (/trendcart/i.test(t)) return "TrendCart live at shadidahamed.github.io/trendcart";
+  if (/game|office engine/i.test(t)) return "Shadid’s Game at shadidahamed.github.io/Shadid-s-game";
+  if (/project|work|skill|drawing|web|architecture/i.test(t)) return "Core areas: Art and Drawing, Architectural design with models and grids, Web projects, and the handmade Book. Say open skills or open the book.";
+  if (/contact|email|whatsapp|hire|collaborate|যোগাযোগ/i.test(t)) { showView("contact"); return "Email shadidahamed.matashome05m@gmail.com. WhatsApp available. Contact section is open."; }
+  if (/cv|resume/i.test(t)) return "CV is on Google Drive — ask Shadid for the latest link if needed.";
+  if (/location|paltan|dhaka/i.test(t)) return "Based in Paltan, Dhaka.";
+  if (/japan|german|germany|australia|canada|america|usa/i.test(t)) return "He is exploring opportunities abroad including Japan, Germany, Australia, Canada and the USA.";
+
+  return "I can open the Book, Home, Profile, Education, Skills, or Contact. Tell me what you need, or say you are done if you want me to switch off.";
+}
+
 function handleMsg(text) {
-  if (!text.trim()) return;
+  if (!text || !text.trim()) return;
   conversation.push({ role: "user", text: text.trim() });
   renderChat(); saveChat();
   document.getElementById("ai-status").textContent = "Thinking…";
   setTimeout(() => {
-    conversation.push({ role: "bot", text: reply(text) });
+    const answer = reply(text);
+    conversation.push({ role: "bot", text: answer });
     renderChat(); saveChat();
-    document.getElementById("ai-status").textContent = "Ready";
-  }, 250);
+    document.getElementById("ai-status").textContent = "Speaking…";
+    speak(answer, () => {
+      document.getElementById("ai-status").textContent = "Ready";
+      if (!aiAwaitingOff && aiPanel.classList.contains("open")) scheduleHelpFollowUp();
+    });
+  }, 200);
 }
+
 document.getElementById("ai-fab").onclick = () => {
+  const opening = !aiPanel.classList.contains("open");
   aiPanel.classList.toggle("open");
-  if (aiPanel.classList.contains("open") && !conversation.length) {
-    conversation.push({ role: "bot", text: "Ask about the handmade Book, education, craft, or say “open the book”. I can navigate the site for you." });
-    renderChat();
+  if (opening) {
+    if (!conversation.length) {
+      const greet = "Hi. You can speak or type. Should I open the Book, go to Home, open Profile, Education, Skills, or Contact?";
+      conversation.push({ role: "bot", text: greet });
+      renderChat(); saveChat();
+      speak(greet);
+    }
+    scheduleHelpFollowUp();
+  } else {
+    closeAssistantCompletely();
   }
 };
-document.getElementById("ai-close").onclick = () => aiPanel.classList.remove("open");
-document.getElementById("ai-clear").onclick = () => { conversation = []; saveChat(); renderChat(); };
+document.getElementById("ai-close").onclick = () => closeAssistantCompletely();
+document.getElementById("ai-clear").onclick = () => {
+  conversation = []; saveChat(); renderChat();
+  aiAwaitingOff = false;
+};
 document.getElementById("ai-send").onclick = () => {
   const i = document.getElementById("ai-input");
   handleMsg(i.value); i.value = "";
@@ -1664,6 +1889,11 @@ document.getElementById("ai-send").onclick = () => {
 document.getElementById("ai-input").addEventListener("keydown", e => {
   if (e.key === "Enter") { handleMsg(e.target.value); e.target.value = ""; }
 });
+const micBtn = document.getElementById("ai-mic");
+if (micBtn) {
+  micBtn.addEventListener("click", startListen);
+  micBtn.addEventListener("touchend", function(e) { e.preventDefault(); startListen(); }, { passive: false });
+}
 
 renderBook();
 renderSkills();
