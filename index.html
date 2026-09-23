@@ -180,13 +180,25 @@ body.touch-device .cursor-ring { display: none !important; }
 }
 .overlay.show { display: block; }
 @media (max-width: 900px) {
-  .sidebar { z-index: 220 !important; }
-  .sidebar.open { pointer-events: auto !important; }
-  .nav button {
-    min-height: 48px;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(255,255,255,0.1);
+  .sidebar {
+    z-index: 300 !important;
+    pointer-events: auto !important;
   }
+  .sidebar.open {
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+  }
+  .sidebar * { pointer-events: auto !important; }
+  .overlay.show { z-index: 250 !important; pointer-events: auto; }
+  .menu-toggle { z-index: 320 !important; pointer-events: auto !important; }
+  .nav button {
+    min-height: 52px;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.15);
+    position: relative;
+    z-index: 5;
+  }
+  body.menu-open { overflow: hidden; }
 }
 
 .main {
@@ -1047,7 +1059,7 @@ const DATA = {
     { w: "Kazi Nazrul Islam & Michael Madhusudan Dutt", books: ["Shorter poems", "Selected works of Madhusudan"], note: "Also interest in Dhaka Comics / Pratybastha." }
   ],
   certs: [
-    { n: "BRAC University — Summer 2026 Grade Sheet (ARC) · CGPA 2.68", d: "gradesheet-summer2026.jpg", img: "gradesheet-summer2026.jpg" },
+    { n: "BRAC University — Summer 2026 Grade Sheet · CGPA 2.68 (ARC-101 B+, ARC-111 A−, ARC-121 B …)", d: "gradesheet-summer2026.jpg", img: "gradesheet-summer2026.jpg" },
     { n: "Bangladesh Shishu Academy / Children’s Drawing — Thana 1st (2023)", d: "https://drive.google.com/", img: "image/cert1.jpg" },
     { n: "Bangladesh Shishu Academy / Children’s Drawing — District 1st (2023)", d: "https://drive.google.com/", img: "image/cert2.jpg" },
     { n: "Bangladesh Shishu Academy / Children’s Drawing — Division 2nd (2023)", d: "https://drive.google.com/", img: "image/cert3.jpg" },
@@ -1186,35 +1198,23 @@ const SKILLS = [
 window.showView = function showView(id) {
   if (!id) return;
   id = String(id).replace(/^#/, "").trim().toLowerCase();
-  document.querySelectorAll(".view").forEach(function(v) { v.classList.remove("active"); });
+  var views = document.querySelectorAll(".view");
+  for (var i = 0; i < views.length; i++) views[i].classList.remove("active");
   var el = document.getElementById("view-" + id);
   if (!el) {
     el = document.getElementById("view-home");
     id = "home";
   }
   if (el) el.classList.add("active");
-  document.querySelectorAll("#nav button").forEach(function(b) {
-    b.classList.toggle("active", b.getAttribute("data-view") === id);
-  });
+  var navBtns = document.querySelectorAll("#nav button");
+  for (var j = 0; j < navBtns.length; j++) {
+    navBtns[j].classList.toggle("active", navBtns[j].getAttribute("data-view") === id);
+  }
   try { history.replaceState(null, "", "#" + id); } catch (err) {}
   try { localStorage.setItem("view", id); } catch (err) {}
   closeSidebar();
   try { window.scrollTo(0, 0); } catch (err) {}
 };
-
-var _lastNav = 0;
-document.addEventListener("click", function(e) {
-  var el = e.target.closest("[data-view]");
-  if (!el) return;
-  var v = el.getAttribute("data-view");
-  if (!v) return;
-  e.preventDefault();
-  e.stopPropagation();
-  var now = Date.now();
-  if (now - _lastNav < 300) return;
-  _lastNav = now;
-  window.showView(v);
-});
 
 var sidebar = document.getElementById("sidebar");
 var overlay = document.getElementById("overlay");
@@ -1222,22 +1222,56 @@ var menuBtn = document.getElementById("menu-toggle");
 function closeSidebar() {
   if (sidebar) sidebar.classList.remove("open");
   if (overlay) overlay.classList.remove("show");
+  document.body.classList.remove("menu-open");
 }
-if (menuBtn) {
-  menuBtn.addEventListener("click", function(e) {
+function openSidebar() {
+  if (sidebar) sidebar.classList.add("open");
+  if (overlay) overlay.classList.add("show");
+  document.body.classList.add("menu-open");
+}
+function toggleSidebar(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  if (sidebar && sidebar.classList.contains("open")) closeSidebar();
+  else openSidebar();
+}
+
+/* Bulletproof mobile nav: bind each control directly */
+(function bindNav() {
+  var nodes = document.querySelectorAll("[data-view]");
+  var last = 0;
+  function go(e, el) {
+    var v = el.getAttribute("data-view");
+    if (!v) return;
     e.preventDefault();
     e.stopPropagation();
-    if (!sidebar) return;
-    var open = !sidebar.classList.contains("open");
-    sidebar.classList.toggle("open", open);
-    if (overlay) overlay.classList.toggle("show", open);
-  });
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+    var now = Date.now();
+    if (now - last < 400) return;
+    last = now;
+    window.showView(v);
+  }
+  for (var i = 0; i < nodes.length; i++) {
+    (function(el) {
+      el.removeAttribute("onclick");
+      el.onclick = null;
+      el.style.cursor = "pointer";
+      el.style.touchAction = "manipulation";
+      el.addEventListener("click", function(e) { go(e, el); }, false);
+      el.addEventListener("touchend", function(e) { go(e, el); }, { passive: false });
+    })(nodes[i]);
+  }
+})();
+
+if (menuBtn) {
+  menuBtn.addEventListener("click", toggleSidebar);
+  menuBtn.addEventListener("touchend", function(e) {
+    e.preventDefault();
+    toggleSidebar(e);
+  }, { passive: false });
 }
 if (overlay) {
-  overlay.addEventListener("click", function(e) {
-    e.preventDefault();
-    closeSidebar();
-  });
+  overlay.addEventListener("click", function(e) { e.preventDefault(); closeSidebar(); });
+  overlay.addEventListener("touchend", function(e) { e.preventDefault(); closeSidebar(); }, { passive: false });
 }
 
 function renderBook() {
@@ -1511,23 +1545,26 @@ function renderChat() {
 }
 function reply(text) {
   const t = text.toLowerCase().trim();
-  // Short keywords work: "profile", "book", "home" …
-  if (/\b(profile|about|প্রোফাইল)\b/.test(t)) { showView("profile"); return "Opening Profile."; }
-  if (/\b(home|হোম)\b/.test(t)) { showView("home"); return "Back at Home."; }
-  if (/\b(book|বই)\b/.test(t)) { showView("book"); return "Opening The Book — handmade first-semester portfolio."; }
-  if (/\b(process|persistence|struggle|লেগে রাখো)\b/.test(t)) { showView("process"); return "Opening Process / Persistence."; }
-  if (/\b(education|school|college|university|শিক্ষা|এডুকেশন)\b/.test(t)) { showView("education"); return "Opening Education. Motijheel Ideal → Notre Dame → BRAC Architecture."; }
-  if (/\b(skills?|স্কিল)\b/.test(t)) { showView("skills"); return "Opening Skills."; }
-  if (/\b(videos?)\b/.test(t)) { showView("videos"); return "Opening Videos."; }
-  if (/\b(achievements?|certificate|result|gradesheet|রেজাল্ট)\b/.test(t)) { showView("achievements"); return "Opening Achievements."; }
-  if (/\b(contact|email|whatsapp|hire|collaborate|যোগাযোগ)\b/.test(t)) { showView("contact"); return "Opening Contact."; }
-  if (/\b(cv|resume)\b/.test(t)) { showView("cv"); return "Opening CV."; }
+  // Flexible match — works for "profile", "open profile", "go to profile", Bangla, etc.
+  function go(id, msg) { window.showView(id); return msg; }
+  if (/profile|about|প্রোফাইল|প্রোফাইল/.test(t)) return go("profile", "Opening Profile.");
+  if (/^home$|go home|open home|হোম|back home/.test(t)) return go("home", "Back at Home.");
+  if (/book|বই|portfolio book|the book/.test(t)) return go("book", "Opening The Book — handmade first-semester portfolio.");
+  if (/process|persistence|struggle|লেগে রাখো/.test(t)) return go("process", "Opening Process / Persistence.");
+  if (/education|school|college|university|শিক্ষা|এডুকেশন/.test(t)) return go("education", "Opening Education. Motijheel Ideal → Notre Dame → BRAC Architecture.");
+  if (/skill|স্কিল/.test(t)) return go("skills", "Opening Skills.");
+  if (/video/.test(t)) return go("videos", "Opening Videos.");
+  if (/achievement|certificate|result|gradesheet|রেজাল্ট|grade/.test(t)) return go("achievements", "Opening Achievements — including Summer 2026 grade sheet.");
+  if (/contact|email|whatsapp|hire|collaborate|যোগাযোগ/.test(t)) return go("contact", "Opening Contact.");
+  if (/cv|resume/.test(t)) return go("cv", "Opening CV.");
+  if (/home|হোম/.test(t)) return go("home", "Back at Home.");
 
   if (/stop|থামো|বন্ধ/.test(t)) return "Alright. Paused.";
   if (/^(hi|hello|hey|হ্যালো|নমস্কার)/.test(t)) return "Hi. Say profile, book, home, education, skills, or contact — I will open it.";
   if (/who (are|r) you|তুমি কে/.test(t)) return "Local curator for this portfolio. Say a section name and I open it.";
   if (/who is shadid|about shadid|biography|কে এই/.test(t)) return "Shadid Ahamed — Architecture student at BRAC (ARC-101, roll 1000061008). Handmade portfolio, drawing, models, code. Core method: persistence.";
-  if (/family|বাবা|মা/.test(t)) return "Father: Tofail Ahmed (Police Inspector). Mother: homemaker.";
+  if (/family|বাবা|মা/.test(t)) return "Father: Tofayel Ahamed (Police Inspector). Mother: Afruja Sultana.";
+  if (/gpa|cgpa|2\.68|summer 2026/.test(t)) return go("achievements", "Summer 2026 CGPA 2.68 — opening Achievements with the grade sheet.");
   if (/trendcart/.test(t)) return "TrendCart: https://shadidahamed.github.io/trendcart/";
   if (/game|office engine/.test(t)) return "Shadid’s Game: https://shadidahamed.github.io/Shadid-s-game/";
   if (/location|paltan|dhaka/.test(t)) return "Based in Paltan, Dhaka.";
@@ -1544,39 +1581,87 @@ function handleMsg(text) {
     document.getElementById("ai-status").textContent = "Ready";
   }, 250);
 }
-/* Background music — starts after Enter tap (browser autoplay policy) */
+/* Background music — Enter gate unlocks autoplay (browser policy) */
 (function() {
   var bg = document.getElementById("bg-music");
   var gate = document.getElementById("enter-gate");
   var enterBtn = document.getElementById("enter-btn");
   var musicFab = document.getElementById("music-fab");
   var wanted = true;
-  if (bg) bg.volume = 0.32;
+  var unlocked = false;
+  if (bg) {
+    bg.volume = 0.35;
+    bg.setAttribute("playsinline", "");
+    bg.setAttribute("webkit-playsinline", "");
+  }
+  function markPlaying(on) {
+    if (!musicFab) return;
+    if (on) {
+      musicFab.style.color = "#e88c2a";
+      musicFab.style.borderColor = "rgba(232,140,42,0.45)";
+    } else {
+      musicFab.style.color = "var(--muted)";
+      musicFab.style.borderColor = "var(--border)";
+    }
+  }
   function play() {
     if (!bg || !wanted) return;
-    var p = bg.play();
-    if (p && p.then) p.then(function() {
-      if (musicFab) { musicFab.style.color = "#e88c2a"; musicFab.style.borderColor = "rgba(232,140,42,0.45)"; }
-    }).catch(function() {});
+    try {
+      var p = bg.play();
+      if (p && p.then) {
+        p.then(function() {
+          unlocked = true;
+          markPlaying(true);
+        }).catch(function() {
+          markPlaying(false);
+        });
+      } else {
+        unlocked = true;
+        markPlaying(true);
+      }
+    } catch (err) {
+      markPlaying(false);
+    }
   }
-  function enter() {
+  function enter(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
     wanted = true;
     play();
     if (gate) {
       gate.style.opacity = "0";
+      gate.style.pointerEvents = "none";
       gate.style.visibility = "hidden";
-      setTimeout(function() { if (gate.parentNode) gate.parentNode.removeChild(gate); }, 450);
+      setTimeout(function() {
+        if (gate && gate.parentNode) gate.parentNode.removeChild(gate);
+      }, 400);
     }
   }
-  if (enterBtn) enterBtn.addEventListener("click", function(e) { e.preventDefault(); enter(); });
-  if (gate) gate.addEventListener("click", function(e) {
-    if (e.target === gate || e.target.closest("#enter-gate")) enter();
-  });
-  if (musicFab) musicFab.addEventListener("click", function(e) {
-    e.preventDefault();
+  function bindTap(el, fn) {
+    if (!el) return;
+    el.addEventListener("click", fn);
+    el.addEventListener("touchend", function(e) {
+      e.preventDefault();
+      fn(e);
+    }, { passive: false });
+  }
+  bindTap(enterBtn, enter);
+  if (gate) {
+    bindTap(gate, enter);
+  }
+  bindTap(musicFab, function(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
     wanted = !wanted;
     if (wanted) play();
-    else { try { bg.pause(); } catch (err) {} musicFab.style.color = "var(--muted)"; musicFab.style.borderColor = "var(--border)"; }
+    else {
+      try { bg.pause(); } catch (err) {}
+      markPlaying(false);
+    }
+  });
+  // Fallback: any first user gesture also tries to start music if gate already gone
+  ["click", "touchend", "keydown"].forEach(function(ev) {
+    document.addEventListener(ev, function once() {
+      if (!unlocked && wanted && bg) play();
+    }, { passive: true });
   });
 })();
 
