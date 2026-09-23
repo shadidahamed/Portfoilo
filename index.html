@@ -203,11 +203,26 @@ body.touch-device .cursor-ring { display: none !important; }
 /* Mobile nav: ensure buttons receive taps */
 @media (max-width: 900px) {
   .nav button {
-    min-height: 44px;
-    -webkit-tap-highlight-color: rgba(255,255,255,0.08);
+    min-height: 48px;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.12);
     touch-action: manipulation;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 5;
   }
-  .sidebar { z-index: 220; }
+  .sidebar {
+    z-index: 220;
+    pointer-events: auto !important;
+  }
+  .sidebar.open { pointer-events: auto !important; }
+  .sidebar * { pointer-events: auto !important; }
+  .overlay.show { pointer-events: auto; }
+  .menu-toggle {
+    pointer-events: auto !important;
+    z-index: 260;
+  }
+  /* Prevent body scroll lock issues while menu open */
+  body.menu-open { overflow: hidden; }
 }
 
 .main {
@@ -661,6 +676,77 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 }
 .ai-fab:hover { transform: scale(1.06); }
 .ai-fab svg { width: 22px; height: 22px; }
+/* music-fab styles live below with other FABs */
+.music-fab {
+  position: fixed; bottom: 24px; right: 88px; width: 44px; height: 44px;
+  border-radius: 50%; background: var(--bg-2); color: var(--text);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; z-index: 80;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35); transition: transform 0.2s, border-color 0.2s;
+}
+.music-fab:hover { transform: scale(1.06); border-color: var(--border-hover); }
+.music-fab svg { width: 18px; height: 18px; }
+.music-fab.playing { border-color: var(--pumpkin, #e88c2a); color: #f0c96a; }
+@media (max-width: 560px) {
+  .music-fab { right: 80px; bottom: 20px; width: 42px; height: 42px; }
+  .ai-fab { bottom: 20px; right: 16px; }
+}
+/* Floating curator — lightweight CSS character */
+.curator-avatar {
+  position: fixed; bottom: 88px; right: 28px; z-index: 75;
+  width: 56px; height: 56px; cursor: pointer;
+  animation: curatorBob 3.2s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 400px;
+}
+.curator-body {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(145deg, #2a2a2e 0%, #141416 60%, #1a1214 100%);
+  border: 1.5px solid rgba(242,240,234,0.2);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45), 0 0 20px rgba(232,140,42,0.12);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.curator-avatar:hover .curator-body,
+.curator-avatar.speaking .curator-body {
+  box-shadow: 0 10px 28px rgba(0,0,0,0.5), 0 0 28px rgba(232,140,42,0.28);
+  transform: scale(1.06);
+}
+.curator-face { position: relative; width: 28px; height: 20px; }
+.curator-eye {
+  position: absolute; top: 2px; width: 6px; height: 6px; border-radius: 50%;
+  background: #f2f0ea; box-shadow: 0 0 6px rgba(242,240,234,0.5);
+  animation: curatorBlink 4.5s infinite;
+}
+.curator-eye.left { left: 2px; }
+.curator-eye.right { right: 2px; }
+.curator-mouth {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 10px; height: 4px; border-radius: 0 0 8px 8px;
+  background: #e88c2a; opacity: 0.85;
+}
+.curator-avatar.speaking .curator-mouth {
+  animation: curatorTalk 0.35s ease-in-out infinite alternate;
+}
+@keyframes curatorBob {
+  0%, 100% { transform: translateY(0) rotateY(-8deg); }
+  50% { transform: translateY(-8px) rotateY(8deg); }
+}
+@keyframes curatorBlink {
+  0%, 42%, 48%, 100% { transform: scaleY(1); }
+  45% { transform: scaleY(0.1); }
+}
+@keyframes curatorTalk {
+  from { height: 3px; width: 8px; }
+  to { height: 6px; width: 12px; }
+}
+@media (max-width: 560px) {
+  .curator-avatar { bottom: 72px; right: 18px; width: 48px; height: 48px; }
+  .curator-body { width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .curator-avatar { animation: none; }
+}
 .ai-panel {
   position: fixed; bottom: 88px; right: 24px;
   width: min(380px, calc(100vw - 32px)); height: min(480px, calc(100vh - 120px));
@@ -902,7 +988,7 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
       <!-- CSS 3D floating book -->
       <div class="book-3d-wrap">
         <div class="book-3d" id="book3d" title="Handmade portfolio — ARC-101">
-          <div class="face front" style="background-image:url('815366796_1754064392528440_1990530380060926840_n.jpg');background-position:center 18%;"></div>
+          <div class="face front" style="background-image:url('817550850_1756948922083208_6663409752770103109_n.jpg');background-position:center center;"></div>
           <div class="face back" style="background-image:url('811615849_2097588261148773_877248636819443508_n.jpg')"></div>
           <div class="face spine"></div>
           <div class="face top"></div>
@@ -1128,6 +1214,21 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
   </div>
 </div>
 
+<audio id="bg-music" src="bg-music.mp3" loop preload="metadata" playsinline></audio>
+<button class="music-fab" id="music-fab" aria-label="Music" title="Background music">
+  <svg id="music-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:none"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+  <svg id="music-icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
+</button>
+<!-- Lightweight floating curator avatar (CSS 3D) -->
+<div class="curator-avatar" id="curator-avatar" title="Curator — tap to open assistant" role="button" tabindex="0">
+  <div class="curator-body">
+    <div class="curator-face">
+      <span class="curator-eye left"></span>
+      <span class="curator-eye right"></span>
+      <span class="curator-mouth"></span>
+    </div>
+  </div>
+</div>
 <button class="ai-fab" id="ai-fab" aria-label="Assistant">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
 </button>
@@ -1152,11 +1253,9 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
 <script>
 const DATA = {
   book: [
-    { t: "Cover — geometric PORTFOLIO / PAFI", i: "815366796_1754064392528440_1990530380060926840_n.jpg", d: "হাতে আঁকা জ্যামিতিক PORTFOLIO অক্ষর — hatch, grid, maroon accent. The cover is the thesis: control, structure, material honesty.", material: "Swiss board / black mount · pen hatching · hand lettering", concept: "Letters as architectural mass and void." },
+    { t: "Cover — PAFI · SHADID AHAMED", i: "817550850_1756948922083208_6663409752770103109_n.jpg", d: "Black mount cover with geometric PAFI lettering, hatch and lattice planes, gold edge light. SHADID AHAMED · 1000061008 · ARC-101 (Summer-2026). The cover is the thesis: control, structure, material honesty.", material: "Swiss board / black mount · pen hatching · hand lettering", concept: "Letters as architectural mass and void." },
     { t: "Front — handmade object", i: "813965363_2318476582340902_2775377306658662126_n.jpg", d: "সম্পূর্ণ হাতে বাঁধাই বই — checker binding, floral corners, roll 1000061008, ARC-101 Summer 2026.", material: "Hand-bound · Swiss board", concept: "Physical proof over template." },
-    { t: "Back — checker field", i: "811615849_2097588261148773_877248636819443508_n.jpg", d: "পিছনের কভার — সাদা-কালো checker এবং DESIGN mark. Grid language continues to the edge.", material: "Painted checker on board", concept: "Grid as continuous language." },
-    { t: "Side fold — full cover system", i: "ChatGPT%20Image%20Sep%2020%2C%202026%2C%2007_38_48%20PM.png", d: "ফ্রন্ট থেকে স্পাইন থেকে ব্যাক — একটা continuous object. Checker edge runs the length.", material: "Continuous edge treatment", concept: "One object, one language." },
-    { t: "3D book view", i: "book-3d.jpg", d: "ত্রিমাত্রিক / angled view of the handmade portfolio — the object as it sits in space.", material: "Photograph of physical book", concept: "Presence and weight of craft." }
+    { t: "Back — checker field", i: "811615849_2097588261148773_877248636819443508_n.jpg", d: "পিছনের কভার — সাদা-কালো checker এবং DESIGN mark. Grid language continues to the edge.", material: "Painted checker on board", concept: "Grid as continuous language." }
   ],
   contacts: [
     { label: "Email", url: "mailto:shadidahamed.matashome05m@gmail.com", icon: "mail" },
@@ -1391,47 +1490,70 @@ window.showView = function showView(id) {
   try { history.replaceState(null, "", "#" + id); } catch (err) {}
   try { localStorage.setItem("view", id); } catch (err) {}
   closeSidebar();
-  window.scrollTo({ top: 0, behavior: "instant" in document.documentElement.style ? "instant" : "auto" });
+  window.scrollTo({ top: 0, behavior: "auto" });
+  // Deferred heavy sections
+  if (id === "book" && !window._bookRendered) { window._bookRendered = true; try { renderBook(); } catch (e) {} }
+  if (id === "videos" && !window._videosRendered) { window._videosRendered = true; try { renderVideos(); } catch (e) {} }
+  if (id === "achievements" && !window._achRendered) { window._achRendered = true; try { renderAch(); } catch (e) {} }
 };
-
-// Robust navigation: click + touchend (mobile)
-function navFromEvent(e) {
-  const el = e.target.closest("[data-view]");
-  if (!el) return;
-  const v = el.getAttribute("data-view");
-  if (!v) return;
-  e.preventDefault();
-  e.stopPropagation();
-  showView(v);
-}
-document.addEventListener("click", navFromEvent);
-document.addEventListener("touchend", function(e) {
-  // Only for data-view targets so we don't block scrolling
-  if (e.target.closest("[data-view]")) navFromEvent(e);
-}, { passive: false });
 
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 const menuBtn = document.getElementById("menu-toggle");
 function toggleSidebar(e) {
   if (e) { e.preventDefault(); e.stopPropagation(); }
-  sidebar.classList.toggle("open");
-  overlay.classList.toggle("show");
+  const opening = !sidebar.classList.contains("open");
+  sidebar.classList.toggle("open", opening);
+  overlay.classList.toggle("show", opening);
+  document.body.classList.toggle("menu-open", opening);
 }
-menuBtn.addEventListener("click", toggleSidebar);
-menuBtn.addEventListener("touchend", function(e) {
-  e.preventDefault();
-  toggleSidebar(e);
-}, { passive: false });
 function closeSidebar() {
+  if (!sidebar) return;
   sidebar.classList.remove("open");
-  overlay.classList.remove("show");
+  if (overlay) overlay.classList.remove("show");
+  document.body.classList.remove("menu-open");
 }
-overlay.addEventListener("click", closeSidebar);
-overlay.addEventListener("touchend", function(e) {
+
+/* Single reliable nav handler — works on mobile + desktop */
+function handleNavTap(e) {
+  const el = e.target.closest("[data-view]");
+  if (!el) return;
+  const v = el.getAttribute("data-view");
+  if (!v) return;
   e.preventDefault();
-  closeSidebar();
-}, { passive: false });
+  e.stopPropagation();
+  window.showView(v);
+}
+// Capture phase so nothing else steals the tap
+document.addEventListener("click", handleNavTap, true);
+document.addEventListener("touchend", function(e) {
+  if (e.target.closest("[data-view]")) {
+    handleNavTap(e);
+  }
+}, { capture: true, passive: false });
+
+if (menuBtn) {
+  menuBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleSidebar(e);
+  });
+  menuBtn.addEventListener("touchend", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleSidebar(e);
+  }, { passive: false });
+}
+if (overlay) {
+  overlay.addEventListener("click", function(e) {
+    e.preventDefault();
+    closeSidebar();
+  });
+  overlay.addEventListener("touchend", function(e) {
+    e.preventDefault();
+    closeSidebar();
+  }, { passive: false });
+}
 
 function renderBook() {
   const stage = document.getElementById("book-orbital-stage");
@@ -1776,28 +1898,98 @@ function renderChat() {
   aiMsgs.scrollTop = aiMsgs.scrollHeight;
 }
 
+/* ---- Background music (pause while voice active) ---- */
+const bgMusic = document.getElementById("bg-music");
+const musicFab = document.getElementById("music-fab");
+let musicWanted = true;   // user preference
+let musicUnlocked = false;
+if (bgMusic) {
+  bgMusic.volume = 0.32;
+}
+function updateMusicIcon(playing) {
+  const on = document.getElementById("music-icon-on");
+  const off = document.getElementById("music-icon-off");
+  if (on) on.style.display = playing ? "block" : "none";
+  if (off) off.style.display = playing ? "none" : "block";
+  if (musicFab) musicFab.classList.toggle("playing", !!playing);
+}
+function tryPlayMusic() {
+  if (!bgMusic || !musicWanted) return;
+  const p = bgMusic.play();
+  if (p && p.then) {
+    p.then(function() {
+      musicUnlocked = true;
+      updateMusicIcon(true);
+    }).catch(function() {
+      updateMusicIcon(false);
+    });
+  }
+}
+function pauseMusicForVoice() {
+  if (bgMusic && !bgMusic.paused) {
+    try { bgMusic.pause(); } catch (e) {}
+    updateMusicIcon(false);
+  }
+}
+function resumeMusicAfterVoice() {
+  if (!musicWanted || !bgMusic) return;
+  // small delay so TTS / mic release fully
+  setTimeout(function() {
+    if (isListening) return;
+    tryPlayMusic();
+  }, 350);
+}
+// Unlock audio on first user gesture (browser policy)
+["pointerup", "click", "touchend", "keydown"].forEach(function(ev) {
+  document.addEventListener(ev, function once() {
+    if (!musicUnlocked && musicWanted) tryPlayMusic();
+  }, { once: false, passive: true });
+});
+function toggleMusic(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  musicWanted = !musicWanted;
+  if (musicWanted) tryPlayMusic();
+  else {
+    try { bgMusic.pause(); } catch (err) {}
+    updateMusicIcon(false);
+  }
+}
+if (musicFab) {
+  musicFab.addEventListener("click", toggleMusic);
+  musicFab.addEventListener("touchend", function(e) {
+    e.preventDefault();
+    toggleMusic(e);
+  }, { passive: false });
+}
+
 /* ---- Voice: speak (TTS) ---- */
+function setCuratorSpeaking(on) {
+  const av = document.getElementById("curator-avatar");
+  if (av) av.classList.toggle("speaking", !!on);
+}
 function speak(text, onDone) {
   if (!voiceEnabled || !window.speechSynthesis) {
     if (onDone) onDone();
+    resumeMusicAfterVoice();
+    setCuratorSpeaking(false);
     return;
   }
+  pauseMusicForVoice();
+  setCuratorSpeaking(true);
   try { window.speechSynthesis.cancel(); } catch (e) {}
   const u = new SpeechSynthesisUtterance(text);
   u.rate = 1.0;
   u.pitch = 1.0;
-  // Prefer English; Bengali if available
   const voices = window.speechSynthesis.getVoices() || [];
   const en = voices.find(v => /en(-|_)?(US|GB|IN)?/i.test(v.lang) && /female|zira|samantha|google/i.test(v.name))
     || voices.find(v => /^en/i.test(v.lang));
   const bn = voices.find(v => /^bn/i.test(v.lang));
   if (/[\u0980-\u09FF]/.test(text) && bn) u.voice = bn;
   else if (en) u.voice = en;
-  u.onend = () => { if (onDone) onDone(); };
-  u.onerror = () => { if (onDone) onDone(); };
+  u.onend = () => { setCuratorSpeaking(false); resumeMusicAfterVoice(); if (onDone) onDone(); };
+  u.onerror = () => { setCuratorSpeaking(false); resumeMusicAfterVoice(); if (onDone) onDone(); };
   window.speechSynthesis.speak(u);
 }
-// Chrome loads voices async
 if (window.speechSynthesis) {
   window.speechSynthesis.onvoiceschanged = function() {};
 }
@@ -1811,9 +2003,10 @@ let isListening = false;
   recognition = new SR();
   recognition.continuous = false;
   recognition.interimResults = false;
-  recognition.lang = "en-US"; // also understands mixed; user can switch
+  recognition.lang = "en-US";
   recognition.onstart = () => {
     isListening = true;
+    pauseMusicForVoice();
     const mic = document.getElementById("ai-mic");
     if (mic) mic.classList.add("listening");
     document.getElementById("ai-status").textContent = "Listening…";
@@ -1825,12 +2018,17 @@ let isListening = false;
     if (document.getElementById("ai-status").textContent === "Listening…") {
       document.getElementById("ai-status").textContent = "Ready";
     }
+    // resume only if not about to speak
+    setTimeout(function() {
+      if (!window.speechSynthesis || !window.speechSynthesis.speaking) resumeMusicAfterVoice();
+    }, 200);
   };
   recognition.onerror = () => {
     isListening = false;
     const mic = document.getElementById("ai-mic");
     if (mic) mic.classList.remove("listening");
     document.getElementById("ai-status").textContent = "Ready";
+    resumeMusicAfterVoice();
   };
   recognition.onresult = (ev) => {
     const said = (ev.results[0] && ev.results[0][0] && ev.results[0][0].transcript) || "";
@@ -1851,11 +2049,12 @@ function startListen() {
     return;
   }
   try {
-    // Prefer bn-BD if user often speaks Bangla — dual: try en first, user can say Bangla too on many devices
     recognition.lang = /[\u0980-\u09FF]/.test((conversation.slice(-1)[0] || {}).text || "") ? "bn-BD" : "en-US";
+    pauseMusicForVoice();
     recognition.start();
   } catch (e) {
     document.getElementById("ai-status").textContent = "Ready";
+    resumeMusicAfterVoice();
   }
 }
 
@@ -1963,21 +2162,30 @@ function handleMsg(text) {
   }, 200);
 }
 
-document.getElementById("ai-fab").onclick = () => {
+function openAssistant() {
   const opening = !aiPanel.classList.contains("open");
-  aiPanel.classList.toggle("open");
-  if (opening) {
-    if (!conversation.length) {
-      const greet = "Hi. You can speak or type. Should I open the Book, go to Home, open Profile, Education, Skills, or Contact?";
-      conversation.push({ role: "bot", text: greet });
-      renderChat(); saveChat();
-      speak(greet);
-    }
-    scheduleHelpFollowUp();
-  } else {
+  if (!opening) {
     closeAssistantCompletely();
+    return;
   }
-};
+  aiPanel.classList.add("open");
+  if (!conversation.length) {
+    const greet = "Hi. You can speak or type. Say open Book, Profile, Education, Skills, or Contact — I will take you there.";
+    conversation.push({ role: "bot", text: greet });
+    renderChat(); saveChat();
+    speak(greet);
+  }
+  scheduleHelpFollowUp();
+}
+document.getElementById("ai-fab").onclick = openAssistant;
+const curatorEl = document.getElementById("curator-avatar");
+if (curatorEl) {
+  curatorEl.addEventListener("click", openAssistant);
+  curatorEl.addEventListener("touchend", function(e) {
+    e.preventDefault();
+    openAssistant();
+  }, { passive: false });
+}
 document.getElementById("ai-close").onclick = () => closeAssistantCompletely();
 document.getElementById("ai-clear").onclick = () => {
   conversation = []; saveChat(); renderChat();
@@ -1996,19 +2204,13 @@ if (micBtn) {
   micBtn.addEventListener("touchend", function(e) { e.preventDefault(); startListen(); }, { passive: false });
 }
 
-/* Lightweight init first — heavy image work deferred until section is opened */
+/* Lightweight init — heavy image work deferred inside showView */
+window._bookRendered = false;
+window._videosRendered = false;
+window._achRendered = false;
 renderSkills();
 renderContacts();
 loadChat();
-
-let _bookRendered = false, _videosRendered = false, _achRendered = false;
-const _origShowView = window.showView;
-window.showView = function(id) {
-  _origShowView(id);
-  if (id === "book" && !_bookRendered) { _bookRendered = true; renderBook(); }
-  if (id === "videos" && !_videosRendered) { _videosRendered = true; renderVideos(); }
-  if (id === "achievements" && !_achRendered) { _achRendered = true; renderAch(); }
-};
 
 const start = (location.hash || "").slice(1) || localStorage.getItem("view") || "home";
 if (document.getElementById("view-" + start)) showView(start);
