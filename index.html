@@ -3,11 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SA · Architecture → CSE</title>
-<meta name="description" content="Personal portfolio of a Bangladeshi student transitioning from Architecture to Computer Science & Engineering. Spatial thinking meets digital craft.">
-<link rel="icon" href="assets/images/sa-favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/images/sa-favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="assets/images/sa-favicon-180.png">
+<meta name="description" content="Personal portfolio of a Bangladeshi student transitioning from Architecture to Computer Science & Engineering — spatial precision meets digital craft.">
+<title>SA — Architecture → CSE</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicons/sa-favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/sa-favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/sa-favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicons/sa-favicon-48.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicons/sa-favicon-64.png">
+<link rel="icon" type="image/png" sizes="128x128" href="assets/favicons/sa-favicon-128.png">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/favicons/sa-favicon-256.png">
+<link rel="apple-touch-icon" href="assets/favicons/sa-favicon-hires.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -17,72 +22,83 @@
 <style>
 :root {
   --bg: #0a0a0b;
-  --bg-elevated: #111113;
-  --bg-soft: #161618;
+  --bg-elevated: #121214;
+  --bg-card: #161618;
   --text: #f5f2eb;
-  --text-muted: #a39e93;
+  --text-muted: #a8a29e;
   --accent: #c9a86c;
   --accent-soft: rgba(201,168,108,0.15);
-  --tech: #4ecdc4;
-  --tech-soft: rgba(78,205,196,0.12);
-  --concrete: #6b6760;
-  --navy: #1a2332;
+  --teal: #4ecdc4;
+  --teal-soft: rgba(78,205,196,0.12);
+  --concrete: #2a2a2c;
+  --terracotta: #c47a5a;
   --border: rgba(245,242,235,0.08);
+  --shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
   --radius: 12px;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
   --ease: cubic-bezier(0.22,1,0.36,1);
-  --font-display: "Instrument Serif", Georgia, serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --transition: 0.4s var(--ease);
 }
 [data-theme="light"] {
   --bg: #f5f2eb;
   --bg-elevated: #ffffff;
-  --bg-soft: #ebe7df;
+  --bg-card: #faf8f4;
   --text: #0a0a0b;
-  --text-muted: #5c574f;
-  --accent: #a67c3d;
-  --accent-soft: rgba(166,124,61,0.12);
-  --tech: #2a9d8f;
-  --tech-soft: rgba(42,157,143,0.1);
-  --concrete: #8a857c;
-  --navy: #e8e4dc;
-  --border: rgba(10,10,11,0.1);
+  --text-muted: #57534e;
+  --accent: #9a7b4f;
+  --accent-soft: rgba(154,123,79,0.12);
+  --teal: #2a9d8f;
+  --teal-soft: rgba(42,157,143,0.1);
+  --concrete: #e7e5e0;
+  --border: rgba(10,10,11,0.08);
+  --shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
-}
 body{
-  font-family:var(--font-body);
+  font-family:var(--font-sans);
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  transition:background var(--transition),color var(--transition);
 }
-img{max-width:100%;display:block;height:auto}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
-button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
 
-/* LOADER */
+/* LOADING */
 #loader{
   position:fixed;inset:0;z-index:9999;
   background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   transition:opacity 0.8s var(--ease),visibility 0.8s;
 }
-#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
-.loader-mark{
-  width:64px;height:64px;
-  border:1px solid var(--accent);
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-logo{
+  width:72px;height:72px;
+  border:1.5px solid var(--accent);
+  border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-size:1.5rem;color:var(--accent);
-  animation:pulseMark 1.6s ease-in-out infinite;
+  font-family:var(--font-serif);font-size:1.75rem;color:var(--accent);
+  letter-spacing:0.05em;
+  animation:pulse 1.6s ease-in-out infinite;
 }
-@keyframes pulseMark{0%,100%{opacity:0.4;transform:scale(0.96)}50%{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:0.85}}
+.loader-bar{
+  width:120px;height:2px;background:var(--concrete);margin-top:2rem;overflow:hidden;border-radius:1px;
+}
+.loader-bar span{
+  display:block;height:100%;width:0;background:var(--accent);
+  animation:load 2.2s var(--ease) forwards;
+}
+@keyframes load{to{width:100%}}
 
 /* NAV */
 .nav{
@@ -90,883 +106,878 @@ ul{list-style:none}
   padding:1.25rem 2rem;
   display:flex;align-items:center;justify-content:space-between;
   background:linear-gradient(to bottom,var(--bg) 60%,transparent);
-  transition:background 0.4s;
+  transition:background var(--transition);
 }
-.nav.scrolled{background:rgba(10,10,11,0.92);backdrop-filter:blur(12px)}
-[data-theme="light"] .nav.scrolled{background:rgba(245,242,235,0.92)}
 .nav-logo{
-  font-family:var(--font-display);font-size:1.35rem;letter-spacing:0.04em;
-  color:var(--accent);display:flex;align-items:center;gap:0.5rem;
+  font-family:var(--font-serif);font-size:1.5rem;color:var(--accent);
+  letter-spacing:0.04em;transition:opacity 0.3s;
 }
-.nav-logo span{width:8px;height:8px;border:1px solid var(--accent);display:inline-block}
+.nav-logo:hover{opacity:0.8}
 .nav-links{display:flex;gap:2rem;align-items:center}
 .nav-links a{
-  font-size:0.8rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+  font-size:0.8125rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
   color:var(--text-muted);transition:color 0.3s;
 }
 .nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-actions{display:flex;align-items:center;gap:1rem}
-.theme-toggle,.audio-toggle{
+.nav-controls{display:flex;gap:0.75rem;align-items:center}
+.theme-btn,.music-btn{
   width:40px;height:40px;border-radius:50%;
-  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
-  transition:border-color 0.3s,background 0.3s;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.3s,border-color 0.3s;
 }
-.theme-toggle:hover,.audio-toggle:hover{border-color:var(--accent);background:var(--accent-soft)}
-.theme-toggle svg,.audio-toggle svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:1.5}
-.menu-btn{display:none;flex-direction:column;gap:5px;width:28px}
-.menu-btn span{height:1.5px;background:var(--text);transition:0.3s}
+.theme-btn:hover,.music-btn:hover{background:var(--accent-soft);border-color:var(--accent)}
+.theme-btn svg,.music-btn svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:1.5}
+.menu-toggle{display:none;width:40px;height:40px;flex-direction:column;justify-content:center;gap:5px}
+.menu-toggle span{display:block;width:20px;height:1.5px;background:var(--text);transition:0.3s}
+@media(max-width:900px){
+  .nav-links{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;gap:2.5rem;opacity:0;visibility:hidden;transition:0.4s}
+  .nav-links.open{opacity:1;visibility:visible}
+  .menu-toggle{display:flex}
+}
+
+/* SECTIONS */
+section{padding:7rem 2rem;position:relative}
+.container{max-width:1200px;margin:0 auto}
+.section-label{
+  font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+}
+.section-title{
+  font-family:var(--font-serif);font-size:clamp(2.25rem,5vw,3.5rem);
+  font-weight:400;line-height:1.15;margin-bottom:1.5rem;letter-spacing:-0.01em;
+}
+.section-lead{font-size:1.0625rem;color:var(--text-muted);max-width:540px;line-height:1.7}
 
 /* HERO */
 .hero{
-  min-height:100vh;padding:8rem 2rem 4rem;
-  display:grid;grid-template-columns:1fr 1.1fr;gap:3rem;align-items:center;
-  max-width:1400px;margin:0 auto;position:relative;
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding-top:6rem;padding-bottom:4rem;
 }
-.hero-content{position:relative;z-index:2}
-.hero-label{
-  font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
 }
-.hero-label::before{content:"";width:32px;height:1px;background:var(--accent)}
-.hero h1{
-  font-family:var(--font-display);font-size:clamp(2.8rem,6vw,4.8rem);
-  font-weight:400;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.5rem;
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:3rem}}
+.hero-name{
+  font-family:var(--font-serif);font-size:clamp(3rem,8vw,5.5rem);
+  line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.25rem;
 }
-.hero h1 em{font-style:italic;color:var(--accent)}
-.hero-tagline{
-  font-size:1.1rem;color:var(--text-muted);max-width:28ch;line-height:1.7;margin-bottom:2.5rem;
+.hero-tag{
+  font-size:1.125rem;color:var(--text-muted);max-width:420px;line-height:1.65;margin-bottom:2rem;
 }
-.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  padding:0.85rem 1.6rem;font-size:0.85rem;font-weight:500;letter-spacing:0.04em;
-  border-radius:999px;transition:all 0.35s var(--ease);
+.hero-cta{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  padding:0.875rem 1.75rem;border:1px solid var(--accent);
+  border-radius:999px;font-size:0.8125rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--accent);transition:background 0.3s,color 0.3s;
 }
-.btn-primary{background:var(--accent);color:#0a0a0b}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,108,0.25)}
-.btn-ghost{border:1px solid var(--border);color:var(--text)}
-.btn-ghost:hover{border-color:var(--accent);background:var(--accent-soft)}
+.hero-cta:hover{background:var(--accent);color:var(--bg)}
+.hero-visual{position:relative;height:420px}
+@media(max-width:900px){.hero-visual{height:340px}}
 
-/* CAROUSEL CORE */
+/* CIRCULAR CAROUSEL */
 .carousel-wrap{
-  position:relative;width:100%;height:480px;
-  perspective:1200px;overflow:visible;
+  position:relative;width:100%;height:100%;
+  perspective:1200px;overflow:hidden;
+  touch-action:pan-y;
 }
-.carousel{
+.carousel-track{
   position:absolute;inset:0;
-  transform-style:preserve-3d;
   display:flex;align-items:center;justify-content:center;
+  transform-style:preserve-3d;
 }
 .carousel-item{
-  position:absolute;width:260px;height:340px;
+  position:absolute;width:220px;height:280px;
   border-radius:8px;overflow:hidden;
-  cursor:pointer;transform-style:preserve-3d;
-  transition:box-shadow 0.4s;
-  will-change:transform,opacity;
+  box-shadow:var(--shadow);
+  cursor:grab;transition:box-shadow 0.3s;
+  background:var(--concrete);
 }
+.carousel-item:active{cursor:grabbing}
 .carousel-item img{
   width:100%;height:100%;object-fit:cover;
-  pointer-events:none;user-select:none;
+  transition:transform 0.5s var(--ease);
 }
-.carousel-item.active{box-shadow:0 20px 60px rgba(0,0,0,0.45)}
+.carousel-item:hover img{transform:scale(1.03)}
 .carousel-nav{
-  position:absolute;bottom:-3rem;left:50%;transform:translateX(-50%);
-  display:flex;gap:1.5rem;align-items:center;z-index:5;
+  position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:0.5rem;z-index:5;
 }
 .carousel-nav button{
-  width:44px;height:44px;border-radius:50%;border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;transition:0.3s;
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg-elevated);transition:0.3s;
 }
 .carousel-nav button:hover{border-color:var(--accent);background:var(--accent-soft)}
-.carousel-nav button svg{width:18px;height:18px;stroke:var(--text)}
-.carousel-counter{font-size:0.75rem;letter-spacing:0.1em;color:var(--text-muted);min-width:4rem;text-align:center}
+.carousel-nav svg{width:16px;height:16px;stroke:var(--text)}
 
-/* FLOATING BOOK */
-.book-stage{
-  position:absolute;right:8%;bottom:12%;width:140px;height:180px;
-  perspective:600px;z-index:3;pointer-events:auto;
+/* 3D BOOK */
+.book-float{
+  position:absolute;right:0;bottom:0;width:160px;height:200px;
+  transform-style:preserve-3d;cursor:pointer;
+  transition:transform 0.6s var(--ease);
+  z-index:10;
 }
-.book-3d{
-  width:100%;height:100%;transform-style:preserve-3d;
-  transition:transform 0.15s ease-out;cursor:grab;
+.book-float:hover{transform:rotateY(-18deg) rotateX(6deg) scale(1.04)}
+.book-float img{
+  width:100%;height:100%;object-fit:cover;border-radius:4px;
+  box-shadow:var(--shadow);
 }
-.book-3d:active{cursor:grabbing}
-.book-3d img{width:100%;height:100%;object-fit:cover;border-radius:4px;box-shadow:0 12px 40px rgba(0,0,0,0.4)}
 
-/* SECTIONS COMMON */
-section{padding:7rem 2rem;max-width:1200px;margin:0 auto}
-.section-label{
-  font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;
+/* PROFILE */
+.profile-grid{
+  display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:start;
 }
-.section-label::before{content:"";width:24px;height:1px;background:var(--accent)}
-.section-title{
-  font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:400;line-height:1.15;margin-bottom:1.5rem;letter-spacing:-0.01em;
+@media(max-width:900px){.profile-grid{grid-template-columns:1fr}}
+.bio{
+  font-size:1.125rem;line-height:1.8;color:var(--text-muted);
+  font-weight:300;
 }
-.section-lead{font-size:1.05rem;color:var(--text-muted);max-width:42ch;line-height:1.75;margin-bottom:3rem}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.about-bio p{margin-bottom:1.25rem;color:var(--text-muted);font-size:1.02rem}
-.about-bio strong{color:var(--text);font-weight:500}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem}
+.bio p{margin-bottom:1.25rem}
+.bio strong{color:var(--text);font-weight:500}
+.facts{
+  display:grid;gap:1rem;
+}
 .fact-card{
-  padding:1.25rem;background:var(--bg-elevated);border:1px solid var(--border);
-  border-radius:var(--radius);transition:border-color 0.3s;
+  padding:1.25rem 1.5rem;background:var(--bg-card);
+  border:1px solid var(--border);border-radius:var(--radius);
+  transition:border-color 0.3s;
 }
 .fact-card:hover{border-color:var(--accent)}
-.fact-card .label{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem}
-.fact-card .value{font-family:var(--font-display);font-size:1.25rem}
+.fact-label{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.35rem}
+.fact-value{font-size:0.9375rem;font-weight:500}
 
 /* EDUCATION */
-.edu-tabs{display:flex;gap:0.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.edu-tab{
-  padding:0.6rem 1.3rem;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;
-  border:1px solid var(--border);border-radius:999px;color:var(--text-muted);transition:0.3s;
-}
-.edu-tab.active,.edu-tab:hover{border-color:var(--accent);color:var(--text);background:var(--accent-soft)}
-.edu-panel{display:none}
-.edu-panel.active{display:block}
-.edu-panel .carousel-wrap{height:420px;margin-bottom:2rem}
-.transcripts{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:2rem}
-.transcript-card{
-  flex:1;min-width:220px;padding:1.5rem;background:var(--bg-elevated);
+.edu-block{margin-bottom:5rem}
+.edu-block:last-child{margin-bottom:0}
+.edu-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.edu-place{font-family:var(--font-serif);font-size:1.75rem}
+.edu-years{font-size:0.875rem;color:var(--text-muted)}
+.edu-carousel{height:320px;margin-bottom:1.5rem}
+.doc-cards{display:flex;gap:1rem;flex-wrap:wrap}
+.doc-card{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;background:var(--bg-card);
   border:1px solid var(--border);border-radius:var(--radius);
-  display:flex;align-items:center;gap:1rem;transition:all 0.35s var(--ease);
+  transition:border-color 0.3s,transform 0.3s;
 }
-.transcript-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.2)}
-.transcript-icon{
-  width:48px;height:48px;border-radius:8px;background:var(--accent-soft);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+.doc-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.doc-icon{
+  width:40px;height:40px;border-radius:8px;background:var(--accent-soft);
+  display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:0.75rem;font-weight:600;
 }
-.transcript-icon svg{width:22px;height:22px;stroke:var(--accent)}
-.transcript-meta .name{font-weight:500;margin-bottom:0.2rem}
-.transcript-meta .sub{font-size:0.8rem;color:var(--text-muted)}
+.doc-info h4{font-size:0.875rem;font-weight:500;margin-bottom:0.15rem}
+.doc-info span{font-size:0.75rem;color:var(--text-muted)}
+.achievement-highlight{
+  margin-top:2rem;padding:1.5rem;border:1px solid var(--accent);
+  border-radius:var(--radius);background:var(--accent-soft);
+  display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;
+}
+.achievement-highlight img{
+  width:120px;height:120px;object-fit:cover;border-radius:8px;
+}
+.achievement-text h4{font-family:var(--font-serif);font-size:1.25rem;margin-bottom:0.35rem}
+.achievement-text p{font-size:0.9375rem;color:var(--text-muted)}
 
 /* SKILLS */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.skills-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;
+}
 .skill-card{
-  padding:1.75rem;background:var(--bg-elevated);border:1px solid var(--border);
-  border-radius:var(--radius);transition:all 0.35s var(--ease);cursor:pointer;
+  padding:1.75rem;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);cursor:pointer;transition:border-color 0.3s,transform 0.3s;
   position:relative;overflow:hidden;
 }
-.skill-card:hover{border-color:var(--accent);transform:translateY(-4px)}
-.skill-card.art-trigger{border-color:var(--tech)}
-.skill-card.art-trigger:hover{border-color:var(--tech);box-shadow:0 0 0 1px var(--tech)}
-.skill-card h3{font-family:var(--font-display);font-size:1.35rem;margin-bottom:0.75rem;font-weight:400}
-.skill-card p{font-size:0.9rem;color:var(--text-muted);line-height:1.6}
-.skill-card .tag{
-  display:inline-block;margin-top:1rem;font-size:0.7rem;letter-spacing:0.1em;
-  text-transform:uppercase;color:var(--tech);
+.skill-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.skill-card.art-trigger{border-color:var(--teal)}
+.skill-icon{
+  width:36px;height:36px;margin-bottom:1rem;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:8px;background:var(--accent-soft);color:var(--accent);font-size:0.875rem;
 }
-.skill-list{margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem}
-.skill-list span{
-  font-size:0.75rem;padding:0.3rem 0.7rem;background:var(--bg-soft);
-  border-radius:999px;color:var(--text-muted);
-}
+.skill-card h3{font-size:1.0625rem;font-weight:500;margin-bottom:0.5rem}
+.skill-card p{font-size:0.875rem;color:var(--text-muted);line-height:1.55}
+.skill-card .arrow{position:absolute;top:1.5rem;right:1.5rem;opacity:0.4;font-size:1.25rem}
 
-/* ART & DESIGN OVERLAY */
-#art-section{
-  position:fixed;inset:0;z-index:200;background:var(--bg);
-  display:none;flex-direction:column;overflow-y:auto;
-  opacity:0;transition:opacity 0.5s var(--ease);
+/* ART SUBSECTION */
+#art-design{
+  display:none;padding-top:2rem;
 }
-#art-section.open{display:flex;opacity:1}
-.art-header{
-  padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;
-  border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10;
+#art-design.visible{display:block}
+.art-back{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.8125rem;color:var(--text-muted);margin-bottom:2rem;
+  transition:color 0.3s;
 }
-.art-close{
-  width:44px;height:44px;border-radius:50%;border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;transition:0.3s;
-}
-.art-close:hover{border-color:var(--accent);background:var(--accent-soft)}
-.art-body{padding:3rem 2rem;max-width:1100px;margin:0 auto;width:100%}
-.art-body .carousel-wrap{height:460px;margin:2.5rem 0}
+.art-back:hover{color:var(--accent)}
+.art-carousel{height:380px;margin-bottom:2rem}
 
 /* PROJECTS */
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
-.project-card{
-  border-radius:var(--radius);overflow:hidden;background:var(--bg-elevated);
-  border:1px solid var(--border);transition:all 0.4s var(--ease);cursor:pointer;
+.projects-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;
 }
-.project-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 16px 40px rgba(0,0,0,0.25)}
-.project-card img{width:100%;height:200px;object-fit:cover}
+.project-card{
+  border-radius:var(--radius);overflow:hidden;background:var(--bg-card);
+  border:1px solid var(--border);transition:transform 0.3s,border-color 0.3s;
+  cursor:pointer;
+}
+.project-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.project-card img{width:100%;height:180px;object-fit:cover}
 .project-card .info{padding:1.25rem}
-.project-card h3{font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.4rem;font-weight:400}
-.project-card p{font-size:0.85rem;color:var(--text-muted)}
+.project-card h3{font-size:0.9375rem;font-weight:500;margin-bottom:0.35rem}
+.project-card p{font-size:0.8125rem;color:var(--text-muted)}
 
 /* EXPERIMENTS */
-.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.exp-card{
-  border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);
-  background:var(--bg-elevated);transition:0.35s;
+.experiment-frame{
+  max-width:640px;margin:0 auto;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);box-shadow:var(--shadow);
 }
-.exp-card:hover{border-color:var(--tech)}
-.exp-card img{width:100%;height:260px;object-fit:cover}
-.exp-card .info{padding:1.25rem}
-.exp-card h3{font-family:var(--font-display);font-size:1.15rem;margin-bottom:0.35rem}
-.exp-card p{font-size:0.85rem;color:var(--text-muted)}
+.experiment-frame img{width:100%;height:auto}
+
+/* CV */
+.cv-section{text-align:center}
+.cv-card{
+  display:inline-flex;flex-direction:column;align-items:center;gap:1.5rem;
+  padding:3rem 4rem;background:var(--bg-card);border:1px solid var(--accent);
+  border-radius:var(--radius);max-width:420px;
+}
+.cv-card h3{font-family:var(--font-serif);font-size:1.75rem}
+.cv-card p{color:var(--text-muted);font-size:0.9375rem}
+.cv-btn{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  padding:1rem 2rem;background:var(--accent);color:var(--bg);
+  border-radius:999px;font-size:0.8125rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  transition:opacity 0.3s,transform 0.3s;
+}
+.cv-btn:hover{opacity:0.9;transform:translateY(-2px)}
 
 /* CONTACT */
-.contact{
-  text-align:center;padding:8rem 2rem 6rem;max-width:700px;margin:0 auto;
+.contact{text-align:center;padding-bottom:6rem}
+.contact-statement{
+  font-family:var(--font-serif);font-size:clamp(1.75rem,4vw,2.5rem);
+  max-width:640px;margin:0 auto 2.5rem;line-height:1.3;
 }
-.contact .section-title{margin-bottom:1rem}
-.contact-lead{color:var(--text-muted);margin-bottom:2.5rem;font-size:1.1rem}
-.contact-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.contact-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:3rem}
 .contact-links a{
-  padding:0.75rem 1.5rem;border:1px solid var(--border);border-radius:999px;
-  font-size:0.85rem;letter-spacing:0.04em;transition:0.3s;
+  font-size:0.875rem;color:var(--text-muted);letter-spacing:0.04em;
+  transition:color 0.3s;border-bottom:1px solid transparent;
 }
-.contact-links a:hover{border-color:var(--accent);background:var(--accent-soft)}
-.final-mark{
-  font-family:var(--font-display);font-size:1.5rem;color:var(--accent);
-  display:flex;align-items:center;justify-content:center;gap:0.6rem;margin-top:3rem;
+.contact-links a:hover{color:var(--accent);border-color:var(--accent)}
+.final-sig{
+  font-family:var(--font-serif);font-size:1.5rem;color:var(--accent);
+  letter-spacing:0.08em;opacity:0.7;
 }
-.final-mark span{width:10px;height:10px;border:1px solid var(--accent)}
 
 /* LIGHTBOX */
-#lightbox{
-  position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.88);
-  display:none;align-items:center;justify-content:center;padding:2rem;
-  opacity:0;transition:opacity 0.4s;
+.lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(10,10,11,0.92);backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:0.4s var(--ease);
+  padding:2rem;
 }
-#lightbox.open{display:flex;opacity:1}
-.lb-content{
+.lightbox.open{opacity:1;visibility:visible}
+.lightbox-content{
   max-width:900px;width:100%;position:relative;
-  transform:scale(0.92);transition:transform 0.45s var(--ease);
+  transform:scale(0.94);transition:transform 0.4s var(--ease);
 }
-#lightbox.open .lb-content{transform:scale(1)}
-.lb-content img{width:100%;max-height:70vh;object-fit:contain;border-radius:6px}
-.lb-meta{margin-top:1.25rem;text-align:center}
-.lb-meta h3{font-family:var(--font-display);font-size:1.4rem;margin-bottom:0.4rem}
-.lb-meta p{color:var(--text-muted);font-size:0.95rem;max-width:50ch;margin:0 auto}
-.lb-close{
-  position:absolute;top:-3rem;right:0;width:40px;height:40px;
-  border-radius:50%;border:1px solid rgba(255,255,255,0.2);
-  display:flex;align-items:center;justify-content:center;color:#fff;transition:0.3s;
+.lightbox.open .lightbox-content{transform:scale(1)}
+.lightbox img{
+  width:100%;max-height:70vh;object-fit:contain;border-radius:8px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.5);
 }
-.lb-close:hover{background:rgba(255,255,255,0.1)}
+.lightbox-meta{margin-top:1.5rem;text-align:center}
+.lightbox-meta h3{font-family:var(--font-serif);font-size:1.5rem;margin-bottom:0.5rem}
+.lightbox-meta p{font-size:0.9375rem;color:var(--text-muted);max-width:480px;margin:0 auto}
+.lightbox-close{
+  position:absolute;top:-3rem;right:0;
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;transition:0.3s;
+}
+.lightbox-close:hover{border-color:var(--accent);color:var(--accent)}
 
 /* FOOTER */
-footer{padding:2rem;text-align:center;font-size:0.8rem;color:var(--text-muted);border-top:1px solid var(--border)}
+footer{
+  padding:2rem;text-align:center;font-size:0.75rem;color:var(--text-muted);
+  border-top:1px solid var(--border);
+}
 
-/* RESPONSIVE */
-@media (max-width:960px){
-  .hero{grid-template-columns:1fr;padding-top:6rem;text-align:center}
-  .hero-content{order:1}
-  .hero-label{justify-content:center}
-  .hero-tagline{margin-left:auto;margin-right:auto}
-  .hero-cta{justify-content:center}
-  .carousel-wrap{height:380px}
-  .book-stage{display:none}
-  .about-grid{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .menu-btn{display:flex}
-  .nav.open .nav-links{
-    display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
-    background:var(--bg);padding:1.5rem 2rem;border-bottom:1px solid var(--border);gap:1.25rem;
-  }
-}
-@media (max-width:600px){
-  .carousel-item{width:200px;height:270px}
-  .carousel-wrap{height:320px}
-  .facts{grid-template-columns:1fr}
-  section{padding:5rem 1.25rem}
-}
+/* UTIL */
+.mt-4{margin-top:2rem}
+.mb-2{margin-bottom:1rem}
+.hidden{display:none!important}
 </style>
 </head>
 <body>
-<div id="loader"><div class="loader-mark">SA</div></div>
+<!-- LOADER -->
+<div id="loader" role="status" aria-live="polite">
+  <div class="loader-logo" aria-hidden="true">SA</div>
+  <div class="loader-bar"><span></span></div>
+</div>
 
-<nav class="nav" id="nav">
-  <a href="#home" class="nav-logo"><span></span> SA</a>
-  <div class="nav-links">
+<!-- NAV -->
+<header class="nav" role="banner">
+  <a href="#home" class="nav-logo" aria-label="Home">SA</a>
+  <nav class="nav-links" id="navLinks" aria-label="Main">
     <a href="#home">Home</a>
-    <a href="#about">About</a>
+    <a href="#profile">Profile</a>
     <a href="#education">Education</a>
     <a href="#skills">Skills</a>
     <a href="#work">Work</a>
+    <a href="#cv">CV</a>
     <a href="#contact">Contact</a>
-  </div>
-  <div class="nav-actions">
-    <button class="audio-toggle" id="audioToggle" aria-label="Toggle ambient audio" title="Ambient sound">
-      <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+  </nav>
+  <div class="nav-controls">
+    <button class="music-btn" id="musicBtn" aria-label="Toggle ambient music" title="Music">
+      <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     </button>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
-      <svg viewBox="0 0 24 24" id="themeIcon"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
     </button>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</nav>
-
-<audio id="bgAudio" loop preload="none">
-  <source src="assets/audio/biting bullets - ridgeclub (youtube).mp3" type="audio/mpeg">
-</audio>
+</header>
 
 <main>
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-label">Architecture → CSE</div>
-    <h1>Spatial mind.<br><em>Digital craft.</em></h1>
-    <p class="hero-tagline">Bangladeshi student building at the intersection of architectural precision and computational systems.</p>
-    <div class="hero-cta">
-      <a href="#about" class="btn btn-primary">Explore the work</a>
-      <a href="#contact" class="btn btn-ghost">Get in touch</a>
-    </div>
-  </div>
-  <div class="carousel-wrap" id="heroCarousel"></div>
-  <div class="book-stage" id="bookStage">
-    <div class="book-3d" id="book3d">
-      <img src="assets/images/book-3d.jpg" alt="3D architectural book study" loading="lazy">
+<!-- HOME -->
+<section id="home" class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="section-label">Architecture → Computer Science</p>
+        <h1 class="hero-name">SA</h1>
+        <p class="hero-tag">I build spaces that think — moving from the quiet precision of architecture into the living systems of code.</p>
+        <a href="#profile" class="hero-cta">Explore the work <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-visual">
+        <div class="carousel-wrap" id="heroCarousel" data-carousel>
+          <div class="carousel-track"></div>
+          <div class="carousel-nav">
+            <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
+        </div>
+        <div class="book-float" id="book3d" title="Handmade architectural book" role="button" tabindex="0" aria-label="View the handmade book">
+          <img src="assets/images/book-3d.jpg" alt="Handmade architectural sketchbook" loading="lazy" width="160" height="200">
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">Profile</div>
-  <h2 class="section-title">Drawn to systems,<br>built by space.</h2>
-  <div class="about-grid">
-    <div class="about-bio">
-      <p>I began in architecture — learning to read light, proportion, and the quiet logic of structures. That training never left; it simply found a new medium.</p>
-      <p>Now I study <strong>Computer Science & Engineering</strong>, carrying the same obsession with clarity, hierarchy, and elegant constraint into code, interfaces, and interactive systems.</p>
-      <p>I design and build things that feel intentional — whether a spatial composition, a digital experience, or the quiet architecture behind a line of logic.</p>
-      <div class="facts">
-        <div class="fact-card"><div class="label">Based in</div><div class="value">Dhaka, BD</div></div>
-        <div class="fact-card"><div class="label">Focus</div><div class="value">CSE + Design</div></div>
-        <div class="fact-card"><div class="label">Foundation</div><div class="value">Architecture</div></div>
-        <div class="fact-card"><div class="label">Mindset</div><div class="value">Systems first</div></div>
+<!-- PROFILE -->
+<section id="profile">
+  <div class="container">
+    <p class="section-label">Profile</p>
+    <h2 class="section-title">A mind shaped by space,<br>now learning to shape systems.</h2>
+    <div class="profile-grid mt-4">
+      <div class="bio">
+        <p>I grew up measuring the world with a pencil and a T-square. Architecture taught me to see structure, light, proportion, and the quiet dignity of materials. Every drawing was a decision; every model a hypothesis about how people might inhabit a place.</p>
+        <p>Somewhere along the way the questions changed. I began asking not only how a space feels, but how information moves, how interfaces breathe, how code can hold intention as carefully as concrete holds a floor. The transition from Architecture to Computer Science & Engineering is not a departure — it is a continuation of the same craft, expressed in a new medium.</p>
+        <p>I am a student from Bangladesh, carrying the discipline of the studio into the logic of the machine. I still sketch. I still build by hand. And now I also write systems that can think, respond, and endure.</p>
+      </div>
+      <div>
+        <div class="carousel-wrap" style="height:360px" id="profileCarousel" data-carousel>
+          <div class="carousel-track"></div>
+          <div class="carousel-nav">
+            <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
+        </div>
+        <div class="facts mt-4">
+          <div class="fact-card">
+            <div class="fact-label">Origin</div>
+            <div class="fact-value">Bangladesh</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">Path</div>
+            <div class="fact-value">Architecture → CSE</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">Craft</div>
+            <div class="fact-value">Drawing · Making · Systems</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="carousel-wrap" id="aboutCarousel" style="height:420px"></div>
   </div>
 </section>
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-label">Education</div>
-  <h2 class="section-title">Formative ground.</h2>
-  <p class="section-lead">Three chapters. Each left a different geometry in the way I think.</p>
-  <div class="edu-tabs" role="tablist">
-    <button class="edu-tab active" data-panel="school" role="tab">School</button>
-    <button class="edu-tab" data-panel="college" role="tab">College · NDC</button>
-    <button class="edu-tab" data-panel="university" role="tab">University</button>
-  </div>
-  <div class="edu-panel active" id="panel-school">
-    <div class="carousel-wrap" id="schoolCarousel"></div>
-  </div>
-  <div class="edu-panel" id="panel-college">
-    <div class="carousel-wrap" id="collegeCarousel"></div>
-  </div>
-  <div class="edu-panel" id="panel-university">
-    <div class="carousel-wrap" id="uniCarousel"></div>
-  </div>
-  <div class="transcripts">
-    <a href="assets/docs/SSC Transcript.pdf" class="transcript-card" download target="_blank" rel="noopener">
-      <div class="transcript-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
-      <div class="transcript-meta"><div class="name">SSC Transcript</div><div class="sub">Secondary School Certificate</div></div>
-    </a>
-    <a href="assets/docs/HSC Transcript.pdf" class="transcript-card" download target="_blank" rel="noopener">
-      <div class="transcript-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
-      <div class="transcript-meta"><div class="name">HSC Transcript</div><div class="sub">Higher Secondary · Notre Dame College</div></div>
-    </a>
+  <div class="container">
+    <p class="section-label">Education</p>
+    <h2 class="section-title">Foundations laid in classrooms<br>and studios.</h2>
+
+    <div class="edu-block mt-4">
+      <div class="edu-header">
+        <h3 class="edu-place">School</h3>
+        <span class="edu-years">Formative years</span>
+      </div>
+      <div class="carousel-wrap edu-carousel" id="schoolCarousel" data-carousel>
+        <div class="carousel-track"></div>
+        <div class="carousel-nav">
+          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-block">
+      <div class="edu-header">
+        <h3 class="edu-place">Notre Dame College</h3>
+        <span class="edu-years">Higher Secondary</span>
+      </div>
+      <div class="carousel-wrap edu-carousel" id="collegeCarousel" data-carousel>
+        <div class="carousel-track"></div>
+        <div class="carousel-nav">
+          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </div>
+      <div class="doc-cards">
+        <a class="doc-card" href="assets/docs/SSC Transcript.pdf" download>
+          <div class="doc-icon">PDF</div>
+          <div class="doc-info">
+            <h4>SSC Transcript</h4>
+            <span>Download academic record</span>
+          </div>
+        </a>
+        <a class="doc-card" href="assets/docs/HSC Transcript.pdf" download>
+          <div class="doc-icon">PDF</div>
+          <div class="doc-info">
+            <h4>HSC Transcript</h4>
+            <span>Download academic record</span>
+          </div>
+        </a>
+      </div>
+      <div class="achievement-highlight">
+        <img src="assets/images/814113108_1617142683373760_3602804557652732585_n.jpg" alt="Academic achievement moment" loading="lazy" width="120" height="120">
+        <div class="achievement-text">
+          <h4>A quiet milestone</h4>
+          <p>Recognition earned through consistency and care — a moment that still reminds me why precision matters.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-block">
+      <div class="edu-header">
+        <h3 class="edu-place">University</h3>
+        <span class="edu-years">Architecture foundations → CSE transition</span>
+      </div>
+      <div class="carousel-wrap edu-carousel" id="uniCarousel" data-carousel>
+        <div class="carousel-track"></div>
+        <div class="carousel-nav">
+          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-label">Capabilities</div>
-  <h2 class="section-title">Range, not noise.</h2>
-  <p class="section-lead">Four lenses. One continuous way of seeing.</p>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <h3>Technical · CSE</h3>
-      <p>Algorithms, data structures, systems thinking, and the quiet discipline of clean code.</p>
-      <div class="skill-list"><span>Python</span><span>JavaScript</span><span>C/C++</span><span>Data Structures</span><span>Web</span></div>
+  <div class="container">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">A hierarchy of craft.</h2>
+    <p class="section-lead">Technical fluency, spatial intelligence, visual making, and the soft skills that let them speak to one another.</p>
+
+    <div class="skills-grid mt-4">
+      <div class="skill-card">
+        <div class="skill-icon">01</div>
+        <h3>Technical / CSE</h3>
+        <p>Programming fundamentals, systems thinking, data structures, and the quiet logic of clean interfaces.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">02</div>
+        <h3>Architectural Thinking & Making</h3>
+        <p>Spatial reasoning, material sensitivity, model-building, and the discipline of iterative design.</p>
+      </div>
+      <div class="skill-card art-trigger" id="artTrigger" role="button" tabindex="0">
+        <div class="skill-icon" style="background:var(--teal-soft);color:var(--teal)">03</div>
+        <h3>Art & Design</h3>
+        <p>Sketching, colour studies, digital drawing, and the handmade book as a vessel of ideas. Click to enter.</p>
+        <span class="arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">04</div>
+        <h3>Content Creation & YouTube</h3>
+        <p>Visual storytelling, process documentation, and the craft of sharing knowledge with clarity and care.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">05</div>
+        <h3>Soft Skills</h3>
+        <p>Curiosity, patience, collaboration, and the ability to hold both precision and ambiguity at once.</p>
+      </div>
     </div>
-    <div class="skill-card">
-      <h3>Architectural Thinking</h3>
-      <p>Spatial hierarchy, material honesty, proportion, and designing for human experience.</p>
-      <div class="skill-list"><span>Form</span><span>Structure</span><span>Light</span><span>Context</span></div>
-    </div>
-    <div class="skill-card art-trigger" id="artTrigger">
-      <h3>Art & Design</h3>
-      <p>Sketch, colour, digital painting, and visual narrative. Click to enter the gallery.</p>
-      <span class="tag">Open gallery →</span>
-    </div>
-    <div class="skill-card">
-      <h3>Soft Skills</h3>
-      <p>Clear communication, iterative critique, and the patience to refine until it feels inevitable.</p>
-      <div class="skill-list"><span>Critique</span><span>Collaboration</span><span>Writing</span></div>
+
+    <!-- ART & DESIGN SUBSECTION -->
+    <div id="art-design">
+      <button class="art-back" id="artBack" aria-label="Back to skills">← Back to Skills</button>
+      <h3 class="section-title" style="font-size:2rem">Art & Design</h3>
+      <p class="section-lead mb-2">Drawings, colour studies, iPad work, and the handmade book — treated as core instruments of thought.</p>
+      <div class="carousel-wrap art-carousel" id="artCarousel" data-carousel>
+        <div class="carousel-track"></div>
+        <div class="carousel-nav">
+          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PREVIOUS WORK -->
 <section id="work">
-  <div class="section-label">Previous Work</div>
-  <h2 class="section-title">Evolution of craft.</h2>
-  <p class="section-lead">Earlier digital explorations — treated as process, not finished statements.</p>
-  <div class="projects-grid" id="projectsGrid"></div>
+  <div class="container">
+    <p class="section-label">Previous Work</p>
+    <h2 class="section-title">Evolution of my digital craft.</h2>
+    <p class="section-lead">Screens and studies that mark the gradual shift from analog precision to interactive systems.</p>
+    <div class="projects-grid mt-4" id="projectsGrid"></div>
+  </div>
 </section>
 
 <!-- CREATIVE EXPERIMENTS -->
 <section id="experiments">
-  <div class="section-label">Experiments</div>
-  <h2 class="section-title">Side channels.</h2>
-  <p class="section-lead">AI-assisted studies and quiet tests of possibility.</p>
-  <div class="exp-grid" id="expGrid"></div>
+  <div class="container">
+    <p class="section-label">Creative Experiments</p>
+    <h2 class="section-title">One conversation with the machine.</h2>
+    <div class="experiment-frame mt-4">
+      <img src="assets/images/ChatGPT Image Sep 20, 2026, 07_38_48 PM.png" alt="AI-generated experimental image" loading="lazy" width="640" height="auto">
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv" class="cv-section">
+  <div class="container">
+    <p class="section-label">Documents</p>
+    <h2 class="section-title">Curriculum Vitae</h2>
+    <div class="cv-card mt-4">
+      <h3>Full CV</h3>
+      <p>A concise record of education, skills, and selected work.</p>
+      <a href="assets/docs/CV.pdf" class="cv-btn" download>Download CV.pdf</a>
+    </div>
+    <div class="doc-cards" style="justify-content:center;margin-top:2rem">
+      <a class="doc-card" href="assets/docs/SSC Transcript.pdf" download>
+        <div class="doc-icon">PDF</div>
+        <div class="doc-info">
+          <h4>SSC Transcript</h4>
+          <span>Secondary record</span>
+        </div>
+      </a>
+      <a class="doc-card" href="assets/docs/HSC Transcript.pdf" download>
+        <div class="doc-icon">PDF</div>
+        <div class="doc-info">
+          <h4>HSC Transcript</h4>
+          <span>Higher Secondary record</span>
+        </div>
+      </a>
+    </div>
+  </div>
 </section>
 
 <!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-label" style="justify-content:center">Contact</div>
-  <h2 class="section-title">Let’s build something<br>that lasts.</h2>
-  <p class="contact-lead">Open to conversations about study, collaboration, or simply good work.</p>
-  <div class="contact-links">
-    <a href="mailto:hello@sa.example">Email</a>
-    <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+<section id="contact" class="contact">
+  <div class="container">
+    <p class="contact-statement">I am ready to build the next space — whether it is made of concrete, pixels, or code.</p>
+    <div class="contact-links">
+      <a href="mailto:hello@sa.portfolio">Email</a>
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="final-sig">SA</div>
   </div>
-  <div class="final-mark"><span></span> SA</div>
 </section>
 </main>
 
 <footer>
-  <p>Designed & built with architectural patience · © 2026</p>
+  <p>© SA — Architecture → CSE. Built with care.</p>
 </footer>
 
-<!-- ART OVERLAY -->
-<div id="art-section" aria-hidden="true">
-  <div class="art-header">
-    <div class="nav-logo"><span></span> Art & Design</div>
-    <button class="art-close" id="artClose" aria-label="Close gallery">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-  </div>
-  <div class="art-body">
-    <p class="section-lead" style="margin-bottom:1rem">Sketches, colour studies, and iPad work — the continuous practice behind the systems.</p>
-    <div class="carousel-wrap" id="artCarousel"></div>
-  </div>
-</div>
-
 <!-- LIGHTBOX -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image detail">
-  <div class="lb-content">
-    <button class="lb-close" id="lbClose" aria-label="Close">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <img id="lbImg" src="" alt="">
-    <div class="lb-meta">
-      <h3 id="lbTitle"></h3>
-      <p id="lbDesc"></p>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-meta">
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxDesc"></p>
     </div>
   </div>
 </div>
 
+<!-- AUDIO -->
+<audio id="bgMusic" loop preload="none">
+  <source src="assets/audio/biting bullets - ridgeclub (youtube).mp3" type="audio/mpeg">
+</audio>
+
 <script>
 (function(){
-  "use strict";
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  'use strict';
 
-  /* ---------- DATA ---------- */
+  // ===== DATA =====
   const heroItems = [
-    {src:"assets/images/book-3d.jpg", title:"Study in Volume", desc:"A three-dimensional book form — material, shadow, and the quiet weight of knowledge."},
-    {src:"assets/images/photo-01.jpg", title:"Quiet Threshold", desc:"Light finding its way through an ordinary moment."},
-    {src:"assets/images/photo-02.jpg", title:"Urban Grain", desc:"The texture of the city as found material."},
-    {src:"assets/images/photo-03.jpg", title:"Framed Pause", desc:"Architecture as a device for looking."},
-    {src:"assets/images/sketch-arch-01.jpg", title:"Line Study", desc:"Early exploration of proportion and spatial sequence."}
+    {src:'assets/images/809518654_1855217995842076_8923680691947304600_n.jpg',title:'Portrait',desc:'A quiet moment between studio and screen.'},
+    {src:'assets/images/book-3d.jpg',title:'The Handmade Book',desc:'Bound by hand, filled with measured thoughts and spatial experiments.'},
+    {src:'assets/images/IMG scetch 1.jpg',title:'Sketch Study',desc:'Line as thought — the first language of architecture.'},
+    {src:'assets/images/813466984_26807832862248578_2653115749408704795_n.jpg',title:'Studio Light',desc:'Where precision and patience meet.'}
   ];
-  const aboutItems = [
-    {src:"assets/images/photo-01.jpg", title:"Portrait Study", desc:"A still moment between frames."},
-    {src:"assets/images/photo-02.jpg", title:"Street Geometry", desc:"Found composition in the everyday."},
-    {src:"assets/images/photo-03.jpg", title:"Soft Edge", desc:"Where light and surface meet."},
-    {src:"assets/images/photo-04.jpg", title:"Vertical Rhythm", desc:"Repetition as quiet order."},
-    {src:"assets/images/photo-05.jpg", title:"Threshold", desc:"The space between inside and out."},
-    {src:"assets/images/photo-06.jpg", title:"Material Close", desc:"Texture as primary language."}
+  const profileItems = [
+    {src:'assets/images/809601262_4548993055379554_8793039364914601083_n.jpg',title:'Presence',desc:'Looking forward while carrying the weight of craft.'},
+    {src:'assets/images/811615849_2097588261148773_877248636819443508_n.jpg',title:'Focus',desc:'The same intensity once reserved for drawings, now applied to systems.'},
+    {src:'assets/images/813692048_1750841226169127_6723820080107089098_n.jpg',title:'Calm',desc:'Architecture taught me to wait for the right line.'},
+    {src:'assets/images/813853349_2273476383432547_5877535730504115386_n.jpg',title:'Curiosity',desc:'Always measuring, always asking what comes next.'},
+    {src:'assets/images/813965363_2318476582340902_2775377306658662126_n.jpg',title:'Character',desc:'A student still learning the language of both space and code.'},
+    {src:'assets/images/815366796_1754064392528440_1990530380060926840_n (1).jpg',title:'Moment',desc:'Between one discipline and the next.'},
+    {src:'assets/images/817550850_1756948922083208_6663409752770103109_n.jpg',title:'Quiet Ambition',desc:'No need to announce the work — let the work speak.'},
+    {src:'assets/images/818061932_846874715114836_2565138691570136914_n.jpg',title:'Continuity',desc:'The same hands that once held pencils now type with purpose.'},
+    {src:'assets/images/818478656_1667736108690904_8025924023257939696_n.jpg',title:'Forward',desc:'Ready for the next chapter.'}
   ];
   const schoolItems = [
-    {src:"assets/images/school-1.jpg", title:"School Grounds", desc:"Where the first questions about space began."},
-    {src:"assets/images/school-2.jpg", title:"Corridor Light", desc:"Everyday architecture that taught attention."}
+    {src:'assets/images/school-1.jpg',title:'School Days',desc:'Where the first habits of care were formed.'},
+    {src:'assets/images/school-2.jpg',title:'Early Foundations',desc:'Learning to see structure long before naming it architecture.'}
   ];
   const collegeItems = [
-    {src:"assets/images/college-1.jpg", title:"Notre Dame College", desc:"The institution that sharpened discipline and clarity."},
-    {src:"assets/images/college-2.jpg", title:"Campus Moment", desc:"Collective energy held by structure."},
-    {src:"assets/images/college-3.jpg", title:"Facade Study", desc:"Reading buildings as systems of parts."},
-    {src:"assets/images/college-ndc.jpg", title:"NDC", desc:"A place of rigorous foundation."}
+    {src:'assets/images/college-1.jpg',title:'Notre Dame College',desc:'A place that demanded both excellence and humility.'},
+    {src:'assets/images/college-2.jpg',title:'Corridor of Focus',desc:'Years spent refining attention and discipline.'},
+    {src:'assets/images/college-3.jpg',title:'Campus Light',desc:'The quiet geometry of institutional space.'},
+    {src:'assets/images/college-ndc.jpg',title:'NDC',desc:'Higher Secondary — the bridge between school and the larger world.'}
   ];
   const uniItems = [
-    {src:"assets/images/university-1.jpg", title:"University Path", desc:"The current chapter — code as material."},
-    {src:"assets/images/university-2.webp", title:"Campus Horizon", desc:"New ground for systems thinking."},
-    {src:"assets/images/university-3.jpg", title:"Learning Space", desc:"Where architecture and computation continue to converse."}
+    {src:'assets/images/university-1.jpg',title:'University Studio',desc:'Where architectural thinking took formal shape.'},
+    {src:'assets/images/university-2.webp',title:'Campus',desc:'Spaces that taught me how buildings hold people.'},
+    {src:'assets/images/university-3.jpg',title:'Transition',desc:'The moment architecture began to open toward systems and code.'}
   ];
   const artItems = [
-    {src:"assets/images/sketch-01.jpg", title:"Gesture Study", desc:"Line seeking form before it solidifies."},
-    {src:"assets/images/sketch-02.jpg", title:"Spatial Sequence", desc:"Movement through imagined rooms."},
-    {src:"assets/images/colour-01.jpg", title:"Colour Field", desc:"Hue as atmosphere and weight."},
-    {src:"assets/images/colour-02.jpg", title:"Warm Palette", desc:"Terracotta and brass in quiet dialogue."},
-    {src:"assets/images/ipad-01.jpg", title:"Digital Sketch", desc:"The tablet as an extension of the hand."},
-    {src:"assets/images/ipad-02.jpg", title:"Layered Study", desc:"Building depth through successive marks."},
-    {src:"assets/images/sketch-03.jpg", title:"Elevation Thought", desc:"Façade as both skin and structure."},
-    {src:"assets/images/colour-03.jpg", title:"Muted Contrast", desc:"Restraint as a design decision."}
+    {src:'assets/images/IMG scetch 1.jpg',title:'Sketch 01',desc:'A single continuous line seeking proportion.'},
+    {src:'assets/images/image sketch 1.jpg',title:'Sketch 02',desc:'Spatial studies on paper — still the fastest way to think.'},
+    {src:'assets/images/image sketch 2.jpg',title:'Sketch 03',desc:'Massing and shadow in graphite.'},
+    {src:'assets/images/image sketch 3.jpg',title:'Sketch 04',desc:'Exploring rhythm and void.'},
+    {src:'assets/images/image colour.jpg',title:'Colour Study',desc:'Learning how hue carries atmosphere.'},
+    {src:'assets/images/image colour 1.jpg',title:'Colour Study II',desc:'Warmth and coolness as structural decisions.'},
+    {src:'assets/images/image ipad 1.png',title:'iPad Drawing',desc:'Digital continuity of the same hand.'},
+    {src:'assets/images/book-3d.jpg',title:'The Book',desc:'A handmade object that holds the process itself.'}
   ];
   const projectItems = [
-    {src:"assets/images/Screenshot 2026-09-20 at 1.png", title:"Early Interface", desc:"First attempts at digital structure and hierarchy."},
-    {src:"assets/images/Screenshot 2026-09-20 at 2.png", title:"Layout Study", desc:"Grid, rhythm, and visual weight."},
-    {src:"assets/images/Screenshot 2026-09-20 at 3.png", title:"Portfolio Iteration", desc:"Previous digital craft — process made visible."},
-    {src:"assets/images/Screenshot 2026-09-20 at 4.png", title:"Component Work", desc:"Building reusable pieces with care."}
+    {src:'assets/images/Screenshot 2026-09-20 201810.png',title:'Interface Study 01',desc:'Early digital explorations of layout and hierarchy.'},
+    {src:'assets/images/Screenshot 2026-09-20 202230.png',title:'Interface Study 02',desc:'Refining spacing and visual weight.'},
+    {src:'assets/images/Screenshot 2026-09-20 202305.png',title:'System Sketch',desc:'Translating architectural grids into screen logic.'},
+    {src:'assets/images/Screenshot 2026-09-20 202318.png',title:'Component Work',desc:'Building reusable pieces with care.'},
+    {src:'assets/images/Screenshot 2026-09-20 202429.png',title:'Detail Pass',desc:'The same attention once given to joinery.'},
+    {src:'assets/images/Screenshot 2026-09-20 202501.png',title:'Flow Study',desc:'How information moves through space.'},
+    {src:'assets/images/Screenshot 2026-09-20 202509.png',title:'Visual Rhythm',desc:'Repetition and variation in digital form.'},
+    {src:'assets/images/Screenshot 2026-09-20 202528.png',title:'Craft Snapshot',desc:'A moment of clarity in the process.'},
+    {src:'assets/images/Screenshot 2026-09-20 202603.png',title:'Final Frame',desc:'Where intention meets execution.'}
   ];
-  const expItems = [
-    {src:"assets/images/ChatGPT Image Sep 20, 2026.png", title:"AI Conversation", desc:"A generated image used as a starting point for further thinking."}
-  ];
 
-  /* ---------- CIRCULAR CAROUSEL ---------- */
-  class CircularCarousel {
-    constructor(container, items, options = {}) {
-      this.container = typeof container === "string" ? document.querySelector(container) : container;
-      this.items = items;
-      this.index = 0;
-      this.isDragging = false;
-      this.startX = 0;
-      this.radius = options.radius || 380;
-      this.itemW = options.itemW || 260;
-      this.itemH = options.itemH || 340;
-      this.auto = options.auto !== false && !prefersReduced;
-      this.autoSpeed = options.autoSpeed || 0.0012;
-      this.angleOffset = 0;
-      this.raf = null;
-      this.build();
-      this.bind();
-      this.render();
-      if (this.auto) this.startAuto();
-    }
-    build() {
-      this.wrap = document.createElement("div");
-      this.wrap.className = "carousel";
-      this.container.appendChild(this.wrap);
-      this.els = this.items.map((item, i) => {
-        const el = document.createElement("div");
-        el.className = "carousel-item";
-        el.dataset.index = i;
-        el.innerHTML = `<img src="${item.src}" alt="${item.title}" loading="lazy">`;
-        el.addEventListener("click", () => {
-          if (Math.abs(this.angleOffset) < 0.02) this.openLightbox(i);
-          else this.goTo(i);
-        });
-        this.wrap.appendChild(el);
-        return el;
+  // ===== LOADER =====
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{
+      document.getElementById('loader').classList.add('done');
+      document.body.style.overflow='';
+    },2200);
+  });
+
+  // ===== THEME =====
+  const themeBtn=document.getElementById('themeBtn');
+  const root=document.documentElement;
+  const saved=localStorage.getItem('theme');
+  if(saved) root.setAttribute('data-theme',saved);
+  themeBtn.addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='light'?'dark':'light';
+    root.setAttribute('data-theme',next);
+    localStorage.setItem('theme',next);
+  });
+
+  // ===== MUSIC =====
+  const music=document.getElementById('bgMusic');
+  const musicBtn=document.getElementById('musicBtn');
+  let musicOn=false;
+  musicBtn.addEventListener('click',()=>{
+    if(musicOn){music.pause();musicOn=false;musicBtn.style.opacity='0.5'}
+    else{music.play().catch(()=>{});musicOn=true;musicBtn.style.opacity='1'}
+  });
+  musicBtn.style.opacity='0.5';
+
+  // ===== MENU =====
+  const menuToggle=document.getElementById('menuToggle');
+  const navLinks=document.getElementById('navLinks');
+  menuToggle.addEventListener('click',()=>{
+    const open=navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded',open);
+  });
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded','false');
+  }));
+
+  // ===== CIRCULAR CAROUSEL =====
+  function createCarousel(el,items){
+    const track=el.querySelector('.carousel-track');
+    const nav=el.querySelectorAll('.carousel-nav button');
+    let angle=0;
+    const n=items.length;
+    const radius=Math.min(el.offsetWidth,el.offsetHeight)*0.42 || 180;
+    const itemW=220;
+    const itemH=280;
+
+    items.forEach((item,i)=>{
+      const div=document.createElement('div');
+      div.className='carousel-item';
+      div.innerHTML=`<img src="${item.src}" alt="${item.title}" loading="lazy" width="${itemW}" height="${itemH}">`;
+      div.dataset.index=i;
+      div.addEventListener('click',e=>{
+        if(!dragging) openLightbox(item);
       });
-      const nav = document.createElement("div");
-      nav.className = "carousel-nav";
-      nav.innerHTML = `
-        <button class="prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <span class="carousel-counter"><span class="cur">1</span> / ${this.items.length}</span>
-        <button class="next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>`;
-      this.container.appendChild(nav);
-      this.counter = nav.querySelector(".cur");
-      nav.querySelector(".prev").addEventListener("click", () => this.prev());
-      nav.querySelector(".next").addEventListener("click", () => this.next());
-    }
-    bind() {
-      let startX = 0, lastX = 0;
-      const onDown = e => {
-        this.isDragging = true;
-        startX = lastX = (e.touches ? e.touches[0].clientX : e.clientX);
-        this.stopAuto();
-      };
-      const onMove = e => {
-        if (!this.isDragging) return;
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        const dx = x - lastX;
-        this.angleOffset += dx * 0.004;
-        lastX = x;
-        this.render();
-      };
-      const onUp = () => {
-        if (!this.isDragging) return;
-        this.isDragging = false;
-        this.snap();
-        if (this.auto) this.startAuto();
-      };
-      this.container.addEventListener("mousedown", onDown);
-      window.addEventListener("mousemove", onMove);
-      window.addEventListener("mouseup", onUp);
-      this.container.addEventListener("touchstart", onDown, {passive:true});
-      this.container.addEventListener("touchmove", onMove, {passive:true});
-      this.container.addEventListener("touchend", onUp);
-      this.container.addEventListener("wheel", e => {
-        e.preventDefault();
-        this.angleOffset += e.deltaY * 0.0015;
-        this.render();
-        clearTimeout(this.wheelT);
-        this.wheelT = setTimeout(() => this.snap(), 180);
-      }, {passive:false});
-    }
-    getAngles() {
-      const n = this.items.length;
-      const step = (Math.PI * 2) / n;
-      return this.items.map((_, i) => {
-        let a = (i - this.index) * step + this.angleOffset;
-        while (a > Math.PI) a -= Math.PI * 2;
-        while (a < -Math.PI) a += Math.PI * 2;
-        return a;
+      track.appendChild(div);
+    });
+
+    const nodes=track.querySelectorAll('.carousel-item');
+    function render(){
+      nodes.forEach((node,i)=>{
+        const a=(i/n)*Math.PI*2 + angle;
+        const x=Math.sin(a)*radius;
+        const z=Math.cos(a)*radius;
+        const scale=0.55+0.45*((z+radius)/(2*radius));
+        const rotY=a*180/Math.PI;
+        node.style.transform=`translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${-rotY}deg) scale(${scale})`;
+        node.style.zIndex=Math.round(z+radius);
+        node.style.opacity=0.35+0.65*((z+radius)/(2*radius));
       });
     }
-    render() {
-      const angles = this.getAngles();
-      const n = this.items.length;
-      angles.forEach((a, i) => {
-        const el = this.els[i];
-        const x = Math.sin(a) * this.radius;
-        const z = Math.cos(a) * this.radius - this.radius;
-        const scale = 0.55 + 0.45 * Math.max(0, Math.cos(a));
-        const opacity = 0.25 + 0.75 * Math.max(0, Math.cos(a));
-        const rotY = a * 0.6;
-        el.style.transform = `translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${rotY}rad) scale(${scale})`;
-        el.style.opacity = opacity;
-        el.style.zIndex = Math.round(100 + z);
-        el.classList.toggle("active", Math.abs(a) < 0.4);
+    render();
+
+    let dragging=false,startX=0,startAngle=0;
+    el.addEventListener('pointerdown',e=>{
+      dragging=true;startX=e.clientX;startAngle=angle;
+      el.setPointerCapture(e.pointerId);
+    });
+    el.addEventListener('pointermove',e=>{
+      if(!dragging) return;
+      const dx=e.clientX-startX;
+      angle=startAngle+dx*0.008;
+      render();
+    });
+    el.addEventListener('pointerup',()=>dragging=false);
+    el.addEventListener('pointercancel',()=>dragging=false);
+    el.addEventListener('wheel',e=>{
+      e.preventDefault();
+      angle+=e.deltaY*0.002;
+      render();
+    },{passive:false});
+
+    nav.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const dir=parseInt(btn.dataset.dir);
+        angle+=dir*(Math.PI*2/n);
+        gsap.to({},{duration:0.6,onUpdate:()=>render(),ease:'power2.out'});
+        // simple step
+        render();
       });
-      this.counter.textContent = this.index + 1;
-    }
-    snap() {
-      const n = this.items.length;
-      const step = (Math.PI * 2) / n;
-      let best = 0, bestDiff = Infinity;
-      for (let i = 0; i < n; i++) {
-        let a = (i - this.index) * step + this.angleOffset;
-        while (a > Math.PI) a -= Math.PI * 2;
-        while (a < -Math.PI) a += Math.PI * 2;
-        if (Math.abs(a) < bestDiff) { bestDiff = Math.abs(a); best = i; }
+    });
+
+    // auto subtle drift
+    let auto=setInterval(()=>{angle+=0.003;render()},40);
+    el.addEventListener('pointerenter',()=>clearInterval(auto));
+    el.addEventListener('pointerleave',()=>{auto=setInterval(()=>{angle+=0.003;render()},40)});
+
+    // resize
+    window.addEventListener('resize',()=>{
+      const r=Math.min(el.offsetWidth,el.offsetHeight)*0.42||180;
+      // radius is closed over; for simplicity re-render
+      render();
+    });
+  }
+
+  // init carousels after DOM
+  createCarousel(document.getElementById('heroCarousel'),heroItems);
+  createCarousel(document.getElementById('profileCarousel'),profileItems);
+  createCarousel(document.getElementById('schoolCarousel'),schoolItems);
+  createCarousel(document.getElementById('collegeCarousel'),collegeItems);
+  createCarousel(document.getElementById('uniCarousel'),uniItems);
+  createCarousel(document.getElementById('artCarousel'),artItems);
+
+  // ===== PROJECTS GRID =====
+  const grid=document.getElementById('projectsGrid');
+  projectItems.forEach(item=>{
+    const card=document.createElement('div');
+    card.className='project-card';
+    card.innerHTML=`<img src="${item.src}" alt="${item.title}" loading="lazy"><div class="info"><h3>${item.title}</h3><p>${item.desc}</p></div>`;
+    card.addEventListener('click',()=>openLightbox(item));
+    grid.appendChild(card);
+  });
+
+  // ===== LIGHTBOX =====
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lightboxImg');
+  const lbTitle=document.getElementById('lightboxTitle');
+  const lbDesc=document.getElementById('lightboxDesc');
+  function openLightbox(item){
+    lbImg.src=item.src;
+    lbImg.alt=item.title;
+    lbTitle.textContent=item.title;
+    lbDesc.textContent=item.desc;
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeLightbox(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  }
+  document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLightbox()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+
+  // book click
+  document.getElementById('book3d').addEventListener('click',()=>{
+    openLightbox({src:'assets/images/book-3d.jpg',title:'The Handmade Book',desc:'Bound by hand, filled with measured thoughts and spatial experiments. A physical record of process.'});
+  });
+  document.getElementById('book3d').addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' ') document.getElementById('book3d').click();
+  });
+
+  // ===== ART SUBSECTION =====
+  const artSection=document.getElementById('art-design');
+  document.getElementById('artTrigger').addEventListener('click',()=>{
+    artSection.classList.add('visible');
+    artSection.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  document.getElementById('artTrigger').addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' ') document.getElementById('artTrigger').click();
+  });
+  document.getElementById('artBack').addEventListener('click',()=>{
+    artSection.classList.remove('visible');
+    document.getElementById('skills').scrollIntoView({behavior:'smooth'});
+  });
+
+  // ===== ACTIVE NAV =====
+  const sections=document.querySelectorAll('section[id]');
+  const navAs=document.querySelectorAll('.nav-links a');
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        navAs.forEach(a=>a.classList.remove('active'));
+        const id=en.target.id;
+        const link=document.querySelector(`.nav-links a[href="#${id}"]`);
+        if(link) link.classList.add('active');
       }
-      const targetOffset = -((best - this.index) * step);
-      const start = this.angleOffset;
-      const diff = targetOffset - start;
-      if (prefersReduced) {
-        this.angleOffset = targetOffset;
-        this.index = best;
-        this.render();
-        return;
-      }
-      const startTime = performance.now();
-      const dur = 450;
-      const tick = now => {
-        const t = Math.min(1, (now - startTime) / dur);
-        const ease = 1 - Math.pow(1 - t, 3);
-        this.angleOffset = start + diff * ease;
-        this.render();
-        if (t < 1) requestAnimationFrame(tick);
-        else {
-          this.angleOffset = 0;
-          this.index = best;
-          this.render();
-        }
-      };
-      requestAnimationFrame(tick);
-    }
-    goTo(i) {
-      this.stopAuto();
-      const n = this.items.length;
-      const step = (Math.PI * 2) / n;
-      this.angleOffset = -((i - this.index) * step);
-      this.snap();
-      if (this.auto) setTimeout(() => this.startAuto(), 800);
-    }
-    next() { this.goTo((this.index + 1) % this.items.length); }
-    prev() { this.goTo((this.index - 1 + this.items.length) % this.items.length); }
-    startAuto() {
-      if (prefersReduced) return;
-      this.stopAuto();
-      const loop = () => {
-        this.angleOffset += this.autoSpeed;
-        if (this.angleOffset > Math.PI / this.items.length) {
-          this.angleOffset -= (Math.PI * 2) / this.items.length;
-          this.index = (this.index + 1) % this.items.length;
-        }
-        this.render();
-        this.raf = requestAnimationFrame(loop);
-      };
-      this.raf = requestAnimationFrame(loop);
-    }
-    stopAuto() {
-      if (this.raf) cancelAnimationFrame(this.raf);
-      this.raf = null;
-    }
-    openLightbox(i) {
-      const item = this.items[i];
-      document.getElementById("lbImg").src = item.src;
-      document.getElementById("lbImg").alt = item.title;
-      document.getElementById("lbTitle").textContent = item.title;
-      document.getElementById("lbDesc").textContent = item.desc;
-      document.getElementById("lightbox").classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
-  }
-
-  /* ---------- INIT CAROUSELS ---------- */
-  const heroC = new CircularCarousel("#heroCarousel", heroItems, {radius:360, itemW:240, itemH:320});
-  const aboutC = new CircularCarousel("#aboutCarousel", aboutItems, {radius:320, auto:false});
-  const schoolC = new CircularCarousel("#schoolCarousel", schoolItems, {radius:300, auto:false});
-  const collegeC = new CircularCarousel("#collegeCarousel", collegeItems, {radius:320, auto:false});
-  const uniC = new CircularCarousel("#uniCarousel", uniItems, {radius:300, auto:false});
-  let artC = null;
-
-  /* ---------- EDUCATION TABS ---------- */
-  document.querySelectorAll(".edu-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".edu-tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".edu-panel").forEach(p => p.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById("panel-" + tab.dataset.panel).classList.add("active");
     });
-  });
+  },{threshold:0.35});
+  sections.forEach(s=>observer.observe(s));
 
-  /* ---------- ART SECTION ---------- */
-  document.getElementById("artTrigger").addEventListener("click", () => {
-    const sec = document.getElementById("art-section");
-    sec.classList.add("open");
-    sec.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    if (!artC) {
-      artC = new CircularCarousel("#artCarousel", artItems, {radius:360, auto:false});
-    }
-  });
-  document.getElementById("artClose").addEventListener("click", () => {
-    const sec = document.getElementById("art-section");
-    sec.classList.remove("open");
-    sec.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  });
-
-  /* ---------- PROJECTS & EXPERIMENTS ---------- */
-  const projGrid = document.getElementById("projectsGrid");
-  projectItems.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "project-card";
-    card.innerHTML = `<img src="${item.src}" alt="${item.title}" loading="lazy"><div class="info"><h3>${item.title}</h3><p>${item.desc}</p></div>`;
-    card.addEventListener("click", () => {
-      document.getElementById("lbImg").src = item.src;
-      document.getElementById("lbImg").alt = item.title;
-      document.getElementById("lbTitle").textContent = item.title;
-      document.getElementById("lbDesc").textContent = item.desc;
-      document.getElementById("lightbox").classList.add("open");
-      document.body.style.overflow = "hidden";
-    });
-    projGrid.appendChild(card);
-  });
-  const expGrid = document.getElementById("expGrid");
-  expItems.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "exp-card";
-    card.innerHTML = `<img src="${item.src}" alt="${item.title}" loading="lazy"><div class="info"><h3>${item.title}</h3><p>${item.desc}</p></div>`;
-    card.addEventListener("click", () => {
-      document.getElementById("lbImg").src = item.src;
-      document.getElementById("lbImg").alt = item.title;
-      document.getElementById("lbTitle").textContent = item.title;
-      document.getElementById("lbDesc").textContent = item.desc;
-      document.getElementById("lightbox").classList.add("open");
-      document.body.style.overflow = "hidden";
-    });
-    expGrid.appendChild(card);
-  });
-
-  /* ---------- LIGHTBOX ---------- */
-  document.getElementById("lbClose").addEventListener("click", closeLb);
-  document.getElementById("lightbox").addEventListener("click", e => {
-    if (e.target.id === "lightbox") closeLb();
-  });
-  function closeLb() {
-    document.getElementById("lightbox").classList.remove("open");
-    document.body.style.overflow = "";
-  }
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") {
-      closeLb();
-      document.getElementById("art-section").classList.remove("open");
-      document.body.style.overflow = "";
-    }
-  });
-
-  /* ---------- THEME ---------- */
-  const themeToggle = document.getElementById("themeToggle");
-  const root = document.documentElement;
-  const saved = localStorage.getItem("sa-theme");
-  if (saved) root.setAttribute("data-theme", saved);
-  themeToggle.addEventListener("click", () => {
-    const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
-    if (next === "dark") root.removeAttribute("data-theme");
-    else root.setAttribute("data-theme", "light");
-    localStorage.setItem("sa-theme", next === "dark" ? "" : "light");
-  });
-
-  /* ---------- AUDIO ---------- */
-  const audio = document.getElementById("bgAudio");
-  const audioBtn = document.getElementById("audioToggle");
-  let audioOn = false;
-  audioBtn.addEventListener("click", () => {
-    if (audioOn) {
-      audio.pause();
-      audioOn = false;
-      audioBtn.style.opacity = "0.6";
-    } else {
-      audio.volume = 0.25;
-      audio.play().catch(()=>{});
-      audioOn = true;
-      audioBtn.style.opacity = "1";
-    }
-  });
-
-  /* ---------- BOOK 3D ---------- */
-  const book = document.getElementById("book3d");
-  if (book && !prefersReduced) {
-    let bx = 0, by = 0, tx = 0, ty = 0;
-    document.addEventListener("mousemove", e => {
-      const rect = book.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      tx = (e.clientX - cx) / 30;
-      ty = (e.clientY - cy) / 30;
-    });
-    (function animBook() {
-      bx += (tx - bx) * 0.08;
-      by += (ty - by) * 0.08;
-      book.style.transform = `rotateY(${bx}deg) rotateX(${-by}deg)`;
-      requestAnimationFrame(animBook);
-    })();
-  }
-
-  /* ---------- NAV ---------- */
-  const nav = document.getElementById("nav");
-  const menuBtn = document.getElementById("menuBtn");
-  menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
-  document.querySelectorAll(".nav-links a").forEach(a => {
-    a.addEventListener("click", () => nav.classList.remove("open"));
-  });
-  window.addEventListener("scroll", () => {
-    nav.classList.toggle("scrolled", window.scrollY > 40);
-  }, {passive:true});
-
-  /* ---------- LOADER ---------- */
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("loader").classList.add("hide");
-    }, prefersReduced ? 200 : 1600);
-  });
-
-  /* ---------- GSAP ENTRANCE (if available) ---------- */
-  if (typeof gsap !== "undefined" && !prefersReduced) {
+  // subtle GSAP entrance
+  if(window.gsap && window.ScrollTrigger){
     gsap.registerPlugin(ScrollTrigger);
-    gsap.from(".hero-content > *", {
-      y: 40, opacity: 0, duration: 1, stagger: 0.12, ease: "power3.out", delay: 1.8
-    });
-    document.querySelectorAll("section").forEach(sec => {
-      gsap.from(sec.querySelectorAll(".section-label, .section-title, .section-lead, .skill-card, .fact-card, .project-card, .exp-card, .transcript-card"), {
-        scrollTrigger: { trigger: sec, start: "top 80%" },
-        y: 30, opacity: 0, duration: 0.8, stagger: 0.08, ease: "power2.out"
+    gsap.utils.toArray('.section-title, .section-lead, .skill-card, .fact-card, .project-card').forEach(el=>{
+      gsap.from(el,{
+        y:28,opacity:0,duration:0.8,ease:'power2.out',
+        scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}
       });
     });
   }
