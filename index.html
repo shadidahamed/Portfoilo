@@ -3,901 +3,1890 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Shadid Ahamed — Architecture student at BRAC University. A handmade portfolio translated into a digital spatial archive.">
-<title>Shadid Ahamed — Architecture · Craft · Code</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Cpath d='M6 6h4v20H6zm8 0h4v8h-4zm0 12h4v8h-4zm8-12h4v20h-4z' fill='%236B2C36'/%3E%3Cpath d='M4 4h24v1H4zm0 23h24v1H4z' fill='%23F2F0EA' opacity='.3'/%3E%3C/svg%3E">
+<title>Shadid Ahamed — Digital Spatial Archive</title>
+<meta name="description" content="A handmade portfolio translated into a digital spatial archive. Architecture student, BRAC University. Geometry, material, structure, narrative and persistence.">
+<link rel="icon" type="image/svg+xml" href="sa-favicon.svg">
+<link rel="icon" type="image/png" href="sa-favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   SHADID AHAMED — DIGITAL SPATIAL ARCHIVE
+   Design system: deep black, off-white, muted burgundy
+   Visual language: geometric lettering, hatching, checkerboard,
+   controlled grid + void, liminal spatial feeling
+   ============================================================ */
+
 :root {
   --bg: #050505;
-  --bg-elev: #0B0B0C;
-  --bg-card: #111112;
+  --bg-elevated: #0B0B0C;
+  --bg-panel: #0F0F10;
   --text: #F2F0EA;
-  --muted: #74747A;
+  --text-muted: #8A8680;
+  --text-dim: #5C5852;
   --accent: #6B2C36;
-  --accent-soft: rgba(107,44,54,0.18);
-  --silver: #A8A8AE;
-  --border: rgba(242,240,234,0.07);
-  --font-serif: 'Instrument Serif', Georgia, serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --ease: cubic-bezier(0.22,1,0.36,1);
-  --radius: 10px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{
-  font-family:var(--font-sans);
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.65;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  cursor:none;
-}
-@media (hover:none),(pointer:coarse){body{cursor:auto} .cursor,.cursor-dot{display:none!important}}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:none;border:none;background:none;color:inherit}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  --accent-soft: #8B3A47;
+  --accent-glow: rgba(107, 44, 54, 0.25);
+  --line: rgba(242, 240, 234, 0.08);
+  --line-strong: rgba(242, 240, 234, 0.14);
+  --void: rgba(5, 5, 5, 0.85);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sidebar-w: 220px;
 }
 
-/* CURSOR */
-.cursor{
-  position:fixed;width:18px;height:18px;border:1.5px solid var(--accent);
-  border-radius:50%;pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s;
-  mix-blend-mode:difference;
-}
-.cursor-dot{
-  position:fixed;width:4px;height:4px;background:var(--text);
-  border-radius:50%;pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-}
-.cursor.hover{width:36px;height:36px;border-color:var(--text)}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* CANVAS BG */
-#spaceCanvas{
-  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* LAYOUT */
-.app{display:flex;min-height:100vh;position:relative;z-index:1}
-.sidebar{
-  width:220px;flex-shrink:0;
-  background:var(--bg-elev);
-  border-right:1px solid var(--border);
-  padding:2rem 0;
-  display:flex;flex-direction:column;
-  position:fixed;top:0;left:0;bottom:0;z-index:50;
-  transition:transform .4s var(--ease);
-}
-.sidebar-logo{
-  font-family:var(--font-serif);font-size:1.5rem;color:var(--accent);
-  padding:0 1.5rem 2rem;letter-spacing:.06em;
-}
-.nav-list{list-style:none;flex:1}
-.nav-list li a{
-  display:flex;align-items:center;gap:.75rem;
-  padding:.7rem 1.5rem;font-size:.78rem;font-weight:500;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
-  transition:color .25s,background .25s;
-}
-.nav-list li a:hover,.nav-list li a.active{color:var(--text);background:var(--accent-soft)}
-.nav-list li a .num{color:var(--accent);font-variant-numeric:tabular-nums;min-width:1.6rem}
-.sidebar-footer{padding:1.5rem;font-size:.7rem;color:var(--muted);border-top:1px solid var(--border)}
-.menu-btn{
-  display:none;position:fixed;top:1.1rem;left:1.1rem;z-index:60;
-  width:42px;height:42px;border:1px solid var(--border);border-radius:50%;
-  background:var(--bg-elev);align-items:center;justify-content:center;flex-direction:column;gap:5px;
-}
-.menu-btn span{display:block;width:16px;height:1.5px;background:var(--text)}
-@media(max-width:900px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
-  .menu-btn{display:flex}
-  .main{margin-left:0!important}
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  cursor: none;
 }
 
-.main{
-  flex:1;margin-left:220px;min-height:100vh;
-  padding:0;
+/* Custom cursor — desktop only */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s var(--ease), width 0.2s, height 0.2s, background 0.2s;
+  transform: translate(-50%, -50%);
 }
-.view{
-  display:none;padding:4.5rem 3rem 5rem;
-  max-width:1100px;animation:fadeIn .5s var(--ease);
+.cursor.hover {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--text);
 }
-.view.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media(max-width:900px){.view{padding:5rem 1.5rem 4rem}}
+.cursor.click {
+  transform: translate(-50%, -50%) scale(0.7);
+}
+@media (max-width: 900px), (pointer: coarse) {
+  .cursor { display: none !important; }
+  body { cursor: auto; }
+}
 
-.section-label{
-  font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:.85rem;
+/* Background canvas */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
 }
-.section-title{
-  font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3.1rem);
-  font-weight:400;line-height:1.15;margin-bottom:1.25rem;letter-spacing:-.01em;
-}
-.lead{font-size:1.05rem;color:var(--muted);max-width:540px;line-height:1.75;font-weight:300}
 
-/* HOME */
-.home-name{
-  font-family:var(--font-sans);font-weight:800;
-  font-size:clamp(3.2rem,9vw,5.8rem);line-height:.95;
-  letter-spacing:-.03em;margin:1.5rem 0 1.75rem;
+/* App shell */
+.app {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  height: 100vh;
+  width: 100%;
 }
-.home-name span{display:block}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.75rem 0}
-.chip{
-  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  padding:.4rem .85rem;border:1px solid var(--border);border-radius:999px;color:var(--muted);
-}
-.quote-block{
-  margin:2rem 0;padding:1.1rem 0 1.1rem 1.25rem;
-  border-left:3px solid var(--accent);color:var(--muted);font-size:.95rem;max-width:520px;
-}
-.btn-row{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2.25rem}
-.btn{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.85rem 1.6rem;font-size:.78rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
-  border-radius:999px;transition:background .3s,color .3s,border-color .3s;
-}
-.btn-primary{background:var(--accent);color:var(--text);border:1px solid var(--accent)}
-.btn-primary:hover{background:transparent;color:var(--accent)}
-.btn-ghost{border:1px solid var(--border);color:var(--muted)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
 
-/* PROFILE */
-.profile-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:start}
-@media(max-width:800px){.profile-grid{grid-template-columns:1fr}}
-.bio p{margin-bottom:1.15rem;color:var(--muted);font-weight:300;font-size:1.05rem}
-.bio strong{color:var(--text);font-weight:500}
-.facts{display:grid;gap:.85rem;margin-top:1.5rem}
-.fact{
-  padding:1.1rem 1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+/* Sidebar */
+.sidebar {
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 0;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
 }
-.fact-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
-.fact-value{font-size:.92rem;font-weight:500}
+.sidebar-brand {
+  padding: 0 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1rem;
+}
+.sidebar-brand .mono {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+.sidebar-brand .name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  line-height: 1.15;
+}
+.nav {
+  flex: 1;
+  padding: 0.5rem 0;
+}
+.nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.55rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.25s, background 0.25s;
+  border-left: 2px solid transparent;
+  user-select: none;
+}
+.nav-item:hover {
+  color: var(--text);
+  background: rgba(242, 240, 234, 0.03);
+}
+.nav-item.active {
+  color: var(--text);
+  border-left-color: var(--accent);
+  background: rgba(107, 44, 54, 0.08);
+}
+.nav-item .num {
+  color: var(--text-dim);
+  min-width: 1.4rem;
+}
+.nav-item.active .num { color: var(--accent); }
 
-/* BOOK */
-.book-stage{
-  position:relative;height:420px;margin:2rem 0 1.5rem;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+.sidebar-footer {
+  padding: 1rem 1.25rem 0;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
 }
-.book-float{
-  width:200px;height:260px;transform-style:preserve-3d;
-  animation:floatBook 7s ease-in-out infinite;
-  cursor:pointer;box-shadow:0 30px 60px rgba(0,0,0,.55);
+.sidebar-footer .label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
 }
-.book-float img{width:100%;height:100%;object-fit:cover;border-radius:4px}
-@keyframes floatBook{
-  0%,100%{transform:translateY(0) rotateY(-8deg) rotateX(4deg)}
-  50%{transform:translateY(-14px) rotateY(8deg) rotateX(-2deg)}
+.sidebar-footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.75rem;
+  display: block;
+  margin-bottom: 0.25rem;
+  transition: color 0.2s;
 }
-.book-thumbs{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.5rem}
-.book-thumbs img{
-  width:88px;height:110px;object-fit:cover;border-radius:6px;
-  border:2px solid transparent;cursor:pointer;flex-shrink:0;opacity:.7;transition:.3s;
-}
-.book-thumbs img:hover,.book-thumbs img.active{opacity:1;border-color:var(--accent)}
-.book-meta{margin-top:1.75rem;max-width:560px}
-.book-meta h3{font-family:var(--font-serif);font-size:1.5rem;margin-bottom:.5rem}
-.book-meta p{color:var(--muted);font-size:.95rem}
+.sidebar-footer a:hover { color: var(--accent-soft); }
 
-/* PROCESS */
-.process-block{margin-bottom:3rem}
-.process-block h3{font-family:var(--font-serif);font-size:1.45rem;margin-bottom:1rem}
-.process-block p{color:var(--muted);font-weight:300;margin-bottom:1rem;max-width:640px}
-.lage{font-family:var(--font-serif);font-size:1.6rem;color:var(--accent);margin-top:2.5rem;letter-spacing:.04em}
+/* Main stage */
+.stage {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+}
+.view {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.55s var(--ease), visibility 0.55s;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+}
+.view.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 
-/* EDUCATION */
-.edu-track{display:flex;flex-direction:column;gap:0;margin-top:2rem;position:relative}
-.edu-track::before{
-  content:'';position:absolute;left:11px;top:12px;bottom:12px;width:1px;background:var(--border);
+/* Shared section utilities */
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 3.5rem 6rem;
 }
-.edu-item{display:flex;gap:1.5rem;padding:1.25rem 0;position:relative}
-.edu-dot{
-  width:24px;height:24px;border-radius:50%;background:var(--bg);
-  border:2px solid var(--accent);flex-shrink:0;z-index:1;
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
-.edu-content h4{font-size:1.05rem;font-weight:600;margin-bottom:.25rem}
-.edu-content .years{font-size:.8rem;color:var(--accent);margin-bottom:.35rem}
-.edu-content p{font-size:.9rem;color:var(--muted)}
-.edu-gallery{display:flex;gap:.75rem;margin-top:1rem;overflow-x:auto}
-.edu-gallery img{width:110px;height:80px;object-fit:cover;border-radius:6px;cursor:pointer;opacity:.85;transition:.3s}
-.edu-gallery img:hover{opacity:1}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 38rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 2.5rem 0;
+}
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  background: transparent;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  text-decoration: none;
+}
+.btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  color: var(--text);
+}
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text);
+}
+.btn-primary:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-soft);
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
 
-/* SKILLS */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem;margin-top:2rem}
-.skill-card{
-  padding:1.6rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
-  cursor:pointer;transition:border-color .3s,transform .3s;
+/* ========== 00 COVER ========== */
+.view-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 4rem 5rem;
+  min-height: 100%;
 }
-.skill-card:hover{border-color:var(--accent);transform:translateY(-3px)}
-.skill-card h3{font-size:1rem;font-weight:600;margin-bottom:.45rem}
-.skill-card p{font-size:.85rem;color:var(--muted);line-height:1.5}
-.skill-card .tag{display:inline-block;margin-top:.85rem;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.cover-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3.8rem, 11vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+.cover-name span {
+  display: block;
+}
+.cover-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+  max-width: 28rem;
+  line-height: 1.6;
+}
+.cover-lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 32rem;
+  line-height: 1.75;
+  margin-bottom: 0.5rem;
+}
+.cover-grid-mark {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  width: 80px;
+  height: 80px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+.cover-grid-mark svg { width: 100%; height: 100%; }
 
-/* PROJECTS / WORK */
-.work-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:2rem}
-.work-card{
-  border-radius:var(--radius);overflow:hidden;background:var(--bg-card);
-  border:1px solid var(--border);cursor:pointer;transition:transform .3s,border-color .3s;
+/* ========== 01 PROFILE ========== */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 3.5rem;
+  align-items: start;
 }
-.work-card:hover{transform:translateY(-4px);border-color:var(--accent)}
-.work-card img{width:100%;height:160px;object-fit:cover}
-.work-card .info{padding:1.1rem}
-.work-card h3{font-size:.9rem;font-weight:500;margin-bottom:.25rem}
-.work-card p{font-size:.8rem;color:var(--muted)}
+.profile-portrait {
+  position: relative;
+}
+.profile-portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(15%) contrast(1.05);
+  border: 1px solid var(--line);
+}
+.profile-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  border: 1px solid var(--line);
+  z-index: -1;
+  pointer-events: none;
+}
+.profile-bio h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.profile-bio p {
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+  line-height: 1.75;
+  font-size: 0.98rem;
+}
+.profile-meta {
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+.profile-meta strong {
+  color: var(--text-muted);
+  font-weight: 500;
+}
 
-/* ACHIEVEMENTS */
-.ach-highlight{
-  display:flex;gap:1.75rem;align-items:center;flex-wrap:wrap;
-  padding:1.75rem;border:1px solid var(--accent);border-radius:var(--radius);
-  background:var(--accent-soft);margin-top:1.5rem;
+/* ========== 02 THE BOOK ========== */
+.book-stage {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0 3rem;
 }
-.ach-highlight img{width:140px;height:140px;object-fit:cover;border-radius:8px}
-.ach-text h3{font-family:var(--font-serif);font-size:1.35rem;margin-bottom:.4rem}
-.ach-text p{color:var(--muted);font-size:.95rem}
+.book-3d-wrap {
+  perspective: 1400px;
+  width: min(420px, 85vw);
+  height: min(520px, 70vh);
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.book-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s var(--ease);
+  cursor: pointer;
+}
+.book-3d:hover {
+  transform: rotateY(-18deg) rotateX(4deg) translateZ(20px);
+}
+.book-face {
+  position: absolute;
+  inset: 0;
+  background: #111;
+  border: 1px solid var(--line-strong);
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+}
+.book-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.book-spine {
+  position: absolute;
+  left: -14px;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  background: linear-gradient(90deg, #1a1a1a, #0d0d0d);
+  transform: rotateY(-90deg) translateZ(0);
+  transform-origin: right center;
+  border: 1px solid var(--line);
+}
+.book-caption {
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+.book-caption h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.book-caption p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.book-thumbs {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  padding: 0 1rem;
+}
+.book-thumb {
+  width: 72px;
+  height: 90px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.3s, border-color 0.3s, transform 0.3s;
+}
+.book-thumb:hover,
+.book-thumb.active {
+  opacity: 1;
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.book-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.book-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+.book-meta-item h4 {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.book-meta-item p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
 
-/* CONTACT */
-.contact-links{display:flex;flex-wrap:wrap;gap:1rem 1.75rem;margin:2rem 0}
-.contact-links a{
-  font-size:.9rem;color:var(--muted);border-bottom:1px solid transparent;transition:.25s;
+/* ========== 03 PROCESS ========== */
+.process-text {
+  max-width: 42rem;
 }
-.contact-links a:hover{color:var(--accent);border-color:var(--accent)}
-.final-sig{font-family:var(--font-serif);font-size:1.6rem;color:var(--accent);margin-top:3rem;opacity:.8;letter-spacing:.06em}
+.process-text p {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.85;
+  margin-bottom: 1.4rem;
+}
+.process-text .pull {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.55;
+  margin: 2rem 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--accent);
+}
+.process-text .lage {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-top: 2.5rem;
+}
 
-/* CV */
-.cv-card{
-  display:inline-flex;flex-direction:column;align-items:center;gap:1.25rem;
-  padding:2.75rem 3.5rem;background:var(--bg-card);border:1px solid var(--accent);
-  border-radius:var(--radius);text-align:center;max-width:400px;
+/* ========== 04 EDUCATION ========== */
+.edu-block {
+  margin-bottom: 3.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
 }
-.cv-card h3{font-family:var(--font-serif);font-size:1.6rem}
-.cv-card p{color:var(--muted);font-size:.9rem}
-.doc-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;justify-content:center}
-.doc-link{
-  display:flex;align-items:center;gap:.85rem;padding:1rem 1.25rem;
-  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:.3s;
+.edu-block:last-child { border-bottom: none; }
+.edu-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
 }
-.doc-link:hover{border-color:var(--accent)}
-.doc-icon{width:36px;height:36px;border-radius:6px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent)}
+.edu-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 500;
+}
+.edu-years {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+.gpa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0.9rem;
+  background: rgba(107, 44, 54, 0.15);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  margin: 0.75rem 0 1.25rem;
+}
+.gpa-badge strong {
+  color: var(--accent-soft);
+  font-weight: 500;
+}
+.edu-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.edu-images img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: opacity 0.3s, border-color 0.3s;
+}
+.edu-images img:hover {
+  border-color: var(--accent);
+  opacity: 0.9;
+}
+.edu-docs a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  transition: color 0.2s;
+}
+.edu-docs a:hover { color: var(--accent-soft); }
+.course-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+.course-list li {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.course-list li span {
+  color: var(--text-dim);
+  margin-right: 0.75rem;
+}
 
-/* LIGHTBOX / DASHBOARD */
-.lightbox{
-  position:fixed;inset:0;z-index:200;background:rgba(5,5,5,.94);
-  display:flex;align-items:center;justify-content:center;padding:2rem;
-  opacity:0;visibility:hidden;transition:.4s var(--ease);
+/* ========== 05 DRAWING ========== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
 }
-.lightbox.open{opacity:1;visibility:visible}
-.lb-inner{
-  display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;max-width:1000px;width:100%;
-  transform:scale(.96);transition:transform .4s var(--ease);
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  background: var(--bg-panel);
 }
-.lightbox.open .lb-inner{transform:scale(1)}
-@media(max-width:700px){.lb-inner{grid-template-columns:1fr}}
-.lb-inner img{width:100%;max-height:75vh;object-fit:contain;border-radius:8px}
-.lb-meta h3{font-family:var(--font-serif);font-size:1.6rem;margin-bottom:.75rem}
-.lb-meta p{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
-.lb-meta .meta-row{font-size:.8rem;color:var(--silver);margin-bottom:.35rem}
-.lb-meta .meta-row span{color:var(--accent)}
-.lb-close{
-  position:absolute;top:1.5rem;right:1.5rem;width:42px;height:42px;
-  border:1px solid var(--border);border-radius:50%;font-size:1.3rem;
-  display:flex;align-items:center;justify-content:center;transition:.3s;
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease), filter 0.4s;
+  filter: grayscale(10%);
 }
-.lb-close:hover{border-color:var(--accent);color:var(--accent)}
+.gallery-item:hover img {
+  transform: scale(1.04);
+  filter: grayscale(0%);
+}
+.gallery-item .cap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 0.9rem 0.85rem;
+  background: linear-gradient(transparent, rgba(5,5,5,0.92));
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.gallery-item:hover .cap {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-/* AI CURATOR */
-.ai-panel{
-  position:fixed;bottom:1.5rem;right:1.5rem;z-index:80;
-  width:340px;max-height:420px;background:var(--bg-elev);
-  border:1px solid var(--border);border-radius:14px;
-  display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.5);
-  transform:translateY(20px);opacity:0;visibility:hidden;transition:.35s var(--ease);
+/* ========== 06 ARCHITECTURE ========== */
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
-.ai-panel.open{transform:none;opacity:1;visibility:visible}
-.ai-header{
-  padding:.9rem 1.1rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
+.arch-card {
+  border: 1px solid var(--line);
+  background: var(--bg-panel);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s;
 }
-.ai-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
-.ai-msg{font-size:.85rem;line-height:1.55;padding:.7rem .9rem;border-radius:8px;max-width:95%}
-.ai-msg.bot{background:var(--bg-card);color:var(--muted);align-self:flex-start}
-.ai-msg.user{background:var(--accent-soft);color:var(--text);align-self:flex-end}
-.ai-input-row{display:flex;border-top:1px solid var(--border);padding:.6rem}
-.ai-input-row input{
-  flex:1;background:transparent;border:none;color:var(--text);font-size:.85rem;padding:.4rem .6rem;outline:none;
+.arch-card:hover { border-color: var(--accent); }
+.arch-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(8%);
+  transition: filter 0.4s;
 }
-.ai-input-row button{padding:.4rem .8rem;color:var(--accent);font-size:.8rem;font-weight:600}
-.ai-toggle{
-  position:fixed;bottom:1.5rem;right:1.5rem;z-index:70;
-  width:52px;height:52px;border-radius:50%;background:var(--accent);
-  display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;letter-spacing:.04em;
-  box-shadow:0 8px 24px rgba(107,44,54,.4);transition:transform .3s;
+.arch-card:hover img { filter: grayscale(0%); }
+.arch-card .info {
+  padding: 1.1rem 1.15rem 1.25rem;
 }
-.ai-toggle:hover{transform:scale(1.06)}
-.ai-panel.open ~ .ai-toggle,.ai-toggle.hidden{display:none}
+.arch-card .info h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+.arch-card .info p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
 
-/* CAROUSEL (circular) */
-.carousel-wrap{position:relative;height:340px;perspective:1100px;overflow:hidden;touch-action:pan-y;margin:1.5rem 0}
-.carousel-track{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d}
-.carousel-item{
-  position:absolute;width:180px;height:230px;border-radius:8px;overflow:hidden;
-  box-shadow:0 20px 40px rgba(0,0,0,.45);cursor:pointer;background:var(--bg-card);
+/* ========== 07 DIGITAL ========== */
+.digital-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
-.carousel-item img{width:100%;height:100%;object-fit:cover}
-.carousel-nav{position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:5}
-.carousel-nav button{
-  width:32px;height:32px;border-radius:50%;border:1px solid var(--border);
-  background:var(--bg-elev);display:flex;align-items:center;justify-content:center;font-size:.9rem;
+.digital-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
 }
-.carousel-nav button:hover{border-color:var(--accent)}
+.digital-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+.digital-item p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 36rem;
+}
+.digital-item a.btn {
+  white-space: nowrap;
+}
 
-/* UTILS */
-.mt-2{margin-top:1.5rem}
-.mb-1{margin-bottom:.75rem}
+/* ========== 08 ACHIEVEMENTS ========== */
+.ach-list {
+  list-style: none;
+}
+.ach-list li {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.ach-list .yr {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  padding-top: 0.2rem;
+}
+.ach-list h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+.ach-list p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ========== 09 CONTACT ========== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.contact-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s;
+}
+.contact-links a:hover { color: var(--accent-soft); }
+.contact-links .label {
+  color: var(--text-dim);
+  min-width: 5.5rem;
+}
+.contact-form label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  margin-top: 1.1rem;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.75rem 0.9rem;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+}
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.contact-form .btn {
+  margin-top: 1.5rem;
+}
+
+/* ========== LIGHTBOX ========== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s;
+  padding: 2rem;
+}
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+.lightbox-inner {
+  max-width: 92vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-inner img {
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border: 1px solid var(--line);
+}
+.lightbox-caption {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 40rem;
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+.lightbox-close:hover { color: var(--text); }
+
+/* ========== AI CURATOR ========== */
+.curator {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 500;
+  width: 340px;
+  max-width: calc(100vw - 2rem);
+  background: var(--bg-panel);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.45s var(--ease), opacity 0.45s;
+  display: flex;
+  flex-direction: column;
+  max-height: 420px;
+}
+.curator.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+.curator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.curator-header h4 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.curator-header button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.2rem;
+}
+.curator-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.curator-body .msg {
+  margin-bottom: 0.9rem;
+}
+.curator-body .msg.bot {
+  color: var(--text);
+}
+.curator-input {
+  display: flex;
+  border-top: 1px solid var(--line);
+}
+.curator-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 0.85rem 1rem;
+  outline: none;
+}
+.curator-input button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 0 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.curator-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 499;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.1rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--line-strong);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.curator-toggle:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.curator-toggle.hidden { opacity: 0; pointer-events: none; }
+
+/* Mobile */
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: min(280px, 85vw);
+    transform: translateX(-100%);
+    transition: transform 0.4s var(--ease);
+    z-index: 200;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .mobile-toggle { display: flex; }
+  .section-inner { padding: 3rem 1.5rem 5rem; }
+  .profile-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .profile-portrait { max-width: 280px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .view-cover { padding: 3rem 1.5rem 4rem; }
+  .cover-grid-mark { display: none; }
+  .book-3d-wrap { height: 380px; }
+}
+
+/* Subtle hatch pattern utility */
+.hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 3px,
+    rgba(242, 240, 234, 0.03) 3px,
+    rgba(242, 240, 234, 0.03) 4px
+  );
+}
+
+/* Empty image fallback */
+img {
+  background: var(--bg-panel);
+}
+img[src=""], img:not([src]) {
+  opacity: 0.3;
+}
 </style>
 </head>
 <body>
-<canvas id="spaceCanvas"></canvas>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-dot" id="cursorDot"></div>
 
-<button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Particle / grid drift background -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Mobile nav toggle -->
+<button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">☰</button>
 
 <div class="app">
+  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-logo">SA</div>
-    <ul class="nav-list" id="navList">
-      <li><a href="#" data-view="home" class="active"><span class="num">00</span> Cover</a></li>
-      <li><a href="#" data-view="profile"><span class="num">01</span> Profile</a></li>
-      <li><a href="#" data-view="book"><span class="num">02</span> The Book</a></li>
-      <li><a href="#" data-view="process"><span class="num">03</span> Process</a></li>
-      <li><a href="#" data-view="education"><span class="num">04</span> Education</a></li>
-      <li><a href="#" data-view="skills"><span class="num">05</span> Skills</a></li>
-      <li><a href="#" data-view="work"><span class="num">06</span> Work</a></li>
-      <li><a href="#" data-view="achievements"><span class="num">07</span> Achievements</a></li>
-      <li><a href="#" data-view="contact"><span class="num">08</span> Contact</a></li>
-      <li><a href="#" data-view="cv"><span class="num">09</span> CV</a></li>
-    </ul>
-    <div class="sidebar-footer">BRAC · ARC-101 · 2026</div>
+    <div class="sidebar-brand">
+      <div class="mono">Portfolio · Spatial Archive</div>
+      <div class="name">Shadid<br>Ahamed</div>
+    </div>
+    <nav class="nav" id="nav">
+      <div class="nav-item active" data-view="cover"><span class="num">00</span> Cover</div>
+      <div class="nav-item" data-view="profile"><span class="num">01</span> Profile</div>
+      <div class="nav-item" data-view="book"><span class="num">02</span> The Book</div>
+      <div class="nav-item" data-view="process"><span class="num">03</span> Process</div>
+      <div class="nav-item" data-view="education"><span class="num">04</span> Education</div>
+      <div class="nav-item" data-view="drawing"><span class="num">05</span> Drawing</div>
+      <div class="nav-item" data-view="architecture"><span class="num">06</span> Architecture</div>
+      <div class="nav-item" data-view="digital"><span class="num">07</span> Digital</div>
+      <div class="nav-item" data-view="achievements"><span class="num">08</span> Achievements</div>
+      <div class="nav-item" data-view="contact"><span class="num">09</span> Contact</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="label">Dhaka · Bangladesh</div>
+      <a href="mailto:shadidahamed.matashome05m@gmail.com">Email</a>
+      <a href="https://wa.me/8801326162684" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://github.com/shadidahamed" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </aside>
 
-  <main class="main">
-    <!-- 00 HOME -->
-    <section class="view active" id="view-home">
-      <p class="section-label">A handmade portfolio translated into a digital spatial archive</p>
-      <h1 class="home-name"><span>SHADID</span><span>AHAMED</span></h1>
-      <p class="lead">Architecture student. Creative developer. Artist. Maker. First-semester portfolio built from hand, geometry, material, drawing, and code.</p>
-      <div class="chips">
+  <!-- MAIN STAGE -->
+  <main class="stage" id="stage">
+
+    <!-- 00 COVER -->
+    <section class="view view-cover active" id="view-cover" data-view="cover">
+      <div class="cover-grid-mark" aria-hidden="true">
+        <svg viewBox="0 0 80 80" fill="none" stroke="#F2F0EA" stroke-width="0.6">
+          <rect x="4" y="4" width="72" height="72"/>
+          <line x1="4" y1="40" x2="76" y2="40"/>
+          <line x1="40" y1="4" x2="40" y2="76"/>
+          <line x1="4" y1="22" x2="76" y2="22"/>
+          <line x1="4" y1="58" x2="76" y2="58"/>
+          <line x1="22" y1="4" x2="22" y2="76"/>
+          <line x1="58" y1="4" x2="58" y2="76"/>
+        </svg>
+      </div>
+      <h1 class="cover-name">
+        <span>SHADID</span>
+        <span>AHAMED</span>
+      </h1>
+      <p class="cover-label">A handmade portfolio translated into a digital spatial archive.</p>
+      <p class="cover-lead">
+        Architecture student at BRAC University. Thinks in geometry, material, structure, narrative and persistence — and codes and draws at a high level.
+      </p>
+      <div class="chip-row">
         <span class="chip">Architecture</span>
         <span class="chip">Drawing</span>
         <span class="chip">Craft</span>
         <span class="chip">Web / JS</span>
         <span class="chip">Exploring CSE</span>
       </div>
-      <div class="quote-block">This is not a freelance “hire me” site. It is a research-oriented talent document — a digital continuation of a physical handmade book.</div>
       <div class="btn-row">
         <button class="btn btn-primary" data-goto="book">Enter the Book →</button>
-        <button class="btn btn-ghost" data-goto="education">Explore Architecture</button>
-        <button class="btn btn-ghost" id="askCuratorBtn">Ask the Curator</button>
+        <button class="btn" data-goto="architecture">Explore Architecture</button>
+        <button class="btn" id="ask-curator-btn">Ask the Curator</button>
       </div>
     </section>
 
     <!-- 01 PROFILE -->
-    <section class="view" id="view-profile">
-      <p class="section-label">01 — Profile</p>
-      <h2 class="section-title">A mind shaped by space,<br>learning to shape systems.</h2>
-      <div class="profile-grid">
-        <div class="bio">
-          <p>I am <strong>Shadid Ahamed</strong>, an architecture student at BRAC University (Roll 1000061008, ARC-101, Summer 2026). I live in Paltan, Dhaka.</p>
-          <p>Architecture taught me to see structure, light, proportion, and the quiet dignity of materials. Every drawing is a decision; every model a hypothesis about how people inhabit a place.</p>
-          <p>Now I am also learning how information moves, how interfaces breathe, and how code can hold intention as carefully as concrete holds a floor. The transition is not a departure — it is a continuation of the same craft in a new medium.</p>
-        </div>
-        <div>
-          <div class="carousel-wrap" id="profileCarousel"></div>
-          <div class="facts">
-            <div class="fact"><div class="fact-label">Location</div><div class="fact-value">Paltan, Dhaka, Bangladesh</div></div>
-            <div class="fact"><div class="fact-label">Institution</div><div class="fact-value">BRAC University · Architecture</div></div>
-            <div class="fact"><div class="fact-label">Roll · Course</div><div class="fact-value">1000061008 · ARC-101</div></div>
+    <section class="view" id="view-profile" data-view="profile">
+      <div class="section-inner">
+        <div class="section-label">01 · Profile</div>
+        <h2 class="section-title">Who is speaking.</h2>
+        <div class="profile-grid">
+          <div class="profile-portrait">
+            <img src="Screenshot 2026-09-20 201810.png" alt="Shadid Ahamed — formal portrait" loading="lazy"
+                 onerror="this.style.opacity='0.4'; this.alt='Portrait pending'">
+          </div>
+          <div class="profile-bio">
+            <h3>Architecture as disciplined curiosity.</h3>
+            <p>
+              I come from a science background and chose architecture not as an escape from rigor, but as a way to give rigor a spatial form. Drawing, making, and thinking in sequence have been constant methods since school.
+            </p>
+            <p>
+              The handmade book for ARC-101 is not a portfolio exercise for me — it is a document of how I learn: by hand, by density of line, by returning to the same problem until it holds.
+            </p>
+            <p>
+              I am interested in the quiet between geometry and material, in models that carry light, and in the persistence required to finish something carefully when no one is watching.
+            </p>
+            <div class="profile-meta">
+              <strong>Student ID</strong> · 1000061008<br>
+              <strong>Program</strong> · Bachelor of Architecture<br>
+              <strong>Batch</strong> · Summer 2026<br>
+              <strong>Institution</strong> · BRAC University, Dhaka<br>
+              <strong>Location</strong> · Dhaka, Bangladesh
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 02 THE BOOK -->
-    <section class="view" id="view-book">
-      <p class="section-label">02 — The Book</p>
-      <h2 class="section-title">Handmade first-semester portfolio.</h2>
-      <p class="lead">Black mount / Swiss board, pen hatching, geometric lettering, checkerboard binding, burgundy accents. Hand-lettered name, roll number, and ARC-101.</p>
-      <div class="book-stage">
-        <div class="book-float" id="bookFloat" title="View the handmade book">
-          <img src="book-3d.jpg" alt="Handmade architectural portfolio book" loading="lazy" width="200" height="260">
+    <section class="view" id="view-book" data-view="book">
+      <div class="section-inner">
+        <div class="section-label">02 · The Book</div>
+        <h2 class="section-title">Flagship artifact.</h2>
+        <p class="section-lead">
+          A physical handmade portfolio for ARC-101 (Design I: Basic Design), translated here as a digital spatial archive. Black mount, Swiss board, pen hatching, geometric lettering.
+        </p>
+
+        <div class="book-stage">
+          <div class="book-3d-wrap">
+            <div class="book-3d" id="book-3d" title="Click to open lightbox">
+              <div class="book-spine"></div>
+              <div class="book-face">
+                <img id="book-main-img" src="811615849_2097588261148773_877248636819443508_n.jpg" alt="Handmade portfolio book cover — checkerboard" loading="lazy">
+              </div>
+            </div>
+          </div>
+          <div class="book-caption">
+            <h3 id="book-title">Checkerboard Cover</h3>
+            <p id="book-desc">Geometric lettering and controlled grid on black mount. The cover establishes the visual language of the entire book: density, void, and precision.</p>
+          </div>
+          <div class="book-thumbs" id="book-thumbs">
+            <!-- populated by JS -->
+          </div>
+          <div class="book-meta">
+            <div class="book-meta-item">
+              <h4>Material</h4>
+              <p>Black mount / Swiss board, pen hatching, geometric lettering, controlled grid + void.</p>
+            </div>
+            <div class="book-meta-item">
+              <h4>Course</h4>
+              <p>ARC-101 · Design I: Basic Design · BRAC University</p>
+            </div>
+            <div class="book-meta-item">
+              <h4>Concept</h4>
+              <p>A handmade document of process — not presentation alone. Each page holds density of attention.</p>
+            </div>
+            <div class="book-meta-item">
+              <h4>Process</h4>
+              <p>Drawn, cut, mounted, lettered by hand. Persistence as method. “Lage Raho.”</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="book-thumbs" id="bookThumbs">
-        <img src="book-3d.jpg" alt="Book cover" class="active" data-src="book-3d.jpg" data-title="The Handmade Book" data-desc="Fully handmade first-semester portfolio. Black mount board, pen hatching, geometric PORTFOLIO lettering, checkerboard binding, burgundy accents." data-mat="Swiss board · Black mount · Pen · Binding" data-concept="Physical craft as primary research method.">
-      </div>
-      <div class="book-meta">
-        <h3>Material & Concept</h3>
-        <p>This book is not decoration. It is the primary research document of my first semester — a physical object that records how I think in geometry, material, and persistence. The digital archive exists to extend its life.</p>
       </div>
     </section>
 
-    <!-- 03 PROCESS -->
-    <section class="view" id="view-process">
-      <p class="section-label">03 — Process / Persistence</p>
-      <h2 class="section-title">If I had to tell someone who Shadid was…</h2>
-      <div class="process-block">
-        <p>I would not start with results. I would start with effort. Closed doors, pressure, disappointment, and the quiet decision to keep drawing, keep making, keep showing up.</p>
-        <p>He kept fighting and creating even when the path was unclear. The real achievement is not a single grade or a single project — it is what he overcame while still trying to build something beautiful.</p>
-        <p>Remember the fighter who still tried.</p>
+    <!-- 03 PROCESS / PERSISTENCE -->
+    <section class="view" id="view-process" data-view="process">
+      <div class="section-inner">
+        <div class="section-label">03 · Process &amp; Persistence</div>
+        <h2 class="section-title">If I had to tell someone who Shadid was.</h2>
+        <div class="process-text">
+          <p>
+            If I had to tell someone who Shadid was, I would not start with grades or titles. I would start with the hours spent at a desk when the work still refused to settle — the quiet decision to stay with a line, a joint, a composition until it held.
+          </p>
+          <p class="pull">
+            Persistence is not a slogan. It is the method by which a handmade book becomes more than paper, and a model becomes more than foam.
+          </p>
+          <p>
+            My father, Tofail Ahmed, is a Police Inspector. My mother has held the household with steady care. I have a wife and a sister. The family is ordinary in the best sense: work is expected, dignity is expected, and finishing what you start is not optional.
+          </p>
+          <p>
+            I carry that into the studio. Architecture, for me, is not performance. It is a long conversation with material, geometry, and the people who will one day inhabit the spaces we propose. I am still early in that conversation. I intend to stay in it.
+          </p>
+          <p class="lage">Lage Raho.</p>
+        </div>
       </div>
-      <div class="process-block">
-        <h3>Family</h3>
-        <p>Father: Tofail Ahmed, Police Inspector. Mother: homemaker. Wife. Younger sister.</p>
-        <p>Complex real relationships — love, pressure, misunderstanding, and support existing side by side. The quiet desire that one day they will say: “He struggled a lot, but he never gave up.”</p>
-      </div>
-      <p class="lage">Lage Raho.</p>
-      <p class="lead" style="margin-top:.5rem">Keep going. Rise high enough that the noise cannot reach.</p>
     </section>
 
     <!-- 04 EDUCATION -->
-    <section class="view" id="view-education">
-      <p class="section-label">04 — Education</p>
-      <h2 class="section-title">Trajectory of attention.</h2>
-      <p class="lead">Architecture → Visual thinking → Digital systems → Exploring CSE</p>
-      <div class="edu-track">
-        <div class="edu-item">
-          <div class="edu-dot"></div>
-          <div class="edu-content">
-            <h4>Motijheel Ideal School and College</h4>
-            <div class="years">2013 – 2023</div>
-            <p>SSC GPA 5.00 Golden A+</p>
-            <div class="edu-gallery">
-              <img src="school-1.jpg" alt="School" loading="lazy" data-title="School Years" data-desc="Where the first habits of care and measurement were formed.">
-              <img src="school-2.jpg" alt="School" loading="lazy" data-title="Early Foundations" data-desc="Learning to see structure long before naming it architecture.">
-            </div>
+    <section class="view" id="view-education" data-view="education">
+      <div class="section-inner">
+        <div class="section-label">04 · Education</div>
+        <h2 class="section-title">Academic record.</h2>
+        <p class="section-lead">Two consecutive Golden A+ results, then architecture at BRAC University. The numbers are clear; the work behind them is denser.</p>
+
+        <!-- Motijheel Ideal -->
+        <div class="edu-block">
+          <div class="edu-header">
+            <h3>Motijheel Ideal School and College</h3>
+            <span class="edu-years">2013 — 2023</span>
+          </div>
+          <div class="gpa-badge">SSC 2023 · <strong>GPA 5.00</strong> · Golden A+ (all subjects A+)</div>
+          <div class="edu-images">
+            <img src="school-1.jpg" alt="Motijheel Ideal School" loading="lazy" data-lb data-title="Motijheel Ideal School and College">
+            <img src="school-2.jpg" alt="Motijheel Ideal School campus" loading="lazy" data-lb data-title="Campus">
+          </div>
+          <div class="edu-docs">
+            <a href="SSC Transcript.pdf" target="_blank" rel="noopener">SSC Transcript.pdf →</a>
           </div>
         </div>
-        <div class="edu-item">
-          <div class="edu-dot"></div>
-          <div class="edu-content">
-            <h4>Notre Dame College</h4>
-            <div class="years">2023 – 2025</div>
-            <p>HSC GPA 5.00 Golden A+</p>
-            <div class="edu-gallery">
-              <img src="college-1.jpg" alt="NDC" loading="lazy" data-title="Notre Dame College" data-desc="A place that demanded both excellence and humility.">
-              <img src="college-2.jpg" alt="NDC" loading="lazy" data-title="Campus" data-desc="Years spent refining attention and discipline.">
-              <img src="college-3.jpg" alt="NDC" loading="lazy" data-title="Light & Geometry" data-desc="The quiet geometry of institutional space.">
-              <img src="college-ndc.jpg" alt="NDC" loading="lazy" data-title="NDC" data-desc="Higher Secondary — the bridge between school and the larger world.">
-            </div>
+
+        <!-- Notre Dame -->
+        <div class="edu-block">
+          <div class="edu-header">
+            <h3>Notre Dame College</h3>
+            <span class="edu-years">2023 — 2025</span>
+          </div>
+          <div class="gpa-badge">HSC 2025 · <strong>GPA 5.00</strong> · Golden</div>
+          <div class="edu-images">
+            <img src="college-1.jpg" alt="Notre Dame College" loading="lazy" data-lb data-title="Notre Dame College">
+            <img src="college-2.jpg" alt="Notre Dame College" loading="lazy" data-lb data-title="Notre Dame College">
+          </div>
+          <div class="edu-docs">
+            <a href="HSC Transcript.pdf" target="_blank" rel="noopener">HSC Transcript.pdf →</a>
           </div>
         </div>
-        <div class="edu-item">
-          <div class="edu-dot"></div>
-          <div class="edu-content">
-            <h4>BRAC University — Architecture</h4>
-            <div class="years">Summer 2026 · Roll 1000061008 · ARC-101</div>
-            <p>First semester. Foundations of architectural thinking, drawing, and making.</p>
-            <div class="edu-gallery">
-              <img src="university-1.jpg" alt="BRAC" loading="lazy" data-title="University Studio" data-desc="Where architectural thinking is taking formal shape.">
-              <img src="university-2.webp" alt="BRAC" loading="lazy" data-title="Campus" data-desc="Spaces that teach how buildings hold people.">
-              <img src="university-3.jpg" alt="BRAC" loading="lazy" data-title="Transition" data-desc="Architecture opening toward systems and code.">
+
+        <!-- BRAC -->
+        <div class="edu-block">
+          <div class="edu-header">
+            <h3>BRAC University</h3>
+            <span class="edu-years">Summer 2026 — Present</span>
+          </div>
+          <p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.95rem;">Bachelor of Architecture · Student ID 1000061008</p>
+          <div class="edu-images">
+            <img src="university-1.jpg" alt="BRAC University" loading="lazy" data-lb data-title="BRAC University">
+            <img src="university-2.webp" alt="BRAC University campus" loading="lazy" data-lb data-title="Campus">
+            <img src="university-3.jpg" alt="BRAC University" loading="lazy" data-lb data-title="BRAC University">
+          </div>
+          <h4 style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--text-dim);margin:1.5rem 0 0.75rem;text-transform:uppercase;">First Semester · Selected Courses</h4>
+          <ul class="course-list">
+            <li><span>ARC-101</span> Design I: Basic Design</li>
+            <li><span>ARC-102</span> Design Communication I</li>
+            <li><span>ARC-111</span> History of Architecture I</li>
+            <li><span>ENG-101</span> English Foundation</li>
+            <li><span>MAT-101</span> Mathematics for Architecture</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 DRAWING & ILLUSTRATION -->
+    <section class="view" id="view-drawing" data-view="drawing">
+      <div class="section-inner">
+        <div class="section-label">05 · Drawing &amp; Illustration</div>
+        <h2 class="section-title">Works on paper and screen.</h2>
+        <p class="section-lead">Every strong drawing is treated as a serious work. Comic narrative, watercolor, still life, perspective, digital scene, and cultural color studies.</p>
+        <div class="gallery-grid" id="drawing-grid">
+          <!-- populated by JS for clean structure -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 ARCHITECTURE / MODELS -->
+    <section class="view" id="view-architecture" data-view="architecture">
+      <div class="section-inner">
+        <div class="section-label">06 · Architecture · Models · Projects</div>
+        <h2 class="section-title">Studio and model work.</h2>
+        <p class="section-lead">Checkerboard studies, tension structures, foam relief with light, planar and paper spatial experiments. Narrative drawing enters the studio as “The Bully.”</p>
+        <div class="arch-grid" id="arch-grid">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 DIGITAL / WEB -->
+    <section class="view" id="view-digital" data-view="digital">
+      <div class="section-inner">
+        <div class="section-label">07 · Digital / Web</div>
+        <h2 class="section-title">Code as another material.</h2>
+        <p class="section-lead">Web experiments and small applications. The same attention to structure and clarity that goes into a model goes into an interface.</p>
+        <div class="digital-list">
+          <div class="digital-item">
+            <div>
+              <h3>TrendCart</h3>
+              <p>E-commerce / product browsing experiment. Focus on clean hierarchy, responsive layout, and restrained interaction.</p>
             </div>
+            <a class="btn" href="https://github.com/shadidahamed" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+          <div class="digital-item">
+            <div>
+              <h3>Shadid’s Game</h3>
+              <p>Interactive browser experiment. Play, logic, and spatial thinking translated into code.</p>
+            </div>
+            <a class="btn" href="https://github.com/shadidahamed" target="_blank" rel="noopener">View on GitHub →</a>
+          </div>
+          <div class="digital-item">
+            <div>
+              <h3>Other Web Experiments</h3>
+              <p>Small tools, visual studies, and interface sketches. Repository continuously updated.</p>
+            </div>
+            <a class="btn" href="https://github.com/shadidahamed" target="_blank" rel="noopener">GitHub →</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 05 SKILLS -->
-    <section class="view" id="view-skills">
-      <p class="section-label">05 — Skills</p>
-      <h2 class="section-title">A hierarchy of craft.</h2>
-      <div class="skills-grid">
-        <div class="skill-card" data-skill="art">
-          <h3>Art & Drawing</h3>
-          <p>Sketching, colour studies, iPad work, hatching, and the discipline of the line.</p>
-          <span class="tag">Open gallery →</span>
-        </div>
-        <div class="skill-card" data-skill="arch">
-          <h3>Architectural Design</h3>
-          <p>Spatial thinking, models, geometric studies, Lory Lift, grids, interlock, pavilion concepts.</p>
-          <span class="tag">Core craft</span>
-        </div>
-        <div class="skill-card" data-skill="web">
-          <h3>Web Development</h3>
-          <p>HTML, CSS, JavaScript. Live projects: TrendCart & Shadid’s Game.</p>
-          <span class="tag">View projects →</span>
-        </div>
-        <div class="skill-card" data-skill="video">
-          <h3>Video</h3>
-          <p>Process documentation, visual storytelling, and the craft of sharing work with clarity.</p>
-          <span class="tag">Content</span>
-        </div>
-      </div>
-      <div id="skillDetail" style="display:none;margin-top:2.5rem">
-        <button class="btn btn-ghost" id="skillBack" style="margin-bottom:1.25rem">← Back</button>
-        <div id="skillContent"></div>
-      </div>
-    </section>
-
-    <!-- 06 WORK -->
-    <section class="view" id="view-work">
-      <p class="section-label">06 — Previous Work</p>
-      <h2 class="section-title">Evolution of digital craft.</h2>
-      <p class="lead">Screens and studies that mark the shift from analog precision toward interactive systems.</p>
-      <div class="work-grid" id="workGrid"></div>
-      <div class="mt-2">
-        <p class="section-label">Live Projects</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener">TrendCart →</a>
-          <a class="btn btn-ghost" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener">Shadid’s Game →</a>
-        </div>
+    <!-- 08 ACHIEVEMENTS -->
+    <section class="view" id="view-achievements" data-view="achievements">
+      <div class="section-inner">
+        <div class="section-label">08 · Achievements</div>
+        <h2 class="section-title">Markers of work.</h2>
+        <ul class="ach-list">
+          <li>
+            <span class="yr">2023</span>
+            <div>
+              <h4>SSC Golden A+</h4>
+              <p>GPA 5.00 — all subjects A+. Motijheel Ideal School and College.</p>
+            </div>
+          </li>
+          <li>
+            <span class="yr">2025</span>
+            <div>
+              <h4>HSC Golden A+</h4>
+              <p>GPA 5.00. Notre Dame College.</p>
+            </div>
+          </li>
+          <li>
+            <span class="yr">2026</span>
+            <div>
+              <h4>Handmade ARC-101 Portfolio Book</h4>
+              <p>Physical book: black mount, Swiss board, pen hatching, geometric lettering. Flagship craft document.</p>
+            </div>
+          </li>
+          <li>
+            <span class="yr">Ongoing</span>
+            <div>
+              <h4>Drawing Practice &amp; Competitions</h4>
+              <p>Consistent body of comic, watercolor, still life, perspective, and digital illustration work.</p>
+            </div>
+          </li>
+          <li>
+            <span class="yr">2026</span>
+            <div>
+              <h4>First Semester Studio Work</h4>
+              <p>Models, planar studies, light experiments, and spatial investigations in Design I.</p>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- 07 ACHIEVEMENTS -->
-    <section class="view" id="view-achievements">
-      <p class="section-label">07 — Achievements</p>
-      <h2 class="section-title">Quiet milestones.</h2>
-      <div class="ach-highlight">
-        <img src="814113108_1617142683373760_3602804557652732585_n.jpg" alt="Achievement moment" loading="lazy" width="140" height="140">
-        <div class="ach-text">
-          <h3>Consistency over spectacle</h3>
-          <p>Recognition earned through sustained attention and care. A reminder that precision compounds.</p>
+    <!-- 09 CONTACT -->
+    <section class="view" id="view-contact" data-view="contact">
+      <div class="section-inner">
+        <div class="section-label">09 · Contact</div>
+        <h2 class="section-title">Reach the archive.</h2>
+        <p class="section-lead">For teachers, admission committees, collaborators, and international reviewers. Direct channels preferred.</p>
+        <div class="contact-grid">
+          <div class="contact-links">
+            <a href="mailto:shadidahamed.matashome05m@gmail.com">
+              <span class="label">Email</span>
+              shadidahamed.matashome05m@gmail.com
+            </a>
+            <a href="https://wa.me/8801326162684" target="_blank" rel="noopener">
+              <span class="label">WhatsApp</span>
+              +880 1326 162684
+            </a>
+            <a href="https://github.com/shadidahamed" target="_blank" rel="noopener">
+              <span class="label">GitHub</span>
+              github.com/shadidahamed
+            </a>
+            <a href="#" onclick="return false;">
+              <span class="label">Location</span>
+              Dhaka, Bangladesh
+            </a>
+            <a href="#" onclick="return false;">
+              <span class="label">ID</span>
+              1000061008 · B.Arch · Summer 2026
+            </a>
+          </div>
+          <form class="contact-form" id="contact-form" onsubmit="return handleContact(event)">
+            <label for="c-name">Name</label>
+            <input type="text" id="c-name" name="name" required autocomplete="name">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" name="email" required autocomplete="email">
+            <label for="c-msg">Message</label>
+            <textarea id="c-msg" name="message" required placeholder="Brief note for the curator…"></textarea>
+            <button type="submit" class="btn btn-primary">Send message</button>
+          </form>
         </div>
-      </div>
-      <div class="mt-2">
-        <p class="lead">SSC GPA 5.00 Golden A+ · HSC GPA 5.00 Golden A+</p>
       </div>
     </section>
 
-    <!-- 08 CONTACT -->
-    <section class="view" id="view-contact">
-      <p class="section-label">08 — Contact</p>
-      <h2 class="section-title">Ready for the next space.</h2>
-      <p class="lead">Whether it is made of concrete, paper, pixels, or code.</p>
-      <div class="contact-links">
-        <a href="mailto:shadidahamed.matashome05m@gmail.com">Email</a>
-        <a href="https://wa.me/8801326162684" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://github.com/shadidahamed" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://x.com" target="_blank" rel="noopener">X</a>
-        <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://pinterest.com" target="_blank" rel="noopener">Pinterest</a>
-        <a href="https://reddit.com" target="_blank" rel="noopener">Reddit</a>
-      </div>
-      <div class="final-sig">SA</div>
-    </section>
-
-    <!-- 09 CV -->
-    <section class="view" id="view-cv">
-      <p class="section-label">09 — Documents</p>
-      <h2 class="section-title">Curriculum Vitae & Records</h2>
-      <div style="text-align:center">
-        <div class="cv-card">
-          <h3>Academic Records</h3>
-          <p>SSC & HSC transcripts available for download. Full CV can be requested or added here.</p>
-        </div>
-        <div class="doc-row">
-          <a class="doc-link" href="SSC Transcript.pdf" download>
-            <div class="doc-icon">PDF</div>
-            <div><strong>SSC Transcript</strong><br><span style="font-size:.75rem;color:var(--muted)">Golden A+</span></div>
-          </a>
-          <a class="doc-link" href="HSC Transcript.pdf" download>
-            <div class="doc-icon">PDF</div>
-            <div><strong>HSC Transcript</strong><br><span style="font-size:.75rem;color:var(--muted)">Golden A+</span></div>
-          </a>
-        </div>
-      </div>
-    </section>
   </main>
 </div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-  <button class="lb-close" id="lbClose" aria-label="Close">×</button>
-  <div class="lb-inner">
-    <img id="lbImg" src="" alt="">
-    <div class="lb-meta">
-      <h3 id="lbTitle"></h3>
-      <p id="lbDesc"></p>
-      <div class="meta-row" id="lbMat"></div>
-      <div class="meta-row" id="lbConcept"></div>
-    </div>
+  <button class="lightbox-close" id="lightbox-close">Close · ESC</button>
+  <div class="lightbox-inner">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 </div>
 
 <!-- AI CURATOR -->
-<button class="ai-toggle" id="aiToggle">AI</button>
-<div class="ai-panel" id="aiPanel">
-  <div class="ai-header">
-    <span>Curator</span>
-    <button id="aiClose" style="color:var(--muted);font-size:1.1rem">×</button>
+<button class="curator-toggle" id="curator-toggle">Curator</button>
+<div class="curator" id="curator">
+  <div class="curator-header">
+    <h4>Archive Curator</h4>
+    <button id="curator-close" aria-label="Close">×</button>
   </div>
-  <div class="ai-messages" id="aiMessages"></div>
-  <div class="ai-input-row">
-    <input type="text" id="aiInput" placeholder="Ask about the book, education…" autocomplete="off">
-    <button id="aiSend">Send</button>
+  <div class="curator-body" id="curator-body">
+    <div class="msg bot">I am the curator of this spatial archive. Ask me to open a section (“open the book”, “show education”, “show drawings”), or ask about the handmade book, process, or academic path.</div>
+  </div>
+  <div class="curator-input">
+    <input type="text" id="curator-input" placeholder="Ask the curator…" autocomplete="off">
+    <button id="curator-send">Send</button>
   </div>
 </div>
 
 <script>
-(function(){
+/* ============================================================
+   SHADID AHAMED — PORTFOLIO LOGIC
+   ============================================================ */
+
+(function () {
   'use strict';
 
-  // ===== DATA (exact real filenames) =====
-  const portraits = [
-    {src:'809518654_1855217995842076_8923680691947304600_n.jpg',title:'Portrait',desc:'A quiet moment between studio and screen.'},
-    {src:'809601262_4548993055379554_8793039364914601083_n.jpg',title:'Presence',desc:'Looking forward while carrying the weight of craft.'},
-    {src:'811615849_2097588261148773_877248636819443508_n.jpg',title:'Focus',desc:'The same intensity once reserved for drawings.'},
-    {src:'813466984_26807832862248578_2653115749408704795_n.jpg',title:'Studio',desc:'Where precision and patience meet.'},
-    {src:'813692048_1750841226169127_6723820080107089098_n.jpg',title:'Calm',desc:'Architecture taught me to wait for the right line.'},
-    {src:'813853349_2273476383432547_5877535730504115386_n.jpg',title:'Curiosity',desc:'Always measuring, always asking what comes next.'},
-    {src:'813965363_2318476582340902_2775377306658662126_n.jpg',title:'Character',desc:'A student still learning the language of space and code.'},
-    {src:'815366796_1754064392528440_1990530380060926840_n (1).jpg',title:'Moment',desc:'Between one discipline and the next.'},
-    {src:'817550850_1756948922083208_6663409752770103109_n.jpg',title:'Quiet Ambition',desc:'No need to announce the work — let the work speak.'},
-    {src:'818061932_846874715114836_2565138691570136914_n.jpg',title:'Continuity',desc:'The same hands that once held pencils now type with purpose.'},
-    {src:'818478656_1667736108690904_8025924023257939696_n.jpg',title:'Forward',desc:'Ready for the next chapter.'}
-  ];
-  const artItems = [
-    {src:'IMG scetch 1.jpg',title:'Sketch 01',desc:'A single continuous line seeking proportion.'},
-    {src:'image sketch 1.jpg',title:'Sketch 02',desc:'Spatial studies on paper — still the fastest way to think.'},
-    {src:'image sketch 2.jpg',title:'Sketch 03',desc:'Massing and shadow in graphite.'},
-    {src:'image sketch 3.jpg',title:'Sketch 04',desc:'Exploring rhythm and void.'},
-    {src:'image colour.jpg',title:'Colour Study',desc:'Learning how hue carries atmosphere.'},
-    {src:'image colour 1.jpg',title:'Colour Study II',desc:'Warmth and coolness as structural decisions.'},
-    {src:'image ipad 1.png',title:'iPad Drawing',desc:'Digital continuity of the same hand.'},
-    {src:'book-3d.jpg',title:'The Book',desc:'A handmade object that holds the process itself.'}
-  ];
-  const workItems = [
-    {src:'Screenshot 2026-09-20 201810.png',title:'Interface Study 01',desc:'Early digital explorations of layout and hierarchy.'},
-    {src:'Screenshot 2026-09-20 202230.png',title:'Interface Study 02',desc:'Refining spacing and visual weight.'},
-    {src:'Screenshot 2026-09-20 202305.png',title:'System Sketch',desc:'Translating architectural grids into screen logic.'},
-    {src:'Screenshot 2026-09-20 202318.png',title:'Component Work',desc:'Building reusable pieces with care.'},
-    {src:'Screenshot 2026-09-20 202429.png',title:'Detail Pass',desc:'The same attention once given to joinery.'},
-    {src:'Screenshot 2026-09-20 202501.png',title:'Flow Study',desc:'How information moves through space.'},
-    {src:'Screenshot 2026-09-20 202509.png',title:'Visual Rhythm',desc:'Repetition and variation in digital form.'},
-    {src:'Screenshot 2026-09-20 202528.png',title:'Craft Snapshot',desc:'A moment of clarity in the process.'},
-    {src:'Screenshot 2026-09-20 202603.png',title:'Final Frame',desc:'Where intention meets execution.'}
-  ];
-
-  // ===== CURSOR =====
-  const cursor=document.getElementById('cursor');
-  const dot=document.getElementById('cursorDot');
-  let mx=0,my=0,cx=0,cy=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
-  function loopCursor(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loopCursor)}
-  loopCursor();
-  document.querySelectorAll('a,button,.skill-card,.work-card,.book-float,.carousel-item,img[data-title]').forEach(el=>{
-    el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));
-    el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));
+  // ---------- Custom cursor ----------
+  const cursor = document.getElementById('cursor');
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+  document.addEventListener('mousedown', () => cursor.classList.add('click'));
+  document.addEventListener('mouseup', () => cursor.classList.remove('click'));
+  document.querySelectorAll('a, button, .nav-item, .btn, .gallery-item, .arch-card, .book-thumb, .book-3d, [data-lb]').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
 
-  // ===== SPACE CANVAS =====
-  const canvas=document.getElementById('spaceCanvas');
-  const ctx=canvas.getContext('2d');
-  let w,h,particles=[];
-  function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
-  resize();window.addEventListener('resize',resize);
-  for(let i=0;i<70;i++)particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+.3,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,a:Math.random()*.4+.1});
-  function drawSpace(){
-    ctx.clearRect(0,0,w,h);
-    // faint grid
-    ctx.strokeStyle='rgba(242,240,234,0.03)';ctx.lineWidth=1;
-    const step=80;
-    for(let x=0;x<w;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
-    for(let y=0;y<h;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
-    // soft burgundy field
-    const g=ctx.createRadialGradient(w*.7,h*.3,0,w*.7,h*.3,w*.5);
-    g.addColorStop(0,'rgba(107,44,54,0.06)');g.addColorStop(1,'transparent');
-    ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
-    particles.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(242,240,234,${p.a})`;ctx.fill();
-    });
-    requestAnimationFrame(drawSpace);
+  // ---------- Background particles / grid drift ----------
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+  const PARTICLE_COUNT = 48;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
   }
-  drawSpace();
-
-  // ===== VIEW SYSTEM =====
-  const views=document.querySelectorAll('.view');
-  const navLinks=document.querySelectorAll('#navList a');
-  function showView(id){
-    views.forEach(v=>v.classList.remove('active'));
-    const el=document.getElementById('view-'+id);
-    if(el)el.classList.add('active');
-    navLinks.forEach(a=>a.classList.toggle('active',a.dataset.view===id));
-    localStorage.setItem('sa-view',id);
-    window.scrollTo(0,0);
-    document.getElementById('sidebar').classList.remove('open');
-  }
-  navLinks.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showView(a.dataset.view)}));
-  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.goto)));
-  const saved=localStorage.getItem('sa-view');
-  if(saved)showView(saved);
-
-  // menu
-  document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
-
-  // ===== CIRCULAR CAROUSEL =====
-  function createCarousel(container,items){
-    container.innerHTML=`<div class="carousel-track"></div><div class="carousel-nav"><button data-d="-1">‹</button><button data-d="1">›</button></div>`;
-    const track=container.querySelector('.carousel-track');
-    const n=items.length;
-    let angle=0;
-    const radius=Math.min(container.offsetWidth,container.offsetHeight)*0.38||160;
-    items.forEach((item,i)=>{
-      const div=document.createElement('div');
-      div.className='carousel-item';
-      div.innerHTML=`<img src="${item.src}" alt="${item.title}" loading="lazy">`;
-      div.addEventListener('click',()=>openLightbox(item));
-      track.appendChild(div);
-    });
-    const nodes=track.querySelectorAll('.carousel-item');
-    function render(){
-      nodes.forEach((node,i)=>{
-        const a=(i/n)*Math.PI*2+angle;
-        const x=Math.sin(a)*radius;
-        const z=Math.cos(a)*radius;
-        const scale=.5+.5*((z+radius)/(2*radius));
-        node.style.transform=`translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${-a*180/Math.PI}deg) scale(${scale})`;
-        node.style.zIndex=Math.round(z+radius);
-        node.style.opacity=.3+.7*((z+radius)/(2*radius));
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.12,
+        r: Math.random() * 1.2 + 0.3,
+        a: Math.random() * 0.25 + 0.05
       });
     }
-    render();
-    let drag=false,sx=0,sa=0;
-    container.addEventListener('pointerdown',e=>{drag=true;sx=e.clientX;sa=angle;container.setPointerCapture(e.pointerId)});
-    container.addEventListener('pointermove',e=>{if(!drag)return;angle=sa+(e.clientX-sx)*0.008;render()});
-    container.addEventListener('pointerup',()=>drag=false);
-    container.addEventListener('wheel',e=>{e.preventDefault();angle+=e.deltaY*0.002;render()},{passive:false});
-    container.querySelectorAll('.carousel-nav button').forEach(b=>b.addEventListener('click',()=>{angle+=parseInt(b.dataset.d)*(Math.PI*2/n);render()}));
-    let auto=setInterval(()=>{angle+=0.004;render()},50);
-    container.addEventListener('pointerenter',()=>clearInterval(auto));
-    container.addEventListener('pointerleave',()=>{auto=setInterval(()=>{angle+=0.004;render()},50)});
   }
-  createCarousel(document.getElementById('profileCarousel'),portraits);
+  function drawGrid() {
+    ctx.strokeStyle = 'rgba(242, 240, 234, 0.015)';
+    ctx.lineWidth = 0.5;
+    const step = 80;
+    const offsetX = (Date.now() * 0.003) % step;
+    const offsetY = (Date.now() * 0.002) % step;
+    for (let x = -step + offsetX; x < w + step; x += step) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, h);
+      ctx.stroke();
+    }
+    for (let y = -step + offsetY; y < h + step; y += step) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(w, y);
+      ctx.stroke();
+    }
+  }
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    drawGrid();
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(242, 240, 234, ${p.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+  resize();
+  initParticles();
+  animate();
 
-  // ===== WORK GRID =====
-  const workGrid=document.getElementById('workGrid');
-  workItems.forEach(item=>{
-    const card=document.createElement('div');
-    card.className='work-card';
-    card.innerHTML=`<img src="${item.src}" alt="${item.title}" loading="lazy"><div class="info"><h3>${item.title}</h3><p>${item.desc}</p></div>`;
-    card.addEventListener('click',()=>openLightbox(item));
-    workGrid.appendChild(card);
+  // ---------- Navigation / views ----------
+  const views = document.querySelectorAll('.view');
+  const navItems = document.querySelectorAll('.nav-item');
+  const sidebar = document.getElementById('sidebar');
+  const mobileToggle = document.getElementById('mobile-toggle');
+
+  function goTo(viewId) {
+    views.forEach(v => v.classList.remove('active'));
+    navItems.forEach(n => n.classList.remove('active'));
+    const target = document.getElementById('view-' + viewId);
+    const nav = document.querySelector(`.nav-item[data-view="${viewId}"]`);
+    if (target) target.classList.add('active');
+    if (nav) nav.classList.add('active');
+    if (window.innerWidth <= 900) sidebar.classList.remove('open');
+    // scroll stage to top
+    const stage = document.getElementById('stage');
+    if (stage) stage.scrollTop = 0;
+    if (target) target.scrollTop = 0;
+  }
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => goTo(item.dataset.view));
+  });
+  document.querySelectorAll('[data-goto]').forEach(btn => {
+    btn.addEventListener('click', () => goTo(btn.dataset.goto));
+  });
+  mobileToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+  // ---------- Book data & carousel ----------
+  const bookImages = [
+    {
+      src: '811615849_2097588261148773_877248636819443508_n.jpg',
+      title: 'Checkerboard Cover',
+      desc: 'Geometric lettering and controlled grid on black mount. The cover establishes the visual language of the entire book: density, void, and precision.'
+    },
+    {
+      src: '817550850_1756948922083208_6663409752770103109_n.jpg',
+      title: 'Interior Spread',
+      desc: 'Pen hatching and spatial studies. Density of line as a record of attention.'
+    },
+    {
+      src: 'ChatGPT Image Sep 20, 2026, 07_38_48 PM.png',
+      title: 'Book in Context',
+      desc: 'The physical object — handmade, sequential, and deliberately slow.'
+    },
+    {
+      src: '813965363_2318476582340902_2775377306658662126_n.jpg',
+      title: 'Process Page',
+      desc: 'From sketch to mounted sheet. Material: black mount / Swiss board.'
+    },
+    {
+      src: '815366796_1754064392528440_1990530380060926840_n (1).jpg',
+      title: 'Geometric Lettering',
+      desc: 'Controlled letterforms that belong to the same language as the drawings.'
+    },
+    {
+      src: 'book-3d.jpg',
+      title: 'Three-Dimensional View',
+      desc: 'The book as object: thickness, weight, and the liminal space of the open page.'
+    }
+  ];
+
+  let bookIndex = 0;
+  let bookTimer = null;
+  const bookMainImg = document.getElementById('book-main-img');
+  const bookTitle = document.getElementById('book-title');
+  const bookDesc = document.getElementById('book-desc');
+  const bookThumbs = document.getElementById('book-thumbs');
+  const book3d = document.getElementById('book-3d');
+
+  function renderBookThumbs() {
+    bookThumbs.innerHTML = bookImages.map((b, i) => `
+      <div class="book-thumb ${i === bookIndex ? 'active' : ''}" data-i="${i}">
+        <img src="${b.src}" alt="${b.title}" loading="lazy">
+      </div>
+    `).join('');
+    bookThumbs.querySelectorAll('.book-thumb').forEach(t => {
+      t.addEventListener('click', () => {
+        bookIndex = +t.dataset.i;
+        updateBook();
+        pauseBook();
+      });
+      t.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      t.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  }
+
+  function updateBook() {
+    const b = bookImages[bookIndex];
+    bookMainImg.src = b.src;
+    bookMainImg.alt = b.title;
+    bookTitle.textContent = b.title;
+    bookDesc.textContent = b.desc;
+    renderBookThumbs();
+  }
+
+  function nextBook() {
+    bookIndex = (bookIndex + 1) % bookImages.length;
+    updateBook();
+  }
+
+  function startBook() {
+    if (bookTimer) clearInterval(bookTimer);
+    bookTimer = setInterval(nextBook, 4200);
+  }
+  function pauseBook() {
+    if (bookTimer) clearInterval(bookTimer);
+    bookTimer = null;
+  }
+
+  book3d.addEventListener('mouseenter', pauseBook);
+  book3d.addEventListener('mouseleave', startBook);
+  book3d.addEventListener('click', () => {
+    openLightbox(bookImages[bookIndex].src, bookImages[bookIndex].title + ' — ' + bookImages[bookIndex].desc);
   });
 
-  // ===== LIGHTBOX =====
-  const lb=document.getElementById('lightbox');
-  function openLightbox(item){
-    document.getElementById('lbImg').src=item.src;
-    document.getElementById('lbImg').alt=item.title||'';
-    document.getElementById('lbTitle').textContent=item.title||'';
-    document.getElementById('lbDesc').textContent=item.desc||'';
-    document.getElementById('lbMat').innerHTML=item.mat?`<span>Material</span> · ${item.mat}`:'';
-    document.getElementById('lbConcept').innerHTML=item.concept?`<span>Concept</span> · ${item.concept}`:'';
-    lb.classList.add('open');
-  }
-  function closeLightbox(){lb.classList.remove('open')}
-  document.getElementById('lbClose').addEventListener('click',closeLightbox);
-  lb.addEventListener('click',e=>{if(e.target===lb)closeLightbox()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+  renderBookThumbs();
+  startBook();
 
-  // book
-  document.getElementById('bookFloat').addEventListener('click',()=>{
-    openLightbox({src:'book-3d.jpg',title:'The Handmade Book',desc:'Fully handmade first-semester portfolio. Black mount board, pen hatching, geometric PORTFOLIO lettering, checkerboard binding, burgundy accents.',mat:'Swiss board · Black mount · Pen · Binding',concept:'Physical craft as primary research method.'});
+  // ---------- Drawing gallery ----------
+  // Filenames kept EXACTLY as provided in the brief.
+  const drawList = [
+    { src: '809518654_....jpg', title: 'Comic Page I', desc: 'Narrative sequence in ink. Replace with exact full filename.' },
+    { src: '809601262_....jpg', title: 'Comic Page II', desc: 'Character and panel rhythm.' },
+    { src: '813466984_....jpg', title: 'Comic Page III', desc: 'Spatial storytelling through frames.' },
+    { src: '818061932_....jpg', title: 'Comic Page IV', desc: 'Ink density and narrative pause.' },
+    { src: '818478656_....jpg', title: 'Comic Page V', desc: 'Closing sequence and resolution.' },
+    { src: '813853349_....jpg', title: 'Watercolor Landscape with Hut', desc: 'Watercolor on paper — landscape and shelter.' },
+    { src: 'IMG scetch 1.jpg', title: 'Underwater / Mermaid', desc: 'Figurative study — underwater narrative.' },
+    { src: 'image sketch 3.jpg', title: 'Bamboo Still Life', desc: 'Observational drawing — material and light.' },
+    { src: 'image sketch 2.jpg', title: 'The Sea of Dreams — Whale', desc: 'Large-scale imaginative drawing.' },
+    { src: 'image sketch 1.jpg', title: 'Perspective Cityscape', desc: 'Linear perspective and urban massing.' },
+    { src: 'image ipad 1.png', title: 'Digital Library Scene', desc: 'Digital illustration — interior atmosphere.' },
+    { src: 'image colour.jpg', title: 'Cultural / Festival Painting', desc: 'Color study of cultural celebration.' },
+    { src: 'image colour 1.jpg', title: 'Anime-style Portrait', desc: 'Character study in digital color.' }
+  ];
+
+  const drawingGrid = document.getElementById('drawing-grid');
+  drawingGrid.innerHTML = drawList.map(d => `
+    <div class="gallery-item" data-src="${d.src}" data-title="${d.title}" data-desc="${d.desc}">
+      <img src="${d.src}" alt="${d.title}" loading="lazy" onerror="this.parentElement.style.opacity='0.45'">
+      <div class="cap">${d.title}</div>
+    </div>
+  `).join('');
+
+  drawingGrid.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      openLightbox(item.dataset.src, item.dataset.title + (item.dataset.desc ? ' — ' + item.dataset.desc : ''));
+    });
+    item.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    item.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
-  document.querySelectorAll('#bookThumbs img').forEach(img=>{
-    img.addEventListener('click',()=>{
-      document.querySelectorAll('#bookThumbs img').forEach(i=>i.classList.remove('active'));
-      img.classList.add('active');
-      openLightbox({src:img.dataset.src,title:img.dataset.title,desc:img.dataset.desc,mat:img.dataset.mat,concept:img.dataset.concept});
+
+  // ---------- Architecture projects ----------
+  const archProjects = [
+    { src: '811615849_2097588261148773_877248636819443508_n.jpg', title: 'Project 1 — Checkerboard', desc: 'Grid, void, and geometric control. Studio study in planar order.' },
+    { src: 'project-2.jpg', title: 'Project 2 — String / Tension', desc: 'Tension structure study. Line as structural and spatial agent.' },
+    { src: 'project-3.jpg', title: 'Project 3 — Foam Relief with Light', desc: 'Foam model investigating light, relief, and shadow.' },
+    { src: 'foam-model.jpg', title: 'Foam & Planar Models', desc: 'Series of foam and planar spatial investigations.' },
+    { src: 'paper-ribbon.jpg', title: 'Paper / Ribbon Spatial Study', desc: 'Folded and ribbon-based spatial experiment.' },
+    { src: 'the-bully.jpg', title: '“The Bully” Comic Cover', desc: 'Narrative drawing skill applied to a strong cover image.' }
+  ];
+
+  const archGrid = document.getElementById('arch-grid');
+  archGrid.innerHTML = archProjects.map(p => `
+    <div class="arch-card" data-src="${p.src}" data-title="${p.title}" data-desc="${p.desc}">
+      <img src="${p.src}" alt="${p.title}" loading="lazy" onerror="this.style.opacity='0.4'">
+      <div class="info">
+        <h4>${p.title}</h4>
+        <p>${p.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  archGrid.querySelectorAll('.arch-card').forEach(card => {
+    card.addEventListener('click', () => {
+      openLightbox(card.dataset.src, card.dataset.title + ' — ' + card.dataset.desc);
+    });
+    card.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    card.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // Education images lightbox
+  document.querySelectorAll('[data-lb]').forEach(img => {
+    img.addEventListener('click', () => {
+      openLightbox(img.src, img.dataset.title || img.alt);
     });
   });
 
-  // education gallery clicks
-  document.querySelectorAll('.edu-gallery img').forEach(img=>{
-    img.addEventListener('click',()=>openLightbox({src:img.src,title:img.dataset.title,desc:img.dataset.desc}));
+  // ---------- Lightbox ----------
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  function openLightbox(src, caption) {
+    lightboxImg.src = src;
+    lightboxCaption.textContent = caption || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+      closeCurator();
+    }
   });
 
-  // ===== SKILLS DETAIL =====
-  const skillDetail=document.getElementById('skillDetail');
-  const skillContent=document.getElementById('skillContent');
-  document.querySelectorAll('.skill-card').forEach(card=>{
-    card.addEventListener('click',()=>{
-      const type=card.dataset.skill;
-      skillDetail.style.display='block';
-      if(type==='art'){
-        skillContent.innerHTML=`<h3 class="section-title" style="font-size:1.8rem">Art & Drawing</h3><div class="carousel-wrap" id="artCarousel"></div>`;
-        createCarousel(document.getElementById('artCarousel'),artItems);
-      } else if(type==='web'){
-        skillContent.innerHTML=`
-          <h3 class="section-title" style="font-size:1.8rem">Web Development</h3>
-          <p class="lead mb-1">Selected live projects.</p>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener">TrendCart →</a>
-            <a class="btn btn-ghost" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener">Shadid’s Game →</a>
-          </div>`;
-      } else if(type==='arch'){
-        skillContent.innerHTML=`
-          <h3 class="section-title" style="font-size:1.8rem">Architectural Design</h3>
-          <p class="lead">Spatial reasoning, geometric studies, model thinking, and iterative design. Studies include Lory Lift, Squares and Grid, Line Signature, Interlock, Pavilion, Cutouts, and Mosque concepts — all treated as core instruments of thought.</p>`;
-      } else {
-        skillContent.innerHTML=`
-          <h3 class="section-title" style="font-size:1.8rem">Video</h3>
-          <p class="lead">Process documentation and visual storytelling. Content creation as an extension of the same careful craft.</p>`;
-      }
-      skillDetail.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-  });
-  document.getElementById('skillBack').addEventListener('click',()=>{skillDetail.style.display='none'});
+  // ---------- AI Curator ----------
+  const curator = document.getElementById('curator');
+  const curatorToggle = document.getElementById('curator-toggle');
+  const curatorClose = document.getElementById('curator-close');
+  const curatorBody = document.getElementById('curator-body');
+  const curatorInput = document.getElementById('curator-input');
+  const curatorSend = document.getElementById('curator-send');
+  const askCuratorBtn = document.getElementById('ask-curator-btn');
 
-  // ===== AI CURATOR =====
-  const aiPanel=document.getElementById('aiPanel');
-  const aiMessages=document.getElementById('aiMessages');
-  const aiInput=document.getElementById('aiInput');
-  let chatHistory=JSON.parse(localStorage.getItem('sa-chat')||'[]');
-  function addMsg(text,who){
-    const div=document.createElement('div');
-    div.className='ai-msg '+who;
-    div.textContent=text;
-    aiMessages.appendChild(div);
-    aiMessages.scrollTop=aiMessages.scrollHeight;
-    chatHistory.push({text,who});
-    localStorage.setItem('sa-chat',JSON.stringify(chatHistory.slice(-40)));
+  function openCurator() {
+    curator.classList.add('open');
+    curatorToggle.classList.add('hidden');
+    curatorInput.focus();
   }
-  function botReply(q){
-    const lower=q.toLowerCase();
-    if(/book|handmade|portfolio book/.test(lower)){showView('book');return 'Opening The Book — the flagship handmade first-semester portfolio. Black mount, pen hatching, geometric lettering, checkerboard binding.'}
-    if(/process|persist|struggle|family|lage/.test(lower)){showView('process');return 'Opening Process / Persistence. Effort before results. Family. Lage Raho.'}
-    if(/educat|school|college|brac|university|ssc|hsc/.test(lower)){showView('education');return 'Opening Education trajectory: Motijheel Ideal → Notre Dame College → BRAC University Architecture.'}
-    if(/skill|draw|art|web|code|architect/.test(lower)){showView('skills');return 'Opening Skills. Art & Drawing, Architectural design, Web development, Video.'}
-    if(/contact|email|whatsapp|github|reach/.test(lower)){showView('contact');return 'Opening Contact. Email, WhatsApp, GitHub and other links are listed there.'}
-    if(/cv|transcript|document/.test(lower)){showView('cv');return 'Opening CV & Documents. SSC and HSC transcripts are available for download.'}
-    if(/home|cover|start/.test(lower)){showView('home');return 'Returning to Cover.'}
-    if(/who|shadid|about|profile/.test(lower)){showView('profile');return 'Shadid Ahamed — Architecture student at BRAC University, Roll 1000061008, ARC-101, Summer 2026. Based in Paltan, Dhaka. Thinks in geometry, material, structure and persistence.'}
-    if(/trendcart|game|project/.test(lower)){showView('work');return 'Opening Work. Live projects: TrendCart and Shadid’s Game are linked there.'}
-    return 'I can open sections for you. Try: “open the book”, “show process”, “open education”, “show skills”, “open contact”, or ask about the handmade book, education, or persistence.';
+  function closeCurator() {
+    curator.classList.remove('open');
+    curatorToggle.classList.remove('hidden');
   }
-  function sendAI(){
-    const q=aiInput.value.trim();
-    if(!q)return;
-    addMsg(q,'user');
-    aiInput.value='';
-    setTimeout(()=>addMsg(botReply(q),'bot'),350);
+  curatorToggle.addEventListener('click', openCurator);
+  curatorClose.addEventListener('click', closeCurator);
+  askCuratorBtn.addEventListener('click', openCurator);
+
+  function addMsg(text, isBot = true) {
+    const div = document.createElement('div');
+    div.className = 'msg' + (isBot ? ' bot' : '');
+    div.textContent = text;
+    curatorBody.appendChild(div);
+    curatorBody.scrollTop = curatorBody.scrollHeight;
   }
-  document.getElementById('aiSend').addEventListener('click',sendAI);
-  aiInput.addEventListener('keydown',e=>{if(e.key==='Enter')sendAI()});
-  document.getElementById('aiToggle').addEventListener('click',()=>{
-    aiPanel.classList.add('open');
-    document.getElementById('aiToggle').classList.add('hidden');
-    if(!chatHistory.length)addMsg('Ask about the handmade Book, education, craft, or say “open the book”.','bot');
-    else chatHistory.forEach(m=>addMsg(m.text,m.who));
+
+  function curatorRespond(query) {
+    const q = query.toLowerCase().trim();
+    let reply = '';
+
+    if (/open.*(book|portfolio)|show.*(book|portfolio)|enter the book/.test(q)) {
+      goTo('book');
+      reply = 'Opening the handmade book section — the flagship artifact for ARC-101. Black mount, Swiss board, pen hatching, geometric lettering.';
+    } else if (/show.*(education|school|college|university|gpa|transcript)/.test(q) || /education/.test(q)) {
+      goTo('education');
+      reply = 'Education record: SSC Golden A+ (GPA 5.00), HSC Golden A+ (GPA 5.00), currently Bachelor of Architecture at BRAC University, Summer 2026 batch.';
+    } else if (/show.*(draw|illustration|comic|painting|sketch)/.test(q) || /drawing/.test(q)) {
+      goTo('drawing');
+      reply = 'Drawing & illustration archive: comic pages, watercolor landscape, underwater study, bamboo still life, whale (“The Sea of Dreams”), perspective cityscape, digital library, cultural color work, and portrait studies.';
+    } else if (/show.*(arch|model|project|studio)/.test(q) || /architecture/.test(q)) {
+      goTo('architecture');
+      reply = 'Architecture and model work: checkerboard studies, string/tension structures, foam relief with light, planar and paper spatial experiments, and narrative drawing (“The Bully”).';
+    } else if (/show.*(profile|about|who)/.test(q) || /profile/.test(q)) {
+      goTo('profile');
+      reply = 'Profile: Shadid Ahamed, architecture student at BRAC University. Science background, persistence as method, handmade craft as primary language.';
+    } else if (/show.*(process|persist|family|lage)/.test(q) || /process/.test(q)) {
+      goTo('process');
+      reply = 'Process & persistence: the long view of who Shadid is — family, discipline, and the decision to stay with the work. “Lage Raho.”';
+    } else if (/show.*(digital|web|code|github|game|trend)/.test(q) || /digital/.test(q)) {
+      goTo('digital');
+      reply = 'Digital / web: TrendCart, Shadid’s Game, and other experiments. Code treated as another material of structure and clarity.';
+    } else if (/show.*(achieve|award|gpa|golden)/.test(q) || /achievement/.test(q)) {
+      goTo('achievements');
+      reply = 'Achievements: consecutive Golden A+ at SSC and HSC, the handmade ARC-101 book, continuous drawing practice, and first-semester studio work.';
+    } else if (/show.*(contact|email|whatsapp|reach)/.test(q) || /contact/.test(q)) {
+      goTo('contact');
+      reply = 'Contact channels: email, WhatsApp (+8801326162684), and GitHub. Dhaka, Bangladesh.';
+    } else if (/book|handmade|arc-101|portfolio/.test(q)) {
+      reply = 'The handmade book is the flagship of this archive. Created for ARC-101 (Design I: Basic Design). Materials: black mount / Swiss board, pen hatching, geometric lettering. It is a research-oriented craft document — not a generic “hire me” portfolio.';
+    } else if (/gpa|golden|ssc|hsc/.test(q)) {
+      reply = 'SSC 2023: GPA 5.00 Golden A+ (all subjects A+), Motijheel Ideal School and College. HSC 2025: GPA 5.00 Golden, Notre Dame College. Transcripts are linked in the Education section.';
+    } else if (/brac|university|architecture|batch/.test(q)) {
+      reply = 'Bachelor of Architecture at BRAC University, Summer 2026 batch. Student ID 1000061008. First-semester work includes ARC-101 Design I and related foundation courses.';
+    } else if (/hello|hi|hey|who are you/.test(q)) {
+      reply = 'I am the curator of Shadid Ahamed’s digital spatial archive. I can navigate sections for you or answer questions about the handmade book, education, process, drawings, and studio work.';
+    } else {
+      reply = 'I can open any section (book, education, drawings, architecture, process, digital, achievements, contact) or answer about the handmade portfolio, academic path, and working methods. Try “open the book” or “show education”.';
+    }
+    addMsg(reply, true);
+  }
+
+  function sendCurator() {
+    const val = curatorInput.value.trim();
+    if (!val) return;
+    addMsg(val, false);
+    curatorInput.value = '';
+    setTimeout(() => curatorRespond(val), 280);
+  }
+  curatorSend.addEventListener('click', sendCurator);
+  curatorInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendCurator();
   });
-  document.getElementById('aiClose').addEventListener('click',()=>{
-    aiPanel.classList.remove('open');
-    document.getElementById('aiToggle').classList.remove('hidden');
-  });
-  document.getElementById('askCuratorBtn').addEventListener('click',()=>{
-    aiPanel.classList.add('open');
-    document.getElementById('aiToggle').classList.add('hidden');
-    if(!chatHistory.length)addMsg('Ask about the handmade Book, education, craft, or say “open the book”.','bot');
+
+  // ---------- Contact form ----------
+  window.handleContact = function (e) {
+    e.preventDefault();
+    const name = document.getElementById('c-name').value;
+    const email = document.getElementById('c-email').value;
+    const msg = document.getElementById('c-msg').value;
+    const subject = encodeURIComponent('Portfolio inquiry from ' + name);
+    const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:shadidahamed.matashome05m@gmail.com?subject=' + subject + '&body=' + body;
+    return false;
+  };
+
+  // ---------- Hover for remaining interactive ----------
+  document.querySelectorAll('a, button, .nav-item, .btn').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
 
 })();
