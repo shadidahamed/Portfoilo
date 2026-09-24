@@ -3,984 +3,903 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Personal portfolio of a Bangladeshi student transitioning from Architecture to Computer Science & Engineering — spatial precision meets digital craft.">
-<title>SA — Architecture → CSE</title>
-<link rel="icon" type="image/svg+xml" href="assets/favicons/sa-favicon.svg">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/sa-favicon-16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/sa-favicon-32.png">
-<link rel="icon" type="image/png" sizes="48x48" href="assets/favicons/sa-favicon-48.png">
-<link rel="icon" type="image/png" sizes="64x64" href="assets/favicons/sa-favicon-64.png">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/favicons/sa-favicon-128.png">
-<link rel="icon" type="image/png" sizes="256x256" href="assets/favicons/sa-favicon-256.png">
-<link rel="apple-touch-icon" href="assets/favicons/sa-favicon-hires.png">
+<meta name="description" content="Shadid Ahamed — Architecture student at BRAC University. A handmade portfolio translated into a digital spatial archive.">
+<title>Shadid Ahamed — Architecture · Craft · Code</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Cpath d='M6 6h4v20H6zm8 0h4v8h-4zm0 12h4v8h-4zm8-12h4v20h-4z' fill='%236B2C36'/%3E%3Cpath d='M4 4h24v1H4zm0 23h24v1H4z' fill='%23F2F0EA' opacity='.3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 :root {
-  --bg: #0a0a0b;
-  --bg-elevated: #121214;
-  --bg-card: #161618;
-  --text: #f5f2eb;
-  --text-muted: #a8a29e;
-  --accent: #c9a86c;
-  --accent-soft: rgba(201,168,108,0.15);
-  --teal: #4ecdc4;
-  --teal-soft: rgba(78,205,196,0.12);
-  --concrete: #2a2a2c;
-  --terracotta: #c47a5a;
-  --border: rgba(245,242,235,0.08);
-  --shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
-  --radius: 12px;
+  --bg: #050505;
+  --bg-elev: #0B0B0C;
+  --bg-card: #111112;
+  --text: #F2F0EA;
+  --muted: #74747A;
+  --accent: #6B2C36;
+  --accent-soft: rgba(107,44,54,0.18);
+  --silver: #A8A8AE;
+  --border: rgba(242,240,234,0.07);
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
   --ease: cubic-bezier(0.22,1,0.36,1);
-  --transition: 0.4s var(--ease);
-}
-[data-theme="light"] {
-  --bg: #f5f2eb;
-  --bg-elevated: #ffffff;
-  --bg-card: #faf8f4;
-  --text: #0a0a0b;
-  --text-muted: #57534e;
-  --accent: #9a7b4f;
-  --accent-soft: rgba(154,123,79,0.12);
-  --teal: #2a9d8f;
-  --teal-soft: rgba(42,157,143,0.1);
-  --concrete: #e7e5e0;
-  --border: rgba(10,10,11,0.08);
-  --shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
+  --radius: 10px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
+html{font-size:16px;scroll-behavior:smooth}
 body{
   font-family:var(--font-sans);
   background:var(--bg);
   color:var(--text);
-  line-height:1.6;
+  line-height:1.65;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
-  transition:background var(--transition),color var(--transition);
+  cursor:none;
 }
+@media (hover:none),(pointer:coarse){body{cursor:auto} .cursor,.cursor-dot{display:none!important}}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+button{font-family:inherit;cursor:none;border:none;background:none;color:inherit}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
-/* LOADING */
-#loader{
-  position:fixed;inset:0;z-index:9999;
-  background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:opacity 0.8s var(--ease),visibility 0.8s;
+/* CURSOR */
+.cursor{
+  position:fixed;width:18px;height:18px;border:1.5px solid var(--accent);
+  border-radius:50%;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s;
+  mix-blend-mode:difference;
 }
-#loader.done{opacity:0;visibility:hidden;pointer-events:none}
-.loader-logo{
-  width:72px;height:72px;
-  border:1.5px solid var(--accent);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-serif);font-size:1.75rem;color:var(--accent);
-  letter-spacing:0.05em;
-  animation:pulse 1.6s ease-in-out infinite;
+.cursor-dot{
+  position:fixed;width:4px;height:4px;background:var(--text);
+  border-radius:50%;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
 }
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:0.85}}
-.loader-bar{
-  width:120px;height:2px;background:var(--concrete);margin-top:2rem;overflow:hidden;border-radius:1px;
-}
-.loader-bar span{
-  display:block;height:100%;width:0;background:var(--accent);
-  animation:load 2.2s var(--ease) forwards;
-}
-@keyframes load{to{width:100%}}
+.cursor.hover{width:36px;height:36px;border-color:var(--text)}
 
-/* NAV */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:1.25rem 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(to bottom,var(--bg) 60%,transparent);
-  transition:background var(--transition);
+/* CANVAS BG */
+#spaceCanvas{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;
 }
-.nav-logo{
+
+/* LAYOUT */
+.app{display:flex;min-height:100vh;position:relative;z-index:1}
+.sidebar{
+  width:220px;flex-shrink:0;
+  background:var(--bg-elev);
+  border-right:1px solid var(--border);
+  padding:2rem 0;
+  display:flex;flex-direction:column;
+  position:fixed;top:0;left:0;bottom:0;z-index:50;
+  transition:transform .4s var(--ease);
+}
+.sidebar-logo{
   font-family:var(--font-serif);font-size:1.5rem;color:var(--accent);
-  letter-spacing:0.04em;transition:opacity 0.3s;
+  padding:0 1.5rem 2rem;letter-spacing:.06em;
 }
-.nav-logo:hover{opacity:0.8}
-.nav-links{display:flex;gap:2rem;align-items:center}
-.nav-links a{
-  font-size:0.8125rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--text-muted);transition:color 0.3s;
+.nav-list{list-style:none;flex:1}
+.nav-list li a{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.7rem 1.5rem;font-size:.78rem;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  transition:color .25s,background .25s;
 }
-.nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-controls{display:flex;gap:0.75rem;align-items:center}
-.theme-btn,.music-btn{
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  transition:background 0.3s,border-color 0.3s;
+.nav-list li a:hover,.nav-list li a.active{color:var(--text);background:var(--accent-soft)}
+.nav-list li a .num{color:var(--accent);font-variant-numeric:tabular-nums;min-width:1.6rem}
+.sidebar-footer{padding:1.5rem;font-size:.7rem;color:var(--muted);border-top:1px solid var(--border)}
+.menu-btn{
+  display:none;position:fixed;top:1.1rem;left:1.1rem;z-index:60;
+  width:42px;height:42px;border:1px solid var(--border);border-radius:50%;
+  background:var(--bg-elev);align-items:center;justify-content:center;flex-direction:column;gap:5px;
 }
-.theme-btn:hover,.music-btn:hover{background:var(--accent-soft);border-color:var(--accent)}
-.theme-btn svg,.music-btn svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:1.5}
-.menu-toggle{display:none;width:40px;height:40px;flex-direction:column;justify-content:center;gap:5px}
-.menu-toggle span{display:block;width:20px;height:1.5px;background:var(--text);transition:0.3s}
+.menu-btn span{display:block;width:16px;height:1.5px;background:var(--text)}
 @media(max-width:900px){
-  .nav-links{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;gap:2.5rem;opacity:0;visibility:hidden;transition:0.4s}
-  .nav-links.open{opacity:1;visibility:visible}
-  .menu-toggle{display:flex}
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .menu-btn{display:flex}
+  .main{margin-left:0!important}
 }
 
-/* SECTIONS */
-section{padding:7rem 2rem;position:relative}
-.container{max-width:1200px;margin:0 auto}
+.main{
+  flex:1;margin-left:220px;min-height:100vh;
+  padding:0;
+}
+.view{
+  display:none;padding:4.5rem 3rem 5rem;
+  max-width:1100px;animation:fadeIn .5s var(--ease);
+}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:900px){.view{padding:5rem 1.5rem 4rem}}
+
 .section-label{
-  font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1rem;
+  font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.85rem;
 }
 .section-title{
-  font-family:var(--font-serif);font-size:clamp(2.25rem,5vw,3.5rem);
-  font-weight:400;line-height:1.15;margin-bottom:1.5rem;letter-spacing:-0.01em;
+  font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3.1rem);
+  font-weight:400;line-height:1.15;margin-bottom:1.25rem;letter-spacing:-.01em;
 }
-.section-lead{font-size:1.0625rem;color:var(--text-muted);max-width:540px;line-height:1.7}
+.lead{font-size:1.05rem;color:var(--muted);max-width:540px;line-height:1.75;font-weight:300}
 
-/* HERO */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  padding-top:6rem;padding-bottom:4rem;
+/* HOME */
+.home-name{
+  font-family:var(--font-sans);font-weight:800;
+  font-size:clamp(3.2rem,9vw,5.8rem);line-height:.95;
+  letter-spacing:-.03em;margin:1.5rem 0 1.75rem;
 }
-.hero-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+.home-name span{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.75rem 0}
+.chip{
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:.4rem .85rem;border:1px solid var(--border);border-radius:999px;color:var(--muted);
 }
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:3rem}}
-.hero-name{
-  font-family:var(--font-serif);font-size:clamp(3rem,8vw,5.5rem);
-  line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.25rem;
+.quote-block{
+  margin:2rem 0;padding:1.1rem 0 1.1rem 1.25rem;
+  border-left:3px solid var(--accent);color:var(--muted);font-size:.95rem;max-width:520px;
 }
-.hero-tag{
-  font-size:1.125rem;color:var(--text-muted);max-width:420px;line-height:1.65;margin-bottom:2rem;
+.btn-row{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2.25rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 1.6rem;font-size:.78rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  border-radius:999px;transition:background .3s,color .3s,border-color .3s;
 }
-.hero-cta{
-  display:inline-flex;align-items:center;gap:0.75rem;
-  padding:0.875rem 1.75rem;border:1px solid var(--accent);
-  border-radius:999px;font-size:0.8125rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--accent);transition:background 0.3s,color 0.3s;
-}
-.hero-cta:hover{background:var(--accent);color:var(--bg)}
-.hero-visual{position:relative;height:420px}
-@media(max-width:900px){.hero-visual{height:340px}}
-
-/* CIRCULAR CAROUSEL */
-.carousel-wrap{
-  position:relative;width:100%;height:100%;
-  perspective:1200px;overflow:hidden;
-  touch-action:pan-y;
-}
-.carousel-track{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  transform-style:preserve-3d;
-}
-.carousel-item{
-  position:absolute;width:220px;height:280px;
-  border-radius:8px;overflow:hidden;
-  box-shadow:var(--shadow);
-  cursor:grab;transition:box-shadow 0.3s;
-  background:var(--concrete);
-}
-.carousel-item:active{cursor:grabbing}
-.carousel-item img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform 0.5s var(--ease);
-}
-.carousel-item:hover img{transform:scale(1.03)}
-.carousel-nav{
-  position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);
-  display:flex;gap:0.5rem;z-index:5;
-}
-.carousel-nav button{
-  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  background:var(--bg-elevated);transition:0.3s;
-}
-.carousel-nav button:hover{border-color:var(--accent);background:var(--accent-soft)}
-.carousel-nav svg{width:16px;height:16px;stroke:var(--text)}
-
-/* 3D BOOK */
-.book-float{
-  position:absolute;right:0;bottom:0;width:160px;height:200px;
-  transform-style:preserve-3d;cursor:pointer;
-  transition:transform 0.6s var(--ease);
-  z-index:10;
-}
-.book-float:hover{transform:rotateY(-18deg) rotateX(6deg) scale(1.04)}
-.book-float img{
-  width:100%;height:100%;object-fit:cover;border-radius:4px;
-  box-shadow:var(--shadow);
-}
+.btn-primary{background:var(--accent);color:var(--text);border:1px solid var(--accent)}
+.btn-primary:hover{background:transparent;color:var(--accent)}
+.btn-ghost{border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
 
 /* PROFILE */
-.profile-grid{
-  display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:start;
-}
-@media(max-width:900px){.profile-grid{grid-template-columns:1fr}}
-.bio{
-  font-size:1.125rem;line-height:1.8;color:var(--text-muted);
-  font-weight:300;
-}
-.bio p{margin-bottom:1.25rem}
+.profile-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:start}
+@media(max-width:800px){.profile-grid{grid-template-columns:1fr}}
+.bio p{margin-bottom:1.15rem;color:var(--muted);font-weight:300;font-size:1.05rem}
 .bio strong{color:var(--text);font-weight:500}
-.facts{
-  display:grid;gap:1rem;
+.facts{display:grid;gap:.85rem;margin-top:1.5rem}
+.fact{
+  padding:1.1rem 1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
 }
-.fact-card{
-  padding:1.25rem 1.5rem;background:var(--bg-card);
-  border:1px solid var(--border);border-radius:var(--radius);
-  transition:border-color 0.3s;
+.fact-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.fact-value{font-size:.92rem;font-weight:500}
+
+/* BOOK */
+.book-stage{
+  position:relative;height:420px;margin:2rem 0 1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
 }
-.fact-card:hover{border-color:var(--accent)}
-.fact-label{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.35rem}
-.fact-value{font-size:0.9375rem;font-weight:500}
+.book-float{
+  width:200px;height:260px;transform-style:preserve-3d;
+  animation:floatBook 7s ease-in-out infinite;
+  cursor:pointer;box-shadow:0 30px 60px rgba(0,0,0,.55);
+}
+.book-float img{width:100%;height:100%;object-fit:cover;border-radius:4px}
+@keyframes floatBook{
+  0%,100%{transform:translateY(0) rotateY(-8deg) rotateX(4deg)}
+  50%{transform:translateY(-14px) rotateY(8deg) rotateX(-2deg)}
+}
+.book-thumbs{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.5rem}
+.book-thumbs img{
+  width:88px;height:110px;object-fit:cover;border-radius:6px;
+  border:2px solid transparent;cursor:pointer;flex-shrink:0;opacity:.7;transition:.3s;
+}
+.book-thumbs img:hover,.book-thumbs img.active{opacity:1;border-color:var(--accent)}
+.book-meta{margin-top:1.75rem;max-width:560px}
+.book-meta h3{font-family:var(--font-serif);font-size:1.5rem;margin-bottom:.5rem}
+.book-meta p{color:var(--muted);font-size:.95rem}
+
+/* PROCESS */
+.process-block{margin-bottom:3rem}
+.process-block h3{font-family:var(--font-serif);font-size:1.45rem;margin-bottom:1rem}
+.process-block p{color:var(--muted);font-weight:300;margin-bottom:1rem;max-width:640px}
+.lage{font-family:var(--font-serif);font-size:1.6rem;color:var(--accent);margin-top:2.5rem;letter-spacing:.04em}
 
 /* EDUCATION */
-.edu-block{margin-bottom:5rem}
-.edu-block:last-child{margin-bottom:0}
-.edu-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.edu-place{font-family:var(--font-serif);font-size:1.75rem}
-.edu-years{font-size:0.875rem;color:var(--text-muted)}
-.edu-carousel{height:320px;margin-bottom:1.5rem}
-.doc-cards{display:flex;gap:1rem;flex-wrap:wrap}
-.doc-card{
-  display:flex;align-items:center;gap:1rem;
-  padding:1rem 1.25rem;background:var(--bg-card);
-  border:1px solid var(--border);border-radius:var(--radius);
-  transition:border-color 0.3s,transform 0.3s;
+.edu-track{display:flex;flex-direction:column;gap:0;margin-top:2rem;position:relative}
+.edu-track::before{
+  content:'';position:absolute;left:11px;top:12px;bottom:12px;width:1px;background:var(--border);
 }
-.doc-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.doc-icon{
-  width:40px;height:40px;border-radius:8px;background:var(--accent-soft);
-  display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:0.75rem;font-weight:600;
+.edu-item{display:flex;gap:1.5rem;padding:1.25rem 0;position:relative}
+.edu-dot{
+  width:24px;height:24px;border-radius:50%;background:var(--bg);
+  border:2px solid var(--accent);flex-shrink:0;z-index:1;
 }
-.doc-info h4{font-size:0.875rem;font-weight:500;margin-bottom:0.15rem}
-.doc-info span{font-size:0.75rem;color:var(--text-muted)}
-.achievement-highlight{
-  margin-top:2rem;padding:1.5rem;border:1px solid var(--accent);
-  border-radius:var(--radius);background:var(--accent-soft);
-  display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;
-}
-.achievement-highlight img{
-  width:120px;height:120px;object-fit:cover;border-radius:8px;
-}
-.achievement-text h4{font-family:var(--font-serif);font-size:1.25rem;margin-bottom:0.35rem}
-.achievement-text p{font-size:0.9375rem;color:var(--text-muted)}
+.edu-content h4{font-size:1.05rem;font-weight:600;margin-bottom:.25rem}
+.edu-content .years{font-size:.8rem;color:var(--accent);margin-bottom:.35rem}
+.edu-content p{font-size:.9rem;color:var(--muted)}
+.edu-gallery{display:flex;gap:.75rem;margin-top:1rem;overflow-x:auto}
+.edu-gallery img{width:110px;height:80px;object-fit:cover;border-radius:6px;cursor:pointer;opacity:.85;transition:.3s}
+.edu-gallery img:hover{opacity:1}
 
 /* SKILLS */
-.skills-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;
-}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem;margin-top:2rem}
 .skill-card{
-  padding:1.75rem;background:var(--bg-card);border:1px solid var(--border);
-  border-radius:var(--radius);cursor:pointer;transition:border-color 0.3s,transform 0.3s;
-  position:relative;overflow:hidden;
+  padding:1.6rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  cursor:pointer;transition:border-color .3s,transform .3s;
 }
 .skill-card:hover{border-color:var(--accent);transform:translateY(-3px)}
-.skill-card.art-trigger{border-color:var(--teal)}
-.skill-icon{
-  width:36px;height:36px;margin-bottom:1rem;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:8px;background:var(--accent-soft);color:var(--accent);font-size:0.875rem;
-}
-.skill-card h3{font-size:1.0625rem;font-weight:500;margin-bottom:0.5rem}
-.skill-card p{font-size:0.875rem;color:var(--text-muted);line-height:1.55}
-.skill-card .arrow{position:absolute;top:1.5rem;right:1.5rem;opacity:0.4;font-size:1.25rem}
+.skill-card h3{font-size:1rem;font-weight:600;margin-bottom:.45rem}
+.skill-card p{font-size:.85rem;color:var(--muted);line-height:1.5}
+.skill-card .tag{display:inline-block;margin-top:.85rem;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
 
-/* ART SUBSECTION */
-#art-design{
-  display:none;padding-top:2rem;
-}
-#art-design.visible{display:block}
-.art-back{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  font-size:0.8125rem;color:var(--text-muted);margin-bottom:2rem;
-  transition:color 0.3s;
-}
-.art-back:hover{color:var(--accent)}
-.art-carousel{height:380px;margin-bottom:2rem}
-
-/* PROJECTS */
-.projects-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;
-}
-.project-card{
+/* PROJECTS / WORK */
+.work-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:2rem}
+.work-card{
   border-radius:var(--radius);overflow:hidden;background:var(--bg-card);
-  border:1px solid var(--border);transition:transform 0.3s,border-color 0.3s;
-  cursor:pointer;
+  border:1px solid var(--border);cursor:pointer;transition:transform .3s,border-color .3s;
 }
-.project-card:hover{transform:translateY(-4px);border-color:var(--accent)}
-.project-card img{width:100%;height:180px;object-fit:cover}
-.project-card .info{padding:1.25rem}
-.project-card h3{font-size:0.9375rem;font-weight:500;margin-bottom:0.35rem}
-.project-card p{font-size:0.8125rem;color:var(--text-muted)}
+.work-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.work-card img{width:100%;height:160px;object-fit:cover}
+.work-card .info{padding:1.1rem}
+.work-card h3{font-size:.9rem;font-weight:500;margin-bottom:.25rem}
+.work-card p{font-size:.8rem;color:var(--muted)}
 
-/* EXPERIMENTS */
-.experiment-frame{
-  max-width:640px;margin:0 auto;border-radius:var(--radius);overflow:hidden;
-  border:1px solid var(--border);box-shadow:var(--shadow);
+/* ACHIEVEMENTS */
+.ach-highlight{
+  display:flex;gap:1.75rem;align-items:center;flex-wrap:wrap;
+  padding:1.75rem;border:1px solid var(--accent);border-radius:var(--radius);
+  background:var(--accent-soft);margin-top:1.5rem;
 }
-.experiment-frame img{width:100%;height:auto}
-
-/* CV */
-.cv-section{text-align:center}
-.cv-card{
-  display:inline-flex;flex-direction:column;align-items:center;gap:1.5rem;
-  padding:3rem 4rem;background:var(--bg-card);border:1px solid var(--accent);
-  border-radius:var(--radius);max-width:420px;
-}
-.cv-card h3{font-family:var(--font-serif);font-size:1.75rem}
-.cv-card p{color:var(--text-muted);font-size:0.9375rem}
-.cv-btn{
-  display:inline-flex;align-items:center;gap:0.75rem;
-  padding:1rem 2rem;background:var(--accent);color:var(--bg);
-  border-radius:999px;font-size:0.8125rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
-  transition:opacity 0.3s,transform 0.3s;
-}
-.cv-btn:hover{opacity:0.9;transform:translateY(-2px)}
+.ach-highlight img{width:140px;height:140px;object-fit:cover;border-radius:8px}
+.ach-text h3{font-family:var(--font-serif);font-size:1.35rem;margin-bottom:.4rem}
+.ach-text p{color:var(--muted);font-size:.95rem}
 
 /* CONTACT */
-.contact{text-align:center;padding-bottom:6rem}
-.contact-statement{
-  font-family:var(--font-serif);font-size:clamp(1.75rem,4vw,2.5rem);
-  max-width:640px;margin:0 auto 2.5rem;line-height:1.3;
-}
-.contact-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:3rem}
+.contact-links{display:flex;flex-wrap:wrap;gap:1rem 1.75rem;margin:2rem 0}
 .contact-links a{
-  font-size:0.875rem;color:var(--text-muted);letter-spacing:0.04em;
-  transition:color 0.3s;border-bottom:1px solid transparent;
+  font-size:.9rem;color:var(--muted);border-bottom:1px solid transparent;transition:.25s;
 }
 .contact-links a:hover{color:var(--accent);border-color:var(--accent)}
-.final-sig{
-  font-family:var(--font-serif);font-size:1.5rem;color:var(--accent);
-  letter-spacing:0.08em;opacity:0.7;
-}
+.final-sig{font-family:var(--font-serif);font-size:1.6rem;color:var(--accent);margin-top:3rem;opacity:.8;letter-spacing:.06em}
 
-/* LIGHTBOX */
+/* CV */
+.cv-card{
+  display:inline-flex;flex-direction:column;align-items:center;gap:1.25rem;
+  padding:2.75rem 3.5rem;background:var(--bg-card);border:1px solid var(--accent);
+  border-radius:var(--radius);text-align:center;max-width:400px;
+}
+.cv-card h3{font-family:var(--font-serif);font-size:1.6rem}
+.cv-card p{color:var(--muted);font-size:.9rem}
+.doc-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;justify-content:center}
+.doc-link{
+  display:flex;align-items:center;gap:.85rem;padding:1rem 1.25rem;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:.3s;
+}
+.doc-link:hover{border-color:var(--accent)}
+.doc-icon{width:36px;height:36px;border-radius:6px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent)}
+
+/* LIGHTBOX / DASHBOARD */
 .lightbox{
-  position:fixed;inset:0;z-index:1000;
-  background:rgba(10,10,11,0.92);backdrop-filter:blur(20px);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;visibility:hidden;transition:0.4s var(--ease);
-  padding:2rem;
+  position:fixed;inset:0;z-index:200;background:rgba(5,5,5,.94);
+  display:flex;align-items:center;justify-content:center;padding:2rem;
+  opacity:0;visibility:hidden;transition:.4s var(--ease);
 }
 .lightbox.open{opacity:1;visibility:visible}
-.lightbox-content{
-  max-width:900px;width:100%;position:relative;
-  transform:scale(0.94);transition:transform 0.4s var(--ease);
+.lb-inner{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;max-width:1000px;width:100%;
+  transform:scale(.96);transition:transform .4s var(--ease);
 }
-.lightbox.open .lightbox-content{transform:scale(1)}
-.lightbox img{
-  width:100%;max-height:70vh;object-fit:contain;border-radius:8px;
-  box-shadow:0 30px 60px rgba(0,0,0,0.5);
+.lightbox.open .lb-inner{transform:scale(1)}
+@media(max-width:700px){.lb-inner{grid-template-columns:1fr}}
+.lb-inner img{width:100%;max-height:75vh;object-fit:contain;border-radius:8px}
+.lb-meta h3{font-family:var(--font-serif);font-size:1.6rem;margin-bottom:.75rem}
+.lb-meta p{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
+.lb-meta .meta-row{font-size:.8rem;color:var(--silver);margin-bottom:.35rem}
+.lb-meta .meta-row span{color:var(--accent)}
+.lb-close{
+  position:absolute;top:1.5rem;right:1.5rem;width:42px;height:42px;
+  border:1px solid var(--border);border-radius:50%;font-size:1.3rem;
+  display:flex;align-items:center;justify-content:center;transition:.3s;
 }
-.lightbox-meta{margin-top:1.5rem;text-align:center}
-.lightbox-meta h3{font-family:var(--font-serif);font-size:1.5rem;margin-bottom:0.5rem}
-.lightbox-meta p{font-size:0.9375rem;color:var(--text-muted);max-width:480px;margin:0 auto}
-.lightbox-close{
-  position:absolute;top:-3rem;right:0;
-  width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.25rem;transition:0.3s;
-}
-.lightbox-close:hover{border-color:var(--accent);color:var(--accent)}
+.lb-close:hover{border-color:var(--accent);color:var(--accent)}
 
-/* FOOTER */
-footer{
-  padding:2rem;text-align:center;font-size:0.75rem;color:var(--text-muted);
-  border-top:1px solid var(--border);
+/* AI CURATOR */
+.ai-panel{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:80;
+  width:340px;max-height:420px;background:var(--bg-elev);
+  border:1px solid var(--border);border-radius:14px;
+  display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.5);
+  transform:translateY(20px);opacity:0;visibility:hidden;transition:.35s var(--ease);
 }
+.ai-panel.open{transform:none;opacity:1;visibility:visible}
+.ai-header{
+  padding:.9rem 1.1rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
+}
+.ai-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
+.ai-msg{font-size:.85rem;line-height:1.55;padding:.7rem .9rem;border-radius:8px;max-width:95%}
+.ai-msg.bot{background:var(--bg-card);color:var(--muted);align-self:flex-start}
+.ai-msg.user{background:var(--accent-soft);color:var(--text);align-self:flex-end}
+.ai-input-row{display:flex;border-top:1px solid var(--border);padding:.6rem}
+.ai-input-row input{
+  flex:1;background:transparent;border:none;color:var(--text);font-size:.85rem;padding:.4rem .6rem;outline:none;
+}
+.ai-input-row button{padding:.4rem .8rem;color:var(--accent);font-size:.8rem;font-weight:600}
+.ai-toggle{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:70;
+  width:52px;height:52px;border-radius:50%;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;letter-spacing:.04em;
+  box-shadow:0 8px 24px rgba(107,44,54,.4);transition:transform .3s;
+}
+.ai-toggle:hover{transform:scale(1.06)}
+.ai-panel.open ~ .ai-toggle,.ai-toggle.hidden{display:none}
 
-/* UTIL */
-.mt-4{margin-top:2rem}
-.mb-2{margin-bottom:1rem}
-.hidden{display:none!important}
+/* CAROUSEL (circular) */
+.carousel-wrap{position:relative;height:340px;perspective:1100px;overflow:hidden;touch-action:pan-y;margin:1.5rem 0}
+.carousel-track{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d}
+.carousel-item{
+  position:absolute;width:180px;height:230px;border-radius:8px;overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.45);cursor:pointer;background:var(--bg-card);
+}
+.carousel-item img{width:100%;height:100%;object-fit:cover}
+.carousel-nav{position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:5}
+.carousel-nav button{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--border);
+  background:var(--bg-elev);display:flex;align-items:center;justify-content:center;font-size:.9rem;
+}
+.carousel-nav button:hover{border-color:var(--accent)}
+
+/* UTILS */
+.mt-2{margin-top:1.5rem}
+.mb-1{margin-bottom:.75rem}
 </style>
 </head>
 <body>
-<!-- LOADER -->
-<div id="loader" role="status" aria-live="polite">
-  <div class="loader-logo" aria-hidden="true">SA</div>
-  <div class="loader-bar"><span></span></div>
+<canvas id="spaceCanvas"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">SA</div>
+    <ul class="nav-list" id="navList">
+      <li><a href="#" data-view="home" class="active"><span class="num">00</span> Cover</a></li>
+      <li><a href="#" data-view="profile"><span class="num">01</span> Profile</a></li>
+      <li><a href="#" data-view="book"><span class="num">02</span> The Book</a></li>
+      <li><a href="#" data-view="process"><span class="num">03</span> Process</a></li>
+      <li><a href="#" data-view="education"><span class="num">04</span> Education</a></li>
+      <li><a href="#" data-view="skills"><span class="num">05</span> Skills</a></li>
+      <li><a href="#" data-view="work"><span class="num">06</span> Work</a></li>
+      <li><a href="#" data-view="achievements"><span class="num">07</span> Achievements</a></li>
+      <li><a href="#" data-view="contact"><span class="num">08</span> Contact</a></li>
+      <li><a href="#" data-view="cv"><span class="num">09</span> CV</a></li>
+    </ul>
+    <div class="sidebar-footer">BRAC · ARC-101 · 2026</div>
+  </aside>
+
+  <main class="main">
+    <!-- 00 HOME -->
+    <section class="view active" id="view-home">
+      <p class="section-label">A handmade portfolio translated into a digital spatial archive</p>
+      <h1 class="home-name"><span>SHADID</span><span>AHAMED</span></h1>
+      <p class="lead">Architecture student. Creative developer. Artist. Maker. First-semester portfolio built from hand, geometry, material, drawing, and code.</p>
+      <div class="chips">
+        <span class="chip">Architecture</span>
+        <span class="chip">Drawing</span>
+        <span class="chip">Craft</span>
+        <span class="chip">Web / JS</span>
+        <span class="chip">Exploring CSE</span>
+      </div>
+      <div class="quote-block">This is not a freelance “hire me” site. It is a research-oriented talent document — a digital continuation of a physical handmade book.</div>
+      <div class="btn-row">
+        <button class="btn btn-primary" data-goto="book">Enter the Book →</button>
+        <button class="btn btn-ghost" data-goto="education">Explore Architecture</button>
+        <button class="btn btn-ghost" id="askCuratorBtn">Ask the Curator</button>
+      </div>
+    </section>
+
+    <!-- 01 PROFILE -->
+    <section class="view" id="view-profile">
+      <p class="section-label">01 — Profile</p>
+      <h2 class="section-title">A mind shaped by space,<br>learning to shape systems.</h2>
+      <div class="profile-grid">
+        <div class="bio">
+          <p>I am <strong>Shadid Ahamed</strong>, an architecture student at BRAC University (Roll 1000061008, ARC-101, Summer 2026). I live in Paltan, Dhaka.</p>
+          <p>Architecture taught me to see structure, light, proportion, and the quiet dignity of materials. Every drawing is a decision; every model a hypothesis about how people inhabit a place.</p>
+          <p>Now I am also learning how information moves, how interfaces breathe, and how code can hold intention as carefully as concrete holds a floor. The transition is not a departure — it is a continuation of the same craft in a new medium.</p>
+        </div>
+        <div>
+          <div class="carousel-wrap" id="profileCarousel"></div>
+          <div class="facts">
+            <div class="fact"><div class="fact-label">Location</div><div class="fact-value">Paltan, Dhaka, Bangladesh</div></div>
+            <div class="fact"><div class="fact-label">Institution</div><div class="fact-value">BRAC University · Architecture</div></div>
+            <div class="fact"><div class="fact-label">Roll · Course</div><div class="fact-value">1000061008 · ARC-101</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 THE BOOK -->
+    <section class="view" id="view-book">
+      <p class="section-label">02 — The Book</p>
+      <h2 class="section-title">Handmade first-semester portfolio.</h2>
+      <p class="lead">Black mount / Swiss board, pen hatching, geometric lettering, checkerboard binding, burgundy accents. Hand-lettered name, roll number, and ARC-101.</p>
+      <div class="book-stage">
+        <div class="book-float" id="bookFloat" title="View the handmade book">
+          <img src="book-3d.jpg" alt="Handmade architectural portfolio book" loading="lazy" width="200" height="260">
+        </div>
+      </div>
+      <div class="book-thumbs" id="bookThumbs">
+        <img src="book-3d.jpg" alt="Book cover" class="active" data-src="book-3d.jpg" data-title="The Handmade Book" data-desc="Fully handmade first-semester portfolio. Black mount board, pen hatching, geometric PORTFOLIO lettering, checkerboard binding, burgundy accents." data-mat="Swiss board · Black mount · Pen · Binding" data-concept="Physical craft as primary research method.">
+      </div>
+      <div class="book-meta">
+        <h3>Material & Concept</h3>
+        <p>This book is not decoration. It is the primary research document of my first semester — a physical object that records how I think in geometry, material, and persistence. The digital archive exists to extend its life.</p>
+      </div>
+    </section>
+
+    <!-- 03 PROCESS -->
+    <section class="view" id="view-process">
+      <p class="section-label">03 — Process / Persistence</p>
+      <h2 class="section-title">If I had to tell someone who Shadid was…</h2>
+      <div class="process-block">
+        <p>I would not start with results. I would start with effort. Closed doors, pressure, disappointment, and the quiet decision to keep drawing, keep making, keep showing up.</p>
+        <p>He kept fighting and creating even when the path was unclear. The real achievement is not a single grade or a single project — it is what he overcame while still trying to build something beautiful.</p>
+        <p>Remember the fighter who still tried.</p>
+      </div>
+      <div class="process-block">
+        <h3>Family</h3>
+        <p>Father: Tofail Ahmed, Police Inspector. Mother: homemaker. Wife. Younger sister.</p>
+        <p>Complex real relationships — love, pressure, misunderstanding, and support existing side by side. The quiet desire that one day they will say: “He struggled a lot, but he never gave up.”</p>
+      </div>
+      <p class="lage">Lage Raho.</p>
+      <p class="lead" style="margin-top:.5rem">Keep going. Rise high enough that the noise cannot reach.</p>
+    </section>
+
+    <!-- 04 EDUCATION -->
+    <section class="view" id="view-education">
+      <p class="section-label">04 — Education</p>
+      <h2 class="section-title">Trajectory of attention.</h2>
+      <p class="lead">Architecture → Visual thinking → Digital systems → Exploring CSE</p>
+      <div class="edu-track">
+        <div class="edu-item">
+          <div class="edu-dot"></div>
+          <div class="edu-content">
+            <h4>Motijheel Ideal School and College</h4>
+            <div class="years">2013 – 2023</div>
+            <p>SSC GPA 5.00 Golden A+</p>
+            <div class="edu-gallery">
+              <img src="school-1.jpg" alt="School" loading="lazy" data-title="School Years" data-desc="Where the first habits of care and measurement were formed.">
+              <img src="school-2.jpg" alt="School" loading="lazy" data-title="Early Foundations" data-desc="Learning to see structure long before naming it architecture.">
+            </div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-dot"></div>
+          <div class="edu-content">
+            <h4>Notre Dame College</h4>
+            <div class="years">2023 – 2025</div>
+            <p>HSC GPA 5.00 Golden A+</p>
+            <div class="edu-gallery">
+              <img src="college-1.jpg" alt="NDC" loading="lazy" data-title="Notre Dame College" data-desc="A place that demanded both excellence and humility.">
+              <img src="college-2.jpg" alt="NDC" loading="lazy" data-title="Campus" data-desc="Years spent refining attention and discipline.">
+              <img src="college-3.jpg" alt="NDC" loading="lazy" data-title="Light & Geometry" data-desc="The quiet geometry of institutional space.">
+              <img src="college-ndc.jpg" alt="NDC" loading="lazy" data-title="NDC" data-desc="Higher Secondary — the bridge between school and the larger world.">
+            </div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-dot"></div>
+          <div class="edu-content">
+            <h4>BRAC University — Architecture</h4>
+            <div class="years">Summer 2026 · Roll 1000061008 · ARC-101</div>
+            <p>First semester. Foundations of architectural thinking, drawing, and making.</p>
+            <div class="edu-gallery">
+              <img src="university-1.jpg" alt="BRAC" loading="lazy" data-title="University Studio" data-desc="Where architectural thinking is taking formal shape.">
+              <img src="university-2.webp" alt="BRAC" loading="lazy" data-title="Campus" data-desc="Spaces that teach how buildings hold people.">
+              <img src="university-3.jpg" alt="BRAC" loading="lazy" data-title="Transition" data-desc="Architecture opening toward systems and code.">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 SKILLS -->
+    <section class="view" id="view-skills">
+      <p class="section-label">05 — Skills</p>
+      <h2 class="section-title">A hierarchy of craft.</h2>
+      <div class="skills-grid">
+        <div class="skill-card" data-skill="art">
+          <h3>Art & Drawing</h3>
+          <p>Sketching, colour studies, iPad work, hatching, and the discipline of the line.</p>
+          <span class="tag">Open gallery →</span>
+        </div>
+        <div class="skill-card" data-skill="arch">
+          <h3>Architectural Design</h3>
+          <p>Spatial thinking, models, geometric studies, Lory Lift, grids, interlock, pavilion concepts.</p>
+          <span class="tag">Core craft</span>
+        </div>
+        <div class="skill-card" data-skill="web">
+          <h3>Web Development</h3>
+          <p>HTML, CSS, JavaScript. Live projects: TrendCart & Shadid’s Game.</p>
+          <span class="tag">View projects →</span>
+        </div>
+        <div class="skill-card" data-skill="video">
+          <h3>Video</h3>
+          <p>Process documentation, visual storytelling, and the craft of sharing work with clarity.</p>
+          <span class="tag">Content</span>
+        </div>
+      </div>
+      <div id="skillDetail" style="display:none;margin-top:2.5rem">
+        <button class="btn btn-ghost" id="skillBack" style="margin-bottom:1.25rem">← Back</button>
+        <div id="skillContent"></div>
+      </div>
+    </section>
+
+    <!-- 06 WORK -->
+    <section class="view" id="view-work">
+      <p class="section-label">06 — Previous Work</p>
+      <h2 class="section-title">Evolution of digital craft.</h2>
+      <p class="lead">Screens and studies that mark the shift from analog precision toward interactive systems.</p>
+      <div class="work-grid" id="workGrid"></div>
+      <div class="mt-2">
+        <p class="section-label">Live Projects</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener">TrendCart →</a>
+          <a class="btn btn-ghost" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener">Shadid’s Game →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 ACHIEVEMENTS -->
+    <section class="view" id="view-achievements">
+      <p class="section-label">07 — Achievements</p>
+      <h2 class="section-title">Quiet milestones.</h2>
+      <div class="ach-highlight">
+        <img src="814113108_1617142683373760_3602804557652732585_n.jpg" alt="Achievement moment" loading="lazy" width="140" height="140">
+        <div class="ach-text">
+          <h3>Consistency over spectacle</h3>
+          <p>Recognition earned through sustained attention and care. A reminder that precision compounds.</p>
+        </div>
+      </div>
+      <div class="mt-2">
+        <p class="lead">SSC GPA 5.00 Golden A+ · HSC GPA 5.00 Golden A+</p>
+      </div>
+    </section>
+
+    <!-- 08 CONTACT -->
+    <section class="view" id="view-contact">
+      <p class="section-label">08 — Contact</p>
+      <h2 class="section-title">Ready for the next space.</h2>
+      <p class="lead">Whether it is made of concrete, paper, pixels, or code.</p>
+      <div class="contact-links">
+        <a href="mailto:shadidahamed.matashome05m@gmail.com">Email</a>
+        <a href="https://wa.me/8801326162684" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://github.com/shadidahamed" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://x.com" target="_blank" rel="noopener">X</a>
+        <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://pinterest.com" target="_blank" rel="noopener">Pinterest</a>
+        <a href="https://reddit.com" target="_blank" rel="noopener">Reddit</a>
+      </div>
+      <div class="final-sig">SA</div>
+    </section>
+
+    <!-- 09 CV -->
+    <section class="view" id="view-cv">
+      <p class="section-label">09 — Documents</p>
+      <h2 class="section-title">Curriculum Vitae & Records</h2>
+      <div style="text-align:center">
+        <div class="cv-card">
+          <h3>Academic Records</h3>
+          <p>SSC & HSC transcripts available for download. Full CV can be requested or added here.</p>
+        </div>
+        <div class="doc-row">
+          <a class="doc-link" href="SSC Transcript.pdf" download>
+            <div class="doc-icon">PDF</div>
+            <div><strong>SSC Transcript</strong><br><span style="font-size:.75rem;color:var(--muted)">Golden A+</span></div>
+          </a>
+          <a class="doc-link" href="HSC Transcript.pdf" download>
+            <div class="doc-icon">PDF</div>
+            <div><strong>HSC Transcript</strong><br><span style="font-size:.75rem;color:var(--muted)">Golden A+</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
-
-<!-- NAV -->
-<header class="nav" role="banner">
-  <a href="#home" class="nav-logo" aria-label="Home">SA</a>
-  <nav class="nav-links" id="navLinks" aria-label="Main">
-    <a href="#home">Home</a>
-    <a href="#profile">Profile</a>
-    <a href="#education">Education</a>
-    <a href="#skills">Skills</a>
-    <a href="#work">Work</a>
-    <a href="#cv">CV</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="nav-controls">
-    <button class="music-btn" id="musicBtn" aria-label="Toggle ambient music" title="Music">
-      <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-    </button>
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-      <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-    </button>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<main>
-<!-- HOME -->
-<section id="home" class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <p class="section-label">Architecture → Computer Science</p>
-        <h1 class="hero-name">SA</h1>
-        <p class="hero-tag">I build spaces that think — moving from the quiet precision of architecture into the living systems of code.</p>
-        <a href="#profile" class="hero-cta">Explore the work <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="hero-visual">
-        <div class="carousel-wrap" id="heroCarousel" data-carousel>
-          <div class="carousel-track"></div>
-          <div class="carousel-nav">
-            <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-            <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-          </div>
-        </div>
-        <div class="book-float" id="book3d" title="Handmade architectural book" role="button" tabindex="0" aria-label="View the handmade book">
-          <img src="assets/images/book-3d.jpg" alt="Handmade architectural sketchbook" loading="lazy" width="160" height="200">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROFILE -->
-<section id="profile">
-  <div class="container">
-    <p class="section-label">Profile</p>
-    <h2 class="section-title">A mind shaped by space,<br>now learning to shape systems.</h2>
-    <div class="profile-grid mt-4">
-      <div class="bio">
-        <p>I grew up measuring the world with a pencil and a T-square. Architecture taught me to see structure, light, proportion, and the quiet dignity of materials. Every drawing was a decision; every model a hypothesis about how people might inhabit a place.</p>
-        <p>Somewhere along the way the questions changed. I began asking not only how a space feels, but how information moves, how interfaces breathe, how code can hold intention as carefully as concrete holds a floor. The transition from Architecture to Computer Science & Engineering is not a departure — it is a continuation of the same craft, expressed in a new medium.</p>
-        <p>I am a student from Bangladesh, carrying the discipline of the studio into the logic of the machine. I still sketch. I still build by hand. And now I also write systems that can think, respond, and endure.</p>
-      </div>
-      <div>
-        <div class="carousel-wrap" style="height:360px" id="profileCarousel" data-carousel>
-          <div class="carousel-track"></div>
-          <div class="carousel-nav">
-            <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-            <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-          </div>
-        </div>
-        <div class="facts mt-4">
-          <div class="fact-card">
-            <div class="fact-label">Origin</div>
-            <div class="fact-value">Bangladesh</div>
-          </div>
-          <div class="fact-card">
-            <div class="fact-label">Path</div>
-            <div class="fact-value">Architecture → CSE</div>
-          </div>
-          <div class="fact-card">
-            <div class="fact-label">Craft</div>
-            <div class="fact-value">Drawing · Making · Systems</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="container">
-    <p class="section-label">Education</p>
-    <h2 class="section-title">Foundations laid in classrooms<br>and studios.</h2>
-
-    <div class="edu-block mt-4">
-      <div class="edu-header">
-        <h3 class="edu-place">School</h3>
-        <span class="edu-years">Formative years</span>
-      </div>
-      <div class="carousel-wrap edu-carousel" id="schoolCarousel" data-carousel>
-        <div class="carousel-track"></div>
-        <div class="carousel-nav">
-          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="edu-block">
-      <div class="edu-header">
-        <h3 class="edu-place">Notre Dame College</h3>
-        <span class="edu-years">Higher Secondary</span>
-      </div>
-      <div class="carousel-wrap edu-carousel" id="collegeCarousel" data-carousel>
-        <div class="carousel-track"></div>
-        <div class="carousel-nav">
-          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-        </div>
-      </div>
-      <div class="doc-cards">
-        <a class="doc-card" href="assets/docs/SSC Transcript.pdf" download>
-          <div class="doc-icon">PDF</div>
-          <div class="doc-info">
-            <h4>SSC Transcript</h4>
-            <span>Download academic record</span>
-          </div>
-        </a>
-        <a class="doc-card" href="assets/docs/HSC Transcript.pdf" download>
-          <div class="doc-icon">PDF</div>
-          <div class="doc-info">
-            <h4>HSC Transcript</h4>
-            <span>Download academic record</span>
-          </div>
-        </a>
-      </div>
-      <div class="achievement-highlight">
-        <img src="assets/images/814113108_1617142683373760_3602804557652732585_n.jpg" alt="Academic achievement moment" loading="lazy" width="120" height="120">
-        <div class="achievement-text">
-          <h4>A quiet milestone</h4>
-          <p>Recognition earned through consistency and care — a moment that still reminds me why precision matters.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="edu-block">
-      <div class="edu-header">
-        <h3 class="edu-place">University</h3>
-        <span class="edu-years">Architecture foundations → CSE transition</span>
-      </div>
-      <div class="carousel-wrap edu-carousel" id="uniCarousel" data-carousel>
-        <div class="carousel-track"></div>
-        <div class="carousel-nav">
-          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <p class="section-label">Skills</p>
-    <h2 class="section-title">A hierarchy of craft.</h2>
-    <p class="section-lead">Technical fluency, spatial intelligence, visual making, and the soft skills that let them speak to one another.</p>
-
-    <div class="skills-grid mt-4">
-      <div class="skill-card">
-        <div class="skill-icon">01</div>
-        <h3>Technical / CSE</h3>
-        <p>Programming fundamentals, systems thinking, data structures, and the quiet logic of clean interfaces.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">02</div>
-        <h3>Architectural Thinking & Making</h3>
-        <p>Spatial reasoning, material sensitivity, model-building, and the discipline of iterative design.</p>
-      </div>
-      <div class="skill-card art-trigger" id="artTrigger" role="button" tabindex="0">
-        <div class="skill-icon" style="background:var(--teal-soft);color:var(--teal)">03</div>
-        <h3>Art & Design</h3>
-        <p>Sketching, colour studies, digital drawing, and the handmade book as a vessel of ideas. Click to enter.</p>
-        <span class="arrow" aria-hidden="true">→</span>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">04</div>
-        <h3>Content Creation & YouTube</h3>
-        <p>Visual storytelling, process documentation, and the craft of sharing knowledge with clarity and care.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">05</div>
-        <h3>Soft Skills</h3>
-        <p>Curiosity, patience, collaboration, and the ability to hold both precision and ambiguity at once.</p>
-      </div>
-    </div>
-
-    <!-- ART & DESIGN SUBSECTION -->
-    <div id="art-design">
-      <button class="art-back" id="artBack" aria-label="Back to skills">← Back to Skills</button>
-      <h3 class="section-title" style="font-size:2rem">Art & Design</h3>
-      <p class="section-lead mb-2">Drawings, colour studies, iPad work, and the handmade book — treated as core instruments of thought.</p>
-      <div class="carousel-wrap art-carousel" id="artCarousel" data-carousel>
-        <div class="carousel-track"></div>
-        <div class="carousel-nav">
-          <button data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PREVIOUS WORK -->
-<section id="work">
-  <div class="container">
-    <p class="section-label">Previous Work</p>
-    <h2 class="section-title">Evolution of my digital craft.</h2>
-    <p class="section-lead">Screens and studies that mark the gradual shift from analog precision to interactive systems.</p>
-    <div class="projects-grid mt-4" id="projectsGrid"></div>
-  </div>
-</section>
-
-<!-- CREATIVE EXPERIMENTS -->
-<section id="experiments">
-  <div class="container">
-    <p class="section-label">Creative Experiments</p>
-    <h2 class="section-title">One conversation with the machine.</h2>
-    <div class="experiment-frame mt-4">
-      <img src="assets/images/ChatGPT Image Sep 20, 2026, 07_38_48 PM.png" alt="AI-generated experimental image" loading="lazy" width="640" height="auto">
-    </div>
-  </div>
-</section>
-
-<!-- CV -->
-<section id="cv" class="cv-section">
-  <div class="container">
-    <p class="section-label">Documents</p>
-    <h2 class="section-title">Curriculum Vitae</h2>
-    <div class="cv-card mt-4">
-      <h3>Full CV</h3>
-      <p>A concise record of education, skills, and selected work.</p>
-      <a href="assets/docs/CV.pdf" class="cv-btn" download>Download CV.pdf</a>
-    </div>
-    <div class="doc-cards" style="justify-content:center;margin-top:2rem">
-      <a class="doc-card" href="assets/docs/SSC Transcript.pdf" download>
-        <div class="doc-icon">PDF</div>
-        <div class="doc-info">
-          <h4>SSC Transcript</h4>
-          <span>Secondary record</span>
-        </div>
-      </a>
-      <a class="doc-card" href="assets/docs/HSC Transcript.pdf" download>
-        <div class="doc-icon">PDF</div>
-        <div class="doc-info">
-          <h4>HSC Transcript</h4>
-          <span>Higher Secondary record</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="contact">
-  <div class="container">
-    <p class="contact-statement">I am ready to build the next space — whether it is made of concrete, pixels, or code.</p>
-    <div class="contact-links">
-      <a href="mailto:hello@sa.portfolio">Email</a>
-      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
-    </div>
-    <div class="final-sig">SA</div>
-  </div>
-</section>
-</main>
-
-<footer>
-  <p>© SA — Architecture → CSE. Built with care.</p>
-</footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <div class="lightbox-content">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
-    <img id="lightboxImg" src="" alt="">
-    <div class="lightbox-meta">
-      <h3 id="lightboxTitle"></h3>
-      <p id="lightboxDesc"></p>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+  <div class="lb-inner">
+    <img id="lbImg" src="" alt="">
+    <div class="lb-meta">
+      <h3 id="lbTitle"></h3>
+      <p id="lbDesc"></p>
+      <div class="meta-row" id="lbMat"></div>
+      <div class="meta-row" id="lbConcept"></div>
     </div>
   </div>
 </div>
 
-<!-- AUDIO -->
-<audio id="bgMusic" loop preload="none">
-  <source src="assets/audio/biting bullets - ridgeclub (youtube).mp3" type="audio/mpeg">
-</audio>
+<!-- AI CURATOR -->
+<button class="ai-toggle" id="aiToggle">AI</button>
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-header">
+    <span>Curator</span>
+    <button id="aiClose" style="color:var(--muted);font-size:1.1rem">×</button>
+  </div>
+  <div class="ai-messages" id="aiMessages"></div>
+  <div class="ai-input-row">
+    <input type="text" id="aiInput" placeholder="Ask about the book, education…" autocomplete="off">
+    <button id="aiSend">Send</button>
+  </div>
+</div>
 
 <script>
 (function(){
   'use strict';
 
-  // ===== DATA =====
-  const heroItems = [
-    {src:'assets/images/809518654_1855217995842076_8923680691947304600_n.jpg',title:'Portrait',desc:'A quiet moment between studio and screen.'},
-    {src:'assets/images/book-3d.jpg',title:'The Handmade Book',desc:'Bound by hand, filled with measured thoughts and spatial experiments.'},
-    {src:'assets/images/IMG scetch 1.jpg',title:'Sketch Study',desc:'Line as thought — the first language of architecture.'},
-    {src:'assets/images/813466984_26807832862248578_2653115749408704795_n.jpg',title:'Studio Light',desc:'Where precision and patience meet.'}
-  ];
-  const profileItems = [
-    {src:'assets/images/809601262_4548993055379554_8793039364914601083_n.jpg',title:'Presence',desc:'Looking forward while carrying the weight of craft.'},
-    {src:'assets/images/811615849_2097588261148773_877248636819443508_n.jpg',title:'Focus',desc:'The same intensity once reserved for drawings, now applied to systems.'},
-    {src:'assets/images/813692048_1750841226169127_6723820080107089098_n.jpg',title:'Calm',desc:'Architecture taught me to wait for the right line.'},
-    {src:'assets/images/813853349_2273476383432547_5877535730504115386_n.jpg',title:'Curiosity',desc:'Always measuring, always asking what comes next.'},
-    {src:'assets/images/813965363_2318476582340902_2775377306658662126_n.jpg',title:'Character',desc:'A student still learning the language of both space and code.'},
-    {src:'assets/images/815366796_1754064392528440_1990530380060926840_n (1).jpg',title:'Moment',desc:'Between one discipline and the next.'},
-    {src:'assets/images/817550850_1756948922083208_6663409752770103109_n.jpg',title:'Quiet Ambition',desc:'No need to announce the work — let the work speak.'},
-    {src:'assets/images/818061932_846874715114836_2565138691570136914_n.jpg',title:'Continuity',desc:'The same hands that once held pencils now type with purpose.'},
-    {src:'assets/images/818478656_1667736108690904_8025924023257939696_n.jpg',title:'Forward',desc:'Ready for the next chapter.'}
-  ];
-  const schoolItems = [
-    {src:'assets/images/school-1.jpg',title:'School Days',desc:'Where the first habits of care were formed.'},
-    {src:'assets/images/school-2.jpg',title:'Early Foundations',desc:'Learning to see structure long before naming it architecture.'}
-  ];
-  const collegeItems = [
-    {src:'assets/images/college-1.jpg',title:'Notre Dame College',desc:'A place that demanded both excellence and humility.'},
-    {src:'assets/images/college-2.jpg',title:'Corridor of Focus',desc:'Years spent refining attention and discipline.'},
-    {src:'assets/images/college-3.jpg',title:'Campus Light',desc:'The quiet geometry of institutional space.'},
-    {src:'assets/images/college-ndc.jpg',title:'NDC',desc:'Higher Secondary — the bridge between school and the larger world.'}
-  ];
-  const uniItems = [
-    {src:'assets/images/university-1.jpg',title:'University Studio',desc:'Where architectural thinking took formal shape.'},
-    {src:'assets/images/university-2.webp',title:'Campus',desc:'Spaces that taught me how buildings hold people.'},
-    {src:'assets/images/university-3.jpg',title:'Transition',desc:'The moment architecture began to open toward systems and code.'}
+  // ===== DATA (exact real filenames) =====
+  const portraits = [
+    {src:'809518654_1855217995842076_8923680691947304600_n.jpg',title:'Portrait',desc:'A quiet moment between studio and screen.'},
+    {src:'809601262_4548993055379554_8793039364914601083_n.jpg',title:'Presence',desc:'Looking forward while carrying the weight of craft.'},
+    {src:'811615849_2097588261148773_877248636819443508_n.jpg',title:'Focus',desc:'The same intensity once reserved for drawings.'},
+    {src:'813466984_26807832862248578_2653115749408704795_n.jpg',title:'Studio',desc:'Where precision and patience meet.'},
+    {src:'813692048_1750841226169127_6723820080107089098_n.jpg',title:'Calm',desc:'Architecture taught me to wait for the right line.'},
+    {src:'813853349_2273476383432547_5877535730504115386_n.jpg',title:'Curiosity',desc:'Always measuring, always asking what comes next.'},
+    {src:'813965363_2318476582340902_2775377306658662126_n.jpg',title:'Character',desc:'A student still learning the language of space and code.'},
+    {src:'815366796_1754064392528440_1990530380060926840_n (1).jpg',title:'Moment',desc:'Between one discipline and the next.'},
+    {src:'817550850_1756948922083208_6663409752770103109_n.jpg',title:'Quiet Ambition',desc:'No need to announce the work — let the work speak.'},
+    {src:'818061932_846874715114836_2565138691570136914_n.jpg',title:'Continuity',desc:'The same hands that once held pencils now type with purpose.'},
+    {src:'818478656_1667736108690904_8025924023257939696_n.jpg',title:'Forward',desc:'Ready for the next chapter.'}
   ];
   const artItems = [
-    {src:'assets/images/IMG scetch 1.jpg',title:'Sketch 01',desc:'A single continuous line seeking proportion.'},
-    {src:'assets/images/image sketch 1.jpg',title:'Sketch 02',desc:'Spatial studies on paper — still the fastest way to think.'},
-    {src:'assets/images/image sketch 2.jpg',title:'Sketch 03',desc:'Massing and shadow in graphite.'},
-    {src:'assets/images/image sketch 3.jpg',title:'Sketch 04',desc:'Exploring rhythm and void.'},
-    {src:'assets/images/image colour.jpg',title:'Colour Study',desc:'Learning how hue carries atmosphere.'},
-    {src:'assets/images/image colour 1.jpg',title:'Colour Study II',desc:'Warmth and coolness as structural decisions.'},
-    {src:'assets/images/image ipad 1.png',title:'iPad Drawing',desc:'Digital continuity of the same hand.'},
-    {src:'assets/images/book-3d.jpg',title:'The Book',desc:'A handmade object that holds the process itself.'}
+    {src:'IMG scetch 1.jpg',title:'Sketch 01',desc:'A single continuous line seeking proportion.'},
+    {src:'image sketch 1.jpg',title:'Sketch 02',desc:'Spatial studies on paper — still the fastest way to think.'},
+    {src:'image sketch 2.jpg',title:'Sketch 03',desc:'Massing and shadow in graphite.'},
+    {src:'image sketch 3.jpg',title:'Sketch 04',desc:'Exploring rhythm and void.'},
+    {src:'image colour.jpg',title:'Colour Study',desc:'Learning how hue carries atmosphere.'},
+    {src:'image colour 1.jpg',title:'Colour Study II',desc:'Warmth and coolness as structural decisions.'},
+    {src:'image ipad 1.png',title:'iPad Drawing',desc:'Digital continuity of the same hand.'},
+    {src:'book-3d.jpg',title:'The Book',desc:'A handmade object that holds the process itself.'}
   ];
-  const projectItems = [
-    {src:'assets/images/Screenshot 2026-09-20 201810.png',title:'Interface Study 01',desc:'Early digital explorations of layout and hierarchy.'},
-    {src:'assets/images/Screenshot 2026-09-20 202230.png',title:'Interface Study 02',desc:'Refining spacing and visual weight.'},
-    {src:'assets/images/Screenshot 2026-09-20 202305.png',title:'System Sketch',desc:'Translating architectural grids into screen logic.'},
-    {src:'assets/images/Screenshot 2026-09-20 202318.png',title:'Component Work',desc:'Building reusable pieces with care.'},
-    {src:'assets/images/Screenshot 2026-09-20 202429.png',title:'Detail Pass',desc:'The same attention once given to joinery.'},
-    {src:'assets/images/Screenshot 2026-09-20 202501.png',title:'Flow Study',desc:'How information moves through space.'},
-    {src:'assets/images/Screenshot 2026-09-20 202509.png',title:'Visual Rhythm',desc:'Repetition and variation in digital form.'},
-    {src:'assets/images/Screenshot 2026-09-20 202528.png',title:'Craft Snapshot',desc:'A moment of clarity in the process.'},
-    {src:'assets/images/Screenshot 2026-09-20 202603.png',title:'Final Frame',desc:'Where intention meets execution.'}
+  const workItems = [
+    {src:'Screenshot 2026-09-20 201810.png',title:'Interface Study 01',desc:'Early digital explorations of layout and hierarchy.'},
+    {src:'Screenshot 2026-09-20 202230.png',title:'Interface Study 02',desc:'Refining spacing and visual weight.'},
+    {src:'Screenshot 2026-09-20 202305.png',title:'System Sketch',desc:'Translating architectural grids into screen logic.'},
+    {src:'Screenshot 2026-09-20 202318.png',title:'Component Work',desc:'Building reusable pieces with care.'},
+    {src:'Screenshot 2026-09-20 202429.png',title:'Detail Pass',desc:'The same attention once given to joinery.'},
+    {src:'Screenshot 2026-09-20 202501.png',title:'Flow Study',desc:'How information moves through space.'},
+    {src:'Screenshot 2026-09-20 202509.png',title:'Visual Rhythm',desc:'Repetition and variation in digital form.'},
+    {src:'Screenshot 2026-09-20 202528.png',title:'Craft Snapshot',desc:'A moment of clarity in the process.'},
+    {src:'Screenshot 2026-09-20 202603.png',title:'Final Frame',desc:'Where intention meets execution.'}
   ];
 
-  // ===== LOADER =====
-  window.addEventListener('load',()=>{
-    setTimeout(()=>{
-      document.getElementById('loader').classList.add('done');
-      document.body.style.overflow='';
-    },2200);
+  // ===== CURSOR =====
+  const cursor=document.getElementById('cursor');
+  const dot=document.getElementById('cursorDot');
+  let mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  function loopCursor(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loopCursor)}
+  loopCursor();
+  document.querySelectorAll('a,button,.skill-card,.work-card,.book-float,.carousel-item,img[data-title]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));
   });
 
-  // ===== THEME =====
-  const themeBtn=document.getElementById('themeBtn');
-  const root=document.documentElement;
-  const saved=localStorage.getItem('theme');
-  if(saved) root.setAttribute('data-theme',saved);
-  themeBtn.addEventListener('click',()=>{
-    const next=root.getAttribute('data-theme')==='light'?'dark':'light';
-    root.setAttribute('data-theme',next);
-    localStorage.setItem('theme',next);
-  });
+  // ===== SPACE CANVAS =====
+  const canvas=document.getElementById('spaceCanvas');
+  const ctx=canvas.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<70;i++)particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+.3,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,a:Math.random()*.4+.1});
+  function drawSpace(){
+    ctx.clearRect(0,0,w,h);
+    // faint grid
+    ctx.strokeStyle='rgba(242,240,234,0.03)';ctx.lineWidth=1;
+    const step=80;
+    for(let x=0;x<w;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
+    for(let y=0;y<h;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+    // soft burgundy field
+    const g=ctx.createRadialGradient(w*.7,h*.3,0,w*.7,h*.3,w*.5);
+    g.addColorStop(0,'rgba(107,44,54,0.06)');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(242,240,234,${p.a})`;ctx.fill();
+    });
+    requestAnimationFrame(drawSpace);
+  }
+  drawSpace();
 
-  // ===== MUSIC =====
-  const music=document.getElementById('bgMusic');
-  const musicBtn=document.getElementById('musicBtn');
-  let musicOn=false;
-  musicBtn.addEventListener('click',()=>{
-    if(musicOn){music.pause();musicOn=false;musicBtn.style.opacity='0.5'}
-    else{music.play().catch(()=>{});musicOn=true;musicBtn.style.opacity='1'}
-  });
-  musicBtn.style.opacity='0.5';
+  // ===== VIEW SYSTEM =====
+  const views=document.querySelectorAll('.view');
+  const navLinks=document.querySelectorAll('#navList a');
+  function showView(id){
+    views.forEach(v=>v.classList.remove('active'));
+    const el=document.getElementById('view-'+id);
+    if(el)el.classList.add('active');
+    navLinks.forEach(a=>a.classList.toggle('active',a.dataset.view===id));
+    localStorage.setItem('sa-view',id);
+    window.scrollTo(0,0);
+    document.getElementById('sidebar').classList.remove('open');
+  }
+  navLinks.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showView(a.dataset.view)}));
+  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.goto)));
+  const saved=localStorage.getItem('sa-view');
+  if(saved)showView(saved);
 
-  // ===== MENU =====
-  const menuToggle=document.getElementById('menuToggle');
-  const navLinks=document.getElementById('navLinks');
-  menuToggle.addEventListener('click',()=>{
-    const open=navLinks.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded',open);
-  });
-  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    navLinks.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded','false');
-  }));
+  // menu
+  document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
 
   // ===== CIRCULAR CAROUSEL =====
-  function createCarousel(el,items){
-    const track=el.querySelector('.carousel-track');
-    const nav=el.querySelectorAll('.carousel-nav button');
-    let angle=0;
+  function createCarousel(container,items){
+    container.innerHTML=`<div class="carousel-track"></div><div class="carousel-nav"><button data-d="-1">‹</button><button data-d="1">›</button></div>`;
+    const track=container.querySelector('.carousel-track');
     const n=items.length;
-    const radius=Math.min(el.offsetWidth,el.offsetHeight)*0.42 || 180;
-    const itemW=220;
-    const itemH=280;
-
+    let angle=0;
+    const radius=Math.min(container.offsetWidth,container.offsetHeight)*0.38||160;
     items.forEach((item,i)=>{
       const div=document.createElement('div');
       div.className='carousel-item';
-      div.innerHTML=`<img src="${item.src}" alt="${item.title}" loading="lazy" width="${itemW}" height="${itemH}">`;
-      div.dataset.index=i;
-      div.addEventListener('click',e=>{
-        if(!dragging) openLightbox(item);
-      });
+      div.innerHTML=`<img src="${item.src}" alt="${item.title}" loading="lazy">`;
+      div.addEventListener('click',()=>openLightbox(item));
       track.appendChild(div);
     });
-
     const nodes=track.querySelectorAll('.carousel-item');
     function render(){
       nodes.forEach((node,i)=>{
-        const a=(i/n)*Math.PI*2 + angle;
+        const a=(i/n)*Math.PI*2+angle;
         const x=Math.sin(a)*radius;
         const z=Math.cos(a)*radius;
-        const scale=0.55+0.45*((z+radius)/(2*radius));
-        const rotY=a*180/Math.PI;
-        node.style.transform=`translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${-rotY}deg) scale(${scale})`;
+        const scale=.5+.5*((z+radius)/(2*radius));
+        node.style.transform=`translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${-a*180/Math.PI}deg) scale(${scale})`;
         node.style.zIndex=Math.round(z+radius);
-        node.style.opacity=0.35+0.65*((z+radius)/(2*radius));
+        node.style.opacity=.3+.7*((z+radius)/(2*radius));
       });
     }
     render();
-
-    let dragging=false,startX=0,startAngle=0;
-    el.addEventListener('pointerdown',e=>{
-      dragging=true;startX=e.clientX;startAngle=angle;
-      el.setPointerCapture(e.pointerId);
-    });
-    el.addEventListener('pointermove',e=>{
-      if(!dragging) return;
-      const dx=e.clientX-startX;
-      angle=startAngle+dx*0.008;
-      render();
-    });
-    el.addEventListener('pointerup',()=>dragging=false);
-    el.addEventListener('pointercancel',()=>dragging=false);
-    el.addEventListener('wheel',e=>{
-      e.preventDefault();
-      angle+=e.deltaY*0.002;
-      render();
-    },{passive:false});
-
-    nav.forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const dir=parseInt(btn.dataset.dir);
-        angle+=dir*(Math.PI*2/n);
-        gsap.to({},{duration:0.6,onUpdate:()=>render(),ease:'power2.out'});
-        // simple step
-        render();
-      });
-    });
-
-    // auto subtle drift
-    let auto=setInterval(()=>{angle+=0.003;render()},40);
-    el.addEventListener('pointerenter',()=>clearInterval(auto));
-    el.addEventListener('pointerleave',()=>{auto=setInterval(()=>{angle+=0.003;render()},40)});
-
-    // resize
-    window.addEventListener('resize',()=>{
-      const r=Math.min(el.offsetWidth,el.offsetHeight)*0.42||180;
-      // radius is closed over; for simplicity re-render
-      render();
-    });
+    let drag=false,sx=0,sa=0;
+    container.addEventListener('pointerdown',e=>{drag=true;sx=e.clientX;sa=angle;container.setPointerCapture(e.pointerId)});
+    container.addEventListener('pointermove',e=>{if(!drag)return;angle=sa+(e.clientX-sx)*0.008;render()});
+    container.addEventListener('pointerup',()=>drag=false);
+    container.addEventListener('wheel',e=>{e.preventDefault();angle+=e.deltaY*0.002;render()},{passive:false});
+    container.querySelectorAll('.carousel-nav button').forEach(b=>b.addEventListener('click',()=>{angle+=parseInt(b.dataset.d)*(Math.PI*2/n);render()}));
+    let auto=setInterval(()=>{angle+=0.004;render()},50);
+    container.addEventListener('pointerenter',()=>clearInterval(auto));
+    container.addEventListener('pointerleave',()=>{auto=setInterval(()=>{angle+=0.004;render()},50)});
   }
+  createCarousel(document.getElementById('profileCarousel'),portraits);
 
-  // init carousels after DOM
-  createCarousel(document.getElementById('heroCarousel'),heroItems);
-  createCarousel(document.getElementById('profileCarousel'),profileItems);
-  createCarousel(document.getElementById('schoolCarousel'),schoolItems);
-  createCarousel(document.getElementById('collegeCarousel'),collegeItems);
-  createCarousel(document.getElementById('uniCarousel'),uniItems);
-  createCarousel(document.getElementById('artCarousel'),artItems);
-
-  // ===== PROJECTS GRID =====
-  const grid=document.getElementById('projectsGrid');
-  projectItems.forEach(item=>{
+  // ===== WORK GRID =====
+  const workGrid=document.getElementById('workGrid');
+  workItems.forEach(item=>{
     const card=document.createElement('div');
-    card.className='project-card';
+    card.className='work-card';
     card.innerHTML=`<img src="${item.src}" alt="${item.title}" loading="lazy"><div class="info"><h3>${item.title}</h3><p>${item.desc}</p></div>`;
     card.addEventListener('click',()=>openLightbox(item));
-    grid.appendChild(card);
+    workGrid.appendChild(card);
   });
 
   // ===== LIGHTBOX =====
   const lb=document.getElementById('lightbox');
-  const lbImg=document.getElementById('lightboxImg');
-  const lbTitle=document.getElementById('lightboxTitle');
-  const lbDesc=document.getElementById('lightboxDesc');
   function openLightbox(item){
-    lbImg.src=item.src;
-    lbImg.alt=item.title;
-    lbTitle.textContent=item.title;
-    lbDesc.textContent=item.desc;
+    document.getElementById('lbImg').src=item.src;
+    document.getElementById('lbImg').alt=item.title||'';
+    document.getElementById('lbTitle').textContent=item.title||'';
+    document.getElementById('lbDesc').textContent=item.desc||'';
+    document.getElementById('lbMat').innerHTML=item.mat?`<span>Material</span> · ${item.mat}`:'';
+    document.getElementById('lbConcept').innerHTML=item.concept?`<span>Concept</span> · ${item.concept}`:'';
     lb.classList.add('open');
-    document.body.style.overflow='hidden';
   }
-  function closeLightbox(){
-    lb.classList.remove('open');
-    document.body.style.overflow='';
-  }
-  document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+  function closeLightbox(){lb.classList.remove('open')}
+  document.getElementById('lbClose').addEventListener('click',closeLightbox);
   lb.addEventListener('click',e=>{if(e.target===lb)closeLightbox()});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
 
-  // book click
-  document.getElementById('book3d').addEventListener('click',()=>{
-    openLightbox({src:'assets/images/book-3d.jpg',title:'The Handmade Book',desc:'Bound by hand, filled with measured thoughts and spatial experiments. A physical record of process.'});
+  // book
+  document.getElementById('bookFloat').addEventListener('click',()=>{
+    openLightbox({src:'book-3d.jpg',title:'The Handmade Book',desc:'Fully handmade first-semester portfolio. Black mount board, pen hatching, geometric PORTFOLIO lettering, checkerboard binding, burgundy accents.',mat:'Swiss board · Black mount · Pen · Binding',concept:'Physical craft as primary research method.'});
   });
-  document.getElementById('book3d').addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' ') document.getElementById('book3d').click();
-  });
-
-  // ===== ART SUBSECTION =====
-  const artSection=document.getElementById('art-design');
-  document.getElementById('artTrigger').addEventListener('click',()=>{
-    artSection.classList.add('visible');
-    artSection.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-  document.getElementById('artTrigger').addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' ') document.getElementById('artTrigger').click();
-  });
-  document.getElementById('artBack').addEventListener('click',()=>{
-    artSection.classList.remove('visible');
-    document.getElementById('skills').scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('#bookThumbs img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      document.querySelectorAll('#bookThumbs img').forEach(i=>i.classList.remove('active'));
+      img.classList.add('active');
+      openLightbox({src:img.dataset.src,title:img.dataset.title,desc:img.dataset.desc,mat:img.dataset.mat,concept:img.dataset.concept});
+    });
   });
 
-  // ===== ACTIVE NAV =====
-  const sections=document.querySelectorAll('section[id]');
-  const navAs=document.querySelectorAll('.nav-links a');
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(en=>{
-      if(en.isIntersecting){
-        navAs.forEach(a=>a.classList.remove('active'));
-        const id=en.target.id;
-        const link=document.querySelector(`.nav-links a[href="#${id}"]`);
-        if(link) link.classList.add('active');
+  // education gallery clicks
+  document.querySelectorAll('.edu-gallery img').forEach(img=>{
+    img.addEventListener('click',()=>openLightbox({src:img.src,title:img.dataset.title,desc:img.dataset.desc}));
+  });
+
+  // ===== SKILLS DETAIL =====
+  const skillDetail=document.getElementById('skillDetail');
+  const skillContent=document.getElementById('skillContent');
+  document.querySelectorAll('.skill-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      const type=card.dataset.skill;
+      skillDetail.style.display='block';
+      if(type==='art'){
+        skillContent.innerHTML=`<h3 class="section-title" style="font-size:1.8rem">Art & Drawing</h3><div class="carousel-wrap" id="artCarousel"></div>`;
+        createCarousel(document.getElementById('artCarousel'),artItems);
+      } else if(type==='web'){
+        skillContent.innerHTML=`
+          <h3 class="section-title" style="font-size:1.8rem">Web Development</h3>
+          <p class="lead mb-1">Selected live projects.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener">TrendCart →</a>
+            <a class="btn btn-ghost" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener">Shadid’s Game →</a>
+          </div>`;
+      } else if(type==='arch'){
+        skillContent.innerHTML=`
+          <h3 class="section-title" style="font-size:1.8rem">Architectural Design</h3>
+          <p class="lead">Spatial reasoning, geometric studies, model thinking, and iterative design. Studies include Lory Lift, Squares and Grid, Line Signature, Interlock, Pavilion, Cutouts, and Mosque concepts — all treated as core instruments of thought.</p>`;
+      } else {
+        skillContent.innerHTML=`
+          <h3 class="section-title" style="font-size:1.8rem">Video</h3>
+          <p class="lead">Process documentation and visual storytelling. Content creation as an extension of the same careful craft.</p>`;
       }
+      skillDetail.scrollIntoView({behavior:'smooth',block:'start'});
     });
-  },{threshold:0.35});
-  sections.forEach(s=>observer.observe(s));
+  });
+  document.getElementById('skillBack').addEventListener('click',()=>{skillDetail.style.display='none'});
 
-  // subtle GSAP entrance
-  if(window.gsap && window.ScrollTrigger){
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray('.section-title, .section-lead, .skill-card, .fact-card, .project-card').forEach(el=>{
-      gsap.from(el,{
-        y:28,opacity:0,duration:0.8,ease:'power2.out',
-        scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}
-      });
-    });
+  // ===== AI CURATOR =====
+  const aiPanel=document.getElementById('aiPanel');
+  const aiMessages=document.getElementById('aiMessages');
+  const aiInput=document.getElementById('aiInput');
+  let chatHistory=JSON.parse(localStorage.getItem('sa-chat')||'[]');
+  function addMsg(text,who){
+    const div=document.createElement('div');
+    div.className='ai-msg '+who;
+    div.textContent=text;
+    aiMessages.appendChild(div);
+    aiMessages.scrollTop=aiMessages.scrollHeight;
+    chatHistory.push({text,who});
+    localStorage.setItem('sa-chat',JSON.stringify(chatHistory.slice(-40)));
   }
+  function botReply(q){
+    const lower=q.toLowerCase();
+    if(/book|handmade|portfolio book/.test(lower)){showView('book');return 'Opening The Book — the flagship handmade first-semester portfolio. Black mount, pen hatching, geometric lettering, checkerboard binding.'}
+    if(/process|persist|struggle|family|lage/.test(lower)){showView('process');return 'Opening Process / Persistence. Effort before results. Family. Lage Raho.'}
+    if(/educat|school|college|brac|university|ssc|hsc/.test(lower)){showView('education');return 'Opening Education trajectory: Motijheel Ideal → Notre Dame College → BRAC University Architecture.'}
+    if(/skill|draw|art|web|code|architect/.test(lower)){showView('skills');return 'Opening Skills. Art & Drawing, Architectural design, Web development, Video.'}
+    if(/contact|email|whatsapp|github|reach/.test(lower)){showView('contact');return 'Opening Contact. Email, WhatsApp, GitHub and other links are listed there.'}
+    if(/cv|transcript|document/.test(lower)){showView('cv');return 'Opening CV & Documents. SSC and HSC transcripts are available for download.'}
+    if(/home|cover|start/.test(lower)){showView('home');return 'Returning to Cover.'}
+    if(/who|shadid|about|profile/.test(lower)){showView('profile');return 'Shadid Ahamed — Architecture student at BRAC University, Roll 1000061008, ARC-101, Summer 2026. Based in Paltan, Dhaka. Thinks in geometry, material, structure and persistence.'}
+    if(/trendcart|game|project/.test(lower)){showView('work');return 'Opening Work. Live projects: TrendCart and Shadid’s Game are linked there.'}
+    return 'I can open sections for you. Try: “open the book”, “show process”, “open education”, “show skills”, “open contact”, or ask about the handmade book, education, or persistence.';
+  }
+  function sendAI(){
+    const q=aiInput.value.trim();
+    if(!q)return;
+    addMsg(q,'user');
+    aiInput.value='';
+    setTimeout(()=>addMsg(botReply(q),'bot'),350);
+  }
+  document.getElementById('aiSend').addEventListener('click',sendAI);
+  aiInput.addEventListener('keydown',e=>{if(e.key==='Enter')sendAI()});
+  document.getElementById('aiToggle').addEventListener('click',()=>{
+    aiPanel.classList.add('open');
+    document.getElementById('aiToggle').classList.add('hidden');
+    if(!chatHistory.length)addMsg('Ask about the handmade Book, education, craft, or say “open the book”.','bot');
+    else chatHistory.forEach(m=>addMsg(m.text,m.who));
+  });
+  document.getElementById('aiClose').addEventListener('click',()=>{
+    aiPanel.classList.remove('open');
+    document.getElementById('aiToggle').classList.remove('hidden');
+  });
+  document.getElementById('askCuratorBtn').addEventListener('click',()=>{
+    aiPanel.classList.add('open');
+    document.getElementById('aiToggle').classList.add('hidden');
+    if(!chatHistory.length)addMsg('Ask about the handmade Book, education, craft, or say “open the book”.','bot');
+  });
+
 })();
 </script>
 </body>
