@@ -3,1025 +3,2009 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="description" content="Shadid Ahamed — Architecture student at BRAC University. Handmade first-semester portfolio book, drawing, geometric craft.">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#0a0a0a">
 <meta name="author" content="Shadid Ahamed">
-<title>Shadid Ahamed — Architecture · Craft · Code</title>
+<meta name="description" content="Shadid Ahamed — Architecture student exploring design, code, visual storytelling and digital experiences. A custom digital exhibition and personal archive.">
+<meta property="og:title" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist">
+<meta property="og:description" content="Architecture student exploring the intersection of design, code, visual storytelling and digital experiences.">
+<meta property="og:type" content="website">
+<title>Shadid Ahamed — Architecture / Creative Developer / Designer / Artist</title>
 
-<!-- Favicons - original names -->
+<!-- Favicons -->
 <link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="sa-favicon-48.png">
 <link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-64.png">
 <link rel="icon" type="image/png" sizes="128x128" href="sa-favicon-128.png">
 <link rel="icon" type="image/png" sizes="256x256" href="sa-favicon-256.png">
-<link rel="apple-touch-icon" href="sa-favicon-hires.png">
+<link rel="apple-touch-icon" sizes="180x180" href="sa-favicon-hires.png">
+<link rel="icon" type="image/png" href="sa-favicon-hires.png">
 
 <style>
-:root {
-  --bg: #050505;
-  --bg-2: #0b0b0c;
-  --bg-3: #141416;
-  --border: rgba(242,240,234,0.08);
-  --border-hover: rgba(242,240,234,0.18);
-  --text: #f2f0ea;
-  --muted: #a8a49c;
-  --dim: #74747a;
-  --green: #5a8f6a;
-  --maroon: #6b2c36;
-  --silver: #c8c4bc;
-  --radius: 12px;
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-}
+/* ========== RESET & BASE ========== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+  color: #e8e4df;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
 }
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+body.touch-device { cursor: auto; }
+body.touch-device * { cursor: auto !important; }
 
-/* Custom cursor - desktop only */
-.cursor-dot, .cursor-ring { display: none; }
-@media (hover: hover) and (pointer: fine) {
-  body { cursor: none; }
-  .cursor-dot {
-    display: block;
-    position: fixed; width: 7px; height: 7px;
-    background: #fff; border-radius: 50%;
-    pointer-events: none; z-index: 99999;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 8px rgba(255,255,255,0.5);
-    mix-blend-mode: difference;
-  }
-  .cursor-ring {
-    display: block;
-    position: fixed; width: 32px; height: 32px;
-    border: 1.5px solid rgba(255,255,255,0.65);
-    border-radius: 50%;
-    pointer-events: none; z-index: 99998;
-    transform: translate(-50%, -50%);
-    transition: width 0.25s, height 0.25s, opacity 0.25s;
-    opacity: 0.7;
-  }
-  body.hovering .cursor-dot { width: 12px; height: 12px; }
-  body.hovering .cursor-ring { width: 48px; height: 48px; opacity: 1; }
+:root {
+  --bg: #0a0a0a;
+  --charcoal: #141414;
+  --graphite: #1c1c1c;
+  --ash: #2a2a2a;
+  --gold: #c9a84c;
+  --gold-dim: #8a7340;
+  --gold-bright: #e8d48b;
+  --warm-yellow: #d4b86a;
+  --text: #e8e4df;
+  --text-dim: #9a958c;
+  --text-muted: #6b6660;
+  --border: rgba(201, 168, 76, 0.18);
+  --radius: 2px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", "Consolas", monospace;
 }
 
-#space-canvas {
-  position: fixed; inset: 0;
-  width: 100%; height: 100%;
-  z-index: 0; pointer-events: none;
+/* ========== CUSTOM CURSOR ========== */
+.cursor-dot {
+  position: fixed;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s, height 0.15s, background 0.15s;
+  mix-blend-mode: difference;
 }
+.cursor-ring {
+  position: fixed;
+  width: 28px; height: 28px;
+  border: 1px solid rgba(201, 168, 76, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s var(--ease), height 0.25s var(--ease), border-color 0.2s;
+}
+body.cursor-hover .cursor-dot { width: 10px; height: 10px; background: var(--gold-bright); }
+body.cursor-hover .cursor-ring { width: 44px; height: 44px; border-color: var(--gold); }
+body.touch-device .cursor-dot,
+body.touch-device .cursor-ring { display: none !important; }
 
-.shell {
-  position: relative; z-index: 1;
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  min-height: 100vh;
-}
-@media (max-width: 900px) {
-  .shell { grid-template-columns: 1fr; }
-}
-
-.sidebar {
-  position: sticky; top: 0; height: 100vh;
-  padding: 28px 18px;
-  border-right: 1px solid var(--border);
-  background: rgba(10,10,11,0.96);
-  backdrop-filter: blur(14px);
-  display: flex; flex-direction: column; z-index: 200;
-}
-@media (max-width: 900px) {
-  .sidebar {
-    position: fixed; inset: 0 auto 0 0;
-    width: min(280px, 86vw);
-    transform: translateX(-105%);
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-    box-shadow: 20px 0 40px rgba(0,0,0,0.45);
-  }
-  .sidebar.open { transform: translateX(0); }
-}
-
-.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-.brand-mark {
-  width: 38px; height: 38px; border-radius: 10px;
-  background: var(--text); color: var(--bg);
-  font-weight: 700; font-size: 14px;
-  display: flex; align-items: center; justify-content: center;
-}
-.brand-text { font-size: 14px; font-weight: 600; }
-.brand-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
-
-.nav { display: flex; flex-direction: column; gap: 3px; flex: 1; overflow-y: auto; }
-.nav button {
-  text-align: left; padding: 12px 12px; border-radius: 9px;
-  font-size: 13.5px; color: var(--muted);
-  display: flex; align-items: center; gap: 11px;
-  transition: background 0.2s, color 0.2s;
+/* ========== PROCEDURAL CANVAS ========== */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
   width: 100%;
-  -webkit-tap-highlight-color: transparent;
-}
-.nav button:hover, .nav button.active {
-  background: var(--bg-3); color: var(--text);
-}
-.nav button.active { font-weight: 500; }
-.nav button svg { width: 17px; height: 17px; opacity: 0.75; flex-shrink: 0; }
-
-.sidebar-footer { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--border); }
-.status-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px; color: var(--muted); margin-bottom: 12px;
-}
-.status-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 3px rgba(90,143,106,0.25);
-  animation: pulse 2.2s infinite;
-}
-@keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 3px rgba(90,143,106,0.25); }
-  50% { box-shadow: 0 0 0 6px rgba(90,143,106,0.08); }
-}
-.hire-btn {
-  display: block; width: 100%; text-align: center;
-  padding: 12px 14px; border-radius: 9px;
-  background: var(--text); color: var(--bg);
-  font-size: 13.5px; font-weight: 600;
-  transition: opacity 0.15s, transform 0.15s;
-}
-.hire-btn:hover { opacity: 0.92; transform: translateY(-1px); }
-
-.menu-toggle {
-  display: none; position: fixed; top: 14px; left: 14px; z-index: 320;
-  width: 46px; height: 46px; border-radius: 11px;
-  background: var(--bg-2); border: 1px solid var(--border);
-  align-items: center; justify-content: center;
-  -webkit-tap-highlight-color: transparent;
-}
-@media (max-width: 900px) { .menu-toggle { display: flex; } }
-
-.overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.55); z-index: 190;
-}
-.overlay.show { display: block; }
-
-.main {
-  min-height: 100vh;
-  padding: 36px 40px 90px;
-  max-width: 960px;
-}
-@media (max-width: 900px) {
-  .main { padding: 70px 18px 90px; }
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
 }
 
-.view { display: none; animation: fadeIn 0.32s ease; }
-.view.active { display: block; }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ========== LAYOUT ========== */
+#app {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
-  font-size: clamp(2rem, 5.2vw, 2.9rem);
-  font-weight: 700; letter-spacing: -0.035em;
-  line-height: 1.15; margin-bottom: 10px;
-}
-h2 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
-h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
-.lead {
-  font-size: 1.02rem; color: var(--muted);
-  max-width: 520px; margin-bottom: 24px; line-height: 1.7;
-}
-.section-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
-  text-transform: uppercase; color: var(--dim); margin-bottom: 16px;
-}
-
-.card {
-  background: var(--bg-2); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px;
-  transition: border-color 0.25s, box-shadow 0.25s;
-}
-.card:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 0 24px rgba(255,255,255,0.05);
-}
-
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 16px; border-radius: 9px; font-size: 13.5px; font-weight: 500;
-  border: 1px solid var(--border); background: transparent; color: var(--text);
-  transition: background 0.15s, border-color 0.15s, transform 0.15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.btn:hover { background: var(--bg-3); border-color: var(--border-hover); }
-.btn-primary {
-  background: var(--text); color: var(--bg); border-color: transparent; font-weight: 600;
-}
-.btn-primary:hover { opacity: 0.93; transform: translateY(-1px); }
-.btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-
-/* Home */
-.name-block {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0 18px;
+/* ========== NAVIGATION RAIL ========== */
+.nav-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
   align-items: center;
-  margin-bottom: 18px;
-  max-width: 520px;
+  justify-content: space-between;
+  padding: 1.1rem 1.75rem;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 70%, transparent 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
 }
-.name-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 9px);
-  grid-template-rows: repeat(4, 9px);
-  gap: 3px;
+.nav-brand {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-transform: uppercase;
+  user-select: none;
 }
-.name-grid span {
-  background: rgba(255,255,255,0.12);
-  border-radius: 1.5px;
+.nav-links {
+  display: flex;
+  gap: 0.15rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
-.name-grid span.on { background: #fff; }
-.name-grid span.mid { background: rgba(255,255,255,0.42); }
-.name-stack h1 {
-  font-size: clamp(3rem, 8.5vw, 5.4rem);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 0.9;
-  margin: 0;
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  padding: 0.45rem 0.65rem;
+  cursor: none;
+  transition: color 0.25s, background 0.25s;
+  position: relative;
+  text-transform: uppercase;
+  border-radius: 1px;
 }
-.home-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-.chip {
-  font-size: 12px; padding: 5px 11px; border-radius: 999px;
-  border: 1px solid var(--border); color: var(--muted); background: var(--bg-2);
+.nav-btn:hover,
+.nav-btn:focus-visible {
+  color: var(--gold-bright);
+  outline: none;
+}
+.nav-btn.active {
+  color: var(--gold);
+}
+.nav-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 1px;
+  background: var(--gold);
+}
+.nav-btn .num {
+  opacity: 0.45;
+  margin-right: 0.35em;
+  font-size: 0.55rem;
 }
 
-/* Circular rotating gallery */
-.circle-wrap {
+/* Audio control */
+.audio-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+.audio-btn {
+  width: 28px; height: 28px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  border-radius: 1px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.audio-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+.audio-visual {
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+  height: 14px;
+}
+.audio-visual span {
+  width: 2px;
+  background: var(--gold);
+  opacity: 0.35;
+  transition: height 0.15s;
+}
+body.audio-playing .audio-visual span {
+  animation: audioBar 0.6s ease-in-out infinite alternate;
+}
+body.audio-playing .audio-visual span:nth-child(1) { animation-delay: 0s; height: 6px; }
+body.audio-playing .audio-visual span:nth-child(2) { animation-delay: 0.15s; height: 12px; }
+body.audio-playing .audio-visual span:nth-child(3) { animation-delay: 0.3s; height: 8px; }
+@keyframes audioBar {
+  from { transform: scaleY(0.4); }
+  to { transform: scaleY(1); }
+}
+
+/* ========== MAIN STAGE ========== */
+.stage {
+  flex: 1;
   position: relative;
   overflow: hidden;
-  margin: 12px 0 28px;
-  padding: 8px 0;
+  margin-top: 56px;
 }
-.circle-track {
+.section {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.7s var(--ease), visibility 0.7s;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2rem 1.5rem 4rem;
   display: flex;
-  gap: 16px;
-  width: max-content;
-  animation: scrollCircle 40s linear infinite;
+  flex-direction: column;
+  align-items: center;
 }
-.circle-wrap:hover .circle-track { animation-play-state: paused; }
-@keyframes scrollCircle {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.section.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
-.circle-item {
-  flex: 0 0 148px;
+
+/* ========== TYPOGRAPHY ========== */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  opacity: 0.85;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.section-sub {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  max-width: 42rem;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+.meta-line {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ========== HOME ========== */
+#section-home {
+  justify-content: center;
+  text-align: center;
+  padding-top: 4vh;
+}
+.home-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  line-height: 1.05;
+}
+.home-roles {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.home-statement {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--text-dim);
+  max-width: 36rem;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+  line-height: 1.65;
+}
+.home-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid var(--border);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: transparent;
+  cursor: none;
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+.home-cta:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  color: var(--gold-bright);
+}
+.home-ornament {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  margin: 2rem auto 0;
+  opacity: 0.5;
+}
+
+/* ========== PROFILE ========== */
+.profile-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 380px) 1fr;
+  gap: 3rem;
+  max-width: 1100px;
+  width: 100%;
+  align-items: start;
+}
+.profile-portrait-wrap {
+  position: relative;
+}
+.profile-portrait {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(201,168,76,0.25);
+  filter: contrast(1.05) brightness(0.95);
+}
+.profile-frame {
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(201,168,76,0.15);
+  pointer-events: none;
+}
+.profile-meta {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.profile-info h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+.profile-identity {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.profile-bio {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+  max-width: 36rem;
+}
+.profile-details {
+  display: grid;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+}
+.profile-details dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.profile-details dd {
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+/* ========== EDUCATION ========== */
+.edu-chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 1100px;
+  width: 100%;
+}
+.edu-chapter {
+  border-left: 1px solid rgba(201,168,76,0.2);
+  padding-left: 1.75rem;
+}
+.edu-institution {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.3rem;
+}
+.edu-meta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+.edu-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+.edu-gallery img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border: 1px solid rgba(201,168,76,0.12);
+  cursor: none;
+  transition: border-color 0.25s, transform 0.35s var(--ease);
+}
+.edu-gallery img:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+/* ========== SKILLS ========== */
+.skills-constellation {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  width: 100%;
+}
+.skill-cluster {
+  border: 1px solid rgba(201,168,76,0.12);
+  background: rgba(20,20,20,0.6);
+  padding: 1.4rem 1.3rem;
+  position: relative;
+}
+.skill-cluster::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+.skill-cluster h3 {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.skill-list li {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  padding-left: 0.9rem;
+  position: relative;
+}
+.skill-list li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--gold-dim);
+}
+
+/* ========== PROJECTS ========== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  max-width: 1100px;
+  width: 100%;
+}
+.project-card {
+  border: 1px solid rgba(201,168,76,0.12);
+  background: rgba(18,18,18,0.7);
+  padding: 1.5rem;
+  transition: border-color 0.3s, transform 0.35s var(--ease);
+  cursor: none;
+}
+.project-card:hover {
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-4px);
+}
+.project-card .cat {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.project-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+.project-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* ========== ORBIT SYSTEM ========== */
+.orbit-section {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.orbit-stage {
+  position: relative;
+  width: 100%;
+  height: min(52vw, 420px);
+  max-height: 460px;
+  perspective: 1200px;
+  margin: 1.5rem 0 1rem;
+  user-select: none;
+  touch-action: pan-y;
+}
+.orbit-track {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orbit-item {
+  position: absolute;
+  width: 180px;
+  height: 240px;
+  transform-style: preserve-3d;
+  transition: transform 0.85s var(--ease), opacity 0.85s var(--ease), filter 0.85s;
+  cursor: none;
+  will-change: transform, opacity;
+}
+.orbit-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(201,168,76,0.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+  pointer-events: none;
+  background: #111;
+}
+.orbit-item .orbit-label {
+  position: absolute;
+  bottom: -1.6rem;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.4s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.3rem;
+}
+.orbit-item.is-front .orbit-label { opacity: 1; color: var(--gold); }
+.orbit-item.is-front img { border-color: rgba(201,168,76,0.4); }
+.orbit-controls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.orbit-btn {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: border-color 0.2s, background 0.2s;
+  border-radius: 1px;
+}
+.orbit-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+.orbit-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  min-width: 4.5rem;
   text-align: center;
 }
-.circle-item img {
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border);
-  transition: transform 0.4s, box-shadow 0.4s, border-color 0.3s;
-  cursor: pointer;
-}
-.circle-item img:hover {
-  transform: scale(1.1) rotate(6deg);
-  box-shadow: 0 14px 36px rgba(0,0,0,0.5);
-  border-color: var(--silver);
-}
-.circle-item span {
-  display: block;
-  margin-top: 9px;
-  font-size: 12px;
-  color: var(--muted);
-}
 
-/* Book showcase */
-.book-showcase {
+/* ========== ACHIEVEMENTS ========== */
+.achievements-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 26px;
-  align-items: center;
-  margin: 24px 0 32px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  max-width: 1100px;
+  width: 100%;
 }
-@media (max-width: 700px) {
-  .book-showcase { grid-template-columns: 1fr; }
-}
-.book-visual {
+.achievement-card {
+  border: 1px solid rgba(201,168,76,0.18);
+  background: linear-gradient(145deg, rgba(28,28,28,0.9), rgba(14,14,14,0.95));
+  padding: 1.6rem 1.5rem;
   position: relative;
-  perspective: 1000px;
+  overflow: hidden;
 }
-.book-visual img {
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+.achievement-seal {
+  width: 36px; height: 36px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+}
+.achievement-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+.achievement-card .rank {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.achievement-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+/* ========== VIDEOS ========== */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 22px 50px rgba(0,0,0,0.5);
-  transition: transform 0.45s ease;
-  cursor: pointer;
-}
-.book-visual:hover img {
-  transform: rotateY(-7deg) rotateX(3deg) scale(1.015);
-}
-
-/* Grid gallery */
-.grid-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 12px;
-}
-.grid-gallery img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.grid-gallery img:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.4);
-}
-
-/* Timeline */
-.timeline { position: relative; padding-left: 24px; }
-.timeline::before {
-  content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px;
-  width: 1px; background: var(--border);
-}
-.tl-item { position: relative; margin-bottom: 26px; }
-.tl-item::before {
-  content: ""; position: absolute; left: -24px; top: 9px;
-  width: 11px; height: 11px; border-radius: 50%;
-  background: var(--text); border: 2px solid var(--bg);
-  box-shadow: 0 0 0 1px var(--border);
-}
-.tl-card {
-  background: var(--bg-2); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 16px 18px;
-  display: grid; grid-template-columns: 1fr 130px; gap: 14px; align-items: start;
-  transition: border-color 0.25s;
-}
-.tl-card:hover { border-color: var(--border-hover); }
-@media (max-width: 560px) {
-  .tl-card { grid-template-columns: 1fr; }
-}
-.tl-card .when { font-size: 12px; color: var(--dim); margin-bottom: 5px; font-family: var(--mono); }
-.tl-card .result {
-  display: inline-block; margin-top: 7px; font-size: 12px; padding: 3px 8px;
-  border-radius: 5px; background: rgba(90,143,106,0.12); color: var(--green);
-  border: 1px solid rgba(90,143,106,0.25);
-}
-.tl-thumb {
-  width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px;
-  border: 1px solid var(--border); cursor: pointer;
-}
-
-/* Profile */
-.profile-layout {
-  display: grid; grid-template-columns: 180px 1fr; gap: 28px; align-items: start;
-}
-@media (max-width: 640px) {
-  .profile-layout { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-}
-.avatar {
-  width: 170px; height: 170px; border-radius: 50%; object-fit: cover;
-  border: 2px solid var(--border);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.4);
-  cursor: pointer;
-}
-.profile-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
-@media (max-width: 640px) { .profile-tags { justify-content: center; } }
-.tag {
-  font-size: 12px; padding: 4px 10px; border-radius: 6px;
-  background: var(--bg-3); color: var(--muted); border: 1px solid var(--border);
-}
-
-/* Contact */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
-}
-.contact-link {
-  display: flex; align-items: center; gap: 10px;
-  padding: 13px 14px; border-radius: 10px;
-  background: var(--bg-2); border: 1px solid var(--border);
-  font-size: 13.5px; transition: border-color 0.2s, background 0.2s;
-}
-.contact-link:hover { border-color: var(--border-hover); background: var(--bg-3); }
-.contact-link svg { width: 17px; height: 17px; opacity: 0.85; flex-shrink: 0; }
-
-/* Lightbox */
-#lightbox {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.93);
-  display: none; align-items: center; justify-content: center;
-  z-index: 5000; padding: 16px;
-}
-#lightbox.open { display: flex; }
-#lightbox img {
-  max-width: min(94vw, 880px);
-  max-height: 86vh;
-  border-radius: 10px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.55);
-}
-#lb-close {
-  position: absolute; top: 16px; right: 18px;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: var(--bg-2); border: 1px solid var(--border);
-  font-size: 22px; display: flex; align-items: center; justify-content: center;
-  z-index: 10;
-}
-
-/* Music FAB */
-#music-fab {
-  position: fixed; bottom: 22px; right: 22px;
-  width: 50px; height: 50px; border-radius: 50%;
-  background: var(--bg-2); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 4000; color: var(--muted); font-size: 18px;
-  transition: color 0.2s, border-color 0.2s, transform 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-#music-fab.playing {
-  color: #e88c2a;
-  border-color: rgba(232,140,42,0.45);
-}
-
-/* Enter gate */
-#enter-gate {
-  position: fixed; inset: 0;
-  background: var(--bg);
-  z-index: 10000;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  transition: opacity 0.4s, visibility 0.4s;
-}
-#enter-gate.hide {
-  opacity: 0; visibility: hidden; pointer-events: none;
-}
-#enter-gate h1 { font-size: 1.9rem; margin-bottom: 6px; letter-spacing: -0.03em; }
-#enter-gate p { color: var(--muted); margin-bottom: 26px; font-size: 0.95rem; }
-#enter-btn {
-  padding: 13px 30px; border-radius: 999px;
-  background: var(--text); color: var(--bg);
-  font-weight: 600; font-size: 14.5px;
-  transition: transform 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-#enter-btn:hover { transform: scale(1.04); }
-
-/* Video */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 14px;
 }
 .video-card {
-  background: var(--bg-2); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.12);
+  background: rgba(18,18,18,0.8);
+  overflow: hidden;
+  cursor: none;
+  transition: border-color 0.3s;
 }
-.video-card .embed { aspect-ratio: 16/9; background: #000; }
-.video-card .embed iframe { width: 100%; height: 100%; border: none; }
-.video-card .info { padding: 13px; }
-.video-card .info h3 { font-size: 0.95rem; margin-bottom: 8px; }
+.video-card:hover { border-color: rgba(201,168,76,0.35); }
+.video-thumb {
+  aspect-ratio: 16/9;
+  background: #111;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-thumb svg { width: 48px; height: 48px; opacity: 0.7; transition: opacity 0.2s; }
+.video-card:hover .video-thumb svg { opacity: 1; }
+.video-info {
+  padding: 1rem 1.1rem;
+}
+.video-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+.video-info p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
 
-/* Achievements */
-.ach-card {
-  background: var(--bg-2); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 18px 20px;
-  margin-bottom: 14px;
+/* ========== CONTACT ========== */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  max-width: 1000px;
+  width: 100%;
 }
-.ach-card h3 { margin-bottom: 6px; }
-.ach-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
+.contact-socials {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(201,168,76,0.12);
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+  cursor: none;
+}
+.social-link:hover {
+  border-color: var(--gold);
+  color: var(--gold-bright);
+  background: rgba(201,168,76,0.06);
+}
+.social-link svg {
+  width: 18px; height: 18px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+.contact-map {
+  border: 1px solid rgba(201,168,76,0.15);
+  overflow: hidden;
+  height: 280px;
+  background: #111;
+}
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.7) contrast(1.05) brightness(0.85);
+}
+.contact-address {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.contact-address strong {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+/* ========== CV SECTION ========== */
+.cv-panel {
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 3rem 2rem;
+  background: rgba(18,18,18,0.7);
+}
+.cv-panel p {
+  color: var(--text-dim);
+  margin-bottom: 1.75rem;
+  font-size: 0.95rem;
+}
+.cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: transparent;
+  cursor: none;
+  transition: background 0.25s, color 0.25s;
+}
+.cv-btn:hover {
+  background: rgba(201,168,76,0.12);
+  color: var(--gold-bright);
+}
+
+/* ========== CERTIFICATES ========== */
+.certs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.cert-btn {
+  padding: 0.7rem 1.2rem;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: transparent;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  cursor: none;
+  transition: border-color 0.25s, color 0.25s;
+}
+.cert-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ========== MODAL / IMAGE VIEWER ========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5,5,5,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s;
+  padding: 1.5rem;
+}
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  position: relative;
+  max-width: min(92vw, 960px);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-img-wrap {
+  position: relative;
+  max-height: 72vh;
+  overflow: hidden;
+}
+.modal-img-wrap img {
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  display: block;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.modal-meta {
+  margin-top: 1rem;
+  text-align: center;
+}
+.modal-meta h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+.modal-meta .cat {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.modal-meta p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 0.4rem;
+  max-width: 36rem;
+}
+.modal-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); }
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; height: 40px;
+  border: 1px solid var(--border);
+  background: rgba(10,10,10,0.7);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: border-color 0.2s;
+}
+.modal-nav:hover { border-color: var(--gold); }
+.modal-prev { left: -3rem; }
+.modal-next { right: -3rem; }
+.modal-index {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+  letter-spacing: 0.1em;
+}
+
+/* PDF Viewer Modal */
+.pdf-modal .modal-content {
+  width: min(96vw, 900px);
+  height: min(90vh, 800px);
+}
+.pdf-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: #111;
+}
+
+/* YouTube Modal */
+.yt-modal .modal-content {
+  width: min(92vw, 860px);
+}
+.yt-frame-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000;
+}
+.yt-frame-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ========== PLACEHOLDER ========== */
+.media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #141414;
+  border: 1px dashed rgba(201,168,76,0.2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .profile-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .profile-portrait-wrap { max-width: 320px; margin: 0 auto; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: flex; }
+  .orbit-item { width: 140px; height: 190px; }
+  .orbit-stage { height: min(58vw, 340px); }
+  .modal-prev { left: 0.5rem; }
+  .modal-next { right: 0.5rem; }
+}
+@media (max-width: 600px) {
+  .nav-rail { padding: 0.9rem 1rem; }
+  .section { padding: 1.5rem 1rem 3.5rem; }
+  .home-name { font-size: 2.4rem; }
+  .orbit-item { width: 120px; height: 160px; }
+  .orbit-stage { height: 280px; }
+  .skills-constellation { grid-template-columns: 1fr; }
+  .achievements-grid { grid-template-columns: 1fr; }
+  .videos-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+}
+
+/* Mobile nav drawer */
+.nav-mobile-toggle {
+  display: none;
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gold);
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+}
+.nav-drawer {
+  position: fixed;
+  top: 0; right: 0;
+  width: min(280px, 85vw);
+  height: 100%;
+  background: rgba(12,12,12,0.97);
+  border-left: 1px solid rgba(201,168,76,0.12);
+  z-index: 200;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease);
+  padding: 4.5rem 1.5rem 2rem;
+  overflow-y: auto;
+}
+.nav-drawer.open { transform: translateX(0); }
+.nav-drawer .nav-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 0.5rem;
+  font-size: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nav-drawer-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  width: 32px; height: 32px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  #bg-canvas { opacity: 0.25; }
+}
 </style>
 </head>
 <body>
-
-<!-- Enter Gate -->
-<div id="enter-gate">
-  <h1>Shadid Ahamed</h1>
-  <p>Architecture · Craft · Code</p>
-  <button id="enter-btn">Enter Portfolio</button>
-</div>
-
 <!-- Custom Cursor -->
-<div class="cursor-dot" id="cursor-dot"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- Space Canvas -->
-<canvas id="space-canvas"></canvas>
+<!-- Procedural Background -->
+<canvas id="bg-canvas"></canvas>
 
-<!-- Overlay -->
-<div class="overlay" id="overlay"></div>
+<!-- Audio -->
+<audio id="bgAudio" loop preload="auto">
+  <source src="biting%20bullets%20-%20ridgeclub%20(youtube).mp3" type="audio/mpeg">
+</audio>
 
-<!-- Menu Toggle -->
-<button class="menu-toggle" id="menu-toggle" aria-label="Menu">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-</button>
-
-<div class="shell">
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <div class="brand-mark">SA</div>
-      <div>
-        <div class="brand-text">Shadid Ahamed</div>
-        <div class="brand-sub">Architecture · BRAC</div>
-      </div>
+<div id="app">
+  <!-- Navigation -->
+  <nav class="nav-rail" role="navigation" aria-label="Main">
+    <div class="nav-brand">SHADID AHAMED</div>
+    <div class="nav-links" id="navLinks">
+      <button class="nav-btn active" data-section="home"><span class="num">01</span>Home</button>
+      <button class="nav-btn" data-section="profile"><span class="num">02</span>Profile</button>
+      <button class="nav-btn" data-section="education"><span class="num">03</span>Education</button>
+      <button class="nav-btn" data-section="skills"><span class="num">04</span>Skills</button>
+      <button class="nav-btn" data-section="projects"><span class="num">05</span>Projects</button>
+      <button class="nav-btn" data-section="art"><span class="num">06</span>Art</button>
+      <button class="nav-btn" data-section="models"><span class="num">07</span>Models</button>
+      <button class="nav-btn" data-section="content"><span class="num">08</span>Content</button>
+      <button class="nav-btn" data-section="achievements"><span class="num">09</span>Achievements</button>
+      <button class="nav-btn" data-section="contact"><span class="num">10</span>Contact</button>
+      <button class="nav-btn" data-section="cv"><span class="num">11</span>CV</button>
     </div>
-    <nav class="nav">
-      <button data-view="home" class="active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-        Home
+    <div class="audio-ctrl">
+      <button class="audio-btn" id="audioToggle" aria-label="Toggle background music" title="Music">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
       </button>
-      <button data-view="profile">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        Profile
-      </button>
-      <button data-view="education">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
-        Education
-      </button>
-      <button data-view="book">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-        The Book
-      </button>
-      <button data-view="drawings">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
-        Drawings
-      </button>
-      <button data-view="models">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-        Models
-      </button>
-      <button data-view="achievements">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 01-10 0V4z"/><path d="M17 8h2a2 2 0 012 2v1a4 4 0 01-4 4h-1"/><path d="M7 8H5a2 2 0 00-2 2v1a4 4 0 004 4h1"/></svg>
-        Achievements
-      </button>
-      <button data-view="videos">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
-        Videos
-      </button>
-      <button data-view="contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
-        Contact
-      </button>
-    </nav>
-    <div class="sidebar-footer">
-      <div class="status-pill"><span class="status-dot"></span> Open to collaborate</div>
-      <a href="#" class="hire-btn" onclick="showView('contact'); return false;">Get in touch</a>
+      <div class="audio-visual" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>
-  </aside>
+    <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Open menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
 
-  <!-- Main -->
-  <main class="main">
+  <!-- Mobile Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">×</button>
+    <button class="nav-btn active" data-section="home"><span class="num">01</span>Home</button>
+    <button class="nav-btn" data-section="profile"><span class="num">02</span>Profile</button>
+    <button class="nav-btn" data-section="education"><span class="num">03</span>Education</button>
+    <button class="nav-btn" data-section="skills"><span class="num">04</span>Skills</button>
+    <button class="nav-btn" data-section="projects"><span class="num">05</span>Projects</button>
+    <button class="nav-btn" data-section="art"><span class="num">06</span>Art</button>
+    <button class="nav-btn" data-section="models"><span class="num">07</span>Models</button>
+    <button class="nav-btn" data-section="content"><span class="num">08</span>Content</button>
+    <button class="nav-btn" data-section="achievements"><span class="num">09</span>Achievements</button>
+    <button class="nav-btn" data-section="contact"><span class="num">10</span>Contact</button>
+    <button class="nav-btn" data-section="cv"><span class="num">11</span>CV</button>
+  </div>
 
-    <!-- HOME -->
-    <section class="view active" id="view-home">
-      <div class="name-block">
-        <div class="name-grid">
-          <span class="on"></span><span></span><span class="mid"></span><span></span>
-          <span></span><span class="on"></span><span></span><span class="on"></span>
-          <span class="mid"></span><span></span><span class="on"></span><span></span>
-          <span></span><span class="on"></span><span></span><span class="mid"></span>
-        </div>
-        <div class="name-stack">
-          <h1>Shadid<br>Ahamed</h1>
-        </div>
-      </div>
-      <p class="lead">Architecture student at BRAC University. Handmade portfolio book, geometric lettering, drawing and digital experiments. First semester — ARC-101.</p>
-      <div class="home-meta">
-        <span class="chip">Roll 1000061008</span>
-        <span class="chip">Summer 2026 · CGPA 2.68</span>
-        <span class="chip">Paltan, Dhaka</span>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="showView('book')">View The Book</button>
-        <button class="btn" onclick="showView('drawings')">Drawings</button>
-        <button class="btn" onclick="showView('profile')">Profile</button>
-      </div>
-
-      <div style="margin-top:42px;">
-        <div class="section-label">Selected Work</div>
-        <div class="circle-wrap">
-          <div class="circle-track" id="home-track">
-            <!-- duplicated for seamless loop -->
-          </div>
-        </div>
-      </div>
+  <main class="stage">
+    <!-- ========== HOME ========== -->
+    <section class="section active" id="section-home" data-section="home">
+      <div class="section-label">01 — Entrance</div>
+      <h1 class="home-name">SHADID AHAMED</h1>
+      <p class="home-roles">Architecture / Creative Developer / Designer / Artist / Web Developer</p>
+      <p class="home-statement">Exploring space, form, code, images and stories through an evolving creative practice.</p>
+      <button class="home-cta" data-section="profile">Enter Archive →</button>
+      <div class="home-ornament"></div>
     </section>
 
-    <!-- PROFILE -->
-    <section class="view" id="view-profile">
-      <div class="section-label">About</div>
+    <!-- ========== PROFILE ========== -->
+    <section class="section" id="section-profile" data-section="profile">
+      <div class="section-label">02 — Identity</div>
+      <h2 class="section-title">Profile</h2>
+      <p class="section-sub">Architecture student exploring the intersection of design, code, visual storytelling and digital experiences.</p>
       <div class="profile-layout">
-        <img class="avatar" src="Screenshot 2026-09-20 201810.png" alt="Shadid Ahamed" onclick="openLb(this.src)">
-        <div>
-          <h1>Shadid Ahamed</h1>
-          <p class="lead" style="margin-bottom:12px;">Architecture student at BRAC University. Interested in craft, geometry, narrative drawing and the quiet persistence that turns ideas into objects.</p>
-          <div class="profile-tags">
-            <span class="tag">Architecture</span>
-            <span class="tag">Drawing</span>
-            <span class="tag">Handmade Books</span>
-            <span class="tag">Geometric Design</span>
+        <div class="profile-portrait-wrap">
+          <div class="profile-frame"></div>
+          <img class="profile-portrait" src="Screenshot%202026-09-20%20201810.png" alt="Shadid Ahamed" loading="eager"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="media-placeholder" style="display:none;aspect-ratio:3/4">MEDIA UNAVAILABLE<br>Screenshot 2026-09-20 201810.png</div>
+          <div class="profile-meta">
+            Student ID: 1000061008<br>
+            BRAC University · Architecture
           </div>
-          <p style="color:var(--muted);font-size:0.95rem;margin-top:10px;">
-            Father: Tofayel Ahamed (Police Inspector)<br>
-            Mother: Afruja Sultana<br>
-            Based in Paltan, Dhaka.
+        </div>
+        <div class="profile-info">
+          <h2>Shadid Ahamed</h2>
+          <p class="profile-identity">Architecture · Creative Development · Design · Art</p>
+          <p class="profile-bio">
+            Currently studying Architecture at BRAC University, while exploring a transition toward Computer Science &amp; Engineering.
+            The practice moves between spatial design, drawing, model-making, interactive web experiences and visual narrative.
           </p>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener">Download CV</a>
-            <button class="btn" onclick="showView('contact')">Contact</button>
-          </div>
+          <dl class="profile-details">
+            <dt>University</dt>
+            <dd>BRAC University — Architecture</dd>
+            <dt>Course</dt>
+            <dd>ARC-101 (Design I: Basic Design), Summer 2026</dd>
+            <dt>CGPA</dt>
+            <dd>2.68</dd>
+            <dt>HSC</dt>
+            <dd>Notre Dame College, Dhaka — GPA 5.00 (2025)</dd>
+            <dt>SSC</dt>
+            <dd>Motijheel Ideal School &amp; College — GPA 5.00 (2023)</dd>
+            <dt>Family</dt>
+            <dd>Father: Tofayel Ahamed (Police Inspector)<br>Mother: Afruza Sultana<br>Sibling: One younger sister</dd>
+          </dl>
         </div>
       </div>
     </section>
 
-    <!-- EDUCATION -->
-    <section class="view" id="view-education">
-      <div class="section-label">Education</div>
-      <h2>Path so far</h2>
-      <p class="lead">Science background → Architecture. Motijheel Ideal School & College → Notre Dame College → BRAC University.</p>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-card">
-            <div>
-              <div class="when">2025 – Present</div>
-              <h3>BRAC University</h3>
-              <p style="color:var(--muted);font-size:0.95rem;">Bachelor of Architecture · ARC-101 (Design I: Basic Design)</p>
-              <span class="result">Summer 2026 CGPA 2.68</span>
-            </div>
-            <img class="tl-thumb" src="university-1.jpg" alt="BRAC University" onclick="openLb(this.src)">
-          </div>
+    <!-- ========== EDUCATION ========== -->
+    <section class="section" id="section-education" data-section="education">
+      <div class="section-label">03 — Institutions</div>
+      <h2 class="section-title">Education</h2>
+      <p class="section-sub">Archival chapters of academic formation.</p>
+      <div class="edu-chapters" id="eduChapters"></div>
+      <div class="certs-row">
+        <button class="cert-btn" data-pdf="SSC%20Transcript.pdf">SSC Transcript</button>
+        <button class="cert-btn" data-pdf="HSC%20Transcript.pdf">HSC Transcript</button>
+        <button class="cert-btn" data-pdf="1000061008_UG_ARC_Gradesheet_Web.pdf">UG ARC Gradesheet</button>
+      </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section class="section" id="section-skills" data-section="skills">
+      <div class="section-label">04 — Capabilities</div>
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">A constellation of practice areas rather than measured percentages.</p>
+      <div class="skills-constellation">
+        <div class="skill-cluster">
+          <h3>Art &amp; Drawing</h3>
+          <ul class="skill-list">
+            <li>Drawing</li>
+            <li>Sketching</li>
+            <li>Visual Composition</li>
+            <li>Watercolor exploration</li>
+            <li>Illustration</li>
+            <li>Comic storytelling</li>
+          </ul>
         </div>
-        <div class="tl-item">
-          <div class="tl-card">
-            <div>
-              <div class="when">College</div>
-              <h3>Notre Dame College, Dhaka</h3>
-              <p style="color:var(--muted);font-size:0.95rem;">Higher Secondary · Science</p>
-            </div>
-            <img class="tl-thumb" src="college-3.jpg" alt="Notre Dame College" onclick="openLb(this.src)">
-          </div>
+        <div class="skill-cluster">
+          <h3>Architecture</h3>
+          <ul class="skill-list">
+            <li>Basic Design</li>
+            <li>Model Making</li>
+            <li>Spatial Exploration</li>
+            <li>Form Study</li>
+            <li>Architectural Graphics</li>
+            <li>Presentation</li>
+          </ul>
         </div>
-        <div class="tl-item">
-          <div class="tl-card">
-            <div>
-              <div class="when">School</div>
-              <h3>Motijheel Ideal School & College</h3>
-              <p style="color:var(--muted);font-size:0.95rem;">Secondary · Science background</p>
-            </div>
-            <img class="tl-thumb" src="school-1.jpg" alt="Motijheel Ideal" onclick="openLb(this.src)">
-          </div>
+        <div class="skill-cluster">
+          <h3>Web / Digital</h3>
+          <ul class="skill-list">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>GitHub Pages</li>
+            <li>Creative Web Development</li>
+            <li>Interactive UI</li>
+          </ul>
+        </div>
+        <div class="skill-cluster">
+          <h3>Creative</h3>
+          <ul class="skill-list">
+            <li>Literature</li>
+            <li>Music</li>
+            <li>Visual storytelling</li>
+            <li>Concept development</li>
+            <li>Experimental design</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- THE BOOK -->
-    <section class="view" id="view-book">
-      <div class="section-label">ARC-101 · Summer 2026</div>
-      <h1>The Portfolio Book</h1>
-      <p class="lead">Handmade first-semester portfolio. Black cover, geometric SA lettering, checkered spine. Physical object first — then documented.</p>
+    <!-- ========== PROJECTS ========== -->
+    <section class="section" id="section-projects" data-section="projects">
+      <div class="section-label">05 — Design Work</div>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">Selected spatial and formal studies from the design studio.</p>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </section>
 
-      <div class="book-showcase">
-        <div class="book-visual">
-          <img src="817550850_1756948922083208_6663409752770103109_n.jpg" alt="Portfolio Book" onclick="openLb(this.src)">
+    <!-- ========== ART / DRAWINGS ========== -->
+    <section class="section" id="section-art" data-section="art">
+      <div class="section-label">06 — Drawings &amp; Art</div>
+      <h2 class="section-title">Art</h2>
+      <p class="section-sub">Illustrative studies, comic sequences and visual explorations.</p>
+      <div class="orbit-section">
+        <div class="orbit-stage" id="orbitArt" data-orbit="art">
+          <div class="orbit-track" id="orbitArtTrack"></div>
+        </div>
+        <div class="orbit-controls">
+          <button class="orbit-btn" data-orbit-prev="art" aria-label="Previous">‹</button>
+          <span class="orbit-indicator" id="orbitArtInd">01 / 16</span>
+          <button class="orbit-btn" data-orbit-next="art" aria-label="Next">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MODELS ========== -->
+    <section class="section" id="section-models" data-section="models">
+      <div class="section-label">07 — Model Making</div>
+      <h2 class="section-title">Models</h2>
+      <p class="section-sub">Physical explorations of form, structure and spatial idea.</p>
+      <div class="orbit-section">
+        <div class="orbit-stage" id="orbitModels" data-orbit="models">
+          <div class="orbit-track" id="orbitModelsTrack"></div>
+        </div>
+        <div class="orbit-controls">
+          <button class="orbit-btn" data-orbit-prev="models" aria-label="Previous">‹</button>
+          <span class="orbit-indicator" id="orbitModelsInd">01 / 07</span>
+          <button class="orbit-btn" data-orbit-next="models" aria-label="Next">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BOOK (integrated into Art or separate hero — placed as part of Art experience, also accessible) ========== -->
+    <!-- Book orbit is shown as a dedicated subsection within a flexible space; we add a Book section via Projects-like or as part of Art. For clarity we create a visible Book zone in HOME or as separate. -->
+    <!-- Actually we will add Book as its own visual zone under a dedicated section if needed; here we embed Book orbit in a way that user can navigate. For structure we put Book inside Art or create an extra entry. Spec lists BOOK as hero showcase. We add a Book section. -->
+
+    <!-- ========== CONTENT / VIDEOS ========== -->
+    <section class="section" id="section-content" data-section="content">
+      <div class="section-label">08 — Media</div>
+      <h2 class="section-title">Content</h2>
+      <p class="section-sub">Educational and explanatory video work.</p>
+      <div class="videos-grid" id="videosGrid"></div>
+    </section>
+
+    <!-- ========== ACHIEVEMENTS ========== -->
+    <section class="section" id="section-achievements" data-section="achievements">
+      <div class="section-label">09 — Archive</div>
+      <h2 class="section-title">Achievements</h2>
+      <p class="section-sub">Recognition recorded as archival entries.</p>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="section" id="section-contact" data-section="contact">
+      <div class="section-label">10 — Connect</div>
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Connect with Shadid across platforms.</p>
+      <div class="contact-layout">
+        <div>
+          <div class="contact-socials" id="socialsGrid"></div>
         </div>
         <div>
-          <h3>Details</h3>
-          <p style="color:var(--muted);font-size:0.95rem;margin:8px 0 16px;">
-            Student ID 1000061008 · SHADID AHAMED · ARC-101 (Summer-2026).<br>
-            Hand-lettered geometric monogram, textured paper, carefully bound.
-          </p>
-          <div class="btn-row">
-            <button class="btn btn-primary" onclick="openLb('815366796_1754064392528440_1990530380060926840_n.jpg')">View Cover</button>
-            <button class="btn" onclick="openLb('811615849_2097588261148773_877248636819443508_n.jpg')">Spine</button>
+          <div class="contact-map">
+            <iframe src="https://www.google.com/maps?q=15%2F17+Sandenagar+Bazar,+Paltan,+Dhaka&amp;output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Home location map"></iframe>
+          </div>
+          <div class="contact-address">
+            <strong>Address</strong>
+            15/17 Sandenagar Bazar, Flat No. 4, Thana: Paltan, Dhaka
           </div>
         </div>
       </div>
-
-      <div class="section-label">Process & Views</div>
-      <div class="circle-wrap">
-        <div class="circle-track" id="book-track"></div>
-      </div>
-
-      <div class="grid-gallery" style="margin-top:8px;">
-        <img src="813965363_2318476582340902_2775377306658662126_n.jpg" alt="Angled" onclick="openLb(this.src)">
-        <img src="812903289_2094149871472792_69075459894343963_n.jpg" alt="In hand" onclick="openLb(this.src)">
-        <img src="812816987_1780849183058307_7067294713027788435_n.jpg" alt="On mat" onclick="openLb(this.src)">
-        <img src="808374318_832505289919133_341923393175280463_n.jpg" alt="Checker" onclick="openLb(this.src)">
-        <img src="807083493_2312566989479709_7343824370968896857_n.jpg" alt="Detail" onclick="openLb(this.src)">
-        <img src="806270688_2266422980809329_2024747915901635330_n.jpg" alt="Vertical" onclick="openLb(this.src)">
-        <img src="808108880_1808585307222660_7996172511928952264_n.jpg" alt="Side" onclick="openLb(this.src)">
-        <img src="ChatGPT Image Sep 20, 2026, 07_38_48 PM.png" alt="3D view" onclick="openLb(this.src)">
-      </div>
     </section>
 
-    <!-- DRAWINGS -->
-    <section class="view" id="view-drawings">
-      <div class="section-label">Art & Drawing</div>
-      <h2>Hand & Screen</h2>
-      <p class="lead">Sketches, comics, colour studies and narrative pieces. From still life to imagined cities and underwater scenes.</p>
-
-      <div class="circle-wrap">
-        <div class="circle-track" id="draw-track"></div>
-      </div>
-
-      <div class="grid-gallery">
-        <img src="image sketch 2.jpg" alt="Sea of Dreams" onclick="openLb(this.src)">
-        <img src="image sketch 1.jpg" alt="City of Loneliness" onclick="openLb(this.src)">
-        <img src="IMG scetch 1.jpg" alt="River" onclick="openLb(this.src)">
-        <img src="image sketch 3.jpg" alt="Bamboo" onclick="openLb(this.src)">
-        <img src="813853349_2273476383432547_5877535730504115386_n.jpg" alt="Cabin" onclick="openLb(this.src)">
-        <img src="image colour.jpg" alt="Village" onclick="openLb(this.src)">
-        <img src="image ipad 1.png" alt="Library" onclick="openLb(this.src)">
-        <img src="image colour 1.jpg" alt="Character" onclick="openLb(this.src)">
-        <img src="809518654_1855217995842076_8923680691947304600_n.jpg" alt="Comic" onclick="openLb(this.src)">
-        <img src="818478656_1667736108690904_8025924023257939696_n.jpg" alt="Comic" onclick="openLb(this.src)">
-        <img src="809601262_4548993055379554_8793039364914601083_n.jpg" alt="Comic" onclick="openLb(this.src)">
-        <img src="813692048_1750841226169127_6723820080107089098_n.jpg" alt="Comic" onclick="openLb(this.src)">
+    <!-- ========== CV ========== -->
+    <section class="section" id="section-cv" data-section="cv">
+      <div class="section-label">11 — Document</div>
+      <h2 class="section-title">Curriculum Vitae</h2>
+      <div class="cv-panel">
+        <p>View the full curriculum vitae document.</p>
+        <a class="cv-btn" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          View CV →
+        </a>
       </div>
     </section>
-
-    <!-- MODELS -->
-    <section class="view" id="view-models">
-      <div class="section-label">Physical Models</div>
-      <h2>Form & Light</h2>
-      <p class="lead">Foam and paper studies exploring mass, void and light. From first-semester exercises.</p>
-      <div class="grid-gallery">
-        <img src="Screenshot 2026-09-20 202509.png" alt="Tower" onclick="openLb(this.src)">
-        <img src="Screenshot 2026-09-20 202501.png" alt="Relief" onclick="openLb(this.src)">
-        <img src="Screenshot 2026-09-20 202429.png" alt="Project 3" onclick="openLb(this.src)">
-        <img src="Screenshot 2026-09-20 202230.png" alt="Ribbon" onclick="openLb(this.src)">
-      </div>
-    </section>
-
-    <!-- ACHIEVEMENTS -->
-    <section class="view" id="view-achievements">
-      <div class="section-label">Results</div>
-      <h2>Achievements & Grade Sheet</h2>
-      <p class="lead">Summer 2026 unofficial grade sheet and academic record.</p>
-      <div class="ach-card">
-        <h3>Summer 2026 · Undergraduate</h3>
-        <p>Credits Attempted / Earned: 15.00 · GPA / CGPA: <strong style="color:var(--text)">2.68</strong></p>
-        <a class="btn btn-primary" href="1000061008_UG_ARC_Gradesheet_Web.pdf" target="_blank" rel="noopener">Open Grade Sheet (PDF)</a>
-      </div>
-    </section>
-
-    <!-- VIDEOS -->
-    <section class="view" id="view-videos">
-      <div class="section-label">Videos</div>
-      <h2>Teaching & Content</h2>
-      <div class="video-grid">
-        <div class="video-card">
-          <div class="embed"><iframe src="https://www.youtube.com/embed/MCj4pNiJR_Q" title="Modifiers" allowfullscreen loading="lazy"></iframe></div>
-          <div class="info"><h3>Modifiers (English)</h3><a class="btn" href="https://youtu.be/MCj4pNiJR_Q" target="_blank" rel="noopener">Watch</a></div>
-        </div>
-        <div class="video-card">
-          <div class="embed"><iframe src="https://www.youtube.com/embed/K29JNurQr9c" title="Connectors" allowfullscreen loading="lazy"></iframe></div>
-          <div class="info"><h3>Connectors (English)</h3><a class="btn" href="https://youtu.be/K29JNurQr9c" target="_blank" rel="noopener">Watch</a></div>
-        </div>
-        <div class="video-card">
-          <div class="embed"><iframe src="https://www.youtube.com/embed/0ba53jWZy5o" title="SVA" allowfullscreen loading="lazy"></iframe></div>
-          <div class="info"><h3>Subject-Verb Agreement</h3><a class="btn" href="https://youtu.be/0ba53jWZy5o" target="_blank" rel="noopener">Watch</a></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="view" id="view-contact">
-      <div class="section-label">Connect</div>
-      <h2>Contact & Links</h2>
-      <p class="lead">Email, socials and collaboration.</p>
-      <div class="contact-grid" id="contact-grid"></div>
-      <div style="margin-top:28px;">
-        <a class="btn btn-primary" href="mailto:shadidahamed.matashome05m@gmail.com">Email Me</a>
-        <a class="btn" style="margin-left:8px;" href="https://wa.me/8801326162684" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </section>
-
   </main>
 </div>
 
-<!-- Lightbox -->
-<div id="lightbox">
-  <button id="lb-close" aria-label="Close">×</button>
-  <img id="lb-img" alt="">
+<!-- Image Viewer Modal -->
+<div class="modal-overlay" id="imageModal" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <button class="modal-nav modal-prev" id="modalPrev" aria-label="Previous">‹</button>
+    <button class="modal-nav modal-next" id="modalNext" aria-label="Next">›</button>
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-meta">
+      <h3 id="modalTitle"></h3>
+      <div class="cat" id="modalCat"></div>
+      <p id="modalDesc"></p>
+    </div>
+    <div class="modal-index" id="modalIndex"></div>
+  </div>
 </div>
 
-<!-- Music FAB -->
-<button id="music-fab" title="Toggle Music" aria-label="Music">♪</button>
+<!-- PDF Viewer Modal -->
+<div class="modal-overlay pdf-modal" id="pdfModal" role="dialog" aria-modal="true" aria-label="Document viewer">
+  <div class="modal-content">
+    <button class="modal-close" id="pdfClose" aria-label="Close">×</button>
+    <iframe class="pdf-frame" id="pdfFrame" src="" title="PDF document"></iframe>
+  </div>
+</div>
 
-<!-- Audio - original filename -->
-<audio id="bg-music" loop preload="metadata">
-  <source src="biting bullets - ridgeclub (youtube).mp3" type="audio/mpeg">
-</audio>
+<!-- YouTube Modal -->
+<div class="modal-overlay yt-modal" id="ytModal" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="modal-content">
+    <button class="modal-close" id="ytClose" aria-label="Close">×</button>
+    <div class="yt-frame-wrap">
+      <iframe id="ytFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube video"></iframe>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ========== NAV ========== */
-function showView(id) {
-  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
-  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
-  const view = document.getElementById("view-" + id);
-  if (view) view.classList.add("active");
-  const btn = document.querySelector(`.nav button[data-view="${id}"]`);
-  if (btn) btn.classList.add("active");
-  try { localStorage.setItem("sa_view", id); } catch(e){}
-  document.getElementById("sidebar").classList.remove("open");
-  document.getElementById("overlay").classList.remove("show");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+/* ============================================================
+   PORTFOLIO DATA — exact filenames, links, labels as supplied
+   ============================================================ */
+const portfolioData = {
+  profileImage: "Screenshot 2026-09-20 201810.png",
+
+  books: [
+    { file: "817550850_1756948922083208_6663409752770103109_n.jpg", title: "Main 3D Book Cover", desc: "Primary three-dimensional presentation of the portfolio book." },
+    { file: "815366796_1754064392528440_1990530380060926840_n.jpg", title: "Cover / Flat", desc: "Flat cover view of the portfolio book." },
+    { file: "813965363_2318476582340902_2775377306658662126_n.jpg", title: "Angled", desc: "Angled perspective of the book form." },
+    { file: "811615849_2097588261148773_877248636819443508_n.jpg", title: "Spine", desc: "Spine detail of the portfolio volume." },
+    { file: "812903289_2094149871472792_69075459894343963_n.jpg", title: "In Hand", desc: "Book held to convey scale and material presence." },
+    { file: "812816987_1780849183058307_7067294713027788435_n.jpg", title: "On Mat", desc: "Book resting on surface mat." },
+    { file: "808374318_832505289919133_341923393175280463_n.jpg", title: "Checker", desc: "Checkered context view." },
+    { file: "807083493_2312566989479709_7343824370968896857_n.jpg", title: "Detail", desc: "Close detail study of the book surface." },
+    { file: "806270688_2266422980809329_2024747915901635330_n.jpg", title: "Vertical", desc: "Vertical orientation of the volume." },
+    { file: "808108880_1808585307222660_7996172511928952264_n.jpg", title: "Side", desc: "Side elevation of the portfolio book." },
+    { file: "ChatGPT Image Sep 20, 2026, 07_38_48 PM.png", title: "3D Checkered View", desc: "Additional three-dimensional checkered presentation." }
+  ],
+
+  artworks: [
+    { file: "image sketch 2.jpg", title: "Sea of Dreams (Whale)", desc: "An illustrative study built around oceanic space, scale and a solitary whale motif." },
+    { file: "image sketch 1.jpg", title: "Science of Loneliness (City)", desc: "Visual study exploring urban atmosphere and solitude." },
+    { file: "IMG scetch 1.jpg", title: "River", desc: "Visual study exploring form, composition and atmosphere." },
+    { file: "image sketch 3.jpg", title: "Bamboo", desc: "Visual study exploring form, composition and atmosphere." },
+    { file: "813853349_2273476383432547_5877535730504115386_n.jpg", title: "Cabin by the Water", desc: "Visual study exploring form, composition and atmosphere." },
+    { file: "image colour.jpg", title: "Village Festival", desc: "Visual study exploring form, composition and atmosphere." },
+    { file: "image ipad 1.png", title: "Library Interior", desc: "Visual study exploring form, composition and atmosphere." },
+    { file: "image colour 1.jpg", title: "Character Study", desc: "Visual study exploring form, composition and atmosphere." },
+    { file: "818061932_846874715114836_2565138691570136914_n.jpg", title: "Exhibition Comic Page", desc: "Comic storytelling sequence." },
+    { file: "809518654_1855217995842076_8923680691947304600_n.jpg", title: "Comic Sequence", desc: "Comic storytelling sequence." },
+    { file: "818478656_1667736108690904_8025924023257939696_n.jpg", title: "Comic Page", desc: "Comic storytelling sequence." },
+    { file: "809601262_4548993055379554_8793039364914601083_n.jpg", title: "Comic Page", desc: "Comic storytelling sequence." },
+    { file: "813692048_1750841226169127_6723820080107089098_n.jpg", title: "Portrait Comic", desc: "Comic storytelling sequence." },
+    { file: "813466984_26807832862248578_2653115749408704795_n.jpg", title: "Narrative Comic", desc: "Comic storytelling sequence." },
+    { file: "Screenshot 2026-09-20 202528.png", title: "The Bully Comic", desc: "Comic storytelling sequence." },
+    { file: "814113108_1617142683373760_3602804557652732585_n.jpg", title: "Signature Piece", desc: "Visual study exploring form, composition and atmosphere." }
+  ],
+
+  models: [
+    { file: "Screenshot 2026-09-20 202509.png", title: "Foam Tower", desc: "Physical model study in foam." },
+    { file: "Screenshot 2026-09-20 202501.png", title: "Relief Study", desc: "Relief model exploring surface and depth." },
+    { file: "Screenshot 2026-09-20 202429.png", title: "Project-3 Relief", desc: "Relief model from Project-3." },
+    { file: "Screenshot 2026-09-20 202230.png", title: "Paper Ribbon", desc: "Paper-based spatial exploration." },
+    { file: "Screenshot 2026-09-20 202603.png", title: "White Spatial Model", desc: "White spatial model study." },
+    { file: "Screenshot 2026-09-20 202318.png", title: "Project-2 String Structure", desc: "String structure model from Project-2." },
+    { file: "Screenshot 2026-09-20 202305.png", title: "Project-1 Checkered", desc: "Checkered model from Project-1." }
+  ],
+
+  education: [
+    {
+      institution: "BRAC University",
+      meta: "Architecture · Current",
+      images: [
+        { file: "university-1.jpg", title: "BRAC University", desc: "Campus / institutional context." },
+        { file: "university-2.webp", title: "BRAC University", desc: "Campus / institutional context." },
+        { file: "university-3.jpg", title: "BRAC University", desc: "Campus / institutional context." },
+        { file: "university-4.jpg", title: "BRAC University", desc: "Campus / institutional context." }
+      ]
+    },
+    {
+      institution: "Notre Dame College",
+      meta: "HSC · GPA 5.00 · 2025",
+      images: [
+        { file: "college-1.jpg", title: "Notre Dame College", desc: "Institutional context." },
+        { file: "college-2.jpg", title: "Notre Dame College", desc: "Institutional context." },
+        { file: "college-3.jpg", title: "Notre Dame College", desc: "Institutional context." },
+        { file: "college-ndc.jpg", title: "Notre Dame College", desc: "Institutional context." }
+      ]
+    },
+    {
+      institution: "Motijheel Ideal School & College",
+      meta: "SSC · GPA 5.00 · 2023",
+      images: [
+        { file: "school-1.jpg", title: "Motijheel Ideal School & College", desc: "Institutional context." },
+        { file: "school-2.jpg", title: "Motijheel Ideal School & College", desc: "Institutional context." }
+      ]
+    }
+  ],
+
+  projects: [
+    { title: "Lory / Laurie Lift", cat: "Design Studio", desc: "Spatial and formal study. Description to be updated." },
+    { title: "Squares and Grid", cat: "Design Studio", desc: "Exploration of grid systems and modular form. Description to be updated." },
+    { title: "Line Signature", cat: "Design Studio", desc: "Line-based formal investigation. Description to be updated." },
+    { title: "Interlock", cat: "Design Studio", desc: "Study of interlocking geometries. Description to be updated." },
+    { title: "Pavilion", cat: "Design Studio", desc: "Pavilion concept and spatial proposal. Description to be updated." },
+    { title: "Cutouts", cat: "Design Studio", desc: "Cutout-based formal exploration. Description to be updated." },
+    { title: "Mosque", cat: "Design Studio", desc: "Mosque design study. Description to be updated." }
+  ],
+
+  achievements: [
+    { title: "Bangladesh Shishu Academy", rank: "Children’s Drawing Competition", desc: "Recognition in national children’s drawing competition." },
+    { title: "Thana Level", rank: "1st · 2023", desc: "First place at thana level." },
+    { title: "District Level", rank: "1st", desc: "First place at district level." },
+    { title: "Division Level", rank: "2nd", desc: "Second place at division level." },
+    { title: "5 km Running", rank: "Runner-up", desc: "Runner-up in 5 km running event." },
+    { title: "Police Badminton Club", rank: "Referee Recognition / Medal", desc: "Referee recognition and medal from Police Badminton Club." },
+    { title: "SSC", rank: "GPA 5.00 · Golden A+", desc: "Secondary School Certificate with Golden A+." },
+    { title: "HSC", rank: "GPA 5.00 · Golden A+", desc: "Higher Secondary Certificate with Golden A+." }
+  ],
+
+  videos: [
+    { title: "Modifiers (English)", url: "https://youtu.be/MCj4pNiJR_Q", id: "MCj4pNiJR_Q", desc: "Educational content on English modifiers." },
+    { title: "Connectors (English)", url: "https://youtu.be/K29JNurQr9c", id: "K29JNurQr9c", desc: "Educational content on English connectors." },
+    { title: "Subject-Verb Agreement", url: "https://youtu.be/0ba53jWZy5o", id: "0ba53jWZy5o", desc: "Educational content on subject-verb agreement." }
+  ],
+
+  socials: [
+    { name: "Email", url: "mailto:shadidahamed.matashome05m@gmail.com", icon: "email" },
+    { name: "WhatsApp", url: "https://wa.me/8801326162684", icon: "whatsapp" },
+    { name: "GitHub", url: "https://github.com/shadidahamed", icon: "github" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/shadid-ahamed-41a0703b2/", icon: "linkedin" },
+    { name: "Instagram", url: "https://www.instagram.com/shade_ed25", icon: "instagram" },
+    { name: "Facebook", url: "https://www.facebook.com/share/1C2KcQfwvn/", icon: "facebook" },
+    { name: "X / Twitter", url: "https://x.com/ShadidAhamed", icon: "x" },
+    { name: "Pinterest", url: "https://pin.it/4Z5y34R2T", icon: "pinterest" },
+    { name: "Reddit", url: "https://www.reddit.com/user/Shade_ed25", icon: "reddit" },
+    { name: "CV", url: "https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link", icon: "cv" }
+  ]
+};
+
+/* ========== UTILITIES ========== */
+function encodePath(name) {
+  return name.split("/").map(p => encodeURIComponent(p)).join("/");
 }
-document.querySelectorAll(".nav button").forEach(b => {
-  b.addEventListener("click", () => showView(b.dataset.view));
-});
-document.getElementById("menu-toggle").onclick = () => {
-  document.getElementById("sidebar").classList.toggle("open");
-  document.getElementById("overlay").classList.toggle("show");
-};
-document.getElementById("overlay").onclick = () => {
-  document.getElementById("sidebar").classList.remove("open");
-  document.getElementById("overlay").classList.remove("show");
-};
 
-/* ========== LIGHTBOX ========== */
-function openLb(src) {
-  document.getElementById("lb-img").src = src;
-  document.getElementById("lightbox").classList.add("open");
-}
-document.getElementById("lb-close").onclick = () => document.getElementById("lightbox").classList.remove("open");
-document.getElementById("lightbox").onclick = e => {
-  if (e.target.id === "lightbox") document.getElementById("lightbox").classList.remove("open");
-};
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") document.getElementById("lightbox").classList.remove("open");
-});
+function $(sel, ctx = document) { return ctx.querySelector(sel); }
+function $$(sel, ctx = document) { return [...ctx.querySelectorAll(sel)]; }
 
-/* ========== CIRCULAR TRACKS ========== */
-function fillTrack(id, items) {
-  const track = document.getElementById(id);
-  if (!track) return;
-  const html = items.map(i => `
-    <div class="circle-item">
-      <img src="${i.src}" alt="${i.label || ''}" loading="lazy" onclick="openLb(this.src)">
-      <span>${i.label || ''}</span>
-    </div>
-  `).join("");
-  track.innerHTML = html + html; // duplicate for seamless loop
-}
-
-fillTrack("home-track", [
-  {src:"817550850_1756948922083208_6663409752770103109_n.jpg", label:"The Book"},
-  {src:"image sketch 2.jpg", label:"Sea of Dreams"},
-  {src:"Screenshot 2026-09-20 201810.png", label:"Portrait"},
-  {src:"Screenshot 2026-09-20 202509.png", label:"Model"},
-  {src:"image sketch 1.jpg", label:"City"},
-  {src:"university-4.jpg", label:"Exhibition"}
-]);
-
-fillTrack("book-track", [
-  {src:"815366796_1754064392528440_1990530380060926840_n.jpg", label:"Cover"},
-  {src:"813965363_2318476582340902_2775377306658662126_n.jpg", label:"Angled"},
-  {src:"811615849_2097588261148773_877248636819443508_n.jpg", label:"Spine"},
-  {src:"812903289_2094149871472792_69075459894343963_n.jpg", label:"In hand"},
-  {src:"812816987_1780849183058307_7067294713027788435_n.jpg", label:"On mat"},
-  {src:"808374318_832505289919133_341923393175280463_n.jpg", label:"Checker"}
-]);
-
-fillTrack("draw-track", [
-  {src:"image sketch 2.jpg", label:"Whale"},
-  {src:"IMG scetch 1.jpg", label:"River"},
-  {src:"image sketch 3.jpg", label:"Bamboo"},
-  {src:"813853349_2273476383432547_5877535730504115386_n.jpg", label:"Cabin"},
-  {src:"image colour 1.jpg", label:"Study"},
-  {src:"image ipad 1.png", label:"Library"}
-]);
-
-/* ========== CONTACTS ========== */
-const contacts = [
-  {label:"Email", url:"mailto:shadidahamed.matashome05m@gmail.com", icon:"mail"},
-  {label:"GitHub", url:"https://github.com/shadidahamed", icon:"github"},
-  {label:"LinkedIn", url:"https://www.linkedin.com/in/shadid-ahamed-41a0703b2/", icon:"linkedin"},
-  {label:"Instagram", url:"https://www.instagram.com/shade_ed25", icon:"instagram"},
-  {label:"Facebook", url:"https://www.facebook.com/share/1C2KcQfwvn/", icon:"facebook"},
-  {label:"WhatsApp", url:"https://wa.me/8801326162684", icon:"whatsapp"},
-  {label:"X", url:"https://x.com/ShadidAhamed", icon:"x"},
-  {label:"Pinterest", url:"https://pin.it/4Z5y34R2T", icon:"pinterest"},
-  {label:"Reddit", url:"https://www.reddit.com/user/Shade_ed25", icon:"reddit"}
-];
-const icons = {
-  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>',
-  github:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 00-.9-2.6c3-.3 6.1-1.5 6.1-6.6a5.1 5.1 0 00-1.4-3.6 4.8 4.8 0 00-.1-3.6s-1.1-.3-3.5 1.3a12 12 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.8 4.8 0 00-.1 3.6A5.1 5.1 0 003.9 10c0 5.1 3.2 6.3 6.2 6.6a3.4 3.4 0 00-.9 2.6V22"/></svg>',
-  linkedin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>',
-  instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>',
-  facebook:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>',
-  whatsapp:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.2.3-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.2.7 3 .6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3zM12.1 21.5h-.1c-1.7 0-3.3-.5-4.8-1.3l-.3-.2-3.5.9.9-3.4-.2-.3A9 9 0 0112 3.1a9 9 0 019 8.9 9 9 0 01-8.9 9.5zm0-18.4A8.2 8.2 0 003.9 12c0 1.5.4 2.9 1.1 4.1L4 20.9l4.9-1.3a8.2 8.2 0 003.2.6 8.2 8.2 0 008.2-8.2 8.2 8.2 0 00-8.2-8.2z"/></svg>',
-  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l16 16M20 4L4 20"/></svg>',
-  pinterest:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.2-.1-.8-.2-2 0-2.9.2-.8 1.3-5.5 1.3-5.5s-.3-.7-.3-1.6c0-1.5.9-2.6 2-2.6.9 0 1.4.7 1.4 1.5 0 .9-.6 2.3-.9 3.5-.3 1.1.5 1.9 1.5 1.9 1.8 0 3.2-1.9 3.2-4.7 0-2.4-1.8-4.2-4.3-4.2-2.9 0-4.7 2.2-4.7 4.5 0 .9.3 1.8.8 2.3.1.1.1.2.1.3l-.3 1.2c0 .2-.2.2-.3.1-1.3-.6-2.1-2.5-2.1-4 0-3.3 2.4-6.3 6.9-6.3 3.6 0 6.4 2.6 6.4 6 0 3.6-2.3 6.5-5.4 6.5-1.1 0-2-.5-2.4-1.2l-.6 2.5c-.2.9-.8 2-1.2 2.7 1 .3 2 .5 3.1.5 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>',
-  reddit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="11.5" r="1.2" fill="currentColor"/><circle cx="15" cy="11.5" r="1.2" fill="currentColor"/><path d="M9 14.5c1 .8 2.2 1.2 3 1.2s2-.4 3-1.2"/></svg>'
-};
-document.getElementById("contact-grid").innerHTML = contacts.map(c => `
-  <a class="contact-link" href="${c.url}" target="${c.label==='Email'?'_self':'_blank'}" rel="noopener">
-    ${icons[c.icon]||icons.mail}<span>${c.label}</span>
-  </a>
-`).join("");
-
-/* ========== CURSOR (desktop only) ========== */
-(function() {
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-  const dot = document.getElementById("cursor-dot");
-  const ring = document.getElementById("cursor-ring");
-  let mx=0, my=0, rx=0, ry=0;
+/* ========== CUSTOM CURSOR ========== */
+(function initCursor() {
+  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  if (isTouch) {
+    document.body.classList.add("touch-device");
+    return;
+  }
+  const dot = $("#cursorDot");
+  const ring = $("#cursorRing");
+  let mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener("mousemove", e => {
     mx = e.clientX; my = e.clientY;
-    dot.style.left = mx+"px";
-    dot.style.top = my+"px";
+    dot.style.left = mx + "px";
+    dot.style.top = my + "px";
   });
-  function anim() {
-    rx += (mx-rx)*0.16;
-    ry += (my-ry)*0.16;
-    ring.style.left = rx+"px";
-    ring.style.top = ry+"px";
-    requestAnimationFrame(anim);
+  function animateRing() {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.left = rx + "px";
+    ring.style.top = ry + "px";
+    requestAnimationFrame(animateRing);
   }
-  anim();
-  document.querySelectorAll("a, button, img, .btn").forEach(el => {
-    el.addEventListener("mouseenter", () => document.body.classList.add("hovering"));
-    el.addEventListener("mouseleave", () => document.body.classList.remove("hovering"));
+  animateRing();
+  document.addEventListener("mouseover", e => {
+    if (e.target.closest("button, a, .orbit-item, .project-card, .video-card, .social-link, .edu-gallery img, .cert-btn, .home-cta")) {
+      document.body.classList.add("cursor-hover");
+    }
+  });
+  document.addEventListener("mouseout", e => {
+    if (e.target.closest("button, a, .orbit-item, .project-card, .video-card, .social-link, .edu-gallery img, .cert-btn, .home-cta")) {
+      document.body.classList.remove("cursor-hover");
+    }
   });
 })();
 
-/* ========== SPACE CANVAS ========== */
-(function() {
-  const c = document.getElementById("space-canvas");
-  const ctx = c.getContext("2d");
-  let w, h, stars=[];
+/* ========== PROCEDURAL BACKGROUND ========== */
+(function initCanvas() {
+  const canvas = $("#bg-canvas");
+  const ctx = canvas.getContext("2d");
+  let w, h, dpr, particles = [], lines = [];
+  const isMobile = window.innerWidth < 700;
+  const COUNT = isMobile ? 40 : 90;
+
   function resize() {
-    w = c.width = innerWidth;
-    h = c.height = innerHeight;
-    stars = Array.from({length:90}, () => ({
-      x: Math.random()*w, y: Math.random()*h,
-      r: Math.random()*1.1+0.2, a: Math.random()*0.4+0.08
-    }));
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
+
+  function spawn() {
+    particles = [];
+    for (let i = 0; i < COUNT; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.4 + 0.3,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        a: Math.random() * 0.4 + 0.1
+      });
+    }
+    lines = [];
+    for (let i = 0; i < (isMobile ? 3 : 6); i++) {
+      lines.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        len: Math.random() * 120 + 40,
+        ang: Math.random() * Math.PI * 2,
+        speed: (Math.random() - 0.5) * 0.002
+      });
+    }
+  }
+
   function draw() {
-    ctx.clearRect(0,0,w,h);
-    stars.forEach(s => {
+    ctx.clearRect(0, 0, w, h);
+    // subtle radial vignette
+    const g = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, Math.max(w,h)*0.7);
+    g.addColorStop(0, "rgba(20,18,12,0.15)");
+    g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
       ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(242,240,234,${s.a})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${p.a})`;
       ctx.fill();
     });
+
+    lines.forEach(l => {
+      l.ang += l.speed;
+      ctx.beginPath();
+      ctx.moveTo(l.x, l.y);
+      ctx.lineTo(l.x + Math.cos(l.ang) * l.len, l.y + Math.sin(l.ang) * l.len);
+      ctx.strokeStyle = "rgba(201,168,76,0.06)";
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    });
+
     requestAnimationFrame(draw);
   }
-  addEventListener("resize", resize);
-  resize(); draw();
+
+  resize();
+  spawn();
+  draw();
+  window.addEventListener("resize", () => { resize(); spawn(); });
 })();
 
-/* ========== MUSIC ========== */
-(function() {
-  const bg = document.getElementById("bg-music");
-  const gate = document.getElementById("enter-gate");
-  const enterBtn = document.getElementById("enter-btn");
-  const fab = document.getElementById("music-fab");
-  let wanted = true;
-  if (bg) bg.volume = 0.32;
-
-  function play() {
-    if (!bg || !wanted) return;
-    bg.play().then(() => fab.classList.add("playing")).catch(() => fab.classList.remove("playing"));
-  }
-  function enter(e) {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-    wanted = true;
-    play();
-    gate.classList.add("hide");
-  }
-  enterBtn.addEventListener("click", enter);
-  gate.addEventListener("click", enter);
-
-  fab.addEventListener("click", e => {
-    e.preventDefault();
-    wanted = !wanted;
-    if (wanted) play();
-    else { bg.pause(); fab.classList.remove("playing"); }
+/* ========== NAVIGATION ========== */
+let currentSection = "home";
+function goToSection(id) {
+  if (id === currentSection) return;
+  const prev = $(`.section.active`);
+  const next = $(`#section-${id}`);
+  if (!next) return;
+  if (prev) prev.classList.remove("active");
+  next.classList.add("active");
+  currentSection = id;
+  $$(".nav-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.section === id);
   });
-})();
+  // close drawer
+  $("#navDrawer").classList.remove("open");
+  // restart relevant orbits if needed
+  if (id === "art") startOrbit("art");
+  if (id === "models") startOrbit("models");
+}
 
-/* ========== START ========== */
-const start = (location.hash||"").slice(1) || (function(){try{return localStorage.getItem("sa_view")}catch(e){return null}})() || "home";
-if (document.getElementById("view-"+start)) showView(start);
-else showView("home");
+$$("[data-section]").forEach(el => {
+  el.addEventListener("click", () => {
+    const s = el.dataset.section;
+    if (s) goToSection(s);
+  });
+});
+
+$("#navMobileToggle").addEventListener("click", () => $("#navDrawer").classList.add("open"));
+$("#navDrawerClose").addEventListener("click", () => $("#navDrawer").classList.remove("open"));
+
+/* ========== AUDIO ========== */
+const audio = $("#bgAudio");
+let audioAllowed = false;
+let ytPlaying = false;
+
+function tryPlayAudio() {
+  if (ytPlaying) return;
+  audio.volume = 0.35;
+  const p = audio.play();
+  if (p) p.then(() => {
+    audioAllowed = true;
+    document.body.classList.add("audio-playing");
+  }).catch(() => {});
+}
+
+$("#audioToggle").addEventListener("click", () => {
+  if (audio.paused) {
+    tryPlayAudio();
+  } else {
+    audio.pause();
+    document.body.classList.remove("audio-playing");
+  }
+});
+
+// First interaction unlock
+["click", "touchstart", "keydown"].forEach(ev => {
+  document.addEventListener(ev, function unlock() {
+    if (!audioAllowed) tryPlayAudio();
+    document.removeEventListener(ev, unlock);
+  }, { once: true, passive: true });
+});
+
+/* ========== RENDER EDUCATION ========== */
+function renderEducation() {
+  const container = $("#eduChapters");
+  portfolioData.education.forEach(ch => {
+    const div = document.createElement("div");
+    div.className = "edu-chapter";
+    div.innerHTML = `
+      <h3 class="edu-institution">${ch.institution}</h3>
+      <div class="edu-meta">${ch.meta}</div>
+      <div class="edu-gallery"></div>
+    `;
+    const gal = div.querySelector(".edu-gallery");
+    ch.images.forEach((img, i) => {
+      const im = document.createElement("img");
+      im.src = encodePath(img.file);
+      im.alt = img.title;
+      im.loading = "lazy";
+      im.onerror = function() {
+        this.style.display = "none";
+        const ph = document.createElement("div");
+        ph.className = "media-placeholder";
+        ph.style.aspectRatio = "4/3";
+        ph.innerHTML = `MEDIA UNAVAILABLE<br>${img.file}`;
+        this.parentNode.insertBefore(ph, this);
+      };
+      im.addEventListener("click", () => openImageViewer(ch.images, i, "Education"));
+      gal.appendChild(im);
+    });
+    container.appendChild(div);
+  });
+}
+
+/* ========== RENDER PROJECTS ========== */
+function renderProjects() {
+  const grid = $("#projectsGrid");
+  portfolioData.projects.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.innerHTML = `
+      <div class="cat">${p.cat}</div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ========== RENDER ACHIEVEMENTS ========== */
+function renderAchievements() {
+  const grid = $("#achievementsGrid");
+  portfolioData.achievements.forEach((a, i) => {
+    const card = document.createElement("div");
+    card.className = "achievement-card";
+    card.innerHTML = `
+      <div class="achievement-seal">${String(i + 1).padStart(2, "0")}</div>
+      <h3>${a.title}</h3>
+      <div class="rank">${a.rank}</div>
+      <p>${a.desc}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ========== RENDER VIDEOS ========== */
+function renderVideos() {
+  const grid = $("#videosGrid");
+  portfolioData.videos.forEach(v => {
+    const card = document.createElement("div");
+    card.className = "video-card";
+    card.innerHTML = `
+      <div class="video-thumb">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-info">
+        <h3>${v.title}</h3>
+        <p>${v.desc}</p>
+      </div>
+    `;
+    card.addEventListener("click", () => openYouTube(v.id));
+    grid.appendChild(card);
+  });
+}
+
+/* ========== RENDER SOCIALS ========== */
+const socialIcons = {
+  email: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M22 6l-10 7L2 6"/></svg>`,
+  whatsapp: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.3-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.2.1-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.3-.4.1-.1 0-.3 0-.4 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.4-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.2.8 3 .7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.8L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.1l-.3-.2-3.2.8.9-3.1-.2-.3C4.4 15 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/></svg>`,
+  github: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1 .8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>`,
+  linkedin: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 9H3v12h3.5V9zM4.8 3.5C3.6 3.5 2.7 4.4 2.7 5.6s.9 2.1 2.1 2.1 2.1-.9 2.1-2.1-.9-2.1-2.1-2.1zM20.9 9.1c-1.5 0-2.5.8-3 1.6V9H14.5v12H18v-6.5c0-1.7.9-2.8 2.3-2.8 1.3 0 2 .9 2 2.8V21H25.8v-7.2c0-3.7-2-5.7-4.9-5.7z"/></svg>`,
+  instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`,
+  facebook: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg>`,
+  x: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2h3.3l-7.2 8.2L23 22h-6.2l-4.9-6.4L6.5 22H3.2l7.7-8.8L1 2h6.4l4.4 5.8L18.2 2zm-1.2 18h1.8L7.1 3.9H5.2L17 20z"/></svg>`,
+  pinterest: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.3-.1-.8-.2-2 0-2.9.2-.8 1.3-5.5 1.3-5.5s-.3-.7-.3-1.7c0-1.6.9-2.8 2.1-2.8 1 0 1.5.7 1.5 1.6 0 1-.6 2.4-.9 3.8-.3 1.1.5 2 1.6 2 1.9 0 3.2-2.4 3.2-5.3 0-2.2-1.5-3.8-4.2-3.8-3.1 0-5 2.3-5 4.8 0 .9.3 1.5.7 2 .1.1.1.2.1.3l-.3 1c0 .2-.2.2-.3.1-1.2-.5-1.8-1.9-1.8-3.5 0-2.6 2.2-5.7 6.5-5.7 3.5 0 5.8 2.5 5.8 5.2 0 3.5-2 6.1-4.9 6.1-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.8-.7 1.7-1.1 2.3C9.7 21.8 10.8 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>`,
+  reddit: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm5.5 10.5c0 .2 0 .3-.1.5-1 1.4-3.1 2.4-5.4 2.5l1 3.1c.1.2 0 .4-.2.4h-.1c-.2 0-.3-.1-.4-.2l-1.1-2.3-1.1 2.3c-.1.1-.2.2-.4.2h-.1c-.2 0-.3-.2-.2-.4l1-3.1c-2.3-.1-4.4-1.1-5.4-2.5-.1-.1-.1-.3-.1-.5 0-.8.7-1.5 1.5-1.5.4 0 .7.1 1 .4 1-.7 2.3-1.1 3.8-1.2l.7-2.5c0-.2.2-.3.4-.3l2.2.5c.2-.4.6-.7 1.1-.7.7 0 1.2.5 1.2 1.2s-.5 1.2-1.2 1.2c-.5 0-.9-.3-1.1-.7l-2-.4-.6 2.2c1.4.1 2.8.5 3.8 1.2.3-.2.6-.4 1-.4.8 0 1.5.7 1.5 1.5z"/></svg>`,
+  cv: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>`
+};
+
+function renderSocials() {
+  const grid = $("#socialsGrid");
+  portfolioData.socials.forEach(s => {
+    const a = document.createElement("a");
+    a.className = "social-link";
+    a.href = s.url;
+    a.target = s.url.startsWith("mailto:") ? "_self" : "_blank";
+    a.rel = "noopener noreferrer";
+    a.innerHTML = `${socialIcons[s.icon] || ""}<span>${s.name}</span>`;
+    grid.appendChild(a);
+  });
+}
+
+/* ========== ORBIT SYSTEM ========== */
+const orbits = {
+  art: { items: portfolioData.artworks, index: 0, timer: null, track: null, stage: null, ind: null },
+  models: { items: portfolioData.models, index: 0, timer: null, track: null, stage: null, ind: null }
+};
+
+function buildOrbit(key) {
+  const o = orbits[key];
+  o.track = $(`#orbit${key.charAt(0).toUpperCase() + key.slice(1)}Track`);
+  o.stage = $(`#orbit${key.charAt(0).toUpperCase() + key.slice(1)}`);
+  o.ind = $(`#orbit${key.charAt(0).toUpperCase() + key.slice(1)}Ind`);
+  if (!o.track) return;
+  o.track.innerHTML = "";
+  o.items.forEach((item, i) => {
+    const el = document.createElement("div");
+    el.className = "orbit-item";
+    el.dataset.index = i;
+    const img = document.createElement("img");
+    img.src = encodePath(item.file);
+    img.alt = item.title;
+    img.loading = "lazy";
+    img.onerror = function() {
+      this.style.display = "none";
+      const ph = document.createElement("div");
+      ph.className = "media-placeholder";
+      ph.innerHTML = `MEDIA UNAVAILABLE<br>${item.file}`;
+      el.insertBefore(ph, el.firstChild);
+    };
+    el.appendChild(img);
+    const lab = document.createElement("div");
+    lab.className = "orbit-label";
+    lab.textContent = item.title;
+    el.appendChild(lab);
+    el.addEventListener("click", () => openImageViewer(o.items, i, key === "art" ? "Art" : "Models"));
+    o.track.appendChild(el);
+  });
+  // drag / swipe
+  let startX = 0, dragging = false;
+  o.stage.addEventListener("pointerdown", e => {
+    dragging = true;
+    startX = e.clientX;
+    o.stage.setPointerCapture(e.pointerId);
+  });
+  o.stage.addEventListener("pointerup", e => {
+    if (!dragging) return;
+    dragging = false;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 40) {
+      if (dx < 0) advanceOrbit(key, 1);
+      else advanceOrbit(key, -1);
+    }
+  });
+  o.stage.addEventListener("pointercancel", () => { dragging = false; });
+}
+
+function updateOrbit(key) {
+  const o = orbits[key];
+  if (!o.track) return;
+  const n = o.items.length;
+  const items = $$(".orbit-item", o.track);
+  const radius = Math.min(o.stage.offsetWidth * 0.32, 220);
+  items.forEach((el, i) => {
+    let offset = (i - o.index + n) % n;
+    if (offset > n / 2) offset -= n;
+    const angle = offset * (Math.PI * 2 / Math.max(n, 8));
+    const x = Math.sin(angle) * radius;
+    const z = Math.cos(angle) * radius - radius;
+    const scale = 0.55 + 0.45 * Math.max(0, Math.cos(angle));
+    const opacity = 0.25 + 0.75 * Math.max(0, Math.cos(angle));
+    el.style.transform = `translate3d(${x}px, 0, ${z}px) scale(${scale})`;
+    el.style.opacity = opacity;
+    el.style.zIndex = Math.round(100 + z);
+    el.classList.toggle("is-front", offset === 0);
+  });
+  if (o.ind) {
+    o.ind.textContent = `${String(o.index + 1).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
+  }
+}
+
+function advanceOrbit(key, dir = 1) {
+  const o = orbits[key];
+  o.index = (o.index + dir + o.items.length) % o.items.length;
+  updateOrbit(key);
+}
+
+function startOrbit(key) {
+  const o = orbits[key];
+  if (o.timer) clearInterval(o.timer);
+  updateOrbit(key);
+  o.timer = setInterval(() => {
+    if (currentSection === (key === "art" ? "art" : "models")) {
+      advanceOrbit(key, 1);
+    }
+  }, 2000);
+}
+
+$$("[data-orbit-prev]").forEach(btn => {
+  btn.addEventListener("click", () => advanceOrbit(btn.dataset.orbitPrev, -1));
+});
+$$("[data-orbit-next]").forEach(btn => {
+  btn.addEventListener("click", () => advanceOrbit(btn.dataset.orbitNext, 1));
+});
+
+/* ========== IMAGE VIEWER ========== */
+let viewerItems = [];
+let viewerIndex = 0;
+let viewerCategory = "";
+
+function openImageViewer(items, index, category) {
+  viewerItems = items;
+  viewerIndex = index;
+  viewerCategory = category;
+  showViewerImage();
+  $("#imageModal").classList.add("open");
+}
+
+function showViewerImage() {
+  const item = viewerItems[viewerIndex];
+  if (!item) return;
+  const img = $("#modalImg");
+  img.src = encodePath(item.file);
+  img.alt = item.title;
+  img.onerror = function() {
+    this.style.display = "none";
+  };
+  img.onload = function() { this.style.display = "block"; };
+  $("#modalTitle").textContent = item.title;
+  $("#modalCat").textContent = viewerCategory;
+  $("#modalDesc").textContent = item.desc || "";
+  $("#modalIndex").textContent = `${viewerIndex + 1} / ${viewerItems.length}`;
+}
+
+function closeImageViewer() {
+  $("#imageModal").classList.remove("open");
+}
+
+$("#modalClose").addEventListener("click", closeImageViewer);
+$("#modalPrev").addEventListener("click", () => {
+  viewerIndex = (viewerIndex - 1 + viewerItems.length) % viewerItems.length;
+  showViewerImage();
+});
+$("#modalNext").addEventListener("click", () => {
+  viewerIndex = (viewerIndex + 1) % viewerItems.length;
+  showViewerImage();
+});
+
+/* ========== PDF VIEWER ========== */
+$$(".cert-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const src = encodePath(btn.dataset.pdf);
+    $("#pdfFrame").src = src;
+    $("#pdfModal").classList.add("open");
+  });
+});
+$("#pdfClose").addEventListener("click", () => {
+  $("#pdfModal").classList.remove("open");
+  $("#pdfFrame").src = "";
+});
+
+/* ========== YOUTUBE ========== */
+function openYouTube(id) {
+  ytPlaying = true;
+  audio.pause();
+  document.body.classList.remove("audio-playing");
+  $("#ytFrame").src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+  $("#ytModal").classList.add("open");
+}
+function closeYouTube() {
+  $("#ytModal").classList.remove("open");
+  $("#ytFrame").src = "";
+  ytPlaying = false;
+  if (audioAllowed) tryPlayAudio();
+}
+$("#ytClose").addEventListener("click", closeYouTube);
+
+/* ========== KEYBOARD ========== */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    closeImageViewer();
+    $("#pdfModal").classList.remove("open");
+    $("#pdfFrame").src = "";
+    closeYouTube();
+    $("#navDrawer").classList.remove("open");
+  }
+  if ($("#imageModal").classList.contains("open")) {
+    if (e.key === "ArrowLeft") { viewerIndex = (viewerIndex - 1 + viewerItems.length) % viewerItems.length; showViewerImage(); }
+    if (e.key === "ArrowRight") { viewerIndex = (viewerIndex + 1) % viewerItems.length; showViewerImage(); }
+  }
+});
+
+/* ========== INIT ========== */
+renderEducation();
+renderProjects();
+renderAchievements();
+renderVideos();
+renderSocials();
+buildOrbit("art");
+buildOrbit("models");
+startOrbit("art");
+startOrbit("models");
+
+// Resize orbits
+window.addEventListener("resize", () => {
+  updateOrbit("art");
+  updateOrbit("models");
+});
 </script>
 </body>
 </html>
