@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a">
 <meta name="author" content="Shadid Ahamed">
-<meta name="description" content="Shadid Ahamed — Architecture student exploring design, code, visual storytelling and digital experiences. A custom digital exhibition and personal archive.">
+<meta name="description" content="Shadid Ahamed — Architecture student exploring design, code, visual storytelling and digital experiences. Digital creative archive.">
 <meta property="og:title" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist">
 <meta property="og:description" content="Architecture student exploring the intersection of design, code, visual storytelling and digital experiences.">
 <meta property="og:type" content="website">
-<title>Shadid Ahamed — Architecture / Creative Developer / Designer / Artist</title>
-
+<title>Shadid Ahamed — Digital Creative Archive</title>
 <link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="sa-favicon-48.png">
 <link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-64.png">
@@ -18,1449 +17,710 @@
 <link rel="icon" type="image/png" sizes="256x256" href="sa-favicon-256.png">
 <link rel="apple-touch-icon" sizes="180x180" href="sa-favicon-hires.png">
 <link rel="icon" type="image/png" href="sa-favicon-hires.png">
-
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-html, body {
-  height: 100%;
-  overflow: hidden;
-  background: #0a0a0a;
-  color: #e8e4df;
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  cursor: none;
-}
-body.touch-device { cursor: auto; }
-body.touch-device * { cursor: auto !important; }
-
-:root {
-  --bg: #0a0a0a;
-  --charcoal: #141414;
-  --graphite: #1c1c1c;
-  --ash: #2a2a2a;
-  --gold: #c9a84c;
-  --gold-dim: #8a7340;
-  --gold-bright: #e8d48b;
-  --warm-yellow: #d4b86a;
-  --text: #e8e4df;
-  --text-dim: #9a958c;
-  --text-muted: #6b6660;
-  --border: rgba(201, 168, 76, 0.18);
-  --radius: 2px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --font-display: "Cormorant Garamond", "Times New Roman", serif;
-  --font-mono: "IBM Plex Mono", "SF Mono", "Consolas", monospace;
-}
-
-.cursor-dot {
-  position: fixed; width: 6px; height: 6px; background: var(--gold);
-  border-radius: 50%; pointer-events: none; z-index: 99999;
-  transform: translate(-50%, -50%); transition: width 0.15s, height 0.15s, background 0.15s;
-  mix-blend-mode: difference;
-}
-.cursor-ring {
-  position: fixed; width: 28px; height: 28px;
-  border: 1px solid rgba(201, 168, 76, 0.55); border-radius: 50%;
-  pointer-events: none; z-index: 99998; transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease), height 0.25s var(--ease), border-color 0.2s;
-}
-body.cursor-hover .cursor-dot { width: 10px; height: 10px; background: var(--gold-bright); }
-body.cursor-hover .cursor-ring { width: 44px; height: 44px; border-color: var(--gold); }
-body.touch-device .cursor-dot, body.touch-device .cursor-ring { display: none !important; }
-
-#bg-canvas {
-  position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0;
-  pointer-events: none; opacity: 0.55;
-}
-
-#app { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; }
-
-.nav-rail {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.1rem 1.75rem;
-  background: linear-gradient(to bottom, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 70%, transparent 100%);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(201,168,76,0.08);
-}
-.nav-brand {
-  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.22em;
-  color: var(--gold); text-transform: uppercase; user-select: none;
-}
-.nav-links { display: flex; gap: 0.15rem; flex-wrap: wrap; justify-content: flex-end; }
-.nav-btn {
-  background: transparent; border: none; color: var(--text-muted);
-  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
-  padding: 0.45rem 0.65rem; cursor: none; transition: color 0.25s, background 0.25s;
-  position: relative; text-transform: uppercase; border-radius: 1px;
-}
-.nav-btn:hover, .nav-btn:focus-visible { color: var(--gold-bright); outline: none; }
-.nav-btn.active { color: var(--gold); }
-.nav-btn.active::after {
-  content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 12px; height: 1px; background: var(--gold);
-}
-.nav-btn .num { opacity: 0.45; margin-right: 0.35em; font-size: 0.55rem; }
-
-.audio-ctrl { display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; }
-.audio-btn {
-  width: 28px; height: 28px; border: 1px solid var(--border); background: transparent;
-  color: var(--gold); display: flex; align-items: center; justify-content: center;
-  cursor: none; border-radius: 1px; transition: border-color 0.2s, background 0.2s;
-}
-.audio-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
-.audio-visual { display: flex; gap: 2px; align-items: flex-end; height: 14px; }
-.audio-visual span { width: 2px; background: var(--gold); opacity: 0.35; transition: height 0.15s; }
-body.audio-playing .audio-visual span { animation: audioBar 0.6s ease-in-out infinite alternate; }
-body.audio-playing .audio-visual span:nth-child(1) { animation-delay: 0s; height: 6px; }
-body.audio-playing .audio-visual span:nth-child(2) { animation-delay: 0.15s; height: 12px; }
-body.audio-playing .audio-visual span:nth-child(3) { animation-delay: 0.3s; height: 8px; }
-@keyframes audioBar { from { transform: scaleY(0.4); } to { transform: scaleY(1); } }
-
-.stage { flex: 1; position: relative; overflow: hidden; margin-top: 56px; }
-.section {
-  position: absolute; inset: 0; opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity 0.7s var(--ease), visibility 0.7s;
-  overflow-y: auto; overflow-x: hidden; padding: 2rem 1.5rem 4rem;
-  display: flex; flex-direction: column; align-items: center;
-}
-.section.active { opacity: 1; visibility: visible; pointer-events: auto; }
-
-.section-label {
-  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.28em;
-  color: var(--gold); text-transform: uppercase; margin-bottom: 0.75rem; opacity: 0.85;
-}
-.section-title {
-  font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: 0.04em;
-  color: var(--text); line-height: 1.1; margin-bottom: 0.5rem;
-}
-.section-sub {
-  font-size: 0.95rem; color: var(--text-dim); max-width: 42rem;
-  margin-bottom: 2.5rem; font-weight: 300;
-}
-
-#section-home { justify-content: center; text-align: center; padding-top: 4vh; }
-.home-name {
-  font-family: var(--font-display); font-size: clamp(2.8rem, 8vw, 5.5rem);
-  font-weight: 400; letter-spacing: 0.08em; color: var(--text);
-  margin-bottom: 0.6rem; line-height: 1.05;
-}
-.home-roles {
-  font-family: var(--font-mono); font-size: clamp(0.7rem, 1.6vw, 0.85rem);
-  letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem;
-}
-.home-statement {
-  font-size: clamp(0.95rem, 2vw, 1.15rem); color: var(--text-dim);
-  max-width: 36rem; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.65;
-}
-.home-cta {
-  display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.4rem;
-  border: 1px solid var(--border); color: var(--gold);
-  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em;
-  text-transform: uppercase; background: transparent; cursor: none;
-  transition: border-color 0.25s, background 0.25s, color 0.25s;
-}
-.home-cta:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); color: var(--gold-bright); }
-.home-ornament {
-  width: 1px; height: 48px;
-  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-  margin: 2rem auto 0; opacity: 0.5;
-}
-
-.profile-layout {
-  display: grid; grid-template-columns: minmax(260px, 380px) 1fr;
-  gap: 3rem; max-width: 1100px; width: 100%; align-items: start;
-}
-.profile-portrait-wrap { position: relative; }
-.profile-portrait {
-  width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
-  border: 1px solid rgba(201,168,76,0.25); filter: contrast(1.05) brightness(0.95);
-}
-.profile-frame {
-  position: absolute; inset: -8px; border: 1px solid rgba(201,168,76,0.15); pointer-events: none;
-}
-.profile-meta {
-  margin-top: 1rem; font-family: var(--font-mono); font-size: 0.65rem;
-  letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.8;
-}
-.profile-info h2 {
-  font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.4rem;
-}
-.profile-identity {
-  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em;
-  color: var(--gold); text-transform: uppercase; margin-bottom: 1.25rem;
-}
-.profile-bio {
-  color: var(--text-dim); font-size: 0.95rem; line-height: 1.7;
-  margin-bottom: 1.75rem; max-width: 36rem;
-}
-.profile-details { display: grid; gap: 0.65rem; font-size: 0.88rem; }
-.profile-details dt {
-  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
-  color: var(--text-muted); text-transform: uppercase;
-}
-.profile-details dd { color: var(--text); margin-bottom: 0.4rem; }
-
-.edu-chapters { display: flex; flex-direction: column; gap: 3.5rem; max-width: 1100px; width: 100%; }
-.edu-chapter { border-left: 1px solid rgba(201,168,76,0.2); padding-left: 1.75rem; }
-.edu-institution {
-  font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.03em; margin-bottom: 0.3rem;
-}
-.edu-meta {
-  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em;
-  color: var(--gold); margin-bottom: 1.25rem;
-}
-.edu-gallery {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem;
-}
-.edu-gallery img {
-  width: 100%; aspect-ratio: 4/3; object-fit: cover;
-  border: 1px solid rgba(201,168,76,0.12); cursor: none;
-  transition: border-color 0.25s, transform 0.35s var(--ease);
-}
-.edu-gallery img:hover { border-color: var(--gold); transform: translateY(-3px); }
-
-.skills-constellation {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem; max-width: 1000px; width: 100%;
-}
-.skill-cluster {
-  border: 1px solid rgba(201,168,76,0.12); background: rgba(20,20,20,0.6);
-  padding: 1.4rem 1.3rem; position: relative; display: flex; flex-direction: column;
-}
-.skill-cluster::before {
-  content: ""; position: absolute; top: 0; left: 0; width: 24px; height: 1px; background: var(--gold);
-}
-.skill-cluster h3 {
-  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.18em;
-  color: var(--gold); text-transform: uppercase; margin-bottom: 1rem;
-}
-.skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
-.skill-list li {
-  font-size: 0.9rem; color: var(--text-dim); padding-left: 0.9rem; position: relative;
-}
-.skill-list li::before { content: "·"; position: absolute; left: 0; color: var(--gold-dim); }
-.skill-view-btn {
-  margin-top: 1.25rem; align-self: flex-start;
-  padding: 0.55rem 1.1rem; border: 1px solid rgba(201,168,76,0.25);
-  background: transparent; color: var(--gold);
-  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em;
-  text-transform: uppercase; cursor: none;
-  transition: border-color 0.25s, background 0.25s, color 0.25s;
-}
-.skill-view-btn:hover {
-  border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold-bright);
-}
-
-.projects-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.25rem; max-width: 1100px; width: 100%; margin-top: 2rem;
-}
-.project-card {
-  border: 1px solid rgba(201,168,76,0.12); background: rgba(18,18,18,0.7);
-  padding: 1.5rem; transition: border-color 0.3s, transform 0.35s var(--ease); cursor: none;
-}
-.project-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-4px); }
-.project-card .cat {
-  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em;
-  color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem;
-}
-.project-card h3 {
-  font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin-bottom: 0.5rem;
-}
-.project-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.55; }
-
-.orbit-section { width: 100%; max-width: 1100px; display: flex; flex-direction: column; align-items: center; }
-.orbit-stage {
-  position: relative; width: 100%; height: min(52vw, 420px); max-height: 460px;
-  perspective: 1200px; margin: 1.5rem 0 1rem; user-select: none; touch-action: pan-y;
-}
-.orbit-track {
-  position: absolute; inset: 0; transform-style: preserve-3d;
-  display: flex; align-items: center; justify-content: center;
-}
-.orbit-item {
-  position: absolute; width: 180px; height: 240px; transform-style: preserve-3d;
-  transition: transform 0.85s var(--ease), opacity 0.85s var(--ease), filter 0.85s;
-  cursor: none; will-change: transform, opacity;
-}
-.orbit-item img {
-  width: 100%; height: 100%; object-fit: cover;
-  border: 1px solid rgba(201,168,76,0.15); box-shadow: 0 12px 40px rgba(0,0,0,0.55);
-  pointer-events: none; background: #111;
-}
-.orbit-item .orbit-label {
-  position: absolute; bottom: -1.6rem; left: 0; right: 0; text-align: center;
-  font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em;
-  color: var(--text-muted); opacity: 0; transition: opacity 0.4s;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 0.3rem;
-}
-.orbit-item.is-front .orbit-label { opacity: 1; color: var(--gold); }
-.orbit-item.is-front img { border-color: rgba(201,168,76,0.4); }
-.orbit-controls { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.5rem; }
-.orbit-btn {
-  width: 36px; height: 36px; border: 1px solid var(--border); background: transparent;
-  color: var(--gold); display: flex; align-items: center; justify-content: center;
-  cursor: none; transition: border-color 0.2s, background 0.2s; border-radius: 1px;
-}
-.orbit-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
-.orbit-indicator {
-  font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted);
-  letter-spacing: 0.1em; min-width: 4.5rem; text-align: center;
-}
-
-.achievements-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem; max-width: 1100px; width: 100%;
-}
-.achievement-card {
-  border: 1px solid rgba(201,168,76,0.18);
-  background: linear-gradient(145deg, rgba(28,28,28,0.9), rgba(14,14,14,0.95));
-  padding: 1.6rem 1.5rem; position: relative; overflow: hidden; cursor: none;
-  transition: border-color 0.3s;
-}
-.achievement-card:hover { border-color: rgba(201,168,76,0.4); }
-.achievement-card::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.5;
-}
-.achievement-seal {
-  width: 36px; height: 36px; border: 1px solid var(--gold-dim); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
-  font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold);
-}
-.achievement-card h3 {
-  font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin-bottom: 0.4rem;
-}
-.achievement-card .rank {
-  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em;
-  color: var(--gold); margin-bottom: 0.5rem;
-}
-.achievement-card p { font-size: 0.85rem; color: var(--text-dim); }
-.achievement-thumb {
-  width: 100%; aspect-ratio: 16/10; object-fit: cover; margin-top: 0.85rem;
-  border: 1px solid rgba(201,168,76,0.15); background: #111;
-}
-
-.videos-inline {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.25rem; max-width: 900px; width: 100%; margin-top: 1.5rem;
-}
-.video-card {
-  border: 1px solid rgba(201,168,76,0.12); background: rgba(18,18,18,0.8);
-  overflow: hidden; cursor: none; transition: border-color 0.3s;
-}
-.video-card:hover { border-color: rgba(201,168,76,0.35); }
-.video-thumb {
-  aspect-ratio: 16/9; background: #111; position: relative;
-  display: flex; align-items: center; justify-content: center;
-}
-.video-thumb svg { width: 40px; height: 40px; opacity: 0.7; transition: opacity 0.2s; }
-.video-card:hover .video-thumb svg { opacity: 1; }
-.video-info { padding: 0.9rem 1rem; }
-.video-info h3 {
-  font-family: var(--font-display); font-size: 1.05rem; font-weight: 400; margin-bottom: 0.2rem;
-}
-.video-info p { font-size: 0.78rem; color: var(--text-muted); }
-
-.contact-layout {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
-  max-width: 1000px; width: 100%;
-}
-.contact-socials {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem;
-}
-.social-link {
-  display: flex; align-items: center; gap: 0.7rem; padding: 0.85rem 1rem;
-  border: 1px solid rgba(201,168,76,0.12); color: var(--text-dim);
-  text-decoration: none; font-size: 0.82rem;
-  transition: border-color 0.25s, color 0.25s, background 0.25s; cursor: none;
-}
-.social-link:hover {
-  border-color: var(--gold); color: var(--gold-bright); background: rgba(201,168,76,0.06);
-}
-.social-link svg { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.85; }
-.contact-map {
-  border: 1px solid rgba(201,168,76,0.15); overflow: hidden; height: 280px; background: #111;
-}
-.contact-map iframe {
-  width: 100%; height: 100%; border: 0;
-  filter: grayscale(0.7) contrast(1.05) brightness(0.85);
-}
-.contact-address {
-  margin-top: 1rem; font-size: 0.88rem; color: var(--text-dim); line-height: 1.6;
-}
-.contact-address strong {
-  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em;
-  color: var(--gold); display: block; margin-bottom: 0.35rem; text-transform: uppercase;
-}
-
-.cv-panel {
-  max-width: 560px; width: 100%; text-align: center;
-  border: 1px solid rgba(201,168,76,0.2); padding: 3rem 2rem; background: rgba(18,18,18,0.7);
-}
-.cv-panel p { color: var(--text-dim); margin-bottom: 1.75rem; font-size: 0.95rem; }
-.cv-btn {
-  display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.6rem;
-  border: 1px solid var(--gold); color: var(--gold);
-  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em;
-  text-transform: uppercase; text-decoration: none; background: transparent; cursor: none;
-  transition: background 0.25s, color 0.25s;
-}
-.cv-btn:hover { background: rgba(201,168,76,0.12); color: var(--gold-bright); }
-
-.certs-row {
-  display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem;
-}
-.cert-btn {
-  padding: 0.7rem 1.2rem; border: 1px solid rgba(201,168,76,0.2);
-  background: transparent; color: var(--text-dim);
-  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em;
-  cursor: none; transition: border-color 0.25s, color 0.25s; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 0.4rem;
-}
-.cert-btn:hover { border-color: var(--gold); color: var(--gold); }
-
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 1000; background: rgba(5,5,5,0.92);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s; padding: 1.5rem;
-}
-.modal-overlay.open { opacity: 1; visibility: visible; }
-.modal-content {
-  position: relative; max-width: min(92vw, 960px); max-height: 88vh;
-  display: flex; flex-direction: column; align-items: center;
-}
-.modal-img-wrap { position: relative; max-height: 72vh; overflow: hidden; }
-.modal-img-wrap img {
-  max-width: 100%; max-height: 72vh; object-fit: contain; display: block;
-  border: 1px solid rgba(201,168,76,0.2);
-}
-.modal-meta { margin-top: 1rem; text-align: center; }
-.modal-meta h3 {
-  font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; margin-bottom: 0.25rem;
-}
-.modal-meta .cat {
-  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em;
-  color: var(--gold); text-transform: uppercase;
-}
-.modal-meta p { font-size: 0.85rem; color: var(--text-dim); margin-top: 0.4rem; max-width: 36rem; }
-.modal-close {
-  position: absolute; top: -2.5rem; right: 0; width: 36px; height: 36px;
-  border: 1px solid var(--border); background: transparent; color: var(--text);
-  font-size: 1.2rem; cursor: none; display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.2s, color 0.2s;
-}
-.modal-close:hover { border-color: var(--gold); color: var(--gold); }
-.modal-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 40px; height: 40px; border: 1px solid var(--border);
-  background: rgba(10,10,10,0.7); color: var(--gold);
-  display: flex; align-items: center; justify-content: center; cursor: none;
-  transition: border-color 0.2s;
-}
-.modal-nav:hover { border-color: var(--gold); }
-.modal-prev { left: -3rem; }
-.modal-next { right: -3rem; }
-.modal-index {
-  font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted);
-  margin-top: 0.6rem; letter-spacing: 0.1em;
-}
-
-.pdf-modal .modal-content { width: min(96vw, 900px); height: min(90vh, 800px); }
-.pdf-frame {
-  width: 100%; height: 100%; border: 1px solid rgba(201,168,76,0.2); background: #111;
-}
-.pdf-actions {
-  display: flex; gap: 0.75rem; margin-top: 0.75rem; justify-content: center;
-}
-.pdf-actions a, .pdf-actions button {
-  padding: 0.5rem 1rem; border: 1px solid var(--border); background: transparent;
-  color: var(--gold); font-family: var(--font-mono); font-size: 0.65rem;
-  letter-spacing: 0.1em; text-decoration: none; cursor: none;
-  transition: border-color 0.2s;
-}
-.pdf-actions a:hover, .pdf-actions button:hover { border-color: var(--gold); }
-
-.yt-modal .modal-content { width: min(92vw, 860px); }
-.yt-frame-wrap { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
-.yt-frame-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-
-.media-placeholder {
-  width: 100%; height: 100%; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; background: #141414;
-  border: 1px dashed rgba(201,168,76,0.2); color: var(--text-muted);
-  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em;
-  text-align: center; padding: 1rem;
-}
-
-.nav-mobile-toggle {
-  display: none; width: 36px; height: 36px; border: 1px solid var(--border);
-  background: transparent; color: var(--gold); align-items: center; justify-content: center; cursor: none;
-}
-.nav-drawer {
-  position: fixed; top: 0; right: 0; width: min(280px, 85vw); height: 100%;
-  background: rgba(12,12,12,0.97); border-left: 1px solid rgba(201,168,76,0.12);
-  z-index: 200; transform: translateX(100%); transition: transform 0.4s var(--ease);
-  padding: 4.5rem 1.5rem 2rem; overflow-y: auto;
-}
-.nav-drawer.open { transform: translateX(0); }
-.nav-drawer .nav-btn {
-  display: block; width: 100%; text-align: left; padding: 0.7rem 0.5rem;
-  font-size: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.nav-drawer-close {
-  position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px;
-  border: 1px solid var(--border); background: transparent; color: var(--text);
-  display: flex; align-items: center; justify-content: center; cursor: none;
-}
-
-.subsection-title {
-  font-family: var(--font-display); font-size: 1.5rem; font-weight: 400;
-  letter-spacing: 0.03em; margin: 2.5rem 0 1rem; color: var(--text);
-  width: 100%; max-width: 1100px;
-}
-
-@media (max-width: 900px) {
-  .profile-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .profile-portrait-wrap { max-width: 320px; margin: 0 auto; }
-  .contact-layout { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
-  .nav-mobile-toggle { display: flex; }
-  .orbit-item { width: 140px; height: 190px; }
-  .orbit-stage { height: min(58vw, 340px); }
-  .modal-prev { left: 0.5rem; }
-  .modal-next { right: 0.5rem; }
-}
-@media (max-width: 600px) {
-  .nav-rail { padding: 0.9rem 1rem; }
-  .section { padding: 1.5rem 1rem 3.5rem; }
-  .home-name { font-size: 2.4rem; }
-  .orbit-item { width: 120px; height: 160px; }
-  .orbit-stage { height: 280px; }
-  .skills-constellation { grid-template-columns: 1fr; }
-  .achievements-grid { grid-template-columns: 1fr; }
-  .videos-inline { grid-template-columns: 1fr; }
-  .projects-grid { grid-template-columns: 1fr; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  #bg-canvas { opacity: 0.25; }
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{height:100%;overflow:hidden;background:#0a0a0a;color:#e8e4df;font-family:Inter,"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;cursor:none;touch-action:manipulation}
+body.touch-device,body.touch-device *{cursor:auto!important}
+:root{--bg:#0a0a0a;--gold:#c9a84c;--gold-dim:#8a7340;--gold-bright:#e8d48b;--text:#e8e4df;--text-dim:#9a958c;--text-muted:#6b6660;--border:rgba(201,168,76,.18);--ease:cubic-bezier(.22,1,.36,1);--fd:"Cormorant Garamond","Times New Roman",serif;--fm:"IBM Plex Mono","SF Mono",Consolas,monospace;--nav-h:56px;--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+.cursor-dot{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:28px;height:28px;border:1px solid rgba(201,168,76,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .25s var(--ease),height .25s var(--ease)}
+body.cursor-hover .cursor-dot{width:10px;height:10px;background:var(--gold-bright)}
+body.cursor-hover .cursor-ring{width:42px;height:42px;border-color:var(--gold)}
+body.touch-device .cursor-dot,body.touch-device .cursor-ring{display:none!important}
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.45}
+#app{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column}
+/* NAV */
+.nav-rail{position:fixed;top:0;left:0;right:0;z-index:100;height:calc(var(--nav-h) + var(--st));padding-top:var(--st);display:flex;align-items:center;justify-content:space-between;padding-left:1rem;padding-right:1rem;background:rgba(10,10,10,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.1)}
+.nav-brand{font-family:var(--fm);font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;user-select:none;white-space:nowrap}
+.nav-links{display:flex;gap:.05rem;flex-wrap:wrap;justify-content:flex-end}
+.nav-btn{background:0 0;border:0;color:var(--text-muted);font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;padding:.45rem .5rem;cursor:none;transition:color .2s;position:relative;text-transform:uppercase;min-height:36px}
+.nav-btn:hover,.nav-btn:focus-visible{color:var(--gold-bright);outline:0}
+.nav-btn.active{color:var(--gold)}
+.nav-btn.active::after{content:"";position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:10px;height:1px;background:var(--gold)}
+.nav-btn .num{opacity:.4;margin-right:.25em;font-size:.5rem}
+.audio-ctrl{display:flex;align-items:center;gap:.3rem;margin-left:.35rem}
+.audio-btn{width:42px;height:42px;min-width:42px;min-height:42px;border:1px solid var(--border);background:0 0;color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:none;border-radius:2px}
+.audio-btn:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+.audio-visual{display:flex;gap:2px;align-items:flex-end;height:11px}
+.audio-visual span{width:2px;background:var(--gold);opacity:.35}
+body.audio-playing .audio-visual span{animation:aBar .55s ease-in-out infinite alternate}
+body.audio-playing .audio-visual span:nth-child(1){animation-delay:0s;height:5px}
+body.audio-playing .audio-visual span:nth-child(2){animation-delay:.12s;height:10px}
+body.audio-playing .audio-visual span:nth-child(3){animation-delay:.24s;height:7px}
+@keyframes aBar{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+.nav-mobile-toggle{display:none;width:44px;height:44px;min-width:44px;min-height:44px;border:1px solid var(--border);background:0 0;color:var(--gold);align-items:center;justify-content:center;cursor:none;border-radius:2px}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:150;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.drawer-overlay.open{opacity:1;visibility:visible}
+.nav-drawer{position:fixed;top:0;right:0;width:min(300px,88vw);height:100%;background:rgba(10,10,10,.98);border-left:1px solid rgba(201,168,76,.12);z-index:200;transform:translateX(100%);transition:transform .4s var(--ease);padding:calc(3.4rem + var(--st)) 1.2rem calc(2rem + var(--sb));overflow-y:auto;-webkit-overflow-scrolling:touch}
+.nav-drawer.open{transform:translateX(0)}
+.nav-drawer .nav-btn{display:flex;width:100%;text-align:left;padding:.85rem .55rem;font-size:.78rem;border-bottom:1px solid rgba(255,255,255,.05);min-height:48px;align-items:center}
+.nav-drawer-close{position:absolute;top:calc(.7rem + var(--st));right:.7rem;width:44px;height:44px;border:1px solid var(--border);background:0 0;color:var(--text);display:flex;align-items:center;justify-content:center;cursor:none;font-size:1.35rem;border-radius:2px}
+/* STAGE — critical: content starts BELOW fixed nav */
+.stage{flex:1;position:relative;overflow:hidden;margin-top:calc(var(--nav-h) + var(--st))}
+.view{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s var(--ease),visibility .45s;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:1.5rem 1.15rem calc(2.75rem + var(--sb));display:flex;flex-direction:column;align-items:center}
+.view.active{opacity:1;visibility:visible;pointer-events:auto}
+.sl{font-family:var(--fm);font-size:.6rem;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:.5rem;opacity:.85}
+.stitle{font-family:var(--fd);font-weight:400;font-size:clamp(1.8rem,5vw,3.1rem);letter-spacing:.04em;color:var(--text);line-height:1.1;margin-bottom:.35rem}
+.ssub{font-size:.88rem;color:var(--text-dim);max-width:40rem;margin-bottom:1.75rem;font-weight:300}
+/* HOME */
+#view-home{justify-content:flex-start;padding-top:2rem}
+.home-name{font-family:var(--fd);font-size:clamp(2rem,7.5vw,4.5rem);font-weight:400;letter-spacing:.07em;text-align:center;margin-bottom:.4rem}
+.home-roles{font-family:var(--fm);font-size:clamp(.58rem,1.7vw,.78rem);letter-spacing:.16em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem}
+.home-statement{font-size:clamp(.86rem,2vw,1.05rem);color:var(--text-dim);max-width:36rem;margin:0 auto 1.75rem;text-align:center;font-weight:300;line-height:1.65}
+.home-cta{display:inline-flex;align-items:center;gap:.45rem;padding:.8rem 1.4rem;min-height:46px;border:1px solid var(--border);color:var(--gold);font-family:var(--fm);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;background:0 0;cursor:none;transition:border-color .2s,background .2s;margin:0 auto 2rem}
+.home-cta:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+/* BOOK HERO */
+.book-hero{width:100%;max-width:900px;margin:0 auto 2.5rem;text-align:center}
+.book-hero-label{font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.75rem}
+.book-hero-title{font-family:var(--fd);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:400;margin-bottom:.35rem}
+.book-hero-sub{font-size:.85rem;color:var(--text-dim);margin-bottom:1.25rem;max-width:28rem;margin-left:auto;margin-right:auto}
+.book-stage{position:relative;width:100%;height:min(42vw,320px);max-height:360px;perspective:1000px;margin:0 auto;user-select:none;touch-action:none;overflow:hidden}
+.book-track{position:absolute;inset:0;transform-style:preserve-3d;display:flex;align-items:center;justify-content:center}
+.book-item{position:absolute;width:140px;height:190px;transform-style:preserve-3d;transition:transform .75s var(--ease),opacity .75s var(--ease);cursor:none;will-change:transform,opacity}
+.book-item img{width:100%;height:100%;object-fit:contain;border:1px solid rgba(201,168,76,.15);background:#111;pointer-events:none}
+.book-item.is-front img{border-color:rgba(201,168,76,.4)}
+.book-controls{display:flex;gap:.55rem;align-items:center;justify-content:center;margin-top:1rem}
+.book-btn{width:42px;height:42px;min-width:42px;min-height:42px;border:1px solid var(--border);background:0 0;color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:none;border-radius:2px;font-size:1.1rem}
+.book-btn:hover{border-color:var(--gold)}
+.book-ind{font-family:var(--fm);font-size:.58rem;color:var(--text-muted);letter-spacing:.08em;min-width:3.8rem;text-align:center}
+.book-desc{margin-top:1.5rem;text-align:left;max-width:36rem;margin-left:auto;margin-right:auto;font-size:.86rem;color:var(--text-dim);line-height:1.65}
+.book-desc h4{font-family:var(--fm);font-size:.58rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin:1rem 0 .35rem}
+.book-desc h4:first-child{margin-top:0}
+.explore-work{display:inline-flex;margin-top:1.5rem;padding:.7rem 1.25rem;min-height:44px;border:1px solid rgba(201,168,76,.3);color:var(--gold);font-family:var(--fm);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;background:0 0;cursor:none;transition:border-color .2s,background .2s}
+.explore-work:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+/* PROFILE */
+.profile-layout{display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:2rem;max-width:960px;width:100%;align-items:start}
+.profile-portrait{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border:1px solid rgba(201,168,76,.22)}
+.profile-frame{position:absolute;inset:-5px;border:1px solid rgba(201,168,76,.12);pointer-events:none}
+.profile-portrait-wrap{position:relative;max-width:300px}
+.profile-meta{margin-top:.7rem;font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;color:var(--text-muted);line-height:1.7}
+.profile-info h2{font-family:var(--fd);font-size:clamp(1.45rem,3.5vw,2.15rem);font-weight:400;margin-bottom:.25rem}
+.profile-identity{font-family:var(--fm);font-size:.64rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:.85rem}
+.profile-bio{color:var(--text-dim);font-size:.86rem;line-height:1.65;margin-bottom:1.25rem;max-width:34rem}
+.profile-details{display:grid;gap:.45rem;font-size:.82rem}
+.profile-details dt{font-family:var(--fm);font-size:.54rem;letter-spacing:.1em;color:var(--text-muted);text-transform:uppercase}
+.profile-details dd{color:var(--text);margin-bottom:.2rem}
+/* EDUCATION */
+.edu-chapters{display:flex;flex-direction:column;gap:2.25rem;max-width:960px;width:100%}
+.edu-chapter{border-left:1px solid rgba(201,168,76,.18);padding-left:1.1rem}
+.edu-institution{font-family:var(--fd);font-size:1.3rem;margin-bottom:.15rem}
+.edu-meta{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--gold);margin-bottom:.8rem}
+.edu-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.55rem}
+.edu-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid rgba(201,168,76,.1);cursor:none;transition:border-color .2s}
+.edu-gallery img:hover{border-color:var(--gold)}
+.certs-row{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1.4rem}
+.cert-btn{padding:.7rem 1rem;min-height:44px;border:1px solid rgba(201,168,76,.2);background:0 0;color:var(--text-dim);font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;cursor:none;text-decoration:none;display:inline-flex;align-items:center;transition:border-color .2s,color .2s}
+.cert-btn:hover{border-color:var(--gold);color:var(--gold)}
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem;max-width:920px;width:100%}
+.skill-card{border:1px solid rgba(201,168,76,.12);background:rgba(18,18,18,.65);padding:1.2rem 1.1rem;position:relative;display:flex;flex-direction:column}
+.skill-card::before{content:"";position:absolute;top:0;left:0;width:18px;height:1px;background:var(--gold)}
+.skill-card h3{font-family:var(--fm);font-size:.62rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem}
+.skill-count{font-family:var(--fm);font-size:.55rem;color:var(--text-muted);letter-spacing:.08em;margin-bottom:.7rem}
+.skill-card ul{list-style:none;display:flex;flex-direction:column;gap:.32rem;flex:1;margin-bottom:.9rem}
+.skill-card li{font-size:.84rem;color:var(--text-dim);padding-left:.75rem;position:relative}
+.skill-card li::before{content:"·";position:absolute;left:0;color:var(--gold-dim)}
+.skill-see{align-self:flex-start;padding:.65rem 1.05rem;min-height:44px;border:1px solid rgba(201,168,76,.28);background:0 0;color:var(--gold);font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;cursor:none;transition:border-color .2s,background .2s}
+.skill-see:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+/* WORK ARCHIVE */
+.work-header{width:100%;max-width:1100px;margin-bottom:1.25rem}
+.work-filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem;justify-content:center}
+.filter-btn{padding:.55rem .9rem;min-height:40px;border:1px solid rgba(201,168,76,.15);background:0 0;color:var(--text-muted);font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;cursor:none;transition:border-color .2s,color .2s,background .2s;border-radius:1px}
+.filter-btn:hover{border-color:rgba(201,168,76,.35);color:var(--gold)}
+.filter-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.08)}
+.work-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:1100px;width:100%}
+.work-card{border:1px solid rgba(201,168,76,.1);background:rgba(16,16,16,.8);overflow:hidden;cursor:none;transition:border-color .25s,transform .3s var(--ease);display:flex;flex-direction:column}
+.work-card:hover{border-color:rgba(201,168,76,.35);transform:translateY(-3px)}
+.work-card-img{aspect-ratio:4/3;background:#111;overflow:hidden;position:relative}
+.work-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.work-card-img .vid-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35)}
+.work-card-img .vid-icon svg{width:36px;height:36px;opacity:.85}
+.work-card-body{padding:.85rem .9rem;flex:1;display:flex;flex-direction:column}
+.work-card .cat{font-family:var(--fm);font-size:.52rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:.25rem}
+.work-card h3{font-family:var(--fd);font-size:1.05rem;font-weight:400;margin-bottom:.3rem;line-height:1.25}
+.work-card p{font-size:.78rem;color:var(--text-dim);line-height:1.45;flex:1}
+.work-card .open-btn{margin-top:.7rem;font-family:var(--fm);font-size:.55rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;opacity:.7;transition:opacity .2s}
+.work-card:hover .open-btn{opacity:1}
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;max-width:1000px;width:100%}
+.ach-card{border:1px solid rgba(201,168,76,.16);background:linear-gradient(145deg,rgba(26,26,26,.9),rgba(12,12,12,.95));padding:1.25rem 1.15rem;position:relative;cursor:none;transition:border-color .25s}
+.ach-card:hover{border-color:rgba(201,168,76,.4)}
+.ach-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.45}
+.ach-seal{width:30px;height:30px;border:1px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:.7rem;font-family:var(--fm);font-size:.58rem;color:var(--gold)}
+.ach-card h3{font-family:var(--fd);font-size:1.08rem;font-weight:400;margin-bottom:.2rem}
+.ach-card .rank{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--gold);margin-bottom:.3rem}
+.ach-card p{font-size:.78rem;color:var(--text-dim)}
+.ach-thumb{width:100%;aspect-ratio:16/10;object-fit:cover;margin-top:.65rem;border:1px solid rgba(201,168,76,.12);background:#111}
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;max-width:920px;width:100%}
+.contact-socials{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.55rem}
+.social-link{display:flex;align-items:center;gap:.5rem;padding:.75rem .8rem;min-height:46px;border:1px solid rgba(201,168,76,.12);color:var(--text-dim);text-decoration:none;font-size:.76rem;transition:border-color .2s,color .2s,background .2s;cursor:none}
+.social-link:hover{border-color:var(--gold);color:var(--gold-bright);background:rgba(201,168,76,.06)}
+.social-link svg{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.contact-map{border:1px solid rgba(201,168,76,.14);overflow:hidden;height:240px;background:#111}
+.contact-map iframe{width:100%;height:100%;border:0;filter:grayscale(.7) contrast(1.05) brightness(.85)}
+.contact-address{margin-top:.8rem;font-size:.82rem;color:var(--text-dim);line-height:1.5}
+.contact-address strong{font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--gold);display:block;margin-bottom:.2rem;text-transform:uppercase}
+/* CV */
+.cv-panel{max-width:480px;width:100%;text-align:center;border:1px solid rgba(201,168,76,.18);padding:2.1rem 1.5rem;background:rgba(16,16,16,.7)}
+.cv-panel p{color:var(--text-dim);margin-bottom:1.25rem;font-size:.88rem}
+.cv-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.85rem 1.4rem;min-height:46px;border:1px solid var(--gold);color:var(--gold);font-family:var(--fm);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;background:0 0;cursor:none;transition:background .2s,color .2s}
+.cv-btn:hover{background:rgba(201,168,76,.1);color:var(--gold-bright)}
+/* DETAIL VIEWER */
+.detail-overlay{position:fixed;inset:0;z-index:300;background:rgba(4,4,4,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;padding:calc(.65rem + var(--st)) .85rem calc(.85rem + var(--sb))}
+.detail-overlay.open{opacity:1;visibility:visible}
+.detail-layout{width:100%;max-width:1050px;max-height:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1.4rem;align-items:center}
+.detail-img-wrap{width:100%;max-height:74vh;display:flex;align-items:center;justify-content:center}
+.detail-img-wrap img{max-width:100%;max-height:74vh;object-fit:contain;border:1px solid rgba(201,168,76,.18);display:block}
+.detail-info{display:flex;flex-direction:column;gap:.4rem}
+.detail-info .cat{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+.detail-info h3{font-family:var(--fd);font-size:clamp(1.2rem,2.6vw,1.7rem);font-weight:400}
+.detail-info p{font-size:.86rem;color:var(--text-dim);line-height:1.55;margin-top:.25rem}
+.detail-index{font-family:var(--fm);font-size:.58rem;color:var(--text-muted);letter-spacing:.1em;margin-top:.55rem}
+.detail-nav{display:flex;gap:.5rem;margin-top:1rem}
+.detail-nav button{width:44px;height:44px;min-width:44px;min-height:44px;border:1px solid var(--border);background:0 0;color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:none;font-size:1.1rem;border-radius:2px}
+.detail-nav button:hover{border-color:var(--gold)}
+.detail-close{position:absolute;top:calc(.65rem + var(--st));right:.85rem;width:44px;height:44px;min-width:44px;min-height:44px;border:1px solid var(--border);background:rgba(10,10,10,.7);color:var(--text);font-size:1.25rem;display:flex;align-items:center;justify-content:center;cursor:none;border-radius:2px;z-index:5}
+.detail-close:hover{border-color:var(--gold);color:var(--gold)}
+/* YT */
+.yt-modal{position:fixed;inset:0;z-index:400;background:rgba(4,4,4,.96);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;padding:1rem}
+.yt-modal.open{opacity:1;visibility:visible}
+.yt-content{position:relative;width:min(92vw,840px)}
+.yt-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000}
+.yt-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-close{position:absolute;top:-46px;right:0;width:44px;height:44px;border:1px solid var(--border);background:0 0;color:var(--text);font-size:1.25rem;display:flex;align-items:center;justify-content:center;cursor:none;border-radius:2px}
+.media-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#141414;border:1px dashed rgba(201,168,76,.18);color:var(--text-muted);font-family:var(--fm);font-size:.55rem;letter-spacing:.06em;text-align:center;padding:.6rem}
+/* RESPONSIVE */
+@media(max-width:900px){
+.nav-links{display:none}.nav-mobile-toggle{display:flex}
+.profile-layout{grid-template-columns:1fr;gap:1.5rem}.profile-portrait-wrap{max-width:260px;margin:0 auto}
+.contact-layout{grid-template-columns:1fr}
+.detail-layout{grid-template-columns:1fr;gap:.85rem;max-height:calc(100vh - 1.8rem - var(--st) - var(--sb));overflow-y:auto}
+.detail-img-wrap{max-height:48vh}.detail-img-wrap img{max-height:48vh}
+.book-item{width:115px;height:155px}.book-stage{height:min(50vw,280px)}
+.work-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+}
+@media(max-width:600px){
+:root{--nav-h:52px}
+.nav-rail{padding-left:.7rem;padding-right:.7rem}.nav-brand{font-size:.56rem;letter-spacing:.12em}
+.view{padding:1.15rem .85rem calc(2.4rem + var(--sb))}
+#view-home{padding-top:1.25rem}
+.home-name{font-size:1.95rem}
+.skills-grid,.ach-grid,.work-grid{grid-template-columns:1fr}
+.edu-gallery{grid-template-columns:repeat(2,1fr)}
+.book-item{width:100px;height:135px}.book-stage{height:230px}
+.work-filters{gap:.3rem}.filter-btn{padding:.5rem .7rem;font-size:.54rem;min-height:38px}
+.detail-info h3{font-size:1.15rem}
+}
+@media(max-height:480px) and (orientation:landscape){
+.book-stage{height:180px}.book-item{width:80px;height:108px}
+.detail-layout{grid-template-columns:1.25fr .75fr}.detail-img-wrap,.detail-img-wrap img{max-height:65vh}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}#bg-canvas{opacity:.15}}
 </style>
 </head>
 <body>
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <canvas id="bg-canvas"></canvas>
-
-<audio id="bgAudio" loop preload="auto">
-  <source src="biting%20bullets%20-%20ridgeclub%20(youtube).mp3" type="audio/mpeg">
-</audio>
-
+<audio id="bgAudio" loop preload="auto"><source src="biting%20bullets%20-%20ridgeclub%20(youtube).mp3" type="audio/mpeg"></audio>
 <div id="app">
-  <nav class="nav-rail" role="navigation" aria-label="Main">
-    <div class="nav-brand">SHADID AHAMED</div>
-    <div class="nav-links" id="navLinks">
-      <button class="nav-btn active" data-section="home"><span class="num">01</span>Home</button>
-      <button class="nav-btn" data-section="profile"><span class="num">02</span>Profile</button>
-      <button class="nav-btn" data-section="education"><span class="num">03</span>Education</button>
-      <button class="nav-btn" data-section="skills"><span class="num">04</span>Skills</button>
-      <button class="nav-btn" data-section="art"><span class="num">05</span>Art</button>
-      <button class="nav-btn" data-section="models"><span class="num">06</span>Models</button>
-      <button class="nav-btn" data-section="achievements"><span class="num">07</span>Achievements</button>
-      <button class="nav-btn" data-section="contact"><span class="num">08</span>Contact</button>
-      <button class="nav-btn" data-section="cv"><span class="num">09</span>CV</button>
-    </div>
-    <div class="audio-ctrl">
-      <button class="audio-btn" id="audioToggle" aria-label="Toggle background music" title="Music">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-      </button>
-      <div class="audio-visual" aria-hidden="true"><span></span><span></span><span></span></div>
-    </div>
-    <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Open menu">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </nav>
-
-  <div class="nav-drawer" id="navDrawer">
-    <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">×</button>
-    <button class="nav-btn active" data-section="home"><span class="num">01</span>Home</button>
-    <button class="nav-btn" data-section="profile"><span class="num">02</span>Profile</button>
-    <button class="nav-btn" data-section="education"><span class="num">03</span>Education</button>
-    <button class="nav-btn" data-section="skills"><span class="num">04</span>Skills</button>
-    <button class="nav-btn" data-section="art"><span class="num">05</span>Art</button>
-    <button class="nav-btn" data-section="models"><span class="num">06</span>Models</button>
-    <button class="nav-btn" data-section="achievements"><span class="num">07</span>Achievements</button>
-    <button class="nav-btn" data-section="contact"><span class="num">08</span>Contact</button>
-    <button class="nav-btn" data-section="cv"><span class="num">09</span>CV</button>
-  </div>
-
-  <main class="stage">
-    <!-- HOME -->
-    <section class="section active" id="section-home" data-section="home">
-      <div class="section-label">01 — Entrance</div>
-      <h1 class="home-name">SHADID AHAMED</h1>
-      <p class="home-roles">Architecture / Creative Developer / Designer / Artist / Web Developer</p>
-      <p class="home-statement">Exploring space, form, code, images and stories through an evolving creative practice.</p>
-      <button class="home-cta" data-section="profile">Enter Archive →</button>
-      <div class="home-ornament"></div>
-    </section>
-
-    <!-- PROFILE -->
-    <section class="section" id="section-profile" data-section="profile">
-      <div class="section-label">02 — Identity</div>
-      <h2 class="section-title">Profile</h2>
-      <p class="section-sub">Architecture student exploring the intersection of design, code, visual storytelling and digital experiences.</p>
-      <div class="profile-layout">
-        <div class="profile-portrait-wrap">
-          <div class="profile-frame"></div>
-          <img class="profile-portrait" src="Screenshot%202026-09-20%20201810.png" alt="Shadid Ahamed" loading="eager"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="media-placeholder" style="display:none;aspect-ratio:3/4">MEDIA UNAVAILABLE<br>Screenshot 2026-09-20 201810.png</div>
-          <div class="profile-meta">
-            Student ID: 1000061008<br>
-            BRAC University · Architecture
-          </div>
-        </div>
-        <div class="profile-info">
-          <h2>Shadid Ahamed</h2>
-          <p class="profile-identity">Architecture · Creative Development · Design · Art</p>
-          <p class="profile-bio">
-            Currently studying Architecture at BRAC University, while exploring a transition toward Computer Science &amp; Engineering.
-            The practice moves between spatial design, drawing, model-making, interactive web experiences and visual narrative.
-          </p>
-          <dl class="profile-details">
-            <dt>University</dt>
-            <dd>BRAC University — Architecture</dd>
-            <dt>Course</dt>
-            <dd>ARC-101 (Design I: Basic Design), Summer 2026</dd>
-            <dt>CGPA</dt>
-            <dd>2.68</dd>
-            <dt>HSC</dt>
-            <dd>Notre Dame College, Dhaka — GPA 5.00 (2025)</dd>
-            <dt>SSC</dt>
-            <dd>Motijheel Ideal School &amp; College — GPA 5.00 (2023)</dd>
-            <dt>Family</dt>
-            <dd>Father: Tofayel Ahamed (Police Inspector)<br>Mother: Afruza Sultana<br>Sibling: One younger sister</dd>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section class="section" id="section-education" data-section="education">
-      <div class="section-label">03 — Institutions</div>
-      <h2 class="section-title">Education</h2>
-      <p class="section-sub">Archival chapters of academic formation.</p>
-      <div class="edu-chapters" id="eduChapters"></div>
-      <div class="certs-row">
-        <a class="cert-btn" href="SSC%20Transcript.pdf" target="_blank" rel="noopener" data-pdf="SSC Transcript.pdf">SSC Transcript ↗</a>
-        <a class="cert-btn" href="HSC%20Transcript.pdf" target="_blank" rel="noopener" data-pdf="HSC Transcript.pdf">HSC Transcript ↗</a>
-        <a class="cert-btn" href="1000061008_UG_ARC_Gradesheet_Web.pdf" target="_blank" rel="noopener" data-pdf="1000061008_UG_ARC_Gradesheet_Web.pdf">UG ARC Gradesheet ↗</a>
-      </div>
-      <p style="margin-top:1rem;font-size:0.8rem;color:var(--text-muted);text-align:center;max-width:36rem">
-        Documents open in a new tab. If a PDF does not display, download it and open with a local PDF reader.
-      </p>
-    </section>
-
-    <!-- SKILLS -->
-    <section class="section" id="section-skills" data-section="skills">
-      <div class="section-label">04 — Capabilities</div>
-      <h2 class="section-title">Skills</h2>
-      <p class="section-sub">A constellation of practice areas. Use View to enter the related exhibition zone.</p>
-      <div class="skills-constellation">
-        <div class="skill-cluster">
-          <h3>Art &amp; Drawing</h3>
-          <ul class="skill-list">
-            <li>Drawing</li>
-            <li>Sketching</li>
-            <li>Visual Composition</li>
-            <li>Watercolor exploration</li>
-            <li>Illustration</li>
-            <li>Comic storytelling</li>
-          </ul>
-          <button class="skill-view-btn" data-section="art">View Gallery →</button>
-        </div>
-        <div class="skill-cluster">
-          <h3>Architecture</h3>
-          <ul class="skill-list">
-            <li>Basic Design</li>
-            <li>Model Making</li>
-            <li>Spatial Exploration</li>
-            <li>Form Study</li>
-            <li>Architectural Graphics</li>
-            <li>Presentation</li>
-          </ul>
-          <button class="skill-view-btn" data-section="models">View Models &amp; Projects →</button>
-        </div>
-        <div class="skill-cluster">
-          <h3>Web / Digital</h3>
-          <ul class="skill-list">
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>GitHub Pages</li>
-            <li>Creative Web Development</li>
-            <li>Interactive UI</li>
-          </ul>
-          <button class="skill-view-btn" data-open="websites">View Websites →</button>
-        </div>
-        <div class="skill-cluster">
-          <h3>Content Creation</h3>
-          <ul class="skill-list">
-            <li>Educational video</li>
-            <li>English language topics</li>
-            <li>Visual storytelling</li>
-          </ul>
-          <button class="skill-view-btn" data-open="videos">View Videos →</button>
-        </div>
-        <div class="skill-cluster">
-          <h3>Creative</h3>
-          <ul class="skill-list">
-            <li>Literature</li>
-            <li>Music</li>
-            <li>Visual storytelling</li>
-            <li>Concept development</li>
-            <li>Experimental design</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Inline expandable panels for websites & videos -->
-      <div id="websitesPanel" style="display:none;width:100%;max-width:900px;margin-top:2.5rem">
-        <h3 class="subsection-title">Website Design</h3>
-        <div class="projects-grid" id="websitesGrid"></div>
-      </div>
-      <div id="videosPanel" style="display:none;width:100%;max-width:900px;margin-top:2.5rem">
-        <h3 class="subsection-title">Content / Videos</h3>
-        <div class="videos-inline" id="videosGrid"></div>
-      </div>
-    </section>
-
-    <!-- ART -->
-    <section class="section" id="section-art" data-section="art">
-      <div class="section-label">05 — Drawings &amp; Art</div>
-      <h2 class="section-title">Art</h2>
-      <p class="section-sub">Illustrative studies, comic sequences and visual explorations.</p>
-      <div class="orbit-section">
-        <div class="orbit-stage" id="orbitArt" data-orbit="art">
-          <div class="orbit-track" id="orbitArtTrack"></div>
-        </div>
-        <div class="orbit-controls">
-          <button class="orbit-btn" data-orbit-prev="art" aria-label="Previous">‹</button>
-          <span class="orbit-indicator" id="orbitArtInd">01 / 16</span>
-          <button class="orbit-btn" data-orbit-next="art" aria-label="Next">›</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- MODELS (includes Projects) -->
-    <section class="section" id="section-models" data-section="models">
-      <div class="section-label">06 — Model Making &amp; Projects</div>
-      <h2 class="section-title">Models</h2>
-      <p class="section-sub">Physical explorations of form, structure and spatial idea.</p>
-      <div class="orbit-section">
-        <div class="orbit-stage" id="orbitModels" data-orbit="models">
-          <div class="orbit-track" id="orbitModelsTrack"></div>
-        </div>
-        <div class="orbit-controls">
-          <button class="orbit-btn" data-orbit-prev="models" aria-label="Previous">‹</button>
-          <span class="orbit-indicator" id="orbitModelsInd">01 / 07</span>
-          <button class="orbit-btn" data-orbit-next="models" aria-label="Next">›</button>
-        </div>
-      </div>
-      <h3 class="subsection-title">Design Studio Projects</h3>
-      <div class="projects-grid" id="projectsGrid"></div>
-    </section>
-
-    <!-- ACHIEVEMENTS -->
-    <section class="section" id="section-achievements" data-section="achievements">
-      <div class="section-label">07 — Archive</div>
-      <h2 class="section-title">Achievements</h2>
-      <p class="section-sub">Recognition recorded as archival entries. Click cards with images to enlarge.</p>
-      <div class="achievements-grid" id="achievementsGrid"></div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="section-contact" data-section="contact">
-      <div class="section-label">08 — Connect</div>
-      <h2 class="section-title">Contact</h2>
-      <p class="section-sub">Connect with Shadid across platforms.</p>
-      <div class="contact-layout">
-        <div>
-          <div class="contact-socials" id="socialsGrid"></div>
-        </div>
-        <div>
-          <div class="contact-map">
-            <iframe src="https://www.google.com/maps?q=15%2F17+Sandenagar+Bazar,+Paltan,+Dhaka&amp;output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Home location map"></iframe>
-          </div>
-          <div class="contact-address">
-            <strong>Address</strong>
-            15/17 Sandenagar Bazar, Flat No. 4, Thana: Paltan, Dhaka
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CV -->
-    <section class="section" id="section-cv" data-section="cv">
-      <div class="section-label">09 — Document</div>
-      <h2 class="section-title">Curriculum Vitae</h2>
-      <div class="cv-panel">
-        <p>View the full curriculum vitae document.</p>
-        <a class="cv-btn" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
-          View CV →
-        </a>
-      </div>
-    </section>
-  </main>
+<nav class="nav-rail" role="navigation" aria-label="Main">
+<div class="nav-brand">SHADID AHAMED</div>
+<div class="nav-links">
+<button class="nav-btn active" data-route="home"><span class="num">01</span>Home</button>
+<button class="nav-btn" data-route="profile"><span class="num">02</span>Profile</button>
+<button class="nav-btn" data-route="education"><span class="num">03</span>Education</button>
+<button class="nav-btn" data-route="skills"><span class="num">04</span>Skills</button>
+<button class="nav-btn" data-route="work"><span class="num">05</span>Work</button>
+<button class="nav-btn" data-route="achievements"><span class="num">06</span>Achievements</button>
+<button class="nav-btn" data-route="contact"><span class="num">07</span>Contact</button>
+<button class="nav-btn" data-route="cv"><span class="num">08</span>CV</button>
 </div>
-
-<!-- Image Viewer Modal -->
-<div class="modal-overlay" id="imageModal" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <div class="modal-content">
-    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-    <button class="modal-nav modal-prev" id="modalPrev" aria-label="Previous">‹</button>
-    <button class="modal-nav modal-next" id="modalNext" aria-label="Next">›</button>
-    <div class="modal-img-wrap">
-      <img id="modalImg" src="" alt="">
-    </div>
-    <div class="modal-meta">
-      <h3 id="modalTitle"></h3>
-      <div class="cat" id="modalCat"></div>
-      <p id="modalDesc"></p>
-    </div>
-    <div class="modal-index" id="modalIndex"></div>
-  </div>
+<div class="audio-ctrl">
+<button class="audio-btn" id="audioToggle" aria-label="Music"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
+<div class="audio-visual" aria-hidden="true"><span></span><span></span><span></span></div>
 </div>
-
-<!-- PDF Viewer Modal (fallback) -->
-<div class="modal-overlay pdf-modal" id="pdfModal" role="dialog" aria-modal="true" aria-label="Document viewer">
-  <div class="modal-content">
-    <button class="modal-close" id="pdfClose" aria-label="Close">×</button>
-    <embed class="pdf-frame" id="pdfFrame" type="application/pdf" src="">
-    <div class="pdf-actions">
-      <a id="pdfOpenTab" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
-      <a id="pdfDownload" href="#" download>Download</a>
-    </div>
-  </div>
+<button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</nav>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+<button class="nav-drawer-close" id="navDrawerClose" aria-label="Close">×</button>
+<button class="nav-btn active" data-route="home"><span class="num">01</span>Home</button>
+<button class="nav-btn" data-route="profile"><span class="num">02</span>Profile</button>
+<button class="nav-btn" data-route="education"><span class="num">03</span>Education</button>
+<button class="nav-btn" data-route="skills"><span class="num">04</span>Skills</button>
+<button class="nav-btn" data-route="work"><span class="num">05</span>Work</button>
+<button class="nav-btn" data-route="achievements"><span class="num">06</span>Achievements</button>
+<button class="nav-btn" data-route="contact"><span class="num">07</span>Contact</button>
+<button class="nav-btn" data-route="cv"><span class="num">08</span>CV</button>
 </div>
-
-<!-- YouTube Modal -->
-<div class="modal-overlay yt-modal" id="ytModal" role="dialog" aria-modal="true" aria-label="Video player">
-  <div class="modal-content">
-    <button class="modal-close" id="ytClose" aria-label="Close">×</button>
-    <div class="yt-frame-wrap">
-      <iframe id="ytFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube video"></iframe>
-    </div>
-  </div>
+<main class="stage">
+<!-- HOME -->
+<div class="view active" id="view-home" data-view="home">
+<div class="sl">01 — Entrance</div>
+<h1 class="home-name">SHADID AHAMED</h1>
+<p class="home-roles">Architecture / Creative Developer / Designer / Artist / Web Developer</p>
+<p class="home-statement">Exploring space, form, drawing, models, code and visual storytelling through an evolving creative practice.</p>
+<button class="home-cta" data-route="work">Enter Archive →</button>
+<div class="book-hero">
+<div class="book-hero-label">Object · Artifact</div>
+<h2 class="book-hero-title">The Portfolio Book</h2>
+<p class="book-hero-sub">An analogue portfolio translated into a digital archive.</p>
+<div class="book-stage" id="bookStage"><div class="book-track" id="bookTrack"></div></div>
+<div class="book-controls">
+<button class="book-btn" id="bookPrev" aria-label="Previous">‹</button>
+<span class="book-ind" id="bookInd">01 / 11</span>
+<button class="book-btn" id="bookNext" aria-label="Next">›</button>
 </div>
-
+<div class="book-desc">
+<h4>Form</h4>
+<p>A handmade physical portfolio volume presenting selected work through sequential spreads and constructed presence.</p>
+<h4>Presentation</h4>
+<p>Photographed as an object — cover, spine, hand-held scale, surface detail — to preserve material character and proportion.</p>
+<h4>Digital Translation</h4>
+<p>This archive extends the book into an interactive system where spatial, drawn and digital work coexist as evidence.</p>
+</div>
+<button class="explore-work" data-route="work" data-filter="book">Explore Book in Work →</button>
+</div>
+</div>
+<!-- PROFILE -->
+<div class="view" id="view-profile" data-view="profile">
+<div class="sl">02 — Identity</div>
+<h2 class="stitle">Profile</h2>
+<p class="ssub">Architecture taught spatial thinking. Digital development translates those ideas into interactive systems.</p>
+<div class="profile-layout">
+<div class="profile-portrait-wrap">
+<div class="profile-frame"></div>
+<img class="profile-portrait" src="Screenshot%202026-09-20%20201810.png" alt="Shadid Ahamed" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+<div class="media-ph" style="display:none;aspect-ratio:3/4">MEDIA UNAVAILABLE</div>
+<div class="profile-meta">Student ID: 1000061008<br>BRAC University · Architecture</div>
+</div>
+<div class="profile-info">
+<h2>Shadid Ahamed</h2>
+<p class="profile-identity">Architecture · Creative Development · Design · Art</p>
+<p class="profile-bio">Currently studying Architecture at BRAC University, while exploring a transition toward Computer Science &amp; Engineering. Practice moves between spatial design, drawing, physical model-making, interactive web experiences and visual narrative.</p>
+<dl class="profile-details">
+<dt>University</dt><dd>BRAC University — Architecture</dd>
+<dt>Course</dt><dd>ARC-101 (Design I: Basic Design), Summer 2026</dd>
+<dt>CGPA</dt><dd>2.68</dd>
+<dt>HSC</dt><dd>Notre Dame College, Dhaka — GPA 5.00 (2025)</dd>
+<dt>SSC</dt><dd>Motijheel Ideal School &amp; College — GPA 5.00 (2023)</dd>
+<dt>Family</dt><dd>Father: Tofayel Ahamed (Police Inspector)<br>Mother: Afruza Sultana<br>Sibling: One younger sister</dd>
+</dl>
+</div>
+</div>
+</div>
+<!-- EDUCATION -->
+<div class="view" id="view-education" data-view="education">
+<div class="sl">03 — Institutions</div>
+<h2 class="stitle">Education</h2>
+<p class="ssub">Academic formation and progression.</p>
+<div class="edu-chapters" id="eduChapters"></div>
+<div class="certs-row">
+<a class="cert-btn" href="SSC%20Transcript.pdf" target="_blank" rel="noopener">SSC Transcript ↗</a>
+<a class="cert-btn" href="HSC%20Transcript.pdf" target="_blank" rel="noopener">HSC Transcript ↗</a>
+<a class="cert-btn" href="1000061008_UG_ARC_Gradesheet_Web.pdf" target="_blank" rel="noopener">UG ARC Gradesheet ↗</a>
+</div>
+</div>
+<!-- SKILLS -->
+<div class="view" id="view-skills" data-view="skills">
+<div class="sl">04 — Capabilities</div>
+<h2 class="stitle">Skills</h2>
+<p class="ssub">What I work with. Evidence lives in the Work archive.</p>
+<div class="skills-grid" id="skillsGrid"></div>
+</div>
+<!-- WORK -->
+<div class="view" id="view-work" data-view="work">
+<div class="sl">05 — Archive</div>
+<h2 class="stitle">Work</h2>
+<p class="ssub">Creative evidence — book, drawings, models, projects, content.</p>
+<div class="work-filters" id="workFilters"></div>
+<div class="work-grid" id="workGrid"></div>
+</div>
+<!-- ACHIEVEMENTS -->
+<div class="view" id="view-achievements" data-view="achievements">
+<div class="sl">06 — Recognition</div>
+<h2 class="stitle">Achievements</h2>
+<p class="ssub">Archival record of recognition and academic distinction.</p>
+<div class="ach-grid" id="achGrid"></div>
+</div>
+<!-- CONTACT -->
+<div class="view" id="view-contact" data-view="contact">
+<div class="sl">07 — Connect</div>
+<h2 class="stitle">Contact</h2>
+<p class="ssub">Connect across platforms.</p>
+<div class="contact-layout">
+<div class="contact-socials" id="socialsGrid"></div>
+<div>
+<div class="contact-map"><iframe src="https://www.google.com/maps?q=15%2F17+Sandenagar+Bazar,+Paltan,+Dhaka&amp;output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></div>
+<div class="contact-address"><strong>Address</strong>15/17 Sandenagar Bazar, Flat No. 4, Thana: Paltan, Dhaka</div>
+</div>
+</div>
+</div>
+<!-- CV -->
+<div class="view" id="view-cv" data-view="cv">
+<div class="sl">08 — Document</div>
+<h2 class="stitle">Curriculum Vitae</h2>
+<div class="cv-panel"><p>View the full curriculum vitae.</p><a class="cv-btn" href="https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link" target="_blank" rel="noopener noreferrer">View CV →</a></div>
+</div>
+</main>
+</div>
+<div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true">
+<button class="detail-close" id="detailClose" aria-label="Close">×</button>
+<div class="detail-layout">
+<div class="detail-img-wrap"><img id="detailImg" src="" alt=""></div>
+<div class="detail-info">
+<div class="cat" id="detailCat"></div>
+<h3 id="detailTitle"></h3>
+<p id="detailDesc"></p>
+<div class="detail-index" id="detailIndex"></div>
+<div class="detail-nav"><button id="detailPrev" aria-label="Previous">‹</button><button id="detailNext" aria-label="Next">›</button></div>
+</div>
+</div>
+</div>
+<div class="yt-modal" id="ytModal" role="dialog" aria-modal="true">
+<div class="yt-content">
+<button class="yt-close" id="ytClose" aria-label="Close">×</button>
+<div class="yt-frame-wrap"><iframe id="ytFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube"></iframe></div>
+</div>
+</div>
 <script>
-const portfolioData = {
-  profileImage: "Screenshot 2026-09-20 201810.png",
-
-  books: [
-    { file: "817550850_1756948922083208_6663409752770103109_n.jpg", title: "Main 3D Book Cover", desc: "Primary three-dimensional presentation of the portfolio book." },
-    { file: "815366796_1754064392528440_1990530380060926840_n.jpg", title: "Cover / Flat", desc: "Flat cover view of the portfolio book." },
-    { file: "813965363_2318476582340902_2775377306658662126_n.jpg", title: "Angled", desc: "Angled perspective of the book form." },
-    { file: "811615849_2097588261148773_877248636819443508_n.jpg", title: "Spine", desc: "Spine detail of the portfolio volume." },
-    { file: "812903289_2094149871472792_69075459894343963_n.jpg", title: "In Hand", desc: "Book held to convey scale and material presence." },
-    { file: "812816987_1780849183058307_7067294713027788435_n.jpg", title: "On Mat", desc: "Book resting on surface mat." },
-    { file: "808374318_832505289919133_341923393175280463_n.jpg", title: "Checker", desc: "Checkered context view." },
-    { file: "807083493_2312566989479709_7343824370968896857_n.jpg", title: "Detail", desc: "Close detail study of the book surface." },
-    { file: "806270688_2266422980809329_2024747915901635330_n.jpg", title: "Vertical", desc: "Vertical orientation of the volume." },
-    { file: "808108880_1808585307222660_7996172511928952264_n.jpg", title: "Side", desc: "Side elevation of the portfolio book." },
-    { file: "ChatGPT Image Sep 20, 2026, 07_38_48 PM.png", title: "3D Checkered View", desc: "Additional three-dimensional checkered presentation." }
-  ],
-
-  artworks: [
-    { file: "image sketch 2.jpg", title: "Sea of Dreams (Whale)", desc: "An illustrative study built around oceanic space, scale and a solitary whale motif." },
-    { file: "image sketch 1.jpg", title: "Science of Loneliness (City)", desc: "Visual study exploring urban atmosphere and solitude." },
-    { file: "IMG scetch 1.jpg", title: "River", desc: "Visual study exploring form, composition and atmosphere." },
-    { file: "image sketch 3.jpg", title: "Bamboo", desc: "Visual study exploring form, composition and atmosphere." },
-    { file: "813853349_2273476383432547_5877535730504115386_n.jpg", title: "Cabin by the Water", desc: "Visual study exploring form, composition and atmosphere." },
-    { file: "image colour.jpg", title: "Village Festival", desc: "Visual study exploring form, composition and atmosphere." },
-    { file: "image ipad 1.png", title: "Library Interior", desc: "Visual study exploring form, composition and atmosphere." },
-    { file: "image colour 1.jpg", title: "Character Study", desc: "Visual study exploring form, composition and atmosphere." },
-    { file: "818061932_846874715114836_2565138691570136914_n.jpg", title: "Exhibition Comic Page", desc: "Comic storytelling sequence." },
-    { file: "809518654_1855217995842076_8923680691947304600_n.jpg", title: "Comic Sequence", desc: "Comic storytelling sequence." },
-    { file: "818478656_1667736108690904_8025924023257939696_n.jpg", title: "Comic Page", desc: "Comic storytelling sequence." },
-    { file: "809601262_4548993055379554_8793039364914601083_n.jpg", title: "Comic Page", desc: "Comic storytelling sequence." },
-    { file: "813692048_1750841226169127_6723820080107089098_n.jpg", title: "Portrait Comic", desc: "Comic storytelling sequence." },
-    { file: "813466984_26807832862248578_2653115749408704795_n.jpg", title: "Narrative Comic", desc: "Comic storytelling sequence." },
-    { file: "Screenshot 2026-09-20 202528.png", title: "The Bully Comic", desc: "Comic storytelling sequence." },
-    { file: "814113108_1617142683373760_3602804557652732585_n.jpg", title: "Signature Piece", desc: "Handwritten signature work dated 02.11.2024." }
-  ],
-
-  models: [
-    { file: "Screenshot 2026-09-20 202509.png", title: "Foam Tower", desc: "Physical model study in foam." },
-    { file: "Screenshot 2026-09-20 202501.png", title: "Relief Study", desc: "Relief model exploring surface and depth." },
-    { file: "Screenshot 2026-09-20 202429.png", title: "Project-3 Relief", desc: "Relief model from Project-3." },
-    { file: "Screenshot 2026-09-20 202230.png", title: "Paper Ribbon", desc: "Paper-based spatial exploration." },
-    { file: "Screenshot 2026-09-20 202603.png", title: "White Spatial Model", desc: "White spatial model study." },
-    { file: "Screenshot 2026-09-20 202318.png", title: "Project-2 String Structure", desc: "String structure model from Project-2." },
-    { file: "Screenshot 2026-09-20 202305.png", title: "Project-1 Checkered", desc: "Checkered model from Project-1." }
-  ],
-
-  education: [
-    {
-      institution: "BRAC University",
-      meta: "Architecture · Current",
-      images: [
-        { file: "university-1.jpg", title: "BRAC University", desc: "Campus / institutional context." },
-        { file: "university-2.webp", title: "BRAC University", desc: "Campus / institutional context." },
-        { file: "university-3.jpg", title: "BRAC University", desc: "Campus / institutional context." }
-      ]
-    },
-    {
-      institution: "Notre Dame College",
-      meta: "HSC · GPA 5.00 · 2025",
-      images: [
-        { file: "college-1.jpg", title: "Notre Dame College", desc: "Institutional context." },
-        { file: "college-2.jpg", title: "Notre Dame College", desc: "Institutional context." },
-        { file: "college-3.jpg", title: "Notre Dame College", desc: "Institutional context." },
-        { file: "college-ndc.jpg", title: "Notre Dame College", desc: "Institutional context." }
-      ]
-    },
-    {
-      institution: "Motijheel Ideal School & College",
-      meta: "SSC · GPA 5.00 · 2023",
-      images: [
-        { file: "school-1.jpg", title: "Motijheel Ideal School & College", desc: "Institutional context." },
-        { file: "school-2.jpg", title: "Motijheel Ideal School & College", desc: "Institutional context." }
-      ]
-    }
-  ],
-
-  projects: [
-    { title: "Lory / Laurie Lift", cat: "Design Studio", desc: "Spatial and formal study. Description to be updated." },
-    { title: "Squares and Grid", cat: "Design Studio", desc: "Exploration of grid systems and modular form. Description to be updated." },
-    { title: "Line Signature", cat: "Design Studio", desc: "Line-based formal investigation. Description to be updated." },
-    { title: "Interlock", cat: "Design Studio", desc: "Study of interlocking geometries. Description to be updated." },
-    { title: "Pavilion", cat: "Design Studio", desc: "Pavilion concept and spatial proposal. Description to be updated." },
-    { title: "Cutouts", cat: "Design Studio", desc: "Cutout-based formal exploration. Description to be updated." },
-    { title: "Mosque", cat: "Design Studio", desc: "Mosque design study. Description to be updated." }
-  ],
-
-  websites: [
-    { title: "Website Project 01", cat: "Web Design", desc: "Description to be updated. Add live link or screenshots when ready." },
-    { title: "Website Project 02", cat: "Web Design", desc: "Description to be updated. Add live link or screenshots when ready." }
-  ],
-
-  achievements: [
-    { title: "Bangladesh Shishu Academy", rank: "Children’s Drawing Competition", desc: "Recognition in national children’s drawing competition." },
-    { title: "Thana Level", rank: "1st · 2023", desc: "First place at thana level." },
-    { title: "District Level", rank: "1st", desc: "First place at district level." },
-    { title: "Division Level", rank: "2nd", desc: "Second place at division level." },
-    { title: "5 km Running", rank: "Runner-up", desc: "Runner-up in 5 km running event." },
-    { title: "Police Badminton Club", rank: "Referee Recognition / Medal", desc: "Referee recognition and medal from Police Badminton Club." },
-    { title: "SSC", rank: "GPA 5.00 · Golden A+", desc: "Secondary School Certificate with Golden A+." },
-    { title: "HSC", rank: "GPA 5.00 · Golden A+", desc: "Higher Secondary Certificate with Golden A+." },
-    {
-      title: "Signature Piece",
-      rank: "02.11.2024",
-      desc: "Handwritten archival piece.",
-      image: "814113108_1617142683373760_3602804557652732585_n.jpg"
-    }
-  ],
-
-  videos: [
-    { title: "Modifiers (English)", url: "https://youtu.be/MCj4pNiJR_Q", id: "MCj4pNiJR_Q", desc: "Educational content on English modifiers." },
-    { title: "Connectors (English)", url: "https://youtu.be/K29JNurQr9c", id: "K29JNurQr9c", desc: "Educational content on English connectors." },
-    { title: "Subject-Verb Agreement", url: "https://youtu.be/0ba53jWZy5o", id: "0ba53jWZy5o", desc: "Educational content on subject-verb agreement." }
-  ],
-
-  socials: [
-    { name: "Email", url: "mailto:shadidahamed.matashome05m@gmail.com", icon: "email" },
-    { name: "WhatsApp", url: "https://wa.me/8801326162684", icon: "whatsapp" },
-    { name: "GitHub", url: "https://github.com/shadidahamed", icon: "github" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/shadid-ahamed-41a0703b2/", icon: "linkedin" },
-    { name: "Instagram", url: "https://www.instagram.com/shade_ed25", icon: "instagram" },
-    { name: "Facebook", url: "https://www.facebook.com/share/1C2KcQfwvn/", icon: "facebook" },
-    { name: "X / Twitter", url: "https://x.com/ShadidAhamed", icon: "x" },
-    { name: "Pinterest", url: "https://pin.it/4Z5y34R2T", icon: "pinterest" },
-    { name: "Reddit", url: "https://www.reddit.com/user/Shade_ed25", icon: "reddit" },
-    { name: "CV", url: "https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link", icon: "cv" }
-  ]
+const DATA={
+books:[
+{file:"817550850_1756948922083208_6663409752770103109_n.jpg",title:"Main 3D Book Cover",desc:"Primary three-dimensional presentation of the portfolio book."},
+{file:"815366796_1754064392528440_1990530380060926840_n.jpg",title:"Cover / Flat",desc:"Flat cover view of the portfolio book."},
+{file:"813965363_2318476582340902_2775377306658662126_n.jpg",title:"Angled",desc:"Angled perspective of the book form."},
+{file:"811615849_2097588261148773_877248636819443508_n.jpg",title:"Spine",desc:"Spine detail of the portfolio volume."},
+{file:"812903289_2094149871472792_69075459894343963_n.jpg",title:"In Hand",desc:"Book held to convey scale and material presence."},
+{file:"812816987_1780849183058307_7067294713027788435_n.jpg",title:"On Mat",desc:"Book resting on surface mat."},
+{file:"808374318_832505289919133_341923393175280463_n.jpg",title:"Checker",desc:"Checkered context view."},
+{file:"807083493_2312566989479709_7343824370968896857_n.jpg",title:"Detail",desc:"Close detail study of the book surface."},
+{file:"806270688_2266422980809329_2024747915901635330_n.jpg",title:"Vertical",desc:"Vertical orientation of the volume."},
+{file:"808108880_1808585307222660_7996172511928952264_n.jpg",title:"Side",desc:"Side elevation of the portfolio book."},
+{file:"ChatGPT Image Sep 20, 2026, 07_38_48 PM.png",title:"3D Checkered View",desc:"Additional three-dimensional checkered presentation."}
+],
+art:[
+{file:"image sketch 2.jpg",title:"Sea of Dreams (Whale)",desc:"An illustrative study built around oceanic space, scale and a solitary whale motif."},
+{file:"image sketch 1.jpg",title:"Science of Loneliness (City)",desc:"Visual study exploring urban atmosphere and solitude."},
+{file:"IMG scetch 1.jpg",title:"River",desc:"Visual study exploring form, composition and atmosphere."},
+{file:"image sketch 3.jpg",title:"Bamboo",desc:"Visual study exploring form, composition and atmosphere."},
+{file:"813853349_2273476383432547_5877535730504115386_n.jpg",title:"Cabin by the Water",desc:"Visual study exploring form, composition and atmosphere."},
+{file:"image colour.jpg",title:"Village Festival",desc:"Visual study exploring form, composition and atmosphere."},
+{file:"image ipad 1.png",title:"Library Interior",desc:"Visual study exploring form, composition and atmosphere."},
+{file:"image colour 1.jpg",title:"Character Study",desc:"Visual study exploring form, composition and atmosphere."},
+{file:"818061932_846874715114836_2565138691570136914_n.jpg",title:"Exhibition Comic Page",desc:"Comic storytelling sequence."},
+{file:"809518654_1855217995842076_8923680691947304600_n.jpg",title:"Comic Sequence",desc:"Comic storytelling sequence."},
+{file:"818478656_1667736108690904_8025924023257939696_n.jpg",title:"Comic Page",desc:"Comic storytelling sequence."},
+{file:"809601262_4548993055379554_8793039364914601083_n.jpg",title:"Comic Page",desc:"Comic storytelling sequence."},
+{file:"813692048_1750841226169127_6723820080107089098_n.jpg",title:"Portrait Comic",desc:"Comic storytelling sequence."},
+{file:"813466984_26807832862248578_2653115749408704795_n.jpg",title:"Narrative Comic",desc:"Comic storytelling sequence."},
+{file:"Screenshot 2026-09-20 202528.png",title:"The Bully Comic",desc:"Comic storytelling sequence."},
+{file:"814113108_1617142683373760_3602804557652732585_n.jpg",title:"Signature Piece",desc:"Handwritten signature work dated 02.11.2024."}
+],
+models:[
+{file:"Screenshot 2026-09-20 202509.png",title:"Foam Tower",desc:"Physical model study in foam."},
+{file:"Screenshot 2026-09-20 202501.png",title:"Relief Study",desc:"Relief model exploring surface and depth."},
+{file:"Screenshot 2026-09-20 202429.png",title:"Project-3 Relief",desc:"Relief model from Project-3."},
+{file:"Screenshot 2026-09-20 202230.png",title:"Paper Ribbon",desc:"Paper-based spatial exploration."},
+{file:"Screenshot 2026-09-20 202603.png",title:"White Spatial Model",desc:"White spatial model study."},
+{file:"Screenshot 2026-09-20 202318.png",title:"Project-2 String Structure",desc:"String structure model from Project-2."},
+{file:"Screenshot 2026-09-20 202305.png",title:"Project-1 Checkered",desc:"Checkered model from Project-1."}
+],
+projects:[
+{title:"Lory / Laurie Lift",cat:"Architecture / Projects",desc:"Spatial and formal study. Description to be updated."},
+{title:"Squares and Grid",cat:"Architecture / Projects",desc:"Exploration of grid systems and modular form. Description to be updated."},
+{title:"Line Signature",cat:"Architecture / Projects",desc:"Line-based formal investigation. Description to be updated."},
+{title:"Interlock",cat:"Architecture / Projects",desc:"Study of interlocking geometries. Description to be updated."},
+{title:"Pavilion",cat:"Architecture / Projects",desc:"Pavilion concept and spatial proposal. Description to be updated."},
+{title:"Cutouts",cat:"Architecture / Projects",desc:"Cutout-based formal exploration. Description to be updated."},
+{title:"Mosque",cat:"Architecture / Projects",desc:"Mosque design study. Description to be updated."}
+],
+videos:[
+{title:"Modifiers (English)",id:"MCj4pNiJR_Q",desc:"Educational content on English modifiers."},
+{title:"Connectors (English)",id:"K29JNurQr9c",desc:"Educational content on English connectors."},
+{title:"Subject-Verb Agreement",id:"0ba53jWZy5o",desc:"Educational content on subject-verb agreement."}
+],
+education:[
+{institution:"BRAC University",meta:"Architecture · Current",images:[{file:"university-1.jpg",title:"BRAC University"},{file:"university-2.webp",title:"BRAC University"},{file:"university-3.jpg",title:"BRAC University"},{file:"university-4.jpg",title:"BRAC University"}]},
+{institution:"Notre Dame College",meta:"HSC · GPA 5.00 · 2025",images:[{file:"college-1.jpg",title:"Notre Dame College"},{file:"college-2.jpg",title:"Notre Dame College"},{file:"college-3.jpg",title:"Notre Dame College"},{file:"college-ndc.jpg",title:"Notre Dame College"}]},
+{institution:"Motijheel Ideal School & College",meta:"SSC · GPA 5.00 · 2023",images:[{file:"school-1.jpg",title:"Motijheel Ideal School & College"},{file:"school-2.jpg",title:"Motijheel Ideal School & College"}]}
+],
+achievements:[
+{title:"Bangladesh Shishu Academy",rank:"Children’s Drawing Competition",desc:"Recognition in national children’s drawing competition."},
+{title:"Thana Level",rank:"1st · 2023",desc:"First place at thana level."},
+{title:"District Level",rank:"1st",desc:"First place at district level."},
+{title:"Division Level",rank:"2nd",desc:"Second place at division level."},
+{title:"5 km Running",rank:"Runner-up",desc:"Runner-up in 5 km running event."},
+{title:"Police Badminton Club",rank:"Referee Recognition / Medal",desc:"Referee recognition and medal from Police Badminton Club."},
+{title:"SSC",rank:"GPA 5.00 · Golden A+",desc:"Secondary School Certificate with Golden A+."},
+{title:"HSC",rank:"GPA 5.00 · Golden A+",desc:"Higher Secondary Certificate with Golden A+."},
+{title:"Signature Piece",rank:"02.11.2024",desc:"Handwritten archival piece.",image:"814113108_1617142683373760_3602804557652732585_n.jpg"}
+],
+socials:[
+{name:"Email",url:"mailto:shadidahamed.matashome05m@gmail.com",icon:"email"},
+{name:"WhatsApp",url:"https://wa.me/8801326162684",icon:"whatsapp"},
+{name:"GitHub",url:"https://github.com/shadidahamed",icon:"github"},
+{name:"LinkedIn",url:"https://www.linkedin.com/in/shadid-ahamed-41a0703b2/",icon:"linkedin"},
+{name:"Instagram",url:"https://www.instagram.com/shade_ed25",icon:"instagram"},
+{name:"Facebook",url:"https://www.facebook.com/share/1C2KcQfwvn/",icon:"facebook"},
+{name:"X / Twitter",url:"https://x.com/ShadidAhamed",icon:"x"},
+{name:"Pinterest",url:"https://pin.it/4Z5y34R2T",icon:"pinterest"},
+{name:"Reddit",url:"https://www.reddit.com/user/Shade_ed25",icon:"reddit"},
+{name:"CV",url:"https://drive.google.com/file/d/1pFIeAtxJgmMUcLbubDZjb6CgWmaHVTQV/view?usp=drive_link",icon:"cv"}
+]
 };
+/* Build unified work items */
+const workItems=[];
+DATA.books.forEach((b,i)=>workItems.push({id:"book-"+i,title:b.title,category:"book",file:b.file,desc:b.desc,type:"image"}));
+DATA.art.forEach((a,i)=>workItems.push({id:"art-"+i,title:a.title,category:"art",file:a.file,desc:a.desc,type:"image"}));
+DATA.models.forEach((m,i)=>workItems.push({id:"model-"+i,title:m.title,category:"models",file:m.file,desc:m.desc,type:"image"}));
+DATA.projects.forEach((p,i)=>workItems.push({id:"proj-"+i,title:p.title,category:"projects",file:null,desc:p.desc,type:"text",catLabel:p.cat}));
+DATA.videos.forEach((v,i)=>workItems.push({id:"vid-"+i,title:v.title,category:"content",file:null,desc:v.desc,type:"video",videoId:v.id}));
 
-function encodePath(name) {
-  return name.split("/").map(p => encodeURIComponent(p)).join("/");
+const FILTERS=[{id:"all",label:"All"},{id:"book",label:"Book"},{id:"art",label:"Art"},{id:"models",label:"Models"},{id:"projects",label:"Projects"},{id:"content",label:"Content"}];
+const SKILLS=[
+{title:"Art & Drawing",count:DATA.art.length+" works",items:["Drawing","Sketching","Illustration","Visual Composition","Comic / Visual Storytelling"],filter:"art"},
+{title:"Architecture / Model Making",count:DATA.models.length+" models",items:["Spatial Study","Form Study","Model Making","Architectural Presentation"],filter:"models"},
+{title:"Content Creating",count:DATA.videos.length+" videos",items:["Educational Content","Video Content","Communication"],filter:"content"},
+{title:"Web / Digital",count:"Interactive systems",items:["HTML","CSS","JavaScript","GitHub Pages","Creative Web Development"],filter:null},
+{title:"Creative",count:"Practice",items:["Literature","Music","Concept development","Experimental design"],filter:null}
+];
+
+function enc(n){return n.split("/").map(p=>encodeURIComponent(p)).join("/")}
+function $(s,c){return(c||document).querySelector(s)}
+function $$(s,c){return[...(c||document).querySelectorAll(s)]}
+
+let currentRoute="home",currentFilter="all",detailOpen=false,detailList=[],detailIdx=0;
+let bookIdx=0,bookTimer=null;
+
+function go(route,filter){
+  if(detailOpen)closeDetail();
+  $$(".view").forEach(v=>v.classList.toggle("active",v.dataset.view===route));
+  $$(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.route===route));
+  currentRoute=route;
+  if(route==="work"){
+    if(filter)currentFilter=filter;
+    setFilter(currentFilter);
+  }
+  $("#navDrawer").classList.remove("open");
+  $("#drawerOverlay").classList.remove("open");
+  /* ensure view scrolls to top */
+  const v=$("#view-"+route);
+  if(v)v.scrollTop=0;
+  if(location.hash!=="#/"+route+(filter&&route==="work"?"/"+filter:"")){
+    history.pushState(null,"","#/"+route+(filter&&route==="work"?"/"+filter:""));
+  }
 }
-function $(sel, ctx = document) { return ctx.querySelector(sel); }
-function $$(sel, ctx = document) { return [...ctx.querySelectorAll(sel)]; }
+$$("[data-route]").forEach(el=>el.addEventListener("click",()=>{
+  const r=el.dataset.route,f=el.dataset.filter||null;
+  go(r,f);
+}));
+window.addEventListener("popstate",()=>{
+  const h=(location.hash||"#/home").replace(/^#\/?/,"").split("/");
+  go(h[0]||"home",h[1]||null);
+});
+$("#navMobileToggle").addEventListener("click",()=>{$("#navDrawer").classList.add("open");$("#drawerOverlay").classList.add("open")});
+$("#navDrawerClose").addEventListener("click",()=>{$("#navDrawer").classList.remove("open");$("#drawerOverlay").classList.remove("open")});
+$("#drawerOverlay").addEventListener("click",()=>{$("#navDrawer").classList.remove("open");$("#drawerOverlay").classList.remove("open")});
 
 /* Cursor */
-(function initCursor() {
-  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  if (isTouch) { document.body.classList.add("touch-device"); return; }
-  const dot = $("#cursorDot"), ring = $("#cursorRing");
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener("mousemove", e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + "px"; dot.style.top = my + "px";
-  });
-  function animateRing() {
-    rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-    ring.style.left = rx + "px"; ring.style.top = ry + "px";
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-  document.addEventListener("mouseover", e => {
-    if (e.target.closest("button, a, .orbit-item, .project-card, .video-card, .social-link, .edu-gallery img, .cert-btn, .home-cta, .skill-view-btn, .achievement-card")) {
-      document.body.classList.add("cursor-hover");
-    }
-  });
-  document.addEventListener("mouseout", e => {
-    if (e.target.closest("button, a, .orbit-item, .project-card, .video-card, .social-link, .edu-gallery img, .cert-btn, .home-cta, .skill-view-btn, .achievement-card")) {
-      document.body.classList.remove("cursor-hover");
-    }
-  });
+(function(){
+  if("ontouchstart"in window||navigator.maxTouchPoints>0){document.body.classList.add("touch-device");return}
+  const d=$("#cursorDot"),r=$("#cursorRing");let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+"px";d.style.top=my+"px"});
+  (function a(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;r.style.left=rx+"px";r.style.top=ry+"px";requestAnimationFrame(a)})();
+  document.addEventListener("mouseover",e=>{if(e.target.closest("button,a,.work-card,.edu-gallery img,.skill-see,.ach-card,.book-item,.home-cta,.explore-work,.filter-btn"))document.body.classList.add("cursor-hover")});
+  document.addEventListener("mouseout",e=>{if(e.target.closest("button,a,.work-card,.edu-gallery img,.skill-see,.ach-card,.book-item,.home-cta,.explore-work,.filter-btn"))document.body.classList.remove("cursor-hover")});
 })();
 
 /* Canvas */
-(function initCanvas() {
-  const canvas = $("#bg-canvas"), ctx = canvas.getContext("2d");
-  let w, h, dpr, particles = [], lines = [];
-  const isMobile = window.innerWidth < 700;
-  const COUNT = isMobile ? 40 : 90;
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth; h = window.innerHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    canvas.style.width = w + "px"; canvas.style.height = h + "px";
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  function spawn() {
-    particles = [];
-    for (let i = 0; i < COUNT; i++) {
-      particles.push({
-        x: Math.random() * w, y: Math.random() * h,
-        r: Math.random() * 1.4 + 0.3,
-        vx: (Math.random() - 0.5) * 0.15, vy: (Math.random() - 0.5) * 0.15,
-        a: Math.random() * 0.4 + 0.1
-      });
-    }
-    lines = [];
-    for (let i = 0; i < (isMobile ? 3 : 6); i++) {
-      lines.push({
-        x: Math.random() * w, y: Math.random() * h,
-        len: Math.random() * 120 + 40, ang: Math.random() * Math.PI * 2,
-        speed: (Math.random() - 0.5) * 0.002
-      });
-    }
-  }
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-    const g = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, Math.max(w,h)*0.7);
-    g.addColorStop(0, "rgba(20,18,12,0.15)"); g.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(201,168,76,${p.a})`; ctx.fill();
-    });
-    lines.forEach(l => {
-      l.ang += l.speed;
-      ctx.beginPath();
-      ctx.moveTo(l.x, l.y);
-      ctx.lineTo(l.x + Math.cos(l.ang) * l.len, l.y + Math.sin(l.ang) * l.len);
-      ctx.strokeStyle = "rgba(201,168,76,0.06)"; ctx.lineWidth = 0.6; ctx.stroke();
-    });
-    requestAnimationFrame(draw);
-  }
-  resize(); spawn(); draw();
-  window.addEventListener("resize", () => { resize(); spawn(); });
+(function(){
+  const c=$("#bg-canvas"),ctx=c.getContext("2d");let w,h,dpr,ps=[],ls=[];
+  const mob=()=>window.innerWidth<700;
+  function rs(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+"px";c.style.height=h+"px";ctx.setTransform(dpr,0,0,dpr,0,0)}
+  function sp(){const n=mob()?24:70;ps=[];for(let i=0;i<n;i++)ps.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.1+.2,vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1,a:Math.random()*.3+.08});ls=[];for(let i=0;i<(mob()?2:4);i++)ls.push({x:Math.random()*w,y:Math.random()*h,len:Math.random()*80+20,ang:Math.random()*Math.PI*2,sp:(Math.random()-.5)*.0012})}
+  function dr(){ctx.clearRect(0,0,w,h);const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,Math.max(w,h)*.65);g.addColorStop(0,"rgba(18,16,12,.1)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${p.a})`;ctx.fill()});ls.forEach(l=>{l.ang+=l.sp;ctx.beginPath();ctx.moveTo(l.x,l.y);ctx.lineTo(l.x+Math.cos(l.ang)*l.len,l.y+Math.sin(l.ang)*l.len);ctx.strokeStyle="rgba(201,168,76,.04)";ctx.lineWidth=.5;ctx.stroke()});requestAnimationFrame(dr)}
+  rs();sp();dr();addEventListener("resize",()=>{rs();sp();updateBook()});
 })();
 
-/* Navigation */
-let currentSection = "home";
-function goToSection(id) {
-  if (id === currentSection) return;
-  const prev = $(".section.active");
-  const next = $(`#section-${id}`);
-  if (!next) return;
-  if (prev) prev.classList.remove("active");
-  next.classList.add("active");
-  currentSection = id;
-  $$(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.section === id));
-  $("#navDrawer").classList.remove("open");
-  if (id === "art") startOrbit("art");
-  if (id === "models") startOrbit("models");
-  // hide skill panels when leaving skills
-  if (id !== "skills") {
-    $("#websitesPanel").style.display = "none";
-    $("#videosPanel").style.display = "none";
-  }
-}
-$$("[data-section]").forEach(el => {
-  el.addEventListener("click", () => {
-    const s = el.dataset.section;
-    if (s) goToSection(s);
-  });
-});
-$("#navMobileToggle").addEventListener("click", () => $("#navDrawer").classList.add("open"));
-$("#navDrawerClose").addEventListener("click", () => $("#navDrawer").classList.remove("open"));
-
-/* Skill View buttons that open inline panels */
-$$("[data-open]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const target = btn.dataset.open;
-    if (target === "websites") {
-      $("#websitesPanel").style.display = "block";
-      $("#videosPanel").style.display = "none";
-      $("#websitesPanel").scrollIntoView({ behavior: "smooth", block: "nearest" });
-    } else if (target === "videos") {
-      $("#videosPanel").style.display = "block";
-      $("#websitesPanel").style.display = "none";
-      $("#videosPanel").scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  });
-});
-
 /* Audio */
-const audio = $("#bgAudio");
-let audioAllowed = false, ytPlaying = false;
-function tryPlayAudio() {
-  if (ytPlaying) return;
-  audio.volume = 0.35;
-  const p = audio.play();
-  if (p) p.then(() => {
-    audioAllowed = true;
-    document.body.classList.add("audio-playing");
-  }).catch(() => {});
-}
-$("#audioToggle").addEventListener("click", () => {
-  if (audio.paused) tryPlayAudio();
-  else { audio.pause(); document.body.classList.remove("audio-playing"); }
-});
-["click", "touchstart", "keydown"].forEach(ev => {
-  document.addEventListener(ev, function unlock() {
-    if (!audioAllowed) tryPlayAudio();
-    document.removeEventListener(ev, unlock);
-  }, { once: true, passive: true });
-});
+const audio=$("#bgAudio");let audioOk=false,ytOn=false;
+function tryAudio(){if(ytOn)return;audio.volume=.3;const p=audio.play();if(p)p.then(()=>{audioOk=true;document.body.classList.add("audio-playing")}).catch(()=>{})}
+$("#audioToggle").addEventListener("click",()=>{if(audio.paused)tryAudio();else{audio.pause();document.body.classList.remove("audio-playing")}});
+["click","touchstart","keydown"].forEach(ev=>document.addEventListener(ev,function u(){if(!audioOk)tryAudio();document.removeEventListener(ev,u)},{once:true,passive:true}));
 
-/* Render Education */
-function renderEducation() {
-  const container = $("#eduChapters");
-  portfolioData.education.forEach(ch => {
-    const div = document.createElement("div");
-    div.className = "edu-chapter";
-    div.innerHTML = `
-      <h3 class="edu-institution">${ch.institution}</h3>
-      <div class="edu-meta">${ch.meta}</div>
-      <div class="edu-gallery"></div>
-    `;
-    const gal = div.querySelector(".edu-gallery");
-    ch.images.forEach((img, i) => {
-      const im = document.createElement("img");
-      im.src = encodePath(img.file);
-      im.alt = img.title;
-      im.loading = "lazy";
-      im.onerror = function() {
-        this.style.display = "none";
-        const ph = document.createElement("div");
-        ph.className = "media-placeholder";
-        ph.style.aspectRatio = "4/3";
-        ph.innerHTML = `MEDIA UNAVAILABLE<br>${img.file}`;
-        this.parentNode.insertBefore(ph, this);
-      };
-      im.addEventListener("click", () => openImageViewer(ch.images, i, "Education"));
+/* Book orbit on Home */
+function buildBook(){
+  const track=$("#bookTrack");track.innerHTML="";
+  DATA.books.forEach((b,i)=>{
+    const el=document.createElement("div");el.className="book-item";
+    const img=document.createElement("img");img.src=enc(b.file);img.alt=b.title;img.loading="lazy";
+    img.onerror=function(){this.style.display="none"};
+    el.appendChild(img);
+    el.addEventListener("click",()=>{openDetail(DATA.books.map(x=>({file:x.file,title:x.title,desc:x.desc,category:"Book"})),i)});
+    track.appendChild(el);
+  });
+  let sx=0,drag=false;
+  const stage=$("#bookStage");
+  stage.addEventListener("pointerdown",e=>{drag=true;sx=e.clientX;stage.setPointerCapture(e.pointerId)});
+  stage.addEventListener("pointerup",e=>{if(!drag)return;drag=false;const dx=e.clientX-sx;if(Math.abs(dx)>30){bookIdx=(bookIdx+(dx<0?1:-1)+DATA.books.length)%DATA.books.length;updateBook()}});
+  stage.addEventListener("pointercancel",()=>{drag=false});
+}
+function updateBook(){
+  const items=$$(".book-item",$("#bookTrack"));const n=DATA.books.length;
+  const stage=$("#bookStage");const radius=Math.min(stage.offsetWidth*.28,window.innerWidth<600?100:160);
+  items.forEach((el,i)=>{
+    let off=(i-bookIdx+n)%n;if(off>n/2)off-=n;
+    const ang=off*(Math.PI*2/Math.max(n,8));
+    const x=Math.sin(ang)*radius,z=Math.cos(ang)*radius-radius;
+    const sc=.55+.45*Math.max(0,Math.cos(ang)),op=.25+.75*Math.max(0,Math.cos(ang));
+    el.style.transform=`translate3d(${x}px,0,${z}px) scale(${sc})`;el.style.opacity=op;el.style.zIndex=Math.round(100+z);
+    el.classList.toggle("is-front",off===0);
+  });
+  $("#bookInd").textContent=`${String(bookIdx+1).padStart(2,"0")} / ${String(n).padStart(2,"0")}`;
+}
+function startBook(){if(bookTimer)clearInterval(bookTimer);updateBook();bookTimer=setInterval(()=>{if(currentRoute==="home"){bookIdx=(bookIdx+1)%DATA.books.length;updateBook()}},2000)}
+$("#bookPrev").addEventListener("click",()=>{bookIdx=(bookIdx-1+DATA.books.length)%DATA.books.length;updateBook()});
+$("#bookNext").addEventListener("click",()=>{bookIdx=(bookIdx+1)%DATA.books.length;updateBook()});
+
+/* Education */
+function renderEdu(){
+  const c=$("#eduChapters");
+  DATA.education.forEach(ch=>{
+    const div=document.createElement("div");div.className="edu-chapter";
+    div.innerHTML=`<h3 class="edu-institution">${ch.institution}</h3><div class="edu-meta">${ch.meta}</div><div class="edu-gallery"></div>`;
+    const gal=div.querySelector(".edu-gallery");
+    ch.images.forEach((img,i)=>{
+      const im=document.createElement("img");im.src=enc(img.file);im.alt=img.title;im.loading="lazy";
+      im.onerror=function(){this.style.display="none";const ph=document.createElement("div");ph.className="media-ph";ph.style.aspectRatio="4/3";ph.textContent="MEDIA UNAVAILABLE";this.parentNode.insertBefore(ph,this)};
+      im.addEventListener("click",()=>openDetail(ch.images.map(x=>({file:x.file,title:x.title,desc:"Institutional context.",category:"Education"})),i));
       gal.appendChild(im);
     });
-    container.appendChild(div);
+    c.appendChild(div);
   });
 }
 
-/* Projects */
-function renderProjects() {
-  const grid = $("#projectsGrid");
-  portfolioData.projects.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "project-card";
-    card.innerHTML = `<div class="cat">${p.cat}</div><h3>${p.title}</h3><p>${p.desc}</p>`;
-    grid.appendChild(card);
+/* Skills */
+function renderSkills(){
+  const g=$("#skillsGrid");
+  SKILLS.forEach(s=>{
+    const card=document.createElement("div");card.className="skill-card";
+    card.innerHTML=`<h3>${s.title}</h3><div class="skill-count">${s.count}</div><ul>${s.items.map(i=>"<li>"+i+"</li>").join("")}</ul>`;
+    if(s.filter){
+      const btn=document.createElement("button");btn.className="skill-see";btn.textContent="See Evidence →";
+      btn.addEventListener("click",()=>go("work",s.filter));
+      card.appendChild(btn);
+    }
+    g.appendChild(card);
   });
 }
 
-/* Websites */
-function renderWebsites() {
-  const grid = $("#websitesGrid");
-  portfolioData.websites.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "project-card";
-    card.innerHTML = `<div class="cat">${p.cat}</div><h3>${p.title}</h3><p>${p.desc}</p>`;
-    grid.appendChild(card);
+/* Work filters + grid */
+function renderFilters(){
+  const f=$("#workFilters");
+  FILTERS.forEach(fl=>{
+    const b=document.createElement("button");b.className="filter-btn"+(fl.id===currentFilter?" active":"");b.textContent=fl.label;b.dataset.filter=fl.id;
+    b.addEventListener("click",()=>setFilter(fl.id));
+    f.appendChild(b);
+  });
+}
+function setFilter(id){
+  currentFilter=id;
+  $$(".filter-btn").forEach(b=>b.classList.toggle("active",b.dataset.filter===id));
+  renderWork();
+}
+function renderWork(){
+  const g=$("#workGrid");g.innerHTML="";
+  const items=currentFilter==="all"?workItems:workItems.filter(w=>w.category===currentFilter);
+  items.forEach((w,idx)=>{
+    const card=document.createElement("div");card.className="work-card";
+    let media="";
+    if(w.type==="image"&&w.file){
+      media=`<div class="work-card-img"><img src="${enc(w.file)}" alt="${w.title}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=media-ph>MEDIA UNAVAILABLE</div>'"></div>`;
+    }else if(w.type==="video"){
+      media=`<div class="work-card-img"><div class="vid-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div>`;
+    }else{
+      media=`<div class="work-card-img" style="display:flex;align-items:center;justify-content:center;background:#141414"><span style="font-family:var(--fm);font-size:.55rem;color:var(--text-muted);letter-spacing:.1em">PROJECT</span></div>`;
+    }
+    const catLabel=w.category==="book"?"Book":w.category==="art"?"Art & Drawing":w.category==="models"?"Architecture / Models":w.category==="content"?"Content":w.category==="projects"?"Projects":w.category;
+    card.innerHTML=`${media}<div class="work-card-body"><div class="cat">${catLabel}</div><h3>${w.title}</h3><p>${w.desc||""}</p><div class="open-btn">Open</div></div>`;
+    card.addEventListener("click",()=>{
+      if(w.type==="video"){openYT(w.videoId);return}
+      const list=items.filter(x=>x.type==="image"||x.type==="text").map(x=>({file:x.file,title:x.title,desc:x.desc,category:catLabel}));
+      const i=list.findIndex(x=>x.title===w.title);
+      if(w.type==="image")openDetail(list.length?list:[{file:w.file,title:w.title,desc:w.desc,category:catLabel}],Math.max(0,i));
+      else openDetail([{file:null,title:w.title,desc:w.desc,category:catLabel}],0);
+    });
+    g.appendChild(card);
   });
 }
 
 /* Achievements */
-function renderAchievements() {
-  const grid = $("#achievementsGrid");
-  portfolioData.achievements.forEach((a, i) => {
-    const card = document.createElement("div");
-    card.className = "achievement-card";
-    let thumb = "";
-    if (a.image) {
-      thumb = `<img class="achievement-thumb" src="${encodePath(a.image)}" alt="${a.title}" loading="lazy"
-        onerror="this.style.display='none'">`;
-    }
-    card.innerHTML = `
-      <div class="achievement-seal">${String(i + 1).padStart(2, "0")}</div>
-      <h3>${a.title}</h3>
-      <div class="rank">${a.rank}</div>
-      <p>${a.desc}</p>
-      ${thumb}
-    `;
-    if (a.image) {
-      card.addEventListener("click", () => {
-        openImageViewer([{ file: a.image, title: a.title, desc: a.desc }], 0, "Achievements");
-      });
-    }
-    grid.appendChild(card);
-  });
-}
-
-/* Videos */
-function renderVideos() {
-  const grid = $("#videosGrid");
-  portfolioData.videos.forEach(v => {
-    const card = document.createElement("div");
-    card.className = "video-card";
-    card.innerHTML = `
-      <div class="video-thumb">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <div class="video-info">
-        <h3>${v.title}</h3>
-        <p>${v.desc}</p>
-      </div>
-    `;
-    card.addEventListener("click", () => openYouTube(v.id));
-    grid.appendChild(card);
+function renderAch(){
+  const g=$("#achGrid");
+  DATA.achievements.forEach((a,i)=>{
+    const card=document.createElement("div");card.className="ach-card";
+    const thumb=a.image?`<img class="ach-thumb" src="${enc(a.image)}" alt="${a.title}" loading="lazy" onerror="this.style.display='none'">`:"";
+    card.innerHTML=`<div class="ach-seal">${String(i+1).padStart(2,"0")}</div><h3>${a.title}</h3><div class="rank">${a.rank}</div><p>${a.desc}</p>${thumb}`;
+    if(a.image)card.addEventListener("click",()=>openDetail([{file:a.image,title:a.title,desc:a.desc,category:"Achievements"}],0));
+    g.appendChild(card);
   });
 }
 
 /* Socials */
-const socialIcons = {
-  email: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M22 6l-10 7L2 6"/></svg>`,
-  whatsapp: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.3-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.2.1-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.3-.4.1-.1 0-.3 0-.4 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.4-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.2.8 3 .7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.8L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.1l-.3-.2-3.2.8.9-3.1-.2-.3C4.4 15 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/></svg>`,
-  github: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1 .8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>`,
-  linkedin: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 9H3v12h3.5V9zM4.8 3.5C3.6 3.5 2.7 4.4 2.7 5.6s.9 2.1 2.1 2.1 2.1-.9 2.1-2.1-.9-2.1-2.1-2.1zM20.9 9.1c-1.5 0-2.5.8-3 1.6V9H14.5v12H18v-6.5c0-1.7.9-2.8 2.3-2.8 1.3 0 2 .9 2 2.8V21H25.8v-7.2c0-3.7-2-5.7-4.9-5.7z"/></svg>`,
-  instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`,
-  facebook: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg>`,
-  x: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2h3.3l-7.2 8.2L23 22h-6.2l-4.9-6.4L6.5 22H3.2l7.7-8.8L1 2h6.4l4.4 5.8L18.2 2zm-1.2 18h1.8L7.1 3.9H5.2L17 20z"/></svg>`,
-  pinterest: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.3-.1-.8-.2-2 0-2.9.2-.8 1.3-5.5 1.3-5.5s-.3-.7-.3-1.7c0-1.6.9-2.8 2.1-2.8 1 0 1.5.7 1.5 1.6 0 1-.6 2.4-.9 3.8-.3 1.1.5 2 1.6 2 1.9 0 3.2-2.4 3.2-5.3 0-2.2-1.5-3.8-4.2-3.8-3.1 0-5 2.3-5 4.8 0 .9.3 1.5.7 2 .1.1.1.2.1.3l-.3 1c0 .2-.2.2-.3.1-1.2-.5-1.8-1.9-1.8-3.5 0-2.6 2.2-5.7 6.5-5.7 3.5 0 5.8 2.5 5.8 5.2 0 3.5-2 6.1-4.9 6.1-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.8-.7 1.7-1.1 2.3C9.7 21.8 10.8 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>`,
-  reddit: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm5.5 10.5c0 .2 0 .3-.1.5-1 1.4-3.1 2.4-5.4 2.5l1 3.1c.1.2 0 .4-.2.4h-.1c-.2 0-.3-.1-.4-.2l-1.1-2.3-1.1 2.3c-.1.1-.2.2-.4.2h-.1c-.2 0-.3-.2-.2-.4l1-3.1c-2.3-.1-4.4-1.1-5.4-2.5-.1-.1-.1-.3-.1-.5 0-.8.7-1.5 1.5-1.5.4 0 .7.1 1 .4 1-.7 2.3-1.1 3.8-1.2l.7-2.5c0-.2.2-.3.4-.3l2.2.5c.2-.4.6-.7 1.1-.7.7 0 1.2.5 1.2 1.2s-.5 1.2-1.2 1.2c-.5 0-.9-.3-1.1-.7l-2-.4-.6 2.2c1.4.1 2.8.5 3.8 1.2.3-.2.6-.4 1-.4.8 0 1.5.7 1.5 1.5z"/></svg>`,
-  cv: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>`
+const ICONS={
+email:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M22 6l-10 7L2 6"/></svg>`,
+whatsapp:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.3-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.2.1-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.3-.4.1-.1 0-.3 0-.4 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.4-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.2.8 3 .7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.8L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.1l-.3-.2-3.2.8.9-3.1-.2-.3C4.4 15 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/></svg>`,
+github:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1 .8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>`,
+linkedin:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 9H3v12h3.5V9zM4.8 3.5C3.6 3.5 2.7 4.4 2.7 5.6s.9 2.1 2.1 2.1 2.1-.9 2.1-2.1-.9-2.1-2.1-2.1zM20.9 9.1c-1.5 0-2.5.8-3 1.6V9H14.5v12H18v-6.5c0-1.7.9-2.8 2.3-2.8 1.3 0 2 .9 2 2.8V21H25.8v-7.2c0-3.7-2-5.7-4.9-5.7z"/></svg>`,
+instagram:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`,
+facebook:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg>`,
+x:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2h3.3l-7.2 8.2L23 22h-6.2l-4.9-6.4L6.5 22H3.2l7.7-8.8L1 2h6.4l4.4 5.8L18.2 2zm-1.2 18h1.8L7.1 3.9H5.2L17 20z"/></svg>`,
+pinterest:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.3-.1-.8-.2-2 0-2.9.2-.8 1.3-5.5 1.3-5.5s-.3-.7-.3-1.7c0-1.6.9-2.8 2.1-2.8 1 0 1.5.7 1.5 1.6 0 1-.6 2.4-.9 3.8-.3 1.1.5 2 1.6 2 1.9 0 3.2-2.4 3.2-5.3 0-2.2-1.5-3.8-4.2-3.8-3.1 0-5 2.3-5 4.8 0 .9.3 1.5.7 2 .1.1.1.2.1.3l-.3 1c0 .2-.2.2-.3.1-1.2-.5-1.8-1.9-1.8-3.5 0-2.6 2.2-5.7 6.5-5.7 3.5 0 5.8 2.5 5.8 5.2 0 3.5-2 6.1-4.9 6.1-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.8-.7 1.7-1.1 2.3C9.7 21.8 10.8 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>`,
+reddit:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm5.5 10.5c0 .2 0 .3-.1.5-1 1.4-3.1 2.4-5.4 2.5l1 3.1c.1.2 0 .4-.2.4h-.1c-.2 0-.3-.1-.4-.2l-1.1-2.3-1.1 2.3c-.1.1-.2.2-.4.2h-.1c-.2 0-.3-.2-.2-.4l1-3.1c-2.3-.1-4.4-1.1-5.4-2.5-.1-.1-.1-.3-.1-.5 0-.8.7-1.5 1.5-1.5.4 0 .7.1 1 .4 1-.7 2.3-1.1 3.8-1.2l.7-2.5c0-.2.2-.3.4-.3l2.2.5c.2-.4.6-.7 1.1-.7.7 0 1.2.5 1.2 1.2s-.5 1.2-1.2 1.2c-.5 0-.9-.3-1.1-.7l-2-.4-.6 2.2c1.4.1 2.8.5 3.8 1.2.3-.2.6-.4 1-.4.8 0 1.5.7 1.5 1.5z"/></svg>`,
+cv:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>`
 };
-function renderSocials() {
-  const grid = $("#socialsGrid");
-  portfolioData.socials.forEach(s => {
-    const a = document.createElement("a");
-    a.className = "social-link";
-    a.href = s.url;
-    a.target = s.url.startsWith("mailto:") ? "_self" : "_blank";
-    a.rel = "noopener noreferrer";
-    a.innerHTML = `${socialIcons[s.icon] || ""}<span>${s.name}</span>`;
-    grid.appendChild(a);
+function renderSocials(){
+  const g=$("#socialsGrid");
+  DATA.socials.forEach(s=>{
+    const a=document.createElement("a");a.className="social-link";a.href=s.url;a.target=s.url.startsWith("mailto:")?"_self":"_blank";a.rel="noopener noreferrer";
+    a.innerHTML=`${ICONS[s.icon]||""}<span>${s.name}</span>`;g.appendChild(a);
   });
 }
 
-/* Orbit */
-const orbits = {
-  art: { items: portfolioData.artworks, index: 0, timer: null, track: null, stage: null, ind: null },
-  models: { items: portfolioData.models, index: 0, timer: null, track: null, stage: null, ind: null }
-};
-function buildOrbit(key) {
-  const o = orbits[key];
-  const cap = key.charAt(0).toUpperCase() + key.slice(1);
-  o.track = $(`#orbit${cap}Track`);
-  o.stage = $(`#orbit${cap}`);
-  o.ind = $(`#orbit${cap}Ind`);
-  if (!o.track) return;
-  o.track.innerHTML = "";
-  o.items.forEach((item, i) => {
-    const el = document.createElement("div");
-    el.className = "orbit-item";
-    el.dataset.index = i;
-    const img = document.createElement("img");
-    img.src = encodePath(item.file);
-    img.alt = item.title;
-    img.loading = "lazy";
-    img.onerror = function() {
-      this.style.display = "none";
-      const ph = document.createElement("div");
-      ph.className = "media-placeholder";
-      ph.innerHTML = `MEDIA UNAVAILABLE<br>${item.file}`;
-      el.insertBefore(ph, el.firstChild);
-    };
-    el.appendChild(img);
-    const lab = document.createElement("div");
-    lab.className = "orbit-label";
-    lab.textContent = item.title;
-    el.appendChild(lab);
-    el.addEventListener("click", () => openImageViewer(o.items, i, key === "art" ? "Art" : "Models"));
-    o.track.appendChild(el);
-  });
-  let startX = 0, dragging = false;
-  o.stage.addEventListener("pointerdown", e => {
-    dragging = true; startX = e.clientX;
-    o.stage.setPointerCapture(e.pointerId);
-  });
-  o.stage.addEventListener("pointerup", e => {
-    if (!dragging) return;
-    dragging = false;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) > 40) {
-      if (dx < 0) advanceOrbit(key, 1); else advanceOrbit(key, -1);
-    }
-  });
-  o.stage.addEventListener("pointercancel", () => { dragging = false; });
+/* Detail */
+function openDetail(list,idx){
+  detailList=list;detailIdx=idx;detailOpen=true;showDetail();$("#detailOverlay").classList.add("open");
 }
-function updateOrbit(key) {
-  const o = orbits[key];
-  if (!o.track) return;
-  const n = o.items.length;
-  const items = $$(".orbit-item", o.track);
-  const radius = Math.min(o.stage.offsetWidth * 0.32, 220);
-  items.forEach((el, i) => {
-    let offset = (i - o.index + n) % n;
-    if (offset > n / 2) offset -= n;
-    const angle = offset * (Math.PI * 2 / Math.max(n, 8));
-    const x = Math.sin(angle) * radius;
-    const z = Math.cos(angle) * radius - radius;
-    const scale = 0.55 + 0.45 * Math.max(0, Math.cos(angle));
-    const opacity = 0.25 + 0.75 * Math.max(0, Math.cos(angle));
-    el.style.transform = `translate3d(${x}px, 0, ${z}px) scale(${scale})`;
-    el.style.opacity = opacity;
-    el.style.zIndex = Math.round(100 + z);
-    el.classList.toggle("is-front", offset === 0);
-  });
-  if (o.ind) o.ind.textContent = `${String(o.index + 1).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
+function showDetail(){
+  const it=detailList[detailIdx];if(!it)return;
+  const img=$("#detailImg");
+  if(it.file){img.style.display="block";img.src=enc(it.file);img.alt=it.title;img.onerror=function(){this.style.display="none"}}
+  else{img.style.display="none"}
+  $("#detailTitle").textContent=it.title;$("#detailCat").textContent=it.category||"";$("#detailDesc").textContent=it.desc||"";
+  $("#detailIndex").textContent=`${detailIdx+1} / ${detailList.length}`;
 }
-function advanceOrbit(key, dir = 1) {
-  const o = orbits[key];
-  o.index = (o.index + dir + o.items.length) % o.items.length;
-  updateOrbit(key);
-}
-function startOrbit(key) {
-  const o = orbits[key];
-  if (o.timer) clearInterval(o.timer);
-  updateOrbit(key);
-  o.timer = setInterval(() => {
-    if (currentSection === (key === "art" ? "art" : "models")) advanceOrbit(key, 1);
-  }, 2000);
-}
-$$("[data-orbit-prev]").forEach(btn => btn.addEventListener("click", () => advanceOrbit(btn.dataset.orbitPrev, -1)));
-$$("[data-orbit-next]").forEach(btn => btn.addEventListener("click", () => advanceOrbit(btn.dataset.orbitNext, 1)));
+function closeDetail(){$("#detailOverlay").classList.remove("open");detailOpen=false}
+$("#detailClose").addEventListener("click",closeDetail);
+$("#detailPrev").addEventListener("click",()=>{detailIdx=(detailIdx-1+detailList.length)%detailList.length;showDetail()});
+$("#detailNext").addEventListener("click",()=>{detailIdx=(detailIdx+1)%detailList.length;showDetail()});
 
-/* Image Viewer */
-let viewerItems = [], viewerIndex = 0, viewerCategory = "";
-function openImageViewer(items, index, category) {
-  viewerItems = items; viewerIndex = index; viewerCategory = category;
-  showViewerImage();
-  $("#imageModal").classList.add("open");
-}
-function showViewerImage() {
-  const item = viewerItems[viewerIndex];
-  if (!item) return;
-  const img = $("#modalImg");
-  img.src = encodePath(item.file);
-  img.alt = item.title;
-  img.onerror = function() { this.style.display = "none"; };
-  img.onload = function() { this.style.display = "block"; };
-  $("#modalTitle").textContent = item.title;
-  $("#modalCat").textContent = viewerCategory;
-  $("#modalDesc").textContent = item.desc || "";
-  $("#modalIndex").textContent = `${viewerIndex + 1} / ${viewerItems.length}`;
-}
-function closeImageViewer() { $("#imageModal").classList.remove("open"); }
-$("#modalClose").addEventListener("click", closeImageViewer);
-$("#modalPrev").addEventListener("click", () => {
-  viewerIndex = (viewerIndex - 1 + viewerItems.length) % viewerItems.length;
-  showViewerImage();
-});
-$("#modalNext").addEventListener("click", () => {
-  viewerIndex = (viewerIndex + 1) % viewerItems.length;
-  showViewerImage();
-});
+/* YT */
+function openYT(id){ytOn=true;audio.pause();document.body.classList.remove("audio-playing");$("#ytFrame").src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;$("#ytModal").classList.add("open")}
+function closeYT(){$("#ytModal").classList.remove("open");$("#ytFrame").src="";ytOn=false;if(audioOk)tryAudio()}
+$("#ytClose").addEventListener("click",closeYT);
 
-/* PDF — open in new tab is primary; modal as secondary */
-$$(".cert-btn").forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    // default is already target="_blank" via <a>
-    // also prepare modal as option (middle-click or if needed)
-  });
-});
-// Optional: long-press or secondary button could open modal; for now new-tab is reliable
-$("#pdfClose").addEventListener("click", () => {
-  $("#pdfModal").classList.remove("open");
-  $("#pdfFrame").src = "";
-});
-
-/* YouTube */
-function openYouTube(id) {
-  ytPlaying = true;
-  audio.pause();
-  document.body.classList.remove("audio-playing");
-  $("#ytFrame").src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-  $("#ytModal").classList.add("open");
-}
-function closeYouTube() {
-  $("#ytModal").classList.remove("open");
-  $("#ytFrame").src = "";
-  ytPlaying = false;
-  if (audioAllowed) tryPlayAudio();
-}
-$("#ytClose").addEventListener("click", closeYouTube);
-
-/* Keyboard */
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") {
-    closeImageViewer();
-    $("#pdfModal").classList.remove("open");
-    $("#pdfFrame").src = "";
-    closeYouTube();
-    $("#navDrawer").classList.remove("open");
-  }
-  if ($("#imageModal").classList.contains("open")) {
-    if (e.key === "ArrowLeft") {
-      viewerIndex = (viewerIndex - 1 + viewerItems.length) % viewerItems.length;
-      showViewerImage();
-    }
-    if (e.key === "ArrowRight") {
-      viewerIndex = (viewerIndex + 1) % viewerItems.length;
-      showViewerImage();
-    }
-  }
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){if(detailOpen){closeDetail();return}if($("#ytModal").classList.contains("open")){closeYT();return}$("#navDrawer").classList.remove("open");$("#drawerOverlay").classList.remove("open")}
+  if(detailOpen){if(e.key==="ArrowLeft"){detailIdx=(detailIdx-1+detailList.length)%detailList.length;showDetail()}if(e.key==="ArrowRight"){detailIdx=(detailIdx+1)%detailList.length;showDetail()}}
 });
 
 /* Init */
-renderEducation();
-renderProjects();
-renderWebsites();
-renderAchievements();
-renderVideos();
-renderSocials();
-buildOrbit("art");
-buildOrbit("models");
-startOrbit("art");
-startOrbit("models");
-window.addEventListener("resize", () => {
-  updateOrbit("art");
-  updateOrbit("models");
-});
+renderEdu();renderSkills();renderFilters();renderWork();renderAch();renderSocials();buildBook();startBook();
+const init=(location.hash||"#/home").replace(/^#\/?/,"").split("/");
+go(init[0]||"home",init[1]||null);
 </script>
 </body>
 </html>
