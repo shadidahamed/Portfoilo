@@ -4,31 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Shadid Ahamed | Portfolio</title>
-
-<!-- Favicons (exact names you provided) -->
-<link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png">
-<link rel="icon" type="image/png" sizes="48x48" href="sa-favicon-48.png">
-<link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-64.png">
-<link rel="icon" type="image/png" sizes="128x128" href="sa-favicon-128.png">
-<link rel="icon" type="image/png" sizes="256x256" href="sa-favicon-256.png">
+<link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-16.png">
+<link rel="apple-touch-icon" href="sa-favicon-128.png">
 <link rel="icon" type="image/svg+xml" href="sa-favicon.svg">
-<link rel="apple-touch-icon" href="sa-favicon-hires.png">
-
 <style>
   :root {
     --bg: #0a0a0f;
     --card: #12121a;
     --accent: #c9a227;
-    --accent2: #7c5cff;
+    --accent2: #7b68ee;
     --text: #e8e6e3;
     --muted: #9a9690;
     --radius: 16px;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
   html, body {
-    height: 100%;
+    height:100%;
     background: var(--bg);
     color: var(--text);
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -36,721 +28,711 @@
     scroll-behavior: smooth;
   }
 
-  /* Navigation */
+  /* ===== SOLAR SYSTEM BACKGROUND ===== */
+  #cosmos {
+    position: fixed; inset:0; z-index:0; pointer-events:none;
+    background: radial-gradient(ellipse at center, #111122 0%, #050508 70%);
+  }
+  .star {
+    position:absolute; background:#fff; border-radius:50%;
+    animation: twinkle var(--d) infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%,100%{opacity:.2} 50%{opacity:1}
+  }
+  .planet {
+    position:absolute; border-radius:50%;
+    box-shadow: 0 0 20px currentColor;
+  }
+
+  /* ===== LAYOUT ===== */
+  .app { position:relative; z-index:1; min-height:100vh; }
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
-    background: rgba(10,10,15,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding: 12px 20px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(10,10,15,.85); backdrop-filter: blur(12px);
+    border-bottom:1px solid rgba(201,162,39,.15);
+    display:flex; justify-content:center; gap:4px; padding:10px 8px;
+    flex-wrap:wrap;
   }
   nav button {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: var(--muted);
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.25s;
+    background:transparent; border:1px solid transparent;
+    color:var(--muted); padding:8px 14px; border-radius:999px;
+    font-size:13px; cursor:pointer; transition:.25s;
   }
   nav button:hover, nav button.active {
-    background: var(--accent);
-    color: #111;
-    border-color: var(--accent);
+    color:var(--accent); border-color:var(--accent); background:rgba(201,162,39,.08);
   }
 
-  /* Sections */
-  .section {
-    display: none;
-    min-height: 100vh;
-    padding: 90px 20px 60px;
-    max-width: 1100px;
-    margin: 0 auto;
+  section {
+    display:none; padding:90px 20px 60px; max-width:1100px; margin:0 auto;
+    animation: fadeIn .5s ease;
   }
-  .section.active { display: block; animation: fadeIn 0.45s ease; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  section.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
 
-  h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
-  h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: 1.5rem; color: var(--accent); }
-  p { line-height: 1.7; color: var(--muted); margin-bottom: 1rem; }
+  h1,h2,h3 { font-weight:600; letter-spacing:-.02em; }
+  h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:1.2rem; color:var(--accent); }
+  p { line-height:1.7; color:var(--muted); }
 
-  /* ===== HOME / PROFILE ===== */
-  .profile-hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-    text-align: center;
-  }
-  @media (min-width: 768px) {
-    .profile-hero {
-      flex-direction: row;
-      text-align: left;
-      gap: 48px;
-    }
+  /* ===== HOME ===== */
+  #home {
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; gap:24px;
   }
   .profile-img {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--accent);
-    box-shadow: 0 0 40px rgba(201,162,39,0.25);
-    flex-shrink: 0;
+    width:min(280px,70vw); height:min(280px,70vw);
+    border-radius:50%; object-fit:cover;
+    border:4px solid var(--accent);
+    box-shadow:0 0 40px rgba(201,162,39,.35);
   }
-  .profile-name {
-    font-size: clamp(2.8rem, 8vw, 4.2rem);
-    line-height: 1;
+  .name-big {
+    font-size:clamp(2.8rem,10vw,5.5rem); font-weight:800; line-height:1;
+    letter-spacing:-.04em;
   }
-  .profile-name span {
-    color: var(--accent);
-    display: block;
-    font-size: 0.55em;
-    letter-spacing: 0.15em;
-    margin-top: 4px;
+  .name-big span { color:var(--accent); }
+  .tagline { font-size:1.05rem; max-width:560px; color:var(--muted); }
+  .cta-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .btn {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:999px; font-weight:600; font-size:14px;
+    border:none; cursor:pointer; transition:.25s; text-decoration:none;
   }
-  .profile-tag {
-    display: inline-block;
-    background: rgba(201,162,39,0.15);
-    color: var(--accent);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    margin: 12px 0 20px;
-  }
-  .profile-bio {
-    max-width: 560px;
-    font-size: 1.05rem;
-  }
+  .btn-primary { background:var(--accent); color:#111; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,162,39,.4); }
+  .btn-ghost { background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.2); }
+  .btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
 
-  /* ===== THE BOOK ===== */
-  .book-desc {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 40px;
-    border: 1px solid rgba(255,255,255,0.06);
+  /* ===== CARDS & GRIDS ===== */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+  .card {
+    background:var(--card); border:1px solid rgba(255,255,255,.06);
+    border-radius:var(--radius); padding:24px; transition:.3s; cursor:pointer;
   }
+  .card:hover { border-color:var(--accent); transform:translateY(-4px); }
+  .card h3 { margin-bottom:8px; color:var(--text); }
+  .card p { font-size:.92rem; }
 
   /* ===== CIRCULAR CAROUSEL ===== */
   .carousel-wrap {
-    position: relative;
-    width: 100%;
-    height: 420px;
-    margin: 40px auto;
-    perspective: 1200px;
-    overflow: visible;
+    position:relative; width:100%; height:min(420px,70vw);
+    margin:30px auto; perspective:1200px;
   }
   .carousel {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position:absolute; width:100%; height:100%;
+    transform-style:preserve-3d; transition:transform .8s cubic-bezier(.2,.8,.2,1);
   }
   .carousel-item {
-    position: absolute;
-    width: 180px;
-    height: 240px;
-    left: 50%;
-    top: 50%;
-    margin: -120px 0 0 -90px;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-    transition: transform 0.4s, box-shadow 0.4s;
-    border: 2px solid rgba(255,255,255,0.08);
+    position:absolute; left:50%; top:50%;
+    width:min(200px,40vw); height:min(260px,52vw);
+    margin-left:calc(min(200px,40vw)/-2);
+    margin-top:calc(min(260px,52vw)/-2);
+    border-radius:12px; overflow:hidden;
+    box-shadow:0 12px 40px rgba(0,0,0,.6);
+    transition:transform .6s, opacity .6s, filter .6s;
+    cursor:pointer; background:#1a1a24;
   }
   .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width:100%; height:100%; object-fit:cover; display:block;
   }
-  .carousel-item:hover {
-    box-shadow: 0 20px 50px rgba(201,162,39,0.3);
-  }
-  .carousel-item.active-front {
-    z-index: 10;
+  .carousel-item .label {
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(transparent,rgba(0,0,0,.85));
+    padding:12px 10px 10px; font-size:12px; text-align:center;
   }
 
-  /* Modal for expanded view */
-  .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 2000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    overflow-y: auto;
+  /* ===== MODAL / DETAIL ===== */
+  .overlay {
+    position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.88);
+    display:none; align-items:center; justify-content:center; padding:20px;
+    backdrop-filter:blur(8px);
   }
-  .modal.open { display: flex; }
-  .modal-content {
-    background: var(--card);
-    border-radius: 20px;
-    max-width: 900px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    border: 1px solid rgba(255,255,255,0.08);
+  .overlay.open { display:flex; }
+  .modal {
+    background:var(--card); border-radius:20px; max-width:900px; width:100%;
+    max-height:90vh; overflow-y:auto; position:relative;
+    border:1px solid rgba(201,162,39,.25);
   }
   .modal-close {
-    position: absolute;
-    top: 16px; right: 16px;
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-    z-index: 10;
+    position:absolute; top:14px; right:14px; width:36px; height:36px;
+    border-radius:50%; background:rgba(255,255,255,.1); border:none;
+    color:#fff; font-size:20px; cursor:pointer; z-index:10;
   }
-  .modal-img {
-    width: 100%;
-    max-height: 50vh;
-    object-fit: contain;
-    background: #000;
-  }
-  .modal-body { padding: 28px; }
-  .modal-body h3 { color: var(--accent); margin-bottom: 12px; }
-  .modal-body p, .modal-body li { color: var(--muted); margin-bottom: 8px; }
-  .modal-body ul { padding-left: 20px; margin: 12px 0; }
+  .modal img { width:100%; max-height:55vh; object-fit:contain; background:#000; }
+  .modal-body { padding:24px; }
+  .modal-body h3 { color:var(--accent); margin-bottom:8px; }
+  .modal-body .meta { font-size:.85rem; color:var(--muted); margin-bottom:16px; }
+  .modal-body ul { padding-left:18px; color:var(--muted); }
+  .modal-body li { margin-bottom:6px; }
 
-  /* Skills cards */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+  /* ===== ACHIEVEMENTS / EDUCATION ===== */
+  .ach-grid { display:grid; gap:16px; }
+  .ach-item {
+    background:var(--card); border-radius:var(--radius); padding:18px 20px;
+    border-left:4px solid var(--accent); display:flex; gap:16px; align-items:flex-start;
   }
-  .skill-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 28px;
-    border: 1px solid rgba(255,255,255,0.06);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  .skill-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-  }
-  .skill-card h3 { color: var(--accent); margin-bottom: 10px; }
-  .skill-card .btn {
-    display: inline-block;
-    margin-top: 16px;
-    background: var(--accent);
-    color: #111;
-    padding: 8px 18px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-  }
+  .ach-item img { width:80px; height:80px; object-fit:cover; border-radius:8px; flex-shrink:0; }
 
-  /* Projects */
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-  .project-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 28px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-  .project-card a {
-    display: inline-block;
-    margin-top: 16px;
-    background: var(--accent2);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  /* Contact */
+  /* ===== CONTACT ===== */
   .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin: 30px 0;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px;
   }
   .contact-grid a {
-    background: var(--card);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: var(--text);
-    padding: 16px;
-    border-radius: 12px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.25s;
+    background:var(--card); border:1px solid rgba(255,255,255,.08);
+    border-radius:12px; padding:16px; text-align:center; color:var(--text);
+    text-decoration:none; transition:.25s; font-size:14px;
   }
-  .contact-grid a:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-  .address-box {
-    background: var(--card);
-    padding: 24px;
-    border-radius: var(--radius);
-    margin-top: 24px;
-    border: 1px solid rgba(255,255,255,0.06);
+  .contact-grid a:hover { border-color:var(--accent); color:var(--accent); }
+
+  /* ===== AUDIO CONTROL ===== */
+  .audio-ctrl {
+    position:fixed; bottom:20px; right:20px; z-index:90;
+    width:48px; height:48px; border-radius:50%;
+    background:var(--accent); color:#111; border:none;
+    font-size:20px; cursor:pointer; box-shadow:0 4px 20px rgba(0,0,0,.4);
   }
 
-  /* CV */
-  .cv-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-top: 24px;
-  }
-  .cv-actions a, .cv-actions button {
-    background: var(--accent);
-    color: #111;
-    padding: 14px 28px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-  }
-
-  /* Footer note */
-  .footer-note {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  /* Audio control */
-  .audio-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1500;
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: none;
-    color: #111;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:600px) {
+    nav { gap:2px; padding:8px 4px; }
+    nav button { padding:7px 10px; font-size:12px; }
+    .profile-img { width:200px; height:200px; }
   }
 </style>
 </head>
 <body>
+<div id="cosmos"></div>
 
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgm" loop preload="auto">
   <source src="biting bullets - ridgeclub (youtube).mp3" type="audio/mpeg">
 </audio>
-<button class="audio-toggle" id="audioBtn" title="Toggle music">♪</button>
+<button class="audio-ctrl" id="audioBtn" title="Toggle music">♪</button>
 
-<nav id="mainNav">
-  <button data-section="home" class="active">Home</button>
-  <button data-section="book">The Book</button>
-  <button data-section="models">Architecture Models</button>
-  <button data-section="skills">Skills</button>
-  <button data-section="projects">Digital Projects</button>
-  <button data-section="videos">Videos</button>
-  <button data-section="contact">Contact</button>
-  <button data-section="cv">CV</button>
-</nav>
+<div class="app">
+  <nav id="nav">
+    <button data-sec="home" class="active">Home</button>
+    <button data-sec="about">About</button>
+    <button data-sec="book">The Book</button>
+    <button data-sec="models">Models</button>
+    <button data-sec="skills">Skills</button>
+    <button data-sec="achievements">Achievements</button>
+    <button data-sec="education">Education</button>
+    <button data-sec="contact">Contact</button>
+    <button data-sec="cv">CV</button>
+  </nav>
 
-<!-- ==================== HOME ==================== -->
-<section id="home" class="section active">
-  <div class="profile-hero">
-    <img src="Screenshot 2026-09-20 201810.png" alt="Shadid Ahamed" class="profile-img"
-         onerror="this.src='https://via.placeholder.com/220x220/12121a/c9a227?text=SA'">
+  <!-- ========== HOME ========== -->
+  <section id="home" class="active">
+    <img src="Screenshot 2026-09-20 201810.png" alt="Shadid Ahamed" class="profile-img" onerror="this.src='https://via.placeholder.com/280x280/1a1a24/c9a227?text=SA'">
     <div>
-      <h1 class="profile-name">SHADID<span>AHAMED</span></h1>
-      <div class="profile-tag">Architecture Student · Creative Developer · Designer · Artist</div>
-      <p class="profile-bio">
-        A multidisciplinary maker who turns ideas into visible or working outcomes — from hand-built architectural models and drawings to interactive websites and educational content. Currently exploring the boundary between architecture, design, art and Computer Science & Engineering at BRAC University (Roll: 1000061008). He keeps trying to turn imagination into reality through lines, buildings, colours, code, stories and ideas. Still becoming.
-      </p>
-      <p class="profile-bio" style="font-size:0.95rem; opacity:0.85;">
-        Golden A+ in both SSC & HSC. Merit position 8th in BRAC Architecture admission. Drawing competition winner. Bangladesh Art Exhibition participant. Builder of physical models and digital worlds.
-      </p>
+      <div class="name-big">SHADID<br><span>AHAMED</span></div>
     </div>
-  </div>
-</section>
-
-<!-- ==================== THE BOOK ==================== -->
-<section id="book" class="section">
-  <h2>The Portfolio Book</h2>
-  <div class="book-desc">
-    <p>This portfolio is entirely handmade — from its drawings and models to every cut, composition and binding. Each element was crafted by hand, making the book itself a part of the creative process. Models were cut from Swiss board, coloured, stacked and attached. It exists both as a physical 2D/3D object and as scanned pages.</p>
-    <p><strong>I am Shadid Ahamed.</strong> This book documents the journey from first design exercises to the final Seasonscape pavilion.</p>
-  </div>
-
-  <div class="carousel-wrap" id="bookCarouselWrap">
-    <div class="carousel" id="bookCarousel"></div>
-  </div>
-</section>
-
-<!-- ==================== ARCHITECTURE MODELS ==================== -->
-<section id="models" class="section">
-  <h2>Architecture Models</h2>
-  <p style="margin-bottom:8px; color:var(--accent);">From ARC 101 · Summer 2026 · Roll 1000061008</p>
-  <p>From scratch to final pavilion. Click any model to expand and read the full brief & method.</p>
-
-  <div class="carousel-wrap" id="modelsCarouselWrap">
-    <div class="carousel" id="modelsCarousel"></div>
-  </div>
-</section>
-
-<!-- ==================== SKILLS ==================== -->
-<section id="skills" class="section">
-  <h2>Skills</h2>
-  <div class="skills-grid">
-    <div class="skill-card" onclick="showArtCarousel()">
-      <h3>Art & Drawing</h3>
-      <p>Freehand drawing, illustration, watercolor, visual storytelling, manga panels, 3D sketches.</p>
-      <span class="btn">Explore Gallery →</span>
+    <p class="tagline">Architecture Student · Creative Developer · Designer · Artist<br>
+    Exploring the boundary between physical making, visual thinking &amp; technology.</p>
+    <div class="cta-row">
+      <button class="btn btn-primary" onclick="showSec('about')">About Me</button>
+      <button class="btn btn-ghost" onclick="showSec('book')">The Portfolio Book</button>
+      <button class="btn btn-ghost" onclick="showSec('skills')">Skills &amp; Work</button>
     </div>
-    <div class="skill-card">
-      <h3>Architecture & Model Making</h3>
-      <p>Basic design, graphics communication, spatial composition, Swiss board, low-relief, plaster of Paris, pavilion design.</p>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about">
+    <h2>Who is Shadid?</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;">
+      <img src="Screenshot 2026-09-20 201810.png" alt="Profile" style="width:min(260px,100%);border-radius:16px;border:2px solid var(--accent);" onerror="this.style.display='none'">
+      <div style="flex:1;min-width:260px;">
+        <p style="color:var(--text);font-size:1.05rem;margin-bottom:16px;">
+          He was never satisfied with being only one thing. Architecture student at BRAC University, yet architecture was only one part of him. He drew, painted, built models, designed websites, experimented with code, imagined games, read deeply, and constantly tried to turn the ideas in his head into something real.
+        </p>
+        <p>
+          He carried an unusual combination of an artist’s sensitivity and an engineer’s curiosity. He could care about the tiniest detail of a line while also wondering how to build an entire digital world from scratch. There were disappointments, pressure, family complications, and moments when he questioned where his life was going. Yet one pattern kept returning: he kept trying to build something.
+        </p>
+        <p style="margin-top:12px;">
+          He is proud of where he came from — his science background, Golden A+ in both SSC and HSC, 8th merit position in BRAC Architecture admission, drawing awards, and the handmade portfolio book that itself became a work of art. At the same time he is honestly exploring a transition toward Computer Science &amp; Engineering. He imagines things larger than his current abilities. Sometimes that makes projects messy or unfinished. It also means he is always reaching beyond what he already knows.
+        </p>
+        <p style="margin-top:16px;color:var(--accent);font-weight:600;">
+          If one sentence could hold him: <em>Shadid is someone still becoming — turning imagination into reality through lines, buildings, colours, code, stories and ideas.</em>
+        </p>
+      </div>
     </div>
-    <div class="skill-card" onclick="document.querySelector('[data-section=projects]').click()">
-      <h3>Web Development & Creative Coding</h3>
-      <p>HTML, CSS, JavaScript, GitHub Pages, interactive UI, Three.js / 3D canvas experiments.</p>
-      <span class="btn">View Projects →</span>
+  </section>
+
+  <!-- ========== THE BOOK ========== -->
+  <section id="book">
+    <h2>The Portfolio Book</h2>
+    <p style="max-width:720px;margin-bottom:24px;">
+      This portfolio is entirely handmade — from drawings and models to every cut, composition and binding. Binding, colour coding, logo design, fonts, and even the three-dimensional cut-out models stacked inside were crafted by hand. It is both a 2-D document and a 3-D object. The scanned pages and physical models live together in one volume that itself forms part of the creative process.
+    </p>
+    <div class="carousel-wrap" id="bookCarousel"></div>
+    <p style="text-align:center;margin-top:12px;font-size:.9rem;color:var(--muted);">Click any page to enlarge · Auto-rotates</p>
+  </section>
+
+  <!-- ========== MODELS ========== -->
+  <section id="models">
+    <h2>Architecture Models</h2>
+    <p style="margin-bottom:8px;">From ARC 101 · Summer 2026 · Roll No. 1000061008</p>
+    <p style="margin-bottom:24px;max-width:700px;">Physical models built from scratch — Swiss board, styrofoam, plaster of Paris, string, pigment. Each project explored a fundamental architectural idea before culminating in the final Seasonscape pavilion <strong>Chhandito Borsha / Monsoon</strong>.</p>
+    <div class="carousel-wrap" id="modelCarousel"></div>
+    <p style="text-align:center;margin-top:12px;font-size:.9rem;color:var(--muted);">Click a model to read full description &amp; method</p>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section id="skills">
+    <h2>Skills &amp; Practice</h2>
+    <div class="card-grid" style="margin-bottom:40px;">
+      <div class="card" onclick="openSub('art')">
+        <h3>Art &amp; Drawing</h3>
+        <p>Freehand, illustration, watercolor, visual storytelling, manga panels, exhibition pieces.</p>
+        <span class="btn btn-ghost" style="margin-top:12px;display:inline-block;">Explore Gallery →</span>
+      </div>
+      <div class="card" onclick="openSub('coding')">
+        <h3>Coding &amp; Web</h3>
+        <p>HTML, CSS, JavaScript, GitHub Pages, interactive UI, Three.js experiments.</p>
+        <span class="btn btn-ghost" style="margin-top:12px;display:inline-block;">View Projects →</span>
+      </div>
+      <div class="card" onclick="openSub('videos')">
+        <h3>Content Creation</h3>
+        <p>Educational videos on English grammar — Modifiers, Connectors, Subject-Verb Agreement.</p>
+        <span class="btn btn-ghost" style="margin-top:12px;display:inline-block;">Watch Videos →</span>
+      </div>
+      <div class="card" onclick="openSub('reading')">
+        <h3>Reading &amp; Communication</h3>
+        <p>Deep engagement with Bangla literature and fluent English reading &amp; speaking.</p>
+        <span class="btn btn-ghost" style="margin-top:12px;display:inline-block;">Authors →</span>
+      </div>
     </div>
-    <div class="skill-card" onclick="document.querySelector('[data-section=videos]').click()">
-      <h3>Content Creation</h3>
-      <p>Educational video content in English grammar (Modifiers, Connectors, Subject-Verb Agreement).</p>
-      <span class="btn">Watch Videos →</span>
+
+    <!-- Sub sections (hidden until clicked) -->
+    <div id="sub-art" class="sub-panel" style="display:none;">
+      <h3 style="color:var(--accent);margin-bottom:16px;">Art &amp; Drawing Gallery</h3>
+      <div class="carousel-wrap" id="artCarousel"></div>
+      <button class="btn btn-ghost" style="margin-top:16px;" onclick="closeSub('art')">← Back to Skills</button>
     </div>
-    <div class="skill-card">
-      <h3>Reading & Communication</h3>
-      <p>English reading & speaking. Favourite authors:</p>
-      <ul style="font-size:0.9rem; color:var(--muted); padding-left:18px; margin-top:8px;">
-        <li>Samaresh Majumdar – Uttaradhikar, Kalbela, Kalpurush</li>
-        <li>Humayun Ahmed – Himu series</li>
-        <li>Rabindranath Tagore – Gitanjali, Chokher Bali, Galpaguchchha</li>
-        <li>Ishwar Chandra Vidyasagar – Barnaparichay, Shakuntala</li>
-        <li>Michael Madhusudan Dutt – Meghnad Badh Kavya</li>
-        <li>Ahmad Sofa – Bangali Musalmaner Mon, Gavi Bittanta</li>
+
+    <div id="sub-coding" class="sub-panel" style="display:none;">
+      <h3 style="color:var(--accent);margin-bottom:16px;">Digital Projects</h3>
+      <div class="card-grid">
+        <div class="card">
+          <h3>TrendCart</h3>
+          <p>Modern e-commerce / shopping interface. Affiliate-ready storefront with clean UI.</p>
+          <a href="https://shadidahamed.github.io/trendcart/" target="_blank" class="btn btn-primary" style="margin-top:12px;">Live Project</a>
+        </div>
+        <div class="card">
+          <h3>Shadid’s Game / Orpheus Engine</h3>
+          <p>Interactive 2.5-D game published on GitHub Pages. Feels almost 3-D — backrooms-inspired spatial exploration built from scratch.</p>
+          <a href="https://shadidahamed.github.io/" target="_blank" class="btn btn-primary" style="margin-top:12px;">Live Project</a>
+        </div>
+      </div>
+      <button class="btn btn-ghost" style="margin-top:16px;" onclick="closeSub('coding')">← Back to Skills</button>
+    </div>
+
+    <div id="sub-videos" class="sub-panel" style="display:none;">
+      <h3 style="color:var(--accent);margin-bottom:16px;">Educational Videos</h3>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Modifiers – English</h3>
+          <a href="https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS" target="_blank" class="btn btn-primary" style="margin-top:12px;">Watch on YouTube</a>
+        </div>
+        <div class="card">
+          <h3>Connectors – English</h3>
+          <a href="https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I" target="_blank" class="btn btn-primary" style="margin-top:12px;">Watch on YouTube</a>
+        </div>
+        <div class="card">
+          <h3>Subject-Verb Agreement</h3>
+          <a href="https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg" target="_blank" class="btn btn-primary" style="margin-top:12px;">Watch on YouTube</a>
+        </div>
+      </div>
+      <button class="btn btn-ghost" style="margin-top:16px;" onclick="closeSub('videos')">← Back to Skills</button>
+    </div>
+
+    <div id="sub-reading" class="sub-panel" style="display:none;">
+      <h3 style="color:var(--accent);margin-bottom:16px;">Selected Reading</h3>
+      <ul style="color:var(--muted);line-height:1.9;padding-left:20px;">
+        <li><strong>Samaresh Majumdar</strong> — Uttaradhikar, Kalbela, Kalpurush</li>
+        <li><strong>Humayun Ahmed</strong> — Himu series &amp; other fiction</li>
+        <li><strong>Rabindranath Tagore</strong> — Gitanjali, Chokher Bali, Galpaguchchha</li>
+        <li><strong>Ishwar Chandra Vidyasagar</strong> — Barnaparichay, Shakuntala</li>
+        <li><strong>Michael Madhusudan Dutt</strong> — Meghnad Badh Kavya, Tilottama Sambhav Kavya, Birangana</li>
+        <li><strong>Ahmad Sofa</strong> — Bangali Musalmaner Mon, Gavi Bittanta, Adha-Nari-Adha-Ishwari</li>
+      </ul>
+      <button class="btn btn-ghost" style="margin-top:16px;" onclick="closeSub('reading')">← Back to Skills</button>
+    </div>
+  </section>
+
+  <!-- ========== ACHIEVEMENTS ========== -->
+  <section id="achievements">
+    <h2>Achievements &amp; Evidence</h2>
+    <div class="ach-grid">
+      <div class="ach-item">
+        <div>
+          <strong>Drawing Competition 2023</strong><br>
+          Thana 1st · District 1st · Division 2nd
+        </div>
+      </div>
+      <div class="ach-item">
+        <img src="IMG scetch 1.jpg" alt="Exhibition piece" onerror="this.style.display='none'">
+        <div>
+          <strong>Bangladesh Art Exhibition 2024</strong><br>
+          Artwork selected and exhibited. (Also listed under Art &amp; Drawing)
+        </div>
+      </div>
+      <div class="ach-item">
+        <div>
+          <strong>BRAC Architecture Admission 2026</strong><br>
+          Merit position 8th · Roll No. 1000061008
+        </div>
+      </div>
+      <div class="ach-item">
+        <img src="814113108_1617142683373760_3602804557652732585_n.jpg" alt="Father’s note" onerror="this.style.display='none'">
+        <div>
+          <strong>Creative Commendation</strong><br>
+          Handwritten signed appreciation from Father Shushanto for manga-panel sketches: “Your drawings look very beautiful.”
+        </div>
+      </div>
+      <div class="ach-item">
+        <div>
+          <strong>Athletics</strong><br>
+          5 km running — Runner-up · Referee recognition from police badminton club
+        </div>
+      </div>
+      <div class="ach-item">
+        <div>
+          <strong>Academic Transcripts</strong><br>
+          <a href="HSC Transcript.pdf" target="_blank" style="color:var(--accent);">HSC Transcript (GPA 5.00 Golden A+)</a><br>
+          <a href="SSC Transcript.pdf" target="_blank" style="color:var(--accent);">SSC Transcript (GPA 5.00 Golden A+)</a><br>
+          <a href="1000061008_UG_ARC_Gradesheet_Web.pdf" target="_blank" style="color:var(--accent);">BRAC Architecture Gradesheet (1st Sem GPA 2.68)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EDUCATION ========== -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>BRAC University</h3>
+        <p>Department of Architecture<br>Summer 2026 · 1st semester completed · 15 credits<br>GPA 2.68 / 4.00<br>Roll: 1000061008<br>
+        <em>Currently transitioning toward CSE (expected 3rd semester)</em></p>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+          <img src="university-1.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+          <img src="university-2.webp" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+          <img src="university-3.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="card">
+        <h3>Notre Dame College, Dhaka</h3>
+        <p>2023–2025 · Science · Group 1<br>HSC 2025 · GPA 5.00 Golden A+</p>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+          <img src="college-1.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+          <img src="college-2.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+          <img src="college-3.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+          <img src="college-ndc.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="card">
+        <h3>Motijheel Ideal School &amp; College</h3>
+        <p>2013–2023 · Science<br>SSC 2023 · GPA 5.00 Golden A+</p>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+          <img src="school-1.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+          <img src="school-2.jpg" style="width:80px;height:60px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact">
+    <h2>Contact &amp; Links</h2>
+    <div class="contact-grid">
+      <a href="mailto:shadidahamed.matashome05m@gmail.com">Email</a>
+      <a href="https://github.com/shadidahamed" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/shade_ed25" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank">Facebook</a>
+      <a href="https://wa.me/8801326162684" target="_blank">WhatsApp</a>
+      <a href="https://x.com/ShadidAhamed" target="_blank">X / Twitter</a>
+      <a href="https://pin.it/4Z5y34R2T" target="_blank">Pinterest</a>
+      <a href="https://www.reddit.com/user/Shade_ed25" target="_blank">Reddit</a>
+      <a href="https://www.tumblr.com/" target="_blank">Tumblr</a>
+    </div>
+    <div style="margin-top:32px;background:var(--card);padding:24px;border-radius:var(--radius);">
+      <h3 style="margin-bottom:8px;">Present Address</h3>
+      <p>15/17 Shantinagar Bazar Road, Flat P4<br>Thana Paltan, Dhaka</p>
+      <h3 style="margin:16px 0 8px;">Permanent Address</h3>
+      <p>Village: Dulviti (Tofayel Home)<br>Post: Chaparkona · Post Code 2050<br>Thana: Shaishabari · District: Jamalpur<br>Division: Mymensingh</p>
+      <a href="https://maps.google.com/?q=15/17+Shantinagar+Bazar+Road+Dhaka" target="_blank" class="btn btn-ghost" style="margin-top:16px;">Open in Google Maps</a>
+    </div>
+  </section>
+
+  <!-- ========== CV ========== -->
+  <section id="cv">
+    <h2>Curriculum Vitae</h2>
+    <p style="margin-bottom:20px;">Professional CV — Architecture Student | Creative Developer | Designer | Artist</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="Shadid_Ahamed_Professional_CV.pdf" target="_blank" class="btn btn-primary">View / Download CV (PDF)</a>
+      <a href="1000061008_UG_ARC_Gradesheet_Web.pdf" target="_blank" class="btn btn-ghost">Architecture Gradesheet</a>
+    </div>
+    <div style="margin-top:32px;background:var(--card);padding:20px;border-radius:var(--radius);font-size:.9rem;color:var(--muted);">
+      <strong style="color:var(--text);">Selected BRAC Courses (1st Semester)</strong>
+      <ul style="margin-top:10px;padding-left:18px;">
+        <li>ARC 101 Basic Design — B+ (3.30)</li>
+        <li>ARC 111 Graphics Communication I — A- (3.70)</li>
+        <li>ARC 121 Introduction to Architecture — B (3.00)</li>
+        <li>CSE 103 Introduction to Computing — C+ (2.30)</li>
+        <li>ENG 091 Foundation Course in English — B- (2.70)</li>
+        <li>PHY 102 Fundamentals of Physics — C- (1.70)</li>
       </ul>
     </div>
-  </div>
-
-  <!-- Hidden Art Carousel (shown when skill clicked) -->
-  <div id="artSection" style="display:none; margin-top:50px;">
-    <h3 style="color:var(--accent); margin-bottom:20px;">Art & Drawing Gallery</h3>
-    <div class="carousel-wrap" id="artCarouselWrap">
-      <div class="carousel" id="artCarousel"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== DIGITAL PROJECTS ==================== -->
-<section id="projects" class="section">
-  <h2>Digital Projects</h2>
-  <div class="project-grid">
-    <div class="project-card">
-      <h3>TrendCart</h3>
-      <p>Modern e-commerce website / shopping interface. Clean UI, product cards, responsive layout.</p>
-      <a href="https://shadidahamed.github.io/trendcart/" target="_blank">Live Project →</a>
-    </div>
-    <div class="project-card">
-      <h3>Shadid's Game / Orpheus Engine</h3>
-      <p>Interactive game published on GitHub Pages. 2.5D / near-3D experience inspired by liminal spaces / backrooms aesthetic. Built with pure web technologies.</p>
-      <a href="https://shadidahamed.github.io/" target="_blank">Live Project →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== VIDEOS ==================== -->
-<section id="videos" class="section">
-  <h2>Educational Videos</h3>
-  <p>English grammar basics created and taught by Shadid.</p>
-  <div class="project-grid" style="margin-top:30px;">
-    <div class="project-card">
-      <h3>Modifiers – English</h3>
-      <a href="https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS" target="_blank">Watch on YouTube →</a>
-    </div>
-    <div class="project-card">
-      <h3>Connectors – English</h3>
-      <a href="https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I" target="_blank">Watch on YouTube →</a>
-    </div>
-    <div class="project-card">
-      <h3>Subject-Verb Agreement</h3>
-      <a href="https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg" target="_blank">Watch on YouTube →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== CONTACT ==================== -->
-<section id="contact" class="section">
-  <h2>Contact & Links</h2>
-  <div class="contact-grid">
-    <a href="mailto:shadidahamed.matashome05m@gmail.com">Email</a>
-    <a href="https://github.com/shadidahamed" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank">LinkedIn</a>
-    <a href="https://www.instagram.com/shade_ed25" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank">Facebook</a>
-    <a href="https://wa.me/8801326162684" target="_blank">WhatsApp</a>
-    <a href="https://x.com/ShadidAhamed" target="_blank">X / Twitter</a>
-    <a href="https://pin.it/4Z5y34R2T" target="_blank">Pinterest</a>
-    <a href="https://www.reddit.com/user/Shade_ed25" target="_blank">Reddit</a>
-    <a href="https://www.tumblr.com/" target="_blank">Tumblr</a>
-  </div>
-
-  <div class="address-box">
-    <h3 style="color:var(--accent); margin-bottom:12px;">Present Address</h3>
-    <p>15/17, Shantinagar Bazar Road, Flat No. P4<br>
-    Thana: Paltan, Dhaka, Bangladesh</p>
-    <p style="margin-top:16px;"><strong>Permanent Address:</strong><br>
-    Dulviti Village, Tofayel Home, Chaparkona Post Office<br>
-    Post Code: 2050, Shaishabari Thana, Jamalpur District, Mymensingh Division</p>
-    <p style="margin-top:16px;">
-      <a href="https://maps.google.com/?q=15/17+Shantinagar+Bazar+Road+Paltan+Dhaka" target="_blank" style="color:var(--accent);">Open in Google Maps →</a>
-    </p>
-  </div>
-</section>
-
-<!-- ==================== CV ==================== -->
-<section id="cv" class="section">
-  <h2>Curriculum Vitae</h2>
-  <p>Full professional CV and academic transcripts.</p>
-  <div class="cv-actions">
-    <a href="Shadid_Ahamed_Professional_CV.pdf" target="_blank">View CV (PDF)</a>
-    <a href="Shadid_Ahamed_Professional_CV.pdf" download>Download CV</a>
-    <a href="1000061008_UG_ARC_Gradesheet_Web.pdf" target="_blank">View Gradesheet</a>
-    <a href="HSC Transcript.pdf" target="_blank">HSC Transcript</a>
-    <a href="SSC Transcript.pdf" target="_blank">SSC Transcript</a>
-  </div>
-
-  <div style="margin-top:40px; background:var(--card); padding:28px; border-radius:var(--radius);">
-    <h3 style="color:var(--accent); margin-bottom:16px;">Selected Achievements</h3>
-    <ul style="color:var(--muted); padding-left:20px; line-height:1.8;">
-      <li>Drawing competition 2023: Thana 1st, District 1st, Division 2nd</li>
-      <li>Artwork exhibited in Bangladesh Art Exhibition 2024</li>
-      <li>BRAC Architecture admission 2026: Merit position 8th</li>
-      <li>5 km running – Runner-up</li>
-      <li>Referee recognition from a police badminton club</li>
-      <li>Handwritten signed appreciation for sketch / manga-panel work (by father figure)</li>
-      <li>GPA 5.00 Golden A+ in both SSC (Motijheel Ideal School & College) and HSC (Notre Dame College)</li>
-    </ul>
-  </div>
-</section>
-
-<div class="footer-note">
-  © 2026 Shadid Ahamed · Architecture → Design → Art → Computer Science<br>
-  Building at the intersection of physical making, visual thinking and technology.
+  </section>
 </div>
 
 <!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
-    <img class="modal-img" id="modalImg" src="" alt="">
+    <img id="modalImg" src="" alt="">
     <div class="modal-body">
       <h3 id="modalTitle"></h3>
+      <div class="meta" id="modalMeta"></div>
       <div id="modalDesc"></div>
     </div>
   </div>
 </div>
 
 <script>
-// ========== DATA ==========
-const artItems = [
-  { src: "809518654_1855217995842076_8923680691947304600_n.jpg", title: "Untitled Sketch 1", desc: "Freehand sketch." },
-  { src: "809601262_4548993055379554_8793039364914601083_n.jpg", title: "Untitled Sketch 2", desc: "Exploration of form and space." },
-  { src: "813466984_26807832862248578_2653115749408704795_n.jpg", title: "Untitled Sketch 3", desc: "Character and narrative study." },
-  { src: "813692048_1750841226169127_6723820080107089098_n.jpg", title: "Untitled Sketch 4", desc: "Detailed line work." },
-  { src: "813853349_2273476383432547_5877535730504115386_n.jpg", title: "Untitled Sketch 5", desc: "Atmospheric study." },
-  { src: "818061932_846874715114836_2565138691570136914_n.jpg", title: "Untitled Sketch 6", desc: "Composition exploration." },
-  { src: "818478656_1667736108690904_8025924023257939696_n.jpg", title: "Untitled Sketch 7", desc: "Final panel study." },
-  { src: "Screenshot 2026-09-20 202528.png", title: "Digital Sketch", desc: "Digital exploration." },
-  { src: "image colour 1.jpg", title: "Colour Study 1", desc: "Watercolour / colour exploration." },
-  { src: "image colour.jpg", title: "Colour Study 2", desc: "Notre Dame College exhibition piece." },
-  { src: "image ipad 1.png", title: "iPad Drawing", desc: "Digital illustration." },
-  { src: "image sketch 1.jpg", title: "First 3D Image", desc: "First three-dimensional sketch attempt." },
-  { src: "image sketch 2.jpg", title: "First Book Cover", desc: "First book-cover design." },
-  { src: "image sketch 3.jpg", title: "First Sketch", desc: "Earliest preserved sketch." },
-  { src: "IMG scetch 1.jpg", title: "Exhibition Piece", desc: "Exhibited at Bangladesh Art Exhibition 2024. Also part of the achievement collection." },
-  { src: "811615849_2097588261148773_877248636819443508_n.jpg", title: "That Day Will Come", desc: "Narrative panel." },
-  { src: "815366796_1754064392528440_1990530380060926840_n (1).jpg", title: "Waiting", desc: "Waiting for someone." },
-  { src: "817550850_1756948922083208_6663409752770103109_n.jpg", title: "If I Could Say It Once More", desc: "Emotional panel." },
-  { src: "ChatGPT Image Sep 20, 2026, 07_38_48 PM.png", title: "Loneliness in a Lovely Island", desc: "Conceptual piece." },
-  { src: "book-3d.jpg", title: "The Book", desc: "Handmade portfolio book (3D view)." }
+/* ===== DATA ===== */
+const bookImages = [
+  "811615849_2097588261148773_877248636819443508_n.jpg",
+  "815366796_1754064392528440_1990530380060926840_n (1).jpg",
+  "817550850_1756948922083208_6663409752770103109_n.jpg",
+  "ChatGPT Image Sep 20, 2026, 07_38_48 PM.png",
+  "book-3d.jpg"
 ];
 
-const modelItems = [
+const artImages = [
+  {src:"809518654_1855217995842076_8923680691947304600_n.jpg", name:"Dimension & Space"},
+  {src:"809601262_4548993055379554_8793039364914601083_n.jpg", name:"When Will You Come, Wait"},
+  {src:"813466984_26807832862248578_2653115749408704795_n.jpg", name:"If I Could Say It Once More"},
+  {src:"813692048_1750841226169127_6723820080107089098_n.jpg", name:"Loneliness in a Lovely Island"},
+  {src:"813853349_2273476383432547_5877535730504115386_n.jpg", name:"Cholo Ghumte Jai"},
+  {src:"818061932_846874715114836_2565138691570136914_n.jpg", name:"Ghum Keno Vangche Na"},
+  {src:"818478656_1667736108690904_8025924023257939696_n.jpg", name:"The River That Flows the Water of Silence"},
+  {src:"IMG scetch 1.jpg", name:"Bangladesh Art Exhibition 2024"},
+  {src:"image colour 1.jpg", name:"Iorichi"},
+  {src:"image colour.jpg", name:"Notre Dame Exhibition Piece"},
+  {src:"image ipad 1.png", name:"First 3D Image"},
+  {src:"image sketch 1.jpg", name:"First Book Cover"},
+  {src:"image sketch 2.jpg", name:"Early Sketch"},
+  {src:"image sketch 3.jpg", name:"Sketch Study"},
+  {src:"Screenshot 2026-09-20 202528.png", name:"Additional Study"}
+];
+
+const modelData = [
   {
-    src: "Screenshot 2026-09-20 202305.png",
-    title: "Project 01 – Squares in Grid",
-    desc: `<p><strong>Purpose:</strong> Make the student sensitive about visual order. Order is achieved by avoiding chaos.</p>
-    <p><strong>Method:</strong> Compose 25 × 25 black squares on a white base with 12 × 12 grids. Total base size 300 × 300. Used only the matte surface of black model paper and Swiss board.</p>`
+    src:"Screenshot 2026-09-20 202305.png",
+    title:"Project 01 – Squares in Grid",
+    meta:"ARC 101 · Visual Order",
+    desc:`<p>The purpose is to become sensitive about visual order. Order can be achieved by avoiding chaos.</p>
+    <p><strong>Method</strong></p>
+    <ul>
+      <li>Compose 25×25 black squares on a white base with 12×12 grids.</li>
+      <li>Total base size 300×300 mm.</li>
+      <li>Used only the matte surface of black model paper and Swiss board.</li>
+    </ul>`
   },
   {
-    src: "Screenshot 2026-09-20 202318.png",
-    title: "Project 02 – Lines in Nature",
-    desc: `<p><strong>Goal:</strong> Discover lines in nature, analyse them, then create compositions. Good form-space relationship is exercised.</p>
-    <p><strong>Method:</strong> Phase 1 – Photograph lines found in nature and select strong compositions. Phase 2 – Metal rod frame 200 × 250 × 400 acts as boundary volume. Use string of varied thickness. Spatial relationships and voids are as important as the lines themselves.</p>`
+    src:"Screenshot 2026-09-20 202318.png",
+    title:"Project 02 – Lines in Nature",
+    meta:"ARC 101 · Spatial Relationships",
+    desc:`<p>Discover lines in nature, analyse them, then create compositions. Good form-space relationship is exercised.</p>
+    <p><strong>Method</strong></p>
+    <ul>
+      <li>Phase 1: Photograph lines found in nature; select a strong composition of spaces with lines.</li>
+      <li>Phase 2: Metal-rod frame 200×250×400 mm as boundary volume. Use string of varied thickness.</li>
+      <li>Spatial relationships between the lines are as important as the lines themselves. Pay attention to the voids.</li>
+    </ul>`
   },
   {
-    src: "Screenshot 2026-09-20 202429.png",
-    title: "Project 03 – Low Relief (Styrofoam)",
-    desc: `<p><strong>Theme:</strong> Low-relief work / carving spaces from a given thickness. Process similar to sculpture.</p>
-    <p><strong>Method:</strong> 300 × 300 styrofoam with multiple layers (height max 75 mm). Each composition recreates an assigned building by carving extracted polygons. Final form cast in pigmented plaster of Paris.</p>`
+    src:"Screenshot 2026-09-20 202429.png",
+    title:"Project 03 – Low Relief (Styrofoam)",
+    meta:"ARC 101 · Carving & Casting",
+    desc:`<p>Low-relief work — carving spaces from a material of given thickness. Process similar to sculpture.</p>
+    <p><strong>Method – Phase 1</strong></p>
+    <ul>
+      <li>300×300 mm styrofoam, multiple layers, max height 75 mm.</li>
+      <li>Each composition recreates one image of an assigned building by carving extracted polygons.</li>
+    </ul>`
   },
   {
-    src: "Screenshot 2026-09-20 202501.png",
-    title: "Project 03 – Low Relief (Plaster)",
-    desc: `<p>Final cast in pigmented plaster of Paris. Secrets for perfect results: let styrofoam stacks dry, build a one-side-open box, mix plaster to whipped-cream consistency, pour, wait 30–40 min, demould after a day, sand for finish.</p>`
+    src:"Screenshot 2026-09-20 202501.png",
+    title:"Project 03 – Low Relief (Plaster of Paris)",
+    meta:"ARC 101 · Final Cast",
+    desc:`<p>Final form developed in styrofoam cast in pigmented plaster of Paris.</p>
+    <p><strong>Secrets for perfect plaster model</strong></p>
+    <ul>
+      <li>Let every stack of styrofoam dry. Create an open-top box (base 300×300, sides elevated 9–10 mm). Check for leaks with water.</li>
+      <li>Attach styro model with ordinary glue (super glue destroys styrofoam).</li>
+      <li>4–5 kg plaster of Paris + 5–6 g pigment. Add water while stirring until consistency of whipped cream.</li>
+      <li>Pour immediately. Do not move for 24 h. Sand for finishing.</li>
+    </ul>`
   },
   {
-    src: "Screenshot 2026-09-20 202603.png",
-    title: "Project 04 – Composition with Planes",
-    desc: `<p>Planes define three-dimensional space. Size, shape, proportion and spatial relationships determine the qualities of the space they enclose.</p>
-    <p><strong>Method:</strong> Base 300 × 450, height > 300. Vary plane sizes (thickness 3–10 mm), interlocking surfaces, monochromatic tones. Consider hierarchy, balance, rhythm, harmony, unity and drama. Good workmanship is essential.</p>`
+    src:"Screenshot 2026-09-20 202603.png",
+    title:"Project 04 – Composition with Planes",
+    meta:"ARC 101 · Hierarchy & Drama",
+    desc:`<p>Planes define three-dimensional space. Size, shape, proportion and spatial relationship determine the qualities of the space they enclose.</p>
+    <p><strong>Method</strong></p>
+    <ul>
+      <li>Base 300×450 mm, height more than 300 mm to define fluid space.</li>
+      <li>Vary size of planes (thickness 3–10 mm), monochromatic, solid surface.</li>
+      <li>Interlock one surface to another. Consider hierarchy, balance, rhythm, harmony, unity and drama.</li>
+      <li>Good workmanship is essential.</li>
+    </ul>`
   },
   {
-    src: "Screenshot 2026-09-20 202509.png",
-    title: "Project 05 – Space & Flow by Subtracting Volumes",
-    desc: `<p>Work with a fundamental geometric solid (triangle-based prism). Create spatial flow by subtracting volumes while respecting the inherent geometric logic and proportional divisions. Original form must remain recognisable.</p>
-    <p><strong>Method:</strong> Study the solid, sketch subdivisions, constrain with scaffold blocks, subtract carefully. Base equilateral triangle, height 350.</p>`
+    src:"Screenshot 2026-09-20 202509.png",
+    title:"Project 05 – Space & Flow by Subtracting Volumes",
+    meta:"ARC 101 · Solid-to-Void",
+    desc:`<p>Worked with a triangular-based prism. Focus on creating spatial flow by subtracting volumes while respecting the inherent geometric logic of the original form.</p>
+    <p><strong>Method</strong></p>
+    <ul>
+      <li>Study the basic geometric solid, observe subdivision and potential subtraction directions that maintain integrity.</li>
+      <li>Using scaffold blocks, constrain the volume. Subtract to generate internal and external spatial relationships.</li>
+      <li>Original form must remain clearly recognisable. Base equilateral triangle, height 350 mm.</li>
+    </ul>`
   },
   {
-    src: "Screenshot 2026-09-20 202230.png",
-    title: "Final Pavilion – Chhandito Borsha / Monsoon (Seasonscape)",
-    desc: `<p><strong>Seasonscape Pavilion</strong> translating the changing rhythm of monsoon rain into flowing architectural form.</p>
-    <p>“Rain is sometimes soft drizzle, sometimes scattered drops, sometimes a downpour. Each form carries its own rhythm. That changing rhythm was transformed into wave-like upward flow.”</p>
-    <p>Inspired by the six seasons of Bangladesh and the folk saying recorded by Akhtaruzzaman Elias. Final model of ARC 101, Summer 2026.</p>`
+    src:"Screenshot 2026-09-20 202230.png",
+    title:"Final Pavilion – Chhandito Borsha / Monsoon",
+    meta:"Seasonscape · ARC 101 Final",
+    desc:`<p><em>“Borsha kokhono rimjhim, kokhono chitepota, abar kokhono musholdhare. Tar protiti rupe nijosso ek chhando ache. Sei poribortonshil chhandoke torongo kon uprobaho e rupantor kora hoy.”</em></p>
+    <p>A Seasonscape pavilion translating the changing rhythm of monsoon rain into flowing architectural form. Six seasons of Bengal each carry distinct atmosphere, rhythm, colour, texture and emotional character.</p>
+    <p>Concept drawn from Khana’s Bachan and the raincoat story of Akhtaruzzaman Elias: “Shonite sat, mongole tin, ar baki shob din.”</p>`
   }
 ];
 
-const bookItems = [
-  { src: "book-3d.jpg", title: "Handmade Portfolio Book", desc: "Entirely handmade – binding, colour coding, logo, cut-outs, stacked models." },
-  { src: "811615849_2097588261148773_877248636819443508_n.jpg", title: "Interior Spread", desc: "Scanned page from the physical book." },
-  { src: "815366796_1754064392528440_1990530380060926840_n (1).jpg", title: "Model Documentation", desc: "Models photographed and mounted inside the book." }
-];
+/* ===== COSMOS BACKGROUND ===== */
+const cosmos = document.getElementById('cosmos');
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.width=s.style.height=(Math.random()*2+0.5)+'px';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.setProperty('--d',(Math.random()*4+2)+'s');
+  cosmos.appendChild(s);
+}
 
-// ========== CAROUSEL ENGINE ==========
-function createCarousel(containerId, items, radius = 320) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = '';
+/* ===== NAVIGATION ===== */
+function showSec(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.sec===id));
+  // close any open sub
+  document.querySelectorAll('.sub-panel').forEach(p=>p.style.display='none');
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>showSec(btn.dataset.sec));
+});
+
+function openSub(id){
+  document.querySelectorAll('.sub-panel').forEach(p=>p.style.display='none');
+  document.getElementById('sub-'+id).style.display='block';
+  if(id==='art') buildCarousel('artCarousel', artImages.map(a=>({src:a.src,title:a.name,meta:'Art & Drawing',desc:'<p>'+a.name+'</p>'})));
+}
+function closeSub(id){
+  document.getElementById('sub-'+id).style.display='none';
+}
+
+/* ===== 3D CAROUSEL ===== */
+function buildCarousel(containerId, items){
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = '';
+  const carousel = document.createElement('div');
+  carousel.className = 'carousel';
   const n = items.length;
-  const angleStep = 360 / n;
-
-  items.forEach((item, i) => {
+  const radius = Math.min(320, window.innerWidth*0.38);
+  items.forEach((item,i)=>{
     const el = document.createElement('div');
     el.className = 'carousel-item';
-    el.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px)`;
-    el.innerHTML = `<img src="${item.src}" alt="${item.title}" loading="lazy"
-      onerror="this.src='https://via.placeholder.com/180x240/1a1a24/c9a227?text=Image'">`;
-    el.addEventListener('click', () => openModal(item));
-    container.appendChild(el);
+    const angle = (i / n) * 360;
+    el.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+    el.innerHTML = `<img src="${item.src}" alt="${item.title||''}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <div class="label">${item.title||''}</div>`;
+    el.addEventListener('click',()=>openModal(item));
+    carousel.appendChild(el);
   });
+  wrap.appendChild(carousel);
 
-  let current = 0;
+  let rot = 0;
   let paused = false;
-  let animId;
+  const spin = ()=>{
+    if(!paused){
+      rot += 0.25;
+      carousel.style.transform = `rotateY(${rot}deg)`;
+    }
+    requestAnimationFrame(spin);
+  };
+  spin();
 
-  function rotate() {
-    if (paused) return;
-    current = (current + 0.15) % 360;
-    container.style.transform = `rotateY(${-current}deg)`;
-    animId = requestAnimationFrame(rotate);
-  }
-  rotate();
-
-  // Pause when modal open
-  window.addEventListener('modalOpen', () => { paused = true; });
-  window.addEventListener('modalClose', () => { paused = false; rotate(); });
+  wrap.addEventListener('mouseenter',()=>paused=true);
+  wrap.addEventListener('mouseleave',()=>paused=false);
+  // also pause while modal open
+  window._carouselPause = ()=>paused=true;
+  window._carouselResume = ()=>paused=false;
 }
 
-// ========== MODAL ==========
-function openModal(item) {
+/* ===== MODAL ===== */
+function openModal(item){
   document.getElementById('modalImg').src = item.src;
-  document.getElementById('modalTitle').textContent = item.title;
+  document.getElementById('modalTitle').textContent = item.title || '';
+  document.getElementById('modalMeta').textContent = item.meta || '';
   document.getElementById('modalDesc').innerHTML = item.desc || '';
-  document.getElementById('modal').classList.add('open');
-  window.dispatchEvent(new Event('modalOpen'));
+  document.getElementById('overlay').classList.add('open');
+  if(window._carouselPause) window._carouselPause();
 }
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  window.dispatchEvent(new Event('modalClose'));
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  if(window._carouselResume) window._carouselResume();
 }
-document.getElementById('modal').addEventListener('click', e => {
-  if (e.target.id === 'modal') closeModal();
+document.getElementById('overlay').addEventListener('click',e=>{
+  if(e.target===document.getElementById('overlay')) closeModal();
 });
 
-// ========== NAVIGATION ==========
-document.querySelectorAll('#mainNav button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#mainNav button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(btn.dataset.section).classList.add('active');
-    window.scrollTo(0, 0);
-  });
-});
+/* ===== INIT CAROUSELS ===== */
+buildCarousel('bookCarousel', bookImages.map(src=>({src,title:'Portfolio Book Page',meta:'Handmade Portfolio',desc:'<p>Every page, binding, colour code, logo and stacked model cut-out was made by hand. The book is both document and object.</p>'})));
+buildCarousel('modelCarousel', modelData);
 
-// ========== ART CAROUSEL TRIGGER ==========
-function showArtCarousel() {
-  const artSec = document.getElementById('artSection');
-  artSec.style.display = 'block';
-  if (!artSec.dataset.inited) {
-    createCarousel('artCarousel', artItems, 380);
-    artSec.dataset.inited = '1';
-  }
-  artSec.scrollIntoView({ behavior: 'smooth' });
-}
-
-// ========== INIT CAROUSELS ==========
-window.addEventListener('load', () => {
-  createCarousel('bookCarousel', bookItems, 300);
-  createCarousel('modelsCarousel', modelItems, 340);
-});
-
-// ========== AUDIO ==========
-const audio = document.getElementById('bgMusic');
+/* ===== AUDIO ===== */
+const bgm = document.getElementById('bgm');
 const audioBtn = document.getElementById('audioBtn');
+bgm.volume = 0.35;
 let playing = false;
-
-// Try autoplay (may be blocked by browser)
-audio.volume = 0.35;
-audio.play().then(() => {
-  playing = true;
-  audioBtn.textContent = '♪';
-}).catch(() => {
-  audioBtn.textContent = '▶';
+function tryPlay(){
+  bgm.play().then(()=>{playing=true;audioBtn.textContent='❚❚';}).catch(()=>{});
+}
+// autoplay attempt after first interaction
+document.body.addEventListener('click',function once(){
+  tryPlay();
+  document.body.removeEventListener('click',once);
+},{once:true});
+audioBtn.addEventListener('click',()=>{
+  if(playing){bgm.pause();playing=false;audioBtn.textContent='♪';}
+  else{tryPlay();}
 });
 
-audioBtn.addEventListener('click', () => {
-  if (playing) {
-    audio.pause();
-    audioBtn.textContent = '▶';
-  } else {
-    audio.play();
-    audioBtn.textContent = '♪';
-  }
-  playing = !playing;
+/* ===== RESIZE SAFETY ===== */
+window.addEventListener('resize',()=>{
+  // rebuild carousels on significant resize to keep radius correct
+  clearTimeout(window._rz);
+  window._rz = setTimeout(()=>{
+    if(document.getElementById('book').classList.contains('active'))
+      buildCarousel('bookCarousel', bookImages.map(src=>({src,title:'Portfolio Book Page',meta:'Handmade Portfolio',desc:'<p>Every page, binding, colour code, logo and stacked model cut-out was made by hand.</p>'})));
+    if(document.getElementById('models').classList.contains('active'))
+      buildCarousel('modelCarousel', modelData);
+  },300);
 });
 </script>
 </body>
