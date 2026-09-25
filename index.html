@@ -49,7 +49,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 .cursor-dot,.cursor-ring{
-  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  position:fixed;top:0;left:0;pointer-events:none!important;z-index:9999;
   border-radius:50%;transform:translate(-50%,-50%);
 }
 .cursor-dot{width:6px;height:6px;background:var(--gold);mix-blend-mode:difference}
@@ -65,7 +65,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 body.has-custom-cursor{cursor:none}
 body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .clickable{cursor:none}
 
-#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none!important}
 @media (prefers-reduced-motion:reduce){#bg-canvas{display:none}}
 
 .app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
@@ -73,7 +73,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .nav{
   position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 1.5rem;background:rgba(10,10,11,0.88);
+  padding:0 1.25rem;background:rgba(10,10,11,0.9);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
 }
@@ -91,23 +91,33 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 }
 .nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,169,98,0.08)}
 .nav-toggle{
-  display:none;width:40px;height:40px;align-items:center;justify-content:center;
-  flex-direction:column;gap:5px;
+  display:none;width:48px;height:48px;align-items:center;justify-content:center;
+  flex-direction:column;gap:6px;flex-shrink:0;-webkit-tap-highlight-color:transparent;
 }
-.nav-toggle span{width:20px;height:1.5px;background:var(--gold);transition:transform .3s,opacity .3s}
-.nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-toggle span{width:22px;height:2px;background:var(--gold);transition:transform .3s,opacity .3s;border-radius:1px}
+.nav-toggle.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .nav-toggle.open span:nth-child(2){opacity:0}
-.nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-toggle.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
 @media (max-width:900px){
+  .nav{padding:0 0.85rem}
   .nav-toggle{display:flex}
   .nav-links{
     position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
-    flex-direction:column;justify-content:flex-start;padding:2rem 1.5rem;
-    background:rgba(10,10,11,0.97);gap:0.5rem;
-    transform:translateX(100%);transition:transform .4s var(--ease);overflow-y:auto;
+    flex-direction:column;justify-content:flex-start;align-items:stretch;
+    padding:1.25rem 1.25rem 2.5rem;background:rgba(10,10,11,0.98);gap:0.35rem;
+    transform:translateX(100%);transition:transform .4s var(--ease);overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
   .nav-links.open{transform:translateX(0)}
-  .nav-links a{font-size:0.95rem;padding:0.85rem 1rem;width:100%;text-align:left}
+  .nav-links li{width:100%}
+  .nav-links a{
+    display:flex;align-items:center;width:100%;min-height:52px;
+    padding:0.95rem 1.15rem;font-size:1.05rem;letter-spacing:0.12em;text-align:left;
+    border:1px solid transparent;border-radius:4px;-webkit-tap-highlight-color:transparent;
+  }
+  .nav-links a:active,.nav-links a.active{
+    color:var(--gold);background:rgba(201,169,98,0.12);border-color:rgba(201,169,98,0.25);
+  }
 }
 
 .sections{flex:1;padding-top:var(--nav-h)}
@@ -123,47 +133,23 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   font-family:var(--font-display);font-size:clamp(1.5rem,3.8vw,2.2rem);
   font-weight:400;letter-spacing:0.08em;color:var(--off-white);margin-bottom:0.3rem;
 }
-.section-sub{
-  font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--gold-muted);margin-bottom:1.25rem;
-}
+.section-sub{font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:1.25rem}
 .gold-line{width:48px;height:1px;background:var(--gold);margin:1.1rem 0}
 
 .home-grid{
   display:grid;grid-template-columns:minmax(240px,380px) 1fr;
   gap:2.5rem;align-items:center;min-height:calc(100vh - var(--nav-h) - 4rem);
 }
-.profile-frame{
-  position:relative;border:1px solid var(--border);padding:8px;
-  background:var(--graphite);box-shadow:var(--shadow);
-}
-.profile-frame::before{
-  content:'';position:absolute;inset:-5px;border:1px solid rgba(201,169,98,0.12);pointer-events:none;
-}
-.profile-frame img{
-  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
-  filter:contrast(1.05) saturate(0.92);
-}
-.home-identity h1{
-  font-family:var(--font-display);font-size:clamp(2.6rem,7.5vw,4.8rem);
-  font-weight:700;letter-spacing:0.06em;line-height:0.95;color:var(--off-white);
-}
-.home-identity h1 .surname{
-  display:block;font-size:0.48em;letter-spacing:0.26em;
-  color:var(--gold);font-weight:700;margin-top:0.4em;
-}
-.home-roles{
-  margin:1.1rem 0 1.3rem;font-size:0.76rem;letter-spacing:0.16em;
-  text-transform:uppercase;color:var(--text-muted);
-}
+.profile-frame{position:relative;border:1px solid var(--border);padding:8px;background:var(--graphite);box-shadow:var(--shadow)}
+.profile-frame::before{content:'';position:absolute;inset:-5px;border:1px solid rgba(201,169,98,0.12);pointer-events:none}
+.profile-frame img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;filter:contrast(1.05) saturate(0.92)}
+.home-identity h1{font-family:var(--font-display);font-size:clamp(2.6rem,7.5vw,4.8rem);font-weight:700;letter-spacing:0.06em;line-height:0.95;color:var(--off-white)}
+.home-identity h1 .surname{display:block;font-size:0.48em;letter-spacing:0.26em;color:var(--gold);font-weight:700;margin-top:0.4em}
+.home-roles{margin:1.1rem 0 1.3rem;font-size:0.76rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted)}
 .home-roles span{color:var(--gold-muted)}
 .home-bio{font-size:1.02rem;color:var(--text);max-width:38em;line-height:1.75}
 .home-bio p{margin-bottom:1rem}
-.home-bio .statement{
-  font-family:var(--font-display);font-style:italic;font-size:1.18rem;
-  color:var(--warm-yellow);margin-top:1.4rem;border-left:2px solid var(--gold);
-  padding-left:1rem;font-weight:500;
-}
+.home-bio .statement{font-family:var(--font-display);font-style:italic;font-size:1.18rem;color:var(--warm-yellow);margin-top:1.4rem;border-left:2px solid var(--gold);padding-left:1rem;font-weight:500}
 @media (max-width:800px){
   .home-grid{grid-template-columns:1fr;gap:1.75rem}
   .profile-frame{max-width:300px;margin:0 auto}
@@ -171,173 +157,67 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   .home-bio{text-align:left}
 }
 
-/* ========== ORBIT — centered middle, no clipping ========== */
-.orbit-wrap{
-  position:relative;
-  width:100%;
-  height:min(48vh,400px);
-  margin:1.75rem auto 1.25rem;
-  perspective:1100px;
-  overflow:visible;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.orbit-stage{
-  position:relative;
-  width:100%;
-  height:100%;
-  transform-style:preserve-3d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.orbit-item{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:min(170px,40vw);
-  aspect-ratio:3/4;
-  transform-style:preserve-3d;
-  cursor:pointer;
-  transition:box-shadow .4s;
-  border:1px solid transparent;
-  background:var(--charcoal);
-  margin:0;
-}
-.orbit-item img{
-  width:100%;height:100%;object-fit:cover;
-  box-shadow:0 6px 24px rgba(0,0,0,0.5);
-}
+.orbit-wrap{position:relative;width:100%;height:min(48vh,400px);margin:1.75rem auto 1.25rem;perspective:1100px;overflow:visible;display:flex;align-items:center;justify-content:center}
+.orbit-stage{position:relative;width:100%;height:100%;transform-style:preserve-3d;display:flex;align-items:center;justify-content:center}
+.orbit-item{position:absolute;left:50%;top:50%;width:min(170px,40vw);aspect-ratio:3/4;transform-style:preserve-3d;cursor:pointer;transition:box-shadow .4s;border:1px solid transparent;background:var(--charcoal);margin:0}
+.orbit-item img{width:100%;height:100%;object-fit:cover;box-shadow:0 6px 24px rgba(0,0,0,0.5)}
 .orbit-item.active{border-color:rgba(201,169,98,0.35);z-index:5}
 .orbit-item.active img{box-shadow:0 10px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(201,169,98,0.2)}
-.orbit-hint{
-  text-align:center;font-size:0.72rem;color:var(--text-muted);
-  letter-spacing:0.1em;margin:0.5rem 0 1.25rem;
-}
-@media (max-width:600px){
-  .orbit-wrap{height:min(40vh,320px);margin:1.25rem auto 1rem}
-  .orbit-item{width:min(130px,46vw)}
-}
+.orbit-hint{text-align:center;font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;margin:0.5rem 0 1.25rem}
+@media (max-width:600px){.orbit-wrap{height:min(40vh,320px);margin:1.25rem auto 1rem}.orbit-item{width:min(130px,46vw)}}
 
-.section-desc{
-  max-width:46em;margin:0 auto 0.5rem;font-size:1.02rem;line-height:1.8;color:var(--text);
-}
+.section-desc{max-width:46em;margin:0 auto 0.5rem;font-size:1.02rem;line-height:1.8;color:var(--text)}
 .section-desc p{margin-bottom:1.05rem}
-.section-desc .bn{
-  font-size:1.05rem;color:var(--warm-yellow);font-style:italic;
-  margin:0.85rem 0;line-height:1.75;
-}
+.section-desc .bn{font-size:1.05rem;color:var(--warm-yellow);font-style:italic;margin:0.85rem 0;line-height:1.75}
 
-.btn-gold{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  padding:0.8rem 1.5rem;border:1px solid var(--gold);
-  color:var(--gold);font-size:0.76rem;letter-spacing:0.16em;
-  text-transform:uppercase;transition:background .3s,color .3s,transform .25s;
-  background:transparent;
-}
+.btn-gold{display:inline-flex;align-items:center;gap:0.6rem;padding:0.8rem 1.5rem;border:1px solid var(--gold);color:var(--gold);font-size:0.76rem;letter-spacing:0.16em;text-transform:uppercase;transition:background .3s,color .3s,transform .25s;background:transparent}
 .btn-gold:hover{background:rgba(201,169,98,0.12);transform:translateY(-1px)}
 .book-actions{text-align:center;margin-top:1.25rem}
 
 .edu-grid{display:grid;gap:2.25rem}
-.edu-card{
-  display:grid;grid-template-columns:minmax(180px,280px) 1fr;
-  gap:1.5rem;padding:1.35rem;background:var(--charcoal);
-  border:1px solid var(--border);box-shadow:var(--shadow);
-}
+.edu-card{display:grid;grid-template-columns:minmax(180px,280px) 1fr;gap:1.5rem;padding:1.35rem;background:var(--charcoal);border:1px solid var(--border);box-shadow:var(--shadow)}
 .edu-gallery{display:grid;grid-template-columns:1fr 1fr;gap:0.45rem}
-.edu-gallery img{
-  width:100%;aspect-ratio:4/3;object-fit:cover;cursor:pointer;
-  transition:opacity .3s,transform .3s;
-}
+.edu-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;cursor:pointer;transition:opacity .3s,transform .3s}
 .edu-gallery img:hover{opacity:0.9;transform:scale(1.02)}
-.edu-info h3{
-  font-family:var(--font-display);font-size:1.28rem;font-weight:400;
-  color:var(--off-white);margin-bottom:0.3rem;
-}
+.edu-info h3{font-family:var(--font-display);font-size:1.28rem;font-weight:400;color:var(--off-white);margin-bottom:0.3rem}
 .edu-meta{font-size:0.78rem;color:var(--gold-muted);letter-spacing:0.08em;margin-bottom:0.65rem}
 .edu-info p{font-size:0.95rem;color:var(--text-muted);line-height:1.65}
-.edu-badge{
-  display:inline-block;margin-top:0.65rem;padding:0.28rem 0.65rem;
-  border:1px solid rgba(201,169,98,0.35);font-size:0.7rem;
-  letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;
-}
+.edu-badge{display:inline-block;margin-top:0.65rem;padding:0.28rem 0.65rem;border:1px solid rgba(201,169,98,0.35);font-size:0.7rem;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase}
 @media (max-width:720px){.edu-card{grid-template-columns:1fr}}
 
-.models-meta{
-  display:flex;flex-wrap:wrap;gap:0.85rem 1.75rem;margin-bottom:0.5rem;
-  font-size:0.8rem;letter-spacing:0.08em;color:var(--text-muted);
-}
+.models-meta{display:flex;flex-wrap:wrap;gap:0.85rem 1.75rem;margin-bottom:0.5rem;font-size:0.8rem;letter-spacing:0.08em;color:var(--text-muted)}
 .models-meta strong{color:var(--gold-muted);font-weight:500}
 
-.skills-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:1.15rem;margin-top:0.85rem;
-}
-.skill-card{
-  position:relative;padding:1.75rem 1.35rem;min-height:165px;
-  background:var(--charcoal);border:1px solid var(--border);
-  cursor:pointer;transition:border-color .3s,transform .3s,box-shadow .3s;overflow:hidden;
-}
-.skill-card::before{
-  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
-  background:var(--gold);transform:scaleY(0);transform-origin:top;
-  transition:transform .35s var(--ease);
-}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.15rem;margin-top:0.85rem}
+.skill-card{position:relative;padding:1.75rem 1.35rem;min-height:165px;background:var(--charcoal);border:1px solid var(--border);cursor:pointer;transition:border-color .3s,transform .3s,box-shadow .3s;overflow:hidden}
+.skill-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease)}
 .skill-card:hover{border-color:rgba(201,169,98,0.4);transform:translateY(-3px);box-shadow:var(--shadow)}
 .skill-card:hover::before{transform:scaleY(1)}
-.skill-card h3{
-  font-family:var(--font-display);font-size:1.18rem;font-weight:400;
-  letter-spacing:0.06em;color:var(--off-white);margin-bottom:0.45rem;
-}
+.skill-card h3{font-family:var(--font-display);font-size:1.18rem;font-weight:400;letter-spacing:0.06em;color:var(--off-white);margin-bottom:0.45rem}
 .skill-card p{font-size:0.86rem;color:var(--text-muted);line-height:1.5}
-.skill-card .arrow{
-  position:absolute;bottom:1.1rem;right:1.1rem;
-  font-size:1.05rem;color:var(--gold);opacity:0.6;transition:opacity .3s,transform .3s;
-}
+.skill-card .arrow{position:absolute;bottom:1.1rem;right:1.1rem;font-size:1.05rem;color:var(--gold);opacity:0.6;transition:opacity .3s,transform .3s}
 .skill-card:hover .arrow{opacity:1;transform:translateX(3px)}
 
 .skill-sub{display:none;min-height:calc(100vh - var(--nav-h));padding:1.75rem 1.5rem 3.5rem}
 .skill-sub.active{display:block}
-.skill-sub-header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:1rem;flex-wrap:wrap;gap:0.85rem;
-}
-.close-x{
-  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--border);color:var(--gold);font-size:1.35rem;
-  transition:background .25s,border-color .25s;
-}
+.skill-sub-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.85rem}
+.close-x{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:var(--gold);font-size:1.35rem;transition:background .25s,border-color .25s;-webkit-tap-highlight-color:transparent}
 .close-x:hover{background:rgba(201,169,98,0.1);border-color:var(--gold)}
 
 .project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.15rem}
-.project-card{
-  padding:1.6rem;background:var(--charcoal);border:1px solid var(--border);
-  transition:border-color .3s,transform .3s;
-}
+.project-card{padding:1.6rem;background:var(--charcoal);border:1px solid var(--border);transition:border-color .3s,transform .3s}
 .project-card:hover{border-color:rgba(201,169,98,0.35);transform:translateY(-2px)}
 .project-card h4{font-family:var(--font-display);font-size:1.15rem;color:var(--off-white);margin-bottom:0.45rem}
 .project-card p{font-size:0.9rem;color:var(--text-muted);margin-bottom:1.1rem;line-height:1.55}
-.btn-outline{
-  display:inline-flex;padding:0.5rem 1rem;border:1px solid var(--border);
-  font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--text-muted);transition:color .25s,border-color .25s,background .25s;
-}
+.btn-outline{display:inline-flex;padding:0.5rem 1rem;border:1px solid var(--border);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);transition:color .25s,border-color .25s,background .25s}
 .btn-outline:hover{color:var(--gold);border-color:var(--gold);background:rgba(201,169,98,0.06)}
 
 .video-orbit .orbit-item{aspect-ratio:16/9;width:min(200px,52vw)}
-.video-card-inner{
-  width:100%;height:100%;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;background:var(--graphite);
-  border:1px solid var(--border);padding:1.25rem;text-align:center;
-}
+.video-card-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--graphite);border:1px solid var(--border);padding:1.25rem;text-align:center}
 .video-card-inner h4{font-family:var(--font-display);font-size:0.98rem;color:var(--off-white);margin-bottom:0.35rem}
 .video-card-inner span{font-size:0.68rem;letter-spacing:0.12em;color:var(--gold-muted);text-transform:uppercase}
 
-.reading-panel{
-  max-width:720px;margin:0 auto;padding:1.85rem;background:var(--charcoal);
-  border:1px solid var(--border);
-}
+.reading-panel{max-width:720px;margin:0 auto;padding:1.85rem;background:var(--charcoal);border:1px solid var(--border)}
 .reading-panel h3{font-family:var(--font-display);font-size:1.22rem;color:var(--gold);margin:1.35rem 0 0.45rem}
 .reading-panel h3:first-child{margin-top:0}
 .reading-panel ul{list-style:none}
@@ -345,57 +225,49 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .reading-intro{margin-bottom:1.35rem;line-height:1.7;color:var(--text);font-size:1.02rem}
 
 .achieve-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.15rem}
-.achieve-card{
-  padding:1.35rem;background:var(--charcoal);border:1px solid rgba(201,169,98,0.22);
-  cursor:pointer;transition:border-color .3s,transform .3s,box-shadow .3s;position:relative;
-}
-.achieve-card::after{
-  content:'';position:absolute;inset:4px;border:1px solid rgba(201,169,98,0.08);pointer-events:none;
-}
+.achieve-card{padding:1.35rem;background:var(--charcoal);border:1px solid rgba(201,169,98,0.22);cursor:pointer;transition:border-color .3s,transform .3s,box-shadow .3s;position:relative}
+.achieve-card::after{content:'';position:absolute;inset:4px;border:1px solid rgba(201,169,98,0.08);pointer-events:none}
 .achieve-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:var(--shadow)}
 .achieve-card .label{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:0.45rem}
 .achieve-card h3{font-family:var(--font-display);font-size:1.1rem;color:var(--off-white);margin-bottom:0.35rem}
 .achieve-card p{font-size:0.86rem;color:var(--text-muted);line-height:1.5}
 
+/* CONTACT — clickable, above canvas, no block */
 .contact-card{
+  position:relative;z-index:5;
   max-width:640px;margin:0 auto;padding:2.25rem 1.85rem;
   background:var(--charcoal);border:1px solid var(--border);box-shadow:var(--shadow);
+  pointer-events:auto;
 }
 .contact-card h2{font-family:var(--font-display);font-size:1.5rem;text-align:center;margin-bottom:0.45rem}
 .contact-loc{text-align:center;font-size:0.84rem;color:var(--text-muted);margin-bottom:1.75rem}
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.7rem}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.7rem;position:relative;z-index:6;pointer-events:auto}
 .contact-link{
+  position:relative;z-index:7;
   display:flex;flex-direction:column;align-items:center;gap:0.45rem;
   padding:1rem 0.65rem;border:1px solid var(--border);
   transition:border-color .3s,background .3s,transform .25s;
   font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);
+  pointer-events:auto!important;
+  cursor:pointer;
+  -webkit-tap-highlight-color:rgba(201,169,98,0.2);
+  text-decoration:none;
 }
-.contact-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,169,98,0.06);transform:translateY(-2px)}
-.contact-link svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.4}
+.contact-link:hover,.contact-link:focus{
+  border-color:var(--gold);color:var(--gold);background:rgba(201,169,98,0.06);transform:translateY(-2px);
+}
+.contact-link svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.4;pointer-events:none}
 
 .cv-panel{text-align:center;max-width:520px;margin:0 auto;padding:2.75rem 1.5rem}
 .cv-panel h2{font-family:var(--font-display);font-size:1.45rem;margin-bottom:0.65rem}
 .cv-panel p{color:var(--text-muted);margin-bottom:1.75rem;line-height:1.6}
 .cv-actions{display:flex;flex-wrap:wrap;gap:0.9rem;justify-content:center}
 
-.modal-overlay{
-  position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.82);
-  display:none;align-items:center;justify-content:center;
-  padding:1.25rem;opacity:0;transition:opacity .3s;
-}
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.82);display:none;align-items:center;justify-content:center;padding:1.25rem;opacity:0;transition:opacity .3s}
 .modal-overlay.open{display:flex;opacity:1}
-.modal{
-  position:relative;background:var(--charcoal);border:1px solid var(--border);
-  max-width:min(920px,96vw);max-height:90vh;overflow:hidden;
-  display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.7);
-  transform:scale(0.96);transition:transform .35s var(--ease);
-}
+.modal{position:relative;background:var(--charcoal);border:1px solid var(--border);max-width:min(920px,96vw);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.7);transform:scale(0.96);transition:transform .35s var(--ease)}
 .modal-overlay.open .modal{transform:scale(1)}
-.modal-close{
-  position:absolute;top:10px;right:10px;z-index:10;
-  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
-  background:rgba(10,10,11,0.8);border:1px solid var(--border);color:var(--gold);font-size:1.25rem;
-}
+.modal-close{position:absolute;top:10px;right:10px;z-index:10;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(10,10,11,0.8);border:1px solid var(--border);color:var(--gold);font-size:1.25rem}
 .modal-close:hover{background:rgba(201,169,98,0.15)}
 .modal-body{display:grid;grid-template-columns:1fr 1fr;overflow:auto;max-height:90vh}
 .modal-media{background:#000;display:flex;align-items:center;justify-content:center;min-height:240px;position:relative}
@@ -409,27 +281,13 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .methods-content{display:none;margin-top:0.65rem;padding:0.9rem;background:var(--graphite);font-size:0.86rem;line-height:1.55;color:var(--text-muted)}
 .methods-content.open{display:block}
 .methods-content li{margin-bottom:0.35rem;list-style:disc;margin-left:1.05rem}
-.modal-loading{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,0.6);color:var(--gold);font-size:0.85rem;letter-spacing:0.12em;
-}
-@media (max-width:720px){
-  .modal-body{grid-template-columns:1fr}
-  .modal-info{border-left:none;border-top:1px solid var(--border)}
-  .modal-media{min-height:180px}
-  .modal-media img{max-height:45vh}
-}
+.modal-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);color:var(--gold);font-size:0.85rem;letter-spacing:0.12em}
+@media (max-width:720px){.modal-body{grid-template-columns:1fr}.modal-info{border-left:none;border-top:1px solid var(--border)}.modal-media{min-height:180px}.modal-media img{max-height:45vh}}
 .modal.pdf-mode .modal-body{grid-template-columns:1fr}
 .modal.pdf-mode .modal-media{min-height:68vh}
 .modal.pdf-mode .modal-media embed{width:100%;height:68vh;border:none}
 
-.audio-ctrl{
-  position:fixed;bottom:1.15rem;right:1.15rem;z-index:90;
-  width:42px;height:42px;border-radius:50%;
-  border:1px solid var(--border);background:rgba(20,20,22,0.88);
-  display:flex;align-items:center;justify-content:center;color:var(--gold);
-  backdrop-filter:blur(8px);
-}
+.audio-ctrl{position:fixed;bottom:1.15rem;right:1.15rem;z-index:90;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:rgba(20,20,22,0.88);display:flex;align-items:center;justify-content:center;color:var(--gold);backdrop-filter:blur(8px)}
 .audio-ctrl:hover{border-color:var(--gold);background:rgba(201,169,98,0.12)}
 .audio-ctrl svg{width:17px;height:17px;fill:currentColor}
 .text-center{text-align:center}
@@ -479,9 +337,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
           </div>
           <div class="home-identity">
             <h1>SHADID<span class="surname">AHAMED</span></h1>
-            <div class="home-roles">
-              Architecture <span>·</span> Creative Developer <span>·</span> Designer <span>·</span> Artist
-            </div>
+            <div class="home-roles">Architecture <span>·</span> Creative Developer <span>·</span> Designer <span>·</span> Artist</div>
             <div class="gold-line"></div>
             <div class="home-bio">
               <p>He was never satisfied with being only one thing. Across drawing, painting, architecture, model-making, web design, code, digital experiments, literature, music and visual storytelling, he has kept returning to the same impulse: to give form to what is imagined.</p>
@@ -500,18 +356,14 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
       <div class="section-inner">
         <h2 class="section-title">The Book</h2>
         <p class="section-sub">Handmade Portfolio</p>
-        <div class="orbit-wrap" id="bookOrbit" aria-label="Book images carousel">
-          <div class="orbit-stage" id="bookStage"></div>
-        </div>
+        <div class="orbit-wrap" id="bookOrbit"><div class="orbit-stage" id="bookStage"></div></div>
         <p class="orbit-hint">Click an image to pause · Continuous orbit · ~3s per front view</p>
         <div class="section-desc">
           <p>This portfolio is entirely handmade, from its drawings and models to every cut, composition and binding. Each element was crafted by hand, making the portfolio itself a part of the creative process.</p>
           <p class="bn">এই পোর্টফোলিও সম্পূর্ণ হাতে তৈরি — অঙ্কন থেকে মডেল, কাটা থেকে বাঁধাই পর্যন্ত প্রতিটি স্তর নিজের হাতে গড়া। বইটি কেবল কাজের ধারক নয়; বইটি নিজেই কাজের অংশ।</p>
           <p>Its binding, colour coding, typography, logo work, cutouts, layered forms, architectural model fragments, compositions and page construction were created as part of the author’s own creative process. The book is not simply a container for the work — the book itself is part of the work.</p>
         </div>
-        <div class="book-actions">
-          <a class="btn-gold" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Portfolio</a>
-        </div>
+        <div class="book-actions"><a class="btn-gold" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Portfolio</a></div>
       </div>
     </section>
 
@@ -572,13 +424,9 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
           <span><strong>Roll</strong> 100061008</span>
           <span><strong>Discipline</strong> Architecture</span>
         </div>
-        <div class="orbit-wrap" id="modelsOrbit" aria-label="Architectural models carousel">
-          <div class="orbit-stage" id="modelsStage"></div>
-        </div>
+        <div class="orbit-wrap" id="modelsOrbit"><div class="orbit-stage" id="modelsStage"></div></div>
         <p class="orbit-hint">Click a model for details · Orbit pauses while viewing · ~3s per front</p>
-        <div class="section-desc">
-          <p>From the first grid of squares to the final pavilion, each model is a step in learning how space, material and rhythm speak. Scratch থেকে শেষ পর্যন্ত — প্রতিটি মডেল স্থান, উপকরণ ও ছন্দের ভাষা শেখার একটি ধাপ।</p>
-        </div>
+        <div class="section-desc"><p>From the first grid of squares to the final pavilion, each model is a step in learning how space, material and rhythm speak. Scratch থেকে শেষ পর্যন্ত — প্রতিটি মডেল স্থান, উপকরণ ও ছন্দের ভাষা শেখার একটি ধাপ।</p></div>
       </div>
     </section>
 
@@ -587,121 +435,46 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
         <h2 class="section-title">Skills</h2>
         <p class="section-sub">Practice &amp; Exploration</p>
         <div class="skills-grid">
-          <button class="skill-card clickable" data-skill="art" aria-label="Open Art and Drawing">
-            <h3>Art &amp; Drawing</h3>
-            <p>Sketches, colour work, exhibition pieces and visual experiments.</p>
-            <span class="arrow" aria-hidden="true">→</span>
-          </button>
-          <button class="skill-card clickable" data-skill="coding" aria-label="Open Coding and Website Making">
-            <h3>Coding &amp; Website Making</h3>
-            <p>Web projects, interactive experiments and digital craft.</p>
-            <span class="arrow" aria-hidden="true">→</span>
-          </button>
-          <button class="skill-card clickable" data-skill="video" aria-label="Open Video and Content Creation">
-            <h3>Video / Content Creation</h3>
-            <p>Educational and creative video content.</p>
-            <span class="arrow" aria-hidden="true">→</span>
-          </button>
-          <button class="skill-card clickable" data-skill="reading" aria-label="Open Reading and Speaking English">
-            <h3>Reading &amp; Speaking English Fluently</h3>
-            <p>Literature, language practice and cultural reading.</p>
-            <span class="arrow" aria-hidden="true">→</span>
-          </button>
+          <button class="skill-card clickable" data-skill="art" aria-label="Open Art and Drawing"><h3>Art &amp; Drawing</h3><p>Sketches, colour work, exhibition pieces and visual experiments.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="coding" aria-label="Open Coding and Website Making"><h3>Coding &amp; Website Making</h3><p>Web projects, interactive experiments and digital craft.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="video" aria-label="Open Video and Content Creation"><h3>Video / Content Creation</h3><p>Educational and creative video content.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="reading" aria-label="Open Reading and Speaking English"><h3>Reading &amp; Speaking English Fluently</h3><p>Literature, language practice and cultural reading.</p><span class="arrow" aria-hidden="true">→</span></button>
         </div>
       </div>
-
       <div class="skill-sub" id="skill-art" aria-label="Art and Drawing">
         <div class="section-inner">
-          <div class="skill-sub-header">
-            <div>
-              <h2 class="section-title">Art &amp; Drawing</h2>
-              <p class="section-sub">Works on paper, screen and exhibition</p>
-            </div>
-            <button class="close-x" data-close-skill aria-label="Close">×</button>
-          </div>
-          <div class="orbit-wrap" id="artOrbit">
-            <div class="orbit-stage" id="artStage"></div>
-          </div>
+          <div class="skill-sub-header"><div><h2 class="section-title">Art &amp; Drawing</h2><p class="section-sub">Works on paper, screen and exhibition</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
+          <div class="orbit-wrap" id="artOrbit"><div class="orbit-stage" id="artStage"></div></div>
           <p class="orbit-hint">Click an artwork for title and context · ~3s per front</p>
-          <div class="section-desc">
-            <p>Drawings and colour works that carry silence, waiting, distance and the quiet flow of water. অঙ্কন ও রঙের মাধ্যমে নীরবতা, অপেক্ষা, দূরত্ব ও জলের ধীর প্রবাহ ধরার চেষ্টা।</p>
-          </div>
+          <div class="section-desc"><p>Drawings and colour works that carry silence, waiting, distance and the quiet flow of water. অঙ্কন ও রঙের মাধ্যমে নীরবতা, অপেক্ষা, দূরত্ব ও জলের ধীর প্রবাহ ধরার চেষ্টা।</p></div>
         </div>
       </div>
-
       <div class="skill-sub" id="skill-coding" aria-label="Coding and Website Making">
         <div class="section-inner">
-          <div class="skill-sub-header">
-            <div>
-              <h2 class="section-title">Coding &amp; Website Making</h2>
-              <p class="section-sub">Digital Projects</p>
-            </div>
-            <button class="close-x" data-close-skill aria-label="Close">×</button>
-          </div>
+          <div class="skill-sub-header"><div><h2 class="section-title">Coding &amp; Website Making</h2><p class="section-sub">Digital Projects</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="project-cards">
-            <article class="project-card">
-              <h4>TrendCart</h4>
-              <p>An affiliate-oriented e-commerce / marketplace web project.</p>
-              <a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a>
-            </article>
-            <article class="project-card">
-              <h4>Office Engine</h4>
-              <p>A browser-based 3D-style game experience with an atmospheric exploration concept.</p>
-              <a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a>
-            </article>
+            <article class="project-card"><h4>TrendCart</h4><p>An affiliate-oriented e-commerce / marketplace web project.</p><a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a></article>
+            <article class="project-card"><h4>Office Engine</h4><p>A browser-based 3D-style game experience with an atmospheric exploration concept.</p><a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a></article>
           </div>
         </div>
       </div>
-
       <div class="skill-sub" id="skill-video" aria-label="Video Content Creation">
         <div class="section-inner">
-          <div class="skill-sub-header">
-            <div>
-              <h2 class="section-title">Video / Content Creation</h2>
-              <p class="section-sub">Selected works</p>
-            </div>
-            <button class="close-x" data-close-skill aria-label="Close">×</button>
-          </div>
-          <div class="orbit-wrap video-orbit" id="videoOrbit">
-            <div class="orbit-stage" id="videoStage"></div>
-          </div>
+          <div class="skill-sub-header"><div><h2 class="section-title">Video / Content Creation</h2><p class="section-sub">Selected works</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
+          <div class="orbit-wrap video-orbit" id="videoOrbit"><div class="orbit-stage" id="videoStage"></div></div>
           <p class="orbit-hint">Click a card to open on YouTube · ~3s per front</p>
-          <div class="section-desc">
-            <p>Educational video content on English grammar and usage — modifiers, connectors, and subject–verb agreement. ভাষার নিয়ম ও ব্যবহার নিয়ে তৈরি শিক্ষামূলক ভিডিও।</p>
-          </div>
+          <div class="section-desc"><p>Educational video content on English grammar and usage — modifiers, connectors, and subject–verb agreement. ভাষার নিয়ম ও ব্যবহার নিয়ে তৈরি শিক্ষামূলক ভিডিও।</p></div>
         </div>
       </div>
-
       <div class="skill-sub" id="skill-reading" aria-label="Reading and Speaking">
         <div class="section-inner">
-          <div class="skill-sub-header">
-            <div>
-              <h2 class="section-title">Reading &amp; Speaking English Fluently</h2>
-              <p class="section-sub">Literary curiosity &amp; language practice</p>
-            </div>
-            <button class="close-x" data-close-skill aria-label="Close">×</button>
-          </div>
+          <div class="skill-sub-header"><div><h2 class="section-title">Reading &amp; Speaking English Fluently</h2><p class="section-sub">Literary curiosity &amp; language practice</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="reading-panel">
             <p class="reading-intro">Reading across Bengali and English literature, with ongoing practice in spoken English and cultural awareness. Interest centres on narrative, character and the texture of language. সাহিত্যের আস্বাদন ও ভাষার অনুশীলন — গল্প, চরিত্র ও ভাষার সূক্ষ্ম স্তর নিয়ে আগ্রহ।</p>
-            <h3>Samaresh Majumdar</h3>
-            <ul>
-              <li>Uttaradhikar</li>
-              <li>Kalbela</li>
-              <li>Kalpurush</li>
-            </ul>
-            <h3>Humayun Ahmed</h3>
-            <ul>
-              <li>Himu-related reading</li>
-              <li>Amar Bondhu Rashed</li>
-            </ul>
-            <h3>Rabindranath Tagore</h3>
-            <ul>
-              <li>Selected poetry, short stories and literary works</li>
-            </ul>
-            <h3>Ishwar Chandra Vidyasagar · Michael Madhusudan Dutt · Ahmed Sofa</h3>
-            <ul>
-              <li>Selected notable works (verified titles only)</li>
-            </ul>
+            <h3>Samaresh Majumdar</h3><ul><li>Uttaradhikar</li><li>Kalbela</li><li>Kalpurush</li></ul>
+            <h3>Humayun Ahmed</h3><ul><li>Himu-related reading</li><li>Amar Bondhu Rashed</li></ul>
+            <h3>Rabindranath Tagore</h3><ul><li>Selected poetry, short stories and literary works</li></ul>
+            <h3>Ishwar Chandra Vidyasagar · Michael Madhusudan Dutt · Ahmed Sofa</h3><ul><li>Selected notable works (verified titles only)</li></ul>
           </div>
         </div>
       </div>
@@ -712,74 +485,55 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
         <h2 class="section-title">Achievements</h2>
         <p class="section-sub">Records &amp; Recognition</p>
         <div class="achieve-grid">
-          <button class="achieve-card clickable" data-achieve="ssc" aria-label="View SSC Transcript">
-            <div class="label">Academic</div>
-            <h3>SSC</h3>
-            <p>GPA 5.00 / Golden A+ · Motijheel Ideal School and College</p>
-          </button>
-          <button class="achieve-card clickable" data-achieve="hsc" aria-label="View HSC Transcript">
-            <div class="label">Academic</div>
-            <h3>HSC</h3>
-            <p>GPA 5.00 / Golden A+ · Notre Dame College</p>
-          </button>
-          <button class="achieve-card clickable" data-achieve="drawing" aria-label="View drawing recognition">
-            <div class="label">Art</div>
-            <h3>Drawing / Art Recognition</h3>
-            <p>Praise and signature associated with drawing and sketch work.</p>
-          </button>
-          <button class="achieve-card clickable" data-achieve="exhibition" aria-label="View exhibition work">
-            <div class="label">Exhibition</div>
-            <h3>Exhibition</h3>
-            <p>Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).</p>
-          </button>
-          <button class="achieve-card clickable" data-achieve="arc" aria-label="View Architecture gradesheet">
-            <div class="label">Architecture</div>
-            <h3>Architecture Academic Record</h3>
-            <p>ARC 101 and related first-semester record · BRAC University</p>
-          </button>
+          <button class="achieve-card clickable" data-achieve="ssc" aria-label="View SSC Transcript"><div class="label">Academic</div><h3>SSC</h3><p>GPA 5.00 / Golden A+ · Motijheel Ideal School and College</p></button>
+          <button class="achieve-card clickable" data-achieve="hsc" aria-label="View HSC Transcript"><div class="label">Academic</div><h3>HSC</h3><p>GPA 5.00 / Golden A+ · Notre Dame College</p></button>
+          <button class="achieve-card clickable" data-achieve="drawing" aria-label="View drawing recognition"><div class="label">Art</div><h3>Drawing / Art Recognition</h3><p>Praise and signature associated with drawing and sketch work.</p></button>
+          <button class="achieve-card clickable" data-achieve="exhibition" aria-label="View exhibition work"><div class="label">Exhibition</div><h3>Exhibition</h3><p>Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).</p></button>
+          <button class="achieve-card clickable" data-achieve="arc" aria-label="View Architecture gradesheet"><div class="label">Architecture</div><h3>Architecture Academic Record</h3><p>ARC 101 and related first-semester record · BRAC University</p></button>
         </div>
       </div>
     </section>
 
+    <!-- CONTACT — real links, forced open on click -->
     <section id="contact" class="section" data-section="contact" aria-label="Contact">
       <div class="section-inner">
         <div class="contact-card">
           <h2>Contact</h2>
           <p class="contact-loc">Shantinagar, Dhaka</p>
-          <div class="contact-grid">
-            <a class="contact-link" href="mailto:shadidahamed.matashome05m@gmail.com" aria-label="Email">
+          <div class="contact-grid" id="contactGrid">
+            <a class="contact-link" href="mailto:shadidahamed.matashome05m@gmail.com" data-external="mailto" aria-label="Email">
               <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>Email
             </a>
-            <a class="contact-link" href="https://github.com/shadidahamed" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a class="contact-link" href="https://github.com/shadidahamed" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="GitHub">
               <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub
             </a>
-            <a class="contact-link" href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a class="contact-link" href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
             </a>
-            <a class="contact-link" href="https://www.instagram.com/shade_ed25" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a class="contact-link" href="https://www.instagram.com/shade_ed25" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Instagram">
               <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram
             </a>
-            <a class="contact-link" href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a class="contact-link" href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Facebook">
               <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook
             </a>
-            <a class="contact-link" href="https://wa.me/8801326162684" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <a class="contact-link" href="https://wa.me/8801326162684" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="WhatsApp">
               <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp
             </a>
-            <a class="contact-link" href="https://x.com/ShadidAhamed" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <a class="contact-link" href="https://x.com/ShadidAhamed" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="X">
               <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg>X
             </a>
-            <a class="contact-link" href="https://pin.it/4Z5y34R2T" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+            <a class="contact-link" href="https://pin.it/4Z5y34R2T" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Pinterest">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pinterest
             </a>
-            <a class="contact-link" href="https://www.reddit.com/user/Shade_ed25" target="_blank" rel="noopener noreferrer" aria-label="Reddit">
+            <a class="contact-link" href="https://www.reddit.com/user/Shade_ed25" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Reddit">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/><path d="M8.5 15c1.2 1 2.5 1.5 3.5 1.5s2.3-.5 3.5-1.5"/></svg>Reddit
             </a>
-            <a class="contact-link" href="https://www.tumblr.com/" target="_blank" rel="noopener noreferrer" aria-label="Tumblr">
+            <a class="contact-link" href="https://www.tumblr.com/" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Tumblr">
               <svg viewBox="0 0 24 24"><path d="M14 3v5h3v3h-3v5.5c0 1.2.5 1.5 1.5 1.5H17v3h-3.5C11 21 10 19.5 10 16.5V11H8V8h2V3h4z"/></svg>Tumblr
             </a>
           </div>
           <p class="text-center mt-2" style="font-size:0.8rem;color:var(--text-muted)">
-            <a href="https://www.google.com/maps/search/Shantinagar,+Dhaka" target="_blank" rel="noopener noreferrer" style="color:var(--gold-muted)">Map · Shantinagar, Dhaka</a>
+            <a href="https://www.google.com/maps/search/Shantinagar,+Dhaka" target="_blank" rel="noopener noreferrer" data-external="url" style="color:var(--gold-muted);pointer-events:auto;position:relative;z-index:7">Map · Shantinagar, Dhaka</a>
           </p>
         </div>
       </div>
@@ -814,14 +568,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 (function(){
 'use strict';
 
-const BOOK_IMGS = [
-  '811615849_2097588261148773_877248636819443508_n.jpg',
-  '815366796_1754064392528440_1990530380060926840_n (1).jpg',
-  '817550850_1756948922083208_6663409752770103109_n.jpg',
-  'ChatGPT Image Sep 20, 2026, 07_38_48 PM.png',
-  'book-3d.jpg'
-];
-
+const BOOK_IMGS = ['811615849_2097588261148773_877248636819443508_n.jpg','815366796_1754064392528440_1990530380060926840_n (1).jpg','817550850_1756948922083208_6663409752770103109_n.jpg','ChatGPT Image Sep 20, 2026, 07_38_48 PM.png','book-3d.jpg'];
 const ART_WORKS = [
   {src:'809518654_1855217995842076_8923680691947304600_n.jpg', title:'আবার দেখা হবে', ctx:''},
   {src:'809601262_4548993055379554_8793039364914601083_n.jpg', title:'আমি কোথায় — At the Dimension and Space', ctx:''},
@@ -839,74 +586,20 @@ const ART_WORKS = [
   {src:'image sketch 3.jpg', title:'Sketch study', ctx:''},
   {src:'IMG scetch 1.jpg', title:'Exhibited work', ctx:'Associated with exhibition contexts'}
 ];
-
 const MODELS = [
-  {
-    src:'Screenshot 2026-09-20 202305.png',
-    project:'Squares in Grid',
-    number:'Architectural Project 1',
-    model:'Black squares composition',
-    concept:'To develop sensitivity toward visual order. Rhythm, spacing and controlled composition through a strict grid. দৃশ্যমান শৃঙ্খলা, ছন্দ ও নিয়ন্ত্রিত বিন্যাসের প্রতি সংবেদনশীলতা গড়ে তোলা।',
-    method:'Compose black 25 × 25 squares on a white base. Base grid 12 × 12. Base size 300 × 300. Materials: matte surface of black model paper, Swiss board.'
-  },
-  {
-    src:'Screenshot 2026-09-20 202318.png',
-    project:'Lines in Nature',
-    number:'Architectural Project 2',
-    model:'String and frame composition',
-    concept:'Discover lines in nature, analyse them and develop spatial compositions. Focus on form–space relationship, voids, thickness and spatial rhythm. প্রকৃতির রেখা থেকে স্থানিক ছন্দ ও শূন্যতার সম্পর্ক খুঁজে নেওয়া।',
-    method:'Phase 1: Photograph lines found in nature. Phase 2: Metal rod frame approx. 200 × 250 × 400; strings of varying thickness. Emphasize voids, line relationships and form–space interaction.'
-  },
-  {
-    src:'Screenshot 2026-09-20 202429.png',
-    project:'Low Relief',
-    number:'Architectural Project 3',
-    model:'Styrofoam to plaster cast (view 1)',
-    concept:'Carving spaces from a material of given thickness — process similar to sculpture. নির্দিষ্ট পুরুত্বের উপাদান থেকে স্থান খোদাই; ভাস্কর্যের মতো প্রক্রিয়া।',
-    method:'Phase 1: 300 × 300 styrofoam, multiple layers, max height 75 mm. Phase 2: Cast in plaster of Paris with pigments.',
-    methodsNotes:['Create styrofoam model in layers; dry each layer','Open-sided mold ~300 × 300','Check leaks with water','Avoid super glue on styrofoam','Mix plaster; add water gradually to whipped-cream consistency','Pour; leave undisturbed; sand after setting']
-  },
-  {
-    src:'Screenshot 2026-09-20 202501.png',
-    project:'Low Relief',
-    number:'Architectural Project 3',
-    model:'Styrofoam to plaster cast (view 2)',
-    concept:'Carving spaces from a material of given thickness. Process similar to sculpture.',
-    method:'Same process — styrofoam layers, open-sided mold, plaster of Paris and pigments.',
-    methodsNotes:['Create styrofoam model in layers; dry each layer','Open-sided mold ~300 × 300','Check leaks with water','Avoid super glue on styrofoam','Mix plaster; add water gradually','Pour; leave undisturbed; sand after setting']
-  },
-  {
-    src:'Screenshot 2026-09-20 202603.png',
-    project:'Composition with Planes',
-    number:'Architectural Project 4',
-    model:'Plane composition',
-    concept:'Planes as key elements of architectural vocabulary. Size, shape, proportion and position define enclosed space and form. To create drama. তলগুলো স্থাপত্যের মূল ভাষা — আকার, অনুপাত ও অবস্থান দিয়ে স্থান ও রূপ নির্ধারণ; নাটকীয়তা সৃষ্টি।',
-    method:'Base ~300 × 450; height >300. Explore fluid space, hierarchy, balance, rhythm, unity. Vary plane sizes; interlock surfaces; thickness ~3–10; monochromatic tones.'
-  },
-  {
-    src:'Screenshot 2026-09-20 202509.png',
-    project:'Space and Flow by Subtracting Volumes',
-    number:'Architectural Project 5',
-    model:'Triangle-based prism subtraction',
-    concept:'Spatial flow by subtracting from a solid. Solid and void, internal/external space, geometric logic — while keeping the original form recognisable. কঠিন থেকে অংশ কেটে স্থানিক প্রবাহ তৈরি; মূল জ্যামিতিক রূপ চেনা যায় এমনভাবে।',
-    method:'Study geometric solid; sketch order; identify subtraction directions; scaffold blocks; preserve geometric integrity.'
-  },
-  {
-    src:'Screenshot 2026-09-20 202230.png',
-    project:'Seasonscape',
-    number:'Final Pavilion · ARC 101',
-    model:'Monsoon pavilion',
-    concept:'Six seasons — গ্রীষ্ম, বর্ষা, শরৎ, হেমন্ত, শীত, বসন্ত. This model interprets monsoon / বর্ষাকাল. প্রবাহিত বর্ষণে · রিমঝিম ছন্দে. Rain may be gentle, scattered or overwhelming; that changing rhythm becomes architectural flow.',
-    method:'Final pavilion translating monsoon rhythm into spatial movement and form.'
-  }
+  {src:'Screenshot 2026-09-20 202305.png',project:'Squares in Grid',number:'Architectural Project 1',model:'Black squares composition',concept:'To develop sensitivity toward visual order. Rhythm, spacing and controlled composition through a strict grid. দৃশ্যমান শৃঙ্খলা, ছন্দ ও নিয়ন্ত্রিত বিন্যাসের প্রতি সংবেদনশীলতা গড়ে তোলা।',method:'Compose black 25 × 25 squares on a white base. Base grid 12 × 12. Base size 300 × 300. Materials: matte surface of black model paper, Swiss board.'},
+  {src:'Screenshot 2026-09-20 202318.png',project:'Lines in Nature',number:'Architectural Project 2',model:'String and frame composition',concept:'Discover lines in nature, analyse them and develop spatial compositions. Focus on form–space relationship, voids, thickness and spatial rhythm. প্রকৃতির রেখা থেকে স্থানিক ছন্দ ও শূন্যতার সম্পর্ক খুঁজে নেওয়া।',method:'Phase 1: Photograph lines found in nature. Phase 2: Metal rod frame approx. 200 × 250 × 400; strings of varying thickness. Emphasize voids, line relationships and form–space interaction.'},
+  {src:'Screenshot 2026-09-20 202429.png',project:'Low Relief',number:'Architectural Project 3',model:'Styrofoam to plaster cast (view 1)',concept:'Carving spaces from a material of given thickness — process similar to sculpture. নির্দিষ্ট পুরুত্বের উপাদান থেকে স্থান খোদাই; ভাস্কর্যের মতো প্রক্রিয়া।',method:'Phase 1: 300 × 300 styrofoam, multiple layers, max height 75 mm. Phase 2: Cast in plaster of Paris with pigments.',methodsNotes:['Create styrofoam model in layers; dry each layer','Open-sided mold ~300 × 300','Check leaks with water','Avoid super glue on styrofoam','Mix plaster; add water gradually to whipped-cream consistency','Pour; leave undisturbed; sand after setting']},
+  {src:'Screenshot 2026-09-20 202501.png',project:'Low Relief',number:'Architectural Project 3',model:'Styrofoam to plaster cast (view 2)',concept:'Carving spaces from a material of given thickness. Process similar to sculpture.',method:'Same process — styrofoam layers, open-sided mold, plaster of Paris and pigments.',methodsNotes:['Create styrofoam model in layers; dry each layer','Open-sided mold ~300 × 300','Check leaks with water','Avoid super glue on styrofoam','Mix plaster; add water gradually','Pour; leave undisturbed; sand after setting']},
+  {src:'Screenshot 2026-09-20 202603.png',project:'Composition with Planes',number:'Architectural Project 4',model:'Plane composition',concept:'Planes as key elements of architectural vocabulary. Size, shape, proportion and position define enclosed space and form. To create drama. তলগুলো স্থাপত্যের মূল ভাষা — আকার, অনুপাত ও অবস্থান দিয়ে স্থান ও রূপ নির্ধারণ; নাটকীয়তা সৃষ্টি।',method:'Base ~300 × 450; height >300. Explore fluid space, hierarchy, balance, rhythm, unity. Vary plane sizes; interlock surfaces; thickness ~3–10; monochromatic tones.'},
+  {src:'Screenshot 2026-09-20 202509.png',project:'Space and Flow by Subtracting Volumes',number:'Architectural Project 5',model:'Triangle-based prism subtraction',concept:'Spatial flow by subtracting from a solid. Solid and void, internal/external space, geometric logic — while keeping the original form recognisable. কঠিন থেকে অংশ কেটে স্থানিক প্রবাহ তৈরি; মূল জ্যামিতিক রূপ চেনা যায় এমনভাবে।',method:'Study geometric solid; sketch order; identify subtraction directions; scaffold blocks; preserve geometric integrity.'},
+  {src:'Screenshot 2026-09-20 202230.png',project:'Seasonscape',number:'Final Pavilion · ARC 101',model:'Monsoon pavilion',concept:'Six seasons — গ্রীষ্ম, বর্ষা, শরৎ, হেমন্ত, শীত, বসন্ত. This model interprets monsoon / বর্ষাকাল. প্রবাহিত বর্ষণে · রিমঝিম ছন্দে. Rain may be gentle, scattered or overwhelming; that changing rhythm becomes architectural flow.',method:'Final pavilion translating monsoon rhythm into spatial movement and form.'}
 ];
-
 const VIDEOS = [
   {title:'Modifiers English', url:'https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS', id:'MCj4pNiJR_Q'},
   {title:'Connectors English', url:'https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I', id:'K29JNurQr9c'},
   {title:'Subject-Verb Agreement', url:'https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg', id:'0ba53jWZy5o'}
 ];
-
 const ACHIEVE = {
   ssc:{type:'pdf', src:'SSC Transcript.pdf', title:'SSC Transcript', body:'GPA 5.00 / Golden A+ · Motijheel Ideal School and College'},
   hsc:{type:'pdf', src:'HSC Transcript.pdf', title:'HSC Transcript', body:'GPA 5.00 / Golden A+ · Notre Dame College'},
@@ -916,9 +609,21 @@ const ACHIEVE = {
 };
 
 const sections = document.querySelectorAll('.section');
-const navLinks = document.querySelectorAll('[data-section]');
 const navToggle = document.getElementById('navToggle');
 const navLinksEl = document.getElementById('navLinks');
+
+function closeMobileMenu(){
+  navLinksEl.classList.remove('open');
+  navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded','false');
+  document.body.classList.remove('no-scroll');
+}
+function openMobileMenu(){
+  navLinksEl.classList.add('open');
+  navToggle.classList.add('open');
+  navToggle.setAttribute('aria-expanded','true');
+  document.body.classList.add('no-scroll');
+}
 
 function showSection(id){
   sections.forEach(s=>s.classList.toggle('active', s.dataset.section===id));
@@ -930,13 +635,12 @@ function showSection(id){
   Object.values(orbits).forEach(o=>{
     if(o) o.setActive(id===o.sectionId || (id==='skills' && o.sectionId==='skills'));
   });
-  navLinksEl.classList.remove('open');
-  navToggle.classList.remove('open');
-  navToggle.setAttribute('aria-expanded','false');
+  closeMobileMenu();
   window.scrollTo(0,0);
 }
 
-navLinks.forEach(el=>{
+/* Only nav items with data-section — do NOT touch contact external links */
+document.querySelectorAll('a[data-section], .nav-logo[data-section]').forEach(el=>{
   el.addEventListener('click',e=>{
     const id=el.dataset.section;
     if(!id) return;
@@ -945,13 +649,36 @@ navLinks.forEach(el=>{
     history.replaceState(null,'','#'+id);
   });
 });
-navToggle.addEventListener('click',()=>{
-  const open=navLinksEl.classList.toggle('open');
-  navToggle.classList.toggle('open',open);
-  navToggle.setAttribute('aria-expanded',open?'true':'false');
+
+navToggle.addEventListener('click',e=>{
+  e.stopPropagation();
+  if(navLinksEl.classList.contains('open')) closeMobileMenu();
+  else openMobileMenu();
+});
+document.addEventListener('click',e=>{
+  if(!navLinksEl.classList.contains('open')) return;
+  if(navLinksEl.contains(e.target) || navToggle.contains(e.target)) return;
+  closeMobileMenu();
 });
 
-/* Orbit: centered at middle of container, no top clipping */
+/* ========== CONTACT LINKS — force open (mailto + social) ========== */
+document.querySelectorAll('.contact-link, a[data-external]').forEach(link=>{
+  link.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+    if(!href) return;
+    /* Let browser handle, but ensure not blocked */
+    if(href.startsWith('mailto:')){
+      /* mailto must use location so mail client opens */
+      e.preventDefault();
+      window.location.href = href;
+      return;
+    }
+    /* external social — open new tab reliably */
+    e.preventDefault();
+    window.open(href, '_blank', 'noopener,noreferrer');
+  });
+});
+
 function createOrbit(stageId, items, opts){
   const stage=document.getElementById(stageId);
   if(!stage) return null;
@@ -961,7 +688,6 @@ function createOrbit(stageId, items, opts){
   const speed = (Math.PI*2) / (n * 3 * 60);
   let radius = opts.radius || 150;
   const els=[];
-
   items.forEach((item)=>{
     const div=document.createElement('div');
     div.className='orbit-item';
@@ -983,7 +709,6 @@ function createOrbit(stageId, items, opts){
     stage.appendChild(div);
     els.push(div);
   });
-
   function layout(t){
     if(!last) last=t;
     const dt=Math.min(32,t-last); last=t;
@@ -995,7 +720,6 @@ function createOrbit(stageId, items, opts){
       const z=Math.cos(a)*radius;
       const scale=0.52+0.42*((z+radius)/(2*radius));
       const opacity=0.32+0.68*((z+radius)/(2*radius));
-      /* left:50%; top:50% + translate(-50%,-50%) keeps true center */
       el.style.transform=`translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) scale(${scale})`;
       el.style.opacity=opacity;
       el.style.zIndex=Math.round(100+z);
@@ -1003,79 +727,49 @@ function createOrbit(stageId, items, opts){
     });
     if(opts.active!==false) raf=requestAnimationFrame(layout);
   }
-
   function start(){ if(!raf){ last=0; raf=requestAnimationFrame(layout);} }
   function stop(){ if(raf){ cancelAnimationFrame(raf); raf=null;} }
   function pause(){ paused=true; }
   function resume(){ paused=false; }
   function setActive(v){ opts.active=v; if(v) start(); else stop(); }
-
   const mq=window.matchMedia('(prefers-reduced-motion:reduce)');
   if(mq.matches) paused=true;
   mq.addEventListener('change',e=>{paused=e.matches;});
-
-  function resize(){
-    const w=wrap.clientWidth;
-    radius=Math.min(150, Math.max(95, w*0.24));
-  }
-  resize();
-  window.addEventListener('resize',resize);
-  start();
+  function resize(){ radius=Math.min(150, Math.max(95, wrap.clientWidth*0.24)); }
+  resize(); window.addEventListener('resize',resize); start();
   return {pause,resume,setActive,sectionId:opts.sectionId};
 }
 
 const orbits={};
-
 orbits.book=createOrbit('bookStage', BOOK_IMGS.map(s=>({src:s})), {
   sectionId:'book', radius:145,
   onSelect:(item)=>{ openModal({type:'img',src:item.src,title:'Handmade Portfolio Book',body:'Part of the complete physical creative process — binding, colour coding, typography, cutouts and layered forms. হাতে গড়া পোর্টফোলিও বইয়ের অংশ।'}); orbits.book.pause(); }
 });
-
 orbits.models=createOrbit('modelsStage', MODELS, {
   sectionId:'models', radius:148,
   onSelect:(m)=>{
     orbits.models.pause();
     let methodsHtml='';
-    if(m.methodsNotes){
-      methodsHtml=`<div class="block"><button class="methods-toggle" id="methodsToggle">Methods / Making Notes ▾</button><div class="methods-content" id="methodsContent"><ul>${m.methodsNotes.map(n=>'<li>'+n+'</li>').join('')}</ul></div></div>`;
-    }
-    openModal({
-      type:'img', src:m.src, title:m.project,
-      html:`
-        <div class="block"><div class="block-label">Project</div><div class="block-body">${m.project}</div></div>
-        <div class="block"><div class="block-label">Project Number</div><div class="block-body">${m.number}</div></div>
-        <div class="block"><div class="block-label">Model</div><div class="block-body">${m.model}</div></div>
-        <div class="block"><div class="block-label">Concept / Description</div><div class="block-body">${m.concept}</div></div>
-        <div class="block"><div class="block-label">Method</div><div class="block-body">${m.method}</div></div>
-        ${methodsHtml}`
-    });
-    setTimeout(()=>{
-      const t=document.getElementById('methodsToggle');
-      const c=document.getElementById('methodsContent');
-      if(t&&c) t.onclick=()=>c.classList.toggle('open');
-    },40);
+    if(m.methodsNotes) methodsHtml=`<div class="block"><button class="methods-toggle" id="methodsToggle">Methods / Making Notes ▾</button><div class="methods-content" id="methodsContent"><ul>${m.methodsNotes.map(n=>'<li>'+n+'</li>').join('')}</ul></div></div>`;
+    openModal({type:'img', src:m.src, title:m.project, html:`
+      <div class="block"><div class="block-label">Project</div><div class="block-body">${m.project}</div></div>
+      <div class="block"><div class="block-label">Project Number</div><div class="block-body">${m.number}</div></div>
+      <div class="block"><div class="block-label">Model</div><div class="block-body">${m.model}</div></div>
+      <div class="block"><div class="block-label">Concept / Description</div><div class="block-body">${m.concept}</div></div>
+      <div class="block"><div class="block-label">Method</div><div class="block-body">${m.method}</div></div>${methodsHtml}`});
+    setTimeout(()=>{ const t=document.getElementById('methodsToggle'); const c=document.getElementById('methodsContent'); if(t&&c) t.onclick=()=>c.classList.toggle('open'); },40);
   }
 });
-
 function initArtOrbit(){
   if(orbits.art) return;
   orbits.art=createOrbit('artStage', ART_WORKS, {
     sectionId:'skills', radius:140,
-    onSelect:(w)=>{
-      orbits.art.pause();
-      openModal({
-        type:'img', src:w.src, title:w.title,
-        body: (w.ctx?w.ctx+' · ':'') + 'Artwork from the personal practice of drawing, colour and visual storytelling.'
-      });
-    }
+    onSelect:(w)=>{ orbits.art.pause(); openModal({type:'img', src:w.src, title:w.title, body:(w.ctx?w.ctx+' · ':'')+'Artwork from the personal practice of drawing, colour and visual storytelling.'}); }
   });
 }
-
 function initVideoOrbit(){
   if(orbits.video) return;
-  orbits.video=createOrbit('videoStage', VIDEOS.map(v=>({...v,type:'video'})), {
-    sectionId:'skills', radius:135
-  });
+  orbits.video=createOrbit('videoStage', VIDEOS.map(v=>({...v,type:'video'})), { sectionId:'skills', radius:135 });
 }
 
 document.querySelectorAll('[data-skill]').forEach(btn=>{
@@ -1097,7 +791,6 @@ document.querySelectorAll('[data-close-skill]').forEach(btn=>{
     if(orbits.video) orbits.video.setActive(false);
   });
 });
-
 document.querySelectorAll('[data-achieve]').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const a=ACHIEVE[btn.dataset.achieve];
@@ -1105,11 +798,9 @@ document.querySelectorAll('[data-achieve]').forEach(btn=>{
     openModal(a.type==='pdf' ? {type:'pdf',src:a.src,title:a.title,body:a.body} : {type:'img',src:a.src,title:a.title,body:a.body});
   });
 });
-
 document.querySelectorAll('.edu-gallery img').forEach(img=>{
   img.addEventListener('click',()=>openModal({type:'img',src:img.dataset.full||img.src,title:img.alt,body:''}));
 });
-
 document.getElementById('viewCvBtn').addEventListener('click',()=>{
   openModal({type:'pdf',src:'Shadid_Ahamed_Professional_CV.pdf',title:'Shadid Ahamed - Professional CV',body:'Professional curriculum vitae.'});
 });
@@ -1119,42 +810,25 @@ const modal=document.getElementById('modal');
 const modalMedia=document.getElementById('modalMedia');
 const modalInfo=document.getElementById('modalInfo');
 const modalClose=document.getElementById('modalClose');
-
 function openModal({type,src,title,body,html}){
   modal.classList.toggle('pdf-mode', type==='pdf');
   modalMedia.innerHTML='';
-  if(type==='img'){
-    const img=document.createElement('img');
-    img.src=src; img.alt=title||'';
-    modalMedia.appendChild(img);
-  } else if(type==='pdf'){
-    const load=document.createElement('div');
-    load.className='modal-loading';
-    load.textContent='Loading…';
-    modalMedia.appendChild(load);
-    const emb=document.createElement('embed');
-    emb.src=src+'#toolbar=1';
-    emb.type='application/pdf';
-    emb.style.width='100%'; emb.style.height='68vh';
+  if(type==='img'){ const img=document.createElement('img'); img.src=src; img.alt=title||''; modalMedia.appendChild(img); }
+  else if(type==='pdf'){
+    const load=document.createElement('div'); load.className='modal-loading'; load.textContent='Loading…'; modalMedia.appendChild(load);
+    const emb=document.createElement('embed'); emb.src=src+'#toolbar=1'; emb.type='application/pdf'; emb.style.width='100%'; emb.style.height='68vh';
     emb.onload=()=>{ if(load.parentNode) load.remove(); };
     setTimeout(()=>{ if(load.parentNode) load.remove(); }, 2500);
     modalMedia.appendChild(emb);
   }
   let info=`<h3 id="modalTitle">${title||''}</h3>`;
-  if(html) info+=html;
-  else if(body) info+=`<div class="block"><div class="block-body">${body}</div></div>`;
+  if(html) info+=html; else if(body) info+=`<div class="block"><div class="block-body">${body}</div></div>`;
   modalInfo.innerHTML=info;
-  overlay.classList.add('open');
-  document.body.classList.add('no-scroll');
-  modalClose.focus();
+  overlay.classList.add('open'); document.body.classList.add('no-scroll'); modalClose.focus();
 }
-
 function closeModal(){
-  overlay.classList.remove('open');
-  document.body.classList.remove('no-scroll');
-  if(orbits.book) orbits.book.resume();
-  if(orbits.models) orbits.models.resume();
-  if(orbits.art) orbits.art.resume();
+  overlay.classList.remove('open'); document.body.classList.remove('no-scroll');
+  if(orbits.book) orbits.book.resume(); if(orbits.models) orbits.models.resume(); if(orbits.art) orbits.art.resume();
 }
 modalClose.addEventListener('click',closeModal);
 overlay.addEventListener('click',e=>{ if(e.target===overlay) closeModal(); });
@@ -1173,6 +847,7 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   });
 }
 
+/* Background — slightly brighter particles & orbits */
 (function(){
   const canvas=document.getElementById('bg-canvas');
   const ctx=canvas.getContext('2d');
@@ -1180,26 +855,47 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   function resize(){
     w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight;
-    const count=w<600?16:32;
+    const count=w<600?20:40;
     particles=[];
-    for(let i=0;i<count;i++) particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.1+0.25,vx:(Math.random()-0.5)*0.12,vy:(Math.random()-0.5)*0.12,a:Math.random()*0.35+0.08});
+    for(let i=0;i<count;i++) particles.push({
+      x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*1.4+0.35,
+      vx:(Math.random()-0.5)*0.14,vy:(Math.random()-0.5)*0.14,
+      a:Math.random()*0.45+0.18
+    });
     orbitsBg=[];
-    for(let i=0;i<3;i++) orbitsBg.push({cx:w*0.5+(Math.random()-0.5)*w*0.3,cy:h*0.5+(Math.random()-0.5)*h*0.3,rad:70+Math.random()*110,angle:Math.random()*Math.PI*2,speed:0.0006+Math.random()*0.001});
+    for(let i=0;i<4;i++) orbitsBg.push({
+      cx:w*0.5+(Math.random()-0.5)*w*0.35,
+      cy:h*0.5+(Math.random()-0.5)*h*0.35,
+      rad:60+Math.random()*130,
+      angle:Math.random()*Math.PI*2,
+      speed:0.0005+Math.random()*0.0012
+    });
   }
   function draw(){
     ctx.clearRect(0,0,w,h);
-    ctx.strokeStyle='rgba(201,169,98,0.03)'; ctx.lineWidth=1;
+    ctx.strokeStyle='rgba(201,169,98,0.045)'; ctx.lineWidth=1;
     for(let x=0;x<w;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
     for(let y=0;y<h;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
     particles.forEach(p=>{
       p.x+=p.vx; p.y+=p.vy;
       if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(232,213,163,${p.a})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,213,163,${p.a})`;
+      ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*2.2,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,169,98,${p.a*0.25})`;
+      ctx.fill();
     });
     orbitsBg.forEach(o=>{
       o.angle+=o.speed;
-      ctx.beginPath(); ctx.arc(o.cx,o.cy,o.rad,0,Math.PI*2); ctx.strokeStyle='rgba(201,169,98,0.05)'; ctx.stroke();
-      ctx.beginPath(); ctx.arc(o.cx+Math.cos(o.angle)*o.rad,o.cy+Math.sin(o.angle)*o.rad,1.4,0,Math.PI*2); ctx.fillStyle='rgba(201,169,98,0.32)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(o.cx,o.cy,o.rad,0,Math.PI*2);
+      ctx.strokeStyle='rgba(201,169,98,0.1)'; ctx.stroke();
+      const px=o.cx+Math.cos(o.angle)*o.rad, py=o.cy+Math.sin(o.angle)*o.rad;
+      ctx.beginPath(); ctx.arc(px,py,2.2,0,Math.PI*2);
+      ctx.fillStyle='rgba(232,213,163,0.55)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(px,py,5,0,Math.PI*2);
+      ctx.fillStyle='rgba(201,169,98,0.15)'; ctx.fill();
     });
     raf=requestAnimationFrame(draw);
   }
@@ -1223,7 +919,6 @@ audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAu
 const hash=(location.hash||'#home').slice(1);
 if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
 else showSection('home');
-
 })();
 </script>
 </body>
