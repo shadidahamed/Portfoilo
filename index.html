@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Shadid Ahamed — Architecture · Design · Art · Code</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist">
+<title>Shadid Ahamed — Portfolio</title>
 
-<!-- Favicon system (exact filenames preserved) -->
 <link rel="icon" type="image/svg+xml" href="sa-favicon.svg">
 <link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png">
@@ -13,1547 +13,1218 @@
 <link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-64.png">
 <link rel="icon" type="image/png" sizes="128x128" href="sa-favicon-128.png">
 <link rel="icon" type="image/png" sizes="256x256" href="sa-favicon-256.png">
-<link rel="apple-touch-icon" href="sa-favicon-hires.png">
-<link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" href="sa-favicon-black-32.png">
-<link rel="icon" type="image/png" media="(prefers-color-scheme: light)" href="sa-favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="sa-favicon-hires.png">
+<link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-black-16.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-black-32.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="48x48" href="sa-favicon-black-48.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-black-64.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="128x128" href="sa-favicon-black-128.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="sa-favicon-black-hires.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-16.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-white-64.png" media="(prefers-color-scheme: dark)">
 
 <style>
-/* ========== CORE RESET & VARIABLES ========== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0a0b;
-  --charcoal:#141416;
-  --graphite:#1c1c1f;
-  --ash:#2a2a2e;
-  --gold:#c9a227;
-  --gold-soft:#d4b84a;
-  --gold-muted:#a88b2e;
-  --offwhite:#e8e4d9;
-  --text:#d8d4c8;
-  --text-dim:#9a9588;
-  --glass:rgba(20,20,22,0.72);
-  --border:rgba(201,162,39,0.22);
+  --bg:#0a0a0b;--charcoal:#141416;--graphite:#1c1c1f;--ash:#2a2a2e;
+  --gold:#c9a962;--gold-soft:#d4b978;--gold-muted:#a8905a;--warm-yellow:#e8d5a3;
+  --off-white:#f2efe8;--text:#e8e4dc;--text-muted:#9a958c;
+  --border:rgba(201,169,98,0.18);
   --shadow:0 12px 40px rgba(0,0,0,0.55);
-  --radius:10px;
-  --nav-h:64px;
-  --ease:cubic-bezier(0.22,0.61,0.36,1);
-  --font:"Segoe UI",system-ui,-apple-system,sans-serif;
+  --nav-h:64px;--ease:cubic-bezier(0.22,1,0.36,1);
+  --font-display:'Georgia','Times New Roman',serif;
+  --font-body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;font-size:16px}
 body{
-  font-family:var(--font);
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.55;
-  overflow-x:hidden;
-  min-height:100vh;
+  font-family:var(--font-body);background:var(--bg);color:var(--text);
+  line-height:1.55;overflow-x:hidden;min-height:100vh;
   -webkit-font-smoothing:antialiased;
 }
 body.no-scroll{overflow:hidden}
-img{max-width:100%;display:block;height:auto}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
-/* ========== CUSTOM CURSOR (desktop only) ========== */
 .cursor-dot,.cursor-ring{
-  position:fixed;pointer-events:none;z-index:9999;
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
   border-radius:50%;transform:translate(-50%,-50%);
-  transition:opacity .3s;
 }
-.cursor-dot{
-  width:6px;height:6px;background:var(--gold);
-  mix-blend-mode:difference;
-}
+.cursor-dot{width:6px;height:6px;background:var(--gold);mix-blend-mode:difference}
 .cursor-ring{
-  width:28px;height:28px;
-  border:1.5px solid rgba(201,162,39,0.55);
-  transition:width .2s,height .2s,border-color .2s;
+  width:36px;height:36px;border:1px solid rgba(201,169,98,0.55);
+  transition:width .25s,height .25s,border-color .25s;
 }
-body:has(.cursor-dot){cursor:none}
+.cursor-ring.hover{width:48px;height:48px;border-color:var(--gold-soft)}
 @media (hover:none),(pointer:coarse){
   .cursor-dot,.cursor-ring{display:none!important}
   body{cursor:auto}
 }
+body.has-custom-cursor{cursor:none}
+body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .clickable{cursor:none}
 
-/* ========== BACKGROUND CANVAS ========== */
-#bg-canvas{
-  position:fixed;inset:0;z-index:0;
-  pointer-events:none;opacity:0.55;
-}
-@media (prefers-reduced-motion:reduce){
-  #bg-canvas{display:none}
-}
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){#bg-canvas{display:none}}
 
-/* ========== LAYOUT ========== */
-.app{position:relative;z-index:1;min-height:100vh}
-.section{
-  display:none;
-  min-height:calc(100vh - var(--nav-h));
-  padding:calc(var(--nav-h) + 28px) 24px 60px;
-  animation:fadeIn .45s var(--ease);
-}
-.section.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
-/* ========== NAV ========== */
 .nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:var(--nav-h);
-  background:rgba(10,10,11,0.88);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
+  padding:0 1.5rem;background:rgba(10,10,11,0.88);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
 }
-.nav-brand{
-  display:flex;align-items:center;gap:10px;
-  flex-shrink:0;
-}
-.nav-favicon{
-  width:36px;height:36px;
-  border-radius:6px;
-  border:1px solid var(--border);
-  overflow:hidden;
-  background:var(--charcoal);
+.nav-logo{
   display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border:1px solid var(--border);
+  background:var(--graphite);overflow:hidden;flex-shrink:0;
 }
-.nav-favicon img{
-  width:100%;height:100%;object-fit:cover;
+.nav-logo img{width:28px;height:28px;object-fit:contain}
+.nav-links{display:flex;gap:0.15rem;list-style:none;align-items:center}
+.nav-links a{
+  padding:0.45rem 0.7rem;font-size:0.72rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--text-muted);
+  transition:color .25s,background .25s;border-radius:2px;
 }
-.nav-links{
-  display:flex;align-items:center;gap:4px;
-  flex-wrap:wrap;justify-content:flex-end;
-}
-.nav-btn{
-  padding:8px 12px;
-  font-size:0.72rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--text-dim);
-  border-radius:4px;
-  transition:color .25s,background .25s,box-shadow .25s;
-  position:relative;
-}
-.nav-btn:hover,.nav-btn.active{
-  color:var(--gold);
-  background:rgba(201,162,39,0.08);
-}
-.nav-btn.active::after{
-  content:"";position:absolute;bottom:2px;left:12px;right:12px;
-  height:1px;background:var(--gold);opacity:0.7;
-}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,169,98,0.08)}
 .nav-toggle{
-  display:none;
-  width:40px;height:40px;
-  align-items:center;justify-content:center;
-  border:1px solid var(--border);border-radius:6px;
+  display:none;width:40px;height:40px;align-items:center;justify-content:center;
+  flex-direction:column;gap:5px;
 }
-.nav-toggle span{
-  display:block;width:18px;height:1.5px;background:var(--gold);
-  position:relative;
-}
-.nav-toggle span::before,.nav-toggle span::after{
-  content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--gold);
-}
-.nav-toggle span::before{top:-6px}
-.nav-toggle span::after{top:6px}
+.nav-toggle span{width:20px;height:1.5px;background:var(--gold);transition:transform .3s,opacity .3s}
+.nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 @media (max-width:900px){
-  .nav-links{
-    position:fixed;top:var(--nav-h);left:0;right:0;
-    background:rgba(10,10,11,0.96);
-    flex-direction:column;padding:16px;
-    border-bottom:1px solid var(--border);
-    transform:translateY(-120%);
-    transition:transform .35s var(--ease);
-    gap:2px;
-  }
-  .nav-links.open{transform:translateY(0)}
-  .nav-btn{width:100%;text-align:left;padding:12px 16px;font-size:0.85rem}
   .nav-toggle{display:flex}
+  .nav-links{
+    position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+    flex-direction:column;justify-content:flex-start;padding:2rem 1.5rem;
+    background:rgba(10,10,11,0.97);gap:0.5rem;
+    transform:translateX(100%);transition:transform .4s var(--ease);overflow-y:auto;
+  }
+  .nav-links.open{transform:translateX(0)}
+  .nav-links a{font-size:0.95rem;padding:0.85rem 1rem;width:100%;text-align:left}
 }
 
-/* ========== TYPOGRAPHY ========== */
-.display-name{
-  font-weight:800;
-  letter-spacing:0.04em;
-  line-height:0.95;
+.sections{flex:1;padding-top:var(--nav-h)}
+.section{
+  display:none;min-height:calc(100vh - var(--nav-h));
+  padding:2rem 1.5rem 3.5rem;opacity:0;transform:translateY(12px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
 }
-.display-first{
-  font-size:clamp(2.8rem,7vw,5.2rem);
-  color:var(--offwhite);
-}
-.display-last{
-  font-size:clamp(1.6rem,3.8vw,2.6rem);
-  color:var(--gold);
-  font-weight:700;
-  letter-spacing:0.12em;
-  margin-top:4px;
-}
+.section.active{display:block;opacity:1;transform:translateY(0)}
+.section-inner{max-width:1100px;margin:0 auto}
+
 .section-title{
-  font-size:clamp(1.4rem,3vw,2rem);
-  font-weight:700;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  color:var(--offwhite);
-  margin-bottom:8px;
+  font-family:var(--font-display);font-size:clamp(1.5rem,3.8vw,2.2rem);
+  font-weight:400;letter-spacing:0.08em;color:var(--off-white);margin-bottom:0.3rem;
 }
 .section-sub{
-  font-size:0.9rem;
-  color:var(--gold-muted);
-  letter-spacing:0.04em;
-  margin-bottom:28px;
+  font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold-muted);margin-bottom:1.25rem;
 }
-.prose{
-  font-size:1.02rem;
-  color:var(--text);
-  max-width:58ch;
-  line-height:1.7;
-}
-.prose p{margin-bottom:1.1em}
-.prose strong{color:var(--gold-soft);font-weight:600}
-.prose em{color:var(--text);font-style:italic}
+.gold-line{width:48px;height:1px;background:var(--gold);margin:1.1rem 0}
 
-/* ========== BUTTONS ========== */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:12px 22px;
-  font-size:0.78rem;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  border:1px solid var(--border);
-  border-radius:4px;
-  color:var(--gold);
-  background:rgba(201,162,39,0.06);
-  transition:background .25s,border-color .25s,transform .2s,box-shadow .25s;
-}
-.btn:hover{
-  background:rgba(201,162,39,0.14);
-  border-color:var(--gold);
-  transform:translateY(-1px);
-  box-shadow:0 6px 20px rgba(201,162,39,0.15);
-}
-.btn:active{transform:translateY(0)}
-.btn-solid{
-  background:var(--gold);
-  color:#0a0a0b;
-  border-color:var(--gold);
-  font-weight:600;
-}
-.btn-solid:hover{background:var(--gold-soft);color:#0a0a0b}
-
-/* ========== HOME ========== */
 .home-grid{
-  display:grid;
-  grid-template-columns:minmax(260px,380px) 1fr;
-  gap:48px;
-  align-items:center;
-  max-width:1100px;
-  margin:0 auto;
-  min-height:calc(100vh - var(--nav-h) - 80px);
+  display:grid;grid-template-columns:minmax(240px,380px) 1fr;
+  gap:2.5rem;align-items:center;min-height:calc(100vh - var(--nav-h) - 4rem);
 }
 .profile-frame{
-  position:relative;
-  border:1px solid var(--border);
-  border-radius:4px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  background:var(--charcoal);
+  position:relative;border:1px solid var(--border);padding:8px;
+  background:var(--graphite);box-shadow:var(--shadow);
 }
-.profile-frame::after{
-  content:"";
-  position:absolute;inset:0;
-  border:1px solid rgba(201,162,39,0.15);
-  pointer-events:none;
-  margin:6px;
+.profile-frame::before{
+  content:'';position:absolute;inset:-5px;border:1px solid rgba(201,169,98,0.12);pointer-events:none;
 }
 .profile-frame img{
-  width:100%;
-  aspect-ratio:3/4;
-  object-fit:cover;
-  object-position:center top;
+  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
+  filter:contrast(1.05) saturate(0.92);
 }
-.home-text{padding-top:8px}
-.home-role{
-  font-size:0.85rem;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--gold-muted);
-  margin:18px 0 20px;
+.home-identity h1{
+  font-family:var(--font-display);font-size:clamp(2.6rem,7.5vw,4.8rem);
+  font-weight:700;letter-spacing:0.06em;line-height:0.95;color:var(--off-white);
 }
-.home-statement{
-  font-size:1.15rem;
-  font-weight:500;
-  color:var(--gold-soft);
-  margin:24px 0 16px;
-  letter-spacing:0.02em;
+.home-identity h1 .surname{
+  display:block;font-size:0.48em;letter-spacing:0.26em;
+  color:var(--gold);font-weight:700;margin-top:0.4em;
+}
+.home-roles{
+  margin:1.1rem 0 1.3rem;font-size:0.76rem;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--text-muted);
+}
+.home-roles span{color:var(--gold-muted)}
+.home-bio{font-size:1.02rem;color:var(--text);max-width:38em;line-height:1.75}
+.home-bio p{margin-bottom:1rem}
+.home-bio .statement{
+  font-family:var(--font-display);font-style:italic;font-size:1.18rem;
+  color:var(--warm-yellow);margin-top:1.4rem;border-left:2px solid var(--gold);
+  padding-left:1rem;font-weight:500;
 }
 @media (max-width:800px){
-  .home-grid{
-    grid-template-columns:1fr;
-    gap:32px;
-    text-align:center;
-  }
-  .profile-frame{max-width:280px;margin:0 auto}
-  .home-text{padding:0}
-  .prose{margin:0 auto}
+  .home-grid{grid-template-columns:1fr;gap:1.75rem}
+  .profile-frame{max-width:300px;margin:0 auto}
+  .home-identity{text-align:center}
+  .home-bio{text-align:left}
 }
 
-/* ========== 3D CAROUSEL SYSTEM ========== */
-.carousel-wrap{
+/* ========== ORBIT — centered middle, no clipping ========== */
+.orbit-wrap{
   position:relative;
   width:100%;
-  max-width:720px;
-  margin:0 auto 28px;
-  height:340px;
-  perspective:1200px;
+  height:min(48vh,400px);
+  margin:1.75rem auto 1.25rem;
+  perspective:1100px;
   overflow:visible;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.carousel-stage{
-  position:absolute;
-  inset:0;
+.orbit-stage{
+  position:relative;
+  width:100%;
+  height:100%;
   transform-style:preserve-3d;
   display:flex;
   align-items:center;
   justify-content:center;
 }
-.carousel-item{
+.orbit-item{
   position:absolute;
-  width:200px;
-  height:260px;
-  border-radius:6px;
-  overflow:hidden;
-  border:1px solid var(--border);
-  background:var(--charcoal);
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  left:50%;
+  top:50%;
+  width:min(170px,40vw);
+  aspect-ratio:3/4;
+  transform-style:preserve-3d;
   cursor:pointer;
-  transition:transform .9s var(--ease),opacity .9s,filter .9s;
-  will-change:transform,opacity;
+  transition:box-shadow .4s;
+  border:1px solid transparent;
+  background:var(--charcoal);
+  margin:0;
 }
-.carousel-item img{
-  width:100%;height:100%;
-  object-fit:cover;
+.orbit-item img{
+  width:100%;height:100%;object-fit:cover;
+  box-shadow:0 6px 24px rgba(0,0,0,0.5);
 }
-.carousel-item.active{
-  border-color:var(--gold);
-  box-shadow:0 16px 40px rgba(201,162,39,0.18);
-}
-/* Book & model smaller sizes */
-.carousel-wrap.book-carousel,
-.carousel-wrap.model-carousel{
-  height:300px;
-  max-width:640px;
-}
-.carousel-wrap.book-carousel .carousel-item,
-.carousel-wrap.model-carousel .carousel-item{
-  width:170px;height:220px;
-}
-/* Art carousel lower + smaller */
-.carousel-wrap.art-carousel{
-  height:320px;
-  margin-top:20px;
-  max-width:680px;
-}
-.carousel-wrap.art-carousel .carousel-item{
-  width:180px;height:240px;
+.orbit-item.active{border-color:rgba(201,169,98,0.35);z-index:5}
+.orbit-item.active img{box-shadow:0 10px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(201,169,98,0.2)}
+.orbit-hint{
+  text-align:center;font-size:0.72rem;color:var(--text-muted);
+  letter-spacing:0.1em;margin:0.5rem 0 1.25rem;
 }
 @media (max-width:600px){
-  .carousel-wrap{height:260px}
-  .carousel-item{width:150px;height:200px}
-  .carousel-wrap.book-carousel,
-  .carousel-wrap.model-carousel{height:240px}
-  .carousel-wrap.book-carousel .carousel-item,
-  .carousel-wrap.model-carousel .carousel-item{width:130px;height:175px}
-  .carousel-wrap.art-carousel{height:250px}
-  .carousel-wrap.art-carousel .carousel-item{width:140px;height:190px}
+  .orbit-wrap{height:min(40vh,320px);margin:1.25rem auto 1rem}
+  .orbit-item{width:min(130px,46vw)}
 }
 
-/* Description under carousel */
-.carousel-desc{
-  max-width:680px;
-  margin:0 auto 32px;
-  text-align:center;
-  padding:0 12px;
+.section-desc{
+  max-width:46em;margin:0 auto 0.5rem;font-size:1.02rem;line-height:1.8;color:var(--text);
 }
-.carousel-desc p{
-  font-size:1.05rem;
-  line-height:1.75;
-  color:var(--text);
-}
-.carousel-desc .highlight{
-  color:var(--gold-soft);
-  font-weight:500;
+.section-desc p{margin-bottom:1.05rem}
+.section-desc .bn{
+  font-size:1.05rem;color:var(--warm-yellow);font-style:italic;
+  margin:0.85rem 0;line-height:1.75;
 }
 
-/* ========== VIEWER / MODAL ========== */
-.viewer{
-  position:fixed;inset:0;z-index:200;
-  background:rgba(6,6,8,0.92);
-  backdrop-filter:blur(10px);
-  display:none;
-  align-items:center;justify-content:center;
-  padding:20px;
-  animation:fadeIn .3s var(--ease);
+.btn-gold{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.8rem 1.5rem;border:1px solid var(--gold);
+  color:var(--gold);font-size:0.76rem;letter-spacing:0.16em;
+  text-transform:uppercase;transition:background .3s,color .3s,transform .25s;
+  background:transparent;
 }
-.viewer.open{display:flex}
-.viewer-inner{
-  position:relative;
-  width:min(960px,100%);
-  max-height:90vh;
-  background:var(--charcoal);
-  border:1px solid var(--border);
-  border-radius:8px;
-  overflow:hidden;
-  display:grid;
-  grid-template-columns:1.1fr 1fr;
-  box-shadow:0 24px 60px rgba(0,0,0,0.6);
-}
-.viewer-media{
-  background:#0d0d0f;
-  display:flex;align-items:center;justify-content:center;
-  min-height:320px;
-  overflow:hidden;
-}
-.viewer-media img,
-.viewer-media iframe,
-.viewer-media embed,
-.viewer-media object{
-  width:100%;height:100%;
-  object-fit:contain;
-  max-height:80vh;
-}
-.viewer-info{
-  padding:28px 24px;
-  overflow-y:auto;
-  max-height:80vh;
-}
-.viewer-info h3{
-  font-size:1.25rem;
-  color:var(--offwhite);
-  margin-bottom:6px;
-  font-weight:700;
-}
-.viewer-info .meta{
-  font-size:0.8rem;
-  color:var(--gold-muted);
-  letter-spacing:0.06em;
-  margin-bottom:16px;
-  text-transform:uppercase;
-}
-.viewer-info .block{
-  margin-bottom:18px;
-}
-.viewer-info .block-label{
-  font-size:0.7rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:4px;
-}
-.viewer-info p{
-  font-size:0.95rem;
-  line-height:1.65;
-  color:var(--text);
-}
-.viewer-close{
-  position:absolute;top:12px;right:12px;z-index:5;
-  width:40px;height:40px;
-  border-radius:50%;
-  background:rgba(20,20,22,0.85);
-  border:1px solid var(--border);
-  color:var(--gold);
-  font-size:1.3rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s;
-}
-.viewer-close:hover{background:rgba(201,162,39,0.15)}
-@media (max-width:700px){
-  .viewer-inner{
-    grid-template-columns:1fr;
-    max-height:92vh;
-    overflow-y:auto;
-  }
-  .viewer-media{min-height:240px;max-height:45vh}
-  .viewer-info{max-height:none;padding:20px 16px 32px}
-}
+.btn-gold:hover{background:rgba(201,169,98,0.12);transform:translateY(-1px)}
+.book-actions{text-align:center;margin-top:1.25rem}
 
-/* ========== EDUCATION ========== */
-.edu-block{
-  max-width:900px;
-  margin:0 auto 48px;
-  padding:28px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
+.edu-grid{display:grid;gap:2.25rem}
+.edu-card{
+  display:grid;grid-template-columns:minmax(180px,280px) 1fr;
+  gap:1.5rem;padding:1.35rem;background:var(--charcoal);
+  border:1px solid var(--border);box-shadow:var(--shadow);
 }
-.edu-block h3{
-  font-size:1.3rem;
-  color:var(--offwhite);
-  margin-bottom:4px;
-}
-.edu-meta{
-  font-size:0.85rem;
-  color:var(--gold-muted);
-  margin-bottom:16px;
-}
-.edu-gallery{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  padding-bottom:8px;
-  scroll-snap-type:x mandatory;
-}
+.edu-gallery{display:grid;grid-template-columns:1fr 1fr;gap:0.45rem}
 .edu-gallery img{
-  height:160px;
-  width:auto;
-  border-radius:4px;
-  border:1px solid var(--border);
-  scroll-snap-align:start;
-  flex-shrink:0;
-  object-fit:cover;
+  width:100%;aspect-ratio:4/3;object-fit:cover;cursor:pointer;
+  transition:opacity .3s,transform .3s;
 }
-@media (max-width:500px){
-  .edu-gallery img{height:130px}
+.edu-gallery img:hover{opacity:0.9;transform:scale(1.02)}
+.edu-info h3{
+  font-family:var(--font-display);font-size:1.28rem;font-weight:400;
+  color:var(--off-white);margin-bottom:0.3rem;
 }
+.edu-meta{font-size:0.78rem;color:var(--gold-muted);letter-spacing:0.08em;margin-bottom:0.65rem}
+.edu-info p{font-size:0.95rem;color:var(--text-muted);line-height:1.65}
+.edu-badge{
+  display:inline-block;margin-top:0.65rem;padding:0.28rem 0.65rem;
+  border:1px solid rgba(201,169,98,0.35);font-size:0.7rem;
+  letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;
+}
+@media (max-width:720px){.edu-card{grid-template-columns:1fr}}
 
-/* ========== SKILLS ========== */
+.models-meta{
+  display:flex;flex-wrap:wrap;gap:0.85rem 1.75rem;margin-bottom:0.5rem;
+  font-size:0.8rem;letter-spacing:0.08em;color:var(--text-muted);
+}
+.models-meta strong{color:var(--gold-muted);font-weight:500}
+
 .skills-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:20px;
-  max-width:960px;
-  margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:1.15rem;margin-top:0.85rem;
 }
 .skill-card{
-  padding:36px 24px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  text-align:center;
-  transition:transform .3s,border-color .3s,box-shadow .3s;
-  cursor:pointer;
+  position:relative;padding:1.75rem 1.35rem;min-height:165px;
+  background:var(--charcoal);border:1px solid var(--border);
+  cursor:pointer;transition:border-color .3s,transform .3s,box-shadow .3s;overflow:hidden;
 }
-.skill-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--gold);
-  box-shadow:0 12px 32px rgba(201,162,39,0.12);
+.skill-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:var(--gold);transform:scaleY(0);transform-origin:top;
+  transition:transform .35s var(--ease);
 }
+.skill-card:hover{border-color:rgba(201,169,98,0.4);transform:translateY(-3px);box-shadow:var(--shadow)}
+.skill-card:hover::before{transform:scaleY(1)}
 .skill-card h3{
-  font-size:1.05rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--offwhite);
-  margin-bottom:8px;
+  font-family:var(--font-display);font-size:1.18rem;font-weight:400;
+  letter-spacing:0.06em;color:var(--off-white);margin-bottom:0.45rem;
 }
-.skill-card p{
-  font-size:0.88rem;
-  color:var(--text-dim);
+.skill-card p{font-size:0.86rem;color:var(--text-muted);line-height:1.5}
+.skill-card .arrow{
+  position:absolute;bottom:1.1rem;right:1.1rem;
+  font-size:1.05rem;color:var(--gold);opacity:0.6;transition:opacity .3s,transform .3s;
 }
-.skill-subview{
-  display:none;
-  max-width:960px;
-  margin:0 auto;
-  position:relative;
-}
-.skill-subview.active{display:block}
-.skill-back{
-  margin-bottom:24px;
-}
+.skill-card:hover .arrow{opacity:1;transform:translateX(3px)}
 
-/* Digital projects */
-.project-cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  margin-top:20px;
+.skill-sub{display:none;min-height:calc(100vh - var(--nav-h));padding:1.75rem 1.5rem 3.5rem}
+.skill-sub.active{display:block}
+.skill-sub-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1rem;flex-wrap:wrap;gap:0.85rem;
 }
+.close-x{
+  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);color:var(--gold);font-size:1.35rem;
+  transition:background .25s,border-color .25s;
+}
+.close-x:hover{background:rgba(201,169,98,0.1);border-color:var(--gold)}
+
+.project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.15rem}
 .project-card{
-  padding:24px;
-  background:var(--graphite);
+  padding:1.6rem;background:var(--charcoal);border:1px solid var(--border);
+  transition:border-color .3s,transform .3s;
+}
+.project-card:hover{border-color:rgba(201,169,98,0.35);transform:translateY(-2px)}
+.project-card h4{font-family:var(--font-display);font-size:1.15rem;color:var(--off-white);margin-bottom:0.45rem}
+.project-card p{font-size:0.9rem;color:var(--text-muted);margin-bottom:1.1rem;line-height:1.55}
+.btn-outline{
+  display:inline-flex;padding:0.5rem 1rem;border:1px solid var(--border);
+  font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text-muted);transition:color .25s,border-color .25s,background .25s;
+}
+.btn-outline:hover{color:var(--gold);border-color:var(--gold);background:rgba(201,169,98,0.06)}
+
+.video-orbit .orbit-item{aspect-ratio:16/9;width:min(200px,52vw)}
+.video-card-inner{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--graphite);
+  border:1px solid var(--border);padding:1.25rem;text-align:center;
+}
+.video-card-inner h4{font-family:var(--font-display);font-size:0.98rem;color:var(--off-white);margin-bottom:0.35rem}
+.video-card-inner span{font-size:0.68rem;letter-spacing:0.12em;color:var(--gold-muted);text-transform:uppercase}
+
+.reading-panel{
+  max-width:720px;margin:0 auto;padding:1.85rem;background:var(--charcoal);
   border:1px solid var(--border);
-  border-radius:var(--radius);
 }
-.project-card h4{
-  font-size:1.1rem;
-  color:var(--offwhite);
-  margin-bottom:8px;
-}
-.project-card p{
-  font-size:0.92rem;
-  color:var(--text-dim);
-  margin-bottom:16px;
-  line-height:1.55;
-}
+.reading-panel h3{font-family:var(--font-display);font-size:1.22rem;color:var(--gold);margin:1.35rem 0 0.45rem}
+.reading-panel h3:first-child{margin-top:0}
+.reading-panel ul{list-style:none}
+.reading-panel li{padding:0.32rem 0;color:var(--text-muted);font-size:0.94rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.reading-intro{margin-bottom:1.35rem;line-height:1.7;color:var(--text);font-size:1.02rem}
 
-/* Video carousel */
-.video-carousel .carousel-item{
-  width:220px;height:140px;
-  background:var(--ash);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;
-  gap:8px;
-  padding:12px;
-  text-align:center;
-}
-.video-carousel .carousel-item span{
-  font-size:0.8rem;
-  color:var(--gold);
-  letter-spacing:0.06em;
-}
-.video-carousel{height:200px;max-width:700px}
-
-/* Literary panel */
-.literary-list{
-  list-style:none;
-  margin-top:16px;
-}
-.literary-list li{
-  padding:10px 0;
-  border-bottom:1px solid rgba(201,162,39,0.12);
-  font-size:0.98rem;
-}
-.literary-list li strong{color:var(--gold-soft)}
-
-/* ========== ACHIEVEMENTS ========== */
-.achieve-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-  max-width:960px;
-  margin:0 auto;
-}
+.achieve-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.15rem}
 .achieve-card{
-  padding:24px 18px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  text-align:center;
-  cursor:pointer;
-  transition:border-color .25s,transform .25s;
-  position:relative;
+  padding:1.35rem;background:var(--charcoal);border:1px solid rgba(201,169,98,0.22);
+  cursor:pointer;transition:border-color .3s,transform .3s,box-shadow .3s;position:relative;
 }
-.achieve-card::before{
-  content:"";
-  position:absolute;inset:6px;
-  border:1px solid rgba(201,162,39,0.12);
-  border-radius:4px;
-  pointer-events:none;
+.achieve-card::after{
+  content:'';position:absolute;inset:4px;border:1px solid rgba(201,169,98,0.08);pointer-events:none;
 }
-.achieve-card:hover{
-  border-color:var(--gold);
-  transform:translateY(-3px);
-}
-.achieve-card h4{
-  font-size:0.95rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--offwhite);
-  margin-bottom:6px;
-}
-.achieve-card p{
-  font-size:0.82rem;
-  color:var(--text-dim);
-}
+.achieve-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:var(--shadow)}
+.achieve-card .label{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:0.45rem}
+.achieve-card h3{font-family:var(--font-display);font-size:1.1rem;color:var(--off-white);margin-bottom:0.35rem}
+.achieve-card p{font-size:0.86rem;color:var(--text-muted);line-height:1.5}
 
-/* ========== CONTACT ========== */
 .contact-card{
-  max-width:640px;
-  margin:0 auto;
-  padding:36px 28px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  text-align:center;
+  max-width:640px;margin:0 auto;padding:2.25rem 1.85rem;
+  background:var(--charcoal);border:1px solid var(--border);box-shadow:var(--shadow);
 }
-.contact-links{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:14px;
-  margin-top:28px;
-}
+.contact-card h2{font-family:var(--font-display);font-size:1.5rem;text-align:center;margin-bottom:0.45rem}
+.contact-loc{text-align:center;font-size:0.84rem;color:var(--text-muted);margin-bottom:1.75rem}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.7rem}
 .contact-link{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  width:84px;
-  padding:14px 8px;
-  border:1px solid transparent;
-  border-radius:8px;
-  transition:border-color .25s,background .25s;
+  display:flex;flex-direction:column;align-items:center;gap:0.45rem;
+  padding:1rem 0.65rem;border:1px solid var(--border);
+  transition:border-color .3s,background .3s,transform .25s;
+  font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);
 }
-.contact-link:hover{
-  border-color:var(--border);
-  background:rgba(201,162,39,0.06);
-}
-.contact-link svg{
-  width:28px;height:28px;
-  stroke:var(--gold);
-  fill:none;
-  stroke-width:1.4;
-}
-.contact-link span{
-  font-size:0.7rem;
-  letter-spacing:0.04em;
-  color:var(--text-dim);
-}
-.contact-loc{
-  margin-top:28px;
-  font-size:0.9rem;
-  color:var(--text-dim);
-}
+.contact-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,169,98,0.06);transform:translateY(-2px)}
+.contact-link svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.4}
 
-/* ========== CV ========== */
-.cv-panel{
-  max-width:520px;
-  margin:0 auto;
-  text-align:center;
-  padding:40px 24px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-}
-.cv-panel h2{margin-bottom:12px}
-.cv-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  justify-content:center;
-  margin-top:28px;
-}
+.cv-panel{text-align:center;max-width:520px;margin:0 auto;padding:2.75rem 1.5rem}
+.cv-panel h2{font-family:var(--font-display);font-size:1.45rem;margin-bottom:0.65rem}
+.cv-panel p{color:var(--text-muted);margin-bottom:1.75rem;line-height:1.6}
+.cv-actions{display:flex;flex-wrap:wrap;gap:0.9rem;justify-content:center}
 
-/* ========== AUDIO CONTROL ========== */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.82);
+  display:none;align-items:center;justify-content:center;
+  padding:1.25rem;opacity:0;transition:opacity .3s;
+}
+.modal-overlay.open{display:flex;opacity:1}
+.modal{
+  position:relative;background:var(--charcoal);border:1px solid var(--border);
+  max-width:min(920px,96vw);max-height:90vh;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+  transform:scale(0.96);transition:transform .35s var(--ease);
+}
+.modal-overlay.open .modal{transform:scale(1)}
+.modal-close{
+  position:absolute;top:10px;right:10px;z-index:10;
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  background:rgba(10,10,11,0.8);border:1px solid var(--border);color:var(--gold);font-size:1.25rem;
+}
+.modal-close:hover{background:rgba(201,169,98,0.15)}
+.modal-body{display:grid;grid-template-columns:1fr 1fr;overflow:auto;max-height:90vh}
+.modal-media{background:#000;display:flex;align-items:center;justify-content:center;min-height:240px;position:relative}
+.modal-media img,.modal-media embed{max-width:100%;max-height:82vh;object-fit:contain}
+.modal-info{padding:1.75rem 1.5rem;overflow-y:auto;border-left:1px solid var(--border)}
+.modal-info h3{font-family:var(--font-display);font-size:1.28rem;color:var(--off-white);margin-bottom:0.45rem}
+.modal-info .block{margin-bottom:1.05rem}
+.modal-info .block-label{font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:0.22rem}
+.modal-info .block-body{font-size:0.94rem;color:var(--text);line-height:1.65}
+.modal-info .methods-toggle{margin-top:0.4rem;padding:0.45rem 0;color:var(--gold);font-size:0.78rem;letter-spacing:0.08em;cursor:pointer}
+.methods-content{display:none;margin-top:0.65rem;padding:0.9rem;background:var(--graphite);font-size:0.86rem;line-height:1.55;color:var(--text-muted)}
+.methods-content.open{display:block}
+.methods-content li{margin-bottom:0.35rem;list-style:disc;margin-left:1.05rem}
+.modal-loading{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.6);color:var(--gold);font-size:0.85rem;letter-spacing:0.12em;
+}
+@media (max-width:720px){
+  .modal-body{grid-template-columns:1fr}
+  .modal-info{border-left:none;border-top:1px solid var(--border)}
+  .modal-media{min-height:180px}
+  .modal-media img{max-height:45vh}
+}
+.modal.pdf-mode .modal-body{grid-template-columns:1fr}
+.modal.pdf-mode .modal-media{min-height:68vh}
+.modal.pdf-mode .modal-media embed{width:100%;height:68vh;border:none}
+
 .audio-ctrl{
-  position:fixed;
-  bottom:20px;right:20px;
-  z-index:90;
-  width:44px;height:44px;
-  border-radius:50%;
-  background:rgba(20,20,22,0.9);
-  border:1px solid var(--border);
-  color:var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;
-  transition:background .2s;
+  position:fixed;bottom:1.15rem;right:1.15rem;z-index:90;
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--border);background:rgba(20,20,22,0.88);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+  backdrop-filter:blur(8px);
 }
-.audio-ctrl:hover{background:rgba(201,162,39,0.12)}
-.audio-ctrl.playing{border-color:var(--gold)}
-
-/* ========== UTILS ========== */
-.sr-only{
-  position:absolute;width:1px;height:1px;
-  padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0,0,0,0);border:0;
-}
-.hidden{display:none!important}
-.mt-lg{margin-top:36px}
+.audio-ctrl:hover{border-color:var(--gold);background:rgba(201,169,98,0.12)}
+.audio-ctrl svg{width:17px;height:17px;fill:currentColor}
 .text-center{text-align:center}
+.mt-2{margin-top:1.75rem}
 </style>
 </head>
 <body>
 
-<!-- Background -->
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
-
-<!-- Custom cursor -->
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
-<!-- Audio -->
 <audio id="bgAudio" loop preload="auto">
   <source src="biting bullets - ridgeclub (youtube).mp3" type="audio/mpeg">
 </audio>
 <button class="audio-ctrl" id="audioBtn" aria-label="Toggle background music" title="Music">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+  <svg id="audioIconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="audioIconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
 </button>
 
 <div class="app">
-  <!-- NAV -->
   <nav class="nav" role="navigation" aria-label="Main">
-    <div class="nav-brand">
-      <div class="nav-favicon" title="Shadid Ahamed">
-        <img src="sa-favicon-64.png" alt="SA" width="36" height="36">
-      </div>
-    </div>
+    <a href="#home" class="nav-logo" data-section="home" aria-label="Home">
+      <img src="sa-favicon-32.png" alt="" width="28" height="28">
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
-    <div class="nav-links" id="navLinks">
-      <button class="nav-btn active" data-section="home">Home</button>
-      <button class="nav-btn" data-section="book">The Book</button>
-      <button class="nav-btn" data-section="education">Education</button>
-      <button class="nav-btn" data-section="models">Architectural Models</button>
-      <button class="nav-btn" data-section="skills">Skills</button>
-      <button class="nav-btn" data-section="achievements">Achievements</button>
-      <button class="nav-btn" data-section="contact">Contact</button>
-      <button class="nav-btn" data-section="cv">CV</button>
-    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" data-section="home" class="active">Home</a></li>
+      <li><a href="#book" data-section="book">The Book</a></li>
+      <li><a href="#education" data-section="education">Education</a></li>
+      <li><a href="#models" data-section="models">Architectural Models</a></li>
+      <li><a href="#skills" data-section="skills">Skills</a></li>
+      <li><a href="#achievements" data-section="achievements">Achievements</a></li>
+      <li><a href="#contact" data-section="contact">Contact</a></li>
+      <li><a href="#cv" data-section="cv">CV</a></li>
+    </ul>
   </nav>
 
-  <!-- ========== HOME ========== -->
-  <section class="section active" id="sec-home" aria-label="Home">
-    <div class="home-grid">
-      <div class="profile-frame">
-        <img src="Screenshot 2026-09-20 201810.png" alt="Shadid Ahamed portrait" loading="eager">
-      </div>
-      <div class="home-text">
-        <div class="display-name">
-          <div class="display-first">SHADID</div>
-          <div class="display-last">AHAMED</div>
+  <main class="sections">
+    <section id="home" class="section active" data-section="home" aria-label="Home">
+      <div class="section-inner">
+        <div class="home-grid">
+          <div class="profile-frame">
+            <img src="Screenshot 2026-09-20 201810.png" alt="Shadid Ahamed portrait" width="380" height="507" loading="eager">
+          </div>
+          <div class="home-identity">
+            <h1>SHADID<span class="surname">AHAMED</span></h1>
+            <div class="home-roles">
+              Architecture <span>·</span> Creative Developer <span>·</span> Designer <span>·</span> Artist
+            </div>
+            <div class="gold-line"></div>
+            <div class="home-bio">
+              <p>He was never satisfied with being only one thing. Across drawing, painting, architecture, model-making, web design, code, digital experiments, literature, music and visual storytelling, he has kept returning to the same impulse: to give form to what is imagined.</p>
+              <p class="bn">একটি মাত্র পরিচয়ে আবদ্ধ থাকার অভ্যাস তাঁর ছিল না। চিত্র, স্থাপত্য, মডেল, কোড ও গল্পের মাঝে তিনি বারবার ফিরে এসেছেন — কল্পনাকে রূপ দেওয়ার সেই একই আকাঙ্ক্ষা নিয়ে।</p>
+              <p>He combines the sensitivity of an artist with the curiosity of an engineer. The path has not been perfectly smooth — there were disappointments, pressure, uncertainty and difficult periods. Yet repeatedly he returned to creating, learning and rebuilding.</p>
+              <p>He is not presented as someone who already has everything figured out. He is still becoming.</p>
+              <p class="statement">A person who keeps trying to turn imagination into reality.<br><span style="font-size:0.92em;opacity:0.9">কল্পনাকে বাস্তবে রূপ দেওয়ার চেষ্টায় যিনি থেমে থাকেন না।</span></p>
+              <p style="margin-top:1.15rem;font-size:0.92rem;color:var(--text-muted)">Exploring the intersection of Architecture, Design, Art and Computer Science.</p>
+            </div>
+          </div>
         </div>
-        <p class="home-role">Architecture · Creative Developer · Designer · Artist</p>
-        <p class="home-statement">“A person who keeps trying to turn imagination into reality.”</p>
-        <div class="prose">
-          <p>He was never satisfied with being only one thing. Across drawing, painting, architecture, model-making, web design, code, digital experiments, literature, music and visual storytelling, he moved with the sensitivity of an artist and the curiosity of an engineer.</p>
-          <p>The path was not smooth. There were disappointments, pressure, uncertainty and difficult periods. Yet repeatedly he returned to creating, learning and rebuilding — still becoming, still exploring the intersection of Architecture, Design, Art and Computer Science.</p>
-          <p>Imagination is not enough; it must become form, space, line, and living digital presence. That is the quiet ambition that continues to shape his work.</p>
+      </div>
+    </section>
+
+    <section id="book" class="section" data-section="book" aria-label="The Book">
+      <div class="section-inner">
+        <h2 class="section-title">The Book</h2>
+        <p class="section-sub">Handmade Portfolio</p>
+        <div class="orbit-wrap" id="bookOrbit" aria-label="Book images carousel">
+          <div class="orbit-stage" id="bookStage"></div>
+        </div>
+        <p class="orbit-hint">Click an image to pause · Continuous orbit · ~3s per front view</p>
+        <div class="section-desc">
+          <p>This portfolio is entirely handmade, from its drawings and models to every cut, composition and binding. Each element was crafted by hand, making the portfolio itself a part of the creative process.</p>
+          <p class="bn">এই পোর্টফোলিও সম্পূর্ণ হাতে তৈরি — অঙ্কন থেকে মডেল, কাটা থেকে বাঁধাই পর্যন্ত প্রতিটি স্তর নিজের হাতে গড়া। বইটি কেবল কাজের ধারক নয়; বইটি নিজেই কাজের অংশ।</p>
+          <p>Its binding, colour coding, typography, logo work, cutouts, layered forms, architectural model fragments, compositions and page construction were created as part of the author’s own creative process. The book is not simply a container for the work — the book itself is part of the work.</p>
+        </div>
+        <div class="book-actions">
+          <a class="btn-gold" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Portfolio</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== THE BOOK ========== -->
-  <section class="section" id="sec-book" aria-label="The Book">
-    <div class="text-center">
-      <h2 class="section-title">The Book</h2>
-      <p class="section-sub">Handmade Portfolio · Physical Creative Process</p>
-    </div>
-    <div class="carousel-wrap book-carousel" id="bookCarousel" data-group="book"></div>
-    <div class="carousel-desc">
-      <p>This portfolio is entirely handmade — from its drawings and models to every cut, composition and binding. Each element was crafted by hand, making the portfolio itself a part of the creative process. Binding, colour coding, typography, logo work, cutouts, layered forms and architectural model fragments were all shaped through the author’s own hands. The book is not merely a container; <span class="highlight">it is the work</span>.</p>
-      <p style="margin-top:12px;font-size:0.95rem;color:var(--text-dim)">হাতে গড়া প্রতিটি পাতা, প্রতিটি কাটা, প্রতিটি বাঁধাই — এই পোর্টফোলিও নিজেই সৃষ্টির অংশ।</p>
-    </div>
-    <div class="text-center">
-      <a class="btn btn-solid" href="#" id="viewPortfolioBtn" target="_blank" rel="noopener">View Portfolio</a>
-    </div>
-  </section>
-
-  <!-- ========== EDUCATION ========== -->
-  <section class="section" id="sec-education" aria-label="Education">
-    <div class="text-center">
-      <h2 class="section-title">Education</h2>
-      <p class="section-sub">Science · Architecture · Continuous Learning</p>
-    </div>
-
-    <div class="edu-block">
-      <h3>Motijheel Ideal School and College</h3>
-      <p class="edu-meta">2013 – 2023 · Science · SSC GPA 5.00 / Golden A+</p>
-      <div class="edu-gallery">
-        <img src="school-1.jpg" alt="Motijheel Ideal School" loading="lazy">
-        <img src="school-2.jpg" alt="School campus" loading="lazy">
+    <section id="education" class="section" data-section="education" aria-label="Education">
+      <div class="section-inner">
+        <h2 class="section-title">Education</h2>
+        <p class="section-sub">Academic Path</p>
+        <div class="edu-grid">
+          <article class="edu-card">
+            <div class="edu-gallery">
+              <img src="school-1.jpg" alt="Motijheel Ideal School and College" loading="lazy" data-full="school-1.jpg">
+              <img src="school-2.jpg" alt="Motijheel Ideal School and College" loading="lazy" data-full="school-2.jpg">
+            </div>
+            <div class="edu-info">
+              <h3>Motijheel Ideal School and College</h3>
+              <div class="edu-meta">2013 – 2023 · Science</div>
+              <p>Secondary education completed with a strong foundation in science. বিজ্ঞানের ভিত্তিতে গড়া শিক্ষার সেই দীর্ঘ অধ্যায়।</p>
+              <span class="edu-badge">SSC GPA 5.00 / Golden A+</span>
+            </div>
+          </article>
+          <article class="edu-card">
+            <div class="edu-gallery">
+              <img src="college-1.jpg" alt="Notre Dame College" loading="lazy" data-full="college-1.jpg">
+              <img src="college-2.jpg" alt="Notre Dame College" loading="lazy" data-full="college-2.jpg">
+              <img src="college-3.jpg" alt="Notre Dame College" loading="lazy" data-full="college-3.jpg">
+              <img src="college-ndc.jpg" alt="Notre Dame College" loading="lazy" data-full="college-ndc.jpg">
+            </div>
+            <div class="edu-info">
+              <h3>Notre Dame College</h3>
+              <div class="edu-meta">2023 – 2025 · Science · Group 1 · HSC 2025</div>
+              <p>Higher secondary education in the science stream. উচ্চ মাধ্যমিকের সেই কঠোর অথচ গঠনমূলক অধ্যায়।</p>
+              <span class="edu-badge">GPA 5.00 / Golden A+</span>
+            </div>
+          </article>
+          <article class="edu-card">
+            <div class="edu-gallery">
+              <img src="university-1.jpg" alt="BRAC University" loading="lazy" data-full="university-1.jpg">
+              <img src="university-2.webp" alt="BRAC University" loading="lazy" data-full="university-2.webp">
+              <img src="university-3.jpg" alt="BRAC University" loading="lazy" data-full="university-3.jpg">
+            </div>
+            <div class="edu-info">
+              <h3>BRAC University</h3>
+              <div class="edu-meta">Architecture · ARC 101 · Summer 2026 · Roll 100061008</div>
+              <p>Architecture student exploring a transition toward Computer Science and Engineering. স্থাপত্যের ভাষা শিখে কম্পিউটার বিজ্ঞানের দিকে পথ খোঁজার এই যাত্রা এখনো চলমান।</p>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="edu-block">
-      <h3>Notre Dame College</h3>
-      <p class="edu-meta">2023 – 2025 · Science · Group 1 · HSC 2025 · GPA 5.00 / Golden A+</p>
-      <div class="edu-gallery">
-        <img src="college-1.jpg" alt="Notre Dame College" loading="lazy">
-        <img src="college-2.jpg" alt="NDC campus" loading="lazy">
-        <img src="college-3.jpg" alt="College life" loading="lazy">
-        <img src="college-ndc.jpg" alt="NDC" loading="lazy">
+    <section id="models" class="section" data-section="models" aria-label="Architectural Models">
+      <div class="section-inner">
+        <h2 class="section-title">Architectural Models</h2>
+        <p class="section-sub">From Scratch to Final</p>
+        <div class="models-meta">
+          <span><strong>Studio</strong> ARC 101</span>
+          <span><strong>Term</strong> Summer 2026</span>
+          <span><strong>Roll</strong> 100061008</span>
+          <span><strong>Discipline</strong> Architecture</span>
+        </div>
+        <div class="orbit-wrap" id="modelsOrbit" aria-label="Architectural models carousel">
+          <div class="orbit-stage" id="modelsStage"></div>
+        </div>
+        <p class="orbit-hint">Click a model for details · Orbit pauses while viewing · ~3s per front</p>
+        <div class="section-desc">
+          <p>From the first grid of squares to the final pavilion, each model is a step in learning how space, material and rhythm speak. Scratch থেকে শেষ পর্যন্ত — প্রতিটি মডেল স্থান, উপকরণ ও ছন্দের ভাষা শেখার একটি ধাপ।</p>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="edu-block">
-      <h3>BRAC University</h3>
-      <p class="edu-meta">Architecture · Exploring the transition toward Computer Science and Engineering</p>
-      <div class="edu-gallery">
-        <img src="university-1.jpg" alt="BRAC University" loading="lazy">
-        <img src="university-2.webp" alt="University campus" loading="lazy">
-        <img src="university-3.jpg" alt="Architecture studio" loading="lazy">
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== ARCHITECTURAL MODELS ========== -->
-  <section class="section" id="sec-models" aria-label="Architectural Models">
-    <div class="text-center">
-      <h2 class="section-title">Architectural Models</h2>
-      <p class="section-sub">From Scratch to Final · ARC 101 · Summer 2026 · Roll 100061008</p>
-    </div>
-    <div class="carousel-wrap model-carousel" id="modelCarousel" data-group="models"></div>
-    <div class="carousel-desc">
-      <p>Each model begins with a question of space, order and material. From the first grid of black squares to the monsoon pavilion, the work moves through visual order, lines found in nature, low-relief carving, planes in composition, and the subtraction of volumes — ending in a spatial interpretation of seasonal rhythm.</p>
-    </div>
-  </section>
-
-  <!-- ========== SKILLS ========== -->
-  <section class="section" id="sec-skills" aria-label="Skills">
-    <div id="skillsMain">
-      <div class="text-center">
+    <section id="skills" class="section" data-section="skills" aria-label="Skills">
+      <div class="section-inner" id="skillsMain">
         <h2 class="section-title">Skills</h2>
-        <p class="section-sub">Art · Code · Media · Language</p>
-      </div>
-      <div class="skills-grid">
-        <button class="skill-card" data-skill="art" aria-label="Art and Drawing">
-          <h3>Art &amp; Drawing</h3>
-          <p>Sketches · Paintings · Exhibition works</p>
-        </button>
-        <button class="skill-card" data-skill="coding" aria-label="Coding and Website Making">
-          <h3>Coding &amp; Website Making</h3>
-          <p>Web projects · Interactive experiments</p>
-        </button>
-        <button class="skill-card" data-skill="video" aria-label="Video and Content Creation">
-          <h3>Video / Content Creation</h3>
-          <p>Educational media · English content</p>
-        </button>
-        <button class="skill-card" data-skill="literary" aria-label="Reading and Speaking English">
-          <h3>Reading &amp; Speaking English Fluently</h3>
-          <p>Literature · Communication · Practice</p>
-        </button>
-      </div>
-    </div>
-
-    <!-- Art subview -->
-    <div class="skill-subview" id="skill-art">
-      <button class="btn skill-back" data-close-skill aria-label="Close Art view">✕ Close</button>
-      <div class="text-center">
-        <h2 class="section-title">Art &amp; Drawing</h2>
-        <p class="section-sub">Works · Sketches · Exhibition pieces</p>
-      </div>
-      <div class="carousel-wrap art-carousel" id="artCarousel" data-group="art"></div>
-      <div class="carousel-desc">
-        <p>From quiet observations of loneliness and waiting to river-silences and dream-states, the drawings carry both personal atmosphere and formal experiment. Some works were shown in exhibitions; others remain private studies of light, figure and mood.</p>
-      </div>
-    </div>
-
-    <!-- Coding subview -->
-    <div class="skill-subview" id="skill-coding">
-      <button class="btn skill-back" data-close-skill aria-label="Close Coding view">✕ Close</button>
-      <div class="text-center">
-        <h2 class="section-title">Coding &amp; Website Making</h2>
-        <p class="section-sub">Digital Projects</p>
-      </div>
-      <div class="project-cards">
-        <div class="project-card">
-          <h4>TrendCart</h4>
-          <p>An affiliate-oriented e-commerce / marketplace web project exploring product presentation, layout and interactive shopping flow.</p>
-          <a class="btn" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener">View Live</a>
-        </div>
-        <div class="project-card">
-          <h4>Office Engine</h4>
-          <p>A browser-based 3D-style game experience with an atmospheric exploration concept — built as a personal experiment in interactive digital space.</p>
-          <a class="btn" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener">View Live</a>
+        <p class="section-sub">Practice &amp; Exploration</p>
+        <div class="skills-grid">
+          <button class="skill-card clickable" data-skill="art" aria-label="Open Art and Drawing">
+            <h3>Art &amp; Drawing</h3>
+            <p>Sketches, colour work, exhibition pieces and visual experiments.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="skill-card clickable" data-skill="coding" aria-label="Open Coding and Website Making">
+            <h3>Coding &amp; Website Making</h3>
+            <p>Web projects, interactive experiments and digital craft.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="skill-card clickable" data-skill="video" aria-label="Open Video and Content Creation">
+            <h3>Video / Content Creation</h3>
+            <p>Educational and creative video content.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="skill-card clickable" data-skill="reading" aria-label="Open Reading and Speaking English">
+            <h3>Reading &amp; Speaking English Fluently</h3>
+            <p>Literature, language practice and cultural reading.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
         </div>
       </div>
-    </div>
 
-    <!-- Video subview -->
-    <div class="skill-subview" id="skill-video">
-      <button class="btn skill-back" data-close-skill aria-label="Close Video view">✕ Close</button>
-      <div class="text-center">
-        <h2 class="section-title">Video / Content Creation</h2>
-        <p class="section-sub">English learning media</p>
+      <div class="skill-sub" id="skill-art" aria-label="Art and Drawing">
+        <div class="section-inner">
+          <div class="skill-sub-header">
+            <div>
+              <h2 class="section-title">Art &amp; Drawing</h2>
+              <p class="section-sub">Works on paper, screen and exhibition</p>
+            </div>
+            <button class="close-x" data-close-skill aria-label="Close">×</button>
+          </div>
+          <div class="orbit-wrap" id="artOrbit">
+            <div class="orbit-stage" id="artStage"></div>
+          </div>
+          <p class="orbit-hint">Click an artwork for title and context · ~3s per front</p>
+          <div class="section-desc">
+            <p>Drawings and colour works that carry silence, waiting, distance and the quiet flow of water. অঙ্কন ও রঙের মাধ্যমে নীরবতা, অপেক্ষা, দূরত্ব ও জলের ধীর প্রবাহ ধরার চেষ্টা।</p>
+          </div>
+        </div>
       </div>
-      <div class="carousel-wrap video-carousel" id="videoCarousel" data-group="video"></div>
-      <div class="carousel-desc">
-        <p>Short educational videos focused on English grammar and usage — Modifiers, Connectors, and Subject-Verb Agreement — created to support clear communication and language practice.</p>
-      </div>
-    </div>
 
-    <!-- Literary subview -->
-    <div class="skill-subview" id="skill-literary">
-      <button class="btn skill-back" data-close-skill aria-label="Close Literary view">✕ Close</button>
-      <div class="text-center">
-        <h2 class="section-title">Reading &amp; Speaking English Fluently</h2>
-        <p class="section-sub">Literature · Language · Cultural awareness</p>
+      <div class="skill-sub" id="skill-coding" aria-label="Coding and Website Making">
+        <div class="section-inner">
+          <div class="skill-sub-header">
+            <div>
+              <h2 class="section-title">Coding &amp; Website Making</h2>
+              <p class="section-sub">Digital Projects</p>
+            </div>
+            <button class="close-x" data-close-skill aria-label="Close">×</button>
+          </div>
+          <div class="project-cards">
+            <article class="project-card">
+              <h4>TrendCart</h4>
+              <p>An affiliate-oriented e-commerce / marketplace web project.</p>
+              <a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a>
+            </article>
+            <article class="project-card">
+              <h4>Office Engine</h4>
+              <p>A browser-based 3D-style game experience with an atmospheric exploration concept.</p>
+              <a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a>
+            </article>
+          </div>
+        </div>
       </div>
-      <div class="prose" style="max-width:640px;margin:0 auto">
-        <p>Reading remains a quiet companion — Bengali literature and selected English works together shape both imagination and expression. Speaking practice continues as an ongoing discipline of clarity and confidence.</p>
-        <ul class="literary-list">
-          <li><strong>Samaresh Majumdar</strong> — Uttaradhikar, Kalbela, Kalpurush</li>
-          <li><strong>Humayun Ahmed</strong> — Himu series, Amar Bondhu Rashed</li>
-          <li><strong>Rabindranath Tagore</strong> — selected poetry, short stories and literary works</li>
-          <li><strong>Ishwar Chandra Vidyasagar</strong> — verified notable works</li>
-          <li><strong>Michael Madhusudan Dutt</strong> — verified notable works</li>
-          <li><strong>Ahmed Sofa</strong> — verified notable works</li>
-        </ul>
-        <p style="margin-top:20px;color:var(--text-dim);font-size:0.95rem">The aim is not certification but lived familiarity with language — reading deeply, speaking with care, and remaining open to both classical and contemporary voices.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- ========== ACHIEVEMENTS ========== -->
-  <section class="section" id="sec-achievements" aria-label="Achievements">
-    <div class="text-center">
-      <h2 class="section-title">Achievements</h2>
-      <p class="section-sub">Academic · Artistic · Recognition</p>
-    </div>
-    <div class="achieve-grid">
-      <button class="achieve-card" data-achieve="ssc" aria-label="SSC Transcript">
-        <h4>SSC</h4>
-        <p>GPA 5.00 · Golden A+</p>
-      </button>
-      <button class="achieve-card" data-achieve="hsc" aria-label="HSC Transcript">
-        <h4>HSC</h4>
-        <p>GPA 5.00 · Golden A+</p>
-      </button>
-      <button class="achieve-card" data-achieve="drawing" aria-label="Drawing recognition">
-        <h4>Drawing / Art Recognition</h4>
-        <p>Praise &amp; signature</p>
-      </button>
-      <button class="achieve-card" data-achieve="arc" aria-label="Architecture gradesheet">
-        <h4>Architecture Academic Record</h4>
-        <p>ARC 101 · First semester</p>
-      </button>
-      <button class="achieve-card" data-achieve="exhibition" aria-label="Exhibition work">
-        <h4>Exhibition</h4>
-        <p>Displayed artwork</p>
-      </button>
-    </div>
-  </section>
-
-  <!-- ========== CONTACT ========== -->
-  <section class="section" id="sec-contact" aria-label="Contact">
-    <div class="text-center">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-sub">Connect · Collaborate · Converse</p>
-    </div>
-    <div class="contact-card">
-      <p style="font-size:1.05rem;color:var(--text)">Open to thoughtful conversation, creative collaboration and shared projects.</p>
-      <div class="contact-links">
-        <a class="contact-link" href="mailto:shadidahamed.matashome05m@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-          <span>Email</span>
-        </a>
-        <a class="contact-link" href="https://github.com/shadidahamed" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          <span>GitHub</span>
-        </a>
-        <a class="contact-link" href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          <span>LinkedIn</span>
-        </a>
-        <a class="contact-link" href="https://www.instagram.com/shade_ed25" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          <span>Instagram</span>
-        </a>
-        <a class="contact-link" href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          <span>Facebook</span>
-        </a>
-        <a class="contact-link" href="https://wa.me/8801326162684" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          <span>WhatsApp</span>
-        </a>
-        <a class="contact-link" href="https://x.com/ShadidAhamed" target="_blank" rel="noopener" aria-label="X">
-          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M15.232 4L9 10.232"/></svg>
-          <span>X</span>
-        </a>
-        <a class="contact-link" href="https://pin.it/4Z5y34R2T" target="_blank" rel="noopener" aria-label="Pinterest">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12c0 2 1.5 3.5 3.5 3.5S15 14 15 12s-1.5-3.5-3.5-3.5S8 10 8 12z"/></svg>
-          <span>Pinterest</span>
-        </a>
-        <a class="contact-link" href="https://www.reddit.com/user/Shade_ed25" target="_blank" rel="noopener" aria-label="Reddit">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M17 12a2 2 0 0 0-2-2 2 2 0 0 0-1.5.7 5 5 0 0 0-3 0A2 2 0 0 0 9 10a2 2 0 0 0-2 2c0 .7.4 1.3 1 1.6V15a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-1.4c.6-.3 1-.9 1-1.6z"/></svg>
-          <span>Reddit</span>
-        </a>
-        <a class="contact-link" href="https://www.tumblr.com/" target="_blank" rel="noopener" aria-label="Tumblr">
-          <svg viewBox="0 0 24 24"><path d="M14.5 18h-2.5v-6.5c0-1.2.5-1.8 1.5-1.8h1V7h-2c-2.5 0-3.5 1.5-3.5 3.5V18H6.5V7h2.5v1.2C9.5 7 11 6 13 6h2.5v3.5h-1.5c-.8 0-1 .4-1 1.2V18z"/></svg>
-          <span>Tumblr</span>
-        </a>
+      <div class="skill-sub" id="skill-video" aria-label="Video Content Creation">
+        <div class="section-inner">
+          <div class="skill-sub-header">
+            <div>
+              <h2 class="section-title">Video / Content Creation</h2>
+              <p class="section-sub">Selected works</p>
+            </div>
+            <button class="close-x" data-close-skill aria-label="Close">×</button>
+          </div>
+          <div class="orbit-wrap video-orbit" id="videoOrbit">
+            <div class="orbit-stage" id="videoStage"></div>
+          </div>
+          <p class="orbit-hint">Click a card to open on YouTube · ~3s per front</p>
+          <div class="section-desc">
+            <p>Educational video content on English grammar and usage — modifiers, connectors, and subject–verb agreement. ভাষার নিয়ম ও ব্যবহার নিয়ে তৈরি শিক্ষামূলক ভিডিও।</p>
+          </div>
+        </div>
       </div>
-      <p class="contact-loc">Shantinagar, Dhaka</p>
-    </div>
-  </section>
 
-  <!-- ========== CV ========== -->
-  <section class="section" id="sec-cv" aria-label="CV">
-    <div class="cv-panel">
-      <h2 class="section-title">Shadid Ahamed — Professional CV</h2>
-      <p style="color:var(--text-dim);margin-top:8px">View or download the complete curriculum vitae.</p>
-      <div class="cv-actions">
-        <button class="btn btn-solid" id="viewCvBtn">View CV</button>
-        <a class="btn" href="Shadid_Ahamed_Professional_CV.pdf" download="Shadid_Ahamed_Professional_CV.pdf">Download CV</a>
+      <div class="skill-sub" id="skill-reading" aria-label="Reading and Speaking">
+        <div class="section-inner">
+          <div class="skill-sub-header">
+            <div>
+              <h2 class="section-title">Reading &amp; Speaking English Fluently</h2>
+              <p class="section-sub">Literary curiosity &amp; language practice</p>
+            </div>
+            <button class="close-x" data-close-skill aria-label="Close">×</button>
+          </div>
+          <div class="reading-panel">
+            <p class="reading-intro">Reading across Bengali and English literature, with ongoing practice in spoken English and cultural awareness. Interest centres on narrative, character and the texture of language. সাহিত্যের আস্বাদন ও ভাষার অনুশীলন — গল্প, চরিত্র ও ভাষার সূক্ষ্ম স্তর নিয়ে আগ্রহ।</p>
+            <h3>Samaresh Majumdar</h3>
+            <ul>
+              <li>Uttaradhikar</li>
+              <li>Kalbela</li>
+              <li>Kalpurush</li>
+            </ul>
+            <h3>Humayun Ahmed</h3>
+            <ul>
+              <li>Himu-related reading</li>
+              <li>Amar Bondhu Rashed</li>
+            </ul>
+            <h3>Rabindranath Tagore</h3>
+            <ul>
+              <li>Selected poetry, short stories and literary works</li>
+            </ul>
+            <h3>Ishwar Chandra Vidyasagar · Michael Madhusudan Dutt · Ahmed Sofa</h3>
+            <ul>
+              <li>Selected notable works (verified titles only)</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="achievements" class="section" data-section="achievements" aria-label="Achievements">
+      <div class="section-inner">
+        <h2 class="section-title">Achievements</h2>
+        <p class="section-sub">Records &amp; Recognition</p>
+        <div class="achieve-grid">
+          <button class="achieve-card clickable" data-achieve="ssc" aria-label="View SSC Transcript">
+            <div class="label">Academic</div>
+            <h3>SSC</h3>
+            <p>GPA 5.00 / Golden A+ · Motijheel Ideal School and College</p>
+          </button>
+          <button class="achieve-card clickable" data-achieve="hsc" aria-label="View HSC Transcript">
+            <div class="label">Academic</div>
+            <h3>HSC</h3>
+            <p>GPA 5.00 / Golden A+ · Notre Dame College</p>
+          </button>
+          <button class="achieve-card clickable" data-achieve="drawing" aria-label="View drawing recognition">
+            <div class="label">Art</div>
+            <h3>Drawing / Art Recognition</h3>
+            <p>Praise and signature associated with drawing and sketch work.</p>
+          </button>
+          <button class="achieve-card clickable" data-achieve="exhibition" aria-label="View exhibition work">
+            <div class="label">Exhibition</div>
+            <h3>Exhibition</h3>
+            <p>Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).</p>
+          </button>
+          <button class="achieve-card clickable" data-achieve="arc" aria-label="View Architecture gradesheet">
+            <div class="label">Architecture</div>
+            <h3>Architecture Academic Record</h3>
+            <p>ARC 101 and related first-semester record · BRAC University</p>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" data-section="contact" aria-label="Contact">
+      <div class="section-inner">
+        <div class="contact-card">
+          <h2>Contact</h2>
+          <p class="contact-loc">Shantinagar, Dhaka</p>
+          <div class="contact-grid">
+            <a class="contact-link" href="mailto:shadidahamed.matashome05m@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>Email
+            </a>
+            <a class="contact-link" href="https://github.com/shadidahamed" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub
+            </a>
+            <a class="contact-link" href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+            </a>
+            <a class="contact-link" href="https://www.instagram.com/shade_ed25" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram
+            </a>
+            <a class="contact-link" href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook
+            </a>
+            <a class="contact-link" href="https://wa.me/8801326162684" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp
+            </a>
+            <a class="contact-link" href="https://x.com/ShadidAhamed" target="_blank" rel="noopener noreferrer" aria-label="X">
+              <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg>X
+            </a>
+            <a class="contact-link" href="https://pin.it/4Z5y34R2T" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pinterest
+            </a>
+            <a class="contact-link" href="https://www.reddit.com/user/Shade_ed25" target="_blank" rel="noopener noreferrer" aria-label="Reddit">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/><path d="M8.5 15c1.2 1 2.5 1.5 3.5 1.5s2.3-.5 3.5-1.5"/></svg>Reddit
+            </a>
+            <a class="contact-link" href="https://www.tumblr.com/" target="_blank" rel="noopener noreferrer" aria-label="Tumblr">
+              <svg viewBox="0 0 24 24"><path d="M14 3v5h3v3h-3v5.5c0 1.2.5 1.5 1.5 1.5H17v3h-3.5C11 21 10 19.5 10 16.5V11H8V8h2V3h4z"/></svg>Tumblr
+            </a>
+          </div>
+          <p class="text-center mt-2" style="font-size:0.8rem;color:var(--text-muted)">
+            <a href="https://www.google.com/maps/search/Shantinagar,+Dhaka" target="_blank" rel="noopener noreferrer" style="color:var(--gold-muted)">Map · Shantinagar, Dhaka</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv" class="section" data-section="cv" aria-label="CV">
+      <div class="section-inner">
+        <div class="cv-panel">
+          <h2>Shadid Ahamed - Professional CV</h2>
+          <p>View or download the professional curriculum vitae.</p>
+          <div class="cv-actions">
+            <button class="btn-gold" id="viewCvBtn" aria-label="View CV">View CV</button>
+            <a class="btn-gold" href="Shadid_Ahamed_Professional_CV.pdf" download="Shadid_Ahamed_Professional_CV.pdf" aria-label="Download CV">Download CV</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
 
-<!-- UNIVERSAL VIEWER -->
-<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Detail viewer">
-  <div class="viewer-inner">
-    <button class="viewer-close" id="viewerClose" aria-label="Close viewer">×</button>
-    <div class="viewer-media" id="viewerMedia"></div>
-    <div class="viewer-info" id="viewerInfo"></div>
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-media" id="modalMedia"></div>
+      <div class="modal-info" id="modalInfo"></div>
+    </div>
   </div>
 </div>
 
 <script>
-/* ========== DATA (exact filenames preserved) ========== */
-const BOOK_IMAGES = [
-  "811615849_2097588261148773_877248636819443508_n.jpg",
-  "815366796_1754064392528440_1990530380060926840_n (1).jpg",
-  "817550850_1756948922083208_6663409752770103109_n.jpg",
-  "ChatGPT Image Sep 20, 2026, 07_38_48 PM.png",
-  "book-3d.jpg"
+(function(){
+'use strict';
+
+const BOOK_IMGS = [
+  '811615849_2097588261148773_877248636819443508_n.jpg',
+  '815366796_1754064392528440_1990530380060926840_n (1).jpg',
+  '817550850_1756948922083208_6663409752770103109_n.jpg',
+  'ChatGPT Image Sep 20, 2026, 07_38_48 PM.png',
+  'book-3d.jpg'
 ];
 
-const ART_ITEMS = [
-  {src:"809518654_1855217995842076_8923680691947304600_n.jpg", title:"আবার দেখা হবে", desc:"A quiet farewell held in the promise of meeting again."},
-  {src:"809601262_4548993055379554_8793039364914601083_n.jpg", title:"আমি কোথায় — At the Dimension and Space", desc:"A figure suspended between dimension and space, searching for location and self."},
-  {src:"813466984_26807832862248578_2653115749408704795_n.jpg", title:"কখন যে আসবেন — অপেক্ষা", desc:"Waiting — the long, patient interval before arrival."},
-  {src:"813692048_1750841226169127_6723820080107089098_n.jpg", title:"আর একটি বার যদি বলতে পেতাম", desc:"If only one more time the words could be spoken."},
-  {src:"813853349_2273476383432547_5877535730504115386_n.jpg", title:"Loneliness in a Lovely Island", desc:"Isolation wrapped in beauty — the island that holds both solitude and grace."},
-  {src:"818061932_846874715114836_2565138691570136914_n.jpg", title:"চলো ঘুমতে যাই", desc:"Come, let us sleep — a gentle invitation into rest and dream."},
-  {src:"818478656_1667736108690904_8025924023257939696_n.jpg", title:"ঘুম কেন ভাঙছে না", desc:"Why does the sleep not break — the lingering hold of a dream."},
-  {src:"Screenshot 2026-09-20 202528.png", title:"The River That Flows the Water of Silence", desc:"A river carrying silence as its only water."},
-  {src:"image colour 1.jpg", title:"Colour Study", desc:"Early exploration of colour and atmosphere."},
-  {src:"image colour.jpg", title:"Colour Work", desc:"Further study in colour and mood."},
-  {src:"image ipad 1.png", title:"Digital Sketch", desc:"First explorations on digital surface."},
-  {src:"image sketch 1.jpg", title:"Early Sketch", desc:"Foundational line work."},
-  {src:"image sketch 2.jpg", title:"Sketch Study", desc:"Continued observational drawing."},
-  {src:"image sketch 3.jpg", title:"Sketch III", desc:"Further development of form and tone."},
-  {src:"IMG scetch 1.jpg", title:"Exhibited Work", desc:"Artwork associated with exhibition display."}
+const ART_WORKS = [
+  {src:'809518654_1855217995842076_8923680691947304600_n.jpg', title:'আবার দেখা হবে', ctx:''},
+  {src:'809601262_4548993055379554_8793039364914601083_n.jpg', title:'আমি কোথায় — At the Dimension and Space', ctx:''},
+  {src:'813466984_26807832862248578_2653115749408704795_n.jpg', title:'কখন যে আসবেন — অপেক্ষা', ctx:''},
+  {src:'813692048_1750841226169127_6723820080107089098_n.jpg', title:'আর একটি বার যদি বলতে পেতাম', ctx:''},
+  {src:'813853349_2273476383432547_5877535730504115386_n.jpg', title:'Loneliness in a Lovely Island', ctx:''},
+  {src:'818061932_846874715114836_2565138691570136914_n.jpg', title:'চলো ঘুমতে যাই', ctx:''},
+  {src:'818478656_1667736108690904_8025924023257939696_n.jpg', title:'ঘুম কেন ভাঙছে না', ctx:''},
+  {src:'Screenshot 2026-09-20 202528.png', title:'The River That Flows the Water of Silence', ctx:''},
+  {src:'image colour 1.jpg', title:'Colour study', ctx:''},
+  {src:'image colour.jpg', title:'Colour work', ctx:''},
+  {src:'image ipad 1.png', title:'Digital / iPad work', ctx:''},
+  {src:'image sketch 1.jpg', title:'Early sketch', ctx:''},
+  {src:'image sketch 2.jpg', title:'Sketch study', ctx:''},
+  {src:'image sketch 3.jpg', title:'Sketch study', ctx:''},
+  {src:'IMG scetch 1.jpg', title:'Exhibited work', ctx:'Associated with exhibition contexts'}
 ];
 
-const MODEL_ITEMS = [
+const MODELS = [
   {
-    src:"Screenshot 2026-09-20 202305.png",
-    project:"Squares in Grid",
-    number:"Architectural Project 1",
-    model:"Black square composition",
-    concept:"To develop sensitivity toward visual order, rhythm, spacing and controlled composition.",
-    method:"Compose black 25 × 25 squares on a white base. Base grid 12 × 12, base size 300 × 300. Materials: matte surface of black model paper, Swiss board."
+    src:'Screenshot 2026-09-20 202305.png',
+    project:'Squares in Grid',
+    number:'Architectural Project 1',
+    model:'Black squares composition',
+    concept:'To develop sensitivity toward visual order. Rhythm, spacing and controlled composition through a strict grid. দৃশ্যমান শৃঙ্খলা, ছন্দ ও নিয়ন্ত্রিত বিন্যাসের প্রতি সংবেদনশীলতা গড়ে তোলা।',
+    method:'Compose black 25 × 25 squares on a white base. Base grid 12 × 12. Base size 300 × 300. Materials: matte surface of black model paper, Swiss board.'
   },
   {
-    src:"Screenshot 2026-09-20 202318.png",
-    project:"Lines in Nature",
-    number:"Architectural Project 2",
-    model:"String and frame composition",
-    concept:"Discover lines in nature, analyse them and develop spatial compositions with strong form-space relationship.",
-    method:"Phase 1: Photograph lines found in nature and select a composition with strong relationships between lines and spaces. Phase 2: Metal rod frame approximately 200 × 250 × 400; strings of varying thickness create lines. Emphasis on voids, spaces, line relationships, spatial rhythm, thickness and form-space interaction."
+    src:'Screenshot 2026-09-20 202318.png',
+    project:'Lines in Nature',
+    number:'Architectural Project 2',
+    model:'String and frame composition',
+    concept:'Discover lines in nature, analyse them and develop spatial compositions. Focus on form–space relationship, voids, thickness and spatial rhythm. প্রকৃতির রেখা থেকে স্থানিক ছন্দ ও শূন্যতার সম্পর্ক খুঁজে নেওয়া।',
+    method:'Phase 1: Photograph lines found in nature. Phase 2: Metal rod frame approx. 200 × 250 × 400; strings of varying thickness. Emphasize voids, line relationships and form–space interaction.'
   },
   {
-    src:"Screenshot 2026-09-20 202429.png",
-    project:"Low Relief",
-    number:"Architectural Project 3",
-    model:"Styrofoam to plaster cast",
-    concept:"Carving spaces from a material of given thickness — a process similar to sculpture. Each composition recreates an assigned building image through extracted polygons.",
-    method:"Phase 1: 300 × 300 styrofoam with multiple layers; maximum low-relief height 75 mm. Phase 2: Final form cast using plaster of Paris with pigments."
+    src:'Screenshot 2026-09-20 202429.png',
+    project:'Low Relief',
+    number:'Architectural Project 3',
+    model:'Styrofoam to plaster cast (view 1)',
+    concept:'Carving spaces from a material of given thickness — process similar to sculpture. নির্দিষ্ট পুরুত্বের উপাদান থেকে স্থান খোদাই; ভাস্কর্যের মতো প্রক্রিয়া।',
+    method:'Phase 1: 300 × 300 styrofoam, multiple layers, max height 75 mm. Phase 2: Cast in plaster of Paris with pigments.',
+    methodsNotes:['Create styrofoam model in layers; dry each layer','Open-sided mold ~300 × 300','Check leaks with water','Avoid super glue on styrofoam','Mix plaster; add water gradually to whipped-cream consistency','Pour; leave undisturbed; sand after setting']
   },
   {
-    src:"Screenshot 2026-09-20 202501.png",
-    project:"Low Relief (Detail)",
-    number:"Architectural Project 3 — Process",
-    model:"Casting and finishing",
-    concept:"Studio process notes for low-relief casting.",
-    method:"Creating the styrofoam model; drying each layer; constructing an open-sided mold (~300 × 300 base); checking leaks with water; attaching the styro model (avoid super glue — it damages styrofoam); mixing plaster of Paris with pigments, adding water gradually to a whipped-cream consistency; pouring; allowing adequate setting time; leaving undisturbed; separating and sanding for finish."
+    src:'Screenshot 2026-09-20 202501.png',
+    project:'Low Relief',
+    number:'Architectural Project 3',
+    model:'Styrofoam to plaster cast (view 2)',
+    concept:'Carving spaces from a material of given thickness. Process similar to sculpture.',
+    method:'Same process — styrofoam layers, open-sided mold, plaster of Paris and pigments.',
+    methodsNotes:['Create styrofoam model in layers; dry each layer','Open-sided mold ~300 × 300','Check leaks with water','Avoid super glue on styrofoam','Mix plaster; add water gradually','Pour; leave undisturbed; sand after setting']
   },
   {
-    src:"Screenshot 2026-09-20 202603.png",
-    project:"Composition with Planes",
-    number:"Architectural Project 4",
-    model:"Interlocking planes",
-    concept:"Planes as key elements of architectural vocabulary. Size, shape, proportion, position and spatial relationship define the space enclosed and the form generated. To create drama through hierarchy, balance, emphasis, rhythm, harmony and unity.",
-    method:"Base approximately 300 × 450; height more than 300. Explore fluid space, interlock surfaces, vary plane sizes, monochromatic tones, thickness approximately 3–10, solid planes, careful craftsmanship."
+    src:'Screenshot 2026-09-20 202603.png',
+    project:'Composition with Planes',
+    number:'Architectural Project 4',
+    model:'Plane composition',
+    concept:'Planes as key elements of architectural vocabulary. Size, shape, proportion and position define enclosed space and form. To create drama. তলগুলো স্থাপত্যের মূল ভাষা — আকার, অনুপাত ও অবস্থান দিয়ে স্থান ও রূপ নির্ধারণ; নাটকীয়তা সৃষ্টি।',
+    method:'Base ~300 × 450; height >300. Explore fluid space, hierarchy, balance, rhythm, unity. Vary plane sizes; interlock surfaces; thickness ~3–10; monochromatic tones.'
   },
   {
-    src:"Screenshot 2026-09-20 202509.png",
-    project:"Space and Flow by Subtracting Volumes",
-    number:"Architectural Project 5",
-    model:"Triangle-based prism",
-    concept:"Study of spatial flow by subtracting portions from a solid. Focus on solid and void, internal/external space, geometric logic, proportional divisions, spatial experience and recognisability of the original form.",
-    method:"Study basic geometric solid; sketch and analyse inherent geometric order; identify directions for subtraction; use scaffold blocks; subtract volumes; establish interior/exterior relationships; preserve geometric integrity so the original form remains recognisable."
+    src:'Screenshot 2026-09-20 202509.png',
+    project:'Space and Flow by Subtracting Volumes',
+    number:'Architectural Project 5',
+    model:'Triangle-based prism subtraction',
+    concept:'Spatial flow by subtracting from a solid. Solid and void, internal/external space, geometric logic — while keeping the original form recognisable. কঠিন থেকে অংশ কেটে স্থানিক প্রবাহ তৈরি; মূল জ্যামিতিক রূপ চেনা যায় এমনভাবে।',
+    method:'Study geometric solid; sketch order; identify subtraction directions; scaffold blocks; preserve geometric integrity.'
   },
   {
-    src:"Screenshot 2026-09-20 202230.png",
-    project:"Seasonscape",
-    number:"Final Pavilion · ARC 101",
-    model:"Monsoon pavilion",
-    concept:"Six Seasons (গ্রীষ্ম, বর্ষা, শরৎ, হেমন্ত, শীত, বসন্ত). The model interprets MONSOON / বর্ষাকাল. Main poetic line: প্রবাহিত বর্ষণে · রিমঝিম ছন্দে. Rain may be gentle, scattered or overwhelming — each form has its own rhythm. That changing rhythm is translated into architectural flow.",
-    method:"Transformation of monsoon rhythm into spatial and architectural movement — atmosphere, colour, texture and emotional character of the rainy season given built form."
+    src:'Screenshot 2026-09-20 202230.png',
+    project:'Seasonscape',
+    number:'Final Pavilion · ARC 101',
+    model:'Monsoon pavilion',
+    concept:'Six seasons — গ্রীষ্ম, বর্ষা, শরৎ, হেমন্ত, শীত, বসন্ত. This model interprets monsoon / বর্ষাকাল. প্রবাহিত বর্ষণে · রিমঝিম ছন্দে. Rain may be gentle, scattered or overwhelming; that changing rhythm becomes architectural flow.',
+    method:'Final pavilion translating monsoon rhythm into spatial movement and form.'
   }
 ];
 
-const VIDEO_ITEMS = [
-  {id:"MCj4pNiJR_Q", title:"Modifiers English", url:"https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS"},
-  {id:"K29JNurQr9c", title:"Connectors English", url:"https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I"},
-  {id:"0ba53jWZy5o", title:"Subject-Verb Agreement", url:"https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg"}
+const VIDEOS = [
+  {title:'Modifiers English', url:'https://youtu.be/MCj4pNiJR_Q?si=pOBr9xrs4MTIZYPS', id:'MCj4pNiJR_Q'},
+  {title:'Connectors English', url:'https://youtu.be/K29JNurQr9c?si=WhIaSmjzuS6xFA1I', id:'K29JNurQr9c'},
+  {title:'Subject-Verb Agreement', url:'https://youtu.be/0ba53jWZy5o?si=CoT3J1wrEhQz7OPg', id:'0ba53jWZy5o'}
 ];
 
-const ACHIEVE_DATA = {
-  ssc: {type:"pdf", src:"SSC Transcript.pdf", title:"SSC Transcript", meta:"GPA 5.00 · Golden A+"},
-  hsc: {type:"pdf", src:"HSC Transcript.pdf", title:"HSC Transcript", meta:"GPA 5.00 · Golden A+"},
-  drawing: {type:"img", src:"814113108_1617142683373760_3602804557652732585_n.jpg", title:"Drawing / Art Recognition", meta:"Praise and signature associated with sketch work"},
-  arc: {type:"pdf", src:"1000061008_UG_ARC_Gradesheet_Web.pdf", title:"Architecture Academic Record", meta:"ARC 101 Design I · ARC 111 · ARC 121 · ARC 122 · CSE 103 · ENG 091 · PHY 102"},
-  exhibition: {type:"img", src:"IMG scetch 1.jpg", title:"Exhibition Work", meta:"Artwork associated with exhibition display"}
+const ACHIEVE = {
+  ssc:{type:'pdf', src:'SSC Transcript.pdf', title:'SSC Transcript', body:'GPA 5.00 / Golden A+ · Motijheel Ideal School and College'},
+  hsc:{type:'pdf', src:'HSC Transcript.pdf', title:'HSC Transcript', body:'GPA 5.00 / Golden A+ · Notre Dame College'},
+  drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition', body:'Praise and signature associated with drawing and sketch work.'},
+  exhibition:{type:'img', src:'IMG scetch 1.jpg', title:'Exhibition', body:'Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).'},
+  arc:{type:'pdf', src:'1000061008_UG_ARC_Gradesheet_Web.pdf', title:'Architecture Academic Record', body:'First-semester record including ARC 101, ARC 111, ARC 121, ARC 122, CSE 103, ENG 091, PHY 102, credits and GPA as recorded.'}
 };
 
-/* ========== SPA NAVIGATION ========== */
-const sections = document.querySelectorAll(".section");
-const navBtns = document.querySelectorAll(".nav-btn");
-const navLinks = document.getElementById("navLinks");
-const navToggle = document.getElementById("navToggle");
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('[data-section]');
+const navToggle = document.getElementById('navToggle');
+const navLinksEl = document.getElementById('navLinks');
 
-function showSection(id) {
-  sections.forEach(s => s.classList.remove("active"));
-  navBtns.forEach(b => b.classList.remove("active"));
-  const sec = document.getElementById("sec-" + id);
-  if (sec) sec.classList.add("active");
-  const btn = document.querySelector(`.nav-btn[data-section="${id}"]`);
-  if (btn) btn.classList.add("active");
-  navLinks.classList.remove("open");
-  navToggle.setAttribute("aria-expanded", "false");
-  // pause all carousels when leaving
-  Object.values(carousels).forEach(c => c && c.pause());
-  // resume only active section carousels
-  requestAnimationFrame(() => {
-    if (id === "book" && carousels.book) carousels.book.resume();
-    if (id === "models" && carousels.models) carousels.models.resume();
-    if (id === "skills") {
-      // art carousel only if art subview open
-    }
+function showSection(id){
+  sections.forEach(s=>s.classList.toggle('active', s.dataset.section===id));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active', a.dataset.section===id));
+  if(id!=='skills'){
+    document.querySelectorAll('.skill-sub').forEach(el=>el.classList.remove('active'));
+    document.getElementById('skillsMain').style.display='';
+  }
+  Object.values(orbits).forEach(o=>{
+    if(o) o.setActive(id===o.sectionId || (id==='skills' && o.sectionId==='skills'));
   });
-  window.scrollTo(0, 0);
+  navLinksEl.classList.remove('open');
+  navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded','false');
+  window.scrollTo(0,0);
 }
 
-navBtns.forEach(btn => {
-  btn.addEventListener("click", () => showSection(btn.dataset.section));
+navLinks.forEach(el=>{
+  el.addEventListener('click',e=>{
+    const id=el.dataset.section;
+    if(!id) return;
+    e.preventDefault();
+    showSection(id);
+    history.replaceState(null,'','#'+id);
+  });
 });
-navToggle.addEventListener("click", () => {
-  const open = navLinks.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", open);
+navToggle.addEventListener('click',()=>{
+  const open=navLinksEl.classList.toggle('open');
+  navToggle.classList.toggle('open',open);
+  navToggle.setAttribute('aria-expanded',open?'true':'false');
 });
 
-/* ========== 3D CAROUSEL ENGINE ========== */
-const carousels = {};
-const ROTATION_MS = 3000; // 3 seconds as requested
+/* Orbit: centered at middle of container, no top clipping */
+function createOrbit(stageId, items, opts){
+  const stage=document.getElementById(stageId);
+  if(!stage) return null;
+  const wrap=stage.parentElement;
+  const n=items.length;
+  let angle=0, paused=false, raf=null, last=0;
+  const speed = (Math.PI*2) / (n * 3 * 60);
+  let radius = opts.radius || 150;
+  const els=[];
 
-function createCarousel(containerId, items, type, onSelect) {
-  const wrap = document.getElementById(containerId);
-  if (!wrap) return null;
-  const stage = document.createElement("div");
-  stage.className = "carousel-stage";
-  wrap.appendChild(stage);
-
-  const n = items.length;
-  const angleStep = 360 / n;
-  let current = 0;
-  let paused = false;
-  let timer = null;
-  const els = [];
-
-  items.forEach((item, i) => {
-    const el = document.createElement("div");
-    el.className = "carousel-item";
-    el.setAttribute("role", "button");
-    el.setAttribute("tabindex", "0");
-    if (type === "video") {
-      el.innerHTML = `<span style="font-size:1.4rem">▶</span><span>${item.title}</span>`;
-      el.addEventListener("click", () => window.open(item.url, "_blank", "noopener"));
+  items.forEach((item)=>{
+    const div=document.createElement('div');
+    div.className='orbit-item';
+    div.setAttribute('role','button');
+    div.tabIndex=0;
+    if(item.type==='video'){
+      div.innerHTML=`<div class="video-card-inner"><h4>${item.title}</h4><span>Watch</span></div>`;
+      div.addEventListener('click',()=>window.open(item.url,'_blank','noopener'));
+      div.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();window.open(item.url,'_blank','noopener');}});
     } else {
-      const img = document.createElement("img");
-      img.src = typeof item === "string" ? item : item.src;
-      img.alt = (item.title || item.project || "Portfolio image");
-      img.loading = "lazy";
-      el.appendChild(img);
-      el.addEventListener("click", () => {
-        if (onSelect) onSelect(item, i);
-      });
-      el.addEventListener("keydown", e => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          if (onSelect) onSelect(item, i);
-        }
-      });
+      const img=document.createElement('img');
+      img.src=item.src||item;
+      img.alt=item.title||item.project||'Portfolio image';
+      img.loading='lazy';
+      div.appendChild(img);
+      div.addEventListener('click',()=>{ if(opts.onSelect) opts.onSelect(item); });
+      div.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();if(opts.onSelect) opts.onSelect(item);} });
     }
-    stage.appendChild(el);
-    els.push(el);
+    stage.appendChild(div);
+    els.push(div);
   });
 
-  function update() {
-    els.forEach((el, i) => {
-      let diff = (i - current + n) % n;
-      if (diff > n / 2) diff -= n;
-      const angle = diff * angleStep;
-      const rad = angle * Math.PI / 180;
-      // smaller radius for smaller images
-      const radius = type === "video" ? 220 : (type === "book" || type === "models" ? 260 : 280);
-      const x = Math.sin(rad) * radius;
-      const z = Math.cos(rad) * radius - radius * 0.35;
-      const scale = Math.max(0.55, 1 - Math.abs(diff) * 0.18);
-      const opacity = Math.max(0.35, 1 - Math.abs(diff) * 0.28);
-      el.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${-angle}deg) scale(${scale})`;
-      el.style.opacity = opacity;
-      el.style.zIndex = Math.round(100 - Math.abs(diff) * 10);
-      el.classList.toggle("active", diff === 0);
+  function layout(t){
+    if(!last) last=t;
+    const dt=Math.min(32,t-last); last=t;
+    if(!paused && opts.active!==false) angle += speed * (dt/16.67);
+    const step=(Math.PI*2)/n;
+    els.forEach((el,i)=>{
+      const a=angle+i*step;
+      const x=Math.sin(a)*radius;
+      const z=Math.cos(a)*radius;
+      const scale=0.52+0.42*((z+radius)/(2*radius));
+      const opacity=0.32+0.68*((z+radius)/(2*radius));
+      /* left:50%; top:50% + translate(-50%,-50%) keeps true center */
+      el.style.transform=`translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) scale(${scale})`;
+      el.style.opacity=opacity;
+      el.style.zIndex=Math.round(100+z);
+      el.classList.toggle('active', z>radius*0.5);
     });
+    if(opts.active!==false) raf=requestAnimationFrame(layout);
   }
 
-  function next() {
-    if (paused) return;
-    current = (current + 1) % n;
-    update();
-  }
+  function start(){ if(!raf){ last=0; raf=requestAnimationFrame(layout);} }
+  function stop(){ if(raf){ cancelAnimationFrame(raf); raf=null;} }
+  function pause(){ paused=true; }
+  function resume(){ paused=false; }
+  function setActive(v){ opts.active=v; if(v) start(); else stop(); }
 
-  function start() {
-    stop();
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      update();
-      return;
-    }
-    timer = setInterval(next, ROTATION_MS);
-  }
-  function stop() {
-    if (timer) clearInterval(timer);
-    timer = null;
-  }
+  const mq=window.matchMedia('(prefers-reduced-motion:reduce)');
+  if(mq.matches) paused=true;
+  mq.addEventListener('change',e=>{paused=e.matches;});
 
-  update();
-  start();
-
-  return {
-    pause() { paused = true; stop(); },
-    resume() { paused = false; start(); },
-    stop,
-    start
-  };
-}
-
-/* ========== VIEWER ========== */
-const viewer = document.getElementById("viewer");
-const viewerMedia = document.getElementById("viewerMedia");
-const viewerInfo = document.getElementById("viewerInfo");
-const viewerClose = document.getElementById("viewerClose");
-let activeCarousel = null;
-
-function openViewer(mediaHtml, infoHtml, carouselToPause) {
-  viewerMedia.innerHTML = mediaHtml;
-  viewerInfo.innerHTML = infoHtml;
-  viewer.classList.add("open");
-  document.body.classList.add("no-scroll");
-  if (carouselToPause) {
-    activeCarousel = carouselToPause;
-    carouselToPause.pause();
-  }
-}
-function closeViewer() {
-  viewer.classList.remove("open");
-  document.body.classList.remove("no-scroll");
-  viewerMedia.innerHTML = "";
-  viewerInfo.innerHTML = "";
-  if (activeCarousel) {
-    activeCarousel.resume();
-    activeCarousel = null;
-  }
-}
-viewerClose.addEventListener("click", closeViewer);
-viewer.addEventListener("click", e => { if (e.target === viewer) closeViewer(); });
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && viewer.classList.contains("open")) closeViewer();
-});
-
-/* ========== INIT CAROUSELS ========== */
-carousels.book = createCarousel("bookCarousel", BOOK_IMAGES, "book", (src) => {
-  openViewer(
-    `<img src="${src}" alt="Book page">`,
-    `<h3>Handmade Portfolio Book</h3>
-     <p class="meta">Physical creative process</p>
-     <div class="block"><div class="block-label">About</div>
-     <p>Every page, cut, composition and binding was crafted by hand. The book is not a container for the work — it is part of the work itself.</p></div>`,
-    carousels.book
-  );
-});
-
-carousels.models = createCarousel("modelCarousel", MODEL_ITEMS, "models", (item) => {
-  openViewer(
-    `<img src="${item.src}" alt="${item.project}">`,
-    `<h3>${item.project}</h3>
-     <p class="meta">${item.number}</p>
-     <div class="block"><div class="block-label">Project</div><p>${item.project}</p></div>
-     <div class="block"><div class="block-label">Project Number</div><p>${item.number}</p></div>
-     <div class="block"><div class="block-label">Model</div><p>${item.model}</p></div>
-     <div class="block"><div class="block-label">Concept / Description</div><p>${item.concept}</p></div>
-     <div class="block"><div class="block-label">Method</div><p>${item.method}</p></div>`,
-    carousels.models
-  );
-});
-
-carousels.art = createCarousel("artCarousel", ART_ITEMS, "art", (item) => {
-  openViewer(
-    `<img src="${item.src}" alt="${item.title}">`,
-    `<h3>${item.title}</h3>
-     <p class="meta">Art & Drawing</p>
-     <div class="block"><div class="block-label">Description</div><p>${item.desc}</p></div>`,
-    carousels.art
-  );
-});
-
-carousels.video = createCarousel("videoCarousel", VIDEO_ITEMS, "video");
-
-/* ========== SKILLS SUBVIEWS ========== */
-document.querySelectorAll(".skill-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const skill = card.dataset.skill;
-    document.getElementById("skillsMain").classList.add("hidden");
-    document.querySelectorAll(".skill-subview").forEach(s => s.classList.remove("active"));
-    const sub = document.getElementById("skill-" + skill);
-    if (sub) sub.classList.add("active");
-    if (skill === "art" && carousels.art) carousels.art.resume();
-    if (skill === "video" && carousels.video) carousels.video.resume();
-  });
-});
-document.querySelectorAll("[data-close-skill]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".skill-subview").forEach(s => s.classList.remove("active"));
-    document.getElementById("skillsMain").classList.remove("hidden");
-    if (carousels.art) carousels.art.pause();
-    if (carousels.video) carousels.video.pause();
-  });
-});
-
-/* ========== ACHIEVEMENTS ========== */
-document.querySelectorAll(".achieve-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const key = card.dataset.achieve;
-    const data = ACHIEVE_DATA[key];
-    if (!data) return;
-    let media;
-    if (data.type === "pdf") {
-      media = `<embed src="${data.src}" type="application/pdf" width="100%" height="100%" style="min-height:70vh">`;
-    } else {
-      media = `<img src="${data.src}" alt="${data.title}">`;
-    }
-    openViewer(
-      media,
-      `<h3>${data.title}</h3><p class="meta">${data.meta}</p>
-       <div class="block"><p>Document viewer — use browser controls to zoom or download if needed.</p></div>`
-    );
-  });
-});
-
-/* ========== CV VIEWER ========== */
-document.getElementById("viewCvBtn").addEventListener("click", () => {
-  openViewer(
-    `<embed src="Shadid_Ahamed_Professional_CV.pdf" type="application/pdf" width="100%" height="100%" style="min-height:75vh">`,
-    `<h3>Shadid Ahamed — Professional CV</h3>
-     <p class="meta">Curriculum Vitae</p>
-     <div class="block"><p>Use the download button in the CV section to save a local copy.</p></div>
-     <a class="btn" href="Shadid_Ahamed_Professional_CV.pdf" download style="margin-top:12px">Download CV</a>`
-  );
-});
-
-/* ========== AUDIO ========== */
-const audio = document.getElementById("bgAudio");
-const audioBtn = document.getElementById("audioBtn");
-let audioPlaying = false;
-audio.volume = 0.45;
-
-function tryPlay() {
-  audio.play().then(() => {
-    audioPlaying = true;
-    audioBtn.classList.add("playing");
-  }).catch(() => {
-    // autoplay blocked — wait for user gesture
-  });
-}
-audioBtn.addEventListener("click", () => {
-  if (audioPlaying) {
-    audio.pause();
-    audioPlaying = false;
-    audioBtn.classList.remove("playing");
-  } else {
-    audio.play().then(() => {
-      audioPlaying = true;
-      audioBtn.classList.add("playing");
-    });
-  }
-});
-// attempt autoplay
-document.addEventListener("DOMContentLoaded", () => {
-  tryPlay();
-});
-// also try on first interaction
-["click","touchstart","keydown"].forEach(ev => {
-  document.addEventListener(ev, function once() {
-    if (!audioPlaying) tryPlay();
-    document.removeEventListener(ev, once);
-  }, {once:true});
-});
-
-/* ========== CUSTOM CURSOR ========== */
-const dot = document.getElementById("cursorDot");
-const ring = document.getElementById("cursorRing");
-let mx = 0, my = 0, rx = 0, ry = 0;
-if (window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
-  document.addEventListener("mousemove", e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + "px";
-    dot.style.top = my + "px";
-  });
-  function animRing() {
-    rx += (mx - rx) * 0.18;
-    ry += (my - ry) * 0.18;
-    ring.style.left = rx + "px";
-    ring.style.top = ry + "px";
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-}
-
-/* ========== BACKGROUND PARTICLES ========== */
-(function() {
-  const canvas = document.getElementById("bg-canvas");
-  if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const ctx = canvas.getContext("2d");
-  let w, h, particles = [];
-  const isMobile = window.innerWidth < 700;
-  const COUNT = isMobile ? 28 : 55;
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  function init() {
-    particles = [];
-    for (let i = 0; i < COUNT; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.4 + 0.3,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.12,
-        o: Math.random() * 0.4 + 0.1
-      });
-    }
-  }
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-    // faint orbital arcs
-    ctx.strokeStyle = "rgba(201,162,39,0.04)";
-    ctx.lineWidth = 1;
-    for (let i = 0; i < 3; i++) {
-      ctx.beginPath();
-      ctx.arc(w * 0.5, h * 0.45, 120 + i * 90, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(201,162,39,${p.o})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
+  function resize(){
+    const w=wrap.clientWidth;
+    radius=Math.min(150, Math.max(95, w*0.24));
   }
   resize();
-  init();
-  draw();
-  window.addEventListener("resize", () => { resize(); init(); });
+  window.addEventListener('resize',resize);
+  start();
+  return {pause,resume,setActive,sectionId:opts.sectionId};
+}
+
+const orbits={};
+
+orbits.book=createOrbit('bookStage', BOOK_IMGS.map(s=>({src:s})), {
+  sectionId:'book', radius:145,
+  onSelect:(item)=>{ openModal({type:'img',src:item.src,title:'Handmade Portfolio Book',body:'Part of the complete physical creative process — binding, colour coding, typography, cutouts and layered forms. হাতে গড়া পোর্টফোলিও বইয়ের অংশ।'}); orbits.book.pause(); }
+});
+
+orbits.models=createOrbit('modelsStage', MODELS, {
+  sectionId:'models', radius:148,
+  onSelect:(m)=>{
+    orbits.models.pause();
+    let methodsHtml='';
+    if(m.methodsNotes){
+      methodsHtml=`<div class="block"><button class="methods-toggle" id="methodsToggle">Methods / Making Notes ▾</button><div class="methods-content" id="methodsContent"><ul>${m.methodsNotes.map(n=>'<li>'+n+'</li>').join('')}</ul></div></div>`;
+    }
+    openModal({
+      type:'img', src:m.src, title:m.project,
+      html:`
+        <div class="block"><div class="block-label">Project</div><div class="block-body">${m.project}</div></div>
+        <div class="block"><div class="block-label">Project Number</div><div class="block-body">${m.number}</div></div>
+        <div class="block"><div class="block-label">Model</div><div class="block-body">${m.model}</div></div>
+        <div class="block"><div class="block-label">Concept / Description</div><div class="block-body">${m.concept}</div></div>
+        <div class="block"><div class="block-label">Method</div><div class="block-body">${m.method}</div></div>
+        ${methodsHtml}`
+    });
+    setTimeout(()=>{
+      const t=document.getElementById('methodsToggle');
+      const c=document.getElementById('methodsContent');
+      if(t&&c) t.onclick=()=>c.classList.toggle('open');
+    },40);
+  }
+});
+
+function initArtOrbit(){
+  if(orbits.art) return;
+  orbits.art=createOrbit('artStage', ART_WORKS, {
+    sectionId:'skills', radius:140,
+    onSelect:(w)=>{
+      orbits.art.pause();
+      openModal({
+        type:'img', src:w.src, title:w.title,
+        body: (w.ctx?w.ctx+' · ':'') + 'Artwork from the personal practice of drawing, colour and visual storytelling.'
+      });
+    }
+  });
+}
+
+function initVideoOrbit(){
+  if(orbits.video) return;
+  orbits.video=createOrbit('videoStage', VIDEOS.map(v=>({...v,type:'video'})), {
+    sectionId:'skills', radius:135
+  });
+}
+
+document.querySelectorAll('[data-skill]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=btn.dataset.skill;
+    document.getElementById('skillsMain').style.display='none';
+    document.querySelectorAll('.skill-sub').forEach(s=>s.classList.remove('active'));
+    const sub=document.getElementById('skill-'+id);
+    if(sub) sub.classList.add('active');
+    if(id==='art'){ initArtOrbit(); if(orbits.art) orbits.art.setActive(true); }
+    if(id==='video'){ initVideoOrbit(); if(orbits.video) orbits.video.setActive(true); }
+  });
+});
+document.querySelectorAll('[data-close-skill]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.skill-sub').forEach(s=>s.classList.remove('active'));
+    document.getElementById('skillsMain').style.display='';
+    if(orbits.art) orbits.art.setActive(false);
+    if(orbits.video) orbits.video.setActive(false);
+  });
+});
+
+document.querySelectorAll('[data-achieve]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const a=ACHIEVE[btn.dataset.achieve];
+    if(!a) return;
+    openModal(a.type==='pdf' ? {type:'pdf',src:a.src,title:a.title,body:a.body} : {type:'img',src:a.src,title:a.title,body:a.body});
+  });
+});
+
+document.querySelectorAll('.edu-gallery img').forEach(img=>{
+  img.addEventListener('click',()=>openModal({type:'img',src:img.dataset.full||img.src,title:img.alt,body:''}));
+});
+
+document.getElementById('viewCvBtn').addEventListener('click',()=>{
+  openModal({type:'pdf',src:'Shadid_Ahamed_Professional_CV.pdf',title:'Shadid Ahamed - Professional CV',body:'Professional curriculum vitae.'});
+});
+
+const overlay=document.getElementById('modalOverlay');
+const modal=document.getElementById('modal');
+const modalMedia=document.getElementById('modalMedia');
+const modalInfo=document.getElementById('modalInfo');
+const modalClose=document.getElementById('modalClose');
+
+function openModal({type,src,title,body,html}){
+  modal.classList.toggle('pdf-mode', type==='pdf');
+  modalMedia.innerHTML='';
+  if(type==='img'){
+    const img=document.createElement('img');
+    img.src=src; img.alt=title||'';
+    modalMedia.appendChild(img);
+  } else if(type==='pdf'){
+    const load=document.createElement('div');
+    load.className='modal-loading';
+    load.textContent='Loading…';
+    modalMedia.appendChild(load);
+    const emb=document.createElement('embed');
+    emb.src=src+'#toolbar=1';
+    emb.type='application/pdf';
+    emb.style.width='100%'; emb.style.height='68vh';
+    emb.onload=()=>{ if(load.parentNode) load.remove(); };
+    setTimeout(()=>{ if(load.parentNode) load.remove(); }, 2500);
+    modalMedia.appendChild(emb);
+  }
+  let info=`<h3 id="modalTitle">${title||''}</h3>`;
+  if(html) info+=html;
+  else if(body) info+=`<div class="block"><div class="block-body">${body}</div></div>`;
+  modalInfo.innerHTML=info;
+  overlay.classList.add('open');
+  document.body.classList.add('no-scroll');
+  modalClose.focus();
+}
+
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.classList.remove('no-scroll');
+  if(orbits.book) orbits.book.resume();
+  if(orbits.models) orbits.models.resume();
+  if(orbits.art) orbits.art.resume();
+}
+modalClose.addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{ if(e.target===overlay) closeModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(); });
+
+const dot=document.getElementById('cursorDot');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.body.classList.add('has-custom-cursor');
+  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+  (function loop(){ rx+=(mx-rx)*0.18; ry+=(my-ry)*0.18; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+  document.querySelectorAll('a,button,.clickable,.orbit-item,.skill-card,.achieve-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+  });
+}
+
+(function(){
+  const canvas=document.getElementById('bg-canvas');
+  const ctx=canvas.getContext('2d');
+  let w,h,particles=[],orbitsBg=[],raf;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  function resize(){
+    w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight;
+    const count=w<600?16:32;
+    particles=[];
+    for(let i=0;i<count;i++) particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.1+0.25,vx:(Math.random()-0.5)*0.12,vy:(Math.random()-0.5)*0.12,a:Math.random()*0.35+0.08});
+    orbitsBg=[];
+    for(let i=0;i<3;i++) orbitsBg.push({cx:w*0.5+(Math.random()-0.5)*w*0.3,cy:h*0.5+(Math.random()-0.5)*h*0.3,rad:70+Math.random()*110,angle:Math.random()*Math.PI*2,speed:0.0006+Math.random()*0.001});
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='rgba(201,169,98,0.03)'; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(232,213,163,${p.a})`; ctx.fill();
+    });
+    orbitsBg.forEach(o=>{
+      o.angle+=o.speed;
+      ctx.beginPath(); ctx.arc(o.cx,o.cy,o.rad,0,Math.PI*2); ctx.strokeStyle='rgba(201,169,98,0.05)'; ctx.stroke();
+      ctx.beginPath(); ctx.arc(o.cx+Math.cos(o.angle)*o.rad,o.cy+Math.sin(o.angle)*o.rad,1.4,0,Math.PI*2); ctx.fillStyle='rgba(201,169,98,0.32)'; ctx.fill();
+    });
+    raf=requestAnimationFrame(draw);
+  }
+  resize(); window.addEventListener('resize',resize); draw();
 })();
 
-/* ========== INITIAL STATE ========== */
-// pause non-visible carousels
-if (carousels.art) carousels.art.pause();
-if (carousels.video) carousels.video.pause();
-if (carousels.models) carousels.models.pause();
-// book starts only when section is active — initially home is shown
-if (carousels.book) carousels.book.pause();
+const audio=document.getElementById('bgAudio');
+const audioBtn=document.getElementById('audioBtn');
+const iconPlay=document.getElementById('audioIconPlay');
+const iconPause=document.getElementById('audioIconPause');
+audio.volume=0.45;
+let audioPlaying=false;
+function updateAudioIcon(){ iconPlay.style.display=audioPlaying?'none':'block'; iconPause.style.display=audioPlaying?'block':'none'; }
+audioBtn.addEventListener('click',()=>{
+  if(audioPlaying){ audio.pause(); audioPlaying=false; }
+  else { audio.play().then(()=>{audioPlaying=true;}).catch(()=>{}); }
+  updateAudioIcon();
+});
+audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
+
+const hash=(location.hash||'#home').slice(1);
+if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
+else showSection('home');
+
+})();
 </script>
 </body>
 </html>
