@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist">
+<meta name="description" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist | Websites, Models, Art & Digital Products">
 <title>Shadid Ahamed — Portfolio</title>
 
 <link rel="icon" type="image/svg+xml" href="sa-favicon.svg">
@@ -75,8 +75,22 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 
 .app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
+/* ===== TOP CTA BAR ===== */
+.top-cta{
+  position:fixed;top:0;left:0;right:0;z-index:110;
+  background:linear-gradient(90deg,rgba(201,169,98,0.15),rgba(201,169,98,0.08));
+  border-bottom:1px solid var(--border);
+  padding:0.45rem 1rem;
+  display:flex;align-items:center;justify-content:center;gap:0.8rem;flex-wrap:wrap;
+  font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.top-cta a{color:var(--off-white);background:rgba(201,169,98,0.2);padding:0.3rem 0.7rem;border-radius:4px;border:1px solid rgba(201,169,98,0.4);transition:background .25s}
+.top-cta a:hover{background:rgba(201,169,98,0.35)}
+.top-cta span{opacity:0.85}
+
 .nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:fixed;top:36px;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 1.25rem;
   padding-top:var(--safe-top);
@@ -107,13 +121,14 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .nav-toggle.open span:nth-child(2){opacity:0}
 .nav-toggle.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
-/* ========== MOBILE MENU (fixed & solid) ========== */
+/* ========== MOBILE MENU ========== */
 @media (max-width:900px){
-  .nav{padding:0 0.9rem;padding-top:var(--safe-top)}
+  .top-cta{font-size:0.65rem;padding:0.4rem 0.7rem}
+  .nav{top:32px;padding:0 0.9rem;padding-top:var(--safe-top)}
   .nav-toggle{display:flex}
   .nav-links{
     position:fixed;
-    top:calc(var(--nav-h) + var(--safe-top));
+    top:calc(var(--nav-h) + 32px + var(--safe-top));
     left:0;right:0;bottom:0;
     flex-direction:column;
     justify-content:flex-start;
@@ -148,10 +163,10 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   }
 }
 
-.sections{flex:1;padding-top:calc(var(--nav-h) + var(--safe-top))}
+.sections{flex:1;padding-top:calc(var(--nav-h) + 36px + var(--safe-top))}
 .section{
   display:none;
-  min-height:calc(100vh - var(--nav-h) - var(--safe-top));
+  min-height:calc(100vh - var(--nav-h) - 36px - var(--safe-top));
   padding:2.2rem 1.5rem 4rem;
   opacity:0;transform:translateY(12px);
   transition:opacity .45s var(--ease),transform .45s var(--ease);
@@ -183,6 +198,34 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .home-bio p{margin-bottom:1.05rem}
 .home-bio .statement{font-family:var(--font-display);font-style:italic;font-size:1.2rem;color:var(--warm-yellow);margin-top:1.5rem;border-left:2px solid var(--gold);padding-left:1.05rem;font-weight:500}
 
+/* Hero CTAs */
+.hero-ctas{display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:1.8rem}
+.btn-gold{display:inline-flex;align-items:center;gap:0.6rem;padding:0.85rem 1.55rem;border:1px solid var(--gold);color:var(--gold);font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;transition:background .3s,color .3s,transform .25s;background:transparent;min-height:48px}
+.btn-gold:hover{background:rgba(201,169,98,0.12);transform:translateY(-1px)}
+.btn-gold.solid{background:var(--gold);color:#0a0a0b;font-weight:600}
+.btn-gold.solid:hover{background:var(--gold-soft);color:#0a0a0b}
+
+/* ===== SERVICES ===== */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:1.2rem}
+.service-card{padding:1.7rem;background:var(--charcoal);border:1px solid var(--border);transition:border-color .3s,transform .3s;position:relative}
+.service-card:hover{border-color:rgba(201,169,98,0.4);transform:translateY(-3px)}
+.service-card .price{font-family:var(--font-display);font-size:1.4rem;color:var(--gold);margin:0.6rem 0 0.4rem}
+.service-card .delivery{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:0.8rem}
+.service-card h3{font-family:var(--font-display);font-size:1.15rem;color:var(--off-white);margin-bottom:0.5rem}
+.service-card p{font-size:0.92rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.1rem}
+.service-card .btn-outline{margin-top:auto}
+
+/* ===== SHOP / DIGITAL PRODUCTS ===== */
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1.2rem}
+.product-card{padding:1.6rem;background:var(--charcoal);border:1px solid var(--border);transition:border-color .3s,transform .3s}
+.product-card:hover{border-color:rgba(201,169,98,0.35);transform:translateY(-2px)}
+.product-card h4{font-family:var(--font-display);font-size:1.15rem;color:var(--off-white);margin-bottom:0.4rem}
+.product-card .price{color:var(--gold);font-size:1.1rem;margin:0.5rem 0}
+.product-card p{font-size:0.92rem;color:var(--text-muted);margin-bottom:1.1rem;line-height:1.55}
+
+.btn-outline{display:inline-flex;padding:0.6rem 1.15rem;border:1px solid var(--border);font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);transition:color .25s,border-color .25s,background .25s;min-height:46px;align-items:center}
+.btn-outline:hover{color:var(--gold);border-color:var(--gold);background:rgba(201,169,98,0.06)}
+
 /* ===== ORBIT ===== */
 .orbit-wrap{position:relative;width:100%;height:min(50vh,420px);margin:1.9rem auto 1.4rem;perspective:1100px;overflow:visible;display:flex;align-items:center;justify-content:center}
 .orbit-stage{position:relative;width:100%;height:100%;transform-style:preserve-3d;display:flex;align-items:center;justify-content:center}
@@ -196,8 +239,6 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .section-desc p{margin-bottom:1.1rem}
 .section-desc .bn{font-size:1.08rem;color:var(--warm-yellow);font-style:italic;margin:0.9rem 0;line-height:1.78}
 
-.btn-gold{display:inline-flex;align-items:center;gap:0.6rem;padding:0.85rem 1.55rem;border:1px solid var(--gold);color:var(--gold);font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;transition:background .3s,color .3s,transform .25s;background:transparent}
-.btn-gold:hover{background:rgba(201,169,98,0.12);transform:translateY(-1px)}
 .book-actions{text-align:center;margin-top:1.4rem}
 
 /* ===== EDUCATION ===== */
@@ -236,8 +277,6 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .project-card:hover{border-color:rgba(201,169,98,0.35);transform:translateY(-2px)}
 .project-card h4{font-family:var(--font-display);font-size:1.2rem;color:var(--off-white);margin-bottom:0.5rem}
 .project-card p{font-size:0.95rem;color:var(--text-muted);margin-bottom:1.2rem;line-height:1.6}
-.btn-outline{display:inline-flex;padding:0.6rem 1.15rem;border:1px solid var(--border);font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);transition:color .25s,border-color .25s,background .25s;min-height:46px;align-items:center}
-.btn-outline:hover{color:var(--gold);border-color:var(--gold);background:rgba(201,169,98,0.06)}
 
 .video-orbit .orbit-item{aspect-ratio:16/9;width:min(210px,55vw)}
 .video-card-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--graphite);border:1px solid var(--border);padding:1.3rem;text-align:center}
@@ -285,6 +324,10 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 }
 .contact-link svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.4;pointer-events:none}
 
+.booking-box{background:var(--graphite);border:1px solid rgba(201,169,98,0.25);padding:1.4rem;margin-bottom:1.8rem;text-align:center;border-radius:6px}
+.booking-box p{font-size:0.95rem;color:var(--text);margin-bottom:1rem;line-height:1.6}
+.booking-box .btn-gold{width:100%;max-width:320px;justify-content:center}
+
 .cv-panel{text-align:center;max-width:540px;margin:0 auto;padding:3rem 1.5rem}
 .cv-panel h2{font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.7rem}
 .cv-panel p{color:var(--text-muted);margin-bottom:1.9rem;line-height:1.65}
@@ -320,8 +363,14 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .text-center{text-align:center}
 .mt-2{margin-top:1.9rem}
 
+.trust-bar{display:flex;flex-wrap:wrap;gap:0.8rem 1.5rem;justify-content:center;margin:1.5rem 0 0.5rem;font-size:0.78rem;letter-spacing:0.06em;color:var(--text-muted)}
+.trust-bar span{display:flex;align-items:center;gap:0.35rem}
+.trust-bar strong{color:var(--gold-muted)}
+
+.payment-note{font-size:0.82rem;color:var(--gold-muted);margin-top:0.8rem;line-height:1.5}
+
 /* =====================================================
-   MOBILE POLISH – this is the main fix for “too small”
+   MOBILE POLISH
 ===================================================== */
 @media (max-width:800px){
   .section{padding:1.8rem 1.15rem 3.5rem}
@@ -335,6 +384,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   .orbit-wrap{height:min(46vh,380px);margin:1.6rem auto 1.2rem}
   .orbit-item{width:min(150px,48vw)}
   .video-orbit .orbit-item{width:min(185px,60vw)}
+  .hero-ctas{justify-content:center}
 }
 
 @media (max-width:600px){
@@ -368,6 +418,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   .modal.pdf-mode .modal-media{min-height:58vh}
   .modal.pdf-mode .modal-media embed{height:58vh}
   .modal-close{top:10px;right:10px;width:48px;height:48px}
+  .services-grid,.shop-grid{grid-template-columns:1fr}
 }
 
 @media (max-width:400px){
@@ -391,6 +442,13 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   <svg id="audioIconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
 </button>
 
+<!-- TOP CTA BAR -->
+<div class="top-cta">
+  <span>Fixed-price packages · Websites · Models · Art · English</span>
+  <a href="#services" data-section="services">View Services</a>
+  <a href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20book%20a%20package" target="_blank" rel="noopener">WhatsApp Now</a>
+</div>
+
 <div class="app">
   <nav class="nav" role="navigation" aria-label="Main">
     <a href="#home" class="nav-logo" data-section="home" aria-label="Home">
@@ -401,6 +459,8 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" data-section="home" class="active">Home</a></li>
+      <li><a href="#services" data-section="services">Services</a></li>
+      <li><a href="#shop" data-section="shop">Shop</a></li>
       <li><a href="#book" data-section="book">The Book</a></li>
       <li><a href="#education" data-section="education">Education</a></li>
       <li><a href="#models" data-section="models">Architectural Models</a></li>
@@ -431,7 +491,137 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
               <p class="statement">A person who keeps trying to turn imagination into reality.<br><span style="font-size:0.92em;opacity:0.9">কল্পনাকে বাস্তবে রূপ দেওয়ার চেষ্টায় যিনি থেমে থাকেন না।</span></p>
               <p style="margin-top:1.2rem;font-size:0.95rem;color:var(--text-muted)">Exploring the intersection of Architecture, Design, Art and Computer Science.</p>
             </div>
+
+            <!-- HERO CTAs -->
+            <div class="hero-ctas">
+              <a class="btn-gold solid" href="#services" data-section="services">Hire Me – Fixed Packages</a>
+              <a class="btn-gold" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20book%20a%2030-min%20paid%20consult%20(1500%20TK)" target="_blank" rel="noopener">Book 30-min Consult · 1500 TK</a>
+            </div>
+
+            <div class="trust-bar">
+              <span><strong>SSC + HSC</strong> Golden A+</span>
+              <span><strong>BRAC</strong> Architecture</span>
+              <span>Live: <strong>TrendCart</strong> + Office Engine</span>
+            </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section" data-section="services" aria-label="Services">
+      <div class="section-inner">
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">Fixed-price packages · Fast delivery · Clear scope</p>
+        <p class="section-desc" style="margin-bottom:1.5rem">No endless back-and-forth. Choose a package → Message on WhatsApp → Confirm → Send bKash/Nagad to the same number → Delivery starts within 24 hours.</p>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Landing Page (Mobile-first)</h3>
+            <div class="price">8,000 – 12,000 TK</div>
+            <div class="delivery">Delivery · 3–5 days</div>
+            <p>One-page website + contact form + basic SEO. Clean, fast, mobile-ready. Perfect for freelancers, small shops or personal branding.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Landing%20Page%20package%20(8000-12000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684 (same number)</p>
+          </article>
+
+          <article class="service-card">
+            <h3>Full Portfolio / Brochure Site</h3>
+            <div class="price">18,000 – 25,000 TK</div>
+            <div class="delivery">Delivery · 7–10 days</div>
+            <p>Multi-section site with custom orbit/gallery, domain help and mobile polish. Ideal for architects, designers and students.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Full%20Portfolio%20Site%20package%20(18000-25000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684 (same number)</p>
+          </article>
+
+          <article class="service-card">
+            <h3>Architectural Model Photography + Presentation</h3>
+            <div class="price">5,000 – 9,000 TK</div>
+            <div class="delivery">Delivery · 2–4 days</div>
+            <p>15–25 professionally edited photos of your physical models + simple layout PDF for submission or portfolio.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Model%20Photography%20%2B%20Presentation%20(5000-9000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684 (same number)</p>
+          </article>
+
+          <article class="service-card">
+            <h3>Art Commission (Digital / Print-ready)</h3>
+            <div class="price">3,000 – 7,000 TK</div>
+            <div class="delivery">Delivery · 3–7 days</div>
+            <p>One finished piece (digital or print-ready) with commercial license. Sketch, colour work or conceptual illustration.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20an%20Art%20Commission%20(3000-7000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684 (same number)</p>
+          </article>
+
+          <article class="service-card">
+            <h3>English Grammar Video Pack / Private Session</h3>
+            <div class="price">2,000 – 4,000 TK</div>
+            <div class="delivery">Delivery · 1–3 days</div>
+            <p>3 short educational videos (modifiers, connectors, SVA) or 1-hour private live session. Scripts + practice sheets included.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20English%20Video%20Pack%20or%20Private%20Session%20(2000-4000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684 (same number)</p>
+          </article>
+
+          <article class="service-card">
+            <h3>Add-ons</h3>
+            <div class="price">Extra</div>
+            <div class="delivery">Anytime</div>
+            <p>Rush delivery · Extra revisions · Hosting setup · Domain help · Additional pages or photos. Ask on WhatsApp for exact pricing.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20discuss%20add-ons" target="_blank" rel="noopener">Ask on WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684 (same number)</p>
+          </article>
+        </div>
+
+        <p class="text-center mt-2" style="font-size:0.9rem;color:var(--text-muted)">Only 3 client slots open this week · Payment via bKash / Nagad to 01326162684 after WhatsApp confirmation</p>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop" class="section" data-section="shop" aria-label="Digital Products">
+      <div class="section-inner">
+        <h2 class="section-title">Shop</h2>
+        <p class="section-sub">Digital products · Instant or same-day delivery</p>
+        <p class="section-desc" style="margin-bottom:1.5rem">Zero shipping. Message on WhatsApp → Confirm → Send bKash/Nagad to 01326162684 → Receive Google Drive / WhatsApp link.</p>
+
+        <div class="shop-grid">
+          <article class="product-card">
+            <h4>Handmade Portfolio Process PDF + Templates</h4>
+            <div class="price">800 – 1,500 TK</div>
+            <p>Binding diagrams, colour coding system, cutout methods and page construction notes from the physical book.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Handmade%20Portfolio%20Process%20PDF%20(800-1500%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684</p>
+          </article>
+
+          <article class="product-card">
+            <h4>ARC 101 Method Notes + Model Photo Pack</h4>
+            <div class="price">1,200 TK</div>
+            <p>Complete process notes for Squares, Lines, Low Relief, Planes, Subtraction & Seasonscape + high-res photos of the models.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20ARC%20101%20Method%20Notes%20%2B%20Photo%20Pack%20(1200%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684</p>
+          </article>
+
+          <article class="product-card">
+            <h4>Art Pack (15 high-res works + process notes)</h4>
+            <div class="price">900 TK</div>
+            <p>High-resolution scans of the exhibition and personal works with short process notes for each piece.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Art%20Pack%20(900%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684</p>
+          </article>
+
+          <article class="product-card">
+            <h4>Website Starter Template (Dark/Gold)</h4>
+            <div class="price">2,500 TK</div>
+            <p>Cleaned & documented version of this exact portfolio code. Ready to customise for your own projects.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Website%20Starter%20Template%20(2500%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684</p>
+          </article>
+
+          <article class="product-card">
+            <h4>English Modifiers / Connectors / SVA Pack</h4>
+            <div class="price">600 TK</div>
+            <p>Video scripts + practice sheets for the three most requested grammar topics. Ready for self-study or teaching.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20English%20Grammar%20Pack%20(600%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <p class="payment-note">Payment: bKash / Nagad to 01326162684</p>
+          </article>
         </div>
       </div>
     </section>
@@ -593,6 +783,16 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
         <div class="contact-card">
           <h2>Contact</h2>
           <p class="contact-loc">Shantinagar, Dhaka</p>
+
+          <div class="booking-box">
+            <p><strong>Ready to start?</strong><br>
+            1. Message me on WhatsApp with the package name<br>
+            2. I will confirm the price & timeline<br>
+            3. Send bKash / Nagad to <strong>01326162684</strong> (same number)<br>
+            4. After screenshot, delivery starts within 24 hours</p>
+            <a class="btn-gold solid" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio%20%E2%80%94%20I%20want%20%5Bpackage%20name%5D" target="_blank" rel="noopener">WhatsApp · Book Now</a>
+          </div>
+
           <div class="contact-grid" id="contactGrid">
             <a class="contact-link" href="mailto:shadidahamed.matashome05m@gmail.com" data-external="mailto" aria-label="Email">
               <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>Email
@@ -1005,7 +1205,7 @@ audioBtn.addEventListener('click',()=>{
 audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
 
 const hash=(location.hash||'#home').slice(1);
-if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
+if(['home','services','shop','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
 else showSection('home');
 })();
 </script>
