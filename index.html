@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist | Websites, Models, Art & Digital Products">
+<meta name="description" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist | Websites, Models, Art, Science Notes & Digital Products">
 <title>Shadid Ahamed — Portfolio</title>
 
 <link rel="icon" type="image/svg+xml" href="sa-favicon.svg">
@@ -23,6 +23,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-16.png" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-white-64.png" media="(prefers-color-scheme: dark)">
+
+<!-- Free Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -112,20 +115,30 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   padding:0.45rem 0.7rem;font-size:0.72rem;letter-spacing:0.14em;
   text-transform:uppercase;color:var(--text-muted);
   transition:color .25s,background .25s;border-radius:2px;
+  display:flex;align-items:center;gap:0.4rem;
 }
+.nav-links a i{font-size:0.85em;opacity:0.8}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,169,98,0.08)}
 .nav-toggle{
   display:none;width:48px;height:48px;align-items:center;justify-content:center;
   flex-direction:column;gap:6px;flex-shrink:0;-webkit-tap-highlight-color:transparent;
+  z-index:120;
 }
 .nav-toggle span{width:22px;height:2px;background:var(--gold);transition:transform .3s,opacity .3s;border-radius:1px}
 .nav-toggle.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .nav-toggle.open span:nth-child(2){opacity:0}
 .nav-toggle.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
+/* Mobile Nav Overlay */
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:98;
+  opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;
+}
+.nav-overlay.open{opacity:1;visibility:visible}
+
 /* ========== MOBILE ========== */
 @media (max-width:900px){
-  .top-cta{display:none !important;} /* মোবাইলে top bar লুকানো */
+  .top-cta{display:none !important;}
   .nav{top:0;padding:0 0.9rem;padding-top:var(--safe-top)}
   .nav-toggle{display:flex}
   .nav-links{
@@ -215,13 +228,20 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 
 /* ===== SERVICES ===== */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:1.2rem}
-.service-card{padding:1.7rem;background:var(--charcoal);border:1px solid var(--border);transition:border-color .3s,transform .3s;position:relative}
+.service-card{padding:1.7rem;background:var(--charcoal);border:1px solid var(--border);transition:border-color .3s,transform .3s;position:relative;display:flex;flex-direction:column}
 .service-card:hover{border-color:rgba(201,169,98,0.4);transform:translateY(-3px)}
+.service-card .icon{font-size:1.6rem;color:var(--gold);margin-bottom:0.7rem}
 .service-card .price{font-family:var(--font-display);font-size:1.4rem;color:var(--gold);margin:0.6rem 0 0.4rem}
 .service-card .delivery{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:0.8rem}
 .service-card h3{font-family:var(--font-display);font-size:1.15rem;color:var(--off-white);margin-bottom:0.5rem}
-.service-card p{font-size:0.92rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.1rem}
+.service-card p{font-size:0.92rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.1rem;flex:1}
 .service-card .btn-outline{margin-top:auto}
+
+.pricing-note{
+  margin-top:2rem;padding:1.4rem;background:var(--graphite);border:1px solid rgba(201,169,98,0.25);border-radius:6px;
+  font-size:0.9rem;color:var(--text-muted);line-height:1.65;
+}
+.pricing-note strong{color:var(--gold)}
 
 /* ===== SHOP ===== */
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1.2rem}
@@ -231,7 +251,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .product-card .price{color:var(--gold);font-size:1.1rem;margin:0.5rem 0}
 .product-card p{font-size:0.92rem;color:var(--text-muted);margin-bottom:1.1rem;line-height:1.55}
 
-.btn-outline{display:inline-flex;padding:0.6rem 1.15rem;border:1px solid var(--border);font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);transition:color .25s,border-color .25s,background .25s;min-height:46px;align-items:center}
+.btn-outline{display:inline-flex;padding:0.6rem 1.15rem;border:1px solid var(--border);font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);transition:color .25s,border-color .25s,background .25s;min-height:46px;align-items:center;gap:0.4rem}
 .btn-outline:hover{color:var(--gold);border-color:var(--gold);background:rgba(201,169,98,0.06)}
 
 /* ===== ORBIT ===== */
@@ -269,6 +289,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .skill-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease)}
 .skill-card:hover{border-color:rgba(201,169,98,0.4);transform:translateY(-3px);box-shadow:var(--shadow)}
 .skill-card:hover::before{transform:scaleY(1)}
+.skill-card .icon{font-size:1.5rem;color:var(--gold);margin-bottom:0.7rem;display:block}
 .skill-card h3{font-family:var(--font-display);font-size:1.22rem;font-weight:400;letter-spacing:0.06em;color:var(--off-white);margin-bottom:0.5rem}
 .skill-card p{font-size:0.9rem;color:var(--text-muted);line-height:1.55}
 .skill-card .arrow{position:absolute;bottom:1.2rem;right:1.2rem;font-size:1.1rem;color:var(--gold);opacity:0.6;transition:opacity .3s,transform .3s}
@@ -330,7 +351,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 .contact-link:hover,.contact-link:focus{
   border-color:var(--gold);color:var(--gold);background:rgba(201,169,98,0.07);transform:translateY(-2px);
 }
-.contact-link svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.4;pointer-events:none}
+.contact-link svg,.contact-link i{width:22px;height:22px;font-size:1.3rem;stroke:currentColor;fill:none;stroke-width:1.4;pointer-events:none}
 
 .booking-box{background:var(--graphite);border:1px solid rgba(201,169,98,0.25);padding:1.4rem;margin-bottom:1.8rem;text-align:center;border-radius:6px}
 .booking-box p{font-size:0.95rem;color:var(--text);margin-bottom:1rem;line-height:1.6}
@@ -412,7 +433,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
   .contact-card{padding:1.9rem 1.2rem;margin:0 0.15rem}
   .contact-grid{grid-template-columns:repeat(2,1fr);gap:0.7rem}
   .contact-link{min-height:100px;padding:1.15rem 0.5rem;font-size:0.7rem}
-  .contact-link svg{width:24px;height:24px}
+  .contact-link svg,.contact-link i{width:24px;height:24px;font-size:1.4rem}
   .cv-panel{padding:2.2rem 1.1rem}
   .cv-actions{flex-direction:column;align-items:center}
   .cv-actions .btn-gold{width:100%;max-width:290px;justify-content:center;min-height:50px}
@@ -452,7 +473,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
 
 <!-- TOP CTA BAR (Desktop only) -->
 <div class="top-cta">
-  <span>Fixed-price packages · Websites · Models · Art · English</span>
+  <span>Fixed-price packages · Websites · Models · Art · Science Notes · English</span>
   <a href="#services" data-section="services">View Services</a>
   <a href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20book%20a%20package" target="_blank" rel="noopener">WhatsApp Now</a>
 </div>
@@ -466,18 +487,21 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#home" data-section="home" class="active">Home</a></li>
-      <li><a href="#services" data-section="services">Services</a></li>
-      <li><a href="#shop" data-section="shop">Shop</a></li>
-      <li><a href="#book" data-section="book">The Book</a></li>
-      <li><a href="#education" data-section="education">Education</a></li>
-      <li><a href="#models" data-section="models">Architectural Models</a></li>
-      <li><a href="#skills" data-section="skills">Skills</a></li>
-      <li><a href="#achievements" data-section="achievements">Achievements</a></li>
-      <li><a href="#contact" data-section="contact">Contact</a></li>
-      <li><a href="#cv" data-section="cv">CV</a></li>
+      <li><a href="#home" data-section="home" class="active"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#services" data-section="services"><i class="fas fa-briefcase"></i> Services</a></li>
+      <li><a href="#shop" data-section="shop"><i class="fas fa-shopping-bag"></i> Shop</a></li>
+      <li><a href="#book" data-section="book"><i class="fas fa-book"></i> The Book</a></li>
+      <li><a href="#education" data-section="education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+      <li><a href="#models" data-section="models"><i class="fas fa-cube"></i> Architectural Models</a></li>
+      <li><a href="#skills" data-section="skills"><i class="fas fa-palette"></i> Skills</a></li>
+      <li><a href="#achievements" data-section="achievements"><i class="fas fa-trophy"></i> Achievements</a></li>
+      <li><a href="#contact" data-section="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      <li><a href="#cv" data-section="cv"><i class="fas fa-file-alt"></i> CV</a></li>
     </ul>
   </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <main class="sections">
     <!-- HOME -->
@@ -501,8 +525,8 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
             </div>
 
             <div class="hero-ctas">
-              <a class="btn-gold solid" href="#services" data-section="services">Hire Me – Fixed Packages</a>
-              <a class="btn-gold" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20book%20a%2030-min%20paid%20consult%20(1500%20TK)" target="_blank" rel="noopener">Book 30-min Consult · 1500 TK</a>
+              <a class="btn-gold solid" href="#services" data-section="services"><i class="fas fa-handshake"></i> Hire Me – Fixed Packages</a>
+              <a class="btn-gold" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20book%20a%2030-min%20paid%20consult%20(1500%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Book 30-min Consult · 1500 TK</a>
             </div>
 
             <div class="trust-bar">
@@ -520,65 +544,134 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
       <div class="section-inner">
         <h2 class="section-title">Services</h2>
         <p class="section-sub">Fixed-price packages · Fast delivery · Clear scope</p>
-        <p class="section-desc" style="margin-bottom:1.5rem">Choose a package → Message on WhatsApp → Confirm → Send bKash to 01326162684 → Delivery starts within 24 hours.</p>
+        <p class="section-desc" style="margin-bottom:1.5rem">Choose a package → Message on WhatsApp → Confirm → Send bKash to <strong>01326162684</strong> → Delivery starts within 24 hours.</p>
 
         <div class="services-grid">
+          <!-- Web -->
           <article class="service-card">
+            <div class="icon"><i class="fas fa-laptop-code"></i></div>
             <h3>Landing Page (Mobile-first)</h3>
             <div class="price">8,000 – 12,000 TK</div>
             <div class="delivery">Delivery · 3–5 days</div>
             <p>One-page website + contact form + basic SEO. Clean, fast, mobile-ready.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Landing%20Page%20package%20(8000-12000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Landing%20Page%20package%20(8000-12000%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
           <article class="service-card">
+            <div class="icon"><i class="fas fa-globe"></i></div>
             <h3>Full Portfolio / Brochure Site</h3>
             <div class="price">18,000 – 25,000 TK</div>
             <div class="delivery">Delivery · 7–10 days</div>
             <p>Multi-section site with custom orbit/gallery, domain help and mobile polish.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Full%20Portfolio%20Site%20package%20(18000-25000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Full%20Portfolio%20Site%20package%20(18000-25000%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
+          <!-- Models & Art -->
           <article class="service-card">
+            <div class="icon"><i class="fas fa-camera"></i></div>
             <h3>Architectural Model Photography + Presentation</h3>
             <div class="price">5,000 – 9,000 TK</div>
             <div class="delivery">Delivery · 2–4 days</div>
             <p>15–25 edited photos of your models + simple layout PDF.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Model%20Photography%20%2B%20Presentation%20(5000-9000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Model%20Photography%20%2B%20Presentation%20(5000-9000%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
           <article class="service-card">
+            <div class="icon"><i class="fas fa-paint-brush"></i></div>
             <h3>Art Commission (Digital / Print-ready)</h3>
             <div class="price">3,000 – 7,000 TK</div>
             <div class="delivery">Delivery · 3–7 days</div>
             <p>One finished piece with commercial license.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20an%20Art%20Commission%20(3000-7000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20an%20Art%20Commission%20(3000-7000%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
+          <!-- English -->
           <article class="service-card">
+            <div class="icon"><i class="fas fa-language"></i></div>
             <h3>English Grammar Video Pack / Private Session</h3>
             <div class="price">2,000 – 4,000 TK</div>
             <div class="delivery">Delivery · 1–3 days</div>
-            <p>3 short videos or 1-hour private session + practice sheets.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20English%20Video%20Pack%20or%20Private%20Session%20(2000-4000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
+            <p>3 short videos or 1-hour private session + practice sheets (Modifiers, Connectors, SVA).</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20English%20Video%20Pack%20or%20Private%20Session%20(2000-4000%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
+          </article>
+
+          <!-- Science Notes - NEW -->
+          <article class="service-card">
+            <div class="icon"><i class="fas fa-atom"></i></div>
+            <h3>Physics Notes Pack (HSC/SSC)</h3>
+            <div class="price">1,200 – 2,000 TK</div>
+            <div class="delivery">Delivery · 2–4 days</div>
+            <p>Clean, exam-focused notes (8–9 pages per chapter set). Based on Golden A+ background. Perfect for quick revision.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Physics%20Notes%20Pack%20(1200-2000%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
           <article class="service-card">
+            <div class="icon"><i class="fas fa-flask"></i></div>
+            <h3>Chemistry Notes Pack</h3>
+            <div class="price">1,000 – 1,800 TK</div>
+            <div class="delivery">Delivery · 2–4 days</div>
+            <p>Organized notes with key reactions, formulas & common mistakes. HSC/SSC level.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Chemistry%20Notes%20Pack%20(1000-1800%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><i class="fas fa-dna"></i></div>
+            <h3>Biology Notes Pack</h3>
+            <div class="price">1,000 – 1,800 TK</div>
+            <div class="delivery">Delivery · 2–4 days</div>
+            <p>Diagram-heavy, concept-clear notes. Ideal for board exam preparation.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Biology%20Notes%20Pack%20(1000-1800%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><i class="fas fa-book-open"></i></div>
+            <h3>Full Science Notes Set (Phy + Chem + Bio)</h3>
+            <div class="price">3,500 – 5,000 TK</div>
+            <div class="delivery">Delivery · 4–7 days</div>
+            <p>Complete package: 9 chapter sets × 8–9 pages. Structured for HSC/SSC board + admission prep. Best value.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Full%20Science%20Notes%20Set%20(3500-5000%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+            <h3>Private Science / English Session</h3>
+            <div class="price">1,500 TK / hour</div>
+            <div class="delivery">Online · Flexible</div>
+            <p>One-to-one doubt clearing or concept teaching (Physics priority, also Chem/Bio/English).</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20a%20Private%20Session%20(1500%20TK%2Fhour)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Book Session</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><i class="fas fa-plus-circle"></i></div>
             <h3>Add-ons</h3>
             <div class="price">Extra</div>
             <div class="delivery">Anytime</div>
-            <p>Rush delivery · Extra revisions · Hosting · Domain help.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20discuss%20add-ons" target="_blank" rel="noopener">Ask on WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
+            <p>Rush delivery · Extra revisions · Hosting · Domain help · Custom note formatting.</p>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20discuss%20add-ons" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Ask on WhatsApp</a>
+            <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
         </div>
 
-        <p class="text-center mt-2" style="font-size:0.9rem;color:var(--text-muted)">Only 3 client slots open this week · Payment via bKash to 01326162684 after WhatsApp confirmation</p>
+        <div class="pricing-note">
+          <strong>Pricing Logic (for transparency):</strong><br>
+          • Notes packs are priced so that after time spent cleaning & formatting personal notes into publishable 8–9 page sets, a fair profit remains.<br>
+          • Full Science Set (≈ 80 pages) gives the best value for students.<br>
+          • Private sessions start at 1500 TK/hour — sustainable and competitive in BD market.<br>
+          • Web & Model packages keep previous successful pricing.<br>
+          Only 3–4 client slots open per week.
+        </div>
+
+        <p class="text-center mt-2" style="font-size:0.9rem;color:var(--text-muted)">Payment via bKash to <strong>01326162684</strong> after WhatsApp confirmation</p>
       </div>
     </section>
 
@@ -594,7 +687,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
             <h4>Handmade Portfolio Process PDF + Templates</h4>
             <div class="price">800 – 1,500 TK</div>
             <p>Binding diagrams, colour coding, cutout methods and page construction notes.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Handmade%20Portfolio%20Process%20PDF%20(800-1500%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Handmade%20Portfolio%20Process%20PDF%20(800-1500%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Buy via WhatsApp</a>
             <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
@@ -602,7 +695,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
             <h4>ARC 101 Method Notes + Model Photo Pack</h4>
             <div class="price">1,200 TK</div>
             <p>Complete process notes + high-res photos of the models.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20ARC%20101%20Method%20Notes%20%2B%20Photo%20Pack%20(1200%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20ARC%20101%20Method%20Notes%20%2B%20Photo%20Pack%20(1200%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Buy via WhatsApp</a>
             <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
@@ -610,7 +703,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
             <h4>Art Pack (15 high-res works + process notes)</h4>
             <div class="price">900 TK</div>
             <p>High-resolution scans of the exhibition and personal works.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Art%20Pack%20(900%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Art%20Pack%20(900%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Buy via WhatsApp</a>
             <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
@@ -618,7 +711,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
             <h4>Website Starter Template (Dark/Gold)</h4>
             <div class="price">2,500 TK</div>
             <p>Cleaned & documented version of this portfolio code.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Website%20Starter%20Template%20(2500%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Website%20Starter%20Template%20(2500%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Buy via WhatsApp</a>
             <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
 
@@ -626,7 +719,7 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
             <h4>English Modifiers / Connectors / SVA Pack</h4>
             <div class="price">600 TK</div>
             <p>Video scripts + practice sheets.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20English%20Grammar%20Pack%20(600%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
+            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20English%20Grammar%20Pack%20(600%20TK)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Buy via WhatsApp</a>
             <p class="payment-note">Payment: bKash to 01326162684</p>
           </article>
         </div>
@@ -720,10 +813,30 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
         <h2 class="section-title">Skills</h2>
         <p class="section-sub">Practice &amp; Exploration</p>
         <div class="skills-grid">
-          <button class="skill-card clickable" data-skill="art" aria-label="Open Art and Drawing"><h3>Art &amp; Drawing</h3><p>Sketches, colour work, exhibition pieces and visual experiments.</p><span class="arrow" aria-hidden="true">→</span></button>
-          <button class="skill-card clickable" data-skill="coding" aria-label="Open Coding and Website Making"><h3>Coding &amp; Website Making</h3><p>Web projects, interactive experiments and digital craft.</p><span class="arrow" aria-hidden="true">→</span></button>
-          <button class="skill-card clickable" data-skill="video" aria-label="Open Video and Content Creation"><h3>Video / Content Creation</h3><p>Educational and creative video content.</p><span class="arrow" aria-hidden="true">→</span></button>
-          <button class="skill-card clickable" data-skill="reading" aria-label="Open Reading and Speaking English"><h3>Reading &amp; Speaking English Fluently</h3><p>Literature, language practice and cultural reading.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="art" aria-label="Open Art and Drawing">
+            <span class="icon"><i class="fas fa-pencil-alt"></i></span>
+            <h3>Art &amp; Drawing</h3>
+            <p>Sketches, colour work, exhibition pieces and visual experiments.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="skill-card clickable" data-skill="coding" aria-label="Open Coding and Website Making">
+            <span class="icon"><i class="fas fa-code"></i></span>
+            <h3>Coding &amp; Website Making</h3>
+            <p>Web projects, interactive experiments and digital craft.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="skill-card clickable" data-skill="video" aria-label="Open Video and Content Creation">
+            <span class="icon"><i class="fas fa-video"></i></span>
+            <h3>Video / Content Creation</h3>
+            <p>Educational and creative video content.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="skill-card clickable" data-skill="reading" aria-label="Open Reading and Speaking English">
+            <span class="icon"><i class="fas fa-book-reader"></i></span>
+            <h3>Reading &amp; Speaking English Fluently</h3>
+            <p>Literature, language practice and cultural reading.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
         </div>
       </div>
 
@@ -797,39 +910,39 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
             2. I will confirm the price & timeline<br>
             3. Send <strong>bKash</strong> to <strong>01326162684</strong> (same number)<br>
             4. After screenshot, delivery starts within 24 hours</p>
-            <a class="btn-gold solid" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio%20%E2%80%94%20I%20want%20%5Bpackage%20name%5D" target="_blank" rel="noopener">WhatsApp · Book Now</a>
+            <a class="btn-gold solid" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio%20%E2%80%94%20I%20want%20%5Bpackage%20name%5D" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp · Book Now</a>
           </div>
 
           <div class="contact-grid" id="contactGrid">
             <a class="contact-link" href="mailto:shadidahamed.matashome05m@gmail.com" data-external="mailto" aria-label="Email">
-              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>Email
+              <i class="fas fa-envelope"></i>Email
             </a>
             <a class="contact-link" href="https://github.com/shadidahamed" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="GitHub">
-              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub
+              <i class="fab fa-github"></i>GitHub
             </a>
             <a class="contact-link" href="https://www.linkedin.com/in/shadid-ahamed-41a0703b2/" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+              <i class="fab fa-linkedin"></i>LinkedIn
             </a>
             <a class="contact-link" href="https://www.instagram.com/shade_ed25" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram
+              <i class="fab fa-instagram"></i>Instagram
             </a>
             <a class="contact-link" href="https://www.facebook.com/share/1C2KcQfwvn/" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook
+              <i class="fab fa-facebook"></i>Facebook
             </a>
             <a class="contact-link" href="https://wa.me/8801326162684" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp
+              <i class="fab fa-whatsapp"></i>WhatsApp
             </a>
             <a class="contact-link" href="https://x.com/ShadidAhamed" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="X">
-              <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg>X
+              <i class="fab fa-x-twitter"></i>X
             </a>
             <a class="contact-link" href="https://pin.it/4Z5y34R2T" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Pinterest">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pinterest
+              <i class="fab fa-pinterest"></i>Pinterest
             </a>
             <a class="contact-link" href="https://www.reddit.com/user/Shade_ed25" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Reddit">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/><path d="M8.5 15c1.2 1 2.5 1.5 3.5 1.5s2.3-.5 3.5-1.5"/></svg>Reddit
+              <i class="fab fa-reddit"></i>Reddit
             </a>
             <a class="contact-link" href="https://www.tumblr.com/" target="_blank" rel="noopener noreferrer" data-external="url" aria-label="Tumblr">
-              <svg viewBox="0 0 24 24"><path d="M14 3v5h3v3h-3v5.5c0 1.2.5 1.5 1.5 1.5H17v3h-3.5C11 21 10 19.5 10 16.5V11H8V8h2V3h4z"/></svg>Tumblr
+              <i class="fab fa-tumblr"></i>Tumblr
             </a>
           </div>
           <p class="text-center mt-2" style="font-size:0.85rem;color:var(--text-muted)">
@@ -846,8 +959,8 @@ body.has-custom-cursor a,body.has-custom-cursor button,body.has-custom-cursor .c
           <h2>Shadid Ahamed - Professional CV</h2>
           <p>View or download the professional curriculum vitae.</p>
           <div class="cv-actions">
-            <button class="btn-gold" id="viewCvBtn" aria-label="View CV">View CV</button>
-            <a class="btn-gold" href="Shadid_Ahamed_Professional_CV.pdf" download="Shadid_Ahamed_Professional_CV.pdf" aria-label="Download CV">Download CV</a>
+            <button class="btn-gold" id="viewCvBtn" aria-label="View CV"><i class="fas fa-eye"></i> View CV</button>
+            <a class="btn-gold" href="Shadid_Ahamed_Professional_CV.pdf" download="Shadid_Ahamed_Professional_CV.pdf" aria-label="Download CV"><i class="fas fa-download"></i> Download CV</a>
           </div>
         </div>
       </div>
@@ -912,17 +1025,20 @@ const ACHIEVE = {
 const sections = document.querySelectorAll('.section');
 const navToggle = document.getElementById('navToggle');
 const navLinksEl = document.getElementById('navLinks');
+const navOverlay = document.getElementById('navOverlay');
 
 function closeMobileMenu(){
   navLinksEl.classList.remove('open');
   navToggle.classList.remove('open');
   navToggle.setAttribute('aria-expanded','false');
+  navOverlay.classList.remove('open');
   document.body.classList.remove('no-scroll');
 }
 function openMobileMenu(){
   navLinksEl.classList.add('open');
   navToggle.classList.add('open');
   navToggle.setAttribute('aria-expanded','true');
+  navOverlay.classList.add('open');
   document.body.classList.add('no-scroll');
 }
 
@@ -955,6 +1071,9 @@ navToggle.addEventListener('click',e=>{
   if(navLinksEl.classList.contains('open')) closeMobileMenu();
   else openMobileMenu();
 });
+
+navOverlay.addEventListener('click', closeMobileMenu);
+
 document.addEventListener('click',e=>{
   if(!navLinksEl.classList.contains('open')) return;
   if(navLinksEl.contains(e.target) || navToggle.contains(e.target)) return;
@@ -1184,9 +1303,9 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
     });
     orbitsBg.forEach(o=>{
       o.angle+=o.speed;
+      const px=o.cx+Math.cos(o.angle)*o.rad, py=o.cy+Math.sin(o.angle)*o.rad;
       ctx.beginPath(); ctx.arc(o.cx,o.cy,o.rad,0,Math.PI*2);
       ctx.strokeStyle='rgba(201,169,98,0.1)'; ctx.stroke();
-      const px=o.cx+Math.cos(o.angle)*o.rad, py=o.cy+Math.sin(o.angle)*o.rad;
       ctx.beginPath(); ctx.arc(px,py,2.2,0,Math.PI*2);
       ctx.fillStyle='rgba(232,213,163,0.55)'; ctx.fill();
       ctx.beginPath(); ctx.arc(px,py,5,0,Math.PI*2);
