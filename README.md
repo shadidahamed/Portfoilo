@@ -1,128 +1,114 @@
-Shadid Ahamed — Portfolio
+# Shadid Ahamed — Personal Portfolio
 
-Architecture · Craft · Code
-BRAC University · ARC-101 · Summer 2026 · Roll 1000061008
+**Architecture · Creative Developer · Designer · Artist**
 
+---
 
-How to use (important)
+একজন মানুষ যিনি শুধু একটা পরিচয়ে আটকে থাকতে চান না।  
+Drawing, Architecture, Model-making, Web Design, Code, Art আর Literature — সবকিছুর মাঝে তিনি বারবার ফিরে আসেন শুধু একটা কারণে: **কল্পনাকে বাস্তবে রূপ দেওয়ার জন্য**।
 
-1. Images you control
+This is the official personal portfolio of **Shadid Ahamed** — a living space where Architecture, Design, Art and Technology meet.
 
-All book photos live in the images/ folder:
+---
 
-images/
-  book-01-cover-clean.jpg   ← main cover (background cleaned)
-  book-02-logo.jpg
-  book-03-held-clean.jpg
-  book-04-side.jpg
-  book-05-checker.jpg
+## About the Portfolio
 
-You can replace any of these files with your own better photos.
-Just keep the same file names (or update the paths inside index.html → DATA.book).
+এই ওয়েবসাইটটা শুধু কাজের প্রদর্শনী নয়।  
+এটা আমার চিন্তা, প্রক্রিয়া এবং যাত্রার একটা ডিজিটাল প্রতিফলন।
 
-For Architecture drawings / sketches later, put them in:
+- Fully handmade portfolio book process
+- Architectural models from ARC 101 (BRAC University)
+- Art & Drawing works
+- Live web projects (TrendCart, Office Engine)
+- Educational content (English Grammar + upcoming Science Notes)
+- Fixed-price service packages
 
-images/arch-01.jpg
-images/draw-01.jpg
-...
+The design language is intentionally dark, gold-accented and calm — reflecting both precision and emotion.
 
-and update the corresponding entries in the DATA object.
+---
 
-2. Favicon
+## Key Features
 
+- Smooth mobile & desktop navigation (hamburger menu + overlay)
+- Interactive 3D-style orbit galleries for Book, Models and Artworks
+- Fixed-price service packages (Web, Models, Art, English, Physics/Chemistry/Biology Notes)
+- Digital product shop
+- Modal-based detailed views for models, artworks and academic records
+- Background ambient music (optional)
+- Fully responsive across mobile, tablet and desktop
+- Clean, fast and accessible design
 
+---
 
+## Tech Stack
 
+- Pure HTML5, CSS3 & Vanilla JavaScript
+- No heavy frameworks
+- Font Awesome (free icons)
+- Canvas-based subtle background animation
+- Fully offline-capable once assets are present
 
-favicon.svg — SA geometric monogram + architectural grid + burgundy accent
+---
 
+## How to Use
 
+1. Download or clone the repository
+2. Make sure all image, PDF and audio files are in the same folder as `index.html`
+3. Open `index.html` in any modern browser
+4. Or host it on GitHub Pages / Netlify / Vercel
 
-favicon-32.png
+No build step required.
 
+---
 
+## Sections Overview
 
-apple-touch-icon.png
+| Section              | Description                                      |
+|----------------------|--------------------------------------------------|
+| Home                 | Introduction & personal statement                |
+| Services             | Fixed-price packages (Web, Notes, Art, Models)   |
+| Shop                 | Digital products for instant delivery            |
+| The Book             | Handmade portfolio process                       |
+| Education            | Academic journey (SSC → HSC → BRAC Architecture) |
+| Architectural Models | ARC 101 studio works with detailed process       |
+| Skills               | Art, Coding, Video & Reading                     |
+| Achievements         | Academic records & recognition                   |
+| Contact              | All social links + WhatsApp booking              |
+| CV                   | View / Download professional CV                  |
 
-3. Upload (GitHub Pages recommended)
+---
 
+## Services Snapshot
 
+- Landing Page & Full Portfolio Websites  
+- Architectural Model Photography + Presentation  
+- Art Commissions  
+- English Grammar Video Packs  
+- **Physics / Chemistry / Biology Notes** (HSC & SSC focused)  
+- Private one-to-one sessions  
 
+All packages are clearly priced and delivered via WhatsApp + bKash.
 
+---
 
-Create repo (example: portfolio or shadidahamed.github.io)
+## Contact
 
+**Shadid Ahamed**  
+Shantinagar, Dhaka  
 
+- WhatsApp: [+880 1326-162684](https://wa.me/8801326162684)  
+- Email: shadidahamed.matashome05m@gmail.com  
+- GitHub: [github.com/shadidahamed](https://github.com/shadidahamed)  
+- LinkedIn / Instagram / Facebook / X — available inside the website  
 
-Upload everything in this folder (keep structure)
+---
 
+## Note
 
+This portfolio is continuously evolving.  
+Just like its creator — still becoming.
 
-Settings → Pages → Deploy from main / root
+---
 
-
-
-Site goes live
-
-Netlify / Vercel: just drag the whole folder.
-
-
-
-What is included
-
-
-
-
-
-The Book (flagship) — cinematic autoplay + immersive project viewer
-
-
-
-Process / Persistence
-
-
-
-Profile, Education, Skills, Videos, Achievements, Contact, CV
-
-
-
-AI Curator (can open sections by natural language)
-
-
-
-All your contacts preserved (Email, GitHub, LinkedIn, Instagram, Facebook, WhatsApp, YouTube, X, Pinterest, Reddit)
-
-
-
-TrendCart + Game links preserved
-
-
-
-YouTube video embeds preserved
-
-
-
-Color language (from your book)
-
-
-
-
-
-Black: #050505
-
-
-
-Off-white: #F2F0EA
-
-
-
-Burgundy: #6B2C36
-
-
-
-Grid + controlled geometry
-
-
-
-Replace the images with your best shots whenever you want.
-The code is ready for Google / GitHub / any static host.
+**Made with patience, precision and quiet persistence.**  
+© 2026 Shadid Ahamed
