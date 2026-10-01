@@ -3,46 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist | Websites, Models, Art & Digital Products">
+<meta name="description" content="Shadid Ahamed — Architecture / Creative Developer / Designer / Artist">
 <title>Shadid Ahamed — Portfolio</title>
 
 <link rel="icon" type="image/svg+xml" href="sa-favicon.svg">
-<link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png">
-<link rel="icon" type="image/png" sizes="48x48" href="sa-favicon-48.png">
-<link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-64.png">
-<link rel="icon" type="image/png" sizes="128x128" href="sa-favicon-128.png">
-<link rel="icon" type="image/png" sizes="256x256" href="sa-favicon-256.png">
 <link rel="apple-touch-icon" sizes="180x180" href="sa-favicon-hires.png">
-<link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-black-16.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-black-32.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="48x48" href="sa-favicon-black-48.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-black-64.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="128x128" href="sa-favicon-black-128.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" href="sa-favicon-black-hires.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="16x16" href="sa-favicon-16.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="sa-favicon-32.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="64x64" href="sa-favicon-white-64.png" media="(prefers-color-scheme: dark)">
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#070708;
-  --surface:#111114;
-  --surface-2:#18181c;
-  --surface-3:#1f1f24;
-  --gold:#d4af6a;
-  --gold-soft:#e4c78a;
-  --gold-muted:#a8905a;
-  --warm:#f0e6c8;
-  --text:#ece8e0;
-  --text-muted:#9b968c;
-  --border:rgba(212,175,106,0.16);
-  --border-strong:rgba(212,175,106,0.32);
+  --bg:#0a0c12;
+  --surface:#12151e;
+  --surface-2:#1a1e2a;
+  --surface-3:#222733;
+  --accent:#8b9dc3;
+  --accent-soft:#a8b8d8;
+  --accent-muted:#6a7a9a;
+  --warm:#e8eaf0;
+  --text:#d4d7e0;
+  --text-muted:#8a90a0;
+  --border:rgba(139,157,195,0.16);
+  --border-strong:rgba(139,157,195,0.32);
   --shadow:0 20px 50px rgba(0,0,0,0.55);
   --shadow-sm:0 8px 24px rgba(0,0,0,0.4);
   --nav-h:68px;
-  --top-cta-h:38px;
   --ease:cubic-bezier(0.22,1,0.36,1);
   --font-display:Georgia,'Times New Roman',serif;
   --font-body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
@@ -58,7 +43,7 @@ body{
   font-family:var(--font-body);
   background:var(--bg);
   color:var(--text);
-  line-height:1.6;
+  line-height:1.65;
   overflow-x:hidden;
   min-height:100vh;
   -webkit-font-smoothing:antialiased;
@@ -69,19 +54,19 @@ body.no-scroll{overflow:hidden}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* Custom cursor */
 .cursor-dot,.cursor-ring{
   position:fixed;top:0;left:0;pointer-events:none!important;z-index:9999;
   border-radius:50%;transform:translate(-50%,-50%);
 }
-.cursor-dot{width:5px;height:5px;background:var(--gold);mix-blend-mode:difference}
+.cursor-dot{width:5px;height:5px;background:var(--accent);mix-blend-mode:difference}
 .cursor-ring{
-  width:34px;height:34px;border:1px solid rgba(212,175,106,0.5);
+  width:34px;height:34px;border:1px solid rgba(139,157,195,0.45);
   transition:width .28s,height .28s,border-color .28s;
 }
-.cursor-ring.hover{width:52px;height:52px;border-color:var(--gold-soft)}
+.cursor-ring.hover{width:52px;height:52px;border-color:var(--accent-soft)}
 @media (hover:none),(pointer:coarse){
   .cursor-dot,.cursor-ring{display:none!important}
   body{cursor:auto}
@@ -96,36 +81,14 @@ body.has-custom-cursor .clickable{cursor:none}
 
 .app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
-/* Top CTA – desktop only */
-.top-cta{
-  position:fixed;top:0;left:0;right:0;z-index:110;
-  background:linear-gradient(90deg,rgba(212,175,106,0.12),rgba(212,175,106,0.05));
-  border-bottom:1px solid var(--border);
-  padding:0.4rem 1.2rem;
-  display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;
-  font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  height:var(--top-cta-h);
-}
-.top-cta a{
-  color:var(--warm);
-  background:rgba(212,175,106,0.18);
-  padding:0.28rem 0.75rem;
-  border-radius:6px;
-  border:1px solid rgba(212,175,106,0.35);
-  transition:background .25s,transform .2s;
-}
-.top-cta a:hover{background:rgba(212,175,106,0.32);transform:translateY(-1px)}
-.top-cta span{opacity:0.9}
-
 /* Navigation */
 .nav{
-  position:fixed;top:var(--top-cta-h);left:0;right:0;z-index:100;
+  position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 1.4rem;
   padding-top:var(--safe-top);
   height:calc(var(--nav-h) + var(--safe-top));
-  background:rgba(7,7,8,0.88);
+  background:rgba(10,12,18,0.88);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
@@ -149,8 +112,8 @@ body.has-custom-cursor .clickable{cursor:none}
   border-radius:6px;
 }
 .nav-links a:hover,.nav-links a.active{
-  color:var(--gold);
-  background:rgba(212,175,106,0.09);
+  color:var(--accent-soft);
+  background:rgba(139,157,195,0.09);
 }
 .nav-toggle{
   display:none;width:46px;height:46px;
@@ -159,30 +122,28 @@ body.has-custom-cursor .clickable{cursor:none}
   -webkit-tap-highlight-color:transparent;
 }
 .nav-toggle span{
-  width:20px;height:1.8px;background:var(--gold);
+  width:20px;height:1.8px;background:var(--accent);
   transition:transform .3s,opacity .3s;border-radius:1px;
 }
 .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-toggle.open span:nth-child(2){opacity:0}
 .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* Mobile nav */
+/* Mobile nav – full popup */
 @media (max-width:960px){
-  .top-cta{display:none!important}
   .nav{top:0;padding:0 1rem;padding-top:var(--safe-top)}
   .nav-toggle{display:flex}
   .nav-links{
     position:fixed;
-    top:calc(var(--nav-h) + var(--safe-top));
-    left:0;right:0;bottom:0;
+    top:0;left:0;right:0;bottom:0;
     flex-direction:column;
     justify-content:flex-start;
     align-items:stretch;
-    padding:1.6rem 1.3rem calc(2.6rem + var(--safe-bottom));
-    background:rgba(7,7,8,0.97);
-    gap:0.35rem;
+    padding:calc(var(--nav-h) + var(--safe-top) + 1.8rem) 1.4rem calc(2.8rem + var(--safe-bottom));
+    background:rgba(10,12,18,0.97);
+    gap:0.55rem;
     transform:translateX(100%);
-    transition:transform .4s var(--ease);
+    transition:transform .45s var(--ease);
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     z-index:99;
@@ -191,62 +152,60 @@ body.has-custom-cursor .clickable{cursor:none}
   .nav-links li{width:100%}
   .nav-links a{
     display:flex;align-items:center;width:100%;
-    min-height:56px;
-    padding:1rem 1.15rem;
-    font-size:1.05rem;
-    letter-spacing:0.09em;
+    min-height:64px;
+    padding:1.15rem 1.3rem;
+    font-size:1.12rem;
+    letter-spacing:0.12em;
     border:1px solid transparent;
-    border-radius:10px;
+    border-radius:14px;
+    background:var(--surface);
+    color:var(--text);
+    font-family:var(--font-display);
+    text-transform:none;
+    letter-spacing:0.04em;
   }
   .nav-links a:active,.nav-links a.active{
-    color:var(--gold);
-    background:rgba(212,175,106,0.12);
-    border-color:rgba(212,175,106,0.28);
+    color:var(--accent-soft);
+    background:rgba(139,157,195,0.12);
+    border-color:rgba(139,157,195,0.28);
   }
 }
 
-.sections{flex:1;padding-top:calc(var(--nav-h) + var(--top-cta-h) + var(--safe-top))}
-@media (max-width:960px){
-  .sections{padding-top:calc(var(--nav-h) + var(--safe-top))}
-}
-
+.sections{flex:1;padding-top:calc(var(--nav-h) + var(--safe-top))}
 .section{
   display:none;
-  min-height:calc(100vh - var(--nav-h) - var(--top-cta-h) - var(--safe-top));
-  padding:2.4rem 1.5rem 4.5rem;
+  min-height:calc(100vh - var(--nav-h) - var(--safe-top));
+  padding:2.6rem 1.5rem 4.8rem;
   opacity:0;transform:translateY(14px);
   transition:opacity .5s var(--ease),transform .5s var(--ease);
-}
-@media (max-width:960px){
-  .section{min-height:calc(100vh - var(--nav-h) - var(--safe-top))}
 }
 .section.active{display:block;opacity:1;transform:translateY(0)}
 .section-inner{max-width:1120px;margin:0 auto}
 
 .section-title{
   font-family:var(--font-display);
-  font-size:clamp(1.7rem,4.2vw,2.4rem);
+  font-size:clamp(1.75rem,4.2vw,2.5rem);
   font-weight:400;
-  letter-spacing:0.06em;
+  letter-spacing:0.05em;
   color:var(--warm);
-  margin-bottom:0.3rem;
+  margin-bottom:0.35rem;
 }
 .section-sub{
   font-size:0.78rem;
   letter-spacing:0.18em;
   text-transform:uppercase;
-  color:var(--gold-muted);
-  margin-bottom:1.5rem;
+  color:var(--accent-muted);
+  margin-bottom:1.6rem;
 }
-.gold-line{width:42px;height:1px;background:var(--gold);margin:1.2rem 0}
+.gold-line{width:42px;height:1px;background:var(--accent);margin:1.3rem 0}
 
 /* ===== HOME ===== */
 .home-grid{
   display:grid;
   grid-template-columns:minmax(240px,360px) 1fr;
-  gap:3rem;
+  gap:3.2rem;
   align-items:center;
-  min-height:calc(100vh - var(--nav-h) - 5.5rem);
+  min-height:calc(100vh - var(--nav-h) - 5rem);
 }
 .profile-frame{
   position:relative;
@@ -259,7 +218,7 @@ body.has-custom-cursor .clickable{cursor:none}
 .profile-frame::before{
   content:'';
   position:absolute;inset:-6px;
-  border:1px solid rgba(212,175,106,0.1);
+  border:1px solid rgba(139,157,195,0.1);
   border-radius:6px;
   pointer-events:none;
 }
@@ -268,7 +227,7 @@ body.has-custom-cursor .clickable{cursor:none}
   aspect-ratio:3/4;
   object-fit:cover;
   object-position:center top;
-  filter:contrast(1.04) saturate(0.9);
+  filter:contrast(1.03) saturate(0.85) brightness(0.96);
   border-radius:2px;
 }
 .home-identity h1{
@@ -283,36 +242,45 @@ body.has-custom-cursor .clickable{cursor:none}
   display:block;
   font-size:0.46em;
   letter-spacing:0.24em;
-  color:var(--gold);
+  color:var(--accent);
   font-weight:700;
   margin-top:0.38em;
 }
 .home-roles{
-  margin:1.2rem 0 1.3rem;
+  margin:1.25rem 0 1.4rem;
   font-size:0.76rem;
   letter-spacing:0.15em;
   text-transform:uppercase;
   color:var(--text-muted);
 }
-.home-roles span{color:var(--gold-muted)}
-.home-bio{font-size:1.04rem;color:var(--text);max-width:38em;line-height:1.78}
-.home-bio p{margin-bottom:1rem}
+.home-roles span{color:var(--accent-muted)}
+.home-bio{font-size:1.05rem;color:var(--text);max-width:40em;line-height:1.82}
+.home-bio p{margin-bottom:1.15rem}
+.home-bio .bn{
+  font-size:1.08rem;
+  color:var(--warm);
+  font-style:italic;
+  margin:1.1rem 0;
+  line-height:1.85;
+  opacity:0.95;
+}
 .home-bio .statement{
   font-family:var(--font-display);
   font-style:italic;
-  font-size:1.18rem;
+  font-size:1.2rem;
   color:var(--warm);
-  margin-top:1.5rem;
-  border-left:2px solid var(--gold);
-  padding-left:1.1rem;
+  margin-top:1.7rem;
+  border-left:2px solid var(--accent);
+  padding-left:1.15rem;
   font-weight:500;
+  line-height:1.7;
 }
-.hero-ctas{display:flex;flex-wrap:wrap;gap:0.85rem;margin-top:1.9rem}
-.btn-gold{
+.hero-ctas{display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:2rem}
+.btn-accent{
   display:inline-flex;align-items:center;gap:0.55rem;
-  padding:0.85rem 1.5rem;
-  border:1px solid var(--gold);
-  color:var(--gold);
+  padding:0.85rem 1.55rem;
+  border:1px solid var(--accent);
+  color:var(--accent);
   font-size:0.76rem;
   letter-spacing:0.14em;
   text-transform:uppercase;
@@ -321,96 +289,27 @@ body.has-custom-cursor .clickable{cursor:none}
   min-height:48px;
   border-radius:8px;
 }
-.btn-gold:hover{
-  background:rgba(212,175,106,0.12);
+.btn-accent:hover{
+  background:rgba(139,157,195,0.12);
   transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(212,175,106,0.12);
+  box-shadow:0 8px 20px rgba(139,157,195,0.12);
 }
-.btn-gold.solid{
-  background:var(--gold);
-  color:#0a0a0b;
+.btn-accent.solid{
+  background:var(--accent);
+  color:#0a0c12;
   font-weight:600;
 }
-.btn-gold.solid:hover{
-  background:var(--gold-soft);
-  color:#0a0a0b;
+.btn-accent.solid:hover{
+  background:var(--accent-soft);
+  color:#0a0c12;
 }
-
-/* ===== SERVICES / SHOP CARDS ===== */
-.services-grid,.shop-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:1.3rem;
-  margin-top:1.3rem;
-}
-.service-card,.product-card{
-  padding:1.75rem;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  transition:border-color .3s,transform .3s,box-shadow .3s;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-}
-.service-card:hover,.product-card:hover{
-  border-color:var(--border-strong);
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-sm);
-}
-.service-card .price,.product-card .price{
-  font-family:var(--font-display);
-  font-size:1.35rem;
-  color:var(--gold);
-  margin:0.55rem 0 0.35rem;
-}
-.service-card .delivery{
-  font-size:0.72rem;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:var(--gold-muted);
-  margin-bottom:0.75rem;
-}
-.service-card h3,.product-card h4{
-  font-family:var(--font-display);
-  font-size:1.15rem;
-  color:var(--warm);
-  margin-bottom:0.45rem;
-}
-.service-card p,.product-card p{
-  font-size:0.92rem;
-  color:var(--text-muted);
-  line-height:1.6;
-  margin-bottom:1.15rem;
-  flex:1;
-}
-.btn-outline{
-  display:inline-flex;
-  padding:0.6rem 1.15rem;
-  border:1px solid var(--border);
-  font-size:0.72rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--text-muted);
-  transition:color .25s,border-color .25s,background .25s;
-  min-height:44px;
-  align-items:center;
-  border-radius:7px;
-  margin-top:auto;
-}
-.btn-outline:hover{
-  color:var(--gold);
-  border-color:var(--gold);
-  background:rgba(212,175,106,0.07);
-}
-.payment-note{font-size:0.8rem;color:var(--gold-muted);margin-top:0.75rem;line-height:1.5}
 
 /* ===== ORBIT ===== */
 .orbit-wrap{
   position:relative;
   width:100%;
   height:min(52vh,440px);
-  margin:2rem auto 1.5rem;
+  margin:2.2rem auto 1.6rem;
   perspective:1200px;
   overflow:visible;
   display:flex;
@@ -446,37 +345,37 @@ body.has-custom-cursor .clickable{cursor:none}
   box-shadow:0 8px 28px rgba(0,0,0,0.5);
 }
 .orbit-item.active{
-  border-color:rgba(212,175,106,0.4);
+  border-color:rgba(139,157,195,0.4);
   z-index:5;
 }
 .orbit-item.active img{
-  box-shadow:0 14px 40px rgba(0,0,0,0.6),0 0 0 1px rgba(212,175,106,0.25);
+  box-shadow:0 14px 40px rgba(0,0,0,0.6),0 0 0 1px rgba(139,157,195,0.25);
 }
 .orbit-hint{
   text-align:center;
   font-size:0.74rem;
   color:var(--text-muted);
   letter-spacing:0.1em;
-  margin:0.5rem 0 1.4rem;
+  margin:0.5rem 0 1.5rem;
 }
-.section-desc{max-width:48em;margin:0 auto 0.7rem;font-size:1.04rem;line-height:1.82;color:var(--text)}
-.section-desc p{margin-bottom:1.05rem}
-.section-desc .bn{font-size:1.06rem;color:var(--warm);font-style:italic;margin:0.9rem 0;line-height:1.78}
-.book-actions{text-align:center;margin-top:1.5rem}
+.section-desc{max-width:50em;margin:0 auto 0.8rem;font-size:1.06rem;line-height:1.88;color:var(--text)}
+.section-desc p{margin-bottom:1.2rem}
+.section-desc .bn{font-size:1.1rem;color:var(--warm);font-style:italic;margin:1.1rem 0;line-height:1.85}
+.book-actions{text-align:center;margin-top:1.8rem}
 
 /* ===== EDUCATION ===== */
-.edu-grid{display:grid;gap:2.2rem}
+.edu-grid{display:grid;gap:2.4rem}
 .edu-card{
   display:grid;
   grid-template-columns:minmax(180px,270px) 1fr;
-  gap:1.6rem;
-  padding:1.5rem;
+  gap:1.7rem;
+  padding:1.6rem;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
 }
-.edu-gallery{display:grid;grid-template-columns:1fr 1fr;gap:0.45rem}
+.edu-gallery{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
 .edu-gallery img{
   width:100%;
   aspect-ratio:4/3;
@@ -488,44 +387,44 @@ body.has-custom-cursor .clickable{cursor:none}
 .edu-gallery img:hover{opacity:0.9;transform:scale(1.02)}
 .edu-info h3{
   font-family:var(--font-display);
-  font-size:1.3rem;
+  font-size:1.32rem;
   font-weight:400;
   color:var(--warm);
-  margin-bottom:0.3rem;
+  margin-bottom:0.35rem;
 }
-.edu-meta{font-size:0.78rem;color:var(--gold-muted);letter-spacing:0.08em;margin-bottom:0.65rem}
-.edu-info p{font-size:0.96rem;color:var(--text-muted);line-height:1.68}
+.edu-meta{font-size:0.78rem;color:var(--accent-muted);letter-spacing:0.08em;margin-bottom:0.7rem}
+.edu-info p{font-size:0.98rem;color:var(--text-muted);line-height:1.75}
 .edu-badge{
   display:inline-block;
-  margin-top:0.7rem;
-  padding:0.28rem 0.7rem;
-  border:1px solid rgba(212,175,106,0.32);
+  margin-top:0.8rem;
+  padding:0.3rem 0.75rem;
+  border:1px solid rgba(139,157,195,0.32);
   font-size:0.7rem;
   letter-spacing:0.1em;
-  color:var(--gold);
+  color:var(--accent);
   text-transform:uppercase;
   border-radius:5px;
 }
 .models-meta{
-  display:flex;flex-wrap:wrap;gap:0.85rem 1.7rem;
-  margin-bottom:0.6rem;
+  display:flex;flex-wrap:wrap;gap:0.9rem 1.8rem;
+  margin-bottom:0.7rem;
   font-size:0.8rem;
   letter-spacing:0.08em;
   color:var(--text-muted);
 }
-.models-meta strong{color:var(--gold-muted);font-weight:500}
+.models-meta strong{color:var(--accent-muted);font-weight:500}
 
 /* ===== SKILLS ===== */
 .skills-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:1.25rem;
-  margin-top:1rem;
+  gap:1.3rem;
+  margin-top:1.1rem;
 }
 .skill-card{
   position:relative;
-  padding:1.9rem 1.45rem;
-  min-height:168px;
+  padding:1.95rem 1.5rem;
+  min-height:172px;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
@@ -538,7 +437,7 @@ body.has-custom-cursor .clickable{cursor:none}
   content:'';
   position:absolute;top:0;left:0;
   width:3px;height:100%;
-  background:var(--gold);
+  background:var(--accent);
   transform:scaleY(0);
   transform-origin:top;
   transition:transform .35s var(--ease);
@@ -551,46 +450,46 @@ body.has-custom-cursor .clickable{cursor:none}
 .skill-card:hover::before{transform:scaleY(1)}
 .skill-card h3{
   font-family:var(--font-display);
-  font-size:1.2rem;
+  font-size:1.22rem;
   font-weight:400;
   letter-spacing:0.05em;
   color:var(--warm);
-  margin-bottom:0.45rem;
+  margin-bottom:0.5rem;
 }
-.skill-card p{font-size:0.9rem;color:var(--text-muted);line-height:1.55}
+.skill-card p{font-size:0.92rem;color:var(--text-muted);line-height:1.6}
 .skill-card .arrow{
-  position:absolute;bottom:1.2rem;right:1.2rem;
-  font-size:1.1rem;color:var(--gold);
+  position:absolute;bottom:1.25rem;right:1.25rem;
+  font-size:1.1rem;color:var(--accent);
   opacity:0.55;
   transition:opacity .3s,transform .3s;
 }
 .skill-card:hover .arrow{opacity:1;transform:translateX(4px)}
 
-.skill-sub{display:none;min-height:calc(100vh - var(--nav-h));padding:2rem 1.5rem 4rem}
+.skill-sub{display:none;min-height:calc(100vh - var(--nav-h));padding:2.1rem 1.5rem 4.2rem}
 .skill-sub.active{display:block}
 .skill-sub-header{
   display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:1.3rem;flex-wrap:wrap;gap:0.9rem;
+  margin-bottom:1.4rem;flex-wrap:wrap;gap:0.9rem;
 }
 .close-x{
   width:48px;height:48px;
   display:flex;align-items:center;justify-content:center;
   border:1px solid var(--border);
-  color:var(--gold);
+  color:var(--accent);
   font-size:1.45rem;
   transition:background .25s,border-color .25s;
   border-radius:10px;
   -webkit-tap-highlight-color:transparent;
 }
-.close-x:hover{background:rgba(212,175,106,0.1);border-color:var(--gold)}
+.close-x:hover{background:rgba(139,157,195,0.1);border-color:var(--accent)}
 
 .project-cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-  gap:1.25rem;
+  gap:1.3rem;
 }
 .project-card{
-  padding:1.7rem;
+  padding:1.75rem;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
@@ -599,11 +498,29 @@ body.has-custom-cursor .clickable{cursor:none}
 .project-card:hover{border-color:var(--border-strong);transform:translateY(-3px)}
 .project-card h4{
   font-family:var(--font-display);
-  font-size:1.18rem;
+  font-size:1.2rem;
   color:var(--warm);
-  margin-bottom:0.45rem;
+  margin-bottom:0.5rem;
 }
-.project-card p{font-size:0.94rem;color:var(--text-muted);margin-bottom:1.15rem;line-height:1.6}
+.project-card p{font-size:0.95rem;color:var(--text-muted);margin-bottom:1.2rem;line-height:1.65}
+.btn-outline{
+  display:inline-flex;
+  padding:0.6rem 1.15rem;
+  border:1px solid var(--border);
+  font-size:0.72rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  transition:color .25s,border-color .25s,background .25s;
+  min-height:44px;
+  align-items:center;
+  border-radius:7px;
+}
+.btn-outline:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+  background:rgba(139,157,195,0.07);
+}
 
 .video-orbit .orbit-item{aspect-ratio:16/9;width:min(205px,52vw)}
 .video-card-inner{
@@ -625,59 +542,59 @@ body.has-custom-cursor .clickable{cursor:none}
 .video-card-inner span{
   font-size:0.68rem;
   letter-spacing:0.12em;
-  color:var(--gold-muted);
+  color:var(--accent-muted);
   text-transform:uppercase;
 }
 
 .reading-panel{
-  max-width:720px;margin:0 auto;
-  padding:2.1rem;
+  max-width:740px;margin:0 auto;
+  padding:2.2rem;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
 }
 .reading-panel h3{
   font-family:var(--font-display);
-  font-size:1.22rem;
-  color:var(--gold);
-  margin:1.35rem 0 0.45rem;
+  font-size:1.25rem;
+  color:var(--accent);
+  margin:1.45rem 0 0.5rem;
 }
 .reading-panel h3:first-child{margin-top:0}
 .reading-panel ul{list-style:none}
 .reading-panel li{
-  padding:0.32rem 0;
+  padding:0.35rem 0;
   color:var(--text-muted);
-  font-size:0.96rem;
+  font-size:0.97rem;
   border-bottom:1px solid rgba(255,255,255,0.04);
 }
-.reading-intro{margin-bottom:1.35rem;line-height:1.75;color:var(--text);font-size:1.04rem}
+.reading-intro{margin-bottom:1.45rem;line-height:1.8;color:var(--text);font-size:1.06rem}
 
 /* ===== ACHIEVEMENTS ===== */
 .achieve-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
-  gap:1.25rem;
+  gap:1.3rem;
 }
 .achieve-card{
-  padding:1.5rem;
+  padding:1.55rem;
   background:var(--surface);
-  border:1px solid rgba(212,175,106,0.2);
+  border:1px solid rgba(139,157,195,0.2);
   border-radius:var(--radius);
   cursor:pointer;
   transition:border-color .3s,transform .3s,box-shadow .3s;
   position:relative;
-  min-height:132px;
+  min-height:138px;
   text-align:left;
 }
 .achieve-card::after{
   content:'';
   position:absolute;inset:5px;
-  border:1px solid rgba(212,175,106,0.07);
+  border:1px solid rgba(139,157,195,0.07);
   border-radius:8px;
   pointer-events:none;
 }
 .achieve-card:hover{
-  border-color:var(--gold);
+  border-color:var(--accent);
   transform:translateY(-4px);
   box-shadow:var(--shadow-sm);
 }
@@ -685,22 +602,22 @@ body.has-custom-cursor .clickable{cursor:none}
   font-size:0.68rem;
   letter-spacing:0.15em;
   text-transform:uppercase;
-  color:var(--gold-muted);
-  margin-bottom:0.45rem;
+  color:var(--accent-muted);
+  margin-bottom:0.5rem;
 }
 .achieve-card h3{
   font-family:var(--font-display);
-  font-size:1.12rem;
+  font-size:1.14rem;
   color:var(--warm);
-  margin-bottom:0.35rem;
+  margin-bottom:0.4rem;
 }
-.achieve-card p{font-size:0.9rem;color:var(--text-muted);line-height:1.55}
+.achieve-card p{font-size:0.92rem;color:var(--text-muted);line-height:1.6}
 
 /* ===== CONTACT ===== */
 .contact-card{
   position:relative;z-index:5;
   max-width:680px;margin:0 auto;
-  padding:2.5rem 2.1rem;
+  padding:2.6rem 2.2rem;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
@@ -709,23 +626,23 @@ body.has-custom-cursor .clickable{cursor:none}
 }
 .contact-card h2{
   font-family:var(--font-display);
-  font-size:1.55rem;
+  font-size:1.6rem;
   text-align:center;
-  margin-bottom:0.4rem;
+  margin-bottom:0.45rem;
 }
-.contact-loc{text-align:center;font-size:0.86rem;color:var(--text-muted);margin-bottom:1.8rem}
+.contact-loc{text-align:center;font-size:0.88rem;color:var(--text-muted);margin-bottom:1.9rem}
 .contact-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-  gap:0.75rem;
+  gap:0.8rem;
   position:relative;z-index:6;
   pointer-events:auto;
 }
 .contact-link{
   position:relative;z-index:7;
   display:flex;flex-direction:column;
-  align-items:center;gap:0.45rem;
-  padding:1.1rem 0.6rem;
+  align-items:center;gap:0.5rem;
+  padding:1.15rem 0.65rem;
   border:1px solid var(--border);
   border-radius:10px;
   transition:border-color .3s,background .3s,transform .25s;
@@ -735,33 +652,54 @@ body.has-custom-cursor .clickable{cursor:none}
   color:var(--text-muted);
   pointer-events:auto!important;
   cursor:pointer;
-  -webkit-tap-highlight-color:rgba(212,175,106,0.2);
+  -webkit-tap-highlight-color:rgba(139,157,195,0.2);
   text-decoration:none;
-  min-height:94px;
+  min-height:96px;
   justify-content:center;
 }
 .contact-link:hover,.contact-link:focus{
-  border-color:var(--gold);
-  color:var(--gold);
-  background:rgba(212,175,106,0.07);
+  border-color:var(--accent);
+  color:var(--accent);
+  background:rgba(139,157,195,0.07);
   transform:translateY(-2px);
 }
 .contact-link svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.4;pointer-events:none}
 
 .booking-box{
   background:var(--surface-2);
-  border:1px solid rgba(212,175,106,0.22);
-  padding:1.4rem;
-  margin-bottom:1.8rem;
+  border:1px solid rgba(139,157,195,0.22);
+  padding:1.5rem;
+  margin-bottom:1.9rem;
   text-align:center;
   border-radius:10px;
 }
-.booking-box p{font-size:0.94rem;color:var(--text);margin-bottom:1rem;line-height:1.6}
-.booking-box .btn-gold{width:100%;max-width:320px;justify-content:center}
+.booking-box p{font-size:0.96rem;color:var(--text);margin-bottom:1.1rem;line-height:1.7}
 
-.cv-panel{text-align:center;max-width:540px;margin:0 auto;padding:3rem 1.5rem}
-.cv-panel h2{font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.65rem}
-.cv-panel p{color:var(--text-muted);margin-bottom:1.9rem;line-height:1.65}
+/* ===== CV ===== */
+.cv-panel{
+  text-align:center;
+  max-width:620px;
+  margin:0 auto;
+  padding:3.2rem 1.6rem;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+.cv-panel h2{
+  font-family:var(--font-display);
+  font-size:1.55rem;
+  margin-bottom:0.8rem;
+  color:var(--warm);
+}
+.cv-panel .cv-desc{
+  color:var(--text-muted);
+  margin-bottom:1.8rem;
+  line-height:1.8;
+  font-size:1.02rem;
+  text-align:left;
+}
+.cv-panel .cv-desc p{margin-bottom:1rem}
 .cv-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
 
 /* ===== MODAL ===== */
@@ -792,13 +730,13 @@ body.has-custom-cursor .clickable{cursor:none}
   position:absolute;top:12px;right:12px;z-index:10;
   width:44px;height:44px;
   display:flex;align-items:center;justify-content:center;
-  background:rgba(7,7,8,0.88);
+  background:rgba(10,12,18,0.88);
   border:1px solid var(--border);
-  color:var(--gold);
+  color:var(--accent);
   font-size:1.3rem;
   border-radius:10px;
 }
-.modal-close:hover{background:rgba(212,175,106,0.14)}
+.modal-close:hover{background:rgba(139,157,195,0.14)}
 .modal-body{display:grid;grid-template-columns:1fr 1fr;overflow:auto;max-height:90vh}
 .modal-media{
   background:#000;
@@ -808,44 +746,44 @@ body.has-custom-cursor .clickable{cursor:none}
 }
 .modal-media img,.modal-media embed{max-width:100%;max-height:82vh;object-fit:contain}
 .modal-info{
-  padding:1.85rem 1.6rem;
+  padding:1.9rem 1.65rem;
   overflow-y:auto;
   border-left:1px solid var(--border);
 }
 .modal-info h3{
   font-family:var(--font-display);
-  font-size:1.3rem;
+  font-size:1.32rem;
   color:var(--warm);
-  margin-bottom:0.5rem;
+  margin-bottom:0.55rem;
 }
-.modal-info .block{margin-bottom:1.1rem}
+.modal-info .block{margin-bottom:1.15rem}
 .modal-info .block-label{
   font-size:0.66rem;
   letter-spacing:0.14em;
   text-transform:uppercase;
-  color:var(--gold-muted);
-  margin-bottom:0.22rem;
+  color:var(--accent-muted);
+  margin-bottom:0.25rem;
 }
-.modal-info .block-body{font-size:0.96rem;color:var(--text);line-height:1.68}
+.modal-info .block-body{font-size:0.97rem;color:var(--text);line-height:1.72}
 .modal-info .methods-toggle{
-  margin-top:0.4rem;padding:0.5rem 0;
-  color:var(--gold);font-size:0.78rem;letter-spacing:0.08em;cursor:pointer;
+  margin-top:0.45rem;padding:0.5rem 0;
+  color:var(--accent);font-size:0.78rem;letter-spacing:0.08em;cursor:pointer;
 }
 .methods-content{
-  display:none;margin-top:0.65rem;
-  padding:1rem;
+  display:none;margin-top:0.7rem;
+  padding:1.05rem;
   background:var(--surface-2);
-  font-size:0.9rem;line-height:1.6;
+  font-size:0.91rem;line-height:1.65;
   color:var(--text-muted);
   border-radius:8px;
 }
 .methods-content.open{display:block}
-.methods-content li{margin-bottom:0.35rem;list-style:disc;margin-left:1.1rem}
+.methods-content li{margin-bottom:0.4rem;list-style:disc;margin-left:1.15rem}
 .modal-loading{
   position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;
   background:rgba(0,0,0,0.6);
-  color:var(--gold);
+  color:var(--accent);
   font-size:0.88rem;letter-spacing:0.12em;
 }
 .modal.pdf-mode .modal-body{grid-template-columns:1fr}
@@ -861,81 +799,81 @@ body.has-custom-cursor .clickable{cursor:none}
   width:48px;height:48px;
   border-radius:50%;
   border:1px solid var(--border);
-  background:rgba(17,17,20,0.92);
+  background:rgba(18,21,30,0.92);
   display:flex;align-items:center;justify-content:center;
-  color:var(--gold);
+  color:var(--accent);
   backdrop-filter:blur(10px);
   -webkit-tap-highlight-color:transparent;
   transition:border-color .25s,background .25s;
 }
-.audio-ctrl:hover{border-color:var(--gold);background:rgba(212,175,106,0.12)}
+.audio-ctrl:hover{border-color:var(--accent);background:rgba(139,157,195,0.12)}
 .audio-ctrl svg{width:17px;height:17px;fill:currentColor}
 
 .text-center{text-align:center}
-.mt-2{margin-top:1.9rem}
+.mt-2{margin-top:2rem}
 .trust-bar{
-  display:flex;flex-wrap:wrap;gap:0.8rem 1.5rem;
-  justify-content:center;
-  margin:1.5rem 0 0.5rem;
+  display:flex;flex-wrap:wrap;gap:0.85rem 1.6rem;
+  justify-content:flex-start;
+  margin:1.6rem 0 0.4rem;
   font-size:0.76rem;
   letter-spacing:0.06em;
   color:var(--text-muted);
 }
 .trust-bar span{display:flex;align-items:center;gap:0.35rem}
-.trust-bar strong{color:var(--gold-muted)}
+.trust-bar strong{color:var(--accent-muted)}
 
 /* ========== MOBILE POLISH ========== */
 @media (max-width:820px){
-  .section{padding:1.9rem 1.15rem 3.6rem}
-  .home-grid{grid-template-columns:1fr;gap:2.1rem;min-height:auto}
+  .section{padding:2rem 1.15rem 3.8rem}
+  .home-grid{grid-template-columns:1fr;gap:2.2rem;min-height:auto}
   .profile-frame{max-width:290px;margin:0 auto}
   .home-identity{text-align:center}
-  .home-bio{text-align:left;font-size:1.01rem}
+  .home-bio{text-align:left;font-size:1.02rem}
   .home-identity h1{font-size:clamp(2.5rem,11vw,3.5rem)}
   .home-roles{font-size:0.72rem}
-  .section-title{font-size:1.65rem}
-  .orbit-wrap{height:min(48vh,390px);margin:1.7rem auto 1.3rem}
+  .section-title{font-size:1.7rem}
+  .orbit-wrap{height:min(48vh,390px);margin:1.8rem auto 1.4rem}
   .orbit-item{width:min(148px,46vw)}
   .video-orbit .orbit-item{width:min(180px,58vw)}
   .hero-ctas{justify-content:center}
+  .trust-bar{justify-content:center}
 }
 
 @media (max-width:600px){
-  .section{padding:1.6rem 1rem 3.3rem}
-  .section-title{font-size:1.5rem}
-  .section-sub{font-size:0.74rem;margin-bottom:1.2rem}
+  .section{padding:1.7rem 1rem 3.5rem}
+  .section-title{font-size:1.55rem}
+  .section-sub{font-size:0.74rem;margin-bottom:1.3rem}
   .orbit-wrap{height:min(45vh,370px)}
   .orbit-item{width:min(136px,48vw)}
-  .skills-grid{grid-template-columns:1fr;gap:1rem}
-  .skill-card{min-height:148px;padding:1.55rem 1.25rem}
-  .skill-card h3{font-size:1.12rem}
-  .edu-card{grid-template-columns:1fr;padding:1.25rem}
-  .edu-info h3{font-size:1.18rem}
+  .skills-grid{grid-template-columns:1fr;gap:1.05rem}
+  .skill-card{min-height:152px;padding:1.6rem 1.3rem}
+  .skill-card h3{font-size:1.14rem}
+  .edu-card{grid-template-columns:1fr;padding:1.3rem}
+  .edu-info h3{font-size:1.2rem}
   .project-cards{grid-template-columns:1fr}
-  .achieve-grid{grid-template-columns:1fr;gap:1rem}
-  .achieve-card{padding:1.3rem;min-height:120px}
-  .contact-card{padding:1.9rem 1.15rem;margin:0 0.1rem}
-  .contact-grid{grid-template-columns:repeat(2,1fr);gap:0.65rem}
-  .contact-link{min-height:96px;padding:1.1rem 0.45rem;font-size:0.68rem}
+  .achieve-grid{grid-template-columns:1fr;gap:1.05rem}
+  .achieve-card{padding:1.35rem;min-height:124px}
+  .contact-card{padding:2rem 1.2rem;margin:0 0.1rem}
+  .contact-grid{grid-template-columns:repeat(2,1fr);gap:0.7rem}
+  .contact-link{min-height:98px;padding:1.15rem 0.5rem;font-size:0.68rem}
   .contact-link svg{width:23px;height:23px}
-  .cv-panel{padding:2.2rem 1.1rem}
+  .cv-panel{padding:2.4rem 1.2rem}
   .cv-actions{flex-direction:column;align-items:center}
-  .cv-actions .btn-gold{width:100%;max-width:290px;justify-content:center;min-height:50px}
-  .reading-panel{padding:1.5rem 1.2rem}
+  .cv-actions .btn-accent{width:100%;max-width:290px;justify-content:center;min-height:50px}
+  .reading-panel{padding:1.6rem 1.25rem}
   .modal-overlay{padding:0.5rem;align-items:flex-end}
   .modal{max-width:100%;max-height:94vh;border-radius:16px 16px 0 0;width:100%}
   .modal-body{grid-template-columns:1fr;max-height:94vh}
-  .modal-info{border-left:none;border-top:1px solid var(--border);padding:1.35rem 1.2rem;padding-bottom:calc(1.5rem + var(--safe-bottom))}
+  .modal-info{border-left:none;border-top:1px solid var(--border);padding:1.4rem 1.25rem;padding-bottom:calc(1.6rem + var(--safe-bottom))}
   .modal-media{min-height:210px}
   .modal-media img{max-height:44vh}
   .modal.pdf-mode .modal-media{min-height:56vh}
   .modal.pdf-mode .modal-media embed{height:56vh}
   .modal-close{top:10px;right:10px;width:46px;height:46px}
-  .services-grid,.shop-grid{grid-template-columns:1fr}
 }
 
 @media (max-width:400px){
-  .section{padding:1.4rem 0.85rem 3rem}
+  .section{padding:1.5rem 0.85rem 3.2rem}
   .home-identity h1{font-size:2.4rem}
   .orbit-item{width:min(124px,50vw)}
 }
@@ -955,13 +893,6 @@ body.has-custom-cursor .clickable{cursor:none}
   <svg id="audioIconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
 </button>
 
-<!-- TOP CTA BAR (Desktop only) -->
-<div class="top-cta">
-  <span>Fixed-price packages · Websites · Models · Art · English</span>
-  <a href="#services" data-section="services">View Services</a>
-  <a href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20book%20a%20package" target="_blank" rel="noopener">WhatsApp Now</a>
-</div>
-
 <div class="app">
   <nav class="nav" role="navigation" aria-label="Main">
     <a href="#home" class="nav-logo" data-section="home" aria-label="Home">
@@ -972,8 +903,6 @@ body.has-custom-cursor .clickable{cursor:none}
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" data-section="home" class="active">Home</a></li>
-      <li><a href="#services" data-section="services">Services</a></li>
-      <li><a href="#shop" data-section="shop">Shop</a></li>
       <li><a href="#book" data-section="book">The Book</a></li>
       <li><a href="#education" data-section="education">Education</a></li>
       <li><a href="#models" data-section="models">Architectural Models</a></li>
@@ -997,17 +926,16 @@ body.has-custom-cursor .clickable{cursor:none}
             <div class="home-roles">Architecture <span>·</span> Creative Developer <span>·</span> Designer <span>·</span> Artist</div>
             <div class="gold-line"></div>
             <div class="home-bio">
-              <p>He was never satisfied with being only one thing. Across drawing, painting, architecture, model-making, web design, code, digital experiments, literature, music and visual storytelling, he has kept returning to the same impulse: to give form to what is imagined.</p>
-              <p class="bn">একটি মাত্র পরিচয়ে আবদ্ধ থাকার অভ্যাস তাঁর ছিল না। চিত্র, স্থাপত্য, মডেল, কোড ও গল্পের মাঝে তিনি বারবার ফিরে এসেছেন — কল্পনাকে রূপ দেওয়ার সেই একই আকাঙ্ক্ষা নিয়ে।</p>
-              <p>He combines the sensitivity of an artist with the curiosity of an engineer. The path has not been perfectly smooth — there were disappointments, pressure, uncertainty and difficult periods. Yet repeatedly he returned to creating, learning and rebuilding.</p>
-              <p>He is not presented as someone who already has everything figured out. He is still becoming.</p>
-              <p class="statement">A person who keeps trying to turn imagination into reality.<br><span style="font-size:0.92em;opacity:0.9">কল্পনাকে বাস্তবে রূপ দেওয়ার চেষ্টায় যিনি থেমে থাকেন না।</span></p>
-              <p style="margin-top:1.2rem;font-size:0.95rem;color:var(--text-muted)">Exploring the intersection of Architecture, Design, Art and Computer Science.</p>
+              <p>He was never satisfied with being only one thing. Across drawing, painting, architecture, model-making, web design, code, digital experiments, literature, music and visual storytelling, he has kept returning to the same impulse: to give form to what is imagined — even when the path felt heavy, uncertain, or quietly painful.</p>
+              <p class="bn">একটি মাত্র পরিচয়ে আবদ্ধ থাকার অভ্যাস তাঁর ছিল না। চিত্র, স্থাপত্য, মডেল, কোড ও গল্পের মাঝে তিনি বারবার ফিরে এসেছেন — কল্পনাকে রূপ দেওয়ার সেই একই আকাঙ্ক্ষা নিয়ে। পথ সবসময় মসৃণ ছিল না; হতাশা, চাপ, অনিশ্চয়তা ও কঠিন সময় এসেছে। তবু তিনি থেমে যাননি। বারবার ফিরে এসেছেন তৈরি করতে, শিখতে, আবার গড়ে তুলতে।</p>
+              <p>He combines the sensitivity of an artist with the curiosity of an engineer. The path has not been perfectly smooth — there were disappointments, pressure, uncertainty and difficult periods. Yet repeatedly he returned to creating, learning and rebuilding. This portfolio is not a showcase of someone who already has everything figured out. It is a record of someone who is still becoming, still carrying both the weight and the quiet refusal to stop.</p>
+              <p class="statement">A person who keeps trying to turn imagination into reality — even when the nights feel longer than the days.<br><span style="font-size:0.92em;opacity:0.9">কল্পনাকে বাস্তবে রূপ দেওয়ার চেষ্টায় যিনি থেমে থাকেন না। দুঃখ, সংগ্রাম ও না-ছেড়ে-দেওয়ার মানসিকতা — এই তিনটিই এই পোর্টফোলিওর নীরব ভিত্তি।</span></p>
+              <p style="margin-top:1.3rem;font-size:0.95rem;color:var(--text-muted)">Exploring the intersection of Architecture, Design, Art and Computer Science.</p>
             </div>
 
             <div class="hero-ctas">
-              <a class="btn-gold solid" href="#services" data-section="services">Hire Me – Fixed Packages</a>
-              <a class="btn-gold" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20book%20a%2030-min%20paid%20consult%20(1500%20TK)" target="_blank" rel="noopener">Book 30-min Consult · 1500 TK</a>
+              <a class="btn-accent solid" href="#contact" data-section="contact">Get in Touch</a>
+              <a class="btn-accent" href="#book" data-section="book">View the Book</a>
             </div>
 
             <div class="trust-bar">
@@ -1020,124 +948,6 @@ body.has-custom-cursor .clickable{cursor:none}
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services" class="section" data-section="services" aria-label="Services">
-      <div class="section-inner">
-        <h2 class="section-title">Services</h2>
-        <p class="section-sub">Fixed-price packages · Fast delivery · Clear scope</p>
-        <p class="section-desc" style="margin-bottom:1.5rem">Choose a package → Message on WhatsApp → Confirm → Send bKash to 01326162684 → Delivery starts within 24 hours.</p>
-
-        <div class="services-grid">
-          <article class="service-card">
-            <h3>Landing Page (Mobile-first)</h3>
-            <div class="price">8,000 – 12,000 TK</div>
-            <div class="delivery">Delivery · 3–5 days</div>
-            <p>One-page website + contact form + basic SEO. Clean, fast, mobile-ready.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Landing%20Page%20package%20(8000-12000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
-          </article>
-
-          <article class="service-card">
-            <h3>Full Portfolio / Brochure Site</h3>
-            <div class="price">18,000 – 25,000 TK</div>
-            <div class="delivery">Delivery · 7–10 days</div>
-            <p>Multi-section site with custom orbit/gallery, domain help and mobile polish.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Full%20Portfolio%20Site%20package%20(18000-25000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
-          </article>
-
-          <article class="service-card">
-            <h3>Architectural Model Photography + Presentation</h3>
-            <div class="price">5,000 – 9,000 TK</div>
-            <div class="delivery">Delivery · 2–4 days</div>
-            <p>15–25 edited photos of your models + simple layout PDF.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20Model%20Photography%20%2B%20Presentation%20(5000-9000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
-          </article>
-
-          <article class="service-card">
-            <h3>Art Commission (Digital / Print-ready)</h3>
-            <div class="price">3,000 – 7,000 TK</div>
-            <div class="delivery">Delivery · 3–7 days</div>
-            <p>One finished piece with commercial license.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20an%20Art%20Commission%20(3000-7000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
-          </article>
-
-          <article class="service-card">
-            <h3>English Grammar Video Pack / Private Session</h3>
-            <div class="price">2,000 – 4,000 TK</div>
-            <div class="delivery">Delivery · 1–3 days</div>
-            <p>3 short videos or 1-hour private session + practice sheets.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20English%20Video%20Pack%20or%20Private%20Session%20(2000-4000%20TK)" target="_blank" rel="noopener">Order via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
-          </article>
-
-          <article class="service-card">
-            <h3>Add-ons</h3>
-            <div class="price">Extra</div>
-            <div class="delivery">Anytime</div>
-            <p>Rush delivery · Extra revisions · Hosting · Domain help.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20to%20discuss%20add-ons" target="_blank" rel="noopener">Ask on WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684 (same number)</p>
-          </article>
-        </div>
-
-        <p class="text-center mt-2" style="font-size:0.9rem;color:var(--text-muted)">Only 3 client slots open this week · Payment via bKash to 01326162684 after WhatsApp confirmation</p>
-      </div>
-    </section>
-
-    <!-- SHOP -->
-    <section id="shop" class="section" data-section="shop" aria-label="Digital Products">
-      <div class="section-inner">
-        <h2 class="section-title">Shop</h2>
-        <p class="section-sub">Digital products · Instant or same-day delivery</p>
-        <p class="section-desc" style="margin-bottom:1.5rem">Message on WhatsApp → Confirm → Send bKash to 01326162684 → Receive Google Drive / WhatsApp link.</p>
-
-        <div class="shop-grid">
-          <article class="product-card">
-            <h4>Handmade Portfolio Process PDF + Templates</h4>
-            <div class="price">800 – 1,500 TK</div>
-            <p>Binding diagrams, colour coding, cutout methods and page construction notes.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Handmade%20Portfolio%20Process%20PDF%20(800-1500%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684</p>
-          </article>
-
-          <article class="product-card">
-            <h4>ARC 101 Method Notes + Model Photo Pack</h4>
-            <div class="price">1,200 TK</div>
-            <p>Complete process notes + high-res photos of the models.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20ARC%20101%20Method%20Notes%20%2B%20Photo%20Pack%20(1200%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684</p>
-          </article>
-
-          <article class="product-card">
-            <h4>Art Pack (15 high-res works + process notes)</h4>
-            <div class="price">900 TK</div>
-            <p>High-resolution scans of the exhibition and personal works.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Art%20Pack%20(900%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684</p>
-          </article>
-
-          <article class="product-card">
-            <h4>Website Starter Template (Dark/Gold)</h4>
-            <div class="price">2,500 TK</div>
-            <p>Cleaned & documented version of this portfolio code.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20Website%20Starter%20Template%20(2500%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684</p>
-          </article>
-
-          <article class="product-card">
-            <h4>English Modifiers / Connectors / SVA Pack</h4>
-            <div class="price">600 TK</div>
-            <p>Video scripts + practice sheets.</p>
-            <a class="btn-outline" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20want%20the%20English%20Grammar%20Pack%20(600%20TK)" target="_blank" rel="noopener">Buy via WhatsApp</a>
-            <p class="payment-note">Payment: bKash to 01326162684</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- BOOK -->
     <section id="book" class="section" data-section="book" aria-label="The Book">
       <div class="section-inner">
@@ -1146,11 +956,11 @@ body.has-custom-cursor .clickable{cursor:none}
         <div class="orbit-wrap" id="bookOrbit"><div class="orbit-stage" id="bookStage"></div></div>
         <p class="orbit-hint">Tap an image to pause · Continuous orbit</p>
         <div class="section-desc">
-          <p>This portfolio is entirely handmade, from its drawings and models to every cut, composition and binding. Each element was crafted by hand, making the portfolio itself a part of the creative process.</p>
-          <p class="bn">এই পোর্টফোলিও সম্পূর্ণ হাতে তৈরি — অঙ্কন থেকে মডেল, কাটা থেকে বাঁধাই পর্যন্ত প্রতিটি স্তর নিজের হাতে গড়া। বইটি কেবল কাজের ধারক নয়; বইটি নিজেই কাজের অংশ।</p>
-          <p>Its binding, colour coding, typography, logo work, cutouts, layered forms, architectural model fragments, compositions and page construction were created as part of the author’s own creative process. The book is not simply a container for the work — the book itself is part of the work.</p>
+          <p>This portfolio is entirely handmade, from its drawings and models to every cut, composition and binding. Each element was crafted by hand, making the portfolio itself a part of the creative process — not merely a container for finished work, but a physical record of the struggle, patience and quiet persistence required to keep making when motivation is thin.</p>
+          <p class="bn">এই পোর্টফোলিও সম্পূর্ণ হাতে তৈরি — অঙ্কন থেকে মডেল, কাটা থেকে বাঁধাই পর্যন্ত প্রতিটি স্তর নিজের হাতে গড়া। বইটি কেবল কাজের ধারক নয়; বইটি নিজেই কাজের অংশ। এর বাঁধাই, রঙের কোডিং, টাইপোগ্রাফি, লোগো কাজ, কাট-আউট, স্তরযুক্ত ফর্ম, স্থাপত্য মডেলের টুকরো, কম্পোজিশন ও পৃষ্ঠা নির্মাণ — সবকিছুই লেখকের নিজস্ব সৃজনশীল প্রক্রিয়ার অংশ হিসেবে তৈরি হয়েছে। এটি শুধু একটি বই নয়; এটি একজন মানুষের থেমে না যাওয়ার নীরব সাক্ষ্য।</p>
+          <p>Its binding, colour coding, typography, logo work, cutouts, layered forms, architectural model fragments, compositions and page construction were created as part of the author’s own creative process. The book is not simply a container for the work — the book itself is part of the work, carrying the marks of late nights, revisions, and the decision to continue even when the outcome was uncertain.</p>
         </div>
-        <div class="book-actions"><a class="btn-gold" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Portfolio</a></div>
+        <div class="book-actions"><a class="btn-accent" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Portfolio</a></div>
       </div>
     </section>
 
@@ -1168,7 +978,7 @@ body.has-custom-cursor .clickable{cursor:none}
             <div class="edu-info">
               <h3>Motijheel Ideal School and College</h3>
               <div class="edu-meta">2013 – 2023 · Science</div>
-              <p>Secondary education completed with a strong foundation in science. বিজ্ঞানের ভিত্তিতে গড়া শিক্ষার সেই দীর্ঘ অধ্যায়।</p>
+              <p>Secondary education completed with a strong foundation in science. Ten years that shaped discipline, quiet endurance, and the first real understanding of how long it takes to build something solid. বিজ্ঞানের ভিত্তিতে গড়া শিক্ষার সেই দীর্ঘ অধ্যায় — যেখানে শুধু নম্বর নয়, ধৈর্য ও নিয়মিত ফিরে আসার অভ্যাসও গড়ে উঠেছিল।</p>
               <span class="edu-badge">SSC GPA 5.00 / Golden A+</span>
             </div>
           </article>
@@ -1182,7 +992,7 @@ body.has-custom-cursor .clickable{cursor:none}
             <div class="edu-info">
               <h3>Notre Dame College</h3>
               <div class="edu-meta">2023 – 2025 · Science · Group 1 · HSC 2025</div>
-              <p>Higher secondary education in the science stream. উচ্চ মাধ্যমিকের সেই কঠোর অথচ গঠনমূলক অধ্যায়।</p>
+              <p>Higher secondary education in the science stream. Years of pressure, late nights and the constant choice to keep going even when the weight felt heavy. উচ্চ মাধ্যমিকের সেই কঠোর অথচ গঠনমূলক অধ্যায় — যেখানে চাপের মাঝেও নিজেকে ফিরিয়ে আনার চেষ্টা থেমে যায়নি।</p>
               <span class="edu-badge">GPA 5.00 / Golden A+</span>
             </div>
           </article>
@@ -1195,7 +1005,7 @@ body.has-custom-cursor .clickable{cursor:none}
             <div class="edu-info">
               <h3>BRAC University</h3>
               <div class="edu-meta">Architecture · ARC 101 · Summer 2026 · Roll 100061008</div>
-              <p>Architecture student exploring a transition toward Computer Science and Engineering. স্থাপত্যের ভাষা শিখে কম্পিউটার বিজ্ঞানের দিকে পথ খোঁজার এই যাত্রা এখনো চলমান।</p>
+              <p>Architecture student exploring a transition toward Computer Science and Engineering. The journey is still open, still unfinished — a reminder that becoming is not a single decision but a series of returns. স্থাপত্যের ভাষা শিখে কম্পিউটার বিজ্ঞানের দিকে পথ খোঁজার এই যাত্রা এখনো চলমান। পথ পরিষ্কার নয়, কিন্তু থেমে যাওয়ার সিদ্ধান্তও নেওয়া হয়নি।</p>
             </div>
           </article>
         </div>
@@ -1215,7 +1025,9 @@ body.has-custom-cursor .clickable{cursor:none}
         </div>
         <div class="orbit-wrap" id="modelsOrbit"><div class="orbit-stage" id="modelsStage"></div></div>
         <p class="orbit-hint">Tap a model for details · Orbit pauses while viewing</p>
-        <div class="section-desc"><p>From the first grid of squares to the final pavilion, each model is a step in learning how space, material and rhythm speak. Scratch থেকে শেষ পর্যন্ত — প্রতিটি মডেল স্থান, উপকরণ ও ছন্দের ভাষা শেখার একটি ধাপ।</p></div>
+        <div class="section-desc">
+          <p>From the first grid of squares to the final pavilion, each model is a step in learning how space, material and rhythm speak. The process was never linear — there were failed cuts, revised proportions, moments of doubt — yet each piece still stands as evidence of continuing. Scratch থেকে শেষ পর্যন্ত — প্রতিটি মডেল স্থান, উপকরণ ও ছন্দের ভাষা শেখার একটি ধাপ। প্রক্রিয়াটি সরল ছিল না; ভুল কাটা, পরিবর্তিত অনুপাত, সন্দেহের মুহূর্ত — তবু প্রতিটি কাজই চালিয়ে যাওয়ার সাক্ষ্য হয়ে দাঁড়িয়ে আছে।</p>
+        </div>
       </div>
     </section>
 
@@ -1225,10 +1037,10 @@ body.has-custom-cursor .clickable{cursor:none}
         <h2 class="section-title">Skills</h2>
         <p class="section-sub">Practice &amp; Exploration</p>
         <div class="skills-grid">
-          <button class="skill-card clickable" data-skill="art" aria-label="Open Art and Drawing"><h3>Art &amp; Drawing</h3><p>Sketches, colour work, exhibition pieces and visual experiments.</p><span class="arrow" aria-hidden="true">→</span></button>
-          <button class="skill-card clickable" data-skill="coding" aria-label="Open Coding and Website Making"><h3>Coding &amp; Website Making</h3><p>Web projects, interactive experiments and digital craft.</p><span class="arrow" aria-hidden="true">→</span></button>
-          <button class="skill-card clickable" data-skill="video" aria-label="Open Video and Content Creation"><h3>Video / Content Creation</h3><p>Educational and creative video content.</p><span class="arrow" aria-hidden="true">→</span></button>
-          <button class="skill-card clickable" data-skill="reading" aria-label="Open Reading and Speaking English"><h3>Reading &amp; Speaking English Fluently</h3><p>Literature, language practice and cultural reading.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="art" aria-label="Open Art and Drawing"><h3>Art &amp; Drawing</h3><p>Sketches, colour work, exhibition pieces and visual experiments born from silence and waiting.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="coding" aria-label="Open Coding and Website Making"><h3>Coding &amp; Website Making</h3><p>Web projects, interactive experiments and digital craft built one quiet session at a time.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="video" aria-label="Open Video and Content Creation"><h3>Video / Content Creation</h3><p>Educational and creative video content shaped by patience and repeated practice.</p><span class="arrow" aria-hidden="true">→</span></button>
+          <button class="skill-card clickable" data-skill="reading" aria-label="Open Reading and Speaking English"><h3>Reading &amp; Speaking English Fluently</h3><p>Literature, language practice and cultural reading as a way of staying present.</p><span class="arrow" aria-hidden="true">→</span></button>
         </div>
       </div>
 
@@ -1237,7 +1049,9 @@ body.has-custom-cursor .clickable{cursor:none}
           <div class="skill-sub-header"><div><h2 class="section-title">Art &amp; Drawing</h2><p class="section-sub">Works on paper, screen and exhibition</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="orbit-wrap" id="artOrbit"><div class="orbit-stage" id="artStage"></div></div>
           <p class="orbit-hint">Tap an artwork for title and context</p>
-          <div class="section-desc"><p>Drawings and colour works that carry silence, waiting, distance and the quiet flow of water. অঙ্কন ও রঙের মাধ্যমে নীরবতা, অপেক্ষা, দূরত্ব ও জলের ধীর প্রবাহ ধরার চেষ্টা।</p></div>
+          <div class="section-desc">
+            <p>Drawings and colour works that carry silence, waiting, distance and the quiet flow of water. Many of these pieces were made in moments when words felt insufficient — when the only way forward was to keep the hand moving. অঙ্কন ও রঙের মাধ্যমে নীরবতা, অপেক্ষা, দূরত্ব ও জলের ধীর প্রবাহ ধরার চেষ্টা। অনেক কাজ তৈরি হয়েছে এমন সময় যখন কথা অপর্যাপ্ত মনে হয়েছিল — যখন এগিয়ে যাওয়ার একমাত্র উপায় ছিল হাতকে চলতে দেওয়া।</p>
+          </div>
         </div>
       </div>
 
@@ -1245,8 +1059,8 @@ body.has-custom-cursor .clickable{cursor:none}
         <div class="section-inner">
           <div class="skill-sub-header"><div><h2 class="section-title">Coding &amp; Website Making</h2><p class="section-sub">Digital Projects</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="project-cards">
-            <article class="project-card"><h4>TrendCart</h4><p>An affiliate-oriented e-commerce / marketplace web project.</p><a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a></article>
-            <article class="project-card"><h4>Office Engine</h4><p>A browser-based 3D-style game experience with an atmospheric exploration concept.</p><a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a></article>
+            <article class="project-card"><h4>TrendCart</h4><p>An affiliate-oriented e-commerce / marketplace web project built with care for clarity and quiet usability.</p><a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a></article>
+            <article class="project-card"><h4>Office Engine</h4><p>A browser-based 3D-style game experience with an atmospheric exploration concept — a space to wander when the mind needs distance.</p><a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a></article>
           </div>
         </div>
       </div>
@@ -1256,7 +1070,9 @@ body.has-custom-cursor .clickable{cursor:none}
           <div class="skill-sub-header"><div><h2 class="section-title">Video / Content Creation</h2><p class="section-sub">Selected works</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="orbit-wrap video-orbit" id="videoOrbit"><div class="orbit-stage" id="videoStage"></div></div>
           <p class="orbit-hint">Tap a card to open on YouTube</p>
-          <div class="section-desc"><p>Educational video content on English grammar and usage — modifiers, connectors, and subject–verb agreement. ভাষার নিয়ম ও ব্যবহার নিয়ে তৈরি শিক্ষামূলক ভিডিও।</p></div>
+          <div class="section-desc">
+            <p>Educational video content on English grammar and usage — modifiers, connectors, and subject–verb agreement. Made slowly, revised often, offered as a small contribution to others who are also learning. ভাষার নিয়ম ও ব্যবহার নিয়ে তৈরি শিক্ষামূলক ভিডিও। ধীরে তৈরি, বারবার সংশোধিত, অন্যদের জন্য একটি ছোট অবদান হিসেবে দেওয়া।</p>
+          </div>
         </div>
       </div>
 
@@ -1264,7 +1080,7 @@ body.has-custom-cursor .clickable{cursor:none}
         <div class="section-inner">
           <div class="skill-sub-header"><div><h2 class="section-title">Reading &amp; Speaking English Fluently</h2><p class="section-sub">Literary curiosity &amp; language practice</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="reading-panel">
-            <p class="reading-intro">Reading across Bengali and English literature, with ongoing practice in spoken English and cultural awareness. Interest centres on narrative, character and the texture of language. সাহিত্যের আস্বাদন ও ভাষার অনুশীলন — গল্প, চরিত্র ও ভাষার সূক্ষ্ম স্তর নিয়ে আগ্রহ।</p>
+            <p class="reading-intro">Reading across Bengali and English literature, with ongoing practice in spoken English and cultural awareness. Interest centres on narrative, character and the texture of language — and on the quiet company books can offer when the days feel heavy. সাহিত্যের আস্বাদন ও ভাষার অনুশীলন — গল্প, চরিত্র ও ভাষার সূক্ষ্ম স্তর নিয়ে আগ্রহ। যখন দিনগুলো ভারী মনে হয়, বইগুলো নীরব সঙ্গী হয়ে থাকে।</p>
             <h3>Samaresh Majumdar</h3><ul><li>Uttaradhikar</li><li>Kalbela</li><li>Kalpurush</li></ul>
             <h3>Humayun Ahmed</h3><ul><li>Himu-related reading</li><li>Amar Bondhu Rashed</li></ul>
             <h3>Rabindranath Tagore</h3><ul><li>Selected poetry, short stories and literary works</li></ul>
@@ -1297,12 +1113,9 @@ body.has-custom-cursor .clickable{cursor:none}
           <p class="contact-loc">Shantinagar, Dhaka</p>
 
           <div class="booking-box">
-            <p><strong>Ready to start?</strong><br>
-            1. Message me on WhatsApp with the package name<br>
-            2. I will confirm the price & timeline<br>
-            3. Send <strong>bKash</strong> to <strong>01326162684</strong> (same number)<br>
-            4. After screenshot, delivery starts within 24 hours</p>
-            <a class="btn-gold solid" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio%20%E2%80%94%20I%20want%20%5Bpackage%20name%5D" target="_blank" rel="noopener">WhatsApp · Book Now</a>
+            <p><strong>Ready to start a conversation?</strong><br>
+            Message on WhatsApp. Share what you need. We will talk about timeline, scope and next steps calmly and clearly.</p>
+            <a class="btn-accent solid" href="https://wa.me/8801326162684?text=Hi%20Shadid%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener">WhatsApp · Reach Out</a>
           </div>
 
           <div class="contact-grid" id="contactGrid">
@@ -1338,7 +1151,7 @@ body.has-custom-cursor .clickable{cursor:none}
             </a>
           </div>
           <p class="text-center mt-2" style="font-size:0.85rem;color:var(--text-muted)">
-            <a href="https://www.google.com/maps/search/Shantinagar,+Dhaka" target="_blank" rel="noopener noreferrer" data-external="url" style="color:var(--gold-muted);pointer-events:auto;position:relative;z-index:7">Map · Shantinagar, Dhaka</a>
+            <a href="https://www.google.com/maps/search/Shantinagar,+Dhaka" target="_blank" rel="noopener noreferrer" data-external="url" style="color:var(--accent-muted);pointer-events:auto;position:relative;z-index:7">Map · Shantinagar, Dhaka</a>
           </p>
         </div>
       </div>
@@ -1348,11 +1161,14 @@ body.has-custom-cursor .clickable{cursor:none}
     <section id="cv" class="section" data-section="cv" aria-label="CV">
       <div class="section-inner">
         <div class="cv-panel">
-          <h2>Shadid Ahamed - Professional CV</h2>
-          <p>View or download the professional curriculum vitae.</p>
+          <h2>Shadid Ahamed — Professional CV</h2>
+          <div class="cv-desc">
+            <p>This curriculum vitae gathers the academic path, studio work, digital projects and quiet creative practice into a single, readable document. It is not a polished list of victories. It is a record of continuous effort — of returning to the desk, the model table, the code editor and the sketchbook even when progress felt slow.</p>
+            <p>Inside you will find SSC & HSC results, the first architecture semester at BRAC University, selected project notes, and the ongoing exploration between design and computation. The CV is offered simply: as evidence that the work continues.</p>
+          </div>
           <div class="cv-actions">
-            <button class="btn-gold" id="viewCvBtn" aria-label="View CV">View CV</button>
-            <a class="btn-gold" href="Shadid_Ahamed_Professional_CV.pdf" download="Shadid_Ahamed_Professional_CV.pdf" aria-label="Download CV">Download CV</a>
+            <button class="btn-accent" id="viewCvBtn" aria-label="View CV">View CV</button>
+            <a class="btn-accent solid" href="Shadid_Ahamed_Professional_CV.pdf" download="Shadid_Ahamed_Professional_CV.pdf" aria-label="Download CV">Download CV</a>
           </div>
         </div>
       </div>
@@ -1648,54 +1464,74 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   });
 }
 
+/* Enhanced background – slow orbiting CD-like rings + soft particles */
 (function(){
   const canvas=document.getElementById('bg-canvas');
   const ctx=canvas.getContext('2d');
-  let w,h,particles=[],orbitsBg=[],raf;
+  let w,h,particles=[],cds=[],raf;
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   function resize(){
     w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight;
-    const count=w<600?14:36;
+    const count=w<600?12:28;
     particles=[];
     for(let i=0;i<count;i++) particles.push({
       x:Math.random()*w,y:Math.random()*h,
-      r:Math.random()*1.3+0.3,
-      vx:(Math.random()-0.5)*0.12,vy:(Math.random()-0.5)*0.12,
-      a:Math.random()*0.4+0.15
+      r:Math.random()*1.2+0.25,
+      vx:(Math.random()-0.5)*0.09,vy:(Math.random()-0.5)*0.09,
+      a:Math.random()*0.28+0.08
     });
-    orbitsBg=[];
-    for(let i=0;i<4;i++) orbitsBg.push({
-      cx:w*0.5+(Math.random()-0.5)*w*0.35,
-      cy:h*0.5+(Math.random()-0.5)*h*0.35,
-      rad:55+Math.random()*120,
+    cds=[];
+    for(let i=0;i<5;i++) cds.push({
+      cx:w*0.5+(Math.random()-0.5)*w*0.42,
+      cy:h*0.5+(Math.random()-0.5)*h*0.42,
+      rad:70+Math.random()*140,
       angle:Math.random()*Math.PI*2,
-      speed:0.00045+Math.random()*0.0011
+      speed:0.00028+Math.random()*0.0007,
+      thickness:1.2+Math.random()*1.8
     });
   }
   function draw(){
     ctx.clearRect(0,0,w,h);
-    ctx.strokeStyle='rgba(212,175,106,0.035)'; ctx.lineWidth=1;
-    for(let x=0;x<w;x+=90){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
-    for(let y=0;y<h;y+=90){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    /* very faint grid */
+    ctx.strokeStyle='rgba(139,157,195,0.028)'; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=100){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=100){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+
+    /* soft particles */
     particles.forEach(p=>{
       p.x+=p.vx; p.y+=p.vy;
       if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0;
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(240,230,200,${p.a})`;
+      ctx.fillStyle=`rgba(200,210,230,${p.a})`;
       ctx.fill();
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*2.1,0,Math.PI*2);
-      ctx.fillStyle=`rgba(212,175,106,${p.a*0.22})`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*2.2,0,Math.PI*2);
+      ctx.fillStyle=`rgba(139,157,195,${p.a*0.18})`;
       ctx.fill();
     });
-    orbitsBg.forEach(o=>{
-      o.angle+=o.speed;
-      ctx.beginPath(); ctx.arc(o.cx,o.cy,o.rad,0,Math.PI*2);
-      ctx.strokeStyle='rgba(212,175,106,0.08)'; ctx.stroke();
-      const px=o.cx+Math.cos(o.angle)*o.rad, py=o.cy+Math.sin(o.angle)*o.rad;
-      ctx.beginPath(); ctx.arc(px,py,2,0,Math.PI*2);
-      ctx.fillStyle='rgba(240,230,200,0.5)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(px,py,4.5,0,Math.PI*2);
-      ctx.fillStyle='rgba(212,175,106,0.12)'; ctx.fill();
+
+    /* slow CD-like rings */
+    cds.forEach(c=>{
+      c.angle+=c.speed;
+      ctx.beginPath();
+      ctx.arc(c.cx,c.cy,c.rad,0,Math.PI*2);
+      ctx.strokeStyle='rgba(139,157,195,0.07)';
+      ctx.lineWidth=c.thickness;
+      ctx.stroke();
+      /* inner thin ring */
+      ctx.beginPath();
+      ctx.arc(c.cx,c.cy,c.rad*0.72,0,Math.PI*2);
+      ctx.strokeStyle='rgba(139,157,195,0.045)';
+      ctx.lineWidth=1;
+      ctx.stroke();
+      /* moving highlight point */
+      const px=c.cx+Math.cos(c.angle)*c.rad;
+      const py=c.cy+Math.sin(c.angle)*c.rad;
+      ctx.beginPath(); ctx.arc(px,py,2.2,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,210,230,0.45)';
+      ctx.fill();
+      ctx.beginPath(); ctx.arc(px,py,5,0,Math.PI*2);
+      ctx.fillStyle='rgba(139,157,195,0.1)';
+      ctx.fill();
     });
     raf=requestAnimationFrame(draw);
   }
@@ -1706,7 +1542,7 @@ const audio=document.getElementById('bgAudio');
 const audioBtn=document.getElementById('audioBtn');
 const iconPlay=document.getElementById('audioIconPlay');
 const iconPause=document.getElementById('audioIconPause');
-audio.volume=0.42;
+audio.volume=0.38;
 let audioPlaying=false;
 function updateAudioIcon(){ iconPlay.style.display=audioPlaying?'none':'block'; iconPause.style.display=audioPlaying?'block':'none'; }
 audioBtn.addEventListener('click',()=>{
@@ -1717,7 +1553,7 @@ audioBtn.addEventListener('click',()=>{
 audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
 
 const hash=(location.hash||'#home').slice(1);
-if(['home','services','shop','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
+if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
 else showSection('home');
 })();
 </script>
