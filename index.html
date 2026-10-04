@@ -65,10 +65,83 @@ body{
   padding-right:var(--safe-right);
 }
 body.no-scroll{overflow:hidden}
+body.intro-active{overflow:hidden}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ===== INTRO SPLASH ===== */
+.intro-overlay{
+  position:fixed;inset:0;z-index:10000;
+  background:#0a0c12;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  transition:opacity 1s var(--ease),visibility 1s;
+}
+.intro-overlay.fade-out{
+  opacity:0;visibility:hidden;pointer-events:none;
+}
+.intro-overlay video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+.intro-overlay::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,12,18,0.15) 0%,rgba(10,12,18,0.45) 50%,rgba(10,12,18,0.72) 100%);
+  z-index:1;pointer-events:none;
+}
+.intro-content{
+  position:relative;z-index:2;
+  text-align:center;
+  color:var(--warm);
+  padding:1.5rem;
+  max-width:94vw;
+}
+.intro-name{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,9.5vw,5.8rem);
+  font-weight:700;
+  letter-spacing:0.14em;
+  line-height:1.02;
+  opacity:0;
+  transform:translateY(28px) scale(0.97);
+  transition:opacity 1.15s var(--ease),transform 1.15s var(--ease);
+  text-shadow:0 4px 30px rgba(0,0,0,0.45);
+}
+.intro-name.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.intro-explore{
+  margin-top:1.5rem;
+  font-family:'Courier New',Courier,monospace;
+  font-size:clamp(0.9rem,3.1vw,1.28rem);
+  letter-spacing:0.38em;
+  text-transform:uppercase;
+  color:var(--accent-soft);
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:0.75em;
+  opacity:0;
+  transition:opacity 0.4s ease;
+}
+.intro-explore.show{opacity:1}
+.intro-explore .word{
+  opacity:0;
+  display:inline-block;
+  transition:opacity 0.55s ease;
+  text-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.intro-explore .word.show{opacity:1}
+@media (max-width:600px){
+  .intro-name{letter-spacing:0.1em}
+  .intro-explore{letter-spacing:0.28em;gap:0.55em}
+}
 
 /* Custom cursor */
 .cursor-dot,.cursor-ring{
@@ -893,7 +966,21 @@ body.has-custom-cursor .clickable{cursor:none}
 }
 </style>
 </head>
-<body>
+<body class="intro-active">
+
+<!-- INTRO SPLASH SCREEN -->
+<div class="intro-overlay" id="introOverlay" aria-hidden="false">
+  <video id="introVideo" muted playsinline preload="auto" aria-hidden="true">
+    <source src="three_panel_transition.mp4" type="video/mp4">
+  </video>
+  <div class="intro-content">
+    <h1 class="intro-name" id="introName">SHADID AHAMED</h1>
+    <p class="intro-explore" id="introExplore" aria-hidden="true">
+      <span class="word">explore</span>
+      <span class="word">him</span>
+    </p>
+  </div>
+</div>
 
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
@@ -1657,11 +1744,84 @@ audioBtn.addEventListener('click',()=>{
   else { audio.play().then(()=>{audioPlaying=true;}).catch(()=>{}); }
   updateAudioIcon();
 });
-audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
 
-const hash=(location.hash||'#home').slice(1);
-if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
-else showSection('home');
+/* ===== INTRO SEQUENCE ===== */
+const introOverlay = document.getElementById('introOverlay');
+const introVideo = document.getElementById('introVideo');
+const introName = document.getElementById('introName');
+const introExplore = document.getElementById('introExplore');
+const exploreWords = introExplore ? introExplore.querySelectorAll('.word') : [];
+
+function finishIntro(){
+  if(!introOverlay || introOverlay.classList.contains('fade-out')) return;
+  introOverlay.classList.add('fade-out');
+  setTimeout(()=>{
+    introOverlay.remove();
+    document.body.classList.remove('intro-active');
+    // reveal main site on home
+    const hash=(location.hash||'#home').slice(1);
+    if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
+    else showSection('home');
+  }, 1050);
+}
+
+function startIntro(){
+  // Start music immediately
+  audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
+
+  // Start video
+  if(introVideo){
+    introVideo.currentTime = 0;
+    const p = introVideo.play();
+    if(p && p.catch) p.catch(()=>{});
+  }
+
+  // Name appears after short delay
+  setTimeout(()=>{
+    if(introName) introName.classList.add('show');
+  }, 850);
+
+  // "explore him" words appear one after another
+  setTimeout(()=>{
+    if(introExplore) introExplore.classList.add('show');
+    exploreWords.forEach((w, i)=>{
+      setTimeout(()=> w.classList.add('show'), i * 420);
+    });
+  }, 2600);
+
+  // After both words visible + 1s hold, fade out (total ~5.8–6.2s)
+  // Video is ~4.77s slowed; text finishes ~3.5s, hold 1.2s more
+  setTimeout(finishIntro, 5800);
+
+  // Safety: also end when video ends (in case timing drifts)
+  if(introVideo){
+    introVideo.addEventListener('ended', ()=>{
+      // give a tiny extra beat after video ends
+      setTimeout(finishIntro, 900);
+    }, {once:true});
+  }
+}
+
+// Kick off intro as soon as possible
+if(introOverlay){
+  startIntro();
+} else {
+  // fallback if intro somehow missing
+  audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
+  const hash=(location.hash||'#home').slice(1);
+  if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
+  else showSection('home');
+}
+
+// Skip intro on any click / key (nice UX)
+function skipIntro(){
+  finishIntro();
+  document.removeEventListener('click', skipIntro);
+  document.removeEventListener('keydown', skipIntro);
+}
+document.addEventListener('click', skipIntro, {once:true});
+document.addEventListener('keydown', skipIntro, {once:true});
+
 })();
 </script>
 </body>
