@@ -317,42 +317,59 @@ body.has-custom-cursor .clickable{cursor:none}
   filter:contrast(1.03) saturate(0.85) brightness(0.96);
   border-radius:2px;
 }
+.home-identity{
+  position:relative;
+}
+/* dense binary / code field that sits behind the name — suggests depth & eyes without photo */
+.home-identity::before{
+  content:'01001101 10110010 01101001 11010010 00101101 10100110 01011011 10010110 01110010 10101100 00110101 11001010 10010111 01001100 10110001 01101010 11010001 00101110 10100101 01011010 10010101 01110011 10101101 00110100 11001011 10010110 01001110 10110011 01101000 11010011 00101100 10100111 01011001 10010100 01110001 10101110 00110110 11001000 10010100 01001100 10110010 01101011 11010000 00101111 10100100 01011011 10010111 01110000 10101111 00110101 11001010 10010101 01001101 10110001 01101001 11010010 00101101 10100110 01011011 10010110 01110010 10101100 00110101 11001010 10010111 01001100 10110001 01101010 11010001 00101110 10100101 01011010 10010101 01110011 10101101 00110100 11001011';
+  position:absolute;
+  left:-4%;
+  top:-8%;
+  width:112%;
+  height:140%;
+  font-family:'Courier New',Courier,monospace;
+  font-size:9px;
+  line-height:1.15;
+  letter-spacing:0.08em;
+  color:rgba(139,157,195,0.13);
+  word-break:break-all;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+  user-select:none;
+  transform:scaleY(1.05);
+}
 .home-identity h1{
+  position:relative;
+  z-index:1;
   font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  font-size:clamp(3.4rem,10vw,6.2rem);
-  font-weight:200;
+  font-size:clamp(3.9rem,11.5vw,7rem);
+  font-weight:900;
   letter-spacing:-0.04em;
-  line-height:0.82;
-  /* iPhone lock-screen clock stretch + blend-on-black eyes */
-  background-image:url('Screenshot 2026-10-05 173551.png');
-  background-size:cover;
-  background-position:center 35%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  -webkit-text-fill-color:transparent;
-  filter:contrast(1.15) brightness(1.05);
+  line-height:0.76;
   text-transform:uppercase;
-  transform:scaleY(1.35);
+  color:var(--warm);
+  transform:scaleY(1.6);
   transform-origin:left center;
-  margin-bottom:0.15em;
+  margin-bottom:0.18em;
+  /* solid bold letters with soft depth */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.12),
+    0 2px 12px rgba(0,0,0,0.35);
 }
 .home-identity h1 .surname{
   display:block;
-  font-size:0.42em;
-  letter-spacing:0.18em;
-  font-weight:300;
-  margin-top:0.55em;
-  transform:scaleY(1.25);
+  font-size:0.38em;
+  letter-spacing:0.12em;
+  font-weight:800;
+  margin-top:0.68em;
+  transform:scaleY(1.4);
   transform-origin:left center;
-  /* same eyes image, slightly different crop for depth */
-  background-image:url('Screenshot 2026-10-05 173551.png');
-  background-size:cover;
-  background-position:center 55%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  -webkit-text-fill-color:transparent;
+  color:var(--accent-soft);
+  text-shadow:
+    0 1px 0 rgba(168,184,216,0.2),
+    0 2px 10px rgba(0,0,0,0.3);
 }
 .home-roles{
   margin:1.25rem 0 1.4rem;
@@ -950,8 +967,9 @@ body.has-custom-cursor .clickable{cursor:none}
   .profile-frame{max-width:290px;margin:0 auto}
   .home-identity{text-align:center}
   .home-bio{text-align:left;font-size:1.02rem}
-  .home-identity h1{font-size:clamp(3rem,12vw,4.2rem);transform:scaleY(1.3);transform-origin:center center}
-  .home-identity h1 .surname{transform:scaleY(1.2);transform-origin:center center}
+  .home-identity::before{left:0;width:100%;font-size:8px;opacity:0.9}
+  .home-identity h1{font-size:clamp(3.2rem,12.5vw,4.6rem);transform:scaleY(1.5);transform-origin:center center}
+  .home-identity h1 .surname{transform:scaleY(1.3);transform-origin:center center}
   .home-roles{font-size:0.72rem}
   .section-title{font-size:1.7rem}
   .orbit-wrap{height:min(48vh,390px);margin:1.8rem auto 1.4rem}
@@ -996,7 +1014,7 @@ body.has-custom-cursor .clickable{cursor:none}
 
 @media (max-width:400px){
   .section{padding:1.5rem 0.85rem 3.2rem}
-  .home-identity h1{font-size:2.8rem}
+  .home-identity h1{font-size:3rem}
   .orbit-item{width:min(124px,50vw)}
 }
 </style>
@@ -1354,7 +1372,7 @@ const ART_WORKS = [
   {src:'813466984_26807832862248578_2653115749408704795_n.jpg', title:'কখন যে আসবেন — অপেক্ষা', ctx:'Waiting. The quiet weight of time that has not yet arrived. A personal practice piece about patience, distance and the soft ache of expectation.'},
   {src:'813692048_1750841226169127_6723820080107089098_n.jpg', title:'আর একটিবার যদি বলতে পেতাম', ctx:'“If only I could say it one more time… If only I could say ‘love you’ once more.” The second chance was also wasted. Three lines of quiet grief drawn into a single emotional scene.'},
   {src:'813853349_2273476383432547_5877535730504115386_n.jpg', title:'Loneliness in a Lovely Island', ctx:'First serious attempt with acrylic markers. A lovely island that still carries loneliness — beauty and isolation existing in the same frame.'},
-  {src:'818061932_846874715114836_2565138691570136914_n.jpg', title:'চলো ঘুমোতে যাই', ctx:'A rainy-day walk. A boy and his girlfriend walking a village path, planning a trip together. Soft light, wet earth, the quiet promise of travel.'},
+  {src:'818061932_846874715114836_2565138691570136914_n.jpg', title:'চলো ঘুরতে যাই', ctx:'A rainy-day walk. A boy and his girlfriend walking a village path, planning a trip together. Soft light, wet earth, the quiet promise of travel. চলো ঘুরতে যাই।'},
   {src:'818478656_1667736108690904_8025924023257939696_n.jpg', title:'ঘুম কেন ভাঙছে না', ctx:'Why won’t the sleep break? A dream-world battle with a dragon. The figure remains trapped inside the dream, fighting while the real world waits outside.'},
   {src:'Screenshot 2026-09-20 202528.png', title:'The Bully by Shadid Ahamed', ctx:'Pure pencil invention. Fully hand-drawn without external reference during the architecture years. Strong three-point perspective and controlled spatial depth. একমাত্র পেন্সিল দিয়ে, কোনো বাহ্যিক অনুপ্রেরণা ছাড়াই তৈরি।'},
   {src:'image colour 1.jpg', title:'Colour Study · Yoriichi', ctx:'First major brush-and-watercolour mixed-media work. Forty-eight continuous hours poured into a single portrait of Demon-Slayer’s Yoriichi. This piece earned the certificate at Shilper Chitra (5th International Art & Photography Exhibition 2023) — the first formal exhibition recognition.'},
@@ -1362,7 +1380,7 @@ const ART_WORKS = [
   {src:'image ipad 1.png', title:'Digital / iPad work', ctx:'Digital experiments on iPad — colour, form and narrative studies that sit between traditional drawing and screen-based storytelling.'},
   {src:'image sketch 1.jpg', title:'Early Sketch · Three-Point Perspective', ctx:'First serious three-point perspective study. A science-fiction cityscape where the old world lies ruined below while a futuristic sky-city rises above. Two figures: one hand visible, the other seated with a futuristic device between AC ducts and walls, tears carried sideways by wind, hair wild in the air-stream.'},
   {src:'image sketch 2.jpg', title:'Sketch Study · First Pain Sketch', ctx:'The very first sketch made “with pain” — the opening study for the book-cover concept of “The Sea of Dreams”. Fully hand-drawn practice while preparing for architecture, testing how a hand-made cover logo and illustration might feel.'},
-  {src:'image sketch 3.jpg', title:'Sketch Study · Bus', ctx:'Early observational sketch study of a bus — one of the first architecture-department preparation drawings focused on form, proportion and everyday structure.'},
+  {src:'image sketch 3.jpg', title:'Sketch Study · বাঁশ (Bamboo)', ctx:'Observational sketch of bamboo sticks (বাঁশ) gathered inside a pot / tub. Multiple sticks rising from a single container — study of form, grouping, rhythm and everyday material. Early architecture-preparation drawing.'},
   {src:'IMG scetch 1.jpg', title:'স্রোতশীনি · Exhibited Work', ctx:'A floating male figure expresses loneliness and the attempt to distance himself from every worldly suffering. Water-lily leaves and blossoms surround him, intensifying the sorrow; yet colourful fish swimming in the current bring a quiet hope. From the opposite bank a woman breaks every barrier to reach him — the rocks at her feet carrying the weight of that struggle. প্রদর্শিত কাজ · স্রোতশীনি।'}
 ];
 const MODELS = [
@@ -1442,7 +1460,7 @@ const ACHIEVE = {
   udvash:{type:'img', src:'NDC UDVASH SOMBORDHONA.jpeg', title:'NDC Udvash Sombordhona 2023', body:'Recognition plaque presented by Udvash for the Notre Dame College admission examination, 2023. নটর ডেম কলেজ ভর্তি পরীক্ষা ২০২৩ উপলক্ষে উদ্ভাস প্রদত্ত সম্মাননা।'},
   uac:{type:'img', src:'UAC SOMBORDHONA FOR NDC.jpeg', title:'Proud to be a Notre Damian · UAC', body:'Trophy from UAC College Admission Coaching celebrating the identity of a Notre Damian. নটর ডেমিয়ান পরিচয়ের স্বীকৃতিস্বরূপ ইউএসি সম্মাননা।'},
   shilper:{type:'img', src:'SHILPER CHITRO.jpeg', title:'Shilper Chitra · 5th International Art & Photography Exhibition 2023', body:'Participant Award · Group (C) · Shadid Ahamed. International art and photography exhibition recognition. শিল্পের চিত্র আন্তর্জাতিক প্রদর্শনী ২০২৩ · অংশগ্রহণকারী পুরস্কার।'},
-  drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition · Father Sushanto', body:'Signed recognition by Father Sushanto — the strictest teacher and Office Head of Notre Dame College, the authority behind the pink-slip system that called guardians. One day the diary (full of drawings) was accidentally left in class after lectures. Father Sushanto found it, examined every page, and wrote: “তোমার আঁকা ছবিগুলো অনেক সুন্দর হয়েছে” — then signed and dated it 10 November 2024. A quiet, powerful acknowledgement from the most demanding presence in the college. নটর ডেম কলেজের কঠোরতম শিক্ষক ও অফিস হেড ফাদার সুশান্তোর স্বাক্ষরিত স্বীকৃতি — ১০ নভেম্বর ২০২৪।'},
+  drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition · Father Sushanto', body:'Signed recognition by Father Sushanto — the strictest teacher and Office Head of Notre Dame College, the authority behind the pink-slip system that called guardians. One day the diary (full of drawings) was accidentally left in class after lectures. Father Sushanto found it, examined every page, and wrote: “তোমার আঁকা ছবিগুলো অনেক সুন্দর হয়েছে” — then signed and dated it 02 November 2024. A quiet, powerful acknowledgement from the most demanding presence in the college. নটর ডেম কলেজের কঠোরতম শিক্ষক ও অফিস হেড ফাদার সুশান্তোর স্বাক্ষরিত স্বীকৃতি — ২ নভেম্বর ২০২৪।'},
   exhibition:{type:'img', src:'IMG scetch 1.jpg', title:'Exhibition', body:'Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).'},
   arc:{type:'pdf', src:'1000061008_UG_ARC_Gradesheet_Web.pdf', title:'Architecture Academic Record', body:'First-semester record including ARC 101, ARC 111, ARC 121, ARC 122, CSE 103, ENG 091, PHY 102, credits and GPA as recorded.'},
   run5:{type:'img', src:'5km run.jpeg', title:'Mohanagar Half Marathon · 5 km Finisher', body:'Finisher medal — Mohanagar Half Marathon 2025 · “Run for a Sustainable City”. মোহানগর হাফ ম্যারাথন ২০২৫ · ৫ কিমি সমাপ্তকারী পদক।'},
