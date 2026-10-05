@@ -317,59 +317,21 @@ body.has-custom-cursor .clickable{cursor:none}
   filter:contrast(1.03) saturate(0.85) brightness(0.96);
   border-radius:2px;
 }
-.home-identity{
-  position:relative;
-}
-/* dense binary / code field that sits behind the name — suggests depth & eyes without photo */
-.home-identity::before{
-  content:'01001101 10110010 01101001 11010010 00101101 10100110 01011011 10010110 01110010 10101100 00110101 11001010 10010111 01001100 10110001 01101010 11010001 00101110 10100101 01011010 10010101 01110011 10101101 00110100 11001011 10010110 01001110 10110011 01101000 11010011 00101100 10100111 01011001 10010100 01110001 10101110 00110110 11001000 10010100 01001100 10110010 01101011 11010000 00101111 10100100 01011011 10010111 01110000 10101111 00110101 11001010 10010101 01001101 10110001 01101001 11010010 00101101 10100110 01011011 10010110 01110010 10101100 00110101 11001010 10010111 01001100 10110001 01101010 11010001 00101110 10100101 01011010 10010101 01110011 10101101 00110100 11001011';
-  position:absolute;
-  left:-4%;
-  top:-8%;
-  width:112%;
-  height:140%;
-  font-family:'Courier New',Courier,monospace;
-  font-size:9px;
-  line-height:1.15;
-  letter-spacing:0.08em;
-  color:rgba(139,157,195,0.13);
-  word-break:break-all;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:0;
-  user-select:none;
-  transform:scaleY(1.05);
-}
 .home-identity h1{
-  position:relative;
-  z-index:1;
-  font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  font-size:clamp(3.9rem,11.5vw,7rem);
-  font-weight:900;
-  letter-spacing:-0.04em;
-  line-height:0.76;
-  text-transform:uppercase;
+  font-family:var(--font-display);
+  font-size:clamp(2.8rem,7.5vw,4.6rem);
+  font-weight:700;
+  letter-spacing:0.05em;
+  line-height:0.94;
   color:var(--warm);
-  transform:scaleY(1.6);
-  transform-origin:left center;
-  margin-bottom:0.18em;
-  /* solid bold letters with soft depth */
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.12),
-    0 2px 12px rgba(0,0,0,0.35);
 }
 .home-identity h1 .surname{
   display:block;
-  font-size:0.38em;
-  letter-spacing:0.12em;
-  font-weight:800;
-  margin-top:0.68em;
-  transform:scaleY(1.4);
-  transform-origin:left center;
-  color:var(--accent-soft);
-  text-shadow:
-    0 1px 0 rgba(168,184,216,0.2),
-    0 2px 10px rgba(0,0,0,0.3);
+  font-size:0.46em;
+  letter-spacing:0.24em;
+  color:var(--accent);
+  font-weight:700;
+  margin-top:0.38em;
 }
 .home-roles{
   margin:1.25rem 0 1.4rem;
@@ -647,40 +609,27 @@ body.has-custom-cursor .clickable{cursor:none}
   background:rgba(139,157,195,0.07);
 }
 
-.video-orbit .orbit-item{aspect-ratio:16/9;width:min(220px,54vw)}
+.video-orbit .orbit-item{aspect-ratio:16/9;width:min(205px,52vw)}
 .video-card-inner{
   width:100%;height:100%;
   display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
   background:var(--surface-2);
   border:1px solid var(--border);
+  padding:1.25rem;
+  text-align:center;
   border-radius:6px;
-  overflow:hidden;
-  position:relative;
-}
-.video-card-inner .video-thumb{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.video-card-inner .video-meta{
-  position:absolute;
-  left:0;right:0;bottom:0;
-  padding:0.55rem 0.7rem 0.65rem;
-  background:linear-gradient(transparent,rgba(10,12,18,0.92));
-  text-align:left;
 }
 .video-card-inner h4{
   font-family:var(--font-display);
-  font-size:0.92rem;
+  font-size:1rem;
   color:var(--warm);
-  margin-bottom:0.15rem;
-  line-height:1.25;
+  margin-bottom:0.35rem;
 }
 .video-card-inner span{
-  font-size:0.62rem;
-  letter-spacing:0.1em;
-  color:var(--accent-soft);
+  font-size:0.68rem;
+  letter-spacing:0.12em;
+  color:var(--accent-muted);
   text-transform:uppercase;
 }
 
@@ -967,9 +916,7 @@ body.has-custom-cursor .clickable{cursor:none}
   .profile-frame{max-width:290px;margin:0 auto}
   .home-identity{text-align:center}
   .home-bio{text-align:left;font-size:1.02rem}
-  .home-identity::before{left:0;width:100%;font-size:8px;opacity:0.9}
-  .home-identity h1{font-size:clamp(3.2rem,12.5vw,4.6rem);transform:scaleY(1.5);transform-origin:center center}
-  .home-identity h1 .surname{transform:scaleY(1.3);transform-origin:center center}
+  .home-identity h1{font-size:clamp(2.5rem,11vw,3.5rem)}
   .home-roles{font-size:0.72rem}
   .section-title{font-size:1.7rem}
   .orbit-wrap{height:min(48vh,390px);margin:1.8rem auto 1.4rem}
@@ -1014,7 +961,7 @@ body.has-custom-cursor .clickable{cursor:none}
 
 @media (max-width:400px){
   .section{padding:1.5rem 0.85rem 3.2rem}
-  .home-identity h1{font-size:3rem}
+  .home-identity h1{font-size:2.4rem}
   .orbit-item{width:min(124px,50vw)}
 }
 </style>
@@ -1367,21 +1314,21 @@ body.has-custom-cursor .clickable{cursor:none}
 
 const BOOK_IMGS = ['811615849_2097588261148773_877248636819443508_n.jpg','815366796_1754064392528440_1990530380060926840_n (1).jpg','817550850_1756948922083208_6663409752770103109_n.jpg','ChatGPT Image Sep 20, 2026, 07_38_48 PM.png','book-3d.jpg'];
 const ART_WORKS = [
-  {src:'809518654_1855217995842076_8923680691947304600_n.jpg', title:'আবার দেখা হবে', ctx:'Comic-series panel. A boy answers a call from a girl who wants to meet. He is lost inside a delusional three-dimensional space of endless stairs and paths — unable to tell real from unreal, unsure where the path ends.'},
-  {src:'809601262_4548993055379554_8793039364914601083_n.jpg', title:'আমি কোথায় — At the Dimension and Space', ctx:'Continuation of the same delusional spatial sequence: the figure trapped between endless staircases, searching for an exit that may not exist.'},
-  {src:'813466984_26807832862248578_2653115749408704795_n.jpg', title:'কখন যে আসবেন — অপেক্ষা', ctx:'Waiting. The quiet weight of time that has not yet arrived. A personal practice piece about patience, distance and the soft ache of expectation.'},
-  {src:'813692048_1750841226169127_6723820080107089098_n.jpg', title:'আর একটিবার যদি বলতে পেতাম', ctx:'“If only I could say it one more time… If only I could say ‘love you’ once more.” The second chance was also wasted. Three lines of quiet grief drawn into a single emotional scene.'},
-  {src:'813853349_2273476383432547_5877535730504115386_n.jpg', title:'Loneliness in a Lovely Island', ctx:'First serious attempt with acrylic markers. A lovely island that still carries loneliness — beauty and isolation existing in the same frame.'},
-  {src:'818061932_846874715114836_2565138691570136914_n.jpg', title:'চলো ঘুরতে যাই', ctx:'A rainy-day walk. A boy and his girlfriend walking a village path, planning a trip together. Soft light, wet earth, the quiet promise of travel. চলো ঘুরতে যাই।'},
-  {src:'818478656_1667736108690904_8025924023257939696_n.jpg', title:'ঘুম কেন ভাঙছে না', ctx:'Why won’t the sleep break? A dream-world battle with a dragon. The figure remains trapped inside the dream, fighting while the real world waits outside.'},
-  {src:'Screenshot 2026-09-20 202528.png', title:'The Bully by Shadid Ahamed', ctx:'Pure pencil invention. Fully hand-drawn without external reference during the architecture years. Strong three-point perspective and controlled spatial depth. একমাত্র পেন্সিল দিয়ে, কোনো বাহ্যিক অনুপ্রেরণা ছাড়াই তৈরি।'},
-  {src:'image colour 1.jpg', title:'Colour Study · Yoriichi', ctx:'First major brush-and-watercolour mixed-media work. Forty-eight continuous hours poured into a single portrait of Demon-Slayer’s Yoriichi. This piece earned the certificate at Shilper Chitra (5th International Art & Photography Exhibition 2023) — the first formal exhibition recognition.'},
-  {src:'image colour.jpg', title:'Colour Work · পহেলা বৈশাখ', ctx:'Four-panel large-scale drawing made for the after-SSC English Course exhibition at Notre Dame College. Panel 1: “এসো হে বৈশাখ” song imagery. Panel 2: village Boishakhi fair. Panel 3–4: clay stalls, terracotta horses & cows, hand-fans, and the Mangal Shobhajatra procession with a face-painted boy in panjabi. A short speech was delivered with the work.'},
-  {src:'image ipad 1.png', title:'Digital / iPad work', ctx:'Digital experiments on iPad — colour, form and narrative studies that sit between traditional drawing and screen-based storytelling.'},
-  {src:'image sketch 1.jpg', title:'Early Sketch · Three-Point Perspective', ctx:'First serious three-point perspective study. A science-fiction cityscape where the old world lies ruined below while a futuristic sky-city rises above. Two figures: one hand visible, the other seated with a futuristic device between AC ducts and walls, tears carried sideways by wind, hair wild in the air-stream.'},
-  {src:'image sketch 2.jpg', title:'Sketch Study · First Pain Sketch', ctx:'The very first sketch made “with pain” — the opening study for the book-cover concept of “The Sea of Dreams”. Fully hand-drawn practice while preparing for architecture, testing how a hand-made cover logo and illustration might feel.'},
-  {src:'image sketch 3.jpg', title:'Sketch Study · বাঁশ (Bamboo)', ctx:'Observational sketch of bamboo sticks (বাঁশ) gathered inside a pot / tub. Multiple sticks rising from a single container — study of form, grouping, rhythm and everyday material. Early architecture-preparation drawing.'},
-  {src:'IMG scetch 1.jpg', title:'স্রোতশীনি · Exhibited Work', ctx:'A floating male figure expresses loneliness and the attempt to distance himself from every worldly suffering. Water-lily leaves and blossoms surround him, intensifying the sorrow; yet colourful fish swimming in the current bring a quiet hope. From the opposite bank a woman breaks every barrier to reach him — the rocks at her feet carrying the weight of that struggle. প্রদর্শিত কাজ · স্রোতশীনি।'}
+  {src:'809518654_1855217995842076_8923680691947304600_n.jpg', title:'আবার দেখা হবে', ctx:''},
+  {src:'809601262_4548993055379554_8793039364914601083_n.jpg', title:'আমি কোথায় — At the Dimension and Space', ctx:''},
+  {src:'813466984_26807832862248578_2653115749408704795_n.jpg', title:'কখন যে আসবেন — অপেক্ষা', ctx:''},
+  {src:'813692048_1750841226169127_6723820080107089098_n.jpg', title:'আর একটি বার যদি বলতে পেতাম', ctx:''},
+  {src:'813853349_2273476383432547_5877535730504115386_n.jpg', title:'Loneliness in a Lovely Island', ctx:''},
+  {src:'818061932_846874715114836_2565138691570136914_n.jpg', title:'চলো ঘুমতে যাই', ctx:''},
+  {src:'818478656_1667736108690904_8025924023257939696_n.jpg', title:'ঘুম কেন ভাঙছে না', ctx:''},
+  {src:'Screenshot 2026-09-20 202528.png', title:'The River That Flows the Water of Silence', ctx:''},
+  {src:'image colour 1.jpg', title:'Colour study', ctx:''},
+  {src:'image colour.jpg', title:'Colour work', ctx:''},
+  {src:'image ipad 1.png', title:'Digital / iPad work', ctx:''},
+  {src:'image sketch 1.jpg', title:'Early sketch', ctx:''},
+  {src:'image sketch 2.jpg', title:'Sketch study', ctx:''},
+  {src:'image sketch 3.jpg', title:'Sketch study', ctx:''},
+  {src:'IMG scetch 1.jpg', title:'Exhibited work', ctx:'Associated with exhibition contexts'}
 ];
 const MODELS = [
   {src:'Screenshot 2026-09-20 202305.png',project:'Squares in Grid',number:'Architectural Project 1',model:'Black squares composition',concept:'To develop sensitivity toward visual order. Rhythm, spacing and controlled composition through a strict grid. দৃশ্যমান শৃঙ্খলা, ছন্দ ও নিয়ন্ত্রিত বিন্যাসের প্রতি সংবেদনশীলতা গড়ে তোলা।',method:'Compose black 25 × 25 squares on a white base. Base grid 12 × 12. Base size 300 × 300. Materials: matte surface of black model paper, Swiss board.'},
@@ -1460,7 +1407,7 @@ const ACHIEVE = {
   udvash:{type:'img', src:'NDC UDVASH SOMBORDHONA.jpeg', title:'NDC Udvash Sombordhona 2023', body:'Recognition plaque presented by Udvash for the Notre Dame College admission examination, 2023. নটর ডেম কলেজ ভর্তি পরীক্ষা ২০২৩ উপলক্ষে উদ্ভাস প্রদত্ত সম্মাননা।'},
   uac:{type:'img', src:'UAC SOMBORDHONA FOR NDC.jpeg', title:'Proud to be a Notre Damian · UAC', body:'Trophy from UAC College Admission Coaching celebrating the identity of a Notre Damian. নটর ডেমিয়ান পরিচয়ের স্বীকৃতিস্বরূপ ইউএসি সম্মাননা।'},
   shilper:{type:'img', src:'SHILPER CHITRO.jpeg', title:'Shilper Chitra · 5th International Art & Photography Exhibition 2023', body:'Participant Award · Group (C) · Shadid Ahamed. International art and photography exhibition recognition. শিল্পের চিত্র আন্তর্জাতিক প্রদর্শনী ২০২৩ · অংশগ্রহণকারী পুরস্কার।'},
-  drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition · Father Sushanto', body:'Signed recognition by Father Sushanto — the strictest teacher and Office Head of Notre Dame College, the authority behind the pink-slip system that called guardians. One day the diary (full of drawings) was accidentally left in class after lectures. Father Sushanto found it, examined every page, and wrote: “তোমার আঁকা ছবিগুলো অনেক সুন্দর হয়েছে” — then signed and dated it 02 November 2024. A quiet, powerful acknowledgement from the most demanding presence in the college. নটর ডেম কলেজের কঠোরতম শিক্ষক ও অফিস হেড ফাদার সুশান্তোর স্বাক্ষরিত স্বীকৃতি — ২ নভেম্বর ২০২৪।'},
+  drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition', body:'Praise and signature associated with drawing and sketch work.'},
   exhibition:{type:'img', src:'IMG scetch 1.jpg', title:'Exhibition', body:'Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).'},
   arc:{type:'pdf', src:'1000061008_UG_ARC_Gradesheet_Web.pdf', title:'Architecture Academic Record', body:'First-semester record including ARC 101, ARC 111, ARC 121, ARC 122, CSE 103, ENG 091, PHY 102, credits and GPA as recorded.'},
   run5:{type:'img', src:'5km run.jpeg', title:'Mohanagar Half Marathon · 5 km Finisher', body:'Finisher medal — Mohanagar Half Marathon 2025 · “Run for a Sustainable City”. মোহানগর হাফ ম্যারাথন ২০২৫ · ৫ কিমি সমাপ্তকারী পদক।'},
@@ -1549,8 +1496,7 @@ function createOrbit(stageId, items, opts){
     div.setAttribute('role','button');
     div.tabIndex=0;
     if(item.type==='video'){
-      const thumb = item.id ? `https://img.youtube.com/vi/${item.id}/hqdefault.jpg` : '';
-      div.innerHTML=`<div class="video-card-inner">${thumb?`<img class="video-thumb" src="${thumb}" alt="${item.title}" loading="lazy">`:''}<div class="video-meta"><h4>${item.title}</h4><span>Watch on YouTube</span></div></div>`;
+      div.innerHTML=`<div class="video-card-inner"><h4>${item.title}</h4><span>Watch</span></div>`;
       div.addEventListener('click',()=>window.open(item.url,'_blank','noopener'));
       div.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();window.open(item.url,'_blank','noopener');}});
     } else {
@@ -1620,7 +1566,7 @@ function initArtOrbit(){
   if(orbits.art) return;
   orbits.art=createOrbit('artStage', ART_WORKS, {
     sectionId:'skills', radius:140,
-    onSelect:(w)=>{ orbits.art.pause(); openModal({type:'img', src:w.src, title:w.title, body:w.ctx || 'Artwork from the personal practice of drawing, colour and visual storytelling.'}); }
+    onSelect:(w)=>{ orbits.art.pause(); openModal({type:'img', src:w.src, title:w.title, body:(w.ctx?w.ctx+' · ':'')+'Artwork from the personal practice of drawing, colour and visual storytelling.'}); }
   });
 }
 function initVideoOrbit(){
