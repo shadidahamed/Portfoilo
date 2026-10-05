@@ -576,20 +576,49 @@ body.has-custom-cursor .clickable{cursor:none}
   gap:1.3rem;
 }
 .project-card{
-  padding:1.75rem;
+  padding:0;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
   transition:border-color .3s,transform .3s;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
 }
 .project-card:hover{border-color:var(--border-strong);transform:translateY(-3px)}
+.project-card .project-preview{
+  width:100%;
+  aspect-ratio:16/10;
+  background:var(--surface-2);
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.project-card .project-preview iframe{
+  width:200%;
+  height:200%;
+  transform:scale(0.5);
+  transform-origin:0 0;
+  border:none;
+  pointer-events:none;
+}
+.project-card .project-preview .preview-fallback{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,var(--surface-2),var(--surface-3));
+  color:var(--accent-muted);
+  font-size:0.78rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+.project-card .project-body{padding:1.55rem 1.55rem 1.7rem;flex:1;display:flex;flex-direction:column}
 .project-card h4{
   font-family:var(--font-display);
   font-size:1.2rem;
   color:var(--warm);
   margin-bottom:0.5rem;
 }
-.project-card p{font-size:0.95rem;color:var(--text-muted);margin-bottom:1.2rem;line-height:1.65}
+.project-card p{font-size:0.95rem;color:var(--text-muted);margin-bottom:1.2rem;line-height:1.65;flex:1}
 .btn-outline{
   display:inline-flex;
   padding:0.6rem 1.15rem;
@@ -613,25 +642,55 @@ body.has-custom-cursor .clickable{cursor:none}
 .video-card-inner{
   width:100%;height:100%;
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
+  align-items:stretch;justify-content:flex-end;
   background:var(--surface-2);
   border:1px solid var(--border);
-  padding:1.25rem;
-  text-align:center;
+  position:relative;
+  overflow:hidden;
   border-radius:6px;
+}
+.video-card-inner .thumb{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+}
+.video-card-inner .thumb-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(10,12,18,0.88) 100%);
+  z-index:1;
+}
+.video-card-inner .video-meta{
+  position:relative;z-index:2;
+  padding:0.85rem 0.9rem 1rem;
+  text-align:left;
 }
 .video-card-inner h4{
   font-family:var(--font-display);
-  font-size:1rem;
+  font-size:0.95rem;
   color:var(--warm);
-  margin-bottom:0.35rem;
+  margin-bottom:0.25rem;
+  line-height:1.25;
 }
 .video-card-inner span{
-  font-size:0.68rem;
+  font-size:0.65rem;
   letter-spacing:0.12em;
   color:var(--accent-muted);
   text-transform:uppercase;
 }
+.video-card-inner .play-icon{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-60%);
+  z-index:2;
+  width:42px;height:42px;
+  border-radius:50%;
+  background:rgba(10,12,18,0.72);
+  border:1px solid rgba(139,157,195,0.45);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent-soft);
+  font-size:1rem;
+  transition:transform .25s,background .25s;
+}
+.orbit-item:hover .play-icon{transform:translate(-50%,-60%) scale(1.08);background:rgba(139,157,195,0.25)}
 
 .reading-panel{
   max-width:740px;margin:0 auto;
@@ -1042,7 +1101,7 @@ body.has-custom-cursor .clickable{cursor:none}
             <div class="trust-bar">
               <span><strong>SSC + HSC</strong> Golden A+</span>
               <span><strong>BRAC</strong> Architecture</span>
-              <span>Live: <strong>TrendCart</strong> + Office Engine</span>
+              <span>Live: <strong>TrendCart</strong> + Orpheus + Chess</span>
             </div>
           </div>
         </div>
@@ -1161,8 +1220,39 @@ body.has-custom-cursor .clickable{cursor:none}
         <div class="section-inner">
           <div class="skill-sub-header"><div><h2 class="section-title">Coding &amp; Website Making</h2><p class="section-sub">Digital Projects</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="project-cards">
-            <article class="project-card"><h4>TrendCart</h4><p>An affiliate-oriented e-commerce / marketplace web project built with care for clarity and quiet usability.</p><a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a></article>
-            <article class="project-card"><h4>Office Engine</h4><p>A browser-based 3D-style game experience with an atmospheric exploration concept — a space to wander when the mind needs distance.</p><a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a></article>
+            <article class="project-card">
+              <div class="project-preview">
+                <iframe src="https://shadidahamed.github.io/trendcart/" title="TrendCart preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                <div class="preview-fallback" aria-hidden="true">TrendCart</div>
+              </div>
+              <div class="project-body">
+                <h4>TrendCart</h4>
+                <p>An affiliate-oriented e-commerce / marketplace web project built with care for clarity and quiet usability.</p>
+                <a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-preview">
+                <iframe src="https://shadidahamed.github.io/Shadid-s-game/" title="Orpheus Engine preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                <div class="preview-fallback" aria-hidden="true">Orpheus Engine</div>
+              </div>
+              <div class="project-body">
+                <h4>Orpheus Engine</h4>
+                <p>A browser-based 3D-style game experience with an atmospheric exploration concept — a space to wander when the mind needs distance.</p>
+                <a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-preview">
+                <iframe src="https://shadidahamed.github.io/CHESS-BOARD-ARINA/" title="Chessboard Arena preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                <div class="preview-fallback" aria-hidden="true">Chessboard Arena</div>
+              </div>
+              <div class="project-body">
+                <h4>Chessboard Arena</h4>
+                <p>A focused chess-playing interface built for clear board presence and quiet concentration — play, think, return.</p>
+                <a class="btn-outline" href="https://shadidahamed.github.io/CHESS-BOARD-ARINA/" target="_blank" rel="noopener noreferrer">View Live</a>
+              </div>
+            </article>
           </div>
         </div>
       </div>
@@ -1217,7 +1307,7 @@ body.has-custom-cursor .clickable{cursor:none}
           <button class="achieve-card clickable" data-achieve="udvash" aria-label="View NDC Udvash Sombordhona"><div class="label">College</div><h3>NDC Udvash Sombordhona</h3><p>Recognition plaque from Udvash for Notre Dame College admission examination 2023.</p></button>
           <button class="achieve-card clickable" data-achieve="uac" aria-label="View UAC Notre Damian"><div class="label">College</div><h3>Proud to be a Notre Damian</h3><p>UAC College Admission Coaching recognition trophy.</p></button>
           <button class="achieve-card clickable" data-achieve="shilper" aria-label="View Shilper Chitra Award"><div class="label">Art</div><h3>Shilper Chitra · Participant Award</h3><p>5th International Art &amp; Photography Exhibition 2023 · Group (C) · Shadid Ahamed</p></button>
-          <button class="achieve-card clickable" data-achieve="drawing" aria-label="View drawing recognition"><div class="label">Art</div><h3>Drawing / Art Recognition</h3><p>Praise and signature associated with drawing and sketch work.</p></button>
+          <button class="achieve-card clickable" data-achieve="drawing" aria-label="View drawing recognition"><div class="label">Art</div><h3>Drawing / Art Recognition</h3><p>Signed praise from Father Sushanto, Office Head, Notre Dame College · 02 November 2024</p></button>
           <button class="achieve-card clickable" data-achieve="exhibition" aria-label="View exhibition work"><div class="label">Exhibition</div><h3>Exhibition</h3><p>Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).</p></button>
           <button class="achieve-card clickable" data-achieve="arc" aria-label="View Architecture gradesheet"><div class="label">Architecture</div><h3>Architecture Academic Record</h3><p>ARC 101 and related first-semester record · BRAC University</p></button>
           <button class="achieve-card clickable" data-achieve="run5" aria-label="View 5km Mohanagar medal"><div class="label">Running</div><h3>Mohanagar Half Marathon · 5 km</h3><p>Finisher medal · Run for a Sustainable City · 2025</p></button>
@@ -1314,21 +1404,21 @@ body.has-custom-cursor .clickable{cursor:none}
 
 const BOOK_IMGS = ['811615849_2097588261148773_877248636819443508_n.jpg','815366796_1754064392528440_1990530380060926840_n (1).jpg','817550850_1756948922083208_6663409752770103109_n.jpg','ChatGPT Image Sep 20, 2026, 07_38_48 PM.png','book-3d.jpg'];
 const ART_WORKS = [
-  {src:'809518654_1855217995842076_8923680691947304600_n.jpg', title:'আবার দেখা হবে', ctx:''},
-  {src:'809601262_4548993055379554_8793039364914601083_n.jpg', title:'আমি কোথায় — At the Dimension and Space', ctx:''},
-  {src:'813466984_26807832862248578_2653115749408704795_n.jpg', title:'কখন যে আসবেন — অপেক্ষা', ctx:''},
-  {src:'813692048_1750841226169127_6723820080107089098_n.jpg', title:'আর একটি বার যদি বলতে পেতাম', ctx:''},
-  {src:'813853349_2273476383432547_5877535730504115386_n.jpg', title:'Loneliness in a Lovely Island', ctx:''},
-  {src:'818061932_846874715114836_2565138691570136914_n.jpg', title:'চলো ঘুমতে যাই', ctx:''},
-  {src:'818478656_1667736108690904_8025924023257939696_n.jpg', title:'ঘুম কেন ভাঙছে না', ctx:''},
-  {src:'Screenshot 2026-09-20 202528.png', title:'The River That Flows the Water of Silence', ctx:''},
-  {src:'image colour 1.jpg', title:'Colour study', ctx:''},
-  {src:'image colour.jpg', title:'Colour work', ctx:''},
-  {src:'image ipad 1.png', title:'Digital / iPad work', ctx:''},
-  {src:'image sketch 1.jpg', title:'Early sketch', ctx:''},
-  {src:'image sketch 2.jpg', title:'Sketch study', ctx:''},
-  {src:'image sketch 3.jpg', title:'Sketch study', ctx:''},
-  {src:'IMG scetch 1.jpg', title:'Exhibited work', ctx:'Associated with exhibition contexts'}
+  {src:'809518654_1855217995842076_8923680691947304600_n.jpg', title:'আবার দেখা হবে', ctx:'একটি কমিক সিরিজের দৃশ্য। ধ্বংসপ্রাপ্ত পৃথিবীর মাঝে এক ছেলে ফোনের ওপাশে মেয়ের কল পায় — সে দেখা করতে আসছে বলে উত্তর দেয়। ভেঙে পড়া পরিবেশের ভিতরও সম্পর্কের একটি ছোট প্রতিশ্রুতি।'},
+  {src:'809601262_4548993055379554_8793039364914601083_n.jpg', title:'আমি কোথায় — At the Dimension and Space', ctx:'একটি ডিলুশনাল ত্রিমাত্রিক স্থান। ছেলেটি হারিয়ে গেছে — স্বপ্ন ও বাস্তবের সীমানা মিলিয়ে গেছে। শুধু সিঁড়ি চলেছে, অন্তহীন পথ। সে জানে না কোন দিকে গেলে থামতে পারবে।'},
+  {src:'813466984_26807832862248578_2653115749408704795_n.jpg', title:'কখন যে আসবেন — অপেক্ষা', ctx:'অপেক্ষার নীরবতা। সময় স্থির হয়ে আছে; দৃষ্টি একই দিকে বাঁধা। যে আসবেন বলেছিলেন, তিনি এখনো আসেননি — তবু অপেক্ষা থেমে যায়নি। Artwork of waiting, distance and the quiet weight of an unanswered arrival.'},
+  {src:'813692048_1750841226169127_6723820080107089098_n.jpg', title:'আর একটি বার যদি বলতে পেতাম', ctx:'আর একটি বার যদি সুযোগ পেতাম। আর একটি বার যদি বলতে পেতাম — love you সঙ্গে। কিন্তু দ্বিতীয় সুযোগটিও বৃথা হয়ে গেল। তিনটি লাইনের কষ্ট, একটি দৃশ্যের নীরবতা।'},
+  {src:'813853349_2273476383432547_5877535730504115386_n.jpg', title:'Loneliness in a Lovely Island', ctx:'একটি সুন্দর দ্বীপের ভিতরও একাকিত্ব প্রকট। প্রথমবার অ্যাক্রিলিক মার্কার দিয়ে করা চেষ্টা। সৌন্দর্য থাকলেও নির্জনতা মুছে যায় না।'},
+  {src:'818061932_846874715114836_2565138691570136914_n.jpg', title:'বর্ষার পথে', ctx:'বর্ষার দিনে মেঠো পথে এক ছেলে ও তার বান্ধবী হেঁটে যাচ্ছে। তারা পরিকল্পনা করছে কোথায় ঘুরতে যাবে — বৃষ্টি, রাস্তা এবং দুজনের কথোপকথন।'},
+  {src:'818478656_1667736108690904_8025924023257939696_n.jpg', title:'ঘুম কেন ভাঙছে না', ctx:'স্বপ্নের দুনিয়ায় আটকে থাকা। সেখানে একটি ড্রাগনের সাথে লড়াই চলছে — ঘুম ভাঙছে না, কারণ স্বপ্ন এখনো শেষ হয়নি।'},
+  {src:'Screenshot 2026-09-20 202528.png', title:'The Bully by Shadid Ahamed', ctx:'পূর্ণাঙ্গ পেন্সিল স্কেচ। সিটি পারস্পেকটিভ স্পষ্টভাবে ধরা হয়েছে। কোনো বাইরের অনুপ্রেরণা ছাড়াই, স্থাপত্য অনুশীলনের সময়ে সম্পূর্ণ নিজের হাতে তৈরি।'},
+  {src:'image colour 1.jpg', title:'Colour study · Yorichi', ctx:'Demon Slayer-এর Yorichi। মিক্সড মিডিয়া — প্রথম তুলি ও জলরং। প্রায় ৪৮ ঘণ্টায় সম্পন্ন। শিল্পের চিত্র প্রদর্শনীর জন্য করা প্রথম বড় কাজ; এই অঙ্কনের জন্যই সার্টিফিকেট পাওয়া।'},
+  {src:'image colour.jpg', title:'Colour work · পহেলা বৈশাখ', ctx:'Notre Dame College-এর After SSC English Course-এর অঙ্কন প্রদর্শনী। চার প্যানেলে পহেলা বৈশাখ: «এসো হে বৈশাখ»-এর দৃশ্য, গ্রামবাংলার মেলা, মাটির হাঁড়ি-ঘোড়া-হাতপাখার স্টল, এবং মঙ্গল শোভাযাত্রা।'},
+  {src:'image ipad 1.png', title:'Digital / iPad work', ctx:'ডিজিটাল মাধ্যমে করা চিত্র — স্ক্রিনে রঙ ও ফর্ম নিয়ে পরীক্ষা।'},
+  {src:'image sketch 1.jpg', title:'Early sketch · Three-point perspective', ctx:'প্রথম থ্রি-পয়েন্ট পারস্পেকটিভ স্কেচ। সায়েন্স-ফিকশন দৃশ্য: পুরনো পৃথিবী পতিত; মানুষ আকাশে ফিউচারিস্টিক শহর গড়েছে। একজনের হাত, আরেকজন হেডফোন পরে AC ডেক ও দেয়ালের মাঝে বসে — চোখের জল বাতাসে উড়ে যাচ্ছে, চুল এলোমেলো।'},
+  {src:'image sketch 2.jpg', title:'Sketch study · The Sea of Dreams', ctx:'ব্যথার মধ্য দিয়ে করা প্রথম স্কেচ। «The Sea of Dreams» বইয়ের কভার লোগো হাতে এঁকে দেখার চেষ্টা — স্থাপত্যের জন্য প্রস্তুতির সময়ে।'},
+  {src:'image sketch 3.jpg', title:'Sketch study', ctx:'আর্কিটেকচার ডিপার্টমেন্টের জন্য চেষ্টা করা প্রাথমিক স্কেচ স্টাডি — বাসের ছবি ও পর্যবেক্ষণ।'},
+  {src:'IMG scetch 1.jpg', title:'স্রোতশীনি', ctx:'প্রদর্শনীতে অংশ নেওয়া কাজ। ভাসমান পুরুষটি তার একাকিত্ব ও দুনিয়াবি কষ্ট প্রকাশ করে; চারপাশের শাপলাপাতা যেন দুঃখকে আরও গভীর করে। তবু পানিতে বহমান মা ও রঙিন মাছ আশার আলো বহন করে। অপর পারে একটি নারী — পৃথিবীর বাধা ভেঙে তাকে বাঁচাতে আসছে। পাথর তার কষ্ট ও স্থায়িত্বের সাক্ষী।'}
 ];
 const MODELS = [
   {src:'Screenshot 2026-09-20 202305.png',project:'Squares in Grid',number:'Architectural Project 1',model:'Black squares composition',concept:'To develop sensitivity toward visual order. Rhythm, spacing and controlled composition through a strict grid. দৃশ্যমান শৃঙ্খলা, ছন্দ ও নিয়ন্ত্রিত বিন্যাসের প্রতি সংবেদনশীলতা গড়ে তোলা।',method:'Compose black 25 × 25 squares on a white base. Base grid 12 × 12. Base size 300 × 300. Materials: matte surface of black model paper, Swiss board.'},
@@ -1407,8 +1497,8 @@ const ACHIEVE = {
   udvash:{type:'img', src:'NDC UDVASH SOMBORDHONA.jpeg', title:'NDC Udvash Sombordhona 2023', body:'Recognition plaque presented by Udvash for the Notre Dame College admission examination, 2023. নটর ডেম কলেজ ভর্তি পরীক্ষা ২০২৩ উপলক্ষে উদ্ভাস প্রদত্ত সম্মাননা।'},
   uac:{type:'img', src:'UAC SOMBORDHONA FOR NDC.jpeg', title:'Proud to be a Notre Damian · UAC', body:'Trophy from UAC College Admission Coaching celebrating the identity of a Notre Damian. নটর ডেমিয়ান পরিচয়ের স্বীকৃতিস্বরূপ ইউএসি সম্মাননা।'},
   shilper:{type:'img', src:'SHILPER CHITRO.jpeg', title:'Shilper Chitra · 5th International Art & Photography Exhibition 2023', body:'Participant Award · Group (C) · Shadid Ahamed. International art and photography exhibition recognition. শিল্পের চিত্র আন্তর্জাতিক প্রদর্শনী ২০২৩ · অংশগ্রহণকারী পুরস্কার।'},
-  drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition', body:'Praise and signature associated with drawing and sketch work.'},
-  exhibition:{type:'img', src:'IMG scetch 1.jpg', title:'Exhibition', body:'Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).'},
+  drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition · Father Sushanto', body:'Notre Dame College-এর Office Head Father Sushanto (Shesh Pradha Sushanto) — কলেজের অন্যতম কঠোর শিক্ষক, pink slip ও অভিভাবক ডাকার নিয়ন্ত্রণ যাঁর হাতে ছিল। একদিন ক্লাসের পর ডায়েরি কলেজে রেখে যাওয়া হয়; তিনি সেটি পুরোপুরি দেখে ও পরীক্ষা করে লিখেছিলেন: «তোমার আঁকা ছবিগুলো অনেক সুন্দর হয়েছে» — এবং স্বাক্ষর করেছিলেন ০২ নভেম্বর ২০২৪। এটা শুধু প্রশংসা নয়; সবচেয়ে কঠোর নজরদারির জায়গা থেকে আসা একটি নীরব স্বীকৃতি।'},
+  exhibition:{type:'img', src:'IMG scetch 1.jpg', title:'Exhibition · স্রোতশীনি', body:'Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts). স্রোতশীনি — ভাসমান একাকিত্ব, শাপলাপাতা, আশার মাছ এবং অপর পারে আসা নারীর কাহিনি।'},
   arc:{type:'pdf', src:'1000061008_UG_ARC_Gradesheet_Web.pdf', title:'Architecture Academic Record', body:'First-semester record including ARC 101, ARC 111, ARC 121, ARC 122, CSE 103, ENG 091, PHY 102, credits and GPA as recorded.'},
   run5:{type:'img', src:'5km run.jpeg', title:'Mohanagar Half Marathon · 5 km Finisher', body:'Finisher medal — Mohanagar Half Marathon 2025 · “Run for a Sustainable City”. মোহানগর হাফ ম্যারাথন ২০২৫ · ৫ কিমি সমাপ্তকারী পদক।'},
   run75:{type:'img', src:'7.5km run.jpeg', title:'JCI Rise Up Run · 7.5 km Finisher', body:'Finisher medal — JCI Dhaka West Rise Up Run 2025. জেসিআই ঢাকা ওয়েস্ট · রাইজ আপ রান ২০২৫ · ৭.৫ কিমি সমাপ্তকারী পদক।'},
@@ -1496,7 +1586,13 @@ function createOrbit(stageId, items, opts){
     div.setAttribute('role','button');
     div.tabIndex=0;
     if(item.type==='video'){
-      div.innerHTML=`<div class="video-card-inner"><h4>${item.title}</h4><span>Watch</span></div>`;
+      const thumbUrl = 'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg';
+      div.innerHTML = '<div class="video-card-inner">' +
+        '<img class="thumb" src="' + thumbUrl + '" alt="' + (item.title||'') + '" loading="lazy">' +
+        '<div class="thumb-overlay"></div>' +
+        '<div class="play-icon" aria-hidden="true">▶</div>' +
+        '<div class="video-meta"><h4>' + item.title + '</h4><span>Watch on YouTube</span></div>' +
+        '</div>';
       div.addEventListener('click',()=>window.open(item.url,'_blank','noopener'));
       div.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();window.open(item.url,'_blank','noopener');}});
     } else {
@@ -1566,7 +1662,7 @@ function initArtOrbit(){
   if(orbits.art) return;
   orbits.art=createOrbit('artStage', ART_WORKS, {
     sectionId:'skills', radius:140,
-    onSelect:(w)=>{ orbits.art.pause(); openModal({type:'img', src:w.src, title:w.title, body:(w.ctx?w.ctx+' · ':'')+'Artwork from the personal practice of drawing, colour and visual storytelling.'}); }
+    onSelect:(w)=>{ orbits.art.pause(); openModal({type:'img', src:w.src, title:w.title, body:w.ctx || 'Artwork from the personal practice of drawing, colour and visual storytelling.'}); }
   });
 }
 function initVideoOrbit(){
@@ -1686,12 +1782,10 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   }
   function draw(){
     ctx.clearRect(0,0,w,h);
-    /* very faint grid */
     ctx.strokeStyle='rgba(139,157,195,0.028)'; ctx.lineWidth=1;
     for(let x=0;x<w;x+=100){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
     for(let y=0;y<h;y+=100){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
 
-    /* soft particles */
     particles.forEach(p=>{
       p.x+=p.vx; p.y+=p.vy;
       if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0;
@@ -1703,7 +1797,6 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
       ctx.fill();
     });
 
-    /* slow CD-like rings */
     cds.forEach(c=>{
       c.angle+=c.speed;
       ctx.beginPath();
@@ -1711,13 +1804,11 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
       ctx.strokeStyle='rgba(139,157,195,0.07)';
       ctx.lineWidth=c.thickness;
       ctx.stroke();
-      /* inner thin ring */
       ctx.beginPath();
       ctx.arc(c.cx,c.cy,c.rad*0.72,0,Math.PI*2);
       ctx.strokeStyle='rgba(139,157,195,0.045)';
       ctx.lineWidth=1;
       ctx.stroke();
-      /* moving highlight point */
       const px=c.cx+Math.cos(c.angle)*c.rad;
       const py=c.cy+Math.sin(c.angle)*c.rad;
       ctx.beginPath(); ctx.arc(px,py,2.2,0,Math.PI*2);
@@ -1758,7 +1849,6 @@ function finishIntro(){
   setTimeout(()=>{
     introOverlay.remove();
     document.body.classList.remove('intro-active');
-    // reveal main site on home
     const hash=(location.hash||'#home').slice(1);
     if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
     else showSection('home');
@@ -1766,22 +1856,18 @@ function finishIntro(){
 }
 
 function startIntro(){
-  // Start music immediately
   audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
 
-  // Start video
   if(introVideo){
     introVideo.currentTime = 0;
     const p = introVideo.play();
     if(p && p.catch) p.catch(()=>{});
   }
 
-  // Name appears after short delay
   setTimeout(()=>{
     if(introName) introName.classList.add('show');
   }, 850);
 
-  // "explore him" words appear one after another
   setTimeout(()=>{
     if(introExplore) introExplore.classList.add('show');
     exploreWords.forEach((w, i)=>{
@@ -1789,31 +1875,24 @@ function startIntro(){
     });
   }, 2600);
 
-  // After both words visible + 1s hold, fade out (total ~5.8–6.2s)
-  // Video is ~4.77s slowed; text finishes ~3.5s, hold 1.2s more
   setTimeout(finishIntro, 5800);
 
-  // Safety: also end when video ends (in case timing drifts)
   if(introVideo){
     introVideo.addEventListener('ended', ()=>{
-      // give a tiny extra beat after video ends
       setTimeout(finishIntro, 900);
     }, {once:true});
   }
 }
 
-// Kick off intro as soon as possible
 if(introOverlay){
   startIntro();
 } else {
-  // fallback if intro somehow missing
   audio.play().then(()=>{audioPlaying=true;updateAudioIcon();}).catch(()=>updateAudioIcon());
   const hash=(location.hash||'#home').slice(1);
   if(['home','book','education','models','skills','achievements','contact','cv'].includes(hash)) showSection(hash);
   else showSection('home');
 }
 
-// Skip intro on any click / key (nice UX)
 function skipIntro(){
   finishIntro();
   document.removeEventListener('click', skipIntro);
