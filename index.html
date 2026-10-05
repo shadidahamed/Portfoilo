@@ -63,10 +63,21 @@ body{
   -webkit-font-smoothing:antialiased;
   padding-left:var(--safe-left);
   padding-right:var(--safe-right);
+  /* Screenshot deterrence */
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
 }
 body.no-scroll{overflow:hidden}
 body.intro-active{overflow:hidden}
-img{max-width:100%;height:auto;display:block}
+img{
+  max-width:100%;height:auto;display:block;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+  -webkit-user-drag:none;
+  pointer-events:auto;
+}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -889,8 +900,24 @@ body.has-custom-cursor .clickable{cursor:none}
   display:flex;align-items:center;justify-content:center;
   min-height:250px;
   position:relative;
+  /* extra protection layer */
+  -webkit-user-select:none;
+  user-select:none;
 }
-.modal-media img,.modal-media embed{max-width:100%;max-height:82vh;object-fit:contain}
+.modal-media img,.modal-media embed{
+  max-width:100%;max-height:82vh;object-fit:contain;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none; /* prevent drag / save */
+}
+.modal-media::after{
+  content:'';
+  position:absolute;inset:0;
+  background:transparent;
+  z-index:2;
+  pointer-events:auto; /* capture interactions */
+}
 .modal-info{
   padding:1.9rem 1.65rem;
   overflow-y:auto;
@@ -967,6 +994,12 @@ body.has-custom-cursor .clickable{cursor:none}
 }
 .trust-bar span{display:flex;align-items:center;gap:0.35rem}
 .trust-bar strong{color:var(--accent-muted)}
+
+/* Screenshot blank flash */
+body.screenshot-blank{
+  filter:brightness(0);
+  transition:filter 0.05s;
+}
 
 /* ========== MOBILE POLISH ========== */
 @media (max-width:820px){
@@ -1300,13 +1333,31 @@ body.has-custom-cursor .clickable{cursor:none}
         <h2 class="section-title">Achievements</h2>
         <p class="section-sub">Records &amp; Recognition</p>
         <div class="achieve-grid">
-          <button class="achieve-card clickable" data-achieve="ssc" aria-label="View SSC Transcript"><div class="label">Academic</div><h3>SSC</h3><p>GPA 5.00 / Golden A+ · Motijheel Ideal School and College</p></button>
-          <button class="achieve-card clickable" data-achieve="hsc" aria-label="View HSC Transcript"><div class="label">Academic</div><h3>HSC</h3><p>GPA 5.00 / Golden A+ · Notre Dame College</p></button>
+          <!-- Academic Certificates -->
+          <button class="achieve-card clickable" data-achieve="pec" aria-label="View PEC Certificate"><div class="label">Academic</div><h3>PEC 2017 · GPA 5.00</h3><p>Primary Education Completion Examination · Ideal School &amp; College · Motijheel</p></button>
+          <button class="achieve-card clickable" data-achieve="jsc" aria-label="View JSC Certificate"><div class="label">Academic</div><h3>JSC 2020</h3><p>Junior School Certificate · Board of Intermediate &amp; Secondary Education, Dhaka · Ideal School &amp; College</p></button>
+          <button class="achieve-card clickable" data-achieve="ssc" aria-label="View SSC Certificate"><div class="label">Academic</div><h3>SSC 2023 · GPA 5.00 Golden A+</h3><p>Secondary School Certificate · Science · Motijheel Ideal School and College</p></button>
+          <button class="achieve-card clickable" data-achieve="hsc" aria-label="View HSC Certificate"><div class="label">Academic</div><h3>HSC 2025 · GPA 5.00 Golden A+</h3><p>Higher Secondary Certificate · Science · Notre Dame College</p></button>
+
+          <!-- English Courses -->
+          <button class="achieve-card clickable" data-achieve="ndcenglish" aria-label="View NDC Special English Course"><div class="label">Language</div><h3>Notre Dame Special English Course</h3><p>End of Course Certificate · 14 June – 1 August 2023 · ID S123120</p></button>
+          <button class="achieve-card clickable" data-achieve="ndcmark" aria-label="View NDC English Mark Sheet"><div class="label">Language</div><h3>NDC English Transcript</h3><p>Listening 24 · Speaking 18 · Reading 25 · Writing 13 · Total 80 · Place 8 · 100% Attendance</p></button>
+          <button class="achieve-card clickable" data-achieve="mentors" aria-label="View Mentors After SSC English"><div class="label">Language</div><h3>Mentors After SSC English Course</h3><p>87% marks · June–August 2023 · Certificate of Achievement</p></button>
+
+          <!-- Art & Competition -->
+          <button class="achieve-card clickable" data-achieve="shishuacademy" aria-label="View Bangladesh Shishu Academy Certificate"><div class="label">Art</div><h3>Bangladesh Shishu Academy · Drawing Course</h3><p>3-year Drawing &amp; Design Course (2017–2018) · Grade A · Completed</p></button>
+          <button class="achieve-card clickable" data-achieve="thanalevel" aria-label="View Thana Level 1st Position"><div class="label">Art</div><h3>Jatiyo Shishu Protijogita 2021 · Thana 1st</h3><p>Drawing (Chitrangka) · Group “Ga” · Motijheel Thana · 1st Position</p></button>
+          <button class="achieve-card clickable" data-achieve="zillalevel" aria-label="View Zilla Level 1st Position"><div class="label">Art</div><h3>Jatiyo Shishu Protijogita 2021 · Zilla 1st</h3><p>Drawing (Chitrangka) · Group “Ga” · Dhaka District · 1st Position</p></button>
+          <button class="achieve-card clickable" data-achieve="banglanewyear" aria-label="View Bangla New Year 1st Position"><div class="label">Art</div><h3>Bangla Nababarsha 1429 · 1st Position</h3><p>Art Competition · Bangladesh Shishu Academy, Dhaka District · 1st Place</p></button>
+          <button class="achieve-card clickable" data-achieve="muktir" aria-label="View Muktir Utsav 2nd Position"><div class="label">Art</div><h3>Muktir Utsav &amp; Suborno Jayanti Mela 2022 · 2nd</h3><p>Drawing Competition · District Administration, Dhaka · Class 9 · Ideal School &amp; College</p></button>
+          <button class="achieve-card clickable" data-achieve="shilper" aria-label="View Shilper Chitra Award"><div class="label">Art</div><h3>Shilper Chitra · Participant Award 2023</h3><p>5th International Art &amp; Photography Exhibition · 6 October 2023</p></button>
+          <button class="achieve-card clickable" data-achieve="environment" aria-label="View World Environment Day Certificate"><div class="label">Participation</div><h3>World Environment Day 2024</h3><p>Certificate of Participation · Notre Dame Nature Study Club · Land Restoration &amp; Drought Resilience</p></button>
+
+          <!-- Existing other achievements kept -->
           <button class="achieve-card clickable" data-achieve="gpa5medal" aria-label="View GPA 5 Gold Medal"><div class="label">Academic</div><h3>GPA 5 Gold Medal · SSC 2023</h3><p>Official golden medal awarded for GPA 5.00 in SSC examination.</p></button>
           <button class="achieve-card clickable" data-achieve="ndc75" aria-label="View Notre Dame 75 Years Jubilee"><div class="label">College</div><h3>Notre Dame College 75 Years</h3><p>Commemorative medal for the 75th anniversary (1949–2024) of Notre Dame College, Dhaka.</p></button>
           <button class="achieve-card clickable" data-achieve="udvash" aria-label="View NDC Udvash Sombordhona"><div class="label">College</div><h3>NDC Udvash Sombordhona</h3><p>Recognition plaque from Udvash for Notre Dame College admission examination 2023.</p></button>
           <button class="achieve-card clickable" data-achieve="uac" aria-label="View UAC Notre Damian"><div class="label">College</div><h3>Proud to be a Notre Damian</h3><p>UAC College Admission Coaching recognition trophy.</p></button>
-          <button class="achieve-card clickable" data-achieve="shilper" aria-label="View Shilper Chitra Award"><div class="label">Art</div><h3>Shilper Chitra · Participant Award</h3><p>5th International Art &amp; Photography Exhibition 2023 · Group (C) · Shadid Ahamed</p></button>
           <button class="achieve-card clickable" data-achieve="drawing" aria-label="View drawing recognition"><div class="label">Art</div><h3>Drawing / Art Recognition</h3><p>Signed praise from Father Sushanto, Office Head, Notre Dame College · 02 November 2024</p></button>
           <button class="achieve-card clickable" data-achieve="exhibition" aria-label="View exhibition work"><div class="label">Exhibition</div><h3>Exhibition</h3><p>Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts).</p></button>
           <button class="achieve-card clickable" data-achieve="arc" aria-label="View Architecture gradesheet"><div class="label">Architecture</div><h3>Architecture Academic Record</h3><p>ARC 101 and related first-semester record · BRAC University</p></button>
@@ -1402,6 +1453,36 @@ body.has-custom-cursor .clickable{cursor:none}
 (function(){
 'use strict';
 
+/* ========== SCREENSHOT DETERRENCE ========== */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('dragstart', e => {
+  if (e.target.tagName === 'IMG' || e.target.closest('.modal-media')) e.preventDefault();
+});
+document.addEventListener('selectstart', e => {
+  if (e.target.tagName === 'IMG' || e.target.closest('.modal-media')) e.preventDefault();
+});
+
+// PrintScreen / common capture keys → temporary blank
+document.addEventListener('keydown', e => {
+  if (
+    e.key === 'PrintScreen' ||
+    (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S')) ||
+    (e.metaKey && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S'))
+  ) {
+    document.body.classList.add('screenshot-blank');
+    setTimeout(() => document.body.classList.remove('screenshot-blank'), 1800);
+  }
+});
+
+// Visibility change (some mobile screenshot apps)
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    document.body.classList.add('screenshot-blank');
+  } else {
+    setTimeout(() => document.body.classList.remove('screenshot-blank'), 400);
+  }
+});
+
 const BOOK_IMGS = ['811615849_2097588261148773_877248636819443508_n.jpg','815366796_1754064392528440_1990530380060926840_n (1).jpg','817550850_1756948922083208_6663409752770103109_n.jpg','ChatGPT Image Sep 20, 2026, 07_38_48 PM.png','book-3d.jpg'];
 const ART_WORKS = [
   {src:'809518654_1855217995842076_8923680691947304600_n.jpg', title:'আবার দেখা হবে', ctx:'একটি কমিক সিরিজের দৃশ্য। ধ্বংসপ্রাপ্ত পৃথিবীর মাঝে এক ছেলে ফোনের ওপাশে মেয়ের কল পায় — সে দেখা করতে আসছে বলে উত্তর দেয়। ভেঙে পড়া পরিবেশের ভিতরও সম্পর্কের একটি ছোট প্রতিশ্রুতি।'},
@@ -1489,14 +1570,99 @@ const HERITAGE = [
   {src:'3de8a196-ae07-4ca7-a703-ee6127ffae82.jpg', title:'Military Museum · On the Tank', body:'Sitting on a historic tank under open sky — the scale of armoured history felt directly. ঐতিহাসিক ট্যাঙ্কের উপর।'},
   {src:'0ef47a8f-3c8a-4e27-afb0-b5735b9b1499.jpg', title:'Military Museum · Artillery & Aircraft', body:'Beside a heavy artillery piece with a fighter aircraft mounted above the wall. আর্টিলারি ও যুদ্ধবিমান।'}
 ];
+
 const ACHIEVE = {
-  ssc:{type:'pdf', src:'SSC Transcript.pdf', title:'SSC Transcript', body:'GPA 5.00 / Golden A+ · Motijheel Ideal School and College'},
-  hsc:{type:'pdf', src:'HSC Transcript.pdf', title:'HSC Transcript', body:'GPA 5.00 / Golden A+ · Notre Dame College'},
+  /* ===== NEW CERTIFICATES (exact filenames) ===== */
+  pec:{
+    type:'img',
+    src:'pec.jpeg',
+    title:'Primary Education Completion (PEC) 2017 · GPA 5.00',
+    body:'প্রাথমিক শিক্ষা সমাপনী পরীক্ষা ২০১৭ · জিপিএ ৫.০০। Ideal School And College, Motijheel, Dhaka। পিতা: তোফায়েল আহমেদ, মাতা: আফরোজা সুলতানা। জন্ম: ০৫ এপ্রিল ২০০৭। ইস্যু তারিখ: ২৯/০৭/২০১৮। Primary Education Completion Examination 2017 with perfect GPA 5.00.'
+  },
+  jsc:{
+    type:'img',
+    src:'jsc.jpeg',
+    title:'Junior School Certificate (JSC) Examination 2020',
+    body:'Board of Intermediate and Secondary Education, Dhaka। Serial DBJ 17 0630699 · Registration 2010991557/2020। Ideal School And College · Roll Dhaka No. 607994। Date of Birth: Fifth April Two Thousand Seven। Results published 11 February 2021। জুনিয়র স্কুল সার্টিফিকেট পরীক্ষা ২০২০ সফলভাবে পাস।'
+  },
+  ssc:{
+    type:'img',
+    src:'ssc.jpeg',
+    title:'Secondary School Certificate (SSC) 2023 · GPA 5.00 Golden A+',
+    body:'Board of Intermediate and Secondary Education, Dhaka। Serial DBSC 23 0301811 · Registration 2010991557/2021-22। Ideal School And College · Science group · Roll Dhaka No. 200467। GPA 5.00 on a scale of 5.00। Date of Birth: Fifth April Two Thousand Seven। Results published 28 July 2023। এসএসসি ২০২৩ · স্বর্ণ আ+।'
+  },
+  hsc:{
+    type:'img',
+    src:'hsc.jpeg',
+    title:'Higher Secondary Certificate (HSC) 2025 · GPA 5.00 Golden A+',
+    body:'Board of Intermediate and Secondary Education, Dhaka। Serial DBHC 25 0036658 · Registration 2010991557/2023-24। Notre Dame College · Science group · Roll Dhaka No. 115080। GPA 5.00 on a scale of 5.00। Results published 16 October 2025। এইচএসসি ২০২৫ · স্বর্ণ আ+।'
+  },
+  ndcenglish:{
+    type:'img',
+    src:'ndc,special english course after ssc.jpeg',
+    title:'Notre Dame College · Special English Course · End of Course Certificate',
+    body:'Awarded to Shadid Ahamed for completion of the Special English Course between 14 June 2023 and 1 August 2023। Identification No. S123120। Date of issue: 4 August 2023। Principal: Dr. Fr. Hemanto Pius Rozario, CSC। নটর ডেম কলেজের বিশেষ ইংরেজি কোর্স সফলভাবে সম্পন্ন।'
+  },
+  ndcmark:{
+    type:'img',
+    src:'ndc,special english course after ssc mark sheet.jpeg',
+    title:'Notre Dame College · Special English Course 2023 · Transcript',
+    body:'Listening 24/25 · Speaking 18/25 · Reading 25/25 · Writing 13/25 · Total 80/100 · Place: 8 · Attendance: 100%। Date of Issue: 4 August 2023। Course Coordinator: Md. Humayun Kabir। নটর ডেম স্পেশাল ইংলিশ কোর্সের মার্কশিট।'
+  },
+  mentors:{
+    type:'img',
+    src:'mentors after ssc english course.jpeg',
+    title:'Mentors · After SSC English Course · Certificate of Achievement',
+    body:'Secured 87% marks for class and test performance। Course ran June–August 2023। Issued 24/08/2023। Mentors Education · Study Abroad · Immigration। আফটার এসএসসি ইংলিশ কোর্সে ৮৭% মার্কস।'
+  },
+  shishuacademy:{
+    type:'img',
+    src:'BANGLADESH SHISHU ACADEMY CERTIFICATE.jpeg',
+    title:'Bangladesh Shishu Academy · Drawing & Design Course 2017–2018',
+    body:'Completed the 3-year (৩ বছর) Drawing and Design course conducted by Bangladesh Shishu Academy with Grade A। Issued 25.03.2018। বাংলাদেশ শিশু একাডেমী পরিচালিত চিত্রাঙ্কন ও ডিজাইন কোর্স সফলভাবে সম্পন্ন।'
+  },
+  thanalevel:{
+    type:'img',
+    src:'JATIYO SHISHU PROTIJOGITA 2021 1ST POSITION IN THANA LEVEL.jpeg',
+    title:'Jatiyo Shishu Puraskar Protijogita 2021 · Thana Level · 1st Position',
+    body:'Drawing (চিত্রাঙ্কন) · Group “Ga” · Motijheel Thana, Dhaka। From Ideal School and College। 1st Position। Date: 17.05.2022। জাতীয় শিশু পুরস্কার প্রতিযোগিতা ২০২১ · থানা পর্যায়ে প্রথম স্থান।'
+  },
+  zillalevel:{
+    type:'img',
+    src:'JATIYO SHISHU PROTIJOGITA 2021 1ST POSITION IN ZELLA PORJAY.jpeg',
+    title:'Jatiyo Shishu Puraskar Protijogita 2021 · Zilla Level · 1st Position',
+    body:'Drawing (চিত্রাঙ্কন) · Group “Ga” · Dhaka District Level। From Ideal School and College, Motijheel। 1st Position। Date: 20 May 2022। জাতীয় শিশু পুরস্কার প্রতিযোগিতা ২০২১ · জেলা পর্যায়ে প্রথম স্থান।'
+  },
+  banglanewyear:{
+    type:'img',
+    src:'BANGLA NEW YEAR CELIBRATION ART COMPITITION BY SHISHU ACADEMY 1ST POSITION ON ART CERTIFICATE.jpeg',
+    title:'Bangla Nababarsha 1429 · Art Competition · 1st Position',
+    body:'Organized by Bangladesh Shishu Academy, Dhaka District। Art (চিত্রাঙ্কন) competition · Group “Ga” · 1st Position। Date: 14 April 2022। বাংলা নববর্ষ ১৪২৯ উদযাপন উপলক্ষে আয়োজিত চিত্রাঙ্কন প্রতিযোগিতায় প্রথম স্থান।'
+  },
+  muktir:{
+    type:'img',
+    src:'MUKTIR UTHSHOB AND SUBORNOJOYONTI MELA 2022 ,2ND POSITION CERTIFICATE.jpeg',
+    title:'Muktir Utsav & Suborno Jayanti Mela 2022 · Drawing · 2nd Position',
+    body:'Organized by District Administration, Dhaka in collaboration with Ministry of Liberation War Affairs and Bangladesh Shilpakala Academy। Drawing competition · Class 9 · Ideal School and College · 2nd Position। Date: 23 March 2022। মুক্তির উৎসব ও সুবর্ণজয়ন্তী মেলা ২০২২ · চিত্রাঙ্কন প্রতিযোগিতায় দ্বিতীয় স্থান।'
+  },
+  shilper:{
+    type:'img',
+    src:'SHILPER CHITRO PARTICIPENT CERTIFICATE 2023.jpeg',
+    title:'Shilper Chitra · 5th International Art & Photography Exhibition 2023 · Participant Award',
+    body:'Successfully participated in the 5th International Art and Photography Exhibition 2023 organized by SHILPER CHITRA। Awarded on 6th October 2023। Participant Award · Group (C)। শিল্পের চিত্র আন্তর্জাতিক প্রদর্শনী ২০২৩ · অংশগ্রহণকারী পুরস্কার।'
+  },
+  environment:{
+    type:'img',
+    src:'world environment day participent.jpeg',
+    title:'World Environment Day Celebration 2024 · Certificate of Participation',
+    body:'Organized by Notre Dame Nature Study Club · Held at Notre Dame College Premises। Theme: Land restoration and drought resilience। Principal: Dr. Fr. Hemanto Pius Rozario, CSC · Moderator: Mr. Biplob Deb। বিশ্ব পরিবেশ দিবস ২০২৪ · অংশগ্রহণ সনদ।'
+  },
+
+  /* ===== EXISTING ENTRIES (kept) ===== */
   gpa5medal:{type:'img', src:'gpa 5 gold medal.jpeg', title:'GPA 5 Gold Medal · SSC 2023', body:'Official golden medal awarded for achieving GPA 5.00 in the Secondary School Certificate examination, 2023. এসএসসি ২০২৩-এ জিপিএ ৫.০০ অর্জনের স্বীকৃতিস্বরূপ স্বর্ণপদক।'},
   ndc75:{type:'img', src:'NOTRE DAME COLLEGE 75 YEARS JUBINILE.jpeg', title:'Notre Dame College 75 Years Jubilee', body:'Commemorative medal marking the 75th anniversary of Notre Dame College, Dhaka (1949–2024). নটর ডেম কলেজের ৭৫ বছর পূর্তি স্মারক পদক।'},
   udvash:{type:'img', src:'NDC UDVASH SOMBORDHONA.jpeg', title:'NDC Udvash Sombordhona 2023', body:'Recognition plaque presented by Udvash for the Notre Dame College admission examination, 2023. নটর ডেম কলেজ ভর্তি পরীক্ষা ২০২৩ উপলক্ষে উদ্ভাস প্রদত্ত সম্মাননা।'},
   uac:{type:'img', src:'UAC SOMBORDHONA FOR NDC.jpeg', title:'Proud to be a Notre Damian · UAC', body:'Trophy from UAC College Admission Coaching celebrating the identity of a Notre Damian. নটর ডেমিয়ান পরিচয়ের স্বীকৃতিস্বরূপ ইউএসি সম্মাননা।'},
-  shilper:{type:'img', src:'SHILPER CHITRO.jpeg', title:'Shilper Chitra · 5th International Art & Photography Exhibition 2023', body:'Participant Award · Group (C) · Shadid Ahamed. International art and photography exhibition recognition. শিল্পের চিত্র আন্তর্জাতিক প্রদর্শনী ২০২৩ · অংশগ্রহণকারী পুরস্কার।'},
   drawing:{type:'img', src:'814113108_1617142683373760_3602804557652732585_n.jpg', title:'Drawing / Art Recognition · Father Sushanto', body:'Notre Dame College-এর Office Head Father Sushanto (Shesh Pradha Sushanto) — কলেজের অন্যতম কঠোর শিক্ষক, pink slip ও অভিভাবক ডাকার নিয়ন্ত্রণ যাঁর হাতে ছিল। একদিন ক্লাসের পর ডায়েরি কলেজে রেখে যাওয়া হয়; তিনি সেটি পুরোপুরি দেখে ও পরীক্ষা করে লিখেছিলেন: «তোমার আঁকা ছবিগুলো অনেক সুন্দর হয়েছে» — এবং স্বাক্ষর করেছিলেন ০২ নভেম্বর ২০২৪। এটা শুধু প্রশংসা নয়; সবচেয়ে কঠোর নজরদারির জায়গা থেকে আসা একটি নীরব স্বীকৃতি।'},
   exhibition:{type:'img', src:'IMG scetch 1.jpg', title:'Exhibition · স্রোতশীনি', body:'Artwork associated with exhibition contexts (including Notre Dame College and Bangladesh art contexts). স্রোতশীনি — ভাসমান একাকিত্ব, শাপলাপাতা, আশার মাছ এবং অপর পারে আসা নারীর কাহিনি।'},
   arc:{type:'pdf', src:'1000061008_UG_ARC_Gradesheet_Web.pdf', title:'Architecture Academic Record', body:'First-semester record including ARC 101, ARC 111, ARC 121, ARC 122, CSE 103, ENG 091, PHY 102, credits and GPA as recorded.'},
@@ -1720,7 +1886,13 @@ const modalClose=document.getElementById('modalClose');
 function openModal({type,src,title,body,html}){
   modal.classList.toggle('pdf-mode', type==='pdf');
   modalMedia.innerHTML='';
-  if(type==='img'){ const img=document.createElement('img'); img.src=src; img.alt=title||''; modalMedia.appendChild(img); }
+  if(type==='img'){ 
+    const img=document.createElement('img'); 
+    img.src=src; 
+    img.alt=title||''; 
+    img.draggable=false;
+    modalMedia.appendChild(img); 
+  }
   else if(type==='pdf'){
     const load=document.createElement('div'); load.className='modal-loading'; load.textContent='Loading…'; modalMedia.appendChild(load);
     const emb=document.createElement('embed'); emb.src=src+'#toolbar=1'; emb.type='application/pdf'; emb.style.width='100%'; emb.style.height='68vh';
