@@ -583,53 +583,88 @@ body.has-custom-cursor .clickable{cursor:none}
 
 .project-cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-  gap:1.3rem;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;
 }
 .project-card{
+  position:relative;
   padding:0;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  transition:border-color .3s,transform .3s;
   overflow:hidden;
-  display:flex;
-  flex-direction:column;
-}
-.project-card:hover{border-color:var(--border-strong);transform:translateY(-3px)}
-.project-card .project-preview{
-  width:100%;
+  display:block;
   aspect-ratio:16/10;
-  background:var(--surface-2);
-  position:relative;
-  overflow:hidden;
-  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:border-color .35s var(--ease),transform .4s var(--ease),box-shadow .4s var(--ease);
+  box-shadow:var(--shadow-sm);
 }
-.project-card .project-preview iframe{
-  width:200%;
-  height:200%;
-  transform:scale(0.5);
-  transform-origin:0 0;
-  border:none;
+.project-card:hover,
+.project-card:focus-within{
+  border-color:var(--border-strong);
+  transform:translateY(-8px) scale(1.015);
+  box-shadow:0 22px 48px rgba(0,0,0,0.55);
+}
+.project-card .project-preview{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  background:var(--surface-2);
+  overflow:hidden;
+}
+.project-card .project-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  transition:transform .55s var(--ease);
+  -webkit-user-drag:none;
   pointer-events:none;
 }
-.project-card .project-preview .preview-fallback{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(145deg,var(--surface-2),var(--surface-3));
-  color:var(--accent-muted);
-  font-size:0.78rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
+.project-card:hover .project-preview img,
+.project-card:focus-within .project-preview img{
+  transform:scale(1.06);
 }
-.project-card .project-body{padding:1.55rem 1.55rem 1.7rem;flex:1;display:flex;flex-direction:column}
-.project-card h4{
+.project-card .project-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:1.35rem 1.4rem 1.5rem;
+  background:linear-gradient(180deg, transparent 15%, rgba(10,12,18,0.55) 45%, rgba(10,12,18,0.92) 100%);
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .4s var(--ease), transform .45s var(--ease);
+  pointer-events:none;
+}
+.project-card:hover .project-overlay,
+.project-card:focus-within .project-overlay{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.project-card .project-overlay h4{
   font-family:var(--font-display);
-  font-size:1.2rem;
+  font-size:1.28rem;
   color:var(--warm);
-  margin-bottom:0.5rem;
+  margin-bottom:0.45rem;
+  letter-spacing:0.03em;
+  line-height:1.25;
 }
-.project-card p{font-size:0.95rem;color:var(--text-muted);margin-bottom:1.2rem;line-height:1.65;flex:1}
+.project-card .project-overlay p{
+  font-size:0.88rem;
+  color:var(--text);
+  line-height:1.6;
+  margin-bottom:0.95rem;
+  opacity:0.92;
+}
+.project-card .project-overlay .btn-outline{
+  align-self:flex-start;
+  margin-top:0.15rem;
+}
 .btn-outline{
   display:inline-flex;
   padding:0.6rem 1.15rem;
@@ -647,6 +682,18 @@ body.has-custom-cursor .clickable{cursor:none}
   color:var(--accent);
   border-color:var(--accent);
   background:rgba(139,157,195,0.07);
+}
+@media (hover:none){
+  .project-card .project-overlay{
+    opacity:1;
+    transform:none;
+    background:linear-gradient(180deg, transparent 25%, rgba(10,12,18,0.75) 55%, rgba(10,12,18,0.95) 100%);
+    pointer-events:auto;
+  }
+  .project-card:hover,
+  .project-card:focus-within{
+    transform:none;
+  }
 }
 
 .video-orbit .orbit-item{aspect-ratio:16/9;width:min(205px,52vw)}
@@ -1253,39 +1300,36 @@ body.screenshot-blank{
         <div class="section-inner">
           <div class="skill-sub-header"><div><h2 class="section-title">Coding &amp; Website Making</h2><p class="section-sub">Digital Projects</p></div><button class="close-x" data-close-skill aria-label="Close">×</button></div>
           <div class="project-cards">
-            <article class="project-card">
+            <a class="project-card clickable" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer" aria-label="TrendCart — open live project">
               <div class="project-preview">
-                <iframe src="https://shadidahamed.github.io/trendcart/" title="TrendCart preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-                <div class="preview-fallback" aria-hidden="true">TrendCart</div>
+                <img src="trendcart-preview.png" alt="TrendCart interface" loading="lazy" decoding="async" width="640" height="400">
               </div>
-              <div class="project-body">
+              <div class="project-overlay">
                 <h4>TrendCart</h4>
-                <p>An affiliate-oriented e-commerce / marketplace web project built with care for clarity and quiet usability.</p>
-                <a class="btn-outline" href="https://shadidahamed.github.io/trendcart/" target="_blank" rel="noopener noreferrer">View Live</a>
+                <p>An affiliate-oriented e-commerce / marketplace web project built with care for clarity and quiet usability — by my own self, for my own purpose.</p>
+                <span class="btn-outline">View Live</span>
               </div>
-            </article>
-            <article class="project-card">
+            </a>
+            <a class="project-card clickable" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer" aria-label="Orpheus Engine — open live project">
               <div class="project-preview">
-                <iframe src="https://shadidahamed.github.io/Shadid-s-game/" title="Orpheus Engine preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-                <div class="preview-fallback" aria-hidden="true">Orpheus Engine</div>
+                <img src="orpheus-preview.png" alt="Orpheus Engine game" loading="lazy" decoding="async" width="640" height="400">
               </div>
-              <div class="project-body">
+              <div class="project-overlay">
                 <h4>Orpheus Engine</h4>
-                <p>A browser-based 3D-style game experience with an atmospheric exploration concept — a space to wander when the mind needs distance.</p>
-                <a class="btn-outline" href="https://shadidahamed.github.io/Shadid-s-game/" target="_blank" rel="noopener noreferrer">View Live</a>
+                <p>Browser CD-style game experience with an atmospheric exploration concept — a space to wander when the mind needs distance. It gives the experience of liminal places, inspired by the movie Backrooms.</p>
+                <span class="btn-outline">View Live</span>
               </div>
-            </article>
-            <article class="project-card">
+            </a>
+            <a class="project-card clickable" href="https://shadidahamed.github.io/CHESS-BOARD-ARINA/" target="_blank" rel="noopener noreferrer" aria-label="Chessboard Arena — open live project">
               <div class="project-preview">
-                <iframe src="https://shadidahamed.github.io/CHESS-BOARD-ARINA/" title="Chessboard Arena preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-                <div class="preview-fallback" aria-hidden="true">Chessboard Arena</div>
+                <img src="chess-preview.png" alt="Chessboard Arena" loading="lazy" decoding="async" width="640" height="400">
               </div>
-              <div class="project-body">
+              <div class="project-overlay">
                 <h4>Chessboard Arena</h4>
-                <p>A focused chess-playing interface built for clear board presence and quiet concentration — play, think, return.</p>
-                <a class="btn-outline" href="https://shadidahamed.github.io/CHESS-BOARD-ARINA/" target="_blank" rel="noopener noreferrer">View Live</a>
+                <p>From the very beginning the creator has liked to play chess. That is why he created a chess game by his own self, from his own interest.</p>
+                <span class="btn-outline">View Live</span>
               </div>
-            </article>
+            </a>
           </div>
         </div>
       </div>
